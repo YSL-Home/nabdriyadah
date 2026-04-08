@@ -25,6 +25,9 @@ jobs:
         run: npm install
 
       - name: Run content automation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
         run: npm run automation:content
 
       - name: Commit generated content
