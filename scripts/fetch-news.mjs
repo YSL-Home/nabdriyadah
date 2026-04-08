@@ -1,27 +1,41 @@
-import fs from "fs/promises";
+import fs from "fs";
+import Parser from "rss-parser";
 
-const sourcesPath = new URL("../data/sources.json", import.meta.url);
-const outputPath = new URL("../content/articles/raw-news.json", import.meta.url);
+const parser = new Parser();
+const sources = JSON.parse(fs.readFileSync("data/sources.json", "utf-8"));
 
 async function main() {
-  const raw = await fs.readFile(sourcesPath, "utf-8");
-  const sources = JSON.parse(raw);
+  const allItems = [];
 
-  const items = sources.map((source, index) => ({
-    id: `news-${Date.now()}-${index}`,
-    source: source.name,
-    title: `Sample title from ${source.name}`,
-    summary: `Sample summary from ${source.name}`,
-    url: source.url,
-    fetchedAt: new Date().toISOString()
-  }));
+  for (const source of sources) {
+    try {
+      const feed = await parser.parseURL(source.url);
 
-  await fs.mkdir(new URL("../content/articles/", import.meta.url), { recursive: true });
-  await fs.writeFile(outputPath, JSON.stringify(items, null, 2), "utf-8");
-  console.log("raw news saved");
+      for (const item of (feed.items || []).slice(0, 5)) {
+        allItems.push({
+          source: source.name,
+          title: item.title || "",
+          summary: item.contentSnippet || item.content || item.summary || "",
+          link: item.link || "",
+          publishedAt: item.pubDate || new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error(`Failed source: ${source.name}`, error.message);
+    }
+  }
+
+  fs.mkdirSync("content/articles", { recursive: true });
+  fs.writeFileSync(
+    "content/articles/raw-news.json",
+    JSON.stringify(allItems, null, 2),
+    "utf-8"
+  );
+
+  console.log(`raw news saved: ${allItems.length}`);
 }
 
-main().catch((err) => {
-  console.error(err);
+main().catch((error) => {
+  console.error(error);
   process.exit(1);
 });
