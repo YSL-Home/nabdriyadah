@@ -1,64 +1,505 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <title>نبض الرياضة</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #f5f7fa;
-    }
-    header {
-      background: linear-gradient(135deg,#2563eb,#7c3aed);
-      color: white;
-      padding: 40px;
-      text-align: center;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    .live {
-      color: red;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
+function IconBadge({ children, className = '' }) {
+  return (
+    <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${className}`}>
+      {children}
+    </div>
+  );
+}
 
-<header>
-  <h1>نبض الرياضة</h1>
-  <p>أخبار - مباشر - فيديو - تحليلات</p>
-</header>
+function CategoryIcon({ type, className = 'h-5 w-5' }) {
+  switch (type) {
+    case 'global':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a14 14 0 0 1 0 18" />
+          <path d="M12 3a14 14 0 0 0 0 18" />
+        </svg>
+      );
+    case 'league':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+      );
+    case 'teams':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <path d="M16 19a4 4 0 0 0-8 0" />
+          <circle cx="12" cy="8" r="3" />
+          <path d="M5 19a3 3 0 0 1 3-3" />
+          <path d="M19 19a3 3 0 0 0-3-3" />
+        </svg>
+      );
+    case 'transfer':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <path d="M7 7h10" />
+          <path d="M13 3l4 4-4 4" />
+          <path d="M17 17H7" />
+          <path d="M11 21l-4-4 4-4" />
+        </svg>
+      );
+    case 'basket':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <circle cx="12" cy="12" r="8" />
+          <path d="M4.5 9.5c2.5 1.3 5 2 7.5 2s5-.7 7.5-2" />
+          <path d="M4.5 14.5c2.5-1.3 5-2 7.5-2s5 .7 7.5 2" />
+          <path d="M12 4a15 15 0 0 1 0 16" />
+        </svg>
+      );
+    case 'tennis':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <circle cx="12" cy="12" r="8" />
+          <path d="M8 5.5a6.5 6.5 0 0 0 0 13" />
+          <path d="M16 5.5a6.5 6.5 0 0 1 0 13" />
+        </svg>
+      );
+    case 'padel':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <path d="M8 5a5 5 0 1 1 3.5 8.5L9 16l-3-3 2.5-2.5A5 5 0 0 1 8 5z" />
+          <path d="M14 14l5 5" />
+          <circle cx="9.5" cy="8.5" r="0.8" fill="currentColor" stroke="none" />
+          <circle cx="11.7" cy="8.5" r="0.8" fill="currentColor" stroke="none" />
+          <circle cx="8.4" cy="10.7" r="0.8" fill="currentColor" stroke="none" />
+          <circle cx="10.6" cy="10.7" r="0.8" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case 'play':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+          <path d="M8 6.5v11l9-5.5-9-5.5z" />
+        </svg>
+      );
+    case 'live':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <circle cx="12" cy="12" r="2.5" />
+          <path d="M6.5 6.5a7.8 7.8 0 0 1 11 0" />
+          <path d="M3.5 3.5a12 12 0 0 1 17 0" />
+        </svg>
+      );
+    case 'trend':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <path d="M12 3c2 3-1 4.5 1 7 1.5-1 2.3-2.4 2.5-4 2.2 1.7 4.5 4.7 4.5 8a8 8 0 1 1-16 0c0-2.8 1.4-4.8 3.5-6.8.2 1.6 1 2.9 2.5 3.8C13 8.5 10 6.5 12 3z" />
+        </svg>
+      );
+    case 'video':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <rect x="3" y="6" width="13" height="12" rx="2" />
+          <path d="M16 10l5-3v10l-5-3" />
+        </svg>
+      );
+    case 'search':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <circle cx="11" cy="11" r="6" />
+          <path d="M20 20l-4-4" />
+        </svg>
+      );
+    case 'menu':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <path d="M4 7h16" />
+          <path d="M4 12h16" />
+          <path d="M4 17h16" />
+        </svg>
+      );
+    case 'arrow':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+          <path d="M5 12h14" />
+          <path d="M13 6l6 6-6 6" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
-<div class="container">
+function TeamLogo({ src, alt, fallback }) {
+  return (
+    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+      <img
+        src={src}
+        alt={alt}
+        className="h-9 w-9 object-contain"
+        onError={(e) => {
+          e.currentTarget.style.display = 'none';
+          const next = e.currentTarget.nextSibling;
+          if (next) next.style.display = 'flex';
+        }}
+      />
+      <div className="hidden h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-sm font-black text-slate-600">
+        {fallback}
+      </div>
+    </div>
+  );
+}
 
-  <div class="card">
-    <h3>🔥 خبر عاجل</h3>
-    <p>برشلونة يفوز على ريال مدريد في الكلاسيكو</p>
-  </div>
+export default function NabdAlRiyadahSite() {
+  const categories = [
+    { title: 'أخبار الكرة العالمية', desc: 'أوروبا، دوري الأبطال، وأبرز أخبار الأندية الكبرى.', icon: 'global' },
+    { title: 'الدوريات العربية', desc: 'السعودي، المغربي، المصري، القطري، والخليجي.', icon: 'league' },
+    { title: 'المنتخبات', desc: 'تصفيات وكؤوس قارية وعالمية وتغطية حصرية.', icon: 'teams' },
+    { title: 'الانتقالات', desc: 'شائعات، صفقات رسمية، وتحليلات السوق أولاً بأول.', icon: 'transfer' },
+    { title: 'كرة السلة', desc: 'NBA والبطولات العربية والقارية.', icon: 'basket' },
+    { title: 'التنس', desc: 'أخبار البطولات الكبرى والنجوم والنتائج.', icon: 'tennis' },
+    { title: 'البادل', desc: 'تغطية رياضة البادل والبطولات العربية والعالمية.', icon: 'padel' },
+    { title: 'فيديو', desc: 'مقاطع قصيرة جاهزة للنشر والسحب من السوشيال.', icon: 'video' },
+  ];
 
-  <div class="card">
-    <h3 class="live">🔴 مباشر</h3>
-    <p>الهلال vs النصر — 2-1</p>
-  </div>
+  const matches = [
+    {
+      id: 'barca-real',
+      home: 'برشلونة',
+      away: 'ريال مدريد',
+      homeLogo: 'https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg',
+      awayLogo: 'https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg',
+      score: '2 - 1',
+      minute: "88'",
+      competition: 'الدوري الإسباني',
+      homeFallback: 'B',
+      awayFallback: 'R',
+    },
+    {
+      id: 'hilal-nassr',
+      home: 'الهلال',
+      away: 'النصر',
+      homeLogo: 'https://upload.wikimedia.org/wikipedia/en/5/55/Al_Hilal_SFC_Logo.svg',
+      awayLogo: 'https://upload.wikimedia.org/wikipedia/en/f/fc/Al-Nassr_FC_logo.png',
+      score: '1 - 2',
+      minute: "72'",
+      competition: 'الدوري السعودي',
+      homeFallback: 'H',
+      awayFallback: 'N',
+    },
+    {
+      id: 'wydad-raja',
+      home: 'الوداد',
+      away: 'الرجاء',
+      homeLogo: 'https://upload.wikimedia.org/wikipedia/en/3/3c/Wydad_AC_logo.svg',
+      awayLogo: 'https://upload.wikimedia.org/wikipedia/en/7/7a/Raja_CA_logo.png',
+      score: '0 - 0',
+      minute: "41'",
+      competition: 'الدوري المغربي',
+      homeFallback: 'W',
+      awayFallback: 'R',
+    },
+  ];
 
-  <div class="card">
-    <h3>🎾 البادل</h3>
-    <p>بطولة عربية جديدة تنطلق الأسبوع القادم</p>
-  </div>
+  const featuredNews = [
+    {
+      title: 'برشلونة يفوز على ريال مدريد في الكلاسيكو ويشعل سباق الصدارة',
+      excerpt: 'فوز مثير في الدقائق الأخيرة مع تفاعل جماهيري ضخم وارتفاع البحث حول نتيجة الكلاسيكو.',
+      tag: 'خبر عاجل',
+    },
+    {
+      title: 'الهلال ضد النصر: النتيجة، الأهداف، وأبرز لقطات المباراة',
+      excerpt: 'صفحة مباراة مباشرة مصممة لتجميع البحث على نتيجة الهلال والنصر وملخص اللقاء.',
+      tag: 'مباشر',
+    },
+    {
+      title: 'بطولة عربية جديدة في البادل تنطلق الأسبوع القادم',
+      excerpt: 'فرصة قوية لقسم البادل في جذب زيارات جديدة عبر أخبار البطولات والمحتوى المتخصص.',
+      tag: 'البادل',
+    },
+  ];
 
-</div>
+  const trendTopics = [
+    'نتيجة برشلونة وريال مدريد',
+    'الهلال ضد النصر مباشر',
+    'أخبار الانتقالات اليوم',
+    'ترتيب الدوري السعودي',
+  ];
 
-</body>
-</html>
+  const seoBlocks = [
+    'صفحات مباريات اليوم',
+    'صفحات النتائج والترتيب',
+    'صفحات البطولات والفرق',
+    'محتوى ترند سريع',
+    'عناوين قابلة للنقر',
+    'فيديوهات قصيرة للسوشيال',
+  ];
+
+  return (
+    <div dir="rtl" className="min-h-screen bg-slate-50 text-slate-900">
+      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 md:px-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-violet-600 text-lg font-black text-white shadow-lg shadow-blue-200">
+              ن
+            </div>
+            <div>
+              <div className="text-xl font-black text-slate-900">نبض الرياضة</div>
+              <div className="text-xs font-medium text-slate-500">أخبار - مباشر - فيديو - تحليلات</div>
+            </div>
+          </div>
+
+          <nav className="hidden items-center gap-2 md:flex">
+            {['الرئيسية', 'الأخبار', 'مباشر', 'البطولات', 'الفيديو', 'الانتقالات'].map((item, index) => (
+              <button
+                key={item}
+                className={`rounded-full px-4 py-2 text-sm font-bold transition ${index === 0 ? 'bg-blue-600 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+              >
+                {item}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <button className="hidden rounded-full bg-slate-100 p-2.5 text-slate-600 md:inline-flex" aria-label="Search">
+              <CategoryIcon type="search" />
+            </button>
+            <button className="rounded-full bg-slate-100 p-2.5 text-slate-600 md:hidden" aria-label="Menu">
+              <CategoryIcon type="menu" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section className="relative overflow-hidden border-b border-white/40 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.25),transparent_22%),radial-gradient(circle_at_top_left,rgba(168,85,247,0.20),transparent_25%),linear-gradient(135deg,#2563eb,#4f46e5,#7c3aed)]">
+          <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:44px_44px]" />
+          <div className="absolute -bottom-2 left-0 w-full">
+            <svg viewBox="0 0 1440 220" className="h-[120px] w-full md:h-[160px]" preserveAspectRatio="none">
+              <path
+                fill="#f8fafc"
+                d="M0,96L48,101.3C96,107,192,117,288,122.7C384,128,480,128,576,112C672,96,768,64,864,69.3C960,75,1056,117,1152,133.3C1248,149,1344,139,1392,133.3L1440,128L1440,320L0,320Z"
+              />
+            </svg>
+          </div>
+
+          <div className="relative mx-auto grid max-w-7xl gap-8 px-4 pb-24 pt-10 md:grid-cols-[1.15fr_0.85fr] md:px-6 md:pb-28 md:pt-16">
+            <div className="text-white">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur-md">
+                <CategoryIcon type="trend" />
+                منصة رياضية عربية حديثة مهيأة للنمو والسيو
+              </div>
+
+              <h1 className="max-w-3xl text-5xl font-black leading-tight md:text-7xl">
+                نبض الرياضة
+                <span className="mt-2 block text-2xl font-bold text-blue-100 md:text-4xl">
+                  مستقبل الإعلام الرياضي العربي… لحظة بلحظة
+                </span>
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-base leading-8 text-blue-50/90 md:text-lg">
+                واجهة V1 Pro تجمع بين التصميم الحديث، الأخبار السريعة، المباريات المباشرة، صفحات قابلة للتوسع،
+                وقاعدة ممتازة للانتقال لاحقاً إلى توليد المقالات تلقائياً وفق الكلمات الأكثر بحثاً.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-blue-700 shadow-lg shadow-blue-900/20 transition hover:-translate-y-0.5">
+                  تصفح الأخبار الآن
+                </button>
+                <button className="rounded-2xl border border-white/30 bg-white/10 px-6 py-3 text-sm font-black text-white backdrop-blur-md transition hover:bg-white/15">
+                  افتح المباريات المباشرة
+                </button>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="rounded-[28px] border border-white/25 bg-white/12 p-4 shadow-2xl shadow-indigo-950/25 backdrop-blur-xl">
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="text-sm font-bold text-white/90">الموضوعات الرائجة</div>
+                  <div className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-black text-red-100">Hot</div>
+                </div>
+
+                <div className="space-y-3">
+                  {trendTopics.map((item, index) => (
+                    <div key={item} className="rounded-2xl border border-white/15 bg-white/10 p-4 text-white/95">
+                      <div className="mb-2 flex items-center gap-2 text-xs font-bold text-blue-100/80">
+                        <CategoryIcon type="trend" />
+                        ترند #{index + 1}
+                      </div>
+                      <div className="text-sm font-bold leading-7">{item}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <div className="text-sm font-bold text-blue-600">أهم الأخبار</div>
+              <h2 className="mt-2 text-3xl font-black text-slate-900 md:text-4xl">واجهة تحريرية قوية وقابلة للتمدد</h2>
+            </div>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {featuredNews.map((article) => (
+              <article
+                key={article.title}
+                className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="h-44 bg-[linear-gradient(135deg,rgba(59,130,246,0.15),rgba(99,102,241,0.1),rgba(168,85,247,0.15))]" />
+                <div className="p-6">
+                  <div className="mb-3 inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-black text-blue-700">
+                    {article.tag}
+                  </div>
+                  <h3 className="mb-3 text-xl font-black leading-9 text-slate-900">{article.title}</h3>
+                  <p className="text-sm leading-7 text-slate-500">{article.excerpt}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-6">
+          <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+            <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+              <div className="mb-8 flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-bold text-blue-600">الأقسام الرئيسية</div>
+                  <h2 className="mt-2 text-3xl font-black text-slate-900">بنية واضحة مثل المواقع الكبيرة لكن أجمل</h2>
+                </div>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                {categories.map((cat) => (
+                  <div
+                    key={cat.title}
+                    className="group relative overflow-hidden rounded-[24px] border border-slate-200 bg-slate-50 p-5 transition hover:border-blue-200 hover:bg-white hover:shadow-md"
+                  >
+                    <div className="absolute inset-y-0 right-0 w-1 rounded-r-full bg-gradient-to-b from-blue-500 to-violet-500 opacity-0 transition group-hover:opacity-100" />
+                    <div className="mb-3 flex items-center gap-3">
+                      <IconBadge className="bg-blue-100 text-blue-600">
+                        <CategoryIcon type={cat.icon} />
+                      </IconBadge>
+                      <div className="text-lg font-black text-slate-900">{cat.title}</div>
+                    </div>
+                    <div className="text-sm leading-7 text-slate-500">{cat.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[32px] border border-slate-200 bg-gradient-to-br from-white via-white to-blue-50 p-6 shadow-sm md:p-8">
+              <div className="mb-6 flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-bold text-violet-600">SEO + Monetization</div>
+                  <h2 className="mt-2 text-3xl font-black text-slate-900">هيكل جاهز للترتيب والربح</h2>
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                {seoBlocks.map((item) => (
+                  <div key={item} className="rounded-[22px] border border-slate-200 bg-white p-4 text-sm font-bold text-slate-700 shadow-sm">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 pb-8 pt-12 md:px-6 md:pb-12 md:pt-16">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="text-sm font-bold text-red-500">Match Center</div>
+              <h2 className="mt-2 text-3xl font-black text-slate-900 md:text-4xl">المباريات المباشرة مع شعارات الفرق</h2>
+            </div>
+            <div className="flex items-center gap-2 rounded-full bg-red-50 px-4 py-2 text-sm font-black text-red-600">
+              <CategoryIcon type="live" />
+              تحديثات لحظية
+            </div>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {matches.map((m) => (
+              <div
+                key={m.id}
+                className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="bg-[linear-gradient(135deg,rgba(59,130,246,0.10),rgba(99,102,241,0.08),rgba(168,85,247,0.10))] p-5">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="rounded-full bg-white/80 px-3 py-1 text-xs font-black text-slate-600 shadow-sm">
+                      {m.competition}
+                    </div>
+                    <div className="rounded-full bg-red-100 px-3 py-1 text-xs font-black text-red-600">{m.minute} • LIVE</div>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex flex-1 flex-col items-center gap-2 text-center">
+                      <TeamLogo src={m.homeLogo} alt={m.home} fallback={m.homeFallback} />
+                      <div className="text-sm font-black text-slate-900 md:text-base">{m.home}</div>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center text-center">
+                      <div className="text-3xl font-black tracking-widest text-blue-700 md:text-4xl">{m.score}</div>
+                      <div className="mt-1 text-xs font-bold text-slate-400">نتيجة مباشرة</div>
+                    </div>
+
+                    <div className="flex flex-1 flex-col items-center gap-2 text-center">
+                      <TeamLogo src={m.awayLogo} alt={m.away} fallback={m.awayFallback} />
+                      <div className="text-sm font-black text-slate-900 md:text-base">{m.away}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between border-t border-slate-100 p-4">
+                  <div className="flex items-center gap-2 text-sm font-bold text-slate-500">
+                    <CategoryIcon type="search" />
+                    stats + timeline + lineups
+                  </div>
+                  <button className="rounded-full bg-slate-100 px-4 py-2 text-sm font-black text-slate-700 transition hover:bg-slate-200">
+                    عرض المباراة
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 pb-16 pt-8 md:px-6">
+          <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+            <div className="mb-6 flex items-center gap-3">
+              <IconBadge className="bg-indigo-100 text-indigo-600">
+                <CategoryIcon type="video" />
+              </IconBadge>
+              <div>
+                <div className="text-sm font-bold text-indigo-600">Short Video Engine</div>
+                <div className="text-2xl font-black text-slate-900">قاعدة قوية للفيديوهات والسوشيال</div>
+              </div>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {['Breaking News Reel', 'هدف اليوم', 'Transfer Alert', 'Padel Highlight', 'نتيجة في 15 ثانية', 'ملخص سريع'].map((item) => (
+                <div key={item} className="rounded-[22px] border border-slate-200 bg-slate-50 p-4 text-sm font-bold text-slate-700">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 md:grid-cols-[1fr_auto] md:px-6">
+          <div>
+            <div className="text-lg font-black text-slate-900">نبض الرياضة</div>
+            <div className="mt-2 max-w-2xl text-sm leading-7 text-slate-500">
+              هذه هي V1 Pro: تصميم أقوى، بنية واضحة، وتمهيد ممتاز للانتقال إلى نظام مقالات مؤتمتة وسيو قائم على الكلمات الأكثر بحثاً.
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3 self-start">
+            <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">News</span>
+            <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">Live</span>
+            <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">SEO</span>
+            <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">Video</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
