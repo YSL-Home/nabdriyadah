@@ -4,12 +4,17 @@ import Parser from "rss-parser";
 const parser = new Parser();
 const sources = JSON.parse(fs.readFileSync("data/sources.json", "utf-8"));
 
+function normalizeUrl(rawUrl) {
+  return encodeURI(rawUrl);
+}
+
 async function main() {
   const allItems = [];
 
   for (const source of sources) {
     try {
-      const feed = await parser.parseURL(source.url);
+      const safeUrl = normalizeUrl(source.url);
+      const feed = await parser.parseURL(safeUrl);
 
       for (const item of (feed.items || []).slice(0, 5)) {
         allItems.push({
