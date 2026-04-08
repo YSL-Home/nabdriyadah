@@ -1,6 +1,6 @@
 "fetch:news": "node scripts/fetch-news.mjs",
 "rewrite:articles": "node scripts/rewrite-article.mjs",
-"automation:content": "npm run fetch:news && npm run rewrite:articles"
+"automation:content": "npm run fetch:news && npm run rewrite:articles",
 "scripts": {
   "dev": "next dev",
   "build": "next build",
