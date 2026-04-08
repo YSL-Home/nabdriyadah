@@ -1,4 +1,7 @@
 {
+"fetch:news": "node scripts/fetch-news.mjs",
+"rewrite:articles": "node scripts/rewrite-article.mjs",
+"automation:content": "npm run fetch:news && npm run rewrite:articles"
   "name": "nabd-alriyadah",
   "version": "1.0.0",
   "private": true,
