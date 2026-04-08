@@ -21,30 +21,9 @@ async function rewriteOne(item, index) {
   const prompt = `
 أنت محرر SEO عربي لموقع رياضي اسمه "نبض الرياضة".
 
-المطلوب:
-1) أعد كتابة الخبر بالعربية الطبيعية.
-2) اجعل المحتوى مفيداً للقارئ أولاً وليس حشواً لمحركات البحث.
-3) استخدم زاوية بحث قوية حول الموضوع.
-4) أنشئ:
-- title
-- description
-- shortTitle
-- content (5 فقرات)
-- faq (سؤالان وجوابان)
-- keywords (4 عناصر)
+أعد كتابة الخبر بالعربية الطبيعية.
 
-المدخلات:
-العنوان: ${topic}
-الملخص: ${summary}
-المصدر: ${item.source}
-
-قواعد صارمة:
-- لا تذكر أنك ذكاء اصطناعي.
-- لا تنسخ النص حرفياً.
-- لا تخترع حقائق غير موجودة.
-- الأسلوب عربي صحفي واضح.
-- ركز على نية البحث: النتيجة، آخر الأخبار، التحليل، التطورات، الموعد إذا كان مناسباً.
-- أعد النتيجة في JSON فقط بهذا الشكل:
+أرجع JSON صالح فقط بهذا الشكل:
 {
   "title": "",
   "shortTitle": "",
@@ -53,6 +32,15 @@ async function rewriteOne(item, index) {
   "faq": [{"q": "", "a": ""}, {"q": "", "a": ""}],
   "keywords": ["", "", "", ""]
 }
+
+العنوان: ${topic}
+الملخص: ${summary}
+المصدر: ${item.source}
+
+قواعد:
+- لا تنسخ النص حرفياً
+- لا تضف معلومات غير مؤكدة
+- اكتب بأسلوب عربي صحفي واضح
 `;
 
   const response = await client.responses.create({
@@ -60,17 +48,30 @@ async function rewriteOne(item, index) {
     input: prompt
   });
 
-  const text = response.output_text;
-  const parsed = JSON.parse(text);
+  const text = response.output_text?.trim() || "";
+
+  if (!text) {
+    throw new Error("Empty response from OpenAI");
+  }
+
+  let parsed;
+
+  try {
+    parsed = JSON.parse(text);
+  } catch (error) {
+    console.error("Invalid JSON returned by model:");
+    console.error(text);
+    throw new Error("Model did not return valid JSON");
+  }
 
   return {
     slug: slugify(parsed.shortTitle || parsed.title || topic) || `article-${index + 1}`,
-    title: parsed.title,
-    shortTitle: parsed.shortTitle,
-    description: parsed.description,
-    content: parsed.content,
-    faq: parsed.faq,
-    keywords: parsed.keywords,
+    title: parsed.title || topic,
+    shortTitle: parsed.shortTitle || topic,
+    description: parsed.description || summary,
+    content: Array.isArray(parsed.content) ? parsed.content : [summary],
+    faq: Array.isArray(parsed.faq) ? parsed.faq : [],
+    keywords: Array.isArray(parsed.keywords) ? parsed.keywords : ["أخبار رياضية"],
     source: item.source,
     originalTitle: topic,
     link: item.link,
@@ -79,6 +80,10 @@ async function rewriteOne(item, index) {
 }
 
 async function main() {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error("Missing OPENAI_API_KEY");
+  }
+
   const raw = JSON.parse(
     fs.readFileSync("content/articles/raw-news.json", "utf-8")
   );
@@ -88,12 +93,14 @@ async function main() {
 
   for (let i = 0; i < limited.length; i++) {
     const item = limited[i];
+
     try {
       const article = await rewriteOne(item, i);
       results.push(article);
       console.log(`rewritten: ${article.slug}`);
     } catch (error) {
-      console.error(`rewrite failed for: ${item.title}`, error.message);
+      console.error(`rewrite failed for: ${item.title}`);
+      console.error(error.message);
     }
   }
 
@@ -104,6 +111,10 @@ async function main() {
   );
 
   console.log(`seo articles saved: ${results.length}`);
+
+  if (results.length === 0) {
+    throw new Error("No SEO articles were generated");
+  }
 }
 
 main().catch((error) => {
