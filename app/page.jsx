@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import Link from "next/link";
 
 function readArticles() {
   try {
@@ -24,12 +25,7 @@ export default function Page() {
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
-      <div
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <section
           style={{
             background: "linear-gradient(135deg,#2563eb,#7c3aed)",
@@ -61,12 +57,7 @@ export default function Page() {
               لا توجد مقالات حالياً. شغّل الـ workflow ثم أعد التحديث.
             </div>
           ) : (
-            <div
-              style={{
-                display: "grid",
-                gap: "20px",
-              }}
-            >
+            <div style={{ display: "grid", gap: "20px" }}>
               {articles.map((article, index) => (
                 <article
                   key={article.slug || index}
@@ -84,7 +75,15 @@ export default function Page() {
                       lineHeight: 1.5,
                     }}
                   >
-                    {article.title}
+                    <Link
+                      href={`/articles/${article.slug}`}
+                      style={{
+                        color: "#0f172a",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {article.title}
+                    </Link>
                   </h3>
 
                   <p
