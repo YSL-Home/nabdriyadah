@@ -32,5 +32,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/articles/
-          git diff --cached --quiet || git commit -m "auto: generate seo content"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "auto: generate seo content"
+          git pull --rebase origin main
+          git push origin main
