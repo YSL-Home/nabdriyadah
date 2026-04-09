@@ -2,8 +2,6 @@ import fs from "fs";
 import path from "path";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = {
   title: "نبض الرياضة",
   description: "أحدث الأخبار الرياضية العربية",
@@ -49,7 +47,6 @@ export default function HomePage() {
               margin: 0,
               fontSize: "64px",
               fontWeight: 800,
-              lineHeight: 1.1,
             }}
           >
             نبض الرياضة
@@ -113,7 +110,6 @@ export default function HomePage() {
                   borderRadius: "22px",
                   padding: "30px",
                   marginBottom: "22px",
-                  direction: "rtl",
                   border: "1px solid #e5e7eb",
                 }}
               >
@@ -121,8 +117,7 @@ export default function HomePage() {
                   style={{
                     margin: "0 0 14px 0",
                     color: "#111827",
-                    fontSize: "30px",
-                    lineHeight: 1.5,
+                    fontSize: "28px",
                     fontWeight: 800,
                   }}
                 >
@@ -133,8 +128,8 @@ export default function HomePage() {
                   style={{
                     margin: "0 0 14px 0",
                     color: "#4b5563",
-                    fontSize: "18px",
-                    lineHeight: 1.9,
+                    fontSize: "17px",
+                    lineHeight: 1.8,
                   }}
                 >
                   {article.description}
