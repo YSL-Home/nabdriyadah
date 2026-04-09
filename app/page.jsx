@@ -2,41 +2,70 @@ import fs from "fs";
 import path from "path";
 import Link from "next/link";
 
-export default function Home() {
-  const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
+export const dynamic = "force-dynamic";
 
+export default function Home() {
   let articles = [];
 
   try {
-    const file = fs.readFileSync(filePath, "utf-8");
-    articles = JSON.parse(file);
-  } catch (e) {
-    console.error("Erreur lecture JSON:", e);
+    const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
+    const fileData = fs.readFileSync(filePath, "utf-8");
+    articles = JSON.parse(fileData);
+  } catch (error) {
+    console.log("No articles found");
   }
 
   return (
-    <main className="p-6 max-w-3xl mx-auto">
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-10 rounded-3xl text-center mb-10">
-        <h1 className="text-4xl font-bold">نبض الرياضة</h1>
-        <p className="mt-2">أخبار - مباشر - فيديو - تحليلات</p>
+    <main style={{ padding: "20px", fontFamily: "Arial" }}>
+      
+      {/* HEADER */}
+      <div
+        style={{
+          background: "linear-gradient(90deg,#3b82f6,#7c3aed)",
+          padding: "40px",
+          borderRadius: "20px",
+          textAlign: "center",
+          color: "white",
+          marginBottom: "40px"
+        }}
+      >
+        <h1 style={{ fontSize: "40px", margin: 0 }}>نبض الرياضة</h1>
+        <p style={{ marginTop: "10px" }}>
+          أخبار - مباشر - فيديو - تحليلات
+        </p>
       </div>
 
-      <h2 className="text-2xl font-bold mb-6">🔥 أحدث المقالات</h2>
+      {/* TITLE */}
+      <h2 style={{ textAlign: "right", marginBottom: "20px" }}>
+        🔥 أحدث المقالات
+      </h2>
 
+      {/* ARTICLES */}
       {articles.length === 0 ? (
-        <p className="text-gray-500 text-center">
-          لا توجد مقالات حالياً...
-        </p>
+        <p style={{ textAlign: "center" }}>لا توجد مقالات حالياً</p>
       ) : (
         articles.map((article, index) => (
-          <Link key={index} href={`/articles/${article.slug}`}>
-            <div className="bg-gray-100 p-6 rounded-2xl mb-4 cursor-pointer hover:bg-gray-200 transition">
-              <h3 className="font-bold text-xl mb-2">
+          <Link key={index} href={`/articles/${article.slug}`} style={{ textDecoration: "none" }}>
+            <div
+              style={{
+                background: "#f3f4f6",
+                padding: "25px",
+                borderRadius: "15px",
+                marginBottom: "20px",
+                direction: "rtl"
+              }}
+            >
+              <h3 style={{ marginBottom: "10px", color: "#111" }}>
                 {article.title}
               </h3>
-              <p className="text-gray-600">
+
+              <p style={{ color: "#555" }}>
                 {article.description}
               </p>
+
+              <div style={{ fontSize: "12px", color: "#888", marginTop: "10px" }}>
+                أخبار رياضية • كرة القدم
+              </div>
             </div>
           </Link>
         ))
