@@ -7,7 +7,10 @@ import path from "path";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-5.3";
 
-const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY;
+// ✅ CORRECTION ICI
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const ANTHROPIC_MODEL =
+  process.env.ANTHROPIC_MODEL || "claude-3-haiku-20240307";
 
 // =====================
 // HELPERS
@@ -21,7 +24,7 @@ function slugify(text) {
 }
 
 // =====================
-// OPENAI CALL
+// OPENAI
 // =====================
 async function rewriteWithOpenAI(item) {
   const prompt = `
@@ -31,12 +34,12 @@ async function rewriteWithOpenAI(item) {
 المحتوى: ${item.content || item.description || ""}
 
 المطلوب:
-- عنوان جذاب عربي فقط
-- وصف مختصر
+- عنوان عربي قوي
+- وصف قصير
 - مقال كامل
 - بدون أي إنجليزي
 
-JSON:
+JSON فقط:
 {
 "title": "",
 "description": "",
@@ -61,14 +64,13 @@ JSON:
   }
 
   const data = await res.json();
-
   const text = data.output[0].content[0].text;
 
   return JSON.parse(text);
 }
 
 // =====================
-// CLAUDE CALL
+// CLAUDE (ANTHROPIC)
 // =====================
 async function rewriteWithClaude(item) {
   const prompt = `
@@ -78,8 +80,8 @@ async function rewriteWithClaude(item) {
 المحتوى: ${item.content || item.description || ""}
 
 المطلوب:
-- عنوان عربي قوي
-- وصف قصير
+- عنوان عربي جذاب
+- وصف مختصر
 - مقال كامل
 - بدون إنجليزي
 
@@ -94,12 +96,12 @@ JSON فقط:
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
-      "x-api-key": CLAUDE_API_KEY,
+      "x-api-key": ANTHROPIC_API_KEY,
       "anthropic-version": "2023-06-01",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "claude-3-haiku-20240307",
+      model: ANTHROPIC_MODEL,
       max_tokens: 1000,
       messages: [
         {
@@ -115,7 +117,6 @@ JSON فقط:
   }
 
   const data = await res.json();
-
   const text = data.content[0].text;
 
   return JSON.parse(text);
@@ -136,18 +137,18 @@ async function main() {
     try {
       let result;
 
-      // 1️⃣ Try OpenAI
+      // 1️⃣ OpenAI (optionnel)
       if (OPENAI_API_KEY) {
         try {
           result = await rewriteWithOpenAI(item);
           console.log("✅ OpenAI OK:", item.title);
         } catch (err) {
-          console.log("⚠️ OpenAI failed → switching to Claude");
+          console.log("⚠️ OpenAI failed → Claude fallback");
         }
       }
 
-      // 2️⃣ Claude fallback
-      if (!result && CLAUDE_API_KEY) {
+      // 2️⃣ Claude fallback (FIXED)
+      if (!result && ANTHROPIC_API_KEY) {
         try {
           result = await rewriteWithClaude(item);
           console.log("✅ Claude OK:", item.title);
@@ -165,7 +166,7 @@ async function main() {
       });
 
     } catch (err) {
-      console.log("❌ rewrite failed for:", item.title);
+      console.log("❌ rewrite failed:", item.title);
     }
   }
 
