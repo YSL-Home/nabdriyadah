@@ -9,6 +9,19 @@ export default function sitemap() {
 
   const articleUrls = articles.map((a) => ({
     url: `${baseUrl}/articles/${a.slug}`,
+    lastModified: new Date(a.publishedAt),
+  }));
+
+  const leagueUrls = [
+    "premier-league",
+    "la-liga",
+    "serie-a",
+    "bundesliga",
+    "ligue-1",
+    "champions-league",
+    "saudi-pro-league",
+  ].map((slug) => ({
+    url: `${baseUrl}/league/${slug}`,
     lastModified: new Date(),
   }));
 
@@ -18,5 +31,6 @@ export default function sitemap() {
       lastModified: new Date(),
     },
     ...articleUrls,
+    ...leagueUrls,
   ];
 }
