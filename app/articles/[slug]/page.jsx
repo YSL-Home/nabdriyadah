@@ -15,7 +15,12 @@ export async function generateMetadata({ params }) {
   return {
     title: article.title,
     description: article.description,
-    keywords: article.keywords
+    keywords: article.keywords,
+    openGraph: {
+      title: article.title,
+      description: article.description,
+      type: "article",
+    },
   };
 }
 
@@ -25,8 +30,27 @@ export default function ArticlePage({ params }) {
 
   if (!article) return <div>Article not found</div>;
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.title,
+    description: article.description,
+    datePublished: article.publishedAt,
+    author: {
+      "@type": "Organization",
+      name: "نبض الرياضة",
+    },
+  };
+
   return (
     <main style={{ padding: "30px", direction: "rtl", maxWidth: "800px", margin: "auto" }}>
+      
+      {/* SEO SCHEMA */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+
       <h1>{article.title}</h1>
 
       <p style={{ color: "#666" }}>{article.description}</p>
