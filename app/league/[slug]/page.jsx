@@ -4,22 +4,32 @@ import Link from "next/link";
 
 function getArticles() {
   const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
-  const file = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(file);
+  return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+}
+
+export async function generateMetadata({ params }) {
+  const name = params.slug.replace("-", " ");
+
+  return {
+    title: `${name} | أخبار وتحليلات`,
+    description: `تابع آخر أخبار ${name} وتحليلات المباريات والتحديثات.`,
+  };
 }
 
 export default function LeaguePage({ params }) {
   const articles = getArticles();
 
+  const leagueName = params.slug.replace("-", " ");
+
   const filtered = articles.filter(
     (a) =>
-      a.source?.toLowerCase().includes(params.slug.replace("-", " ")) ||
-      a.keywords?.join(" ").toLowerCase().includes(params.slug.replace("-", " "))
+      a.source?.toLowerCase().includes(leagueName) ||
+      a.keywords?.join(" ").toLowerCase().includes(leagueName)
   );
 
   return (
     <main style={{ padding: "30px", direction: "rtl" }}>
-      <h1>🔥 {params.slug.replace("-", " ")}</h1>
+      <h1>🔥 {leagueName}</h1>
 
       {filtered.length === 0 ? (
         <p>لا توجد مقالات حالياً</p>
