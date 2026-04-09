@@ -1,77 +1,181 @@
 import fs from "fs";
+import path from "path";
 
+// =====================
+// CONFIG
+// =====================
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-5.3";
+
+const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY;
+
+// =====================
+// HELPERS
+// =====================
 function slugify(text) {
   return text
     .toLowerCase()
-    .replace(/[^\u0600-\u06FFa-z0-9 ]/g, "")
-    .trim()
+    .replace(/[^\w\s-]/g, "")
     .replace(/\s+/g, "-")
-    .slice(0, 90);
+    .slice(0, 80);
 }
 
-function arabicLeagueName(source = "") {
-  const s = source.toLowerCase();
+// =====================
+// OPENAI CALL
+// =====================
+async function rewriteWithOpenAI(item) {
+  const prompt = `
+أعد كتابة هذا الخبر الرياضي بالعربية بأسلوب احترافي SEO:
 
-  if (s.includes("premier")) return "الدوري الإنجليزي الممتاز";
-  if (s.includes("la liga")) return "الدوري الإسباني";
-  if (s.includes("serie a")) return "الدوري الإيطالي";
-  if (s.includes("bundesliga")) return "الدوري الألماني";
-  if (s.includes("ligue 1")) return "الدوري الفرنسي";
-  if (s.includes("champions")) return "دوري أبطال أوروبا";
-  if (s.includes("saudi")) return "الدوري السعودي";
+العنوان: ${item.title}
+المحتوى: ${item.content || item.description || ""}
 
-  return "كرة القدم";
+المطلوب:
+- عنوان جذاب عربي فقط
+- وصف مختصر
+- مقال كامل
+- بدون أي إنجليزي
+
+JSON:
+{
+"title": "",
+"description": "",
+"content": ""
+}
+`;
+
+  const res = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: OPENAI_MODEL,
+      input: prompt,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`OpenAI error ${res.status}`);
+  }
+
+  const data = await res.json();
+
+  const text = data.output[0].content[0].text;
+
+  return JSON.parse(text);
 }
 
-function buildArticle(item, index) {
-  const league = arabicLeagueName(item.source);
+// =====================
+// CLAUDE CALL
+// =====================
+async function rewriteWithClaude(item) {
+  const prompt = `
+أعد كتابة هذا الخبر الرياضي بالعربية بأسلوب احترافي SEO:
 
-  const shortTitle = `آخر أخبار ${league}`;
-  const title = `🔥 ${shortTitle} - التفاصيل الكاملة والتحديثات`;
+العنوان: ${item.title}
+المحتوى: ${item.content || item.description || ""}
 
-  return {
-    slug: slugify(shortTitle) || `article-${index + 1}`,
-    title,
-    shortTitle,
-    description: `تعرف على آخر أخبار ${league} وتحليل المباريات والنتائج بشكل يومي عبر نبض الرياضة.`,
-    content: [
-      `تشهد أخبار ${league} متابعة كبيرة من الجماهير الرياضية في مختلف أنحاء العالم العربي.`,
-      `في هذا التقرير نقدم تغطية شاملة لأهم الأحداث والتطورات المرتبطة بالبطولة.`,
-      `نركز على تقديم محتوى واضح وسريع يساعد القارئ على فهم أهم المستجدات.`,
-      `كما نعرض تحليلاً مبسطاً لأبرز النتائج وتأثيرها على ترتيب الفرق.`,
-      `تابع نبض الرياضة للحصول على أحدث الأخبار الرياضية بشكل مستمر.`
-    ],
-    faq: [
-      {
-        q: `ما أهم أخبار ${league} اليوم؟`,
-        a: `نستعرض في هذا المقال أهم المستجدات والنتائج المرتبطة بالبطولة.`
-      },
-      {
-        q: `هل يتم تحديث الأخبار باستمرار؟`,
-        a: `نعم، يتم تحديث المقالات بشكل دوري حسب آخر الأخبار المتوفرة.`
-      }
-    ],
-    keywords: ["أخبار رياضية", league, "كرة القدم", "نتائج المباريات"],
-    source: item.source,
-    originalTitle: item.title,
-    link: item.link,
-    publishedAt: item.publishedAt || new Date().toISOString()
-  };
+المطلوب:
+- عنوان عربي قوي
+- وصف قصير
+- مقال كامل
+- بدون إنجليزي
+
+JSON فقط:
+{
+"title": "",
+"description": "",
+"content": ""
+}
+`;
+
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "x-api-key": CLAUDE_API_KEY,
+      "anthropic-version": "2023-06-01",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "claude-3-haiku-20240307",
+      max_tokens: 1000,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Claude error ${res.status}`);
+  }
+
+  const data = await res.json();
+
+  const text = data.content[0].text;
+
+  return JSON.parse(text);
 }
 
+// =====================
+// MAIN
+// =====================
 async function main() {
-  const raw = JSON.parse(
-    fs.readFileSync("content/articles/raw-news.json", "utf-8")
-  );
+  const rawPath = path.join(process.cwd(), "content/articles/raw-news.json");
+  const outPath = path.join(process.cwd(), "content/articles/seo-articles.json");
 
-  const results = raw.slice(0, 8).map((item, i) => buildArticle(item, i));
+  const raw = JSON.parse(fs.readFileSync(rawPath, "utf-8"));
 
-  fs.writeFileSync(
-    "content/articles/seo-articles.json",
-    JSON.stringify(results, null, 2)
-  );
+  const articles = [];
 
-  console.log("🔥 ARABIC ARTICLES GENERATED:", results.length);
+  for (const item of raw.slice(0, 10)) {
+    try {
+      let result;
+
+      // 1️⃣ Try OpenAI
+      if (OPENAI_API_KEY) {
+        try {
+          result = await rewriteWithOpenAI(item);
+          console.log("✅ OpenAI OK:", item.title);
+        } catch (err) {
+          console.log("⚠️ OpenAI failed → switching to Claude");
+        }
+      }
+
+      // 2️⃣ Claude fallback
+      if (!result && CLAUDE_API_KEY) {
+        try {
+          result = await rewriteWithClaude(item);
+          console.log("✅ Claude OK:", item.title);
+        } catch (err) {
+          console.log("❌ Claude failed:", item.title);
+          continue;
+        }
+      }
+
+      if (!result) continue;
+
+      articles.push({
+        ...result,
+        slug: slugify(result.title),
+      });
+
+    } catch (err) {
+      console.log("❌ rewrite failed for:", item.title);
+    }
+  }
+
+  fs.writeFileSync(outPath, JSON.stringify(articles, null, 2));
+
+  console.log("seo articles saved:", articles.length);
+
+  if (articles.length === 0) {
+    throw new Error("No SEO articles were generated");
+  }
 }
 
 main();
