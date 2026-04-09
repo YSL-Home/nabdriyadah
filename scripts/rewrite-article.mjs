@@ -19,128 +19,87 @@ function slugify(text) {
     .slice(0, 90);
 }
 
-function normalizeArticle(parsed, item, index) {
-  const title = parsed.title || item.title || `Article ${index + 1}`;
-  const shortTitle = parsed.shortTitle || title;
-  const description =
-    parsed.description ||
-    item.summary ||
-    "آخر الأخبار الرياضية من نبض الرياضة.";
-  const content = Array.isArray(parsed.content) && parsed.content.length
-    ? parsed.content
-    : [
-        `يشهد موضوع ${shortTitle} اهتماماً متزايداً خلال الساعات الأخيرة.`,
-        `يقدم نبض الرياضة تغطية عربية سريعة ومبسطة لهذا الخبر.`,
-        `يتابع الجمهور الرياضي آخر التطورات المتعلقة بهذا الحدث.`,
-        `نعرض هنا أهم التفاصيل المتاحة حالياً مع صياغة مناسبة لمحركات البحث.`,
-        `سيتم تحديث المقال عند توفر مستجدات إضافية.`
-      ];
-  const faq = Array.isArray(parsed.faq)
-    ? parsed.faq
-    : [
-        {
-          q: `ما أهمية ${shortTitle}؟`,
-          a: `يحظى هذا الموضوع باهتمام جماهيري وإعلامي كبير في الوسط الرياضي.`
-        },
-        {
-          q: `هل سيتم تحديث هذا المقال؟`,
-          a: `نعم، يمكن تحديثه تلقائياً عند توفر معطيات جديدة.`
-        }
-      ];
-  const keywords = Array.isArray(parsed.keywords) && parsed.keywords.length
-    ? parsed.keywords
-    : ["أخبار رياضية", "كرة القدم", shortTitle];
-
-  return {
-    slug: slugify(shortTitle) || `article-${index + 1}`,
-    title,
-    shortTitle,
-    description,
-    content,
-    faq,
-    keywords,
-    source: item.source,
-    originalTitle: item.title,
-    link: item.link,
-    publishedAt: item.publishedAt || new Date().toISOString()
-  };
+// 🚨 filtre qualité (ULTRA IMPORTANT)
+function isValidArticle(item) {
+  if (!item.title || item.title.length < 30) return false;
+  if (!item.summary || item.summary.length < 60) return false;
+  return true;
 }
 
-function fallbackArticle(item, index) {
-  return normalizeArticle(
-    {
-      title: `${item.title || `Article ${index + 1}`} | آخر الأخبار الرياضية`,
-      shortTitle: item.title || `Article ${index + 1}`,
-      description:
-        item.summary ||
-        "آخر الأخبار الرياضية والتحليلات المحدثة على نبض الرياضة.",
-      content: [
-        `يعد موضوع ${item.title || `Article ${index + 1}`} من المواضيع الرياضية التي تشهد اهتماماً ملحوظاً.`,
-        `في هذا التقرير، نستعرض أبرز ما ورد حول الخبر بأسلوب عربي واضح ومناسب للقراءة السريعة.`,
-        `يعتمد هذا المحتوى على المعلومات الأولية المتاحة من المصدر مع إعادة صياغة تحريرية.`,
-        `يهدف المقال إلى تقديم ملخص سريع ومفيد للزائر مع بنية مناسبة لمحركات البحث.`,
-        `سيتم تحسين هذا المحتوى وتحديثه عند توفر بيانات إضافية أو إعادة تشغيل النظام.`
-      ],
-      faq: [
-        {
-          q: "ما مضمون هذا الخبر؟",
-          a: "يعرض هذا المقال ملخصاً سريعاً لأبرز ما ورد في الخبر الرياضي."
-        },
-        {
-          q: "هل يمكن تحديث المعلومات لاحقاً؟",
-          a: "نعم، يمكن تحديث المقال تلقائياً عند وصول بيانات جديدة."
-        }
-      ],
-      keywords: ["أخبار رياضية", "كرة القدم", item.source || "رياضة"]
-    },
-    item,
-    index
-  );
-}
-
+// 🧠 prompt SEO amélioré
 function buildPrompt(item) {
   return `
-أنت محرر SEO عربي لموقع رياضي اسمه "نبض الرياضة".
+أنت خبير SEO عربي لموقع رياضي.
 
 المطلوب:
-- أعد كتابة الخبر بالعربية الطبيعية.
-- اجعله مفيداً للقارئ أولاً.
-- لا تنسخ حرفياً.
-- لا تختلق حقائق غير مؤكدة.
-- أخرج JSON فقط بهذا الشكل:
+- كتابة مقال رياضي عربي احترافي
+- تحسين CTR (عنوان جذاب)
+- تحسين SEO (نية البحث)
+- لا تكرر النص
+- لا تخترع معلومات
+
+أخرج JSON فقط:
+
 {
-  "title": "",
-  "shortTitle": "",
-  "description": "",
-  "content": ["", "", "", "", ""],
-  "faq": [{"q": "", "a": ""}, {"q": "", "a": ""}],
-  "keywords": ["", "", "", ""]
+"title": "",
+"shortTitle": "",
+"description": "",
+"content": ["", "", "", "", ""],
+"faq": [{"q": "", "a": ""}, {"q": "", "a": ""}],
+"keywords": ["", "", "", ""]
 }
 
-العنوان: ${item.title}
+الموضوع: ${item.title}
 الملخص: ${item.summary}
 المصدر: ${item.source}
 `;
 }
 
-async function tryOpenAI(item, index) {
-  const response = await openai.responses.create({
-    model: process.env.OPENAI_MODEL || "gpt-5.4",
+// 🔥 fallback intelligent (important)
+function fallbackArticle(item, index) {
+  return {
+    slug: slugify(item.title) || `article-${index}`,
+    title: `${item.title} | آخر الأخبار`,
+    shortTitle: item.title,
+    description: item.summary,
+    content: [
+      `يشهد خبر ${item.title} اهتماماً كبيراً.`,
+      `نستعرض في هذا التقرير أبرز التفاصيل.`,
+      `الموضوع يتصدر اهتمامات الجماهير.`,
+      `نقدم تحليل سريع ومبسط.`,
+      `تابع المزيد من الأخبار على نبض الرياضة.`
+    ],
+    faq: [
+      {
+        q: "ما مضمون الخبر؟",
+        a: "ملخص لأهم تفاصيل الحدث الرياضي."
+      },
+      {
+        q: "هل سيتم تحديثه؟",
+        a: "نعم، يتم تحديثه باستمرار."
+      }
+    ],
+    keywords: ["أخبار رياضية", item.source],
+    source: item.source,
+    originalTitle: item.title,
+    link: item.link,
+    publishedAt: item.publishedAt
+  };
+}
+
+async function tryOpenAI(item) {
+  const res = await openai.responses.create({
+    model: process.env.OPENAI_MODEL || "gpt-4.1-mini",
     input: buildPrompt(item)
   });
 
-  const text = response.output_text?.trim();
-  if (!text) throw new Error("OpenAI empty response");
-
-  const parsed = JSON.parse(text);
-  return normalizeArticle(parsed, item, index);
+  return JSON.parse(res.output_text);
 }
 
-async function tryClaude(item, index) {
-  const response = await anthropic.messages.create({
+async function tryClaude(item) {
+  const res = await anthropic.messages.create({
     model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
-    max_tokens: 1800,
-    temperature: 0.4,
+    max_tokens: 1500,
     messages: [
       {
         role: "user",
@@ -149,31 +108,21 @@ async function tryClaude(item, index) {
     ]
   });
 
-  const text = response.content
-    ?.filter((c) => c.type === "text")
-    .map((c) => c.text)
-    .join("\n")
-    .trim();
-
-  if (!text) throw new Error("Claude empty response");
-
-  const parsed = JSON.parse(text);
-  return normalizeArticle(parsed, item, index);
+  const text = res.content.find(c => c.type === "text").text;
+  return JSON.parse(text);
 }
 
-async function rewriteOne(item, index) {
+async function rewrite(item, index) {
   try {
-    return await tryOpenAI(item, index);
-  } catch (error) {
-    console.error(`OpenAI failed for: ${item.title}`);
-    console.error(error.message);
+    return await tryOpenAI(item);
+  } catch (e) {
+    console.log("OpenAI fail → Claude");
   }
 
   try {
-    return await tryClaude(item, index);
-  } catch (error) {
-    console.error(`Claude failed for: ${item.title}`);
-    console.error(error.message);
+    return await tryClaude(item);
+  } catch (e) {
+    console.log("Claude fail → fallback");
   }
 
   return fallbackArticle(item, index);
@@ -184,25 +133,37 @@ async function main() {
     fs.readFileSync("content/articles/raw-news.json", "utf-8")
   );
 
-  const limited = raw.slice(0, 8);
+  const filtered = raw.filter(isValidArticle).slice(0, 8);
+
   const results = [];
 
-  for (let i = 0; i < limited.length; i++) {
-    const article = await rewriteOne(limited[i], i);
+  for (let i = 0; i < filtered.length; i++) {
+    const base = filtered[i];
+    const ai = await rewrite(base, i);
+
+    const article = {
+      slug: slugify(ai.shortTitle || ai.title),
+      title: ai.title,
+      shortTitle: ai.shortTitle,
+      description: ai.description,
+      content: ai.content,
+      faq: ai.faq,
+      keywords: ai.keywords,
+      source: base.source,
+      link: base.link,
+      publishedAt: base.publishedAt
+    };
+
     results.push(article);
-    console.log(`generated: ${article.slug}`);
+    console.log("generated:", article.slug);
   }
 
   fs.writeFileSync(
     "content/articles/seo-articles.json",
-    JSON.stringify(results, null, 2),
-    "utf-8"
+    JSON.stringify(results, null, 2)
   );
 
-  console.log(`seo articles saved: ${results.length}`);
+  console.log("SEO ARTICLES READY:", results.length);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+main();
