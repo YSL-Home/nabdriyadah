@@ -1,6 +1,24 @@
 import fs from "fs";
 import path from "path";
 
+export async function generateMetadata({ params }) {
+  const fs = require("fs");
+  const path = require("path");
+
+  const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
+  const articles = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+  const article = articles.find((a) => a.slug === params.slug);
+
+  if (!article) return {};
+
+  return {
+    title: article.title,
+    description: article.description,
+    keywords: article.keywords,
+  };
+}
+
 function getArticles() {
   const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
   const file = fs.readFileSync(filePath, "utf-8");
