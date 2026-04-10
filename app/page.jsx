@@ -1,42 +1,442 @@
-import "./globals.css";
-import Script from "next/script";
+import fs from "fs";
+import path from "path";
+import Link from "next/link";
 
 export const metadata = {
   title: "نبض الرياضة",
   description: "أحدث الأخبار الرياضية العربية وتحليلات البطولات العالمية",
-  icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
-  },
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="ar" dir="rtl">
-      <head>
-        <Script id="gtm-script" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-MHCF745N');
-          `}
-        </Script>
-      </head>
-      <body>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-MHCF745N"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+function getArticles() {
+  try {
+    const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
+    const file = fs.readFileSync(filePath, "utf-8");
+    return JSON.parse(file);
+  } catch (error) {
+    console.error("Erreur lecture seo-articles.json:", error);
+    return [];
+  }
+}
 
-        {children}
-      </body>
-    </html>
+function slugifyLeague(source = "") {
+  return String(source).toLowerCase().replace(/\s+/g, "-");
+}
+
+function arabicLeagueName(source = "") {
+  const s = String(source).toLowerCase();
+
+  if (s.includes("premier")) return "الدوري الإنجليزي الممتاز";
+  if (s.includes("la-liga") || s.includes("la liga")) return "الدوري الإسباني";
+  if (s.includes("serie-a") || s.includes("serie a")) return "الدوري الإيطالي";
+  if (s.includes("bundesliga")) return "الدوري الألماني";
+  if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
+  if (s.includes("champions")) return "دوري أبطال أوروبا";
+  if (s.includes("saudi")) return "الدوري السعودي";
+  if (s.includes("padel")) return "البادل";
+  return source || "كرة القدم";
+}
+
+function AdPlaceholder({ label = "مساحة إعلانية", height = 140 }) {
+  return (
+    <div
+      style={{
+        background: "#ffffff",
+        border: "2px dashed #cbd5e1",
+        borderRadius: "20px",
+        minHeight: `${height}px`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#64748b",
+        fontSize: "15px",
+        fontWeight: 700,
+        textAlign: "center",
+        padding: "16px",
+      }}
+    >
+      📢 {label}
+    </div>
+  );
+}
+
+export default function HomePage() {
+  const articles = getArticles();
+  const featured = articles[0] || null;
+  const latest = articles.slice(1, 9);
+
+  const leagues = [
+    ...new Map(
+      articles.map((article) => [
+        slugifyLeague(article.source),
+        {
+          slug: slugifyLeague(article.source),
+          name: arabicLeagueName(article.source),
+        },
+      ])
+    ).values(),
+  ].filter((item) => item.slug);
+
+  return (
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#f6f8f7",
+        direction: "rtl",
+      }}
+    >
+      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "24px 20px 56px" }}>
+        <header
+          style={{
+            background: "white",
+            borderRadius: "28px",
+            padding: "24px",
+            border: "1px solid #e5e7eb",
+            boxShadow: "0 10px 30px rgba(15,23,42,0.04)",
+            marginBottom: "28px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "14px",
+            }}
+          >
+            <img
+              src="/logo.svg"
+              alt="نبض الرياضة"
+              style={{ width: "min(100%, 560px)" }}
+            />
+
+            <nav
+              style={{
+                display: "flex",
+                gap: "18px",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "8px",
+              }}
+            >
+              <Link href="/" style={{ textDecoration: "none", color: "#2E7D32", fontWeight: 800 }}>
+                🏠 الرئيسية
+              </Link>
+
+              {leagues.slice(0, 6).map((league) => (
+                <Link
+                  key={league.slug}
+                  href={`/league/${league.slug}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "#1f2937",
+                    fontWeight: 700,
+                  }}
+                >
+                  🏆 {league.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+
+        <section
+          style={{
+            background: "linear-gradient(135deg, #2E7D32, #8BC34A)",
+            borderRadius: "32px",
+            padding: "54px 24px",
+            textAlign: "center",
+            color: "white",
+            marginBottom: "32px",
+            boxShadow: "0 20px 40px rgba(46,125,50,0.16)",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "18px",
+              fontWeight: 700,
+              opacity: 0.95,
+              marginBottom: "10px",
+            }}
+          >
+            ⚽ منصة عربية رياضية حديثة
+          </div>
+
+          <h1
+            style={{
+              margin: 0,
+              fontSize: "68px",
+              fontWeight: 800,
+              lineHeight: 1.1,
+            }}
+          >
+            نبض الرياضة
+          </h1>
+
+          <p
+            style={{
+              marginTop: "18px",
+              fontSize: "24px",
+              opacity: 0.97,
+            }}
+          >
+            📰 أخبار - ⏱️ مباشر - 🎥 فيديو - 📊 تحليلات
+          </p>
+        </section>
+
+        <section style={{ marginBottom: "28px" }}>
+          <AdPlaceholder label="مساحة إعلانية علوية 970×250 أو 728×90" height={120} />
+        </section>
+
+        {featured && (
+          <section style={{ marginBottom: "30px" }}>
+            <h2
+              style={{
+                margin: "0 0 20px 0",
+                fontSize: "34px",
+                color: "#1f2937",
+              }}
+            >
+              🔥 الخبر الأبرز
+            </h2>
+
+            <article
+              style={{
+                background: "white",
+                borderRadius: "26px",
+                padding: "32px",
+                border: "1px solid #e5e7eb",
+                boxShadow: "0 10px 24px rgba(15,23,42,0.04)",
+              }}
+            >
+              <Link
+                href={`/articles/${featured.slug}`}
+                style={{ textDecoration: "none" }}
+              >
+                <h3
+                  style={{
+                    margin: "0 0 14px 0",
+                    color: "#1f2937",
+                    fontSize: "38px",
+                    lineHeight: 1.5,
+                    fontWeight: 800,
+                  }}
+                >
+                  📰 {featured.title}
+                </h3>
+              </Link>
+
+              <p
+                style={{
+                  margin: "0 0 16px 0",
+                  color: "#4b5563",
+                  fontSize: "19px",
+                  lineHeight: 1.95,
+                }}
+              >
+                {featured.description}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  fontSize: "14px",
+                  color: "#6b7280",
+                }}
+              >
+                <Link
+                  href={`/league/${slugifyLeague(featured.source)}`}
+                  style={{
+                    color: "#2E7D32",
+                    textDecoration: "none",
+                    fontWeight: 800,
+                  }}
+                >
+                  🏆 {arabicLeagueName(featured.source)}
+                </Link>
+
+                <span>🏷️ {(featured.keywords || []).join(" • ")}</span>
+              </div>
+            </article>
+          </section>
+        )}
+
+        <section style={{ marginBottom: "28px" }}>
+          <h2
+            style={{
+              margin: "0 0 18px 0",
+              fontSize: "32px",
+              color: "#1f2937",
+            }}
+          >
+            🏆 البطولات
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "18px",
+            }}
+          >
+            {leagues.map((league) => (
+              <Link
+                key={league.slug}
+                href={`/league/${league.slug}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div
+                  style={{
+                    background: "white",
+                    borderRadius: "22px",
+                    padding: "22px",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "22px",
+                      fontWeight: 800,
+                      color: "#1f2937",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    🥇 {league.name}
+                  </div>
+
+                  <div
+                    style={{
+                      color: "#6b7280",
+                      lineHeight: 1.8,
+                      fontSize: "15px",
+                    }}
+                  >
+                    آخر الأخبار والمقالات الخاصة بهذه البطولة
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom: "28px" }}>
+          <AdPlaceholder label="مساحة إعلانية وسط الصفحة بين الأقسام" height={140} />
+        </section>
+
+        <section>
+          <h2
+            style={{
+              textAlign: "right",
+              marginBottom: "24px",
+              fontSize: "34px",
+              color: "#1f2937",
+            }}
+          >
+            ⏱️ آخر الأخبار
+          </h2>
+
+          {latest.length === 0 ? (
+            <div
+              style={{
+                background: "white",
+                borderRadius: "20px",
+                padding: "28px",
+                textAlign: "center",
+                color: "#6b7280",
+                border: "1px solid #e5e7eb",
+              }}
+            >
+              لا توجد مقالات حالياً
+            </div>
+          ) : (
+            latest.map((article, index) => (
+              <article
+                key={article.slug || index}
+                style={{
+                  background: "white",
+                  borderRadius: "24px",
+                  padding: "30px",
+                  marginBottom: "20px",
+                  border: "1px solid #e5e7eb",
+                  boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
+                }}
+              >
+                <Link
+                  href={`/articles/${article.slug}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <h3
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#1f2937",
+                      fontSize: "30px",
+                      lineHeight: 1.5,
+                      fontWeight: 800,
+                    }}
+                  >
+                    📰 {article.title}
+                  </h3>
+                </Link>
+
+                <p
+                  style={{
+                    margin: "0 0 16px 0",
+                    color: "#4b5563",
+                    fontSize: "18px",
+                    lineHeight: 1.95,
+                  }}
+                >
+                  {article.description}
+                </p>
+
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "12px",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    fontSize: "14px",
+                    color: "#6b7280",
+                  }}
+                >
+                  <Link
+                    href={`/league/${slugifyLeague(article.source)}`}
+                    style={{
+                      color: "#2E7D32",
+                      textDecoration: "none",
+                      fontWeight: 800,
+                    }}
+                  >
+                    🏆 {arabicLeagueName(article.source)}
+                  </Link>
+
+                  <span>🏷️ {(article.keywords || []).join(" • ")}</span>
+                </div>
+              </article>
+            ))
+          )}
+        </section>
+
+        <section style={{ marginTop: "28px" }}>
+          <AdPlaceholder label="مساحة إعلانية سفلية قبل الفوتر" height={160} />
+        </section>
+
+        <footer
+          style={{
+            marginTop: "42px",
+            padding: "24px",
+            textAlign: "center",
+            color: "#6b7280",
+            fontSize: "15px",
+          }}
+        >
+          ✅ نبض الرياضة © واجهة مجلة رياضية عربية بهيكل أقوى للنشر والـ SEO
+        </footer>
+      </div>
+    </main>
   );
 }
