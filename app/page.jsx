@@ -18,6 +18,10 @@ function getArticles() {
   }
 }
 
+function slugifyLeague(source = "") {
+  return String(source).toLowerCase().replace(/\s+/g, "-");
+}
+
 export default function HomePage() {
   const articles = getArticles();
 
@@ -99,52 +103,68 @@ export default function HomePage() {
           </div>
         ) : (
           articles.map((article, index) => (
-            <Link
+            <article
               key={article.slug || index}
-              href={`/articles/${article.slug}`}
-              style={{ textDecoration: "none" }}
+              style={{
+                background: "#f9fafb",
+                borderRadius: "22px",
+                padding: "30px",
+                marginBottom: "22px",
+                border: "1px solid #e5e7eb",
+              }}
             >
-              <article
-                style={{
-                  background: "#f9fafb",
-                  borderRadius: "22px",
-                  padding: "30px",
-                  marginBottom: "22px",
-                  border: "1px solid #e5e7eb",
-                }}
+              <Link
+                href={`/articles/${article.slug}`}
+                style={{ textDecoration: "none" }}
               >
                 <h3
                   style={{
                     margin: "0 0 14px 0",
                     color: "#111827",
-                    fontSize: "28px",
+                    fontSize: "30px",
+                    lineHeight: 1.5,
                     fontWeight: 800,
                   }}
                 >
                   {article.title}
                 </h3>
+              </Link>
 
-                <p
+              <p
+                style={{
+                  margin: "0 0 14px 0",
+                  color: "#4b5563",
+                  fontSize: "18px",
+                  lineHeight: 1.9,
+                }}
+              >
+                {article.description}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  fontSize: "14px",
+                  color: "#6b7280",
+                }}
+              >
+                <Link
+                  href={`/league/${slugifyLeague(article.source)}`}
                   style={{
-                    margin: "0 0 14px 0",
-                    color: "#4b5563",
-                    fontSize: "17px",
-                    lineHeight: 1.8,
+                    color: "#2563eb",
+                    textDecoration: "none",
+                    fontWeight: 700,
                   }}
                 >
-                  {article.description}
-                </p>
+                  {article.source}
+                </Link>
 
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#6b7280",
-                  }}
-                >
-                  {(article.keywords || []).join(" • ")}
-                </div>
-              </article>
-            </Link>
+                <span>{(article.keywords || []).join(" • ")}</span>
+              </div>
+            </article>
           ))
         )}
       </div>
