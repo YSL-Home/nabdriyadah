@@ -13,6 +13,23 @@ function getArticles() {
   }
 }
 
+function arabicLeagueName(source = "") {
+  const s = String(source).toLowerCase();
+
+  if (s.includes("premier")) return "الدوري الإنجليزي الممتاز";
+  if (s.includes("la-liga") || s.includes("la liga")) return "الدوري الإسباني";
+  if (s.includes("serie-a") || s.includes("serie a")) return "الدوري الإيطالي";
+  if (s.includes("bundesliga")) return "الدوري الألماني";
+  if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
+  if (s.includes("champions")) return "دوري أبطال أوروبا";
+  if (s.includes("saudi")) return "الدوري السعودي";
+  return source || "كرة القدم";
+}
+
+function slugifyLeague(source = "") {
+  return String(source).toLowerCase().replace(/\s+/g, "-");
+}
+
 export function generateStaticParams() {
   const articles = getArticles();
 
@@ -57,13 +74,13 @@ export default function ArticlePage({ params }) {
       <main
         style={{
           minHeight: "100vh",
-          background: "#f3f4f6",
+          background: "#eef2f7",
           padding: "32px 20px",
           direction: "rtl",
           fontFamily: "Arial, sans-serif",
         }}
       >
-        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "920px", margin: "0 auto" }}>
           <div
             style={{
               background: "white",
@@ -118,7 +135,7 @@ export default function ArticlePage({ params }) {
     <main
       style={{
         minHeight: "100vh",
-        background: "#f3f4f6",
+        background: "#eef2f7",
         padding: "32px 20px",
         direction: "rtl",
         fontFamily: "Arial, sans-serif",
@@ -129,25 +146,49 @@ export default function ArticlePage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <div style={{ maxWidth: "920px", margin: "0 auto" }}>
-        <Link
-          href="/"
+      <div style={{ maxWidth: "980px", margin: "0 auto" }}>
+        <header
           style={{
-            display: "inline-block",
-            marginBottom: "20px",
-            color: "#2563eb",
-            textDecoration: "none",
-            fontWeight: 700,
+            background: "white",
+            borderRadius: "20px",
+            padding: "16px 22px",
+            marginBottom: "22px",
+            border: "1px solid #e5e7eb",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "12px",
+            flexWrap: "wrap",
           }}
         >
-          ← العودة إلى الرئيسية
-        </Link>
+          <Link
+            href="/"
+            style={{
+              color: "#2563eb",
+              textDecoration: "none",
+              fontWeight: 700,
+            }}
+          >
+            ← العودة إلى الرئيسية
+          </Link>
+
+          <Link
+            href={`/league/${slugifyLeague(article.source)}`}
+            style={{
+              color: "#374151",
+              textDecoration: "none",
+              fontWeight: 700,
+            }}
+          >
+            {arabicLeagueName(article.source)}
+          </Link>
+        </header>
 
         <article
           style={{
             background: "white",
             borderRadius: "24px",
-            padding: "34px",
+            padding: "36px",
             border: "1px solid #e5e7eb",
           }}
         >
@@ -158,7 +199,7 @@ export default function ArticlePage({ params }) {
               marginBottom: "14px",
             }}
           >
-            {article.source || "أخبار رياضية"}
+            {arabicLeagueName(article.source)}
             {article.publishedAt ? (
               <> • {new Date(article.publishedAt).toLocaleDateString("fr-FR")}</>
             ) : null}
@@ -167,7 +208,7 @@ export default function ArticlePage({ params }) {
           <h1
             style={{
               margin: "0 0 18px 0",
-              fontSize: "42px",
+              fontSize: "44px",
               lineHeight: 1.4,
               color: "#111827",
               fontWeight: 800,
@@ -178,9 +219,9 @@ export default function ArticlePage({ params }) {
 
           <p
             style={{
-              margin: "0 0 28px 0",
+              margin: "0 0 30px 0",
               fontSize: "20px",
-              lineHeight: 1.9,
+              lineHeight: 1.95,
               color: "#4b5563",
             }}
           >
@@ -204,7 +245,7 @@ export default function ArticlePage({ params }) {
           </div>
 
           {(article.faq || []).length > 0 && (
-            <section style={{ marginTop: "40px" }}>
+            <section style={{ marginTop: "42px" }}>
               <h2
                 style={{
                   fontSize: "30px",
