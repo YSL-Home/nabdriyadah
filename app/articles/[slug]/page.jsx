@@ -55,29 +55,6 @@ function buildKeyPoints(article) {
   return points.slice(0, 4);
 }
 
-function AdPlaceholder({ label = "مساحة إعلانية", height = 220 }) {
-  return (
-    <div
-      style={{
-        background: "#ffffff",
-        border: "2px dashed #cbd5e1",
-        borderRadius: "20px",
-        minHeight: `${height}px`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#64748b",
-        fontSize: "15px",
-        fontWeight: 700,
-        textAlign: "center",
-        padding: "16px",
-      }}
-    >
-      📢 {label}
-    </div>
-  );
-}
-
 export function generateStaticParams() {
   const articles = getArticles();
 
@@ -235,10 +212,6 @@ export default function ArticlePage({ params }) {
           </Link>
         </header>
 
-        <section style={{ marginBottom: "20px" }}>
-          <AdPlaceholder label="مساحة إعلانية أعلى المقال 728×90 أو Responsive" height={120} />
-        </section>
-
         <div
           style={{
             display: "grid",
@@ -327,10 +300,6 @@ export default function ArticlePage({ params }) {
                 </p>
               ))}
             </div>
-
-            <section style={{ marginTop: "24px", marginBottom: "24px" }}>
-              <AdPlaceholder label="مساحة إعلانية داخل المقال بين الفقرات" height={160} />
-            </section>
 
             {(article.faq || []).length > 0 && (
               <section style={{ marginTop: "42px" }}>
@@ -456,8 +425,6 @@ export default function ArticlePage({ params }) {
                 ))}
               </div>
             </div>
-
-            <AdPlaceholder label="مساحة إعلانية جانبية 300×250" height={250} />
 
             <div
               style={{
