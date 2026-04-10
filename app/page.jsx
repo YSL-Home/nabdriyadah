@@ -36,29 +36,6 @@ function arabicLeagueName(source = "") {
   return source || "كرة القدم";
 }
 
-function AdPlaceholder({ label = "مساحة إعلانية", height = 140 }) {
-  return (
-    <div
-      style={{
-        background: "#ffffff",
-        border: "2px dashed #cbd5e1",
-        borderRadius: "20px",
-        minHeight: `${height}px`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#64748b",
-        fontSize: "15px",
-        fontWeight: 700,
-        textAlign: "center",
-        padding: "16px",
-      }}
-    >
-      📢 {label}
-    </div>
-  );
-}
-
 export default function HomePage() {
   const articles = getArticles();
   const featured = articles[0] || null;
@@ -182,10 +159,6 @@ export default function HomePage() {
           >
             📰 أخبار - ⏱️ مباشر - 🎥 فيديو - 📊 تحليلات
           </p>
-        </section>
-
-        <section style={{ marginBottom: "28px" }}>
-          <AdPlaceholder label="مساحة إعلانية علوية 970×250 أو 728×90" height={120} />
         </section>
 
         {featured && (
@@ -323,10 +296,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section style={{ marginBottom: "28px" }}>
-          <AdPlaceholder label="مساحة إعلانية وسط الصفحة بين الأقسام" height={140} />
-        </section>
-
         <section>
           <h2
             style={{
@@ -419,10 +388,6 @@ export default function HomePage() {
               </article>
             ))
           )}
-        </section>
-
-        <section style={{ marginTop: "28px" }}>
-          <AdPlaceholder label="مساحة إعلانية سفلية قبل الفوتر" height={160} />
         </section>
 
         <footer
