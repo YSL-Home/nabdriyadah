@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "نبض الرياضة",
-  description: "أحدث الأخبار الرياضية العربية",
+  description: "أحدث الأخبار الرياضية العربية وتحليلات البطولات العالمية",
 };
 
 function getArticles() {
