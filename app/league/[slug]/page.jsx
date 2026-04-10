@@ -27,6 +27,7 @@ function arabicLeagueName(source = "") {
   if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
   if (s.includes("champions")) return "دوري أبطال أوروبا";
   if (s.includes("saudi")) return "الدوري السعودي";
+  if (s.includes("padel")) return "البادل";
   return source || "كرة القدم";
 }
 
