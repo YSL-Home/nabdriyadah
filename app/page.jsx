@@ -32,6 +32,7 @@ function arabicLeagueName(source = "") {
   if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
   if (s.includes("champions")) return "دوري أبطال أوروبا";
   if (s.includes("saudi")) return "الدوري السعودي";
+  if (s.includes("padel")) return "البادل";
   return source || "كرة القدم";
 }
 
@@ -45,87 +46,106 @@ export default function HomePage() {
         {
           slug: slugifyLeague(article.source),
           name: arabicLeagueName(article.source),
-          source: article.source,
         },
       ])
     ).values(),
   ].filter((league) => league.slug);
 
+  const featured = articles[0] || null;
+  const latest = articles.slice(1);
+
   return (
     <main
       style={{
         minHeight: "100vh",
-        background: "#eef2f7",
+        background: "#f6f8f7",
         direction: "rtl",
-        fontFamily: "Arial, sans-serif",
       }}
     >
-      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "24px 20px 48px" }}>
+      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "24px 20px 56px" }}>
         <header
           style={{
             background: "white",
-            borderRadius: "20px",
-            padding: "16px 22px",
-            marginBottom: "22px",
+            borderRadius: "28px",
+            padding: "24px",
             border: "1px solid #e5e7eb",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "16px",
-            flexWrap: "wrap",
+            boxShadow: "0 10px 30px rgba(15,23,42,0.04)",
+            marginBottom: "28px",
           }}
         >
-          <div>
-            <div style={{ fontSize: "28px", fontWeight: 800, color: "#111827" }}>
-              نبض الرياضة
-            </div>
-            <div style={{ color: "#6b7280", fontSize: "14px", marginTop: "4px" }}>
-              منصة أخبار رياضية عربية سريعة ومحدثة
-            </div>
-          </div>
-
-          <nav
+          <div
             style={{
               display: "flex",
-              gap: "14px",
-              flexWrap: "wrap",
+              flexDirection: "column",
               alignItems: "center",
+              gap: "14px",
             }}
           >
-            <Link href="/" style={{ color: "#2563eb", textDecoration: "none", fontWeight: 700 }}>
-              الرئيسية
-            </Link>
-            {uniqueLeagues.slice(0, 6).map((league) => (
-              <Link
-                key={league.slug}
-                href={`/league/${league.slug}`}
-                style={{
-                  color: "#374151",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                }}
-              >
-                {league.name}
+            <img
+              src="/logo.svg"
+              alt="نبض الرياضة"
+              style={{
+                width: "min(100%, 560px)",
+              }}
+            />
+
+            <nav
+              style={{
+                display: "flex",
+                gap: "18px",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "8px",
+              }}
+            >
+              <Link href="/" style={{ textDecoration: "none", color: "#2E7D32", fontWeight: 800 }}>
+                🏠 الرئيسية
               </Link>
-            ))}
-          </nav>
+
+              {uniqueLeagues.slice(0, 6).map((league) => (
+                <Link
+                  key={league.slug}
+                  href={`/league/${league.slug}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "#1f2937",
+                    fontWeight: 700,
+                  }}
+                >
+                  🏆 {league.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </header>
 
         <section
           style={{
-            background: "linear-gradient(135deg,#2563eb,#7c3aed)",
-            borderRadius: "30px",
-            padding: "72px 24px",
+            background: "linear-gradient(135deg, #2E7D32, #8BC34A)",
+            borderRadius: "32px",
+            padding: "54px 24px",
             textAlign: "center",
             color: "white",
-            marginBottom: "36px",
-            boxShadow: "0 20px 40px rgba(37,99,235,0.15)",
+            marginBottom: "32px",
+            boxShadow: "0 20px 40px rgba(46,125,50,0.16)",
           }}
         >
+          <div
+            style={{
+              fontSize: "18px",
+              fontWeight: 700,
+              opacity: 0.95,
+              marginBottom: "10px",
+            }}
+          >
+            ⚽ منصة عربية رياضية حديثة
+          </div>
+
           <h1
             style={{
               margin: 0,
-              fontSize: "72px",
+              fontSize: "68px",
               fontWeight: 800,
               lineHeight: 1.1,
             }}
@@ -136,15 +156,15 @@ export default function HomePage() {
           <p
             style={{
               marginTop: "18px",
-              fontSize: "26px",
-              opacity: 0.95,
+              fontSize: "24px",
+              opacity: 0.97,
             }}
           >
-            أخبار - مباشر - فيديو - تحليلات
+            📰 أخبار - ⏱️ مباشر - 🎥 فيديو - 📊 تحليلات
           </p>
         </section>
 
-        <section style={{ marginBottom: "34px" }}>
+        <section style={{ marginBottom: "28px" }}>
           <div
             style={{
               display: "flex",
@@ -159,20 +179,20 @@ export default function HomePage() {
               style={{
                 margin: 0,
                 fontSize: "34px",
-                color: "#111827",
+                color: "#1f2937",
               }}
             >
-              البطولات
+              🏆 البطولات
             </h2>
 
             <div
               style={{
                 fontSize: "16px",
-                color: "#374151",
+                color: "#1f2937",
                 fontWeight: 700,
               }}
             >
-              عدد المقالات الحالية: {articles.length}
+              📌 عدد المقالات الحالية: {articles.length}
             </div>
           </div>
 
@@ -192,9 +212,10 @@ export default function HomePage() {
                 <div
                   style={{
                     background: "white",
-                    borderRadius: "20px",
+                    borderRadius: "22px",
                     padding: "22px",
                     border: "1px solid #e5e7eb",
+                    boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
                     minHeight: "120px",
                   }}
                 >
@@ -202,11 +223,11 @@ export default function HomePage() {
                     style={{
                       fontSize: "22px",
                       fontWeight: 800,
-                      color: "#111827",
+                      color: "#1f2937",
                       marginBottom: "10px",
                     }}
                   >
-                    {league.name}
+                    🏅 {league.name}
                   </div>
                   <div
                     style={{
@@ -223,19 +244,95 @@ export default function HomePage() {
           </div>
         </section>
 
+        {featured && (
+          <section style={{ marginBottom: "30px" }}>
+            <h2
+              style={{
+                margin: "0 0 20px 0",
+                fontSize: "34px",
+                color: "#1f2937",
+              }}
+            >
+              🔥 الخبر الأبرز
+            </h2>
+
+            <article
+              style={{
+                background: "white",
+                borderRadius: "26px",
+                padding: "32px",
+                border: "1px solid #e5e7eb",
+                boxShadow: "0 10px 24px rgba(15,23,42,0.04)",
+              }}
+            >
+              <Link
+                href={`/articles/${featured.slug}`}
+                style={{ textDecoration: "none" }}
+              >
+                <h3
+                  style={{
+                    margin: "0 0 14px 0",
+                    color: "#1f2937",
+                    fontSize: "38px",
+                    lineHeight: 1.5,
+                    fontWeight: 800,
+                  }}
+                >
+                  📰 {featured.title}
+                </h3>
+              </Link>
+
+              <p
+                style={{
+                  margin: "0 0 16px 0",
+                  color: "#4b5563",
+                  fontSize: "19px",
+                  lineHeight: 1.95,
+                }}
+              >
+                {featured.description}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  fontSize: "14px",
+                  color: "#6b7280",
+                }}
+              >
+                <Link
+                  href={`/league/${slugifyLeague(featured.source)}`}
+                  style={{
+                    color: "#2E7D32",
+                    textDecoration: "none",
+                    fontWeight: 800,
+                  }}
+                >
+                  🏆 {arabicLeagueName(featured.source)}
+                </Link>
+
+                <span>{(featured.keywords || []).join(" • ")}</span>
+              </div>
+            </article>
+          </section>
+        )}
+
         <section>
           <h2
             style={{
               textAlign: "right",
               marginBottom: "24px",
               fontSize: "34px",
-              color: "#111827",
+              color: "#1f2937",
             }}
           >
-            🔥 أحدث المقالات
+            📌 أحدث المقالات
           </h2>
 
-          {articles.length === 0 ? (
+          {latest.length === 0 ? (
             <div
               style={{
                 background: "white",
@@ -249,7 +346,7 @@ export default function HomePage() {
               لا توجد مقالات حالياً
             </div>
           ) : (
-            articles.map((article, index) => (
+            latest.map((article, index) => (
               <article
                 key={article.slug || index}
                 style={{
@@ -258,7 +355,7 @@ export default function HomePage() {
                   padding: "30px",
                   marginBottom: "20px",
                   border: "1px solid #e5e7eb",
-                  boxShadow: "0 8px 20px rgba(15,23,42,0.04)",
+                  boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
                 }}
               >
                 <Link
@@ -268,13 +365,13 @@ export default function HomePage() {
                   <h3
                     style={{
                       margin: "0 0 14px 0",
-                      color: "#111827",
-                      fontSize: "32px",
+                      color: "#1f2937",
+                      fontSize: "30px",
                       lineHeight: 1.5,
                       fontWeight: 800,
                     }}
                   >
-                    {article.title}
+                    📰 {article.title}
                   </h3>
                 </Link>
 
@@ -302,15 +399,15 @@ export default function HomePage() {
                   <Link
                     href={`/league/${slugifyLeague(article.source)}`}
                     style={{
-                      color: "#2563eb",
+                      color: "#2E7D32",
                       textDecoration: "none",
-                      fontWeight: 700,
+                      fontWeight: 800,
                     }}
                   >
-                    {arabicLeagueName(article.source)}
+                    🏆 {arabicLeagueName(article.source)}
                   </Link>
 
-                  <span>{(article.keywords || []).join(" • ")}</span>
+                  <span>🏷️ {(article.keywords || []).join(" • ")}</span>
                 </div>
               </article>
             ))
@@ -326,7 +423,7 @@ export default function HomePage() {
             fontSize: "15px",
           }}
         >
-          نبض الرياضة © منصة أخبار رياضية عربية مبنية للنشر السريع والهيكلة SEO
+          ✅ نبض الرياضة © هوية بصرية خضراء حديثة موجهة للأخبار الرياضية العربية
         </footer>
       </div>
     </main>
