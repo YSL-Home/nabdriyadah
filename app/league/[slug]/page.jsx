@@ -31,29 +31,6 @@ function arabicLeagueName(source = "") {
   return source || "كرة القدم";
 }
 
-function AdPlaceholder({ label = "مساحة إعلانية", height = 140 }) {
-  return (
-    <div
-      style={{
-        background: "#ffffff",
-        border: "2px dashed #cbd5e1",
-        borderRadius: "20px",
-        minHeight: `${height}px`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#64748b",
-        fontSize: "15px",
-        fontWeight: 700,
-        textAlign: "center",
-        padding: "16px",
-      }}
-    >
-      📢 {label}
-    </div>
-  );
-}
-
 export function generateStaticParams() {
   const articles = getArticles();
 
@@ -145,10 +122,6 @@ export default function LeaguePage({ params }) {
           </p>
         </section>
 
-        <section style={{ marginBottom: "22px" }}>
-          <AdPlaceholder label="مساحة إعلانية أعلى صفحة البطولة" height={120} />
-        </section>
-
         {filtered.length === 0 ? (
           <div
             style={{
@@ -214,10 +187,6 @@ export default function LeaguePage({ params }) {
             </Link>
           ))
         )}
-
-        <section style={{ marginTop: "12px" }}>
-          <AdPlaceholder label="مساحة إعلانية أسفل صفحة البطولة" height={140} />
-        </section>
       </div>
     </main>
   );
