@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "نبض الرياضة",
-  description: "أخبار رياضية لحظة بلحظة",
+  description: "أحدث الأخبار الرياضية العربية وتحليلات البطولات العالمية",
 };
 
 export default function RootLayout({ children }) {
