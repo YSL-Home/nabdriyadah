@@ -74,7 +74,7 @@ export default function ArticlePage({ params }) {
       <main
         style={{
           minHeight: "100vh",
-          background: "#eef2f7",
+          background: "#f6f8f7",
           padding: "32px 20px",
           direction: "rtl",
           fontFamily: "Arial, sans-serif",
@@ -98,9 +98,9 @@ export default function ArticlePage({ params }) {
               style={{
                 display: "inline-block",
                 marginTop: "16px",
-                color: "#2563eb",
+                color: "#2E7D32",
                 textDecoration: "none",
-                fontWeight: 700,
+                fontWeight: 800,
               }}
             >
               العودة إلى الصفحة الرئيسية
@@ -135,7 +135,7 @@ export default function ArticlePage({ params }) {
     <main
       style={{
         minHeight: "100vh",
-        background: "#eef2f7",
+        background: "#f6f8f7",
         padding: "32px 20px",
         direction: "rtl",
         fontFamily: "Arial, sans-serif",
@@ -164,9 +164,9 @@ export default function ArticlePage({ params }) {
           <Link
             href="/"
             style={{
-              color: "#2563eb",
+              color: "#2E7D32",
               textDecoration: "none",
-              fontWeight: 700,
+              fontWeight: 800,
             }}
           >
             ← العودة إلى الرئيسية
@@ -180,7 +180,7 @@ export default function ArticlePage({ params }) {
               fontWeight: 700,
             }}
           >
-            {arabicLeagueName(article.source)}
+            🏆 {arabicLeagueName(article.source)}
           </Link>
         </header>
 
@@ -190,6 +190,7 @@ export default function ArticlePage({ params }) {
             borderRadius: "24px",
             padding: "36px",
             border: "1px solid #e5e7eb",
+            boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
           }}
         >
           <div
@@ -199,9 +200,9 @@ export default function ArticlePage({ params }) {
               marginBottom: "14px",
             }}
           >
-            {arabicLeagueName(article.source)}
+            🏆 {arabicLeagueName(article.source)}
             {article.publishedAt ? (
-              <> • {new Date(article.publishedAt).toLocaleDateString("fr-FR")}</>
+              <> • 📅 {new Date(article.publishedAt).toLocaleDateString("fr-FR")}</>
             ) : null}
           </div>
 
@@ -210,11 +211,11 @@ export default function ArticlePage({ params }) {
               margin: "0 0 18px 0",
               fontSize: "44px",
               lineHeight: 1.4,
-              color: "#111827",
+              color: "#1f2937",
               fontWeight: 800,
             }}
           >
-            {article.title}
+            📰 {article.title}
           </h1>
 
           <p
@@ -253,7 +254,7 @@ export default function ArticlePage({ params }) {
                   color: "#111827",
                 }}
               >
-                الأسئلة الشائعة
+                ❓ الأسئلة الشائعة
               </h2>
 
               <div style={{ display: "grid", gap: "16px" }}>
@@ -274,7 +275,7 @@ export default function ArticlePage({ params }) {
                         color: "#111827",
                       }}
                     >
-                      {item.q}
+                      ❔ {item.q}
                     </h3>
                     <p
                       style={{
@@ -300,7 +301,7 @@ export default function ArticlePage({ params }) {
                 color: "#6b7280",
               }}
             >
-              {(article.keywords || []).join(" • ")}
+              🏷️ {(article.keywords || []).join(" • ")}
             </div>
           )}
         </article>
