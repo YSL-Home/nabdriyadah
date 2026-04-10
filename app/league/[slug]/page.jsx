@@ -17,7 +17,20 @@ function slugifyLeague(source = "") {
   return String(source).toLowerCase().replace(/\s+/g, "-");
 }
 
-export async function generateStaticParams() {
+function arabicLeagueName(source = "") {
+  const s = String(source).toLowerCase();
+
+  if (s.includes("premier")) return "الدوري الإنجليزي الممتاز";
+  if (s.includes("la-liga") || s.includes("la liga")) return "الدوري الإسباني";
+  if (s.includes("serie-a") || s.includes("serie a")) return "الدوري الإيطالي";
+  if (s.includes("bundesliga")) return "الدوري الألماني";
+  if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
+  if (s.includes("champions")) return "دوري أبطال أوروبا";
+  if (s.includes("saudi")) return "الدوري السعودي";
+  return source || "كرة القدم";
+}
+
+export function generateStaticParams() {
   const articles = getArticles();
 
   const uniqueSlugs = [...new Set(articles.map((article) => slugifyLeague(article.source)))];
@@ -30,9 +43,11 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+  const leagueName = arabicLeagueName(params.slug);
+
   return {
-    title: `${params.slug} | نبض الرياضة`,
-    description: `آخر الأخبار والمقالات المتعلقة بـ ${params.slug}`,
+    title: `${leagueName} | نبض الرياضة`,
+    description: `آخر الأخبار والتحليلات والمقالات المتعلقة بـ ${leagueName}`,
   };
 }
 
@@ -42,6 +57,8 @@ export default function LeaguePage({ params }) {
   const filtered = articles.filter(
     (article) => slugifyLeague(article.source) === params.slug
   );
+
+  const leagueName = arabicLeagueName(params.slug);
 
   return (
     <main
@@ -67,15 +84,34 @@ export default function LeaguePage({ params }) {
           ← العودة إلى الرئيسية
         </Link>
 
-        <h1
+        <div
           style={{
-            marginBottom: "24px",
-            fontSize: "38px",
-            color: "#111827",
+            background: "linear-gradient(90deg,#1d4ed8,#7c3aed)",
+            borderRadius: "24px",
+            padding: "34px 24px",
+            color: "white",
+            marginBottom: "28px",
           }}
         >
-          {filtered[0]?.source || params.slug}
-        </h1>
+          <h1
+            style={{
+              margin: 0,
+              fontSize: "42px",
+              fontWeight: 800,
+            }}
+          >
+            {leagueName}
+          </h1>
+          <p
+            style={{
+              marginTop: "12px",
+              fontSize: "18px",
+              opacity: 0.95,
+            }}
+          >
+            آخر الأخبار والمقالات والتحليلات الخاصة بهذه البطولة
+          </p>
+        </div>
 
         {filtered.length === 0 ? (
           <div
@@ -109,7 +145,7 @@ export default function LeaguePage({ params }) {
                   style={{
                     margin: "0 0 14px 0",
                     color: "#111827",
-                    fontSize: "28px",
+                    fontSize: "30px",
                     lineHeight: 1.5,
                     fontWeight: 800,
                   }}
@@ -119,7 +155,7 @@ export default function LeaguePage({ params }) {
 
                 <p
                   style={{
-                    margin: 0,
+                    margin: "0 0 14px 0",
                     color: "#4b5563",
                     fontSize: "18px",
                     lineHeight: 1.9,
@@ -127,6 +163,15 @@ export default function LeaguePage({ params }) {
                 >
                   {article.description}
                 </p>
+
+                <div
+                  style={{
+                    fontSize: "14px",
+                    color: "#6b7280",
+                  }}
+                >
+                  {(article.keywords || []).join(" • ")}
+                </div>
               </article>
             </Link>
           ))
