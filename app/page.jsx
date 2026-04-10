@@ -36,23 +36,44 @@ function arabicLeagueName(source = "") {
   return source || "كرة القدم";
 }
 
+function pickTrends(articles) {
+  const counts = new Map();
+
+  for (const article of articles) {
+    for (const keyword of article.keywords || []) {
+      const key = String(keyword || "").trim();
+      if (!key) continue;
+      counts.set(key, (counts.get(key) || 0) + 1);
+    }
+  }
+
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([name]) => name);
+}
+
 export default function HomePage() {
   const articles = getArticles();
 
-  const uniqueLeagues = [
-    ...new Map(
-      articles.map((article) => [
-        slugifyLeague(article.source),
-        {
-          slug: slugifyLeague(article.source),
-          name: arabicLeagueName(article.source),
-        },
-      ])
-    ).values(),
-  ].filter((league) => league.slug);
-
   const featured = articles[0] || null;
-  const latest = articles.slice(1);
+  const secondaryFeatured = articles.slice(1, 3);
+  const latest = articles.slice(3, 9);
+
+  const leagueGroups = [...new Map(
+    articles.map((article) => [
+      slugifyLeague(article.source),
+      {
+        slug: slugifyLeague(article.source),
+        name: arabicLeagueName(article.source),
+        items: articles.filter(
+          (a) => slugifyLeague(a.source) === slugifyLeague(article.source)
+        ),
+      },
+    ])
+  ).values()];
+
+  const trends = pickTrends(articles);
 
   return (
     <main
@@ -103,7 +124,7 @@ export default function HomePage() {
                 🏠 الرئيسية
               </Link>
 
-              {uniqueLeagues.slice(0, 6).map((league) => (
+              {leagueGroups.slice(0, 6).map((league) => (
                 <Link
                   key={league.slug}
                   href={`/league/${league.slug}`}
@@ -164,161 +185,292 @@ export default function HomePage() {
           </p>
         </section>
 
-        <section style={{ marginBottom: "28px" }}>
+        <section style={{ marginBottom: "34px" }}>
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "16px",
-              flexWrap: "wrap",
-              marginBottom: "18px",
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr",
+              gap: "20px",
             }}
           >
+            <div>
+              <h2
+                style={{
+                  margin: "0 0 18px 0",
+                  fontSize: "34px",
+                  color: "#1f2937",
+                }}
+              >
+                🔥 العنوان الأبرز
+              </h2>
+
+              {featured && (
+                <article
+                  style={{
+                    background: "white",
+                    borderRadius: "28px",
+                    padding: "34px",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 12px 28px rgba(15,23,42,0.05)",
+                    minHeight: "100%",
+                  }}
+                >
+                  <Link
+                    href={`/articles/${featured.slug}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <h3
+                      style={{
+                        margin: "0 0 16px 0",
+                        color: "#1f2937",
+                        fontSize: "42px",
+                        lineHeight: 1.45,
+                        fontWeight: 800,
+                      }}
+                    >
+                      📰 {featured.title}
+                    </h3>
+                  </Link>
+
+                  <p
+                    style={{
+                      margin: "0 0 18px 0",
+                      color: "#4b5563",
+                      fontSize: "20px",
+                      lineHeight: 2,
+                    }}
+                  >
+                    {featured.description}
+                  </p>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "12px",
+                      flexWrap: "wrap",
+                      alignItems: "center",
+                      fontSize: "14px",
+                      color: "#6b7280",
+                    }}
+                  >
+                    <Link
+                      href={`/league/${slugifyLeague(featured.source)}`}
+                      style={{
+                        color: "#2E7D32",
+                        textDecoration: "none",
+                        fontWeight: 800,
+                      }}
+                    >
+                      🏆 {arabicLeagueName(featured.source)}
+                    </Link>
+
+                    <span>🏷️ {(featured.keywords || []).join(" • ")}</span>
+                  </div>
+                </article>
+              )}
+            </div>
+
+            <div>
+              <h2
+                style={{
+                  margin: "0 0 18px 0",
+                  fontSize: "30px",
+                  color: "#1f2937",
+                }}
+              >
+                📌 رائج الآن
+              </h2>
+
+              <div
+                style={{
+                  background: "white",
+                  borderRadius: "24px",
+                  padding: "24px",
+                  border: "1px solid #e5e7eb",
+                  boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "10px",
+                  }}
+                >
+                  {trends.map((trend, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        background: "#EDF7EE",
+                        color: "#2E7D32",
+                        padding: "10px 14px",
+                        borderRadius: "999px",
+                        fontSize: "14px",
+                        fontWeight: 700,
+                      }}
+                    >
+                      📈 {trend}
+                    </span>
+                  ))}
+                </div>
+
+                <div
+                  style={{
+                    marginTop: "24px",
+                    fontSize: "15px",
+                    color: "#6b7280",
+                    lineHeight: 1.9,
+                  }}
+                >
+                  ✅ يتم استخراج المواضيع الرائجة من الكلمات المفتاحية داخل المقالات المنشورة.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {secondaryFeatured.length > 0 && (
+          <section style={{ marginBottom: "34px" }}>
             <h2
               style={{
-                margin: 0,
-                fontSize: "34px",
+                margin: "0 0 18px 0",
+                fontSize: "32px",
                 color: "#1f2937",
               }}
             >
-              🏆 البطولات
+              ⚡ أبرز المتابعات
             </h2>
 
             <div
               style={{
-                fontSize: "16px",
-                color: "#1f2937",
-                fontWeight: 700,
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                gap: "18px",
               }}
             >
-              📌 عدد المقالات الحالية: {articles.length}
+              {secondaryFeatured.map((article, index) => (
+                <article
+                  key={article.slug || index}
+                  style={{
+                    background: "white",
+                    borderRadius: "24px",
+                    padding: "26px",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
+                  }}
+                >
+                  <Link
+                    href={`/articles/${article.slug}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <h3
+                      style={{
+                        margin: "0 0 12px 0",
+                        color: "#1f2937",
+                        fontSize: "28px",
+                        lineHeight: 1.6,
+                        fontWeight: 800,
+                      }}
+                    >
+                      🗞️ {article.title}
+                    </h3>
+                  </Link>
+
+                  <p
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#4b5563",
+                      fontSize: "17px",
+                      lineHeight: 1.95,
+                    }}
+                  >
+                    {article.description}
+                  </p>
+
+                  <Link
+                    href={`/league/${slugifyLeague(article.source)}`}
+                    style={{
+                      color: "#2E7D32",
+                      textDecoration: "none",
+                      fontWeight: 800,
+                      fontSize: "14px",
+                    }}
+                  >
+                    🏆 {arabicLeagueName(article.source)}
+                  </Link>
+                </article>
+              ))}
             </div>
-          </div>
+          </section>
+        )}
+
+        <section style={{ marginBottom: "34px" }}>
+          <h2
+            style={{
+              margin: "0 0 18px 0",
+              fontSize: "32px",
+              color: "#1f2937",
+            }}
+          >
+            🏆 حسب البطولة
+          </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: "16px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "18px",
             }}
           >
-            {uniqueLeagues.map((league) => (
-              <Link
-                key={league.slug}
-                href={`/league/${league.slug}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div
-                  style={{
-                    background: "white",
-                    borderRadius: "22px",
-                    padding: "22px",
-                    border: "1px solid #e5e7eb",
-                    boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
-                    minHeight: "120px",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "22px",
-                      fontWeight: 800,
-                      color: "#1f2937",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    🏅 {league.name}
-                  </div>
-                  <div
-                    style={{
-                      color: "#6b7280",
-                      lineHeight: 1.8,
-                      fontSize: "15px",
-                    }}
-                  >
-                    آخر الأخبار والمقالات الخاصة بهذه البطولة
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {featured && (
-          <section style={{ marginBottom: "30px" }}>
-            <h2
-              style={{
-                margin: "0 0 20px 0",
-                fontSize: "34px",
-                color: "#1f2937",
-              }}
-            >
-              🔥 الخبر الأبرز
-            </h2>
-
-            <article
-              style={{
-                background: "white",
-                borderRadius: "26px",
-                padding: "32px",
-                border: "1px solid #e5e7eb",
-                boxShadow: "0 10px 24px rgba(15,23,42,0.04)",
-              }}
-            >
-              <Link
-                href={`/articles/${featured.slug}`}
-                style={{ textDecoration: "none" }}
-              >
-                <h3
-                  style={{
-                    margin: "0 0 14px 0",
-                    color: "#1f2937",
-                    fontSize: "38px",
-                    lineHeight: 1.5,
-                    fontWeight: 800,
-                  }}
-                >
-                  📰 {featured.title}
-                </h3>
-              </Link>
-
-              <p
-                style={{
-                  margin: "0 0 16px 0",
-                  color: "#4b5563",
-                  fontSize: "19px",
-                  lineHeight: 1.95,
-                }}
-              >
-                {featured.description}
-              </p>
-
+            {leagueGroups.map((league, index) => (
               <div
+                key={league.slug || index}
                 style={{
-                  display: "flex",
-                  gap: "12px",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  fontSize: "14px",
-                  color: "#6b7280",
+                  background: "white",
+                  borderRadius: "24px",
+                  padding: "24px",
+                  border: "1px solid #e5e7eb",
+                  boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
                 }}
               >
                 <Link
-                  href={`/league/${slugifyLeague(featured.source)}`}
-                  style={{
-                    color: "#2E7D32",
-                    textDecoration: "none",
-                    fontWeight: 800,
-                  }}
+                  href={`/league/${league.slug}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  🏆 {arabicLeagueName(featured.source)}
+                  <h3
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#1f2937",
+                      fontSize: "24px",
+                      lineHeight: 1.5,
+                      fontWeight: 800,
+                    }}
+                  >
+                    🥇 {league.name}
+                  </h3>
                 </Link>
 
-                <span>{(featured.keywords || []).join(" • ")}</span>
+                <div style={{ display: "grid", gap: "12px" }}>
+                  {league.items.slice(0, 3).map((article, articleIndex) => (
+                    <Link
+                      key={article.slug || articleIndex}
+                      href={`/articles/${article.slug}`}
+                      style={{
+                        textDecoration: "none",
+                        color: "#4b5563",
+                        fontSize: "15px",
+                        lineHeight: 1.8,
+                        fontWeight: 700,
+                      }}
+                    >
+                      • {article.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </article>
-          </section>
-        )}
+            ))}
+          </div>
+        </section>
 
         <section>
           <h2
@@ -329,7 +481,7 @@ export default function HomePage() {
               color: "#1f2937",
             }}
           >
-            📌 أحدث المقالات
+            ⏱️ آخر الأخبار
           </h2>
 
           {latest.length === 0 ? (
@@ -423,7 +575,7 @@ export default function HomePage() {
             fontSize: "15px",
           }}
         >
-          ✅ نبض الرياضة © هوية بصرية خضراء حديثة موجهة للأخبار الرياضية العربية
+          ✅ نبض الرياضة © واجهة مجلة رياضية عربية بهيكل أقوى للنشر والـ SEO
         </footer>
       </div>
     </main>
