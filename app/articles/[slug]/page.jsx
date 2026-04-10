@@ -32,11 +32,20 @@ function slugifyLeague(source = "") {
 }
 
 function getRelatedArticles(allArticles, currentArticle) {
+  const inlineRelated = Array.isArray(currentArticle.related)
+    ? currentArticle.related
+        .map((rel) => allArticles.find((a) => a.slug === rel.slug))
+        .filter(Boolean)
+    : [];
+
+  if (inlineRelated.length) return inlineRelated.slice(0, 4);
+
   return allArticles
+    .filter((article) => article.slug !== currentArticle.slug)
     .filter(
       (article) =>
-        article.slug !== currentArticle.slug &&
-        article.source === currentArticle.source
+        article.source === currentArticle.source ||
+        article.keywords?.some((keyword) => currentArticle.keywords?.includes(keyword))
     )
     .slice(0, 4);
 }
@@ -46,11 +55,11 @@ function buildKeyPoints(article) {
   const league = arabicLeagueName(article.source);
 
   points.push(`📌 الخبر مرتبط ببطولة ${league}`);
-  points.push(`📰 المقال يركز على آخر التطورات الخاصة بالموضوع`);
+  points.push(`📰 المقال يقدم قراءة سريعة لأهم التطورات`);
   if ((article.keywords || []).length > 0) {
-    points.push(`🏷️ الكلمات المفتاحية الأبرز: ${article.keywords.slice(0, 2).join(" - ")}`);
+    points.push(`🏷️ الكلمات الأبرز: ${article.keywords.slice(0, 2).join(" - ")}`);
   }
-  points.push(`✅ المتابعة مستمرة عبر نبض الرياضة`);
+  points.push(`🔗 توجد مقالات مرتبطة لمزيد من التوسع في نفس الملف`);
 
   return points.slice(0, 4);
 }
@@ -300,6 +309,45 @@ export default function ArticlePage({ params }) {
                 </p>
               ))}
             </div>
+
+            {relatedArticles.length > 0 && (
+              <section
+                style={{
+                  marginTop: "28px",
+                  background: "#F9FAFB",
+                  border: "1px solid #E5E7EB",
+                  borderRadius: "18px",
+                  padding: "20px",
+                }}
+              >
+                <h2
+                  style={{
+                    margin: "0 0 14px 0",
+                    fontSize: "22px",
+                    color: "#111827",
+                  }}
+                >
+                  🔗 اقرأ أيضاً
+                </h2>
+
+                <div style={{ display: "grid", gap: "10px" }}>
+                  {relatedArticles.slice(0, 3).map((item, index) => (
+                    <Link
+                      key={item.slug || index}
+                      href={`/articles/${item.slug}`}
+                      style={{
+                        textDecoration: "none",
+                        color: "#2E7D32",
+                        fontWeight: 700,
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      • {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {(article.faq || []).length > 0 && (
               <section style={{ marginTop: "42px" }}>
