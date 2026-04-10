@@ -53,7 +53,6 @@ export async function generateMetadata({ params }) {
 
 export default function LeaguePage({ params }) {
   const articles = getArticles();
-
   const filtered = articles.filter(
     (article) => slugifyLeague(article.source) === params.slug
   );
@@ -64,31 +63,39 @@ export default function LeaguePage({ params }) {
     <main
       style={{
         minHeight: "100vh",
-        background: "#f3f4f6",
+        background: "#eef2f7",
         padding: "32px 20px",
         direction: "rtl",
         fontFamily: "Arial, sans-serif",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <Link
-          href="/"
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <header
           style={{
-            display: "inline-block",
-            marginBottom: "20px",
-            color: "#2563eb",
-            textDecoration: "none",
-            fontWeight: 700,
+            background: "white",
+            borderRadius: "20px",
+            padding: "16px 22px",
+            marginBottom: "22px",
+            border: "1px solid #e5e7eb",
           }}
         >
-          ← العودة إلى الرئيسية
-        </Link>
+          <Link
+            href="/"
+            style={{
+              color: "#2563eb",
+              textDecoration: "none",
+              fontWeight: 700,
+            }}
+          >
+            ← العودة إلى الرئيسية
+          </Link>
+        </header>
 
-        <div
+        <section
           style={{
-            background: "linear-gradient(90deg,#1d4ed8,#7c3aed)",
-            borderRadius: "24px",
-            padding: "34px 24px",
+            background: "linear-gradient(135deg,#1d4ed8,#7c3aed)",
+            borderRadius: "28px",
+            padding: "42px 28px",
             color: "white",
             marginBottom: "28px",
           }}
@@ -96,7 +103,7 @@ export default function LeaguePage({ params }) {
           <h1
             style={{
               margin: 0,
-              fontSize: "42px",
+              fontSize: "46px",
               fontWeight: 800,
             }}
           >
@@ -104,14 +111,14 @@ export default function LeaguePage({ params }) {
           </h1>
           <p
             style={{
-              marginTop: "12px",
-              fontSize: "18px",
+              marginTop: "14px",
+              fontSize: "19px",
               opacity: 0.95,
             }}
           >
             آخر الأخبار والمقالات والتحليلات الخاصة بهذه البطولة
           </p>
-        </div>
+        </section>
 
         {filtered.length === 0 ? (
           <div
@@ -121,6 +128,7 @@ export default function LeaguePage({ params }) {
               padding: "28px",
               textAlign: "center",
               color: "#6b7280",
+              border: "1px solid #e5e7eb",
             }}
           >
             لا توجد مقالات حالياً
@@ -134,10 +142,10 @@ export default function LeaguePage({ params }) {
             >
               <article
                 style={{
-                  background: "#f9fafb",
+                  background: "white",
                   borderRadius: "22px",
                   padding: "30px",
-                  marginBottom: "22px",
+                  marginBottom: "20px",
                   border: "1px solid #e5e7eb",
                 }}
               >
