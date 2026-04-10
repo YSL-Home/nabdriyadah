@@ -63,7 +63,7 @@ export default function LeaguePage({ params }) {
     <main
       style={{
         minHeight: "100vh",
-        background: "#eef2f7",
+        background: "#f6f8f7",
         padding: "32px 20px",
         direction: "rtl",
         fontFamily: "Arial, sans-serif",
@@ -82,9 +82,9 @@ export default function LeaguePage({ params }) {
           <Link
             href="/"
             style={{
-              color: "#2563eb",
+              color: "#2E7D32",
               textDecoration: "none",
-              fontWeight: 700,
+              fontWeight: 800,
             }}
           >
             ← العودة إلى الرئيسية
@@ -93,11 +93,12 @@ export default function LeaguePage({ params }) {
 
         <section
           style={{
-            background: "linear-gradient(135deg,#1d4ed8,#7c3aed)",
+            background: "linear-gradient(135deg,#2E7D32,#8BC34A)",
             borderRadius: "28px",
             padding: "42px 28px",
             color: "white",
             marginBottom: "28px",
+            boxShadow: "0 18px 36px rgba(46,125,50,0.12)",
           }}
         >
           <h1
@@ -107,7 +108,7 @@ export default function LeaguePage({ params }) {
               fontWeight: 800,
             }}
           >
-            {leagueName}
+            🏆 {leagueName}
           </h1>
           <p
             style={{
@@ -147,18 +148,19 @@ export default function LeaguePage({ params }) {
                   padding: "30px",
                   marginBottom: "20px",
                   border: "1px solid #e5e7eb",
+                  boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
                 }}
               >
                 <h2
                   style={{
                     margin: "0 0 14px 0",
-                    color: "#111827",
+                    color: "#1f2937",
                     fontSize: "30px",
                     lineHeight: 1.5,
                     fontWeight: 800,
                   }}
                 >
-                  {article.title}
+                  📰 {article.title}
                 </h2>
 
                 <p
@@ -178,7 +180,7 @@ export default function LeaguePage({ params }) {
                     color: "#6b7280",
                   }}
                 >
-                  {(article.keywords || []).join(" • ")}
+                  🏷️ {(article.keywords || []).join(" • ")}
                 </div>
               </article>
             </Link>
