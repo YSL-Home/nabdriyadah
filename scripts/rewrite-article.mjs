@@ -1,229 +1,171 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs/promises";
 
-const RAW_NEWS_PATH = path.join(process.cwd(), "data", "raw-news.json");
-const SEO_ARTICLES_PATH = path.join(process.cwd(), "data", "seo-articles.json");
+const INPUT = "content/articles/raw-news.json";
+const OUTPUT = "content/articles/seo-articles.json";
 
-function slugifyArabic(text = "") {
-  return text
-    .toString()
-    .trim()
-    .toLowerCase()
+const MAX_ARTICLES = 10;
+
+function cleanArabic(text = "") {
+  return String(text)
     .replace(/[A-Za-z]/g, "")
-    .replace(/[^\u0600-\u06FF0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-function containsArabic(text = "") {
-  return /[\u0600-\u06FF]/.test(text);
-}
-
-function isMostlyArabic(text = "") {
-  if (!text) return false;
-
-  const cleaned = text.replace(/\s/g, "");
-  if (!cleaned.length) return false;
-
-  const arabicCount = (cleaned.match(/[\u0600-\u06FF]/g) || []).length;
-  return arabicCount / cleaned.length >= 0.45;
-}
-
-function removeEnglishLetters(text = "") {
-  return text
-    .replace(/[A-Za-z]/g, "")
-    .replace(/\s+/g, " ")
-    .replace(/Read more/gi, "")
-    .replace(/Breaking/gi, "")
-    .replace(/Trending/gi, "")
-    .replace(/Latest/gi, "")
-    .replace(/Analysis/gi, "")
-    .trim();
-}
-
-function cleanArabicText(text = "") {
-  return removeEnglishLetters(text)
-    .replace(/\s+,/g, ",")
-    .replace(/\s+\./g, ".")
+    .replace(/[^\u0600-\u06FF0-9\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-function validateArabicArticle(article) {
-  if (!article) return false;
-
-  const title = article.title || "";
-  const description = article.description || "";
-  const content = article.content || "";
-
-  if (!containsArabic(title)) return false;
-  if (!containsArabic(description)) return false;
-  if (!containsArabic(content)) return false;
-
-  if (!isMostlyArabic(title)) return false;
-  if (!isMostlyArabic(description)) return false;
-  if (!isMostlyArabic(content)) return false;
-
-  return true;
+function hasEnglish(text = "") {
+  return /[A-Za-z]/.test(text);
 }
 
-function extractText(item) {
-  return cleanArabicText(
-    item.content ||
-      item.description ||
-      item.summary ||
-      item.body ||
-      item.title ||
-      ""
-  );
+function arabicLeague(source = "") {
+  const s = source.toLowerCase();
+
+  if (s.includes("premier")) return "الدوري الإنجليزي";
+  if (s.includes("liga")) return "الدوري الإسباني";
+  if (s.includes("serie")) return "الدوري الإيطالي";
+  if (s.includes("bundesliga")) return "الدوري الألماني";
+  if (s.includes("ligue")) return "الدوري الفرنسي";
+  if (s.includes("champions")) return "دوري أبطال أوروبا";
+
+  return "كرة القدم";
 }
 
-function splitIntoParagraphs(text = "") {
-  return text
-    .split(/[.!؟\n]/)
-    .map((part) => part.trim())
-    .filter(Boolean);
+function buildPrompt(item) {
+  return `
+اكتب مقال رياضي احترافي باللغة العربية فقط.
+
+ممنوع:
+- أي كلمة إنجليزية
+- نسخ النص
+
+مطلوب:
+- عنوان جذاب
+- وصف SEO
+- 4 فقرات تحليلية
+- 4 كلمات مفتاحية
+- سؤالين FAQ
+
+أرجع JSON فقط
+
+الخبر:
+${item.title}
+`;
 }
 
-function generateLocalArabicFallback(newsItem) {
-  const sourceTitle = cleanArabicText(newsItem.title || "خبر رياضي جديد");
-  const sourceText = extractText(newsItem);
-
-  const paragraphs = splitIntoParagraphs(sourceText);
-  const intro =
-    paragraphs[0] ||
-    "تشهد الساحة الرياضية تطورات جديدة تهم الجماهير العربية وعشاق كرة القدم في مختلف البطولات.";
-  const detail1 =
-    paragraphs[1] ||
-    "وتأتي هذه المستجدات في وقت يتزايد فيه الاهتمام بمتابعة الأخبار الرياضية اليومية وتحليل انعكاساتها على الأندية واللاعبين.";
-  const detail2 =
-    paragraphs[2] ||
-    "ومن المنتظر أن تتضح الصورة بشكل أكبر خلال الساعات المقبلة مع صدور تفاصيل إضافية وردود فعل من الأطراف المعنية.";
-  const closing =
-    "ويبقى هذا الملف مفتوحاً على احتمالات عديدة، في انتظار ما ستسفر عنه التطورات القادمة على الساحة الرياضية.";
-
-  const title = sourceTitle;
-  const description = cleanArabicText(
-    `تفاصيل جديدة حول ${sourceTitle} مع متابعة لأبرز التطورات والانعكاسات المحتملة على المشهد الرياضي.`
-  );
-
-  const content = [
-    intro,
-    detail1,
-    detail2,
-    closing,
-  ]
-    .map(cleanArabicText)
-    .join("\n\n");
-
-  const keywords = [
-    "أخبار الرياضة",
-    "كرة القدم",
-    "أخبار عاجلة",
-    cleanArabicText(sourceTitle),
-  ].filter(Boolean);
-
-  return {
-    slug: slugifyArabic(title) || `خبر-${Date.now()}`,
-    title,
-    description,
-    content,
-    keywords,
-    category: "football",
-    publishedAt: new Date().toISOString(),
-  };
-}
-
-async function rewriteWithOpenAI(newsItem) {
-  return null;
-}
-
-async function rewriteWithClaude(newsItem) {
-  return null;
-}
-
-async function buildArticle(newsItem) {
-  let article = null;
+async function openai(item) {
+  if (!process.env.OPENAI_API_KEY) return null;
 
   try {
-    article = await rewriteWithOpenAI(newsItem);
-  } catch (error) {
-    console.error("OpenAI failed:", error.message);
-  }
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: buildPrompt(item) }],
+      }),
+    });
 
-  if (!article) {
-    try {
-      article = await rewriteWithClaude(newsItem);
-    } catch (error) {
-      console.error("Claude failed:", error.message);
-    }
+    const data = await res.json();
+    return JSON.parse(data.choices[0].message.content);
+  } catch {
+    return null;
   }
+}
 
-  if (!article) {
-    article = generateLocalArabicFallback(newsItem);
+async function claude(item) {
+  if (!process.env.ANTHROPIC_API_KEY) return null;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "claude-3-haiku-20240307",
+        max_tokens: 800,
+        messages: [{ role: "user", content: buildPrompt(item) }],
+      }),
+    });
+
+    const data = await res.json();
+    return JSON.parse(data.content[0].text);
+  } catch {
+    return null;
   }
+}
 
-  article = {
-    ...article,
-    title: cleanArabicText(article.title || ""),
-    description: cleanArabicText(article.description || ""),
-    content: cleanArabicText(article.content || ""),
-    keywords: Array.isArray(article.keywords)
-      ? article.keywords.map((keyword) => cleanArabicText(keyword)).filter(Boolean)
-      : [],
-    category: article.category || "football",
-    publishedAt: article.publishedAt || new Date().toISOString(),
+function fallback(item) {
+  const league = arabicLeague(item.source);
+
+  return {
+    title: `آخر أخبار ${league}`,
+    description: `نستعرض أبرز مستجدات ${league} وتحليل سريع.`,
+    content: [
+      `تشهد الساحة الرياضية تطورات جديدة في ${league}.`,
+      `الخبر أثار اهتمام الجماهير والمتابعين.`,
+      `التحليل يشير إلى تأثير محتمل على المنافسة.`,
+      `المتابعة مستمرة لمعرفة التفاصيل القادمة.`,
+    ],
+    keywords: [league, "أخبار", "كرة القدم"],
+    faq: [
+      { q: "ما أهمية الخبر؟", a: "يحمل تأثير على المنافسة." },
+      { q: "هل هناك جديد؟", a: "نعم قريباً." },
+    ],
   };
+}
 
-  if (!article.slug || !containsArabic(article.slug.replace(/-/g, " "))) {
-    article.slug = slugifyArabic(article.title) || `خبر-${Date.now()}`;
+function enforceArabic(article, item) {
+  if (
+    hasEnglish(article.title) ||
+    article.content.some(hasEnglish)
+  ) {
+    return fallback(item);
   }
 
-  if (!validateArabicArticle(article)) {
-    console.log("❌ Article rejeté car non arabe, fallback local activé");
-    article = generateLocalArabicFallback(newsItem);
-  }
+  return {
+    title: cleanArabic(article.title),
+    description: cleanArabic(article.description),
+    content: article.content.map(cleanArabic),
+    keywords: article.keywords.map(cleanArabic),
+    faq: article.faq,
+  };
+}
 
-  return article;
+function slugify(text) {
+  return cleanArabic(text).replace(/\s+/g, "-");
 }
 
 async function main() {
-  if (!fs.existsSync(RAW_NEWS_PATH)) {
-    console.error("❌ Fichier raw-news.json introuvable");
-    process.exit(1);
+  const raw = JSON.parse(await fs.readFile(INPUT, "utf-8"));
+
+  const final = [];
+
+  for (let i = 0; i < raw.length; i++) {
+    if (final.length >= MAX_ARTICLES) break;
+
+    const item = raw[i];
+
+    let article = await openai(item);
+    if (!article) article = await claude(item);
+    if (!article) article = fallback(item);
+
+    article = enforceArabic(article, item);
+
+    final.push({
+      ...article,
+      slug: slugify(article.title),
+      source: item.source,
+    });
   }
 
-  const raw = fs.readFileSync(RAW_NEWS_PATH, "utf-8");
-  const rawNews = JSON.parse(raw);
-
-  if (!Array.isArray(rawNews)) {
-    console.error("❌ raw-news.json doit être un tableau");
-    process.exit(1);
-  }
-
-  const seoArticles = [];
-
-  for (const newsItem of rawNews) {
-    try {
-      const article = await buildArticle(newsItem);
-      if (validateArabicArticle(article)) {
-        seoArticles.push(article);
-      } else {
-        console.log("❌ Article ignoré après validation finale");
-      }
-    } catch (error) {
-      console.error("❌ Erreur génération article:", error.message);
-    }
-  }
-
-  fs.writeFileSync(
-    SEO_ARTICLES_PATH,
-    JSON.stringify(seoArticles, null, 2),
-    "utf-8"
-  );
-
-  console.log(`✅ ${seoArticles.length} articles arabes enregistrés dans seo-articles.json`);
+  await fs.writeFile(OUTPUT, JSON.stringify(final, null, 2));
+  console.log("✅ Articles SEO générés :", final.length);
 }
 
 main();
