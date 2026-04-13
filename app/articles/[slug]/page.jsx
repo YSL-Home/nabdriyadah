@@ -1,575 +1,183 @@
-import fs from "fs";
-import path from "path";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import articles from "@/data/seo-articles.json";
 
-function getArticles() {
-  try {
-    const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
-    const file = fs.readFileSync(filePath, "utf-8");
-    return JSON.parse(file);
-  } catch (error) {
-    console.error("Erreur lecture seo-articles.json:", error);
-    return [];
-  }
+type Article = {
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  keywords?: string[];
+  category?: string;
+  image?: string;
+  publishedAt?: string;
+};
+
+function containsArabic(text: string = "") {
+  return /[\u0600-\u06FF]/.test(text);
 }
 
-function arabicLeagueName(source = "") {
-  const s = String(source).toLowerCase();
+function isMostlyArabic(text: string = "") {
+  if (!text) return false;
 
-  if (s.includes("premier")) return "الدوري الإنجليزي الممتاز";
-  if (s.includes("la-liga") || s.includes("la liga")) return "الدوري الإسباني";
-  if (s.includes("serie-a") || s.includes("serie a")) return "الدوري الإيطالي";
-  if (s.includes("bundesliga")) return "الدوري الألماني";
-  if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
-  if (s.includes("champions")) return "دوري أبطال أوروبا";
-  if (s.includes("saudi")) return "الدوري السعودي";
-  if (s.includes("padel")) return "البادل";
-  return source || "كرة القدم";
+  const cleaned = text.replace(/\s/g, "");
+  if (!cleaned.length) return false;
+
+  const arabicCount = (cleaned.match(/[\u0600-\u06FF]/g) || []).length;
+  return arabicCount / cleaned.length >= 0.45;
 }
 
-function slugifyLeague(source = "") {
-  return String(source).toLowerCase().replace(/\s+/g, "-");
+function removeEnglishLetters(text: string = "") {
+  return text.replace(/[A-Za-z]/g, "").replace(/\s+/g, " ").trim();
 }
 
-function getRelatedArticles(allArticles, currentArticle) {
-  const inlineRelated = Array.isArray(currentArticle.related)
-    ? currentArticle.related
-        .map((rel) => allArticles.find((a) => a.slug === rel.slug))
-        .filter(Boolean)
-    : [];
-
-  if (inlineRelated.length) return inlineRelated.slice(0, 4);
-
-  return allArticles
-    .filter((article) => article.slug !== currentArticle.slug)
-    .filter(
-      (article) =>
-        article.source === currentArticle.source ||
-        article.keywords?.some((keyword) => currentArticle.keywords?.includes(keyword))
-    )
-    .slice(0, 4);
+function cleanArabicText(text: string = "") {
+  return removeEnglishLetters(text)
+    .replace(/Read more/gi, "")
+    .replace(/Breaking/gi, "")
+    .replace(/Trending/gi, "")
+    .replace(/Latest/gi, "")
+    .replace(/Analysis/gi, "")
+    .trim();
 }
 
-function buildKeyPoints(article) {
-  const points = [];
-  const league = arabicLeagueName(article.source);
+function isValidArabicArticle(article: Partial<Article>) {
+  if (!article) return false;
 
-  points.push(`📌 الخبر مرتبط ببطولة ${league}`);
-  points.push(`📰 المقال يقدم قراءة سريعة لأهم التطورات`);
-  if ((article.keywords || []).length > 0) {
-    points.push(`🏷️ الكلمات الأبرز: ${article.keywords.slice(0, 2).join(" - ")}`);
-  }
-  points.push(`🔗 توجد مقالات مرتبطة لمزيد من التوسع في نفس الملف`);
+  const title = article.title || "";
+  const description = article.description || "";
+  const content = article.content || "";
 
-  return points.slice(0, 4);
+  if (!containsArabic(title)) return false;
+  if (!containsArabic(description)) return false;
+  if (!containsArabic(content)) return false;
+
+  if (!isMostlyArabic(title)) return false;
+  if (!isMostlyArabic(description)) return false;
+  if (!isMostlyArabic(content)) return false;
+
+  return true;
 }
 
-export function generateStaticParams() {
-  const articles = getArticles();
+const allArticles = (articles as Article[])
+  .map((article) => ({
+    ...article,
+    title: cleanArabicText(article.title),
+    description: cleanArabicText(article.description),
+    content: cleanArabicText(article.content),
+  }))
+  .filter(isValidArabicArticle);
 
-  return articles
-    .filter((article) => article?.slug)
-    .map((article) => ({
-      slug: article.slug,
-    }));
+function stripHtml(html: string = "") {
+  return html.replace(/<[^>]*>/g, "");
 }
 
-export async function generateMetadata({ params }) {
-  const articles = getArticles();
-  const article = articles.find((a) => a.slug === params.slug);
+function getArticleBySlug(slug: string) {
+  return allArticles.find((article) => article.slug === slug);
+}
+
+export async function generateStaticParams() {
+  return allArticles.map((article) => ({
+    slug: article.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
 
   if (!article) {
     return {
-      title: "المقال غير موجود | نبض الرياضة",
-      description: "هذه الصفحة غير متوفرة حالياً.",
+      title: "المقال غير موجود",
     };
   }
 
   return {
     title: article.title,
     description: article.description,
-    keywords: article.keywords || [],
+    keywords: article.keywords || [
+      "أخبار الرياضة",
+      "كرة القدم",
+      "نبض الرياضة",
+    ],
     openGraph: {
       title: article.title,
       description: article.description,
       type: "article",
       locale: "ar_AR",
-      siteName: "نبض الرياضة",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description,
     },
   };
 }
 
-export default function ArticlePage({ params }) {
-  const articles = getArticles();
-  const article = articles.find((a) => a.slug === params.slug);
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
 
   if (!article) {
-    return (
-      <main
-        style={{
-          minHeight: "100vh",
-          background: "#f6f8f7",
-          padding: "32px 20px",
-          direction: "rtl",
-          fontFamily: "Arial, sans-serif",
-        }}
-      >
-        <div style={{ maxWidth: "920px", margin: "0 auto" }}>
-          <div
-            style={{
-              background: "white",
-              borderRadius: "24px",
-              padding: "32px",
-              border: "1px solid #e5e7eb",
-            }}
-          >
-            <h1 style={{ marginTop: 0 }}>المقال غير موجود</h1>
-            <p style={{ color: "#4b5563", lineHeight: 1.8 }}>
-              قد يكون هذا المقال غير متوفر حالياً أو تم تغييره.
-            </p>
-            <Link
-              href="/"
-              style={{
-                display: "inline-block",
-                marginTop: "16px",
-                color: "#2E7D32",
-                textDecoration: "none",
-                fontWeight: 800,
-              }}
-            >
-              العودة إلى الصفحة الرئيسية
-            </Link>
-          </div>
-        </div>
-      </main>
-    );
+    notFound();
   }
 
-  const relatedArticles = getRelatedArticles(articles, article);
-  const keyPoints = buildKeyPoints(article);
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    headline: article.title,
-    description: article.description,
-    datePublished: article.publishedAt,
-    author: {
-      "@type": "Organization",
-      name: "نبض الرياضة",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "نبض الرياضة",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://nabdriyadah.com/articles/${article.slug}`,
-    },
-  };
+  const relatedArticles = allArticles
+    .filter((item) => item.slug !== article.slug)
+    .slice(0, 4);
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#f6f8f7",
-        padding: "32px 20px",
-        direction: "rtl",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+    <main dir="rtl" className="min-h-screen bg-white text-gray-900">
+      <div className="mx-auto max-w-4xl px-4 py-8 md:px-6 lg:px-8">
+        <article className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8">
+          <div className="mb-4 text-sm font-bold text-red-600">أخبار الرياضة</div>
 
-      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-        <header
-          style={{
-            background: "white",
-            borderRadius: "20px",
-            padding: "16px 22px",
-            marginBottom: "22px",
-            border: "1px solid #e5e7eb",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "12px",
-            flexWrap: "wrap",
-          }}
-        >
-          <Link
-            href="/"
-            style={{
-              color: "#2E7D32",
-              textDecoration: "none",
-              fontWeight: 800,
-            }}
-          >
-            ← العودة إلى الرئيسية
-          </Link>
+          <h1 className="mb-4 text-3xl font-extrabold leading-tight md:text-5xl">
+            {article.title}
+          </h1>
 
-          <Link
-            href={`/league/${slugifyLeague(article.source)}`}
-            style={{
-              color: "#374151",
-              textDecoration: "none",
-              fontWeight: 700,
-            }}
-          >
-            🏆 {arabicLeagueName(article.source)}
-          </Link>
-        </header>
+          <p className="mb-8 text-lg leading-8 text-gray-600">
+            {article.description}
+          </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "minmax(0, 2fr) 340px",
-            gap: "22px",
-            alignItems: "start",
-          }}
-        >
-          <article
-            style={{
-              background: "white",
-              borderRadius: "24px",
-              padding: "36px",
-              border: "1px solid #e5e7eb",
-              boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "14px",
-                color: "#6b7280",
-                marginBottom: "14px",
-              }}
-            >
-              🏆 {arabicLeagueName(article.source)}
-              {article.publishedAt ? (
-                <> • 📅 {new Date(article.publishedAt).toLocaleDateString("fr-FR")}</>
-              ) : null}
-            </div>
-
-            <h1
-              style={{
-                margin: "0 0 18px 0",
-                fontSize: "44px",
-                lineHeight: 1.4,
-                color: "#1f2937",
-                fontWeight: 800,
-              }}
-            >
-              📰 {article.title}
-            </h1>
-
-            <div
-              style={{
-                background: "linear-gradient(135deg,#EDF7EE,#F7FAF7)",
-                border: "1px solid #DCEEDD",
-                borderRadius: "20px",
-                padding: "22px",
-                marginBottom: "26px",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "18px",
-                  fontWeight: 800,
-                  color: "#2E7D32",
-                  marginBottom: "10px",
-                }}
-              >
-                ⚡ ملخص سريع
-              </div>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: "19px",
-                  lineHeight: 1.95,
-                  color: "#4b5563",
-                }}
-              >
-                {article.description}
-              </p>
-            </div>
-
-            <div style={{ display: "grid", gap: "18px" }}>
-              {(article.content || []).map((paragraph, index) => (
-                <p
-                  key={index}
-                  style={{
-                    margin: 0,
-                    fontSize: "18px",
-                    lineHeight: 2.05,
-                    color: "#111827",
-                  }}
-                >
+          <div className="prose prose-lg max-w-none leading-8 prose-headings:text-gray-900 prose-p:text-gray-800">
+            {stripHtml(article.content)
+              .split("\n")
+              .filter(Boolean)
+              .map((paragraph, index) => (
+                <p key={index} className="mb-5 text-base leading-8 text-gray-800">
                   {paragraph}
                 </p>
               ))}
-            </div>
+          </div>
+        </article>
 
-            {relatedArticles.length > 0 && (
-              <section
-                style={{
-                  marginTop: "28px",
-                  background: "#F9FAFB",
-                  border: "1px solid #E5E7EB",
-                  borderRadius: "18px",
-                  padding: "20px",
-                }}
-              >
-                <h2
-                  style={{
-                    margin: "0 0 14px 0",
-                    fontSize: "22px",
-                    color: "#111827",
-                  }}
-                >
-                  🔗 اقرأ أيضاً
-                </h2>
-
-                <div style={{ display: "grid", gap: "10px" }}>
-                  {relatedArticles.slice(0, 3).map((item, index) => (
-                    <Link
-                      key={item.slug || index}
-                      href={`/articles/${item.slug}`}
-                      style={{
-                        textDecoration: "none",
-                        color: "#2E7D32",
-                        fontWeight: 700,
-                        lineHeight: 1.8,
-                      }}
-                    >
-                      • {item.title}
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {(article.faq || []).length > 0 && (
-              <section style={{ marginTop: "42px" }}>
-                <h2
-                  style={{
-                    fontSize: "30px",
-                    marginBottom: "18px",
-                    color: "#111827",
-                  }}
-                >
-                  ❓ الأسئلة الشائعة
-                </h2>
-
-                <div style={{ display: "grid", gap: "16px" }}>
-                  {article.faq.map((item, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        background: "#f9fafb",
-                        border: "1px solid #e5e7eb",
-                        borderRadius: "16px",
-                        padding: "18px",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: "0 0 10px 0",
-                          fontSize: "18px",
-                          color: "#111827",
-                        }}
-                      >
-                        ❔ {item.q}
-                      </h3>
-                      <p
-                        style={{
-                          margin: 0,
-                          color: "#4b5563",
-                          lineHeight: 1.9,
-                          fontSize: "16px",
-                        }}
-                      >
-                        {item.a}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {(article.keywords || []).length > 0 && (
-              <div style={{ marginTop: "28px" }}>
-                <div
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: 800,
-                    color: "#111827",
-                    marginBottom: "12px",
-                  }}
-                >
-                  🏷️ الكلمات المفتاحية
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "10px",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  {article.keywords.map((keyword, index) => (
-                    <span
-                      key={index}
-                      style={{
-                        background: "#EDF7EE",
-                        color: "#2E7D32",
-                        padding: "10px 14px",
-                        borderRadius: "999px",
-                        fontSize: "14px",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </article>
-
-          <aside style={{ display: "grid", gap: "18px" }}>
-            <div
-              style={{
-                background: "white",
-                borderRadius: "22px",
-                padding: "22px",
-                border: "1px solid #e5e7eb",
-                boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: 800,
-                  color: "#111827",
-                  marginBottom: "14px",
-                }}
-              >
-                ✅ نقاط سريعة
-              </div>
-
-              <div style={{ display: "grid", gap: "12px" }}>
-                {keyPoints.map((point, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      color: "#4b5563",
-                      lineHeight: 1.8,
-                      fontSize: "15px",
-                    }}
-                  >
-                    {point}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div
-              style={{
-                background: "white",
-                borderRadius: "22px",
-                padding: "22px",
-                border: "1px solid #e5e7eb",
-                boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: 800,
-                  color: "#111827",
-                  marginBottom: "14px",
-                }}
-              >
-                🏆 البطولة
-              </div>
-
+        <section className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 className="mb-5 text-2xl font-extrabold">اقرأ أيضاً</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {relatedArticles.map((related) => (
               <Link
-                href={`/league/${slugifyLeague(article.source)}`}
-                style={{
-                  color: "#2E7D32",
-                  textDecoration: "none",
-                  fontWeight: 800,
-                  fontSize: "17px",
-                }}
+                key={related.slug}
+                href={`/articles/${related.slug}`}
+                className="rounded-xl border border-gray-200 bg-white p-4 transition hover:shadow"
               >
-                {arabicLeagueName(article.source)}
+                <h3 className="text-base font-bold leading-7">{related.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-gray-600">
+                  {related.description}
+                </p>
               </Link>
-
-              <div
-                style={{
-                  marginTop: "10px",
-                  color: "#6b7280",
-                  lineHeight: 1.8,
-                  fontSize: "14px",
-                }}
-              >
-                صفحة مخصصة تضم آخر الأخبار والمقالات الخاصة بهذه البطولة.
-              </div>
-            </div>
-
-            <div
-              style={{
-                background: "white",
-                borderRadius: "22px",
-                padding: "22px",
-                border: "1px solid #e5e7eb",
-                boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: 800,
-                  color: "#111827",
-                  marginBottom: "14px",
-                }}
-              >
-                📌 مقالات مرتبطة
-              </div>
-
-              {relatedArticles.length === 0 ? (
-                <div
-                  style={{
-                    color: "#6b7280",
-                    lineHeight: 1.8,
-                    fontSize: "14px",
-                  }}
-                >
-                  لا توجد مقالات مرتبطة حالياً.
-                </div>
-              ) : (
-                <div style={{ display: "grid", gap: "12px" }}>
-                  {relatedArticles.map((item, index) => (
-                    <Link
-                      key={item.slug || index}
-                      href={`/articles/${item.slug}`}
-                      style={{
-                        textDecoration: "none",
-                        color: "#374151",
-                        fontWeight: 700,
-                        lineHeight: 1.8,
-                        fontSize: "15px",
-                      }}
-                    >
-                      • {item.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          </aside>
-        </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );
