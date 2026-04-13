@@ -10,10 +10,26 @@ function normalizeText(value = "") {
   return String(value).replace(/\s+/g, " ").trim();
 }
 
+function stripEnglish(text = "") {
+  return String(text)
+    .replace(/[A-Za-z]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function onlyArabicText(text = "") {
+  const cleaned = stripEnglish(text)
+    .replace(/["'`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return cleaned;
+}
+
 function buildSlug(title) {
   return normalizeText(title)
     .toLowerCase()
-    .replace(/[^\u0600-\u06FFa-z0-9\s-]/g, "")
+    .replace(/[^\u0600-\u06FF0-9\s-]/g, "")
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .slice(0, 90);
@@ -45,81 +61,6 @@ function isDuplicate(title, seen) {
   return false;
 }
 
-function buildPrompt(item) {
-  const league = arabicLeagueName(item.source);
-
-  return `
-أنت صحفي رياضي عربي محترف يكتب لموقع "نبض الرياضة".
-
-أعد كتابة الخبر التالي بأسلوب عربي طبيعي واحترافي يشبه مواقع الأخبار الرياضية الكبرى.
-
-القواعد:
-- اكتب بالعربية فقط.
-- لا تنسخ النص الأصلي حرفياً.
-- لا تستخدم أسلوباً آلياً أو متكرراً.
-- اجعل العنوان جذاباً لكن مهنياً.
-- اكتب وصفاً تمهيدياً قصيراً مناسباً لمحركات البحث.
-- اكتب من 4 إلى 6 فقرات مفيدة.
-- أضف زاوية تحليلية خفيفة: الأهمية، التأثير، السياق، ما الذي يعنيه الخبر.
-- أضف 4 كلمات مفتاحية عربية.
-- أضف سؤالين شائعين مع إجابات قصيرة.
-- أعد النتيجة بصيغة JSON فقط.
-
-الشكل المطلوب:
-{
-  "title": "",
-  "description": "",
-  "content": ["", "", "", ""],
-  "keywords": ["", "", "", ""],
-  "faq": [
-    {"q": "", "a": ""},
-    {"q": "", "a": ""}
-  ]
-}
-
-اسم البطولة بالعربية: ${league}
-العنوان الأصلي: ${item.title || ""}
-المحتوى الأصلي: ${item.content || item.description || item.summary || ""}
-`;
-}
-
-function buildLocalArticle(item, index) {
-  const originalTitle = normalizeText(item.title || "خبر رياضي عاجل");
-  const league = arabicLeagueName(item.source);
-
-  const titleVariants = [
-    `تفاصيل جديدة حول ${league} بعد تطورات لافتة`,
-    `${league}: قراءة سريعة في آخر المستجدات`,
-    `ماذا يحدث في ${league}؟ آخر التطورات والتحليل`,
-    `آخر أخبار ${league} وتداعيات الخبر الأحدث`
-  ];
-
-  const title = titleVariants[index % titleVariants.length];
-
-  return {
-    title,
-    description: `نستعرض في هذا التقرير آخر تطورات ${league} مع قراءة سريعة لأهم ما يحمله الخبر من دلالات ومتابعات.`,
-    content: [
-      `يشهد ${league} خلال الفترة الحالية تطورات متسارعة مع استمرار تداول خبر ${originalTitle} بين المتابعين والمحللين الرياضيين.`,
-      `ويحمل هذا المستجد أهمية واضحة بالنظر إلى توقيته وتأثيره المحتمل على المشهد العام داخل البطولة أو على الأطراف المرتبطة بالخبر.`,
-      `كما أن التفاعل الكبير مع هذا الملف يعكس حجم الاهتمام الجماهيري، خاصة عندما يتعلق الأمر بالنتائج أو الصفقات أو مستقبل المنافسة.`,
-      `ومن زاوية تحليلية، فإن مثل هذه الأخبار غالباً ما تفتح الباب أمام سيناريوهات جديدة قد تؤثر على الترتيب أو الأداء أو القرارات الفنية القادمة.`,
-      `ويبقى الأهم بالنسبة للجمهور هو متابعة التحديثات الرسمية والقراءة الهادئة للسياق الكامل قبل الحكم النهائي على أبعاد الخبر.`
-    ],
-    keywords: [league, "أخبار رياضية", "كرة القدم", "تحليل رياضي"],
-    faq: [
-      {
-        q: `ما أهمية هذا الخبر في ${league}؟`,
-        a: `تكمن أهميته في توقيته وتأثيره المحتمل على المنافسة أو على مستقبل الأطراف المرتبطة به.`
-      },
-      {
-        q: "هل يمكن أن تتغير المعطيات لاحقاً؟",
-        a: "نعم، الأخبار الرياضية تتطور سريعاً وغالباً ما تظهر تفاصيل إضافية خلال وقت قصير."
-      }
-    ]
-  };
-}
-
 function safeJsonParse(text) {
   const raw = normalizeText(text);
   if (!raw) return null;
@@ -146,37 +87,171 @@ function safeJsonParse(text) {
   return null;
 }
 
+function buildPrompt(item) {
+  const league = arabicLeagueName(item.source);
+
+  return `
+أنت صحفي رياضي عربي محترف يكتب لموقع "نبض الرياضة".
+
+تعليمات صارمة جداً:
+- اكتب بالعربية فقط 100%.
+- ممنوع كتابة أي كلمة إنجليزية داخل العنوان أو الوصف أو الفقرات أو الكلمات المفتاحية أو الأسئلة.
+- إذا كان الخبر الأصلي بالإنجليزية، ترجم المعنى إلى العربية ولا تنقل الكلمات الإنجليزية.
+- لا تذكر أسماء البطولات أو الأندية أو اللاعبين بالإنجليزية، بل صغها بالعربية أو بصياغة عامة عربية.
+- لا تنسخ النص الأصلي حرفياً.
+- اكتب بأسلوب صحفي طبيعي ومهني.
+- اجعل العنوان جذاباً لكن مهنياً.
+- اكتب وصفاً قصيراً مناسباً لمحركات البحث.
+- اكتب من 4 إلى 6 فقرات.
+- أضف 4 كلمات مفتاحية عربية.
+- أضف سؤالين شائعين مع إجابات قصيرة.
+- أعد النتيجة بصيغة JSON فقط.
+
+الشكل المطلوب:
+{
+  "title": "",
+  "description": "",
+  "content": ["", "", "", ""],
+  "keywords": ["", "", "", ""],
+  "faq": [
+    {"q": "", "a": ""},
+    {"q": "", "a": ""}
+  ]
+}
+
+اسم البطولة بالعربية: ${league}
+العنوان الأصلي: ${item.title || ""}
+المحتوى الأصلي: ${item.content || item.description || item.summary || ""}
+`;
+}
+
+function buildLocalArticle(item, index) {
+  const league = arabicLeagueName(item.source);
+
+  const titleVariants = [
+    `تفاصيل جديدة في ${league}`,
+    `مستجدات مهمة في ${league}`,
+    `قراءة سريعة في آخر أخبار ${league}`,
+    `آخر تطورات ${league} وتحليل أولي`
+  ];
+
+  const descVariants = [
+    `نستعرض آخر التطورات المرتبطة بـ ${league} مع قراءة سريعة لأهمية الخبر وانعكاساته.`,
+    `متابعة عربية لأبرز مستجدات ${league} مع عرض أهم التفاصيل في صياغة صحفية واضحة.`,
+    `هذا التقرير يقدم خلاصة سريعة لأحدث ما يدور في ${league} مع توضيح أبرز النقاط المهمة.`,
+    `تغطية موجزة لآخر أخبار ${league} مع إبراز السياق العام وما يحمله الخبر من دلالات.`
+  ];
+
+  return {
+    title: titleVariants[index % titleVariants.length],
+    description: descVariants[index % descVariants.length],
+    content: [
+      `يشهد ${league} خلال الفترة الحالية تطورات متسارعة تستحوذ على اهتمام المتابعين في الساحة الرياضية العربية.`,
+      `ويحمل هذا المستجد أهمية واضحة بسبب توقيته وتأثيره المحتمل على المشهد العام داخل البطولة أو على الأطراف المرتبطة بالخبر.`,
+      `كما يعكس حجم التفاعل مع هذا الملف مدى اهتمام الجمهور بالتفاصيل الجديدة وما يمكن أن تتركه من أثر خلال المرحلة المقبلة.`,
+      `ومن زاوية تحليلية، فإن مثل هذه الأخبار تفتح الباب أمام احتمالات متعددة تتعلق بالأداء أو النتائج أو شكل المنافسة القادمة.`,
+      `ويبقى العنصر الأهم هو متابعة التحديثات الرسمية وقراءة السياق الكامل للخبر قبل الوصول إلى أي استنتاج نهائي.`
+    ],
+    keywords: [league, "أخبار رياضية", "كرة القدم", "تحليل رياضي"],
+    faq: [
+      {
+        q: `ما أهمية هذا الخبر في ${league}؟`,
+        a: `تظهر أهمية الخبر من تأثيره المحتمل على المنافسة وعلى قراءة المرحلة المقبلة داخل البطولة.`
+      },
+      {
+        q: "هل يمكن أن تظهر تفاصيل جديدة لاحقاً؟",
+        a: "نعم، من المعتاد أن تتطور الأخبار الرياضية سريعاً مع ظهور معلومات إضافية خلال وقت قصير."
+      }
+    ]
+  };
+}
+
+function hasEnglish(text = "") {
+  return /[A-Za-z]/.test(String(text));
+}
+
+function sanitizeParagraph(text, fallback) {
+  const cleaned = onlyArabicText(text);
+  return cleaned || fallback;
+}
+
+function sanitizeKeyword(text, fallback) {
+  const cleaned = onlyArabicText(text);
+  return cleaned || fallback;
+}
+
+function sanitizeFaqItem(item, fallbackQ, fallbackA) {
+  const q = onlyArabicText(item?.q || "");
+  const a = onlyArabicText(item?.a || "");
+
+  return {
+    q: q || fallbackQ,
+    a: a || fallbackA,
+  };
+}
+
 function normalizeArticle(article, item, index) {
   const fallback = buildLocalArticle(item, index);
 
-  const title = normalizeText(article?.title || fallback.title);
-  const description = normalizeText(article?.description || fallback.description);
+  const title = onlyArabicText(article?.title || "") || fallback.title;
+  const description =
+    onlyArabicText(article?.description || "") || fallback.description;
 
-  const content = Array.isArray(article?.content)
-    ? article.content.map((p) => normalizeText(p)).filter(Boolean)
+  const rawContent = Array.isArray(article?.content) ? article.content : [];
+  const content = rawContent.length
+    ? rawContent.map((p, i) =>
+        sanitizeParagraph(
+          p,
+          fallback.content[i] || fallback.content[fallback.content.length - 1]
+        )
+      )
     : fallback.content;
 
-  const keywords = Array.isArray(article?.keywords)
-    ? article.keywords.map((k) => normalizeText(k)).filter(Boolean).slice(0, 6)
+  const rawKeywords = Array.isArray(article?.keywords) ? article.keywords : [];
+  const keywords = rawKeywords.length
+    ? rawKeywords
+        .map((k, i) =>
+          sanitizeKeyword(
+            k,
+            fallback.keywords[i] || fallback.keywords[fallback.keywords.length - 1]
+          )
+        )
+        .filter(Boolean)
+        .slice(0, 6)
     : fallback.keywords;
 
-  const faq = Array.isArray(article?.faq)
-    ? article.faq
-        .map((f) => ({
-          q: normalizeText(f?.q),
-          a: normalizeText(f?.a),
-        }))
-        .filter((f) => f.q && f.a)
+  const rawFaq = Array.isArray(article?.faq) ? article.faq : [];
+  const faq = rawFaq.length
+    ? rawFaq
+        .map((f, i) =>
+          sanitizeFaqItem(
+            f,
+            fallback.faq[i]?.q || "ما أبرز تفاصيل هذا الخبر؟",
+            fallback.faq[i]?.a || "يعرض هذا المقال أهم المعلومات المرتبطة بالخبر في صياغة عربية واضحة."
+          )
+        )
         .slice(0, 4)
     : fallback.faq;
 
-  return {
-    title: title || fallback.title,
-    description: description || fallback.description,
+  const finalArticle = {
+    title,
+    description,
     content: content.length >= MIN_PARAGRAPHS ? content : fallback.content,
     keywords: keywords.length ? keywords : fallback.keywords,
     faq: faq.length ? faq : fallback.faq,
   };
+
+  if (
+    hasEnglish(finalArticle.title) ||
+    hasEnglish(finalArticle.description) ||
+    finalArticle.content.some((p) => hasEnglish(p)) ||
+    finalArticle.keywords.some((k) => hasEnglish(k)) ||
+    finalArticle.faq.some((f) => hasEnglish(f.q) || hasEnglish(f.a))
+  ) {
+    return fallback;
+  }
+
+  return finalArticle;
 }
 
 async function rewriteWithOpenAI(item, index) {
@@ -322,5 +397,4 @@ async function main() {
 
   console.log("✅ SEO articles saved:", withLinks.length);
 }
-
 main();
