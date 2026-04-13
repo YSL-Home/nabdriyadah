@@ -1,43 +1,45 @@
-name: Content Automation
+name: 🚀 Auto Generate Content + Images
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */6 * * *" # toutes les 6h
+  workflow_dispatch:
 
 jobs:
-  generate-content:
+  build:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout
+      # 1. Récupérer le repo
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      # 2. Installer Node.js
+      - name: 🟢 Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "20"
 
-      - name: Install dependencies
+      # 3. Installer dépendances (IMPORTANT)
+      - name: 📦 Install dependencies
         run: npm install
 
-      - name: Run content automation
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
-        run: npm run automation:content
+      # 4. Générer contenu (news + articles)
+      - name: 📰 Generate content
+        run: npm run fetch:news
 
-      - name: Commit generated content
+      - name: ✍️ Rewrite articles
+        run: npm run rewrite:articles
+
+      # 5. Générer images + upload Cloudinary
+      - name: 🖼️ Generate images
+        run: npm run generate:images
+
+      # 6. Commit automatique
+      - name: 💾 Commit & Push
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/articles/
-          git diff --cached --quiet && exit 0
-          git commit -m "auto: generate seo content"
-          git pull --rebase origin main
-          git push origin main
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "auto: generate content + images" || echo "no changes"
+          git push
