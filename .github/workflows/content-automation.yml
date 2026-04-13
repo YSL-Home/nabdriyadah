@@ -44,8 +44,7 @@ jobs:
       - name: 💾 Commit & Push
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions@github.com]"
-          git add .gitignore package.json .github/workflows/automation.yml content public app scripts
+          git config user.email "github-actions@github.com"
           git add -A
           git commit -m "auto: generate content + images" || echo "no changes"
           git push
