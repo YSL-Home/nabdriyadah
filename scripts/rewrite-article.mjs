@@ -1,351 +1,229 @@
-```tsx
-import Link from "next/link";
-import articles from "@/data/seo-articles.json";
+const fs = require("fs");
+const path = require("path");
 
-type Article = {
-  slug: string;
-  title: string;
-  description: string;
-  content: string;
-  keywords?: string[];
-  category?: string;
-  image?: string;
-  publishedAt?: string;
-};
+const RAW_NEWS_PATH = path.join(process.cwd(), "data", "raw-news.json");
+const SEO_ARTICLES_PATH = path.join(process.cwd(), "data", "seo-articles.json");
 
-const allArticles = articles as Article[];
-
-function getLatestArticles(items: Article[], count: number) {
-  return [...items].slice(0, count);
+function slugifyArabic(text = "") {
+  return text
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[A-Za-z]/g, "")
+    .replace(/[^\u0600-\u06FF0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
-function getMostReadArticles(items: Article[], count: number) {
-  return [...items]
-    .sort((a, b) => {
-      const scoreA =
-        (a.title?.length || 0) +
-        (a.description?.length || 0) +
-        (a.content?.length || 0);
-      const scoreB =
-        (b.title?.length || 0) +
-        (b.description?.length || 0) +
-        (b.content?.length || 0);
-      return scoreB - scoreA;
-    })
-    .slice(0, count);
+function containsArabic(text = "") {
+  return /[\u0600-\u06FF]/.test(text);
 }
 
-function getTrendingArticles(items: Article[], count: number) {
-  return [...items]
-    .filter((item) => item.title && item.description)
-    .slice(0, count);
+function isMostlyArabic(text = "") {
+  if (!text) return false;
+
+  const cleaned = text.replace(/\s/g, "");
+  if (!cleaned.length) return false;
+
+  const arabicCount = (cleaned.match(/[\u0600-\u06FF]/g) || []).length;
+  return arabicCount / cleaned.length >= 0.45;
 }
 
-function getAnalysisArticles(items: Article[], count: number) {
-  return [...items]
-    .filter((item) => (item.content?.length || 0) > 1200)
-    .slice(0, count);
+function removeEnglishLetters(text = "") {
+  return text
+    .replace(/[A-Za-z]/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/Read more/gi, "")
+    .replace(/Breaking/gi, "")
+    .replace(/Trending/gi, "")
+    .replace(/Latest/gi, "")
+    .replace(/Analysis/gi, "")
+    .trim();
 }
 
-function getCategories(items: Article[]) {
-  const defaultCategories = [
-    { slug: "football", name: "كرة القدم" },
-    { slug: "world-football", name: "الكرة العالمية" },
-    { slug: "arab-football", name: "الكرة العربية" },
-    { slug: "transfers", name: "سوق الانتقالات" },
-  ];
-
-  return defaultCategories.filter((cat) =>
-    items.some(
-      (article) =>
-        article.category?.toLowerCase() === cat.slug.toLowerCase() ||
-        article.slug?.toLowerCase().includes(cat.slug.toLowerCase())
-    )
-  ).length
-    ? defaultCategories.filter((cat) =>
-        items.some(
-          (article) =>
-            article.category?.toLowerCase() === cat.slug.toLowerCase() ||
-            article.slug?.toLowerCase().includes(cat.slug.toLowerCase())
-        )
-      )
-    : defaultCategories;
+function cleanArabicText(text = "") {
+  return removeEnglishLetters(text)
+    .replace(/\s+,/g, ",")
+    .replace(/\s+\./g, ".")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-function stripHtml(html: string = "") {
-  return html.replace(/<[^>]*>/g, "").trim();
+function validateArabicArticle(article) {
+  if (!article) return false;
+
+  const title = article.title || "";
+  const description = article.description || "";
+  const content = article.content || "";
+
+  if (!containsArabic(title)) return false;
+  if (!containsArabic(description)) return false;
+  if (!containsArabic(content)) return false;
+
+  if (!isMostlyArabic(title)) return false;
+  if (!isMostlyArabic(description)) return false;
+  if (!isMostlyArabic(content)) return false;
+
+  return true;
 }
 
-function truncate(text: string = "", length: number) {
-  if (text.length <= length) return text;
-  return text.slice(0, length).trim() + "...";
-}
-
-export const metadata = {
-  title: "نبض الرياضة | آخر أخبار كرة القدم العربية والعالمية",
-  description:
-    "تابع آخر أخبار كرة القدم العربية والعالمية، التحليلات الرياضية، نتائج المباريات، وأخبار الانتقالات على نبض الرياضة.",
-};
-
-export default function HomePage() {
-  const latestArticles = getLatestArticles(allArticles, 7);
-  const featuredArticle = latestArticles[0];
-  const latestGrid = latestArticles.slice(1, 7);
-
-  const mostReadArticles = getMostReadArticles(allArticles, 4);
-  const trendingArticles = getTrendingArticles(allArticles, 4);
-  const analysisArticles = getAnalysisArticles(allArticles, 3);
-  const categories = getCategories(allArticles);
-
-  return (
-    <main
-      dir="rtl"
-      className="min-h-screen bg-white text-gray-900"
-    >
-      <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 lg:px-8">
-        {/* SEO Intro */}
-        <section className="mb-8">
-          <h1 className="mb-3 text-3xl font-extrabold leading-tight md:text-5xl">
-            نبض الرياضة
-          </h1>
-          <p className="max-w-3xl text-base leading-8 text-gray-600 md:text-lg">
-            تغطية عربية شاملة لآخر أخبار كرة القدم، نتائج المباريات، أخبار الانتقالات،
-            وتحليلات رياضية محدثة باستمرار لمتابعة كل جديد في البطولات العربية والعالمية.
-          </p>
-        </section>
-
-        {/* Featured + Side */}
-        {featuredArticle && (
-          <section className="mb-12 grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <Link href={`/articles/${featuredArticle.slug}`} className="block h-full">
-                <article className="h-full rounded-2xl border border-gray-200 bg-gray-50 p-6 transition hover:shadow-lg">
-                  <div className="mb-4 inline-flex rounded-full bg-red-100 px-3 py-1 text-sm font-semibold text-red-700">
-                    الخبر الأبرز
-                  </div>
-
-                  <h2 className="mb-4 text-2xl font-extrabold leading-tight md:text-4xl">
-                    {featuredArticle.title}
-                  </h2>
-
-                  <p className="mb-5 text-base leading-8 text-gray-700 md:text-lg">
-                    {truncate(
-                      featuredArticle.description ||
-                        stripHtml(featuredArticle.content),
-                      220
-                    )}
-                  </p>
-
-                  <span className="inline-flex text-sm font-bold text-red-600">
-                    اقرأ التفاصيل ←
-                  </span>
-                </article>
-              </Link>
-            </div>
-
-            <div className="space-y-4">
-              {latestGrid.slice(0, 3).map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/articles/${article.slug}`}
-                  className="block"
-                >
-                  <article className="rounded-2xl border border-gray-200 p-4 transition hover:shadow-md">
-                    <div className="mb-2 text-xs font-bold text-gray-500">
-                      آخر الأخبار
-                    </div>
-                    <h3 className="mb-2 text-lg font-bold leading-7">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm leading-7 text-gray-600">
-                      {truncate(
-                        article.description || stripHtml(article.content),
-                        100
-                      )}
-                    </p>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Latest News */}
-        <section className="mb-12">
-          <div className="mb-5 flex items-center justify-between">
-            <h2 className="text-2xl font-extrabold">آخر الأخبار</h2>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {latestGrid.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/articles/${article.slug}`}
-                className="block"
-              >
-                <article className="h-full rounded-2xl border border-gray-200 p-5 transition hover:-translate-y-1 hover:shadow-lg">
-                  <h3 className="mb-3 text-lg font-bold leading-7">
-                    {article.title}
-                  </h3>
-                  <p className="text-sm leading-7 text-gray-600">
-                    {truncate(
-                      article.description || stripHtml(article.content),
-                      120
-                    )}
-                  </p>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* Most Read + Trending */}
-        <section className="mb-12 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-gray-200 p-6">
-            <h2 className="mb-5 text-2xl font-extrabold">الأكثر قراءة</h2>
-            <div className="space-y-4">
-              {mostReadArticles.map((article, index) => (
-                <Link
-                  key={article.slug}
-                  href={`/articles/${article.slug}`}
-                  className="block"
-                >
-                  <article className="flex items-start gap-4 rounded-xl border-b border-gray-100 pb-4 transition hover:bg-gray-50">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-sm font-bold text-white">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <h3 className="mb-1 text-base font-bold leading-7">
-                        {article.title}
-                      </h3>
-                      <p className="text-sm leading-7 text-gray-600">
-                        {truncate(
-                          article.description || stripHtml(article.content),
-                          90
-                        )}
-                      </p>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-gray-200 p-6">
-            <h2 className="mb-5 text-2xl font-extrabold">ترند اليوم</h2>
-            <div className="space-y-4">
-              {trendingArticles.map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/articles/${article.slug}`}
-                  className="block"
-                >
-                  <article className="rounded-xl border border-gray-100 p-4 transition hover:bg-gray-50">
-                    <h3 className="mb-2 text-base font-bold leading-7">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm leading-7 text-gray-600">
-                      {truncate(
-                        article.description || stripHtml(article.content),
-                        100
-                      )}
-                    </p>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Analysis */}
-        <section className="mb-12">
-          <h2 className="mb-5 text-2xl font-extrabold">تحليلات رياضية</h2>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {analysisArticles.length > 0 ? (
-              analysisArticles.map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/articles/${article.slug}`}
-                  className="block"
-                >
-                  <article className="h-full rounded-2xl border border-amber-200 bg-amber-50 p-5 transition hover:shadow-lg">
-                    <div className="mb-3 inline-flex rounded-full bg-amber-200 px-3 py-1 text-xs font-bold text-amber-900">
-                      تحليل
-                    </div>
-                    <h3 className="mb-3 text-lg font-bold leading-7">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm leading-7 text-gray-700">
-                      {truncate(
-                        article.description || stripHtml(article.content),
-                        130
-                      )}
-                    </p>
-                  </article>
-                </Link>
-              ))
-            ) : (
-              latestArticles.slice(0, 3).map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/articles/${article.slug}`}
-                  className="block"
-                >
-                  <article className="h-full rounded-2xl border border-amber-200 bg-amber-50 p-5 transition hover:shadow-lg">
-                    <div className="mb-3 inline-flex rounded-full bg-amber-200 px-3 py-1 text-xs font-bold text-amber-900">
-                      تحليل
-                    </div>
-                    <h3 className="mb-3 text-lg font-bold leading-7">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm leading-7 text-gray-700">
-                      {truncate(
-                        article.description || stripHtml(article.content),
-                        130
-                      )}
-                    </p>
-                  </article>
-                </Link>
-              ))
-            )}
-          </div>
-        </section>
-
-        {/* Categories */}
-        <section className="mb-12">
-          <h2 className="mb-5 text-2xl font-extrabold">البطولات والأقسام</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/league/${category.slug}`}
-                className="block"
-              >
-                <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center font-bold transition hover:bg-black hover:text-white">
-                  {category.name}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* Internal SEO Links */}
-        <section className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-          <h2 className="mb-4 text-2xl font-extrabold">روابط مهمة</h2>
-          <div className="grid gap-3 md:grid-cols-2">
-            {allArticles.slice(0, 8).map((article) => (
-              <Link
-                key={article.slug}
-                href={`/articles/${article.slug}`}
-                className="rounded-xl border border-gray-200 bg-white p-4 text-sm font-medium transition hover:shadow"
-              >
-                {article.title}
-              </Link>
-            ))}
-          </div>
-        </section>
-      </div>
-    </main>
+function extractText(item) {
+  return cleanArabicText(
+    item.content ||
+      item.description ||
+      item.summary ||
+      item.body ||
+      item.title ||
+      ""
   );
 }
-```
+
+function splitIntoParagraphs(text = "") {
+  return text
+    .split(/[.!؟\n]/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+function generateLocalArabicFallback(newsItem) {
+  const sourceTitle = cleanArabicText(newsItem.title || "خبر رياضي جديد");
+  const sourceText = extractText(newsItem);
+
+  const paragraphs = splitIntoParagraphs(sourceText);
+  const intro =
+    paragraphs[0] ||
+    "تشهد الساحة الرياضية تطورات جديدة تهم الجماهير العربية وعشاق كرة القدم في مختلف البطولات.";
+  const detail1 =
+    paragraphs[1] ||
+    "وتأتي هذه المستجدات في وقت يتزايد فيه الاهتمام بمتابعة الأخبار الرياضية اليومية وتحليل انعكاساتها على الأندية واللاعبين.";
+  const detail2 =
+    paragraphs[2] ||
+    "ومن المنتظر أن تتضح الصورة بشكل أكبر خلال الساعات المقبلة مع صدور تفاصيل إضافية وردود فعل من الأطراف المعنية.";
+  const closing =
+    "ويبقى هذا الملف مفتوحاً على احتمالات عديدة، في انتظار ما ستسفر عنه التطورات القادمة على الساحة الرياضية.";
+
+  const title = sourceTitle;
+  const description = cleanArabicText(
+    `تفاصيل جديدة حول ${sourceTitle} مع متابعة لأبرز التطورات والانعكاسات المحتملة على المشهد الرياضي.`
+  );
+
+  const content = [
+    intro,
+    detail1,
+    detail2,
+    closing,
+  ]
+    .map(cleanArabicText)
+    .join("\n\n");
+
+  const keywords = [
+    "أخبار الرياضة",
+    "كرة القدم",
+    "أخبار عاجلة",
+    cleanArabicText(sourceTitle),
+  ].filter(Boolean);
+
+  return {
+    slug: slugifyArabic(title) || `خبر-${Date.now()}`,
+    title,
+    description,
+    content,
+    keywords,
+    category: "football",
+    publishedAt: new Date().toISOString(),
+  };
+}
+
+async function rewriteWithOpenAI(newsItem) {
+  return null;
+}
+
+async function rewriteWithClaude(newsItem) {
+  return null;
+}
+
+async function buildArticle(newsItem) {
+  let article = null;
+
+  try {
+    article = await rewriteWithOpenAI(newsItem);
+  } catch (error) {
+    console.error("OpenAI failed:", error.message);
+  }
+
+  if (!article) {
+    try {
+      article = await rewriteWithClaude(newsItem);
+    } catch (error) {
+      console.error("Claude failed:", error.message);
+    }
+  }
+
+  if (!article) {
+    article = generateLocalArabicFallback(newsItem);
+  }
+
+  article = {
+    ...article,
+    title: cleanArabicText(article.title || ""),
+    description: cleanArabicText(article.description || ""),
+    content: cleanArabicText(article.content || ""),
+    keywords: Array.isArray(article.keywords)
+      ? article.keywords.map((keyword) => cleanArabicText(keyword)).filter(Boolean)
+      : [],
+    category: article.category || "football",
+    publishedAt: article.publishedAt || new Date().toISOString(),
+  };
+
+  if (!article.slug || !containsArabic(article.slug.replace(/-/g, " "))) {
+    article.slug = slugifyArabic(article.title) || `خبر-${Date.now()}`;
+  }
+
+  if (!validateArabicArticle(article)) {
+    console.log("❌ Article rejeté car non arabe, fallback local activé");
+    article = generateLocalArabicFallback(newsItem);
+  }
+
+  return article;
+}
+
+async function main() {
+  if (!fs.existsSync(RAW_NEWS_PATH)) {
+    console.error("❌ Fichier raw-news.json introuvable");
+    process.exit(1);
+  }
+
+  const raw = fs.readFileSync(RAW_NEWS_PATH, "utf-8");
+  const rawNews = JSON.parse(raw);
+
+  if (!Array.isArray(rawNews)) {
+    console.error("❌ raw-news.json doit être un tableau");
+    process.exit(1);
+  }
+
+  const seoArticles = [];
+
+  for (const newsItem of rawNews) {
+    try {
+      const article = await buildArticle(newsItem);
+      if (validateArabicArticle(article)) {
+        seoArticles.push(article);
+      } else {
+        console.log("❌ Article ignoré après validation finale");
+      }
+    } catch (error) {
+      console.error("❌ Erreur génération article:", error.message);
+    }
+  }
+
+  fs.writeFileSync(
+    SEO_ARTICLES_PATH,
+    JSON.stringify(seoArticles, null, 2),
+    "utf-8"
+  );
+
+  console.log(`✅ ${seoArticles.length} articles arabes enregistrés dans seo-articles.json`);
+}
+
+main();
