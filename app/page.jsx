@@ -26,14 +26,14 @@ function arabicLeagueName(source = "") {
   const s = String(source).toLowerCase();
 
   if (s.includes("premier")) return "الدوري الإنجليزي الممتاز";
-  if (s.includes("la-liga") || s.includes("la liga")) return "الدوري الإسباني";
-  if (s.includes("serie-a") || s.includes("serie a")) return "الدوري الإيطالي";
+  if (s.includes("la liga") || s.includes("la-liga")) return "الدوري الإسباني";
+  if (s.includes("serie a") || s.includes("serie-a")) return "الدوري الإيطالي";
   if (s.includes("bundesliga")) return "الدوري الألماني";
-  if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
+  if (s.includes("ligue 1") || s.includes("ligue-1")) return "الدوري الفرنسي";
   if (s.includes("champions")) return "دوري أبطال أوروبا";
   if (s.includes("saudi")) return "الدوري السعودي";
   if (s.includes("padel")) return "البادل";
-  return source || "كرة القدم";
+  return "كرة القدم";
 }
 
 export default function HomePage() {
@@ -344,64 +344,4 @@ export default function HomePage() {
                       color: "#1f2937",
                       fontSize: "30px",
                       lineHeight: 1.5,
-                      fontWeight: 800,
-                    }}
-                  >
-                    📰 {article.title}
-                  </h3>
-                </Link>
-
-                <p
-                  style={{
-                    margin: "0 0 16px 0",
-                    color: "#4b5563",
-                    fontSize: "18px",
-                    lineHeight: 1.95,
-                  }}
-                >
-                  {article.description}
-                </p>
-
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "12px",
-                    flexWrap: "wrap",
-                    alignItems: "center",
-                    fontSize: "14px",
-                    color: "#6b7280",
-                  }}
-                >
-                  <Link
-                    href={`/league/${slugifyLeague(article.source)}`}
-                    style={{
-                      color: "#2E7D32",
-                      textDecoration: "none",
-                      fontWeight: 800,
-                    }}
-                  >
-                    🏆 {arabicLeagueName(article.source)}
-                  </Link>
-
-                  <span>🏷️ {(article.keywords || []).join(" • ")}</span>
-                </div>
-              </article>
-            ))
-          )}
-        </section>
-
-        <footer
-          style={{
-            marginTop: "42px",
-            padding: "24px",
-            textAlign: "center",
-            color: "#6b7280",
-            fontSize: "15px",
-          }}
-        >
-          ✅ نبض الرياضة © واجهة مجلة رياضية عربية بهيكل أقوى للنشر والـ SEO
-        </footer>
-      </div>
-    </main>
-  );
-}
+                      fontWeight: 
