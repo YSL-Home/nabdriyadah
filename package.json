@@ -3,17 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
     "fetch:news": "node scripts/fetch-news.mjs",
     "rewrite:articles": "node scripts/rewrite-article.mjs",
-    "automation:content": "npm run fetch:news && npm run rewrite:articles"
+    "generate:images": "node scripts/generate-images.mjs",
+    "automation:content": "npm run fetch:news && npm run rewrite:articles && npm run generate:images"
   },
   "dependencies": {
-    "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18",
     "cloudinary": "^2.0.0"
   }
 }
