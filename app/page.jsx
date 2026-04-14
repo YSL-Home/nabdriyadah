@@ -2,14 +2,18 @@ import fs from "fs";
 import path from "path";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
-
 function getArticles() {
   try {
     const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
+
+    if (!fs.existsSync(filePath)) {
+      return [];
+    }
+
     const file = fs.readFileSync(filePath, "utf-8");
-    const articles = JSON.parse(file);
-    return Array.isArray(articles) ? articles : [];
+    const parsed = JSON.parse(file);
+
+    return Array.isArray(parsed) ? parsed : [];
   } catch (error) {
     console.error("Erreur lecture seo-articles.json:", error);
     return [];
@@ -25,11 +29,10 @@ export default function HomePage() {
         minHeight: "100vh",
         background: "#f3f4f6",
         padding: "32px 20px",
-        direction: "rtl",
-        fontFamily: "Arial, sans-serif",
+        direction: "rtl"
       }}
     >
-      <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <section
           style={{
             background: "linear-gradient(90deg,#2563eb,#7c3aed)",
@@ -37,15 +40,15 @@ export default function HomePage() {
             padding: "56px 24px",
             textAlign: "center",
             color: "white",
-            marginBottom: "40px",
+            marginBottom: "40px"
           }}
         >
           <h1
             style={{
               margin: 0,
-              fontSize: "64px",
+              fontSize: "56px",
               fontWeight: 800,
-              lineHeight: 1.1,
+              lineHeight: 1.1
             }}
           >
             نبض الرياضة
@@ -54,8 +57,8 @@ export default function HomePage() {
           <p
             style={{
               marginTop: "18px",
-              fontSize: "24px",
-              opacity: 0.95,
+              fontSize: "22px",
+              opacity: 0.95
             }}
           >
             أخبار - مباشر - فيديو - تحليلات
@@ -67,7 +70,7 @@ export default function HomePage() {
             marginBottom: "20px",
             fontSize: "18px",
             color: "#111827",
-            fontWeight: 700,
+            fontWeight: 700
           }}
         >
           عدد المقالات الحالية: {articles.length}
@@ -78,7 +81,7 @@ export default function HomePage() {
             textAlign: "right",
             marginBottom: "24px",
             fontSize: "32px",
-            color: "#111827",
+            color: "#111827"
           }}
         >
           🔥 أحدث المقالات
@@ -91,62 +94,64 @@ export default function HomePage() {
               borderRadius: "20px",
               padding: "28px",
               textAlign: "center",
-              color: "#6b7280",
+              color: "#6b7280"
             }}
           >
             لا توجد مقالات حالياً
           </div>
         ) : (
-          articles.map((article, index) => (
-            <Link
-              key={article.slug || index}
-              href={`/articles/${article.slug}`}
-              style={{ textDecoration: "none" }}
-            >
-              <article
-                style={{
-                  background: "#f9fafb",
-                  borderRadius: "22px",
-                  padding: "30px",
-                  marginBottom: "22px",
-                  direction: "rtl",
-                  border: "1px solid #e5e7eb",
-                }}
+          <div style={{ display: "grid", gap: "22px" }}>
+            {articles.map((article, index) => (
+              <Link
+                key={article.slug || index}
+                href={`/articles/${article.slug}`}
+                style={{ textDecoration: "none" }}
               >
-                <h3
+                <article
                   style={{
-                    margin: "0 0 14px 0",
-                    color: "#111827",
-                    fontSize: "30px",
-                    lineHeight: 1.5,
-                    fontWeight: 800,
+                    background: "white",
+                    borderRadius: "22px",
+                    padding: "30px",
+                    border: "1px solid #e5e7eb"
                   }}
                 >
-                  {article.title}
-                </h3>
+                  <h3
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#111827",
+                      fontSize: "30px",
+                      lineHeight: 1.5,
+                      fontWeight: 800
+                    }}
+                  >
+                    {article.title || "مقال رياضي"}
+                  </h3>
 
-                <p
-                  style={{
-                    margin: "0 0 14px 0",
-                    color: "#4b5563",
-                    fontSize: "18px",
-                    lineHeight: 1.9,
-                  }}
-                >
-                  {article.description}
-                </p>
+                  <p
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#4b5563",
+                      fontSize: "18px",
+                      lineHeight: 1.9
+                    }}
+                  >
+                    {article.description || "ملخص المقال غير متوفر حالياً."}
+                  </p>
 
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#6b7280",
-                  }}
-                >
-                  {(article.keywords || []).join(" • ")}
-                </div>
-              </article>
-            </Link>
-          ))
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      color: "#6b7280"
+                    }}
+                  >
+                    {Array.isArray(article.keywords)
+                      ? article.keywords.join(" • ")
+                      : ""}
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
         )}
       </div>
     </main>
