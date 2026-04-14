@@ -1,28 +1,32 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-function getArticles() {
-  try {
-    const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
-
-    if (!fs.existsSync(filePath)) {
-      return [];
-    }
-
-    const file = fs.readFileSync(filePath, "utf-8");
-    const parsed = JSON.parse(file);
-
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    console.error("Erreur lecture seo-articles.json:", error);
-    return [];
+const articles = [
+  {
+    title: "فوز ريال مدريد في مباراة مثيرة",
+    description: "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.",
+    slug: "real-madrid-win",
+    keywords: ["ريال مدريد", "الدوري", "كرة القدم"],
+    content:
+      "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري. شهدت المواجهة أداءً مميزًا من الفريق وتفاعلاً كبيرًا من الجماهير، في لقاء حمل الكثير من الندية والإثارة حتى الدقائق الأخيرة."
+  },
+  {
+    title: "برشلونة يستعد لمواجهة قوية",
+    description: "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط اهتمام جماهيري كبير.",
+    slug: "barcelona-match",
+    keywords: ["برشلونة", "مباراة", "كرة القدم"],
+    content:
+      "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط متابعة جماهيرية واسعة. ويأمل الجهاز الفني في تقديم أداء قوي وتحقيق نتيجة إيجابية تعزز وضع الفريق في المنافسة."
   }
+];
+
+export function generateStaticParams() {
+  return articles.map((article) => ({
+    slug: article.slug
+  }));
 }
 
 export function generateMetadata({ params }) {
-  const articles = getArticles();
   const article = articles.find((item) => item.slug === params.slug);
 
   if (!article) {
@@ -33,12 +37,11 @@ export function generateMetadata({ params }) {
 
   return {
     title: `${article.title} | نبض الرياضة`,
-    description: article.description || "أحدث الأخبار الرياضية العربية"
+    description: article.description
   };
 }
 
 export default function ArticlePage({ params }) {
-  const articles = getArticles();
   const article = articles.find((item) => item.slug === params.slug);
 
   if (!article) {
@@ -107,9 +110,7 @@ export default function ArticlePage({ params }) {
               marginBottom: "24px"
             }}
           >
-            {Array.isArray(article.keywords)
-              ? article.keywords.join(" • ")
-              : ""}
+            {article.keywords.join(" • ")}
           </div>
 
           <div
@@ -120,7 +121,7 @@ export default function ArticlePage({ params }) {
               whiteSpace: "pre-wrap"
             }}
           >
-            {article.content || article.description || "المحتوى غير متوفر حالياً."}
+            {article.content}
           </div>
         </article>
       </div>
