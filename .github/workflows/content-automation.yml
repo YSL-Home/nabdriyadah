@@ -1,8 +1,6 @@
-name: 🚀 Auto Generate Content + Images
+name: 🚀 Auto Generate Content
 
 on:
-  schedule:
-    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,8 +13,6 @@ jobs:
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: 🟢 Setup Node
         uses: actions/setup-node@v4
@@ -26,25 +22,5 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: 📰 Fetch news
-        run: npm run fetch:news
-
-      - name: ✍️ Rewrite articles
-        run: npm run rewrite:articles
-
-      - name: 🖼️ Generate images
-        run: npm run generate:images
-
-      - name: 🧹 Clean generated dependencies from git
-        run: |
-          rm -rf node_modules .next out
-          git rm -r --cached --ignore-unmatch node_modules .next out
-          git rm --cached --ignore-unmatch package-lock.json
-
-      - name: 💾 Commit & Push
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions@github.com"
-          git add -A
-          git commit -m "auto: generate content + images" || echo "no changes"
-          git push
+      - name: 🏗️ Build
+        run: npm run build
