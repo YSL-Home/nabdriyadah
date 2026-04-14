@@ -1,6 +1,6 @@
 export const metadata = {
   title: "نبض الرياضة",
-  description: "أحدث الأخبار الرياضية العربية"
+  description: "أحدث الأخبار الرياضية العربية",
 };
 
 export default function RootLayout({ children }) {
