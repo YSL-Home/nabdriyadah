@@ -35,7 +35,7 @@ jobs:
       - name: 🖼️ Generate images
         run: npm run generate:images
 
-      - name: 🧹 Remove generated dependencies from git tracking
+      - name: 🧹 Clean git (remove node_modules)
         run: |
           rm -rf node_modules .next out
           git rm -r --cached --ignore-unmatch node_modules .next out
