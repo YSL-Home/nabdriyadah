@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  poweredByHeader: false,
-  generateEtags: false
+  output: "export",
+  images: {
+    unoptimized: true
+  },
+  trailingSlash: true
 };
 
 export default nextConfig;
