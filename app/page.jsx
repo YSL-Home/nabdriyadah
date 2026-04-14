@@ -1,19 +1,5 @@
 import Link from "next/link";
-
-const articles = [
-  {
-    title: "فوز ريال مدريد في مباراة مثيرة",
-    description: "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.",
-    slug: "real-madrid-win",
-    keywords: ["ريال مدريد", "الدوري", "كرة القدم"]
-  },
-  {
-    title: "برشلونة يستعد لمواجهة قوية",
-    description: "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط اهتمام جماهيري كبير.",
-    slug: "barcelona-match",
-    keywords: ["برشلونة", "مباراة", "كرة القدم"]
-  }
-];
+import articles from "@/data/seo-articles.json";
 
 export default function HomePage() {
   return (
@@ -22,7 +8,8 @@ export default function HomePage() {
         minHeight: "100vh",
         background: "#f3f4f6",
         padding: "32px 20px",
-        direction: "rtl"
+        direction: "rtl",
+        fontFamily: "Arial, sans-serif",
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -33,7 +20,7 @@ export default function HomePage() {
             padding: "56px 24px",
             textAlign: "center",
             color: "white",
-            marginBottom: "40px"
+            marginBottom: "40px",
           }}
         >
           <h1
@@ -41,7 +28,7 @@ export default function HomePage() {
               margin: 0,
               fontSize: "56px",
               fontWeight: 800,
-              lineHeight: 1.1
+              lineHeight: 1.1,
             }}
           >
             نبض الرياضة
@@ -51,70 +38,99 @@ export default function HomePage() {
             style={{
               marginTop: "18px",
               fontSize: "22px",
-              opacity: 0.95
+              opacity: 0.95,
             }}
           >
             أخبار - مباشر - فيديو - تحليلات
           </p>
         </section>
 
+        <div
+          style={{
+            marginBottom: "20px",
+            fontSize: "18px",
+            color: "#111827",
+            fontWeight: 700,
+          }}
+        >
+          عدد المقالات الحالية: {articles.length}
+        </div>
+
         <h2
           style={{
             textAlign: "right",
             marginBottom: "24px",
             fontSize: "32px",
-            color: "#111827"
+            color: "#111827",
           }}
         >
-          أحدث المقالات
+          🔥 أحدث المقالات
         </h2>
 
-        <div style={{ display: "grid", gap: "22px" }}>
-          {articles.map((article, index) => (
-            <Link key={index} href={`/articles/${article.slug}/`}>
-              <article
-                style={{
-                  background: "white",
-                  borderRadius: "22px",
-                  padding: "30px",
-                  border: "1px solid #e5e7eb"
-                }}
+        {articles.length === 0 ? (
+          <div
+            style={{
+              background: "white",
+              borderRadius: "20px",
+              padding: "28px",
+              textAlign: "center",
+              color: "#6b7280",
+            }}
+          >
+            لا توجد مقالات حالياً
+          </div>
+        ) : (
+          <div style={{ display: "grid", gap: "22px" }}>
+            {articles.map((article, index) => (
+              <Link
+                key={article.slug || index}
+                href={`/articles/${article.slug}`}
+                style={{ textDecoration: "none" }}
               >
-                <h3
+                <article
                   style={{
-                    margin: "0 0 14px 0",
-                    color: "#111827",
-                    fontSize: "30px",
-                    lineHeight: 1.5,
-                    fontWeight: 800
+                    background: "white",
+                    borderRadius: "22px",
+                    padding: "30px",
+                    border: "1px solid #e5e7eb",
                   }}
                 >
-                  {article.title}
-                </h3>
+                  <h3
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#111827",
+                      fontSize: "30px",
+                      lineHeight: 1.5,
+                      fontWeight: 800,
+                    }}
+                  >
+                    {article.title}
+                  </h3>
 
-                <p
-                  style={{
-                    margin: "0 0 14px 0",
-                    color: "#4b5563",
-                    fontSize: "18px",
-                    lineHeight: 1.9
-                  }}
-                >
-                  {article.description}
-                </p>
+                  <p
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#4b5563",
+                      fontSize: "18px",
+                      lineHeight: 1.9,
+                    }}
+                  >
+                    {article.description}
+                  </p>
 
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#6b7280"
-                  }}
-                >
-                  {article.keywords.join(" • ")}
-                </div>
-              </article>
-            </Link>
-          ))}
-        </div>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      color: "#6b7280",
+                    }}
+                  >
+                    {Array.isArray(article.keywords) ? article.keywords.join(" • ") : ""}
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
