@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import articles from "@/data/seo-articles.json";
+import articles from "../../../data/seo-articles.json";
 
 export function generateStaticParams() {
   return articles.map((article) => ({
