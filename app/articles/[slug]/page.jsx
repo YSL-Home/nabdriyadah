@@ -1,28 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-const articles = [
-  {
-    title: "فوز ريال مدريد في مباراة مثيرة",
-    description: "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.",
-    slug: "real-madrid-win",
-    keywords: ["ريال مدريد", "الدوري", "كرة القدم"],
-    content:
-      "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري. شهدت المواجهة أداءً مميزًا من الفريق وتفاعلاً كبيرًا من الجماهير، في لقاء حمل الكثير من الندية والإثارة حتى الدقائق الأخيرة."
-  },
-  {
-    title: "برشلونة يستعد لمواجهة قوية",
-    description: "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط اهتمام جماهيري كبير.",
-    slug: "barcelona-match",
-    keywords: ["برشلونة", "مباراة", "كرة القدم"],
-    content:
-      "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط متابعة جماهيرية واسعة. ويأمل الجهاز الفني في تقديم أداء قوي وتحقيق نتيجة إيجابية تعزز وضع الفريق في المنافسة."
-  }
-];
+import articles from "@/data/seo-articles.json";
 
 export function generateStaticParams() {
   return articles.map((article) => ({
-    slug: article.slug
+    slug: article.slug,
   }));
 }
 
@@ -31,13 +13,14 @@ export function generateMetadata({ params }) {
 
   if (!article) {
     return {
-      title: "مقال غير موجود | نبض الرياضة"
+      title: "مقال غير موجود | نبض الرياضة",
+      description: "هذا المقال غير متوفر حالياً.",
     };
   }
 
   return {
     title: `${article.title} | نبض الرياضة`,
-    description: article.description
+    description: article.description || "أحدث الأخبار الرياضية العربية",
   };
 }
 
@@ -55,7 +38,7 @@ export default function ArticlePage({ params }) {
         background: "#f3f4f6",
         padding: "32px 20px",
         direction: "rtl",
-        fontFamily: "Arial, sans-serif"
+        fontFamily: "Arial, sans-serif",
       }}
     >
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
@@ -66,7 +49,7 @@ export default function ArticlePage({ params }) {
             marginBottom: "24px",
             color: "#2563eb",
             textDecoration: "none",
-            fontWeight: 700
+            fontWeight: 700,
           }}
         >
           العودة إلى الصفحة الرئيسية
@@ -77,7 +60,7 @@ export default function ArticlePage({ params }) {
             background: "white",
             borderRadius: "24px",
             padding: "32px",
-            border: "1px solid #e5e7eb"
+            border: "1px solid #e5e7eb",
           }}
         >
           <h1
@@ -86,7 +69,7 @@ export default function ArticlePage({ params }) {
               marginBottom: "16px",
               color: "#111827",
               fontSize: "40px",
-              lineHeight: 1.5
+              lineHeight: 1.5,
             }}
           >
             {article.title}
@@ -97,7 +80,7 @@ export default function ArticlePage({ params }) {
               color: "#4b5563",
               fontSize: "20px",
               lineHeight: 2,
-              marginBottom: "24px"
+              marginBottom: "24px",
             }}
           >
             {article.description}
@@ -107,10 +90,10 @@ export default function ArticlePage({ params }) {
             style={{
               fontSize: "15px",
               color: "#6b7280",
-              marginBottom: "24px"
+              marginBottom: "24px",
             }}
           >
-            {article.keywords.join(" • ")}
+            {Array.isArray(article.keywords) ? article.keywords.join(" • ") : ""}
           </div>
 
           <div
@@ -118,10 +101,10 @@ export default function ArticlePage({ params }) {
               color: "#111827",
               fontSize: "19px",
               lineHeight: 2.1,
-              whiteSpace: "pre-wrap"
+              whiteSpace: "pre-wrap",
             }}
           >
-            {article.content}
+            {article.content || "المحتوى غير متوفر حالياً."}
           </div>
         </article>
       </div>
