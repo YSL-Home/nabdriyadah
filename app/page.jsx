@@ -1,5 +1,5 @@
 import Link from "next/link";
-import articles from "@/data/seo-articles.json";
+import articles from "../data/seo-articles.json";
 
 export default function HomePage() {
   return (
