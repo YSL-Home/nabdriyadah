@@ -2,67 +2,46 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 
-function buildArticleSlug(index) {
-  return `article-${index + 1}`;
-}
-
-function findArticleByRouteSlug(routeSlug) {
-  const index = articles.findIndex((_, i) => buildArticleSlug(i) === routeSlug);
-
-  if (index === -1) {
-    return null;
-  }
-
-  return {
-    article: articles[index],
-    index
-  };
-}
-
 export function generateStaticParams() {
-  return articles.map((_, index) => ({
-    slug: buildArticleSlug(index)
-  }));
+  return articles
+    .filter((article) => article.slug)
+    .map((article) => ({
+      slug: article.slug
+    }));
 }
 
 export function generateMetadata({ params }) {
-  const result = findArticleByRouteSlug(params.slug);
+  const article = articles.find((item) => item.slug === params.slug);
 
-  if (!result) {
+  if (!article) {
     return {
       title: "مقال غير موجود",
       description: "هذا المقال غير متوفر حالياً."
     };
   }
 
-  const { article, index } = result;
-
   return {
     title: article.title,
     description: article.description || "أحدث الأخبار الرياضية العربية",
     keywords: article.keywords || [],
     alternates: {
-      canonical: `https://nabdriyadah.com/articles/${buildArticleSlug(index)}/`
+      canonical: `https://nabdriyadah.com/articles/${article.slug}/`
     }
   };
 }
 
-function getRelatedArticles(currentIndex) {
-  return articles
-    .map((article, index) => ({ article, index }))
-    .filter((item) => item.index !== currentIndex)
-    .slice(0, 3);
+function getRelatedArticles(currentSlug) {
+  return articles.filter((article) => article.slug !== currentSlug).slice(0, 3);
 }
 
 export default function ArticlePage({ params }) {
-  const result = findArticleByRouteSlug(params.slug);
+  const article = articles.find((item) => item.slug === params.slug);
 
-  if (!result) {
+  if (!article) {
     notFound();
   }
 
-  const { article, index } = result;
-  const relatedArticles = getRelatedArticles(index);
+  const relatedArticles = getRelatedArticles(article.slug);
 
   return (
     <main
@@ -194,10 +173,10 @@ export default function ArticlePage({ params }) {
               </h3>
 
               <div style={{ display: "grid", gap: "16px" }}>
-                {relatedArticles.map((item) => (
+                {relatedArticles.map((relatedArticle) => (
                   <Link
-                    key={item.index}
-                    href={`/articles/${buildArticleSlug(item.index)}/`}
+                    key={relatedArticle.slug}
+                    href={`/articles/${relatedArticle.slug}/`}
                     style={{
                       textDecoration: "none",
                       borderBottom: "1px solid #f3f4f6",
@@ -213,7 +192,7 @@ export default function ArticlePage({ params }) {
                         marginBottom: "6px"
                       }}
                     >
-                      {item.article.title}
+                      {relatedArticle.title}
                     </div>
 
                     <div
@@ -223,7 +202,7 @@ export default function ArticlePage({ params }) {
                         lineHeight: 1.8
                       }}
                     >
-                      {item.article.description}
+                      {relatedArticle.description}
                     </div>
                   </Link>
                 ))}
