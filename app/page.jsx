@@ -1,5 +1,5 @@
 import Link from "next/link";
-import articles from "../data/seo-articles.json";
+import articles from "../content/articles/seo-articles.json";
 
 export default function HomePage() {
   return (
@@ -12,7 +12,7 @@ export default function HomePage() {
         fontFamily: "Arial, sans-serif",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
         <section
           style={{
             background: "linear-gradient(90deg,#2563eb,#7c3aed)",
@@ -26,7 +26,7 @@ export default function HomePage() {
           <h1
             style={{
               margin: 0,
-              fontSize: "56px",
+              fontSize: "64px",
               fontWeight: 800,
               lineHeight: 1.1,
             }}
@@ -37,24 +37,13 @@ export default function HomePage() {
           <p
             style={{
               marginTop: "18px",
-              fontSize: "22px",
+              fontSize: "24px",
               opacity: 0.95,
             }}
           >
             أخبار - مباشر - فيديو - تحليلات
           </p>
         </section>
-
-        <div
-          style={{
-            marginBottom: "20px",
-            fontSize: "18px",
-            color: "#111827",
-            fontWeight: 700,
-          }}
-        >
-          عدد المقالات الحالية: {articles.length}
-        </div>
 
         <h2
           style={{
@@ -64,7 +53,7 @@ export default function HomePage() {
             color: "#111827",
           }}
         >
-          🔥 أحدث المقالات
+          أحدث المقالات
         </h2>
 
         {articles.length === 0 ? (
@@ -80,56 +69,56 @@ export default function HomePage() {
             لا توجد مقالات حالياً
           </div>
         ) : (
-          <div style={{ display: "grid", gap: "22px" }}>
-            {articles.map((article, index) => (
-              <Link
-                key={article.slug || index}
-                href={`/articles/${article.slug}`}
-                style={{ textDecoration: "none" }}
+          articles.map((article, index) => (
+            <Link
+              key={article.slug || index}
+              href={`/articles/${article.slug}`}
+              style={{ textDecoration: "none" }}
+            >
+              <article
+                style={{
+                  background: "#f9fafb",
+                  borderRadius: "22px",
+                  padding: "30px",
+                  marginBottom: "22px",
+                  direction: "rtl",
+                  border: "1px solid #e5e7eb",
+                }}
               >
-                <article
+                <h3
                   style={{
-                    background: "white",
-                    borderRadius: "22px",
-                    padding: "30px",
-                    border: "1px solid #e5e7eb",
+                    margin: "0 0 14px 0",
+                    color: "#111827",
+                    fontSize: "30px",
+                    lineHeight: 1.5,
+                    fontWeight: 800,
                   }}
                 >
-                  <h3
-                    style={{
-                      margin: "0 0 14px 0",
-                      color: "#111827",
-                      fontSize: "30px",
-                      lineHeight: 1.5,
-                      fontWeight: 800,
-                    }}
-                  >
-                    {article.title}
-                  </h3>
+                  {article.title}
+                </h3>
 
-                  <p
-                    style={{
-                      margin: "0 0 14px 0",
-                      color: "#4b5563",
-                      fontSize: "18px",
-                      lineHeight: 1.9,
-                    }}
-                  >
-                    {article.description}
-                  </p>
+                <p
+                  style={{
+                    margin: "0 0 14px 0",
+                    color: "#4b5563",
+                    fontSize: "18px",
+                    lineHeight: 1.9,
+                  }}
+                >
+                  {article.description}
+                </p>
 
-                  <div
-                    style={{
-                      fontSize: "14px",
-                      color: "#6b7280",
-                    }}
-                  >
-                    {Array.isArray(article.keywords) ? article.keywords.join(" • ") : ""}
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    color: "#6b7280",
+                  }}
+                >
+                  {(article.keywords || []).join(" • ")}
+                </div>
+              </article>
+            </Link>
+          ))
         )}
       </div>
     </main>
