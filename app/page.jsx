@@ -84,7 +84,7 @@ export default function HomePage() {
             {articles.map((article, index) => (
               <Link
                 key={index}
-                href={`/article/?id=${index + 1}`}
+                href={`/article-${index + 1}/`}
                 style={{ textDecoration: "none" }}
               >
                 <article
