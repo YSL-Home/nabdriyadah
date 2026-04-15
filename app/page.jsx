@@ -10,6 +10,10 @@ export const metadata = {
   }
 };
 
+function buildArticlePath(index) {
+  return `/articles/article-${index + 1}/`;
+}
+
 export default function HomePage() {
   return (
     <main
@@ -94,8 +98,8 @@ export default function HomePage() {
           <div style={{ display: "grid", gap: "22px" }}>
             {articles.map((article, index) => (
               <Link
-                key={article.slug || index}
-                href={`/article/?slug=${encodeURIComponent(article.slug)}`}
+                key={index}
+                href={buildArticlePath(index)}
                 style={{ textDecoration: "none" }}
               >
                 <article
