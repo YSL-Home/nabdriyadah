@@ -1,6 +1,6 @@
 import Link from "next/link";
 import articles from "../content/articles/seo-articles.json";
-
+ 
 export default function HomePage() {
   return (
     <main
