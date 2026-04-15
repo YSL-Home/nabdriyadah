@@ -11,20 +11,6 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "نبض الرياضة",
-    url: "https://nabdriyadah.com",
-    inLanguage: "ar",
-    description:
-      "موقع عربي لمتابعة آخر الأخبار الرياضية العربية، نتائج المباريات، والتحليلات.",
-    publisher: {
-      "@type": "Organization",
-      name: "نبض الرياضة"
-    }
-  };
-
   return (
     <main
       style={{
@@ -35,10 +21,6 @@ export default function HomePage() {
         fontFamily: "Arial, sans-serif"
       }}
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
         <section
           style={{
@@ -72,7 +54,7 @@ export default function HomePage() {
           </p>
         </section>
 
-        <section style={{ marginBottom: "24px" }}>
+        <section style={{ marginBottom: "30px" }}>
           <h2
             style={{
               textAlign: "right",
@@ -92,7 +74,7 @@ export default function HomePage() {
               lineHeight: 1.9
             }}
           >
-            تابع آخر أخبار كرة القدم العربية والعالمية، أبرز نتائج المباريات، وتحليلات الدوريات الكبرى في مكان واحد.
+            تابع آخر أخبار كرة القدم العربية والعالمية، واطّلع على أبرز التحليلات والتقارير الخاصة بالدوريات الكبرى.
           </p>
         </section>
 
@@ -109,56 +91,72 @@ export default function HomePage() {
             لا توجد مقالات حالياً
           </div>
         ) : (
-          articles.map((article, index) => (
-            <Link
-              key={article.slug || index}
-              href={`/articles/${article.slug}`}
-              style={{ textDecoration: "none" }}
-            >
-              <article
-                style={{
-                  background: "#f9fafb",
-                  borderRadius: "22px",
-                  padding: "30px",
-                  marginBottom: "22px",
-                  direction: "rtl",
-                  border: "1px solid #e5e7eb"
-                }}
+          <div style={{ display: "grid", gap: "22px" }}>
+            {articles.map((article, index) => (
+              <Link
+                key={article.slug || index}
+                href={`/articles/${article.slug}`}
+                style={{ textDecoration: "none" }}
               >
-                <h3
+                <article
                   style={{
-                    margin: "0 0 14px 0",
-                    color: "#111827",
-                    fontSize: "30px",
-                    lineHeight: 1.5,
-                    fontWeight: 800
+                    background: "white",
+                    borderRadius: "22px",
+                    padding: "30px",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.04)"
                   }}
                 >
-                  {article.title}
-                </h3>
+                  <div
+                    style={{
+                      display: "inline-block",
+                      marginBottom: "14px",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: "#2563eb",
+                      background: "#eff6ff",
+                      borderRadius: "999px",
+                      padding: "8px 14px"
+                    }}
+                  >
+                    خبر رياضي
+                  </div>
 
-                <p
-                  style={{
-                    margin: "0 0 14px 0",
-                    color: "#4b5563",
-                    fontSize: "18px",
-                    lineHeight: 1.9
-                  }}
-                >
-                  {article.description}
-                </p>
+                  <h3
+                    style={{
+                      margin: "0 0 14px 0",
+                      color: "#111827",
+                      fontSize: "30px",
+                      lineHeight: 1.5,
+                      fontWeight: 800
+                    }}
+                  >
+                    {article.title}
+                  </h3>
 
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#6b7280"
-                  }}
-                >
-                  {(article.keywords || []).join(" • ")}
-                </div>
-              </article>
-            </Link>
-          ))
+                  <p
+                    style={{
+                      margin: "0 0 16px 0",
+                      color: "#4b5563",
+                      fontSize: "18px",
+                      lineHeight: 1.9
+                    }}
+                  >
+                    {article.description}
+                  </p>
+
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      color: "#6b7280"
+                    }}
+                  >
+                    {(article.keywords || []).join(" • ")}
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
         )}
       </div>
     </main>
