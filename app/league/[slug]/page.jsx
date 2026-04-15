@@ -29,14 +29,17 @@ export function generateMetadata({ params }) {
 
   if (!league) {
     return {
-      title: "بطولة غير موجودة | نبض الرياضة",
+      title: "بطولة غير موجودة",
       description: "هذه الصفحة غير متوفرة حالياً."
     };
   }
 
   return {
-    title: `${league.title} | نبض الرياضة`,
-    description: league.description
+    title: league.title,
+    description: league.description,
+    alternates: {
+      canonical: `https://nabdriyadah.com/league/${league.slug}`
+    }
   };
 }
 
