@@ -4,15 +4,18 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import articles from "../../content/articles/seo-articles.json";
 
-function getRelatedArticles(currentSlug) {
-  return articles.filter((article) => article.slug !== currentSlug).slice(0, 3);
+function getRelatedArticles(currentIndex) {
+  return articles
+    .map((article, index) => ({ article, index }))
+    .filter((item) => item.index !== currentIndex)
+    .slice(0, 3);
 }
 
 export default function ArticlePage() {
   const searchParams = useSearchParams();
-  const slug = searchParams.get("slug");
-
-  const article = articles.find((item) => item.slug === slug);
+  const id = Number(searchParams.get("id") || "0");
+  const index = id - 1;
+  const article = articles[index];
 
   if (!article) {
     return (
@@ -57,7 +60,7 @@ export default function ArticlePage() {
     );
   }
 
-  const relatedArticles = getRelatedArticles(article.slug);
+  const relatedArticles = getRelatedArticles(index);
 
   return (
     <main
@@ -99,35 +102,6 @@ export default function ArticlePage() {
               >
                 الصفحة الرئيسية
               </Link>
-
-              <span style={{ margin: "0 8px", color: "#9ca3af" }}>←</span>
-
-              <Link
-                href="/league/premier-league/"
-                style={{
-                  color: "#2563eb",
-                  textDecoration: "none",
-                  fontWeight: 700,
-                  fontSize: "15px"
-                }}
-              >
-                الدوريات
-              </Link>
-            </div>
-
-            <div
-              style={{
-                display: "inline-block",
-                marginBottom: "16px",
-                fontSize: "13px",
-                fontWeight: 700,
-                color: "#2563eb",
-                background: "#eff6ff",
-                borderRadius: "999px",
-                padding: "8px 14px"
-              }}
-            >
-              تحليل ومتابعة
             </div>
 
             <h1
@@ -162,9 +136,9 @@ export default function ArticlePage() {
                 marginBottom: "28px"
               }}
             >
-              {(article.keywords || []).map((keyword, index) => (
+              {(article.keywords || []).map((keyword, keywordIndex) => (
                 <span
-                  key={index}
+                  key={keywordIndex}
                   style={{
                     background: "#f3f4f6",
                     color: "#374151",
@@ -181,14 +155,6 @@ export default function ArticlePage() {
 
             <div
               style={{
-                height: "1px",
-                background: "#e5e7eb",
-                marginBottom: "28px"
-              }}
-            />
-
-            <div
-              style={{
                 color: "#111827",
                 fontSize: "20px",
                 lineHeight: 2.2,
@@ -196,60 +162,6 @@ export default function ArticlePage() {
               }}
             >
               {article.content || "المحتوى غير متوفر حالياً."}
-            </div>
-
-            <div
-              style={{
-                marginTop: "34px",
-                paddingTop: "24px",
-                borderTop: "1px solid #e5e7eb"
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: "28px",
-                  color: "#111827",
-                  marginTop: 0,
-                  marginBottom: "16px"
-                }}
-              >
-                روابط داخلية مفيدة
-              </h2>
-
-              <div style={{ display: "grid", gap: "12px" }}>
-                <Link
-                  href="/league/premier-league/"
-                  style={{
-                    color: "#2563eb",
-                    fontWeight: 700,
-                    textDecoration: "none"
-                  }}
-                >
-                  تصفح آخر أخبار الدوري الإنجليزي الممتاز
-                </Link>
-
-                <Link
-                  href="/league/la-liga/"
-                  style={{
-                    color: "#2563eb",
-                    fontWeight: 700,
-                    textDecoration: "none"
-                  }}
-                >
-                  تصفح آخر أخبار الدوري الإسباني
-                </Link>
-
-                <Link
-                  href="/"
-                  style={{
-                    color: "#2563eb",
-                    fontWeight: 700,
-                    textDecoration: "none"
-                  }}
-                >
-                  العودة إلى جميع الأخبار الرياضية
-                </Link>
-              </div>
             </div>
           </article>
 
@@ -280,10 +192,10 @@ export default function ArticlePage() {
               </h3>
 
               <div style={{ display: "grid", gap: "16px" }}>
-                {relatedArticles.map((relatedArticle) => (
+                {relatedArticles.map((item) => (
                   <Link
-                    key={relatedArticle.slug}
-                    href={`/article/?slug=${encodeURIComponent(relatedArticle.slug)}`}
+                    key={item.index}
+                    href={`/article/?id=${item.index + 1}`}
                     style={{
                       textDecoration: "none",
                       borderBottom: "1px solid #f3f4f6",
@@ -299,7 +211,7 @@ export default function ArticlePage() {
                         marginBottom: "6px"
                       }}
                     >
-                      {relatedArticle.title}
+                      {item.article.title}
                     </div>
 
                     <div
@@ -309,54 +221,10 @@ export default function ArticlePage() {
                         lineHeight: 1.8
                       }}
                     >
-                      {relatedArticle.description}
+                      {item.article.description}
                     </div>
                   </Link>
                 ))}
-              </div>
-            </section>
-
-            <section
-              style={{
-                background: "white",
-                borderRadius: "24px",
-                padding: "24px",
-                border: "1px solid #e5e7eb",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.04)"
-              }}
-            >
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: "16px",
-                  color: "#111827",
-                  fontSize: "24px"
-                }}
-              >
-                أقسام الموقع
-              </h3>
-
-              <div style={{ display: "grid", gap: "12px" }}>
-                <Link
-                  href="/league/premier-league/"
-                  style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
-                >
-                  الدوري الإنجليزي الممتاز
-                </Link>
-
-                <Link
-                  href="/league/la-liga/"
-                  style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
-                >
-                  الدوري الإسباني
-                </Link>
-
-                <Link
-                  href="/"
-                  style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
-                >
-                  جميع المقالات
-                </Link>
               </div>
             </section>
           </aside>
