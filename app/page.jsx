@@ -98,7 +98,7 @@ export default function HomePage() {
           <div style={{ display: "grid", gap: "22px" }}>
             {articles.map((article, index) => (
               <Link
-                key={index}
+                key={`article-${index + 1}`}
                 href={buildArticlePath(index)}
                 style={{ textDecoration: "none" }}
               >
