@@ -4,93 +4,75 @@ import path from "path";
 const RAW_PATH = path.join(process.cwd(), "content/raw-news.json");
 const SEO_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 
-function normalizeText(value = "") {
-  return String(value).replace(/\s+/g, " ").trim();
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+async function callOpenAI(prompt) {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${OPENAI_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "أنت صحفي رياضي عربي محترف متخصص في كتابة مقالات SEO عالية الجودة."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      temperature: 0.7
+    })
+  });
+
+  const data = await res.json();
+
+  if (!data.choices) {
+    console.error("OpenAI error:", data);
+    return null;
+  }
+
+  return data.choices[0].message.content;
 }
 
-function slugifyArabic(value = "", fallback = "article") {
-  const cleaned = String(value)
-    .replace(/[^\u0600-\u06FFa-zA-Z0-9\s-]/g, " ")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "")
-    .trim();
+function buildPrompt(item) {
+  return `
+أعد كتابة هذا الخبر الرياضي باللغة العربية بأسلوب احترافي SEO.
 
-  return cleaned || fallback;
+الشروط:
+- لغة عربية طبيعية 100%
+- لا تترجم حرفيًا
+- أضف تحليل بسيط
+- طول المقال 300 إلى 500 كلمة
+- فقرة افتتاحية قوية
+- تقسيم الفقرات
+
+أعطني النتيجة بهذا الشكل JSON فقط:
+
+{
+"title": "...",
+"description": "...",
+"content": "...",
+"keywords": ["...", "..."]
 }
 
-function leagueName(slug = "") {
-  if (slug === "premier-league") return "الدوري الإنجليزي الممتاز";
-  if (slug === "la-liga") return "الدوري الإسباني";
-  return "كرة القدم الأوروبية";
+الخبر الأصلي:
+${item.originalTitle}
+
+الوصف:
+${item.originalDescription}
+`;
 }
 
-function sourceArabic(source = "") {
-  if (source.includes("BBC")) return "بي بي سي سبورت";
-  if (source.includes("Sky")) return "سكاي سبورت";
-  return "المصدر الرياضي";
-}
-
-function buildArabicTitle(item, index) {
-  const league = leagueName(item.league);
-
-  const patterns = [
-    `آخر أخبار ${league}`,
-    `مستجدات ${league}`,
-    `أهم ما يحدث في ${league}`,
-    `تحليل أخبار ${league}`
-  ];
-
-  return `${patterns[index % patterns.length]} ${index + 1}`;
-}
-
-function buildArabicDescription(item) {
-  const league = leagueName(item.league);
-  const source = sourceArabic(item.source);
-
-  return `نستعرض في هذا التقرير آخر المستجدات المرتبطة بـ ${league} مع متابعة لأبرز الأخبار المتداولة عبر ${source}، في تغطية عربية مختصرة وسريعة لأهم ما يهم الجماهير.`;
-}
-
-function buildArabicContent(item, index) {
-  const league = leagueName(item.league);
-  const source = sourceArabic(item.source);
-  const originalTitle = normalizeText(item.originalTitle);
-  const originalDescription = normalizeText(item.originalDescription);
-
-  return [
-    `يشهد ${league} متابعة جماهيرية كبيرة خلال الفترة الحالية، مع اهتمام متزايد بكل التفاصيل المرتبطة بالأندية والنجوم والمباريات الحاسمة.`,
-    `وفي هذا السياق، تتابع منصة نبض الرياضة أبرز المستجدات الواردة من ${source} ضمن تغطية عربية مبسطة تهدف إلى تقديم صورة واضحة وسريعة للقارئ العربي.`,
-    originalTitle
-      ? `ويتناول الخبر الأصلي عنوانًا بارزًا يتمحور حول: ${originalTitle}.`
-      : `ويتناول الخبر الأصلي تطورات جديدة لافتة داخل المشهد الكروي المرتبط بهذه البطولة.`,
-    originalDescription
-      ? `كما تشير المعطيات المتاحة إلى أن أبرز التفاصيل المتداولة حاليًا تتمثل في الآتي: ${originalDescription}.`
-      : `وتشير المتابعات إلى وجود تطورات جديدة قد يكون لها تأثير مباشر على شكل المنافسة خلال المرحلة المقبلة.`,
-    `وتحاول الفرق الكبرى في ${league} الحفاظ على الاستقرار الفني وتحقيق أفضل النتائج الممكنة، خصوصًا مع ضغط المباريات واحتدام الصراع على المراكز المتقدمة.`,
-    `ومن المنتظر أن تشهد الأيام المقبلة مزيدًا من الأخبار والقرارات المهمة، وهو ما يمنح الجماهير مساحة واسعة للمتابعة والتحليل والترقب.`,
-    `في نبض الرياضة، نواصل تقديم تغطية عربية مركزة لأهم أخبار ${league}، مع الحرص على إبقاء القارئ على اطلاع دائم بكل جديد.`
-  ].join("\n\n");
-}
-
-function buildKeywords(item) {
-  const league = leagueName(item.league);
-
-  return [
-    league,
-    "أخبار رياضية",
-    "كرة القدم",
-    "نتائج المباريات",
-    "تحليلات رياضية"
-  ];
-}
-
-function readJson(filePath, fallback = []) {
+function readJson(filePath) {
   try {
-    const raw = fs.readFileSync(filePath, "utf-8");
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : fallback;
+    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
   } catch {
-    return fallback;
+    return [];
   }
 }
 
@@ -98,50 +80,57 @@ function ensureDir(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 }
 
-function buildFallbackArticles() {
-  return [
-    {
-      title: "فوز ريال مدريد في مباراة مثيرة",
-      description: "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.",
-      slug: "real-madrid-win",
-      keywords: ["ريال مدريد", "الدوري", "كرة القدم"],
-      content:
-        "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.\n\nشهدت المواجهة أداءً مميزًا من الفريق وتفاعلاً كبيرًا من الجماهير.\n\nويأمل الفريق في مواصلة نتائجه الإيجابية خلال المباريات المقبلة."
-    },
-    {
-      title: "برشلونة يستعد لمواجهة قوية",
-      description: "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع.",
-      slug: "barcelona-match",
-      keywords: ["برشلونة", "مباراة", "كرة القدم"],
-      content:
-        "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط متابعة جماهيرية واسعة.\n\nويركز الجهاز الفني على رفع الجاهزية الفنية والبدنية.\n\nويأمل الفريق في تحقيق نتيجة إيجابية تعزز موقعه في المنافسة."
-    }
-  ];
+function slugify(text, index) {
+  return text
+    .replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, "")
+    .replace(/\s+/g, "-")
+    .toLowerCase()
+    .slice(0, 50) || `article-${index}`;
 }
 
-function main() {
-  const rawItems = readJson(RAW_PATH, []);
+async function main() {
+  const rawItems = readJson(RAW_PATH);
 
-  let articles = [];
+  if (!rawItems.length) {
+    console.log("No raw news → skip AI");
+    return;
+  }
 
-  if (rawItems.length > 0) {
-    articles = rawItems.slice(0, 10).map((item, index) => {
-      const title = buildArabicTitle(item, index);
-      return {
-        title,
-        description: buildArabicDescription(item),
-        slug: slugifyArabic(title, `article-${index + 1}`),
-        keywords: buildKeywords(item),
-        content: buildArabicContent(item, index)
-      };
-    });
-  } else {
-    articles = buildFallbackArticles();
+  const articles = [];
+
+  for (let i = 0; i < Math.min(rawItems.length, 5); i++) {
+    const item = rawItems[i];
+
+    console.log("Generating article:", i + 1);
+
+    const response = await callOpenAI(buildPrompt(item));
+
+    if (!response) continue;
+
+    try {
+      const parsed = JSON.parse(response);
+
+      articles.push({
+        title: parsed.title,
+        description: parsed.description,
+        slug: slugify(parsed.title, i),
+        keywords: parsed.keywords || [],
+        content: parsed.content
+      });
+    } catch (e) {
+      console.error("JSON parse failed:", response);
+    }
+  }
+
+  if (articles.length === 0) {
+    console.log("No AI articles generated → keeping old content");
+    return;
   }
 
   ensureDir(SEO_PATH);
-  fs.writeFileSync(SEO_PATH, JSON.stringify(articles, null, 2), "utf-8");
-  console.log(`seo articles saved: ${articles.length}`);
+  fs.writeFileSync(SEO_PATH, JSON.stringify(articles, null, 2));
+
+  console.log("AI articles saved:", articles.length);
 }
 
 main();
