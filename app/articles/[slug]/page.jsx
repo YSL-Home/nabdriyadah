@@ -1,52 +1,60 @@
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import articles from "../../../content/articles/seo-articles.json";
-
-export function generateStaticParams() {
-  return articles
-    .filter((article) => article.slug)
-    .map((article) => ({
-      slug: article.slug
-    }));
-}
-
-export function generateMetadata({ params }) {
-  const article = articles.find((item) => item.slug === params.slug);
-
-  if (!article) {
-    return {
-      title: "مقال غير موجود",
-      description: "هذا المقال غير متوفر حالياً."
-    };
-  }
-
-  return {
-    title: article.title,
-    description: article.description || "أحدث الأخبار الرياضية العربية",
-    keywords: article.keywords || [],
-    alternates: {
-      canonical: `https://nabdriyadah.com/articles/${article.slug}/`
-    },
-    openGraph: {
-      title: article.title,
-      description: article.description || "أحدث الأخبار الرياضية العربية",
-      url: `https://nabdriyadah.com/articles/${article.slug}/`,
-      siteName: "نبض الرياضة",
-      locale: "ar_AR",
-      type: "article"
-    }
-  };
-}
+import { useSearchParams } from "next/navigation";
+import articles from "../../content/articles/seo-articles.json";
 
 function getRelatedArticles(currentSlug) {
   return articles.filter((article) => article.slug !== currentSlug).slice(0, 3);
 }
 
-export default function ArticlePage({ params }) {
-  const article = articles.find((item) => item.slug === params.slug);
+export default function ArticlePage() {
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("slug");
+
+  const article = articles.find((item) => item.slug === slug);
 
   if (!article) {
-    notFound();
+    return (
+      <main
+        style={{
+          minHeight: "100vh",
+          background: "#f3f4f6",
+          padding: "32px 20px",
+          direction: "rtl",
+          fontFamily: "Arial, sans-serif"
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <div
+            style={{
+              background: "white",
+              borderRadius: "24px",
+              padding: "32px",
+              border: "1px solid #e5e7eb",
+              textAlign: "center"
+            }}
+          >
+            <h1 style={{ color: "#111827", marginTop: 0 }}>المقال غير موجود</h1>
+            <p style={{ color: "#6b7280", fontSize: "18px" }}>
+              تعذر العثور على هذا المقال حالياً.
+            </p>
+            <Link
+              href="/"
+              style={{
+                display: "inline-block",
+                marginTop: "16px",
+                color: "#2563eb",
+                textDecoration: "none",
+                fontWeight: 700
+              }}
+            >
+              العودة إلى الصفحة الرئيسية
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
   }
 
   const relatedArticles = getRelatedArticles(article.slug);
@@ -275,7 +283,7 @@ export default function ArticlePage({ params }) {
                 {relatedArticles.map((relatedArticle) => (
                   <Link
                     key={relatedArticle.slug}
-                    href={`/articles/${relatedArticle.slug}/`}
+                    href={`/article/?slug=${encodeURIComponent(relatedArticle.slug)}`}
                     style={{
                       textDecoration: "none",
                       borderBottom: "1px solid #f3f4f6",
