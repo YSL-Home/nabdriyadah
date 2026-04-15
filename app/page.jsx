@@ -6,7 +6,7 @@ export const metadata = {
   description:
     "تابع آخر الأخبار الرياضية العربية، أبرز نتائج المباريات، وتحليلات كرة القدم والدوريات الكبرى يوميًا على نبض الرياضة.",
   alternates: {
-    canonical: "https://nabdriyadah.com"
+    canonical: "https://nabdriyadah.com/"
   }
 };
 
@@ -95,7 +95,7 @@ export default function HomePage() {
             {articles.map((article, index) => (
               <Link
                 key={article.slug || index}
-                href={`/articles/${article.slug}`}
+                href={`/articles/${article.slug}/`}
                 style={{ textDecoration: "none" }}
               >
                 <article
