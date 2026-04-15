@@ -1,192 +1,118 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-function getArticles() {
-  try {
-    const filePath = path.join(process.cwd(), "content/articles/seo-articles.json");
-    const file = fs.readFileSync(filePath, "utf-8");
-    return JSON.parse(file);
-  } catch (error) {
-    console.error("Erreur lecture seo-articles.json:", error);
-    return [];
+const leagues = [
+  {
+    slug: "premier-league",
+    title: "الدوري الإنجليزي الممتاز",
+    description: "آخر أخبار وتحليلات ونتائج الدوري الإنجليزي الممتاز.",
+    content:
+      "تابع آخر أخبار الدوري الإنجليزي الممتاز، مواعيد المباريات، النتائج، والتحليلات الكاملة لأهم الفرق والنجوم."
+  },
+  {
+    slug: "la-liga",
+    title: "الدوري الإسباني",
+    description: "آخر أخبار وتحليلات ونتائج الدوري الإسباني.",
+    content:
+      "تابع آخر أخبار الدوري الإسباني، نتائج المباريات، وتحليلات أبرز مواجهات ريال مدريد وبرشلونة وباقي الأندية."
   }
-}
-
-function slugifyLeague(source = "") {
-  return String(source).toLowerCase().replace(/\s+/g, "-");
-}
-
-function arabicLeagueName(source = "") {
-  const s = String(source).toLowerCase();
-
-  if (s.includes("premier")) return "الدوري الإنجليزي الممتاز";
-  if (s.includes("la-liga") || s.includes("la liga")) return "الدوري الإسباني";
-  if (s.includes("serie-a") || s.includes("serie a")) return "الدوري الإيطالي";
-  if (s.includes("bundesliga")) return "الدوري الألماني";
-  if (s.includes("ligue-1") || s.includes("ligue 1")) return "الدوري الفرنسي";
-  if (s.includes("champions")) return "دوري أبطال أوروبا";
-  if (s.includes("saudi")) return "الدوري السعودي";
-  if (s.includes("padel")) return "البادل";
-  return source || "كرة القدم";
-}
+];
 
 export function generateStaticParams() {
-  const articles = getArticles();
-
-  const uniqueSlugs = [...new Set(articles.map((article) => slugifyLeague(article.source)))];
-
-  return uniqueSlugs
-    .filter(Boolean)
-    .map((slug) => ({
-      slug,
-    }));
+  return leagues.map((league) => ({
+    slug: league.slug
+  }));
 }
 
-export async function generateMetadata({ params }) {
-  const leagueName = arabicLeagueName(params.slug);
+export function generateMetadata({ params }) {
+  const league = leagues.find((item) => item.slug === params.slug);
+
+  if (!league) {
+    return {
+      title: "بطولة غير موجودة | نبض الرياضة",
+      description: "هذه الصفحة غير متوفرة حالياً."
+    };
+  }
 
   return {
-    title: `${leagueName} | نبض الرياضة`,
-    description: `آخر الأخبار والتحليلات والمقالات المتعلقة بـ ${leagueName}`,
+    title: `${league.title} | نبض الرياضة`,
+    description: league.description
   };
 }
 
 export default function LeaguePage({ params }) {
-  const articles = getArticles();
-  const filtered = articles.filter(
-    (article) => slugifyLeague(article.source) === params.slug
-  );
+  const league = leagues.find((item) => item.slug === params.slug);
 
-  const leagueName = arabicLeagueName(params.slug);
+  if (!league) {
+    notFound();
+  }
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        background: "#f6f8f7",
+        background: "#f3f4f6",
         padding: "32px 20px",
         direction: "rtl",
-        fontFamily: "Arial, sans-serif",
+        fontFamily: "Arial, sans-serif"
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <header
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <Link
+          href="/"
           style={{
-            background: "white",
-            borderRadius: "20px",
-            padding: "16px 22px",
-            marginBottom: "22px",
-            border: "1px solid #e5e7eb",
+            display: "inline-block",
+            marginBottom: "24px",
+            color: "#2563eb",
+            textDecoration: "none",
+            fontWeight: 700
           }}
         >
-          <Link
-            href="/"
-            style={{
-              color: "#2E7D32",
-              textDecoration: "none",
-              fontWeight: 800,
-            }}
-          >
-            ← العودة إلى الرئيسية
-          </Link>
-        </header>
+          العودة إلى الصفحة الرئيسية
+        </Link>
 
-        <section
+        <article
           style={{
-            background: "linear-gradient(135deg,#2E7D32,#8BC34A)",
-            borderRadius: "28px",
-            padding: "42px 28px",
-            color: "white",
-            marginBottom: "28px",
-            boxShadow: "0 18px 36px rgba(46,125,50,0.12)",
+            background: "white",
+            borderRadius: "24px",
+            padding: "32px",
+            border: "1px solid #e5e7eb"
           }}
         >
           <h1
             style={{
-              margin: 0,
-              fontSize: "46px",
-              fontWeight: 800,
+              marginTop: 0,
+              marginBottom: "16px",
+              color: "#111827",
+              fontSize: "40px",
+              lineHeight: 1.5
             }}
           >
-            🏆 {leagueName}
+            {league.title}
           </h1>
+
           <p
             style={{
-              marginTop: "14px",
-              fontSize: "19px",
-              opacity: 0.95,
+              color: "#4b5563",
+              fontSize: "20px",
+              lineHeight: 2,
+              marginBottom: "24px"
             }}
           >
-            آخر الأخبار والمقالات والتحليلات الخاصة بهذه البطولة
+            {league.description}
           </p>
-        </section>
 
-        {filtered.length === 0 ? (
           <div
             style={{
-              background: "white",
-              borderRadius: "20px",
-              padding: "28px",
-              textAlign: "center",
-              color: "#6b7280",
-              border: "1px solid #e5e7eb",
+              color: "#111827",
+              fontSize: "19px",
+              lineHeight: 2.1,
+              whiteSpace: "pre-wrap"
             }}
           >
-            لا توجد مقالات حالياً
+            {league.content}
           </div>
-        ) : (
-          filtered.map((article, index) => (
-            <Link
-              key={article.slug || index}
-              href={`/articles/${article.slug}`}
-              style={{ textDecoration: "none" }}
-            >
-              <article
-                style={{
-                  background: "white",
-                  borderRadius: "22px",
-                  padding: "30px",
-                  marginBottom: "20px",
-                  border: "1px solid #e5e7eb",
-                  boxShadow: "0 8px 20px rgba(15,23,42,0.03)",
-                }}
-              >
-                <h2
-                  style={{
-                    margin: "0 0 14px 0",
-                    color: "#1f2937",
-                    fontSize: "30px",
-                    lineHeight: 1.5,
-                    fontWeight: 800,
-                  }}
-                >
-                  📰 {article.title}
-                </h2>
-
-                <p
-                  style={{
-                    margin: "0 0 14px 0",
-                    color: "#4b5563",
-                    fontSize: "18px",
-                    lineHeight: 1.9,
-                  }}
-                >
-                  {article.description}
-                </p>
-
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#6b7280",
-                  }}
-                >
-                  🏷️ {(article.keywords || []).join(" • ")}
-                </div>
-              </article>
-            </Link>
-          ))
-        )}
+        </article>
       </div>
     </main>
   );
