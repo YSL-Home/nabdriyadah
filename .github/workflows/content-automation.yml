@@ -1,18 +1,22 @@
-name: 🚀 Auto Generate Content
+name: 🚀 Content Automation
 
 on:
+  schedule:
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  automate:
     runs-on: ubuntu-latest
 
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: 🟢 Setup Node
         uses: actions/setup-node@v4
@@ -22,5 +26,22 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: 🏗️ Build
-        run: npm run build
+      - name: 📰 Fetch news
+        run: npm run fetch:news
+
+      - name: ✍️ Rewrite articles
+        run: npm run rewrite:articles
+
+      - name: 🧹 Clean git cache
+        run: |
+          rm -rf node_modules .next out
+          git rm -r --cached --ignore-unmatch node_modules .next out
+          git rm --cached --ignore-unmatch package-lock.json
+
+      - name: 💾 Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "auto: update seo articles"
+          git push
