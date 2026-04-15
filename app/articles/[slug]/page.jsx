@@ -3,9 +3,11 @@ import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 
 export function generateStaticParams() {
-  return articles.map((article) => ({
-    slug: article.slug
-  }));
+  return articles
+    .filter((article) => article.slug)
+    .map((article) => ({
+      slug: article.slug
+    }));
 }
 
 export function generateMetadata({ params }) {
