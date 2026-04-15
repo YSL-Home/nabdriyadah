@@ -95,7 +95,7 @@ export default function HomePage() {
             {articles.map((article, index) => (
               <Link
                 key={article.slug || index}
-                href={`/articles/${article.slug}/`}
+                href={`/article/?slug=${encodeURIComponent(article.slug)}`}
                 style={{ textDecoration: "none" }}
               >
                 <article
