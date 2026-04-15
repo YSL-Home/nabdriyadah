@@ -4,7 +4,7 @@ export default function sitemap() {
   const baseUrl = "https://nabdriyadah.com";
 
   const articleUrls = articles.map((_, index) => ({
-    url: `${baseUrl}/articles/article-${index + 1}/`,
+    url: `${baseUrl}/article/?id=${index + 1}`,
     lastModified: new Date()
   }));
 
