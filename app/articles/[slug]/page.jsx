@@ -4,7 +4,7 @@ import articles from "../../../content/articles/seo-articles.json";
 
 export function generateStaticParams() {
   return articles.map((article) => ({
-    slug: article.slug,
+    slug: article.slug
   }));
 }
 
@@ -13,14 +13,31 @@ export function generateMetadata({ params }) {
 
   if (!article) {
     return {
-      title: "مقال غير موجود | نبض الرياضة",
-      description: "هذا المقال غير متوفر حالياً.",
+      title: "مقال غير موجود",
+      description: "هذا المقال غير متوفر حالياً."
     };
   }
 
   return {
-    title: `${article.title} | نبض الرياضة`,
+    title: article.title,
     description: article.description || "أحدث الأخبار الرياضية العربية",
+    keywords: article.keywords || [],
+    alternates: {
+      canonical: `https://nabdriyadah.com/articles/${article.slug}`
+    },
+    openGraph: {
+      title: article.title,
+      description: article.description || "أحدث الأخبار الرياضية العربية",
+      url: `https://nabdriyadah.com/articles/${article.slug}`,
+      siteName: "نبض الرياضة",
+      locale: "ar_AR",
+      type: "article"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description || "أحدث الأخبار الرياضية العربية"
+    }
   };
 }
 
@@ -31,6 +48,19 @@ export default function ArticlePage({ params }) {
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.title,
+    description: article.description,
+    inLanguage: "ar",
+    mainEntityOfPage: `https://nabdriyadah.com/articles/${article.slug}`,
+    publisher: {
+      "@type": "Organization",
+      name: "نبض الرياضة"
+    }
+  };
+
   return (
     <main
       style={{
@@ -38,9 +68,13 @@ export default function ArticlePage({ params }) {
         background: "#f3f4f6",
         padding: "32px 20px",
         direction: "rtl",
-        fontFamily: "Arial, sans-serif",
+        fontFamily: "Arial, sans-serif"
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <Link
           href="/"
@@ -49,7 +83,7 @@ export default function ArticlePage({ params }) {
             marginBottom: "24px",
             color: "#2563eb",
             textDecoration: "none",
-            fontWeight: 700,
+            fontWeight: 700
           }}
         >
           العودة إلى الصفحة الرئيسية
@@ -60,7 +94,7 @@ export default function ArticlePage({ params }) {
             background: "white",
             borderRadius: "24px",
             padding: "32px",
-            border: "1px solid #e5e7eb",
+            border: "1px solid #e5e7eb"
           }}
         >
           <h1
@@ -69,7 +103,7 @@ export default function ArticlePage({ params }) {
               marginBottom: "16px",
               color: "#111827",
               fontSize: "40px",
-              lineHeight: 1.5,
+              lineHeight: 1.5
             }}
           >
             {article.title}
@@ -80,7 +114,7 @@ export default function ArticlePage({ params }) {
               color: "#4b5563",
               fontSize: "20px",
               lineHeight: 2,
-              marginBottom: "24px",
+              marginBottom: "24px"
             }}
           >
             {article.description}
@@ -90,7 +124,7 @@ export default function ArticlePage({ params }) {
             style={{
               fontSize: "15px",
               color: "#6b7280",
-              marginBottom: "24px",
+              marginBottom: "24px"
             }}
           >
             {(article.keywords || []).join(" • ")}
@@ -101,7 +135,7 @@ export default function ArticlePage({ params }) {
               color: "#111827",
               fontSize: "19px",
               lineHeight: 2.1,
-              whiteSpace: "pre-wrap",
+              whiteSpace: "pre-wrap"
             }}
           >
             {article.content || "المحتوى غير متوفر حالياً."}
