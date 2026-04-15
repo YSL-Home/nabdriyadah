@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import articles from "../../../data/seo-articles.json";
+import articles from "../../../content/articles/seo-articles.json";
 
 export function generateStaticParams() {
   return articles.map((article) => ({
@@ -93,7 +93,7 @@ export default function ArticlePage({ params }) {
               marginBottom: "24px",
             }}
           >
-            {Array.isArray(article.keywords) ? article.keywords.join(" • ") : ""}
+            {(article.keywords || []).join(" • ")}
           </div>
 
           <div
