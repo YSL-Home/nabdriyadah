@@ -1,43 +1,92 @@
 import fs from "fs";
+import path from "path";
 import Parser from "rss-parser";
 
-const parser = new Parser();
-const sources = JSON.parse(fs.readFileSync("data/sources.json", "utf-8"));
+const parser = new Parser({
+  customFields: {
+    item: ["media:content", "media:thumbnail", "description", "content:encoded"]
+  }
+});
 
-function normalizeUrl(rawUrl) {
-  return encodeURI(rawUrl);
+const FEEDS = [
+  {
+    league: "premier-league",
+    source: "BBC Sport",
+    url: "https://feeds.bbci.co.uk/sport/football/rss.xml"
+  },
+  {
+    league: "la-liga",
+    source: "Sky Sports",
+    url: "https://www.skysports.com/rss/12040"
+  }
+];
+
+function ensureDir(filePath) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+}
+
+function normalizeText(value = "") {
+  return String(value).replace(/\s+/g, " ").trim();
+}
+
+function stripHtml(value = "") {
+  return String(value).replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function buildSlug(title, index) {
+  return `news-${index + 1}`;
+}
+
+async function fetchFeed(feed) {
+  try {
+    const parsed = await parser.parseURL(feed.url);
+
+    return (parsed.items || []).slice(0, 8).map((item, index) => ({
+      originalTitle: normalizeText(item.title || ""),
+      originalDescription: normalizeText(
+        stripHtml(item.contentSnippet || item.content || item.description || "")
+      ),
+      link: item.link || "",
+      source: feed.source,
+      league: feed.league,
+      publishedAt: item.pubDate || new Date().toISOString(),
+      slug: buildSlug(`${feed.league}-${item.title || "news"}`, index)
+    }));
+  } catch (error) {
+    console.error(`Feed failed: ${feed.source}`, error.message);
+    return [];
+  }
 }
 
 async function main() {
   const allItems = [];
 
-  for (const source of sources) {
-    try {
-      const safeUrl = normalizeUrl(source.url);
-      const feed = await parser.parseURL(safeUrl);
+  for (const feed of FEEDS) {
+    const items = await fetchFeed(feed);
+    allItems.push(...items);
+  }
 
-      for (const item of (feed.items || []).slice(0, 5)) {
-        allItems.push({
-          source: source.name,
-          title: item.title || "",
-          summary: item.contentSnippet || item.content || item.summary || "",
-          link: item.link || "",
-          publishedAt: item.pubDate || new Date().toISOString()
-        });
-      }
-    } catch (error) {
-      console.error(`Failed source: ${source.name}`, error.message);
+  const unique = [];
+  const seen = new Set();
+
+  for (const item of allItems) {
+    const key = `${item.originalTitle}-${item.link}`;
+    if (!seen.has(key) && item.originalTitle) {
+      seen.add(key);
+      unique.push(item);
     }
   }
 
-  fs.mkdirSync("content/articles", { recursive: true });
-  fs.writeFileSync(
-    "content/articles/raw-news.json",
-    JSON.stringify(allItems, null, 2),
-    "utf-8"
-  );
+  const outputPath = path.join(process.cwd(), "content/raw-news.json");
+  ensureDir(outputPath);
 
-  console.log(`raw news saved: ${allItems.length}`);
+  if (unique.length === 0) {
+    console.log("No raw news fetched, keeping existing files untouched.");
+    process.exit(0);
+  }
+
+  fs.writeFileSync(outputPath, JSON.stringify(unique, null, 2), "utf-8");
+  console.log(`raw news saved: ${unique.length}`);
 }
 
 main().catch((error) => {
