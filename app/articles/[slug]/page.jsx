@@ -43,14 +43,6 @@ export function generateMetadata({ params }) {
     keywords: article.keywords || [],
     alternates: {
       canonical: `https://nabdriyadah.com/articles/${buildArticleSlug(index)}/`
-    },
-    openGraph: {
-      title: article.title,
-      description: article.description || "أحدث الأخبار الرياضية العربية",
-      url: `https://nabdriyadah.com/articles/${buildArticleSlug(index)}/`,
-      siteName: "نبض الرياضة",
-      locale: "ar_AR",
-      type: "article"
     }
   };
 }
@@ -112,35 +104,6 @@ export default function ArticlePage({ params }) {
               >
                 الصفحة الرئيسية
               </Link>
-
-              <span style={{ margin: "0 8px", color: "#9ca3af" }}>←</span>
-
-              <Link
-                href="/league/premier-league/"
-                style={{
-                  color: "#2563eb",
-                  textDecoration: "none",
-                  fontWeight: 700,
-                  fontSize: "15px"
-                }}
-              >
-                الدوريات
-              </Link>
-            </div>
-
-            <div
-              style={{
-                display: "inline-block",
-                marginBottom: "16px",
-                fontSize: "13px",
-                fontWeight: 700,
-                color: "#2563eb",
-                background: "#eff6ff",
-                borderRadius: "999px",
-                padding: "8px 14px"
-              }}
-            >
-              تحليل ومتابعة
             </div>
 
             <h1
@@ -194,14 +157,6 @@ export default function ArticlePage({ params }) {
 
             <div
               style={{
-                height: "1px",
-                background: "#e5e7eb",
-                marginBottom: "28px"
-              }}
-            />
-
-            <div
-              style={{
                 color: "#111827",
                 fontSize: "20px",
                 lineHeight: 2.2,
@@ -209,60 +164,6 @@ export default function ArticlePage({ params }) {
               }}
             >
               {article.content || "المحتوى غير متوفر حالياً."}
-            </div>
-
-            <div
-              style={{
-                marginTop: "34px",
-                paddingTop: "24px",
-                borderTop: "1px solid #e5e7eb"
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: "28px",
-                  color: "#111827",
-                  marginTop: 0,
-                  marginBottom: "16px"
-                }}
-              >
-                روابط داخلية مفيدة
-              </h2>
-
-              <div style={{ display: "grid", gap: "12px" }}>
-                <Link
-                  href="/league/premier-league/"
-                  style={{
-                    color: "#2563eb",
-                    fontWeight: 700,
-                    textDecoration: "none"
-                  }}
-                >
-                  تصفح آخر أخبار الدوري الإنجليزي الممتاز
-                </Link>
-
-                <Link
-                  href="/league/la-liga/"
-                  style={{
-                    color: "#2563eb",
-                    fontWeight: 700,
-                    textDecoration: "none"
-                  }}
-                >
-                  تصفح آخر أخبار الدوري الإسباني
-                </Link>
-
-                <Link
-                  href="/"
-                  style={{
-                    color: "#2563eb",
-                    fontWeight: 700,
-                    textDecoration: "none"
-                  }}
-                >
-                  العودة إلى جميع الأخبار الرياضية
-                </Link>
-              </div>
             </div>
           </article>
 
@@ -326,50 +227,6 @@ export default function ArticlePage({ params }) {
                     </div>
                   </Link>
                 ))}
-              </div>
-            </section>
-
-            <section
-              style={{
-                background: "white",
-                borderRadius: "24px",
-                padding: "24px",
-                border: "1px solid #e5e7eb",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.04)"
-              }}
-            >
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: "16px",
-                  color: "#111827",
-                  fontSize: "24px"
-                }}
-              >
-                أقسام الموقع
-              </h3>
-
-              <div style={{ display: "grid", gap: "12px" }}>
-                <Link
-                  href="/league/premier-league/"
-                  style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
-                >
-                  الدوري الإنجليزي الممتاز
-                </Link>
-
-                <Link
-                  href="/league/la-liga/"
-                  style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
-                >
-                  الدوري الإسباني
-                </Link>
-
-                <Link
-                  href="/"
-                  style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
-                >
-                  جميع المقالات
-                </Link>
               </div>
             </section>
           </aside>
