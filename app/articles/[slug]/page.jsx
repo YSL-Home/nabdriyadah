@@ -23,12 +23,12 @@ export function generateMetadata({ params }) {
     description: article.description || "أحدث الأخبار الرياضية العربية",
     keywords: article.keywords || [],
     alternates: {
-      canonical: `https://nabdriyadah.com/articles/${article.slug}`
+      canonical: `https://nabdriyadah.com/articles/${article.slug}/`
     },
     openGraph: {
       title: article.title,
       description: article.description || "أحدث الأخبار الرياضية العربية",
-      url: `https://nabdriyadah.com/articles/${article.slug}`,
+      url: `https://nabdriyadah.com/articles/${article.slug}/`,
       siteName: "نبض الرياضة",
       locale: "ar_AR",
       type: "article"
@@ -93,7 +93,7 @@ export default function ArticlePage({ params }) {
               <span style={{ margin: "0 8px", color: "#9ca3af" }}>←</span>
 
               <Link
-                href="/league/premier-league"
+                href="/league/premier-league/"
                 style={{
                   color: "#2563eb",
                   textDecoration: "none",
@@ -208,7 +208,7 @@ export default function ArticlePage({ params }) {
 
               <div style={{ display: "grid", gap: "12px" }}>
                 <Link
-                  href="/league/premier-league"
+                  href="/league/premier-league/"
                   style={{
                     color: "#2563eb",
                     fontWeight: 700,
@@ -219,7 +219,7 @@ export default function ArticlePage({ params }) {
                 </Link>
 
                 <Link
-                  href="/league/la-liga"
+                  href="/league/la-liga/"
                   style={{
                     color: "#2563eb",
                     fontWeight: 700,
@@ -273,7 +273,7 @@ export default function ArticlePage({ params }) {
                 {relatedArticles.map((relatedArticle) => (
                   <Link
                     key={relatedArticle.slug}
-                    href={`/articles/${relatedArticle.slug}`}
+                    href={`/articles/${relatedArticle.slug}/`}
                     style={{
                       textDecoration: "none",
                       borderBottom: "1px solid #f3f4f6",
@@ -328,14 +328,14 @@ export default function ArticlePage({ params }) {
 
               <div style={{ display: "grid", gap: "12px" }}>
                 <Link
-                  href="/league/premier-league"
+                  href="/league/premier-league/"
                   style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
                 >
                   الدوري الإنجليزي الممتاز
                 </Link>
 
                 <Link
-                  href="/league/la-liga"
+                  href="/league/la-liga/"
                   style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}
                 >
                   الدوري الإسباني
