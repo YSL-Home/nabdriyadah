@@ -65,17 +65,6 @@ export default function HomePage() {
           >
             أحدث المقالات
           </h2>
-
-          <p
-            style={{
-              margin: 0,
-              color: "#4b5563",
-              fontSize: "18px",
-              lineHeight: 1.9
-            }}
-          >
-            تابع آخر أخبار كرة القدم العربية والعالمية، واطّلع على أبرز التحليلات والتقارير الخاصة بالدوريات الكبرى.
-          </p>
         </section>
 
         {articles.length === 0 ? (
@@ -94,8 +83,8 @@ export default function HomePage() {
           <div style={{ display: "grid", gap: "22px" }}>
             {articles.map((article, index) => (
               <Link
-                key={article.slug || index}
-                href={`/articles/${article.slug}/`}
+                key={index}
+                href={`/article/?id=${index + 1}`}
                 style={{ textDecoration: "none" }}
               >
                 <article
