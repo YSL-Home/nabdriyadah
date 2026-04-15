@@ -1,4 +1,4 @@
-name: 🚀 Content Automation
+name: Content Automation
 
 on:
   schedule:
@@ -16,32 +16,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🟢 Setup Node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: 📰 Fetch news
+      - name: Fetch news
         run: npm run fetch:news
 
-      - name: ✍️ Rewrite articles
+      - name: Rewrite articles
         run: npm run rewrite:articles
 
-      - name: 🧹 Clean git cache
+      - name: Clean git cache
         run: |
           rm -rf node_modules .next out
           git rm -r --cached --ignore-unmatch node_modules .next out
           git rm --cached --ignore-unmatch package-lock.json
 
-      - name: 💾 Commit and push if changed
+      - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions@github.com"
