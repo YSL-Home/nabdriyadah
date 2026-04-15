@@ -39,7 +39,7 @@ export function generateMetadata({ params }) {
     title: league.title,
     description: league.description,
     alternates: {
-      canonical: `https://nabdriyadah.com/league/${league.slug}`
+      canonical: `https://nabdriyadah.com/league/${league.slug}/`
     }
   };
 }
@@ -136,7 +136,7 @@ export default function LeaguePage({ params }) {
             {relatedArticles.map((article) => (
               <Link
                 key={article.slug}
-                href={`/articles/${article.slug}`}
+                href={`/articles/${article.slug}/`}
                 style={{ textDecoration: "none" }}
               >
                 <article
