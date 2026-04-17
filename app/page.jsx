@@ -2,20 +2,10 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#f3f4f6",
-        padding: "40px 20px",
-        direction: "rtl",
-        fontFamily: "Arial, sans-serif"
-      }}
-    >
+    <main style={{ minHeight: "100vh", background: "#f3f4f6", padding: "40px 20px", direction: "rtl", fontFamily: "Arial, sans-serif" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <h1 style={{ fontSize: "56px", marginBottom: "20px" }}>نبض الرياضة</h1>
-        <p style={{ fontSize: "22px", marginBottom: "30px" }}>
-          اختبار روابط المقالات الثابتة
-        </p>
+        <p style={{ fontSize: "22px", marginBottom: "30px" }}>اختبار روابط المقالات الثابتة</p>
 
         <div style={{ display: "grid", gap: "20px" }}>
           <Link
