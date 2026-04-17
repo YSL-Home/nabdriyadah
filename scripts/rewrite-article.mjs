@@ -22,14 +22,12 @@ function sourceArabic(source = "") {
 
 function buildArabicTitle(item, index) {
   const league = leagueName(item.league);
-
   const patterns = [
     `آخر أخبار ${league}`,
     `مستجدات ${league}`,
     `أهم ما يحدث في ${league}`,
     `تحليل أخبار ${league}`
   ];
-
   return `${patterns[index % patterns.length]} ${index + 1}`;
 }
 
@@ -63,14 +61,20 @@ function buildArabicContent(item) {
 
 function buildKeywords(item) {
   const league = leagueName(item.league);
+  return [league, "أخبار رياضية", "كرة القدم", "نتائج المباريات", "تحليلات رياضية"];
+}
 
-  return [
-    league,
-    "أخبار رياضية",
-    "كرة القدم",
-    "نتائج المباريات",
-    "تحليلات رياضية"
-  ];
+function slugifySafe(text = "", index = 1) {
+  const latin = String(text)
+    .normalize("NFKD")
+    .replace(/[^\x00-\x7F]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return latin || `article-${index}`;
 }
 
 function readJson(filePath, fallback = []) {
@@ -85,11 +89,6 @@ function readJson(filePath, fallback = []) {
 
 function ensureDir(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-}
-
-function buildSafeSlug(item, index) {
-  const base = item.league === "la-liga" ? "la-liga" : "premier-league";
-  return `${base}-article-${index + 1}`;
 }
 
 function buildFallbackArticles() {
@@ -115,17 +114,23 @@ function buildFallbackArticles() {
 
 function main() {
   const rawItems = readJson(RAW_PATH, []);
-
   let articles = [];
 
   if (rawItems.length > 0) {
-    articles = rawItems.slice(0, 10).map((item, index) => ({
-      title: buildArabicTitle(item, index),
-      description: buildArabicDescription(item),
-      slug: buildSafeSlug(item, index),
-      keywords: buildKeywords(item),
-      content: buildArabicContent(item)
-    }));
+    articles = rawItems.slice(0, 10).map((item, index) => {
+      const safeBase =
+        normalizeText(item.originalTitle) ||
+        normalizeText(item.originalDescription) ||
+        `article-${index + 1}`;
+
+      return {
+        title: buildArabicTitle(item, index),
+        description: buildArabicDescription(item),
+        slug: slugifySafe(safeBase, index + 1),
+        keywords: buildKeywords(item),
+        content: buildArabicContent(item)
+      };
+    });
   } else {
     articles = buildFallbackArticles();
   }
