@@ -59,16 +59,33 @@ function buildKeywords(item) {
 }
 
 function buildImageUrl(item, index) {
-  const league = leagueName(item.league);
+  const premierLeagueImages = [
+    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1508098682722-e99c643e7485?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=1200&q=80"
+  ];
 
-  const keywordsMap = {
-    "الدوري الإنجليزي الممتاز": "premier-league,football,stadium",
-    "الدوري الإسباني": "la-liga,football,barcelona,madrid"
-  };
+  const laLigaImages = [
+    "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1200&q=80"
+  ];
 
-  const query = keywordsMap[league] || "football,soccer,stadium";
+  const genericImages = [
+    "https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1486286701208-1d58e9338013?auto=format&fit=crop&w=1200&q=80"
+  ];
 
-  return `https://source.unsplash.com/1200x600/?${query}&sig=${index + 1}`;
+  if (item.league === "premier-league") {
+    return premierLeagueImages[index % premierLeagueImages.length];
+  }
+
+  if (item.league === "la-liga") {
+    return laLigaImages[index % laLigaImages.length];
+  }
+
+  return genericImages[index % genericImages.length];
 }
 
 function buildSlug(index) {
@@ -100,7 +117,7 @@ function buildFallbackArticles() {
       seoDescription: "تعرف على تفاصيل فوز ريال مدريد وأبرز ما حدث في المباراة ضمن تغطية عربية رياضية محدثة.",
       slug: "real-madrid-win",
       keywords: ["ريال مدريد", "الدوري", "كرة القدم"],
-      image: "https://source.unsplash.com/1200x600/?football,real-madrid&sig=1",
+      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
       content:
         "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.\n\nشهدت المواجهة أداءً مميزًا من الفريق وتفاعلاً كبيرًا من الجماهير.\n\nويأمل الفريق في مواصلة نتائجه الإيجابية خلال المباريات المقبلة."
     },
@@ -111,7 +128,7 @@ function buildFallbackArticles() {
       seoDescription: "آخر أخبار برشلونة والتحضيرات الخاصة بالمواجهة المقبلة ضمن تغطية رياضية عربية محدثة.",
       slug: "barcelona-match",
       keywords: ["برشلونة", "مباراة", "كرة القدم"],
-      image: "https://source.unsplash.com/1200x600/?football,barcelona&sig=2",
+      image: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80",
       content:
         "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط متابعة جماهيرية واسعة.\n\nويركز الجهاز الفني على رفع الجاهزية الفنية والبدنية.\n\nويأمل الفريق في تحقيق نتيجة إيجابية تعزز موقعه في المنافسة."
     }
