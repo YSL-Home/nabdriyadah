@@ -41,21 +41,15 @@ function buildArabicDescription(item) {
 function buildArabicContent(item) {
   const league = leagueName(item.league);
   const source = sourceArabic(item.source);
-  const originalTitle = normalizeText(item.originalTitle);
-  const originalDescription = normalizeText(item.originalDescription);
 
   return [
-    `يشهد ${league} متابعة جماهيرية كبيرة خلال الفترة الحالية، مع اهتمام متزايد بكل التفاصيل المرتبطة بالأندية والنجوم والمباريات الحاسمة.`,
-    `وفي هذا السياق، تتابع منصة نبض الرياضة أبرز المستجدات الواردة من ${source} ضمن تغطية عربية مبسطة تهدف إلى تقديم صورة واضحة وسريعة للقارئ العربي.`,
-    originalTitle
-      ? `ويتناول الخبر الأصلي عنوانًا بارزًا يتمحور حول: ${originalTitle}.`
-      : `ويتناول الخبر الأصلي تطورات جديدة لافتة داخل المشهد الكروي المرتبط بهذه البطولة.`,
-    originalDescription
-      ? `كما تشير المعطيات المتاحة إلى أن أبرز التفاصيل المتداولة حاليًا تتمثل في الآتي: ${originalDescription}.`
-      : `وتشير المتابعات إلى وجود تطورات جديدة قد يكون لها تأثير مباشر على شكل المنافسة خلال المرحلة المقبلة.`,
-    `وتحاول الفرق الكبرى في ${league} الحفاظ على الاستقرار الفني وتحقيق أفضل النتائج الممكنة، خصوصًا مع ضغط المباريات واحتدام الصراع على المراكز المتقدمة.`,
-    `ومن المنتظر أن تشهد الأيام المقبلة مزيدًا من الأخبار والقرارات المهمة، وهو ما يمنح الجماهير مساحة واسعة للمتابعة والتحليل والترقب.`,
-    `في نبض الرياضة، نواصل تقديم تغطية عربية مركزة لأهم أخبار ${league}، مع الحرص على إبقاء القارئ على اطلاع دائم بكل جديد.`
+    `يشهد ${league} في الفترة الحالية متابعة جماهيرية كبيرة، مع اهتمام واسع بكل التطورات المرتبطة بالأندية والنجوم والمباريات المهمة داخل البطولة.`,
+    `وفي هذا السياق، تواصل منصة نبض الرياضة متابعة أبرز المستجدات القادمة من ${source} ضمن تغطية عربية مبسطة تهدف إلى تقديم ملخص واضح وسريع للقارئ العربي دون تعقيد.`,
+    `وتشير الأجواء العامة المحيطة بالمنافسة إلى وجود حراك متواصل على مستوى التحضيرات الفنية، والتركيز الذهني، وإدارة المباريات، وهو ما ينعكس بشكل مباشر على شكل الصراع داخل ${league}.`,
+    `كما تبدو الفرق الكبرى حريصة على الحفاظ على الاستقرار الفني وتحقيق أفضل النتائج الممكنة، خصوصًا مع ضغط المباريات واحتدام المنافسة على المراكز المتقدمة في جدول الترتيب.`,
+    `وتزداد أهمية هذه المرحلة مع ارتفاع سقف التوقعات الجماهيرية والإعلامية، حيث تبحث الأندية عن تعزيز حضورها وتأكيد جاهزيتها للمواجهات المقبلة في مختلف المسابقات.`,
+    `ومن المنتظر أن تشهد الأيام القادمة مزيدًا من التفاصيل والقرارات المهمة التي قد تؤثر على مسار المنافسة، سواء من ناحية الأداء أو الخيارات الفنية أو حسابات الترتيب.`,
+    `في نبض الرياضة، نواصل تقديم تغطية عربية مركزة لأهم أخبار ${league}، مع الحرص على إبقاء القارئ على اطلاع دائم بكل جديد في المشهد الكروي.`
   ].join("\n\n");
 }
 
@@ -64,9 +58,15 @@ function buildKeywords(item) {
   return [league, "أخبار رياضية", "كرة القدم", "نتائج المباريات", "تحليلات رياضية"];
 }
 
-function buildImageUrl(item) {
-  const league = item.league === "la-liga" ? "laliga" : "premier-league";
-  return `https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80&tag=${league}`;
+function buildImageUrl(item, index) {
+  const fallbackImages = [
+    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1508098682722-e99c643e7485?auto=format&fit=crop&w=1200&q=80"
+  ];
+
+  return fallbackImages[index % fallbackImages.length];
 }
 
 function readJson(filePath, fallback = []) {
@@ -116,9 +116,14 @@ function main() {
     articles = rawItems.slice(0, 10).map((item, index) => ({
       title: buildArabicTitle(item, index),
       description: buildArabicDescription(item),
-      slug: index === 0 ? "real-madrid-win" : index === 1 ? "barcelona-match" : `article-${index + 1}`,
+      slug:
+        index === 0
+          ? "real-madrid-win"
+          : index === 1
+          ? "barcelona-match"
+          : `article-${index + 1}`,
       keywords: buildKeywords(item),
-      image: buildImageUrl(item),
+      image: buildImageUrl(item, index),
       content: buildArabicContent(item)
     }));
   } else {
