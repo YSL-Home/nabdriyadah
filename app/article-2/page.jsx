@@ -61,6 +61,20 @@ export default function ArticleTwoPage() {
               </Link>
             </div>
 
+            {article.image && (
+              <img
+                src={article.image}
+                alt={article.title}
+                style={{
+                  width: "100%",
+                  height: "360px",
+                  objectFit: "cover",
+                  borderRadius: "18px",
+                  marginBottom: "20px"
+                }}
+              />
+            )}
+
             <div
               style={{
                 display: "inline-block",
