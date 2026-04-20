@@ -43,9 +43,9 @@ function buildArabicContent(item) {
   const source = sourceArabic(item.source);
 
   return [
-    `يشهد ${league} في الفترة الحالية متابعة جماهيرية كبيرة، مع اهتمام واسع بكل التطورات المرتبطة بالأندية والنجوم والمباريات المهمة داخل البطولة.`,
-    `وفي هذا السياق، تواصل منصة نبض الرياضة متابعة أبرز المستجدات القادمة من ${source} ضمن تغطية عربية مبسطة تهدف إلى تقديم ملخص واضح وسريع للقارئ العربي دون تعقيد.`,
-    `وتشير الأجواء العامة المحيطة بالمنافسة إلى وجود حراك متواصل على مستوى التحضيرات الفنية، والتركيز الذهني، وإدارة المباريات، وهو ما ينعكس بشكل مباشر على شكل الصراع داخل ${league}.`,
+    `يشهد ${league} خلال الفترة الحالية متابعة جماهيرية كبيرة، مع اهتمام متزايد بكل التفاصيل المرتبطة بالأندية والنجوم والمباريات الحاسمة.`,
+    `وفي هذا السياق، تتابع منصة نبض الرياضة أبرز المستجدات الواردة من ${source} ضمن تغطية عربية مبسطة تهدف إلى تقديم صورة واضحة وسريعة للقارئ العربي.`,
+    `وتشير الأجواء العامة المحيطة بالمنافسة إلى وجود حراك متواصل على مستوى التحضيرات الفنية وإدارة المباريات والجاهزية الذهنية، وهو ما ينعكس بشكل مباشر على شكل الصراع داخل ${league}.`,
     `كما تبدو الفرق الكبرى حريصة على الحفاظ على الاستقرار الفني وتحقيق أفضل النتائج الممكنة، خصوصًا مع ضغط المباريات واحتدام المنافسة على المراكز المتقدمة في جدول الترتيب.`,
     `وتزداد أهمية هذه المرحلة مع ارتفاع سقف التوقعات الجماهيرية والإعلامية، حيث تبحث الأندية عن تعزيز حضورها وتأكيد جاهزيتها للمواجهات المقبلة في مختلف المسابقات.`,
     `ومن المنتظر أن تشهد الأيام القادمة مزيدًا من التفاصيل والقرارات المهمة التي قد تؤثر على مسار المنافسة، سواء من ناحية الأداء أو الخيارات الفنية أو حسابات الترتيب.`,
@@ -59,14 +59,22 @@ function buildKeywords(item) {
 }
 
 function buildImageUrl(item, index) {
-  const fallbackImages = [
-    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1508098682722-e99c643e7485?auto=format&fit=crop&w=1200&q=80"
-  ];
+  const league = leagueName(item.league);
 
-  return fallbackImages[index % fallbackImages.length];
+  const keywordsMap = {
+    "الدوري الإنجليزي الممتاز": "premier-league,football,stadium",
+    "الدوري الإسباني": "la-liga,football,barcelona,madrid"
+  };
+
+  const query = keywordsMap[league] || "football,soccer,stadium";
+
+  return `https://source.unsplash.com/1200x600/?${query}&sig=${index + 1}`;
+}
+
+function buildSlug(index) {
+  if (index === 0) return "real-madrid-win";
+  if (index === 1) return "barcelona-match";
+  return `article-${index + 1}`;
 }
 
 function readJson(filePath, fallback = []) {
@@ -88,20 +96,22 @@ function buildFallbackArticles() {
     {
       title: "فوز ريال مدريد في مباراة مثيرة",
       description: "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.",
+      seoTitle: "فوز ريال مدريد في مباراة مثيرة | نبض الرياضة",
+      seoDescription: "تعرف على تفاصيل فوز ريال مدريد وأبرز ما حدث في المباراة ضمن تغطية عربية رياضية محدثة.",
       slug: "real-madrid-win",
       keywords: ["ريال مدريد", "الدوري", "كرة القدم"],
-      image:
-        "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
+      image: "https://source.unsplash.com/1200x600/?football,real-madrid&sig=1",
       content:
         "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.\n\nشهدت المواجهة أداءً مميزًا من الفريق وتفاعلاً كبيرًا من الجماهير.\n\nويأمل الفريق في مواصلة نتائجه الإيجابية خلال المباريات المقبلة."
     },
     {
       title: "برشلونة يستعد لمواجهة قوية",
       description: "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع.",
+      seoTitle: "برشلونة يستعد لمواجهة قوية | نبض الرياضة",
+      seoDescription: "آخر أخبار برشلونة والتحضيرات الخاصة بالمواجهة المقبلة ضمن تغطية رياضية عربية محدثة.",
       slug: "barcelona-match",
       keywords: ["برشلونة", "مباراة", "كرة القدم"],
-      image:
-        "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80",
+      image: "https://source.unsplash.com/1200x600/?football,barcelona&sig=2",
       content:
         "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط متابعة جماهيرية واسعة.\n\nويركز الجهاز الفني على رفع الجاهزية الفنية والبدنية.\n\nويأمل الفريق في تحقيق نتيجة إيجابية تعزز موقعه في المنافسة."
     }
@@ -113,19 +123,21 @@ function main() {
   let articles = [];
 
   if (rawItems.length > 0) {
-    articles = rawItems.slice(0, 10).map((item, index) => ({
-      title: buildArabicTitle(item, index),
-      description: buildArabicDescription(item),
-      slug:
-        index === 0
-          ? "real-madrid-win"
-          : index === 1
-          ? "barcelona-match"
-          : `article-${index + 1}`,
-      keywords: buildKeywords(item),
-      image: buildImageUrl(item, index),
-      content: buildArabicContent(item)
-    }));
+    articles = rawItems.slice(0, 10).map((item, index) => {
+      const title = buildArabicTitle(item, index);
+      const description = buildArabicDescription(item);
+
+      return {
+        title,
+        description,
+        seoTitle: `${title} | نبض الرياضة`,
+        seoDescription: description,
+        slug: buildSlug(index),
+        keywords: buildKeywords(item),
+        image: buildImageUrl(item, index),
+        content: buildArabicContent(item)
+      };
+    });
   } else {
     articles = buildFallbackArticles();
   }
