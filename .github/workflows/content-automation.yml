@@ -35,12 +35,6 @@ jobs:
       - name: Rewrite articles
         run: npm run rewrite:articles
 
-      - name: Clean git cache
-        run: |
-          rm -rf node_modules .next out
-          git rm -r --cached --ignore-unmatch node_modules .next out
-          git rm --cached --ignore-unmatch package-lock.json
-
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
