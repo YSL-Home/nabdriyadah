@@ -28,7 +28,8 @@ export default function HomePage() {
         minHeight: "100vh",
         padding: "32px 20px",
         direction: "rtl",
-        background: "#f3f4f6"
+        background: "#f3f4f6",
+        fontFamily: "Arial, sans-serif"
       }}
     >
       <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
@@ -215,6 +216,20 @@ export default function HomePage() {
                       minHeight: "230px"
                     }}
                   >
+                    {featuredArticles[0].image && (
+                      <img
+                        src={featuredArticles[0].image}
+                        alt={featuredArticles[0].title}
+                        style={{
+                          width: "100%",
+                          height: "260px",
+                          objectFit: "cover",
+                          borderRadius: "18px",
+                          marginBottom: "18px"
+                        }}
+                      />
+                    )}
+
                     <div
                       style={{
                         display: "inline-block",
@@ -271,6 +286,20 @@ export default function HomePage() {
                       minHeight: "230px"
                     }}
                   >
+                    {featuredArticles[1].image && (
+                      <img
+                        src={featuredArticles[1].image}
+                        alt={featuredArticles[1].title}
+                        style={{
+                          width: "100%",
+                          height: "260px",
+                          objectFit: "cover",
+                          borderRadius: "18px",
+                          marginBottom: "18px"
+                        }}
+                      />
+                    )}
+
                     <div
                       style={{
                         display: "inline-block",
