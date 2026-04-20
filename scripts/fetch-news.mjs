@@ -50,7 +50,7 @@ async function fetchFeed(feed) {
       source: feed.source,
       league: feed.league,
       publishedAt: item.pubDate || new Date().toISOString(),
-      slug: buildSlug(`${feed.league}-${item.title || "news"}`, index)
+      slug: buildSlug(item.title || "news", index)
     }));
   } catch (error) {
     console.error(`Feed failed: ${feed.source}`, error.message);
