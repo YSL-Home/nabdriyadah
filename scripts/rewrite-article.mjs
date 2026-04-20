@@ -64,6 +64,11 @@ function buildKeywords(item) {
   return [league, "أخبار رياضية", "كرة القدم", "نتائج المباريات", "تحليلات رياضية"];
 }
 
+function buildImageUrl(item) {
+  const league = item.league === "la-liga" ? "laliga" : "premier-league";
+  return `https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80&tag=${league}`;
+}
+
 function readJson(filePath, fallback = []) {
   try {
     const raw = fs.readFileSync(filePath, "utf-8");
@@ -85,6 +90,8 @@ function buildFallbackArticles() {
       description: "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.",
       slug: "real-madrid-win",
       keywords: ["ريال مدريد", "الدوري", "كرة القدم"],
+      image:
+        "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
       content:
         "حقق ريال مدريد فوزًا مهمًا في مباراة قوية ضمن منافسات الدوري.\n\nشهدت المواجهة أداءً مميزًا من الفريق وتفاعلاً كبيرًا من الجماهير.\n\nويأمل الفريق في مواصلة نتائجه الإيجابية خلال المباريات المقبلة."
     },
@@ -93,6 +100,8 @@ function buildFallbackArticles() {
       description: "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع.",
       slug: "barcelona-match",
       keywords: ["برشلونة", "مباراة", "كرة القدم"],
+      image:
+        "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80",
       content:
         "يستعد فريق برشلونة لمباراة حاسمة هذا الأسبوع وسط متابعة جماهيرية واسعة.\n\nويركز الجهاز الفني على رفع الجاهزية الفنية والبدنية.\n\nويأمل الفريق في تحقيق نتيجة إيجابية تعزز موقعه في المنافسة."
     }
@@ -109,6 +118,7 @@ function main() {
       description: buildArabicDescription(item),
       slug: index === 0 ? "real-madrid-win" : index === 1 ? "barcelona-match" : `article-${index + 1}`,
       keywords: buildKeywords(item),
+      image: buildImageUrl(item),
       content: buildArabicContent(item)
     }));
   } else {
