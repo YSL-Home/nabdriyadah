@@ -1,4 +1,4 @@
-import articles from "@/content/articles/seo-articles.json";
+import articles from "../content/articles/seo-articles.json";
 
 export default function Home() {
   return (
@@ -31,7 +31,6 @@ export default function Home() {
               boxShadow: "0 10px 30px rgba(0,0,0,0.05)"
             }}>
 
-              {/* IMAGE FIX */}
               <img
                 src={article.image}
                 alt={article.title}
