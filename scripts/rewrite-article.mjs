@@ -117,22 +117,62 @@ function buildImage(index) {
   return images[index % images.length];
 }
 
+function buildTitleVariant(baseTopic, league, index) {
+  const patterns = [
+    `تفاصيل جديدة حول ${baseTopic}`,
+    `ماذا يحدث في ملف ${baseTopic}؟`,
+    `تطورات لافتة تخص ${baseTopic}`,
+    `قراءة في خلفيات ${baseTopic}`,
+    `آخر المستجدات بشأن ${baseTopic}`,
+    `ملف ${baseTopic} يفرض نفسه في ${league}`,
+    `كيف تتطور قصة ${baseTopic}؟`,
+    `متابعة خاصة لتفاصيل ${baseTopic}`
+  ];
+
+  return patterns[index % patterns.length];
+}
+
+function buildDescriptionVariant(baseTopic, league, source, index) {
+  const patterns = [
+    `نستعرض في هذا التقرير أبرز التفاصيل المرتبطة بملف ${baseTopic} في ${league} وفق المعطيات المتداولة في ${source}.`,
+    `يتناول هذا المقال آخر التطورات الخاصة بموضوع ${baseTopic} مع قراءة عربية لأبعاده داخل ${league}.`,
+    `في هذا التقرير نتابع الخلفيات الأساسية لخبر ${baseTopic} وتأثيره المحتمل على المشهد الحالي في ${league}.`,
+    `نقدم قراءة صحفية مختصرة لملف ${baseTopic} كما يظهر في التغطية الرياضية المرتبطة بـ ${league}.`
+  ];
+
+  return patterns[index % patterns.length];
+}
+
 function fallbackArticle(item, index) {
   const league = leagueName(item.league);
   const source = sourceArabic(item.source);
-  const sourceTitle = normalizeText(item.originalTitle || `خبر رياضي ${index + 1}`);
-  const sourceDescription = normalizeText(item.originalDescription || "تطورات رياضية جديدة.");
+  const originalTitle = normalizeText(item.originalTitle || `خبر رياضي ${index + 1}`);
+  const topic = originalTitle.length > 70 ? originalTitle.slice(0, 70) : originalTitle;
 
-  const title = `مستجدات جديدة في ${league}`;
-  const description = `نستعرض في هذا التقرير أبرز تفاصيل خبر متداول في ${league} وفق ما تناولته تقارير ${source}.`;
+  const title = buildTitleVariant(topic, league, index);
+  const description = buildDescriptionVariant(topic, league, source, index);
+
+  const intros = [
+    `يحظى هذا الملف بمتابعة كبيرة داخل ${league} في ظل تزايد الحديث عن أبعاده الفنية والرياضية.`,
+    `يتصدر هذا الموضوع مساحة مهمة من النقاشات المرتبطة بـ ${league} خلال المرحلة الحالية.`,
+    `يعيد هذا الخبر تسليط الضوء على واحد من الملفات البارزة في ${league}.`,
+    `تواصل التطورات المرتبطة بهذا الملف جذب اهتمام المتابعين في ${league}.`
+  ];
+
+  const p2 = [
+    `وتشير المعطيات المتاحة إلى أن جوهر الخبر يرتبط بعنوان متداول يدور حول: ${topic}.`,
+    `وبحسب ما يتم تداوله في التغطيات الحالية، فإن القضية الأساسية في هذا الخبر تتمحور حول: ${topic}.`,
+    `ويبدو من متابعة الخبر أن النقاش الرئيسي يدور حول ملف عنوانه العام: ${topic}.`
+  ];
 
   const content = [
-    `تواصل الأخبار المرتبطة بـ ${league} جذب اهتمام المتابعين خلال الفترة الحالية، خاصة مع تزايد الملفات التي تخص الأندية واللاعبين والمنافسة داخل البطولة.`,
-    `وفي هذا السياق، برز خبر جديد تناولته تقارير ${source} ودار حول موضوع يرتبط بـ ${sourceTitle}.`,
-    `وتشير المعطيات المتداولة إلى أن هذا الملف يندرج ضمن الأخبار التي تحظى بمتابعة واسعة، في ظل ارتباطه بتفاصيل قد يكون لها تأثير على المشهد الرياضي العام.`,
-    `كما أن المعلومات المتاحة حول هذا الخبر توضح أن خلفيته ترتبط بما يلي: ${sourceDescription}.`,
-    `ويتابع الجمهور مثل هذه المستجدات باهتمام، خاصة عندما تتعلق بالفرق الكبيرة أو اللاعبين البارزين أو القرارات التي قد تنعكس على المرحلة المقبلة.`,
-    `ومن المنتظر أن تظهر خلال الأيام القادمة تفاصيل إضافية توضح الصورة بشكل أكبر، سواء على مستوى التطورات الرسمية أو المعطيات المرتبطة بالملف نفسه.`
+    intros[index % intros.length],
+    p2[index % p2.length],
+    `ويأتي هذا الاهتمام في وقت تزداد فيه أهمية التفاصيل المرتبطة بالأندية واللاعبين والخيارات الفنية داخل ${league}.`,
+    `وتحاول وسائل الإعلام الرياضية تقديم صورة أوضح عن خلفية هذا الملف، خاصة مع ارتباطه باحتمالات قد يكون لها أثر على المرحلة المقبلة.`,
+    `كما ينظر المتابعون إلى هذه التطورات باعتبارها جزءًا من المشهد الأوسع داخل المنافسة، سواء من حيث القرارات أو التحركات أو الانعكاسات المحتملة.`,
+    `ومن المتوقع أن تكشف الأيام المقبلة عن معلومات إضافية تساعد على فهم هذا الموضوع بصورة أدق، وهو ما يمنح الخبر أهمية أكبر لدى الجمهور.`,
+    `في نبض الرياضة، نتابع مثل هذه الملفات بصياغة عربية واضحة تركز على الفكرة الأساسية وتقدمها للقارئ بشكل مباشر ومفيد.`
   ].join("\n\n");
 
   return {
@@ -162,7 +202,7 @@ async function callOpenAI(prompt, temperature = 0.3) {
           {
             role: "system",
             content:
-              "أنت محرر في موقع رياضي عربي. أعد صياغة الأخبار بالعربية فقط، بأسلوب صحفي واضح ومباشر، دون مبالغة أو حشو أو تحليل إنشائي غير ضروري."
+              "أنت محرر في موقع رياضي عربي. أعد صياغة الأخبار بالعربية فقط، بأسلوب صحفي مباشر ومقروء، دون مقدمات عامة مكررة."
           },
           {
             role: "user",
@@ -193,7 +233,7 @@ async function arabizeIfNeeded(text, label = "النص") {
   const prompt = `
 حوّل هذا ${label} إلى العربية فقط.
 - لا تترك أي عبارة إنجليزية
-- اكتب أسماء اللاعبين والأندية بالعربية
+- اكتب الأسماء الأجنبية بالعربية
 - أعد النص فقط
 
 النص:
@@ -209,11 +249,47 @@ ${cleaned}
   return sanitizeArabic(raw);
 }
 
+async function extractTopic(item) {
+  const originalTitle = normalizeText(item.originalTitle || "");
+  const originalDescription = normalizeText(item.originalDescription || "");
+  const league = leagueName(item.league);
+  const source = sourceArabic(item.source);
+
+  const prompt = `
+استخرج من هذا الخبر الرياضي موضوعه الرئيسي بصياغة عربية قصيرة ودقيقة.
+
+المعطيات:
+- البطولة: ${league}
+- المصدر: ${source}
+- العنوان: ${originalTitle}
+- الوصف: ${originalDescription}
+
+أعد JSON فقط:
+{
+  "topic": "الموضوع الرئيسي بالعربية",
+  "headlineStyle": "نمط عنوان مناسب بالعربية",
+  "summary": "ملخص قصير بالعربية"
+}
+`;
+
+  const raw = await callOpenAI(prompt, 0.2);
+  if (!raw) return null;
+
+  const parsed = extractJson(raw);
+  if (!parsed) return null;
+
+  return {
+    topic: sanitizeArabic(parsed.topic || ""),
+    headlineStyle: sanitizeArabic(parsed.headlineStyle || ""),
+    summary: sanitizeArabic(parsed.summary || "")
+  };
+}
+
 async function rewriteArticle(item, index) {
   const fallback = fallbackArticle(item, index);
 
-  const sourceTitle = normalizeText(item.originalTitle || item.title || "");
-  const sourceDescription = normalizeText(item.originalDescription || item.description || "");
+  const originalTitle = normalizeText(item.originalTitle || item.title || "");
+  const originalDescription = normalizeText(item.originalDescription || item.description || "");
   const league = leagueName(item.league);
   const source = sourceArabic(item.source);
 
@@ -222,35 +298,42 @@ async function rewriteArticle(item, index) {
     return fallback;
   }
 
+  const topicData = await extractTopic(item);
+  const baseTopic = topicData?.topic || sanitizeArabic(originalTitle) || `خبر في ${league}`;
+
+  const titleSeed = buildTitleVariant(baseTopic, league, index);
+  const descriptionSeed = buildDescriptionVariant(baseTopic, league, source, index);
+
   const prompt = `
-أعد صياغة هذا الخبر الرياضي إلى مادة صحفية عربية واضحة ومقروءة، مع الحفاظ على الفكرة الأصلية والسياق.
+أعد صياغة هذا الخبر الرياضي إلى مادة صحفية عربية وفية للمعنى والسياق.
 
 المعطيات:
 - البطولة: ${league}
 - المصدر: ${source}
-- عنوان الخبر الأصلي: ${sourceTitle}
-- وصف الخبر الأصلي: ${sourceDescription}
+- عنوان الخبر الأصلي: ${originalTitle}
+- وصف الخبر الأصلي: ${originalDescription}
+- الموضوع المستخرج بالعربية: ${baseTopic}
+- عنوان مقترح مبدئي: ${titleSeed}
+- وصف مقترح مبدئي: ${descriptionSeed}
 
 التعليمات:
-- المطلوب إعادة صياغة صحفية وفية للخبر، وليس كتابة مقال عام
-- حافظ على المعنى الأساسي والسياق
-- لا تضف تحليلات إنشائية أو مقدمات عامة لا علاقة لها بالخبر
-- لا تستخدم أي جملة إنجليزية في الناتج النهائي
-- اكتب الأسماء الأجنبية بالعربية
-- اكتب عنوانًا عربيًا خبريًا جذابًا وقريبًا من المعنى الأصلي
-- اكتب وصفًا عربيًا خبريًا مختصرًا
-- اكتب محتوى من 4 إلى 7 فقرات صحفية واضحة
-- اجعل الأسلوب قريبًا من المواقع الرياضية العربية
-- لا تنسخ النص الأصلي حرفيًا
-- أعد فقط JSON
+- حافظ على الفكرة الأصلية والسياق
+- لا تكتب مقالًا عامًا
+- اجعل الصياغة قريبة من أسلوب المواقع الرياضية العربية
+- لا تستخدم أي جملة إنجليزية
+- اكتب الأسماء بالعربية
+- حافظ على نبرة خبرية مشوقة ولكن غير مبالغ فيها
+- اجعل العنوان والوصف مختلفين عن المقالات الأخرى
+- اكتب 4 إلى 6 فقرات صحفية واضحة
+- أعد JSON فقط
 
-الصيغة المطلوبة:
+الصيغة:
 {
-  "title": "عنوان عربي خبري",
-  "description": "وصف عربي خبري مختصر",
+  "title": "عنوان عربي خبري مختلف",
+  "description": "وصف عربي مختصر مختلف",
   "seoTitle": "عنوان سيو عربي",
   "seoDescription": "وصف سيو عربي",
-  "content": "نص عربي صحفي كامل",
+  "content": "محتوى عربي صحفي",
   "keywords": ["...", "...", "...", "..."]
 }
 `;
@@ -268,8 +351,8 @@ async function rewriteArticle(item, index) {
     return fallback;
   }
 
-  let title = sanitizeArabic(parsed.title || fallback.title);
-  let description = sanitizeArabic(parsed.description || fallback.description);
+  let title = sanitizeArabic(parsed.title || titleSeed);
+  let description = sanitizeArabic(parsed.description || descriptionSeed);
   let seoTitle = sanitizeArabic(parsed.seoTitle || `${title} | نبض الرياضة`);
   let seoDescription = sanitizeArabic(parsed.seoDescription || description);
   let content = sanitizeArabic(parsed.content || fallback.content);
