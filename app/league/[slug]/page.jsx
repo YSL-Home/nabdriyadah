@@ -53,7 +53,9 @@ export default function LeaguePage({ params }) {
     notFound();
   }
 
-  const leagueArticles = articles.filter((article) => article.league === params.slug);
+  const leagueArticles = articles
+    .filter((article) => article.league === params.slug)
+    .slice(0, 12);
 
   return (
     <main
@@ -112,67 +114,84 @@ export default function LeaguePage({ params }) {
           </p>
         </section>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-            gap: "22px"
-          }}
-        >
-          {leagueArticles.map((article) => (
-            <Link
-              key={article.slug}
-              href={`/articles/${article.slug}/`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <article
-                style={{
-                  background: "white",
-                  borderRadius: "22px",
-                  overflow: "hidden",
-                  border: "1px solid #e5e7eb",
-                  boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
-                  height: "100%"
-                }}
+        {leagueArticles.length === 0 ? (
+          <section
+            style={{
+              background: "white",
+              borderRadius: "24px",
+              padding: "28px",
+              border: "1px solid #e5e7eb",
+              color: "#6b7280",
+              fontSize: "18px",
+              lineHeight: 1.9
+            }}
+          >
+            لا توجد مواد كافية في هذا القسم حالياً. سيتم تحديث الصفحة تلقائياً مع وصول
+            أخبار جديدة مرتبطة بهذه البطولة.
+          </section>
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+              gap: "22px"
+            }}
+          >
+            {leagueArticles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/articles/${article.slug}/`}
+                style={{ textDecoration: "none", color: "inherit" }}
               >
-                <img
-                  src={article.image}
-                  alt={article.title}
+                <article
                   style={{
-                    width: "100%",
-                    height: "220px",
-                    objectFit: "cover",
-                    display: "block"
+                    background: "white",
+                    borderRadius: "22px",
+                    overflow: "hidden",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
+                    height: "100%"
                   }}
-                />
-
-                <div style={{ padding: "22px" }}>
-                  <h2
+                >
+                  <img
+                    src={article.image}
+                    alt={article.title}
                     style={{
-                      margin: "0 0 12px 0",
-                      fontSize: "22px",
-                      lineHeight: 1.6,
-                      fontWeight: 800
+                      width: "100%",
+                      height: "220px",
+                      objectFit: "cover",
+                      display: "block"
                     }}
-                  >
-                    {article.title}
-                  </h2>
+                  />
 
-                  <p
-                    style={{
-                      margin: 0,
-                      color: "#6b7280",
-                      fontSize: "16px",
-                      lineHeight: 1.9
-                    }}
-                  >
-                    {article.description}
-                  </p>
-                </div>
-              </article>
-            </Link>
-          ))}
-        </div>
+                  <div style={{ padding: "22px" }}>
+                    <h2
+                      style={{
+                        margin: "0 0 12px 0",
+                        fontSize: "22px",
+                        lineHeight: 1.6,
+                        fontWeight: 800
+                      }}
+                    >
+                      {article.title}
+                    </h2>
+
+                    <p
+                      style={{
+                        margin: 0,
+                        color: "#6b7280",
+                        fontSize: "16px",
+                        lineHeight: 1.9
+                      }}
+                    >
+                      {article.description}
+                    </p>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
