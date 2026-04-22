@@ -120,35 +120,19 @@ function buildImage(index) {
 function fallbackArticle(item, index) {
   const league = leagueName(item.league);
   const source = sourceArabic(item.source);
-  const originalTitle = normalizeText(item.originalTitle || `خبر رياضي ${index + 1}`);
+  const sourceTitle = normalizeText(item.originalTitle || `خبر رياضي ${index + 1}`);
+  const sourceDescription = normalizeText(item.originalDescription || "تطورات رياضية جديدة.");
 
-  const titleVariants = [
-    `تفاصيل جديدة حول ${league}`,
-    `تطورات مهمة في ${league}`,
-    `قراءة في ملف جديد يخص ${league}`,
-    `ماذا يحدث في ${league}؟`,
-    `متابعة خاصة لآخر أخبار ${league}`,
-    `تحليل لأبرز أحداث ${league}`
-  ];
-
-  const descVariants = [
-    `يستعرض هذا التقرير أبرز الخلفيات المرتبطة بموضوع رياضي متداول داخل ${league} اعتمادًا على متابعة عربية للمشهد الحالي.`,
-    `نقدم في هذا المقال قراءة عربية لأحد الملفات الرياضية التي تثير اهتمام المتابعين في ${league}.`,
-    `يتناول هذا التقرير زاوية مختلفة لخبر متداول في ${league} مع إبراز أهم أبعاده الرياضية المحتملة.`
-  ];
-
-  const title = titleVariants[index % titleVariants.length];
-  const description = descVariants[index % descVariants.length];
+  const title = `مستجدات جديدة في ${league}`;
+  const description = `نستعرض في هذا التقرير أبرز تفاصيل خبر متداول في ${league} وفق ما تناولته تقارير ${source}.`;
 
   const content = [
-    `يحظى ${league} خلال هذه المرحلة باهتمام جماهيري واسع، في ظل تزايد الأخبار التي ترتبط بالأندية واللاعبين والقرارات الفنية المختلفة.`,
-    `وينطلق هذا التقرير من موضوع رياضي متداول في وسائل الإعلام، حيث برزت المتابعة حول ملف يرتبط بعنوان عام يتمحور حول: ${originalTitle}.`,
-    `وتسعى منصة نبض الرياضة إلى إعادة تقديم هذه الملفات في صياغة عربية واضحة تساعد القارئ على فهم خلفية الحدث وأبعاده العامة بعيدًا عن التكرار أو النقل المباشر.`,
-    `وتشير القراءة العامة إلى أن أهمية هذا الموضوع لا ترتبط بالتفصيل الآني فقط، بل تمتد إلى ما يمكن أن ينعكس على الأندية المعنية وعلى مسار المنافسة في الفترة المقبلة.`,
-    `كما تبدو هذه النوعية من الأخبار ذات قيمة كبيرة بالنسبة للمتابع العربي، لأنها تكشف الكثير من التفاصيل المرتبطة بحركة الفرق أو اختياراتها أو موقعها في المنافسة.`,
-    `وتحاول الأندية الكبرى خلال هذه المرحلة الحفاظ على أكبر قدر ممكن من التوازن، سواء على مستوى الأداء أو الجاهزية أو إدارة ضغط المباريات المتتالية.`,
-    `ومن المنتظر أن تكشف الأيام المقبلة عن معطيات إضافية قد تجعل هذا الملف أكثر وضوحًا، وهو ما يمنح المتابعين فرصة أفضل لفهم الصورة الكاملة.`,
-    `في نبض الرياضة، نواصل تقديم محتوى عربي رياضي متجدد يشرح أهم الأحداث بلغة صحفية واضحة، ويمنح القارئ ملخصًا عمليًا ومفيدًا لمتابعة آخر التطورات.`
+    `تواصل الأخبار المرتبطة بـ ${league} جذب اهتمام المتابعين خلال الفترة الحالية، خاصة مع تزايد الملفات التي تخص الأندية واللاعبين والمنافسة داخل البطولة.`,
+    `وفي هذا السياق، برز خبر جديد تناولته تقارير ${source} ودار حول موضوع يرتبط بـ ${sourceTitle}.`,
+    `وتشير المعطيات المتداولة إلى أن هذا الملف يندرج ضمن الأخبار التي تحظى بمتابعة واسعة، في ظل ارتباطه بتفاصيل قد يكون لها تأثير على المشهد الرياضي العام.`,
+    `كما أن المعلومات المتاحة حول هذا الخبر توضح أن خلفيته ترتبط بما يلي: ${sourceDescription}.`,
+    `ويتابع الجمهور مثل هذه المستجدات باهتمام، خاصة عندما تتعلق بالفرق الكبيرة أو اللاعبين البارزين أو القرارات التي قد تنعكس على المرحلة المقبلة.`,
+    `ومن المنتظر أن تظهر خلال الأيام القادمة تفاصيل إضافية توضح الصورة بشكل أكبر، سواء على مستوى التطورات الرسمية أو المعطيات المرتبطة بالملف نفسه.`
   ].join("\n\n");
 
   return {
@@ -157,11 +141,11 @@ function fallbackArticle(item, index) {
     seoTitle: `${title} | نبض الرياضة`,
     seoDescription: description,
     content,
-    keywords: [league, "أخبار رياضية", "كرة القدم", "تحليلات رياضية", "نتائج المباريات"]
+    keywords: [league, "أخبار رياضية", "كرة القدم", "نتائج المباريات", "انتقالات"]
   };
 }
 
-async function callOpenAI(prompt, temperature = 0.4) {
+async function callOpenAI(prompt, temperature = 0.3) {
   if (!OPENAI_API_KEY) return null;
 
   try {
@@ -178,7 +162,7 @@ async function callOpenAI(prompt, temperature = 0.4) {
           {
             role: "system",
             content:
-              "أنت محرر رياضي عربي محترف. يجب أن تكون جميع المخرجات بالعربية فقط. لا تترك أي سطر أو عبارة باللغة الإنجليزية."
+              "أنت محرر في موقع رياضي عربي. أعد صياغة الأخبار بالعربية فقط، بأسلوب صحفي واضح ومباشر، دون مبالغة أو حشو أو تحليل إنشائي غير ضروري."
           },
           {
             role: "user",
@@ -202,113 +186,13 @@ async function callOpenAI(prompt, temperature = 0.4) {
   }
 }
 
-async function translateSourceToArabic(item) {
-  const league = leagueName(item.league);
-  const source = sourceArabic(item.source);
-  const originalTitle = normalizeText(item.originalTitle || "");
-  const originalDescription = normalizeText(item.originalDescription || "");
-
-  const prompt = `
-حوّل بيانات هذا الخبر الرياضي إلى العربية فقط.
-
-المعطيات:
-- البطولة: ${league}
-- المصدر: ${source}
-- العنوان: ${originalTitle}
-- الوصف: ${originalDescription}
-
-المطلوب:
-- ترجم المعنى إلى العربية فقط
-- اكتب الأسماء الأجنبية بالعربية
-- لا تترك أي كلمة إنجليزية
-- لا تضف شرحًا
-- أعد JSON فقط
-
-الصيغة:
-{
-  "arabicTitle": "...",
-  "arabicDescription": "...",
-  "mainTopic": "...",
-  "entities": ["...", "..."],
-  "topicType": "..."
-}
-`;
-
-  const raw = await callOpenAI(prompt, 0.2);
-  if (!raw) return null;
-
-  const parsed = extractJson(raw);
-  if (!parsed) return null;
-
-  return {
-    arabicTitle: sanitizeArabic(parsed.arabicTitle || ""),
-    arabicDescription: sanitizeArabic(parsed.arabicDescription || ""),
-    mainTopic: sanitizeArabic(parsed.mainTopic || ""),
-    entities: Array.isArray(parsed.entities) ? parsed.entities.map((e) => sanitizeArabic(e)).filter(Boolean) : [],
-    topicType: sanitizeArabic(parsed.topicType || "")
-  };
-}
-
-async function writeSeoArticle(item, translated, index) {
-  const league = leagueName(item.league);
-
-  const prompt = `
-اكتب مقالاً عربياً رياضياً فريداً ومحسناً لمحركات البحث انطلاقًا من هذه المعطيات المعربة.
-
-المعطيات:
-- البطولة: ${league}
-- العنوان المعرب: ${translated.arabicTitle}
-- الوصف المعرب: ${translated.arabicDescription}
-- الموضوع الأساسي: ${translated.mainTopic}
-- الأطراف الرئيسية: ${(translated.entities || []).join("، ")}
-- نوع الموضوع: ${translated.topicType}
-
-المطلوب:
-- عنوان عربي مختلف وواضح
-- وصف عربي مختلف
-- seoTitle
-- seoDescription
-- مقال عربي من 700 إلى 900 كلمة تقريبًا
-- اجعل المقال متعلقًا مباشرة بهذا الموضوع
-- لا تستخدم أي جمل إنجليزية
-- لا تكرر نفس المقدمة أو نفس الوصف الموجود في بقية المقالات
-- اجعل المقال يبدو كمادة صحفية أصلية وليس كتلخيص آلي
-- أعد JSON فقط
-
-الصيغة:
-{
-  "title": "...",
-  "description": "...",
-  "seoTitle": "...",
-  "seoDescription": "...",
-  "content": "...",
-  "keywords": ["...", "...", "...", "..."]
-}
-`;
-
-  const raw = await callOpenAI(prompt, 0.75);
-  if (!raw) return null;
-
-  const parsed = extractJson(raw);
-  if (!parsed) return null;
-
-  return {
-    title: sanitizeArabic(parsed.title || ""),
-    description: sanitizeArabic(parsed.description || ""),
-    seoTitle: sanitizeArabic(parsed.seoTitle || ""),
-    seoDescription: sanitizeArabic(parsed.seoDescription || ""),
-    content: sanitizeArabic(parsed.content || ""),
-    keywords: sanitizeKeywords(parsed.keywords)
-  };
-}
-
 async function arabizeIfNeeded(text, label = "النص") {
   const cleaned = sanitizeArabic(text);
   if (!containsLatin(cleaned)) return cleaned;
 
   const prompt = `
 حوّل هذا ${label} إلى العربية فقط.
-- لا تترك أي كلمات أو جمل إنجليزية
+- لا تترك أي عبارة إنجليزية
 - اكتب أسماء اللاعبين والأندية بالعربية
 - أعد النص فقط
 
@@ -328,33 +212,81 @@ ${cleaned}
 async function rewriteArticle(item, index) {
   const fallback = fallbackArticle(item, index);
 
-  const translated = await translateSourceToArabic(item);
-  if (!translated || !translated.mainTopic) {
-    console.log("Translation pass failed, using fallback.");
+  const sourceTitle = normalizeText(item.originalTitle || item.title || "");
+  const sourceDescription = normalizeText(item.originalDescription || item.description || "");
+  const league = leagueName(item.league);
+  const source = sourceArabic(item.source);
+
+  if (!OPENAI_API_KEY) {
+    console.log("OPENAI_API_KEY missing, using fallback.");
     return fallback;
   }
 
-  const draft = await writeSeoArticle(item, translated, index);
-  if (!draft) {
-    console.log("Writing pass failed, using fallback.");
+  const prompt = `
+أعد صياغة هذا الخبر الرياضي إلى مادة صحفية عربية واضحة ومقروءة، مع الحفاظ على الفكرة الأصلية والسياق.
+
+المعطيات:
+- البطولة: ${league}
+- المصدر: ${source}
+- عنوان الخبر الأصلي: ${sourceTitle}
+- وصف الخبر الأصلي: ${sourceDescription}
+
+التعليمات:
+- المطلوب إعادة صياغة صحفية وفية للخبر، وليس كتابة مقال عام
+- حافظ على المعنى الأساسي والسياق
+- لا تضف تحليلات إنشائية أو مقدمات عامة لا علاقة لها بالخبر
+- لا تستخدم أي جملة إنجليزية في الناتج النهائي
+- اكتب الأسماء الأجنبية بالعربية
+- اكتب عنوانًا عربيًا خبريًا جذابًا وقريبًا من المعنى الأصلي
+- اكتب وصفًا عربيًا خبريًا مختصرًا
+- اكتب محتوى من 4 إلى 7 فقرات صحفية واضحة
+- اجعل الأسلوب قريبًا من المواقع الرياضية العربية
+- لا تنسخ النص الأصلي حرفيًا
+- أعد فقط JSON
+
+الصيغة المطلوبة:
+{
+  "title": "عنوان عربي خبري",
+  "description": "وصف عربي خبري مختصر",
+  "seoTitle": "عنوان سيو عربي",
+  "seoDescription": "وصف سيو عربي",
+  "content": "نص عربي صحفي كامل",
+  "keywords": ["...", "...", "...", "..."]
+}
+`;
+
+  const raw = await callOpenAI(prompt, 0.35);
+
+  if (!raw) {
     return fallback;
   }
 
-  let title = draft.title || fallback.title;
-  let description = draft.description || fallback.description;
-  let seoTitle = draft.seoTitle || `${title} | نبض الرياضة`;
-  let seoDescription = draft.seoDescription || description;
-  let content = draft.content || fallback.content;
-  let keywords = draft.keywords.length ? draft.keywords : fallback.keywords;
+  const parsed = extractJson(raw);
+
+  if (!parsed) {
+    console.log("JSON parse failed, using fallback.");
+    return fallback;
+  }
+
+  let title = sanitizeArabic(parsed.title || fallback.title);
+  let description = sanitizeArabic(parsed.description || fallback.description);
+  let seoTitle = sanitizeArabic(parsed.seoTitle || `${title} | نبض الرياضة`);
+  let seoDescription = sanitizeArabic(parsed.seoDescription || description);
+  let content = sanitizeArabic(parsed.content || fallback.content);
+  let keywords = sanitizeKeywords(parsed.keywords);
 
   title = await arabizeIfNeeded(title, "العنوان");
   description = await arabizeIfNeeded(description, "الوصف");
   seoTitle = await arabizeIfNeeded(seoTitle, "عنوان السيو");
   seoDescription = await arabizeIfNeeded(seoDescription, "وصف السيو");
-  content = await arabizeIfNeeded(content, "المقال");
+  content = await arabizeIfNeeded(content, "المحتوى");
 
   if (!title || !description || !content) {
     return fallback;
+  }
+
+  if (!keywords.length) {
+    keywords = fallback.keywords;
   }
 
   return {
@@ -386,8 +318,12 @@ async function main() {
   const seen = new Set();
 
   for (const item of rawItems) {
-    const key = normalizeText(item.originalTitle || "").toLowerCase();
-    if (!key || seen.has(key)) continue;
+    const title = normalizeText(item.originalTitle || item.title || "");
+    if (!title) continue;
+
+    const key = title.toLowerCase();
+    if (seen.has(key)) continue;
+
     seen.add(key);
     unique.push(item);
   }
