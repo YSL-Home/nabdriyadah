@@ -1,8 +1,8 @@
-import articles from "@/content/articles/seo-articles.json";
+import articles from "../../../content/articles/seo-articles.json";
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return articles.map((article) => ({
-    slug: article.slug,
+    slug: article.slug
   }));
 }
 
@@ -10,12 +10,15 @@ export default function ArticlePage({ params }) {
   const article = articles.find((a) => a.slug === params.slug);
 
   if (!article) {
-    return <div>Article non trouvé</div>;
+    return (
+      <main style={{ padding: "40px", direction: "rtl", fontFamily: "sans-serif" }}>
+        <div>المقال غير موجود</div>
+      </main>
+    );
   }
 
   return (
     <main style={{ padding: "40px", direction: "rtl", fontFamily: "sans-serif" }}>
-      
       <h1 style={{ fontSize: "32px", marginBottom: "20px" }}>
         {article.title}
       </h1>
@@ -32,10 +35,9 @@ export default function ArticlePage({ params }) {
         }}
       />
 
-      <p style={{ color: "#444", lineHeight: "1.8" }}>
+      <p style={{ color: "#444", lineHeight: "1.8", fontSize: "18px", whiteSpace: "pre-wrap" }}>
         {article.content}
       </p>
-
     </main>
   );
 }
