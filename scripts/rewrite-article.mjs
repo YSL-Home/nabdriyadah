@@ -315,6 +315,7 @@ async function rewriteArticle(item, index) {
 - الموضوع المستخرج بالعربية: ${baseTopic}
 - عنوان مقترح مبدئي: ${titleSeed}
 - وصف مقترح مبدئي: ${descriptionSeed}
+- الكلمات المفتاحية الموضوعية الحالية: ${(item.topicTags || []).join("، ")}
 
 التعليمات:
 - حافظ على الفكرة الأصلية والسياق
@@ -369,7 +370,9 @@ async function rewriteArticle(item, index) {
   }
 
   if (!keywords.length) {
-    keywords = fallback.keywords;
+    keywords = item.topicTags?.length
+      ? [...item.topicTags.slice(0, 4), league]
+      : fallback.keywords;
   }
 
   return {
@@ -424,6 +427,7 @@ async function main() {
       slug: buildSlug(selected[i], i),
       league: selected[i].league || "mixed",
       source: selected[i].source || "",
+      topicTags: selected[i].topicTags || ["كرة القدم"],
       title: rewritten.title,
       description: rewritten.description,
       seoTitle: rewritten.seoTitle,
