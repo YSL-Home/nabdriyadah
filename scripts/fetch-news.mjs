@@ -76,31 +76,61 @@ function absoluteUrl(base, href = "") {
 function detectLeague(text = "") {
   const value = normalizeText(text);
 
-  if (
-    value.includes("الدوري الإنجليزي") ||
-    value.includes("البريميرليغ") ||
-    value.includes("مانشستر") ||
-    value.includes("ليفربول") ||
-    value.includes("تشيلسي") ||
-    value.includes("آرسنال") ||
-    value.includes("توتنهام") ||
-    value.includes("نيوكاسل")
-  ) {
-    return "premier-league";
-  }
+  const premierSignals = [
+    "الدوري الإنجليزي",
+    "البريميرليغ",
+    "البريمير ليغ",
+    "مانشستر يونايتد",
+    "مانشستر سيتي",
+    "ليفربول",
+    "تشيلسي",
+    "آرسنال",
+    "توتنهام",
+    "أستون فيلا",
+    "نيوكاسل",
+    "وست هام",
+    "إيفرتون"
+  ];
 
-  if (
-    value.includes("الدوري الإسباني") ||
-    value.includes("الليغا") ||
-    value.includes("ريال مدريد") ||
-    value.includes("برشلونة") ||
-    value.includes("أتلتيكو") ||
-    value.includes("فالنسيا")
-  ) {
-    return "la-liga";
-  }
+  const laLigaSignals = [
+    "الدوري الإسباني",
+    "الليغا",
+    "ريال مدريد",
+    "برشلونة",
+    "أتلتيكو مدريد",
+    "فالنسيا",
+    "إشبيلية",
+    "فياريال",
+    "ريال سوسيداد",
+    "بيتيس"
+  ];
+
+  if (premierSignals.some((s) => value.includes(s))) return "premier-league";
+  if (laLigaSignals.some((s) => value.includes(s))) return "la-liga";
 
   return "mixed";
+}
+
+function detectTopicTags(text = "") {
+  const value = normalizeText(text);
+  const tags = [];
+
+  const map = [
+    ["انتقالات", ["انتقال", "صفقة", "تعاقد", "يرتبط", "اهتمام", "مفاوضات"]],
+    ["إصابات", ["إصابة", "غياب", "تعافى", "العلاج"]],
+    ["نتائج المباريات", ["فاز", "خسر", "تعادل", "مباراة", "نتيجة", "انتصار"]],
+    ["تصريحات", ["قال", "صرح", "أكد", "أوضح", "تحدث"]],
+    ["مدربون", ["مدرب", "الجهاز الفني"]],
+    ["لاعبون", ["لاعب", "نجم", "مهاجم", "وسط", "مدافع", "حارس"]],
+    ["أخبار الأندية", ["نادي", "إدارة", "جماهير", "أزمة", "قرار"]],
+    ["كرة القدم", ["كرة القدم", "الدوري", "البطولة", "الكأس"]]
+  ];
+
+  for (const [tag, signals] of map) {
+    if (signals.some((s) => value.includes(s))) tags.push(tag);
+  }
+
+  return tags.length ? tags.slice(0, 4) : ["كرة القدم"];
 }
 
 function looksLikeArabicSportsHeadline(text = "") {
@@ -168,11 +198,12 @@ async function fetchRss(source) {
   try {
     const feed = await parser.parseURL(source.url);
 
-    return (feed.items || []).slice(0, 15).map((item, index) => {
+    return (feed.items || []).slice(0, 16).map((item, index) => {
       const title = normalizeText(item.title || "");
       const description = normalizeText(
         item.contentSnippet || item.content || item.summary || item.description || ""
       );
+      const combined = `${title} ${description}`;
 
       return {
         originalTitle: title,
@@ -180,7 +211,8 @@ async function fetchRss(source) {
         link: item.link || source.url,
         source: source.name,
         sourcePriority: source.priority,
-        league: detectLeague(`${title} ${description}`),
+        league: detectLeague(combined),
+        topicTags: detectTopicTags(combined),
         publishedAt: item.pubDate || new Date().toISOString(),
         slug: slugFromTitle(title, index)
       };
@@ -211,6 +243,7 @@ function extractFromHtml(html = "", baseUrl = "", sourceName = "", priority = "a
       source: sourceName,
       sourcePriority: priority,
       league: detectLeague(rawText),
+      topicTags: detectTopicTags(rawText),
       publishedAt: new Date().toISOString()
     });
   }
@@ -223,7 +256,7 @@ function extractFromHtml(html = "", baseUrl = "", sourceName = "", priority = "a
     if (!key || seen.has(key)) continue;
     seen.add(key);
     unique.push(item);
-    if (unique.length >= 15) break;
+    if (unique.length >= 16) break;
   }
 
   return unique;
@@ -272,10 +305,7 @@ async function main() {
   const arabicItems = unique.filter((item) => item.sourcePriority === "arabic");
   const fallbackItems = unique.filter((item) => item.sourcePriority !== "arabic");
 
-  const prioritized = [
-    ...arabicItems.slice(0, 18),
-    ...fallbackItems.slice(0, 2)
-  ];
+  const prioritized = [...arabicItems.slice(0, 18), ...fallbackItems.slice(0, 2)];
 
   ensureDir(OUTPUT_PATH);
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(prioritized, null, 2), "utf-8");
