@@ -422,6 +422,8 @@ async function main() {
 
     articles.push({
       slug: buildSlug(selected[i], i),
+      league: selected[i].league || "mixed",
+      source: selected[i].source || "",
       title: rewritten.title,
       description: rewritten.description,
       seoTitle: rewritten.seoTitle,
