@@ -24,7 +24,7 @@ export default function sitemap() {
       url: `${baseUrl}/`,
       lastModified: new Date()
     },
-    ...articleUrls,
-    ...leagueUrls
+    ...leagueUrls,
+    ...articleUrls
   ];
 }
