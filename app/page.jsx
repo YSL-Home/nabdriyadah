@@ -1,65 +1,57 @@
-import articles from "../content/articles/seo-articles.json";
+import articles from "@/content/articles/seo-articles.json";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main style={{ padding: "40px", maxWidth: "1200px", margin: "auto" }}>
+    <main style={{ padding: "40px", direction: "rtl", fontFamily: "sans-serif" }}>
       
-      <h1 style={{ fontSize: "28px", marginBottom: "30px" }}>
-        المقالات المميزة
+      <h1 style={{ fontSize: "32px", marginBottom: "20px" }}>
+        المشهد الرياضي اليوم
       </h1>
+
+      <p style={{ marginBottom: "40px", color: "#555" }}>
+        تابع آخر أخبار كرة القدم العالمية والعربية مع تغطية حصرية وتحليل احترافي.
+      </p>
 
       <div style={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "30px"
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+        gap: "20px"
       }}>
-        
         {articles.map((article, index) => (
-          
           <a
             key={index}
-            href={`/article-${index + 1}`}
+            href={`/articles/${article.slug}`}
             style={{
+              display: "block",
+              border: "1px solid #eee",
+              borderRadius: "12px",
+              overflow: "hidden",
               textDecoration: "none",
-              color: "inherit"
+              color: "black",
+              background: "#fff"
             }}
           >
-            <div style={{
-              background: "#fff",
-              borderRadius: "20px",
-              padding: "20px",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.05)"
-            }}>
+            <img
+              src={article.image}
+              alt={article.title}
+              style={{
+                width: "100%",
+                height: "200px",
+                objectFit: "cover"
+              }}
+            />
 
-              <img
-                src={article.image}
-                alt={article.title}
-                style={{
-                  width: "100%",
-                  height: "220px",
-                  objectFit: "cover",
-                  borderRadius: "12px",
-                  marginBottom: "15px"
-                }}
-                onError={(e) => {
-                  e.target.src =
-                    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80";
-                }}
-              />
-
-              <h2 style={{ fontSize: "22px", marginBottom: "10px" }}>
+            <div style={{ padding: "15px" }}>
+              <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
                 {article.title}
               </h2>
 
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
+              <p style={{ color: "#666", fontSize: "14px" }}>
                 {article.description}
               </p>
-
             </div>
           </a>
-
         ))}
-
       </div>
 
     </main>
