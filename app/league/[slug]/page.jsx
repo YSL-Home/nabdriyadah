@@ -123,7 +123,6 @@ export default function LeaguePage({ params }) {
     .slice(0, 12);
 
   const featuredArticle = leagueArticles[0] || null;
-  const otherArticles = leagueArticles.slice(1);
 
   return (
     <main
@@ -312,7 +311,7 @@ export default function LeaguePage({ params }) {
                 marginBottom: "10px"
               }}
             >
-              هوية القسم
+              أندية بارزة في البطولة
             </div>
 
             <h2
@@ -335,8 +334,8 @@ export default function LeaguePage({ params }) {
                 lineHeight: 1.95
               }}
             >
-              هذه الصفحة مخصصة لتجميع أبرز مواد {league.title} داخل الموقع بنفس
-              الهوية البصرية الخاصة بالبطولة، مع ربط مباشر بأهم المقالات المرتبطة بها.
+              هذه الصفحة تعرض أهم مواد {league.title} داخل الموقع، مع هوية بصرية
+              خاصة بالبطولة وروابط مباشرة على أبرز الملفات المرتبطة بها.
             </p>
 
             <div
