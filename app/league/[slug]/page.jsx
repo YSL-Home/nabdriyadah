@@ -8,6 +8,7 @@ const leagueMap = {
     shortLabel: "EPL",
     description:
       "تابع آخر أخبار الدوري الإنجليزي الممتاز، أبرز المستجدات، والتحليلات الخاصة بالأندية واللاعبين.",
+    leagueLogo: "/leagues/premier-league.png",
     theme: {
       pageBg: "#f6f0ff",
       heroFrom: "#3b0764",
@@ -25,6 +26,14 @@ const leagueMap = {
       "أخبار مانشستر سيتي ومانشستر يونايتد",
       "متابعة ليفربول وآرسنال وتشيلسي",
       "تحليلات المباريات والنتائج والسباق على القمة"
+    ],
+    teams: [
+      { name: "مانشستر سيتي", logo: "/teams/premier-league/manchester-city.png" },
+      { name: "مانشستر يونايتد", logo: "/teams/premier-league/manchester-united.png" },
+      { name: "ليفربول", logo: "/teams/premier-league/liverpool.png" },
+      { name: "آرسنال", logo: "/teams/premier-league/arsenal.png" },
+      { name: "تشيلسي", logo: "/teams/premier-league/chelsea.png" },
+      { name: "توتنهام", logo: "/teams/premier-league/tottenham.png" }
     ]
   },
   "la-liga": {
@@ -32,6 +41,7 @@ const leagueMap = {
     shortLabel: "LL",
     description:
       "أحدث أخبار الدوري الإسباني مع متابعة خاصة لريال مدريد وبرشلونة وأبرز ملفات الليغا.",
+    leagueLogo: "/leagues/la-liga.png",
     theme: {
       pageBg: "#fff7ed",
       heroFrom: "#9a3412",
@@ -49,45 +59,17 @@ const leagueMap = {
       "متابعة ريال مدريد وبرشلونة",
       "رصد مستجدات الليغا أسبوعًا بأسبوع",
       "ملفات المدربين والنجوم والنتائج"
+    ],
+    teams: [
+      { name: "ريال مدريد", logo: "/teams/la-liga/real-madrid.png" },
+      { name: "برشلونة", logo: "/teams/la-liga/barcelona.png" },
+      { name: "أتلتيكو مدريد", logo: "/teams/la-liga/atletico-madrid.png" },
+      { name: "إشبيلية", logo: "/teams/la-liga/sevilla.png" },
+      { name: "فالنسيا", logo: "/teams/la-liga/valencia.png" },
+      { name: "ريال سوسيداد", logo: "/teams/la-liga/real-sociedad.png" }
     ]
   }
 };
-
-function buildLogo(shortLabel, primary, secondary) {
-  return (
-    <div
-      style={{
-        width: "170px",
-        height: "170px",
-        borderRadius: "36px",
-        background: `linear-gradient(135deg, ${primary}, ${secondary})`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        boxShadow: "0 18px 34px rgba(0,0,0,0.14)",
-        border: "1px solid rgba(255,255,255,0.2)"
-      }}
-    >
-      <div
-        style={{
-          width: "110px",
-          height: "110px",
-          borderRadius: "999px",
-          background: "rgba(255,255,255,0.16)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "white",
-          fontSize: "30px",
-          fontWeight: 800,
-          letterSpacing: "0.5px"
-        }}
-      >
-        {shortLabel}
-      </div>
-    </div>
-  );
-}
 
 function getGridColumns(count) {
   if (count <= 1) return "minmax(0, 420px)";
@@ -152,7 +134,7 @@ export default function LeaguePage({ params }) {
         direction: "rtl"
       }}
     >
-      <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
         <section
           style={{
             position: "relative",
@@ -197,8 +179,29 @@ export default function LeaguePage({ params }) {
               alignItems: "center"
             }}
           >
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              {buildLogo(league.shortLabel, theme.heroFrom, theme.heroTo)}
+            <div
+              style={{
+                background: "rgba(255,255,255,0.10)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                borderRadius: "30px",
+                padding: "22px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 18px 34px rgba(0,0,0,0.14)",
+                backdropFilter: "blur(6px)"
+              }}
+            >
+              <img
+                src={league.leagueLogo}
+                alt={league.title}
+                style={{
+                  width: "140px",
+                  height: "140px",
+                  objectFit: "contain",
+                  display: "block"
+                }}
+              />
             </div>
 
             <div>
@@ -284,15 +287,104 @@ export default function LeaguePage({ params }) {
           </div>
         </section>
 
-        {featuredArticle ? (
-          <section
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "0.95fr 1.05fr",
+            gap: "24px",
+            marginBottom: "28px"
+          }}
+        >
+          <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1.2fr 0.8fr",
-              gap: "24px",
-              marginBottom: "28px"
+              background: theme.cardBg,
+              borderRadius: "28px",
+              padding: "28px",
+              border: `1px solid ${theme.border}`,
+              boxShadow: "0 12px 30px rgba(0,0,0,0.05)"
             }}
           >
+            <div
+              style={{
+                color: theme.primary,
+                fontSize: "14px",
+                fontWeight: 700,
+                marginBottom: "10px"
+              }}
+            >
+              هوية القسم
+            </div>
+
+            <h2
+              style={{
+                margin: "0 0 14px 0",
+                fontSize: "34px",
+                lineHeight: 1.4,
+                fontWeight: 800,
+                color: theme.text
+              }}
+            >
+              {league.title}
+            </h2>
+
+            <p
+              style={{
+                margin: "0 0 18px 0",
+                color: theme.subtext,
+                fontSize: "18px",
+                lineHeight: 1.95
+              }}
+            >
+              هذه الصفحة مخصصة لتجميع أبرز مواد {league.title} داخل الموقع بنفس
+              الهوية البصرية الخاصة بالبطولة، مع ربط مباشر بأهم المقالات المرتبطة بها.
+            </p>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                gap: "12px",
+                marginTop: "20px"
+              }}
+            >
+              {league.teams.map((team, index) => (
+                <div
+                  key={index}
+                  style={{
+                    background: theme.primarySoft,
+                    border: `1px solid ${theme.border}`,
+                    borderRadius: "18px",
+                    padding: "14px 12px",
+                    textAlign: "center"
+                  }}
+                >
+                  <img
+                    src={team.logo}
+                    alt={team.name}
+                    style={{
+                      width: "54px",
+                      height: "54px",
+                      objectFit: "contain",
+                      display: "block",
+                      margin: "0 auto 10px"
+                    }}
+                  />
+                  <div
+                    style={{
+                      color: theme.primary,
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      lineHeight: 1.6
+                    }}
+                  >
+                    {team.name}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {featuredArticle ? (
             <Link
               href={`/articles/${featuredArticle.slug}/`}
               style={{ textDecoration: "none", color: "inherit" }}
@@ -359,78 +451,8 @@ export default function LeaguePage({ params }) {
                 </div>
               </article>
             </Link>
-
-            <div
-              style={{
-                background: theme.cardBg,
-                borderRadius: "28px",
-                padding: "26px",
-                border: `1px solid ${theme.border}`,
-                boxShadow: "0 12px 30px rgba(0,0,0,0.05)"
-              }}
-            >
-              <div
-                style={{
-                  color: theme.primary,
-                  fontSize: "14px",
-                  fontWeight: 700,
-                  marginBottom: "10px"
-                }}
-              >
-                هوية القسم
-              </div>
-
-              <h3
-                style={{
-                  margin: "0 0 12px 0",
-                  fontSize: "28px",
-                  fontWeight: 800,
-                  lineHeight: 1.55,
-                  color: theme.text
-                }}
-              >
-                {league.title}
-              </h3>
-
-              <p
-                style={{
-                  margin: "0 0 18px 0",
-                  color: theme.subtext,
-                  fontSize: "17px",
-                  lineHeight: 1.95
-                }}
-              >
-                هذه الصفحة مخصصة لتجميع أبرز مواد {league.title} داخل الموقع بنفس
-                الهوية البصرية الخاصة بالبطولة، مع ربط مباشر بأهم المقالات المرتبطة
-                بها.
-              </p>
-
-              <div
-                style={{
-                  display: "grid",
-                  gap: "12px"
-                }}
-              >
-                {league.highlights.map((item, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      background: theme.primarySoft,
-                      border: `1px solid ${theme.border}`,
-                      color: theme.primary,
-                      padding: "12px 14px",
-                      borderRadius: "16px",
-                      fontSize: "15px",
-                      fontWeight: 700
-                    }}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
+          ) : null}
+        </section>
 
         {leagueArticles.length === 0 ? (
           <section
@@ -483,12 +505,12 @@ export default function LeaguePage({ params }) {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: getGridColumns(otherArticles.length || 1),
+                gridTemplateColumns: getGridColumns(leagueArticles.length),
                 gap: "22px",
-                justifyContent: otherArticles.length <= 1 ? "start" : "stretch"
+                justifyContent: leagueArticles.length <= 1 ? "start" : "stretch"
               }}
             >
-              {(otherArticles.length ? otherArticles : leagueArticles).map((article, index) => (
+              {leagueArticles.map((article, index) => (
                 <Link
                   key={article.slug}
                   href={`/articles/${article.slug}/`}
