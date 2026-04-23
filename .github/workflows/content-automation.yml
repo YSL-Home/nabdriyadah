@@ -1,4 +1,4 @@
-name: Content Automation
+name: 🚀 Content Automation
 
 on:
   schedule:
@@ -16,29 +16,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node
+      - name: 🟢 Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm install
 
-      - name: Fetch news
-        run: npm run fetch:news
+      - name: 📰 Fetch news
+        run: node scripts/fetch-news.mjs
 
-      - name: Rewrite articles
-        run: npm run rewrite:articles
+      - name: ✍️ Rewrite articles
+        run: node scripts/rewrite-article.mjs
 
-      - name: Commit and push if changed
+      - name: 🖼️ Generate article visuals
+        run: node scripts/generate-article-images.mjs
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: 🧹 Clean git cache
+        run: |
+          rm -rf node_modules .next out
+          git rm -r --cached --ignore-unmatch node_modules .next out
+
+      - name: 💾 Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions@github.com"
-          git add -A
-          git diff --cached --quiet || git commit -m "auto: update seo articles"
+          git add content/articles/seo-articles.json
+          git add content/raw-news.json
+          git add public/generated
+          git diff --cached --quiet || git commit -m "auto: update articles and visuals"
           git push
