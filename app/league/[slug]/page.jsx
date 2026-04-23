@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
+import AdSlot from "../../components/AdSlot";
 
 const leagueMap = {
   "premier-league": {
@@ -28,12 +29,12 @@ const leagueMap = {
       "تحليلات المباريات والنتائج والسباق على القمة"
     ],
     teams: [
-      { name: "مانشستر سيتي", logo: "/teams/premier-league/manchester-city.png" },
-      { name: "مانشستر يونايتد", logo: "/teams/premier-league/manchester-united.png" },
-      { name: "ليفربول", logo: "/teams/premier-league/liverpool.png" },
-      { name: "آرسنال", logo: "/teams/premier-league/arsenal.png" },
-      { name: "تشيلسي", logo: "/teams/premier-league/chelsea.png" },
-      { name: "توتنهام", logo: "/teams/premier-league/tottenham.png" }
+      { name: "مانشستر سيتي", slug: "manchester-city", logo: "/teams/premier-league/manchester-city.png" },
+      { name: "مانشستر يونايتد", slug: "manchester-united", logo: "/teams/premier-league/manchester-united.png" },
+      { name: "ليفربول", slug: "liverpool", logo: "/teams/premier-league/liverpool.png" },
+      { name: "آرسنال", slug: "arsenal", logo: "/teams/premier-league/arsenal.png" },
+      { name: "تشيلسي", slug: "chelsea", logo: "/teams/premier-league/chelsea.png" },
+      { name: "توتنهام", slug: "tottenham", logo: "/teams/premier-league/tottenham.png" }
     ]
   },
   "la-liga": {
@@ -61,12 +62,12 @@ const leagueMap = {
       "ملفات المدربين والنجوم والنتائج"
     ],
     teams: [
-      { name: "ريال مدريد", logo: "/teams/la-liga/real-madrid.png" },
-      { name: "برشلونة", logo: "/teams/la-liga/barcelona.png" },
-      { name: "أتلتيكو مدريد", logo: "/teams/la-liga/atletico-madrid.png" },
-      { name: "إشبيلية", logo: "/teams/la-liga/sevilla.png" },
-      { name: "فالنسيا", logo: "/teams/la-liga/valencia.png" },
-      { name: "ريال سوسيداد", logo: "/teams/la-liga/real-sociedad.png" }
+      { name: "ريال مدريد", slug: "real-madrid", logo: "/teams/la-liga/real-madrid.png" },
+      { name: "برشلونة", slug: "barcelona", logo: "/teams/la-liga/barcelona.png" },
+      { name: "أتلتيكو مدريد", slug: "atletico-madrid", logo: "/teams/la-liga/atletico-madrid.png" },
+      { name: "إشبيلية", slug: "sevilla", logo: "/teams/la-liga/sevilla.png" },
+      { name: "فالنسيا", slug: "valencia", logo: "/teams/la-liga/valencia.png" },
+      { name: "ريال سوسيداد", slug: "real-sociedad", logo: "/teams/la-liga/real-sociedad.png" }
     ]
   }
 };
@@ -117,11 +118,7 @@ export default function LeaguePage({ params }) {
   }
 
   const theme = league.theme;
-
-  const leagueArticles = articles
-    .filter((article) => article.league === params.slug)
-    .slice(0, 12);
-
+  const leagueArticles = articles.filter((article) => article.league === params.slug).slice(0, 12);
   const featuredArticle = leagueArticles[0] || null;
 
   return (
@@ -186,9 +183,7 @@ export default function LeaguePage({ params }) {
                 padding: "22px",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 18px 34px rgba(0,0,0,0.14)",
-                backdropFilter: "blur(6px)"
+                justifyContent: "center"
               }}
             >
               <img
@@ -286,83 +281,61 @@ export default function LeaguePage({ params }) {
           </div>
         </section>
 
+        <AdSlot label="مساحة إعلانية أعلى صفحة البطولة" minHeight={90} style={{ marginBottom: 24 }} />
+
         <section
           style={{
-            display: "grid",
-            gridTemplateColumns: "0.95fr 1.05fr",
-            gap: "24px",
-            marginBottom: "28px"
+            background: theme.cardBg,
+            borderRadius: "28px",
+            padding: "24px",
+            border: `1px solid ${theme.border}`,
+            boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
+            marginBottom: "24px"
           }}
         >
           <div
             style={{
-              background: theme.cardBg,
-              borderRadius: "28px",
-              padding: "28px",
-              border: `1px solid ${theme.border}`,
-              boxShadow: "0 12px 30px rgba(0,0,0,0.05)"
+              color: theme.primary,
+              fontSize: "14px",
+              fontWeight: 700,
+              marginBottom: "12px"
             }}
           >
-            <div
-              style={{
-                color: theme.primary,
-                fontSize: "14px",
-                fontWeight: 700,
-                marginBottom: "10px"
-              }}
-            >
-              أندية بارزة في البطولة
-            </div>
+            الأندية الكبرى في البطولة
+          </div>
 
-            <h2
-              style={{
-                margin: "0 0 14px 0",
-                fontSize: "34px",
-                lineHeight: 1.4,
-                fontWeight: 800,
-                color: theme.text
-              }}
-            >
-              {league.title}
-            </h2>
-
-            <p
-              style={{
-                margin: "0 0 18px 0",
-                color: theme.subtext,
-                fontSize: "18px",
-                lineHeight: 1.95
-              }}
-            >
-              هذه الصفحة تعرض أهم مواد {league.title} داخل الموقع، مع هوية بصرية
-              خاصة بالبطولة وروابط مباشرة على أبرز الملفات المرتبطة بها.
-            </p>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: "12px",
-                marginTop: "20px"
-              }}
-            >
-              {league.teams.map((team, index) => (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+              gap: "14px"
+            }}
+          >
+            {league.teams.map((team) => (
+              <Link
+                key={team.slug}
+                href={`/team/${team.slug}/`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit"
+                }}
+              >
                 <div
-                  key={index}
                   style={{
                     background: theme.primarySoft,
                     border: `1px solid ${theme.border}`,
-                    borderRadius: "18px",
+                    borderRadius: "20px",
                     padding: "14px 12px",
-                    textAlign: "center"
+                    textAlign: "center",
+                    transition: "0.2s ease"
                   }}
                 >
                   <img
                     src={team.logo}
                     alt={team.name}
                     style={{
-                      width: "54px",
-                      height: "54px",
+                      width: "56px",
+                      height: "56px",
                       objectFit: "contain",
                       display: "block",
                       margin: "0 auto 10px"
@@ -379,10 +352,19 @@ export default function LeaguePage({ params }) {
                     {team.name}
                   </div>
                 </div>
-              ))}
-            </div>
+              </Link>
+            ))}
           </div>
+        </section>
 
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.1fr 0.9fr",
+            gap: "24px",
+            marginBottom: "28px"
+          }}
+        >
           {featuredArticle ? (
             <Link
               href={`/articles/${featuredArticle.slug}/`}
@@ -451,7 +433,78 @@ export default function LeaguePage({ params }) {
               </article>
             </Link>
           ) : null}
+
+          <div
+            style={{
+              background: theme.cardBg,
+              borderRadius: "28px",
+              padding: "28px",
+              border: `1px solid ${theme.border}`,
+              boxShadow: "0 12px 30px rgba(0,0,0,0.05)"
+            }}
+          >
+            <div
+              style={{
+                color: theme.primary,
+                fontSize: "14px",
+                fontWeight: 700,
+                marginBottom: "10px"
+              }}
+            >
+              هوية القسم
+            </div>
+
+            <h2
+              style={{
+                margin: "0 0 14px 0",
+                fontSize: "34px",
+                lineHeight: 1.4,
+                fontWeight: 800,
+                color: theme.text
+              }}
+            >
+              {league.title}
+            </h2>
+
+            <p
+              style={{
+                margin: "0 0 18px 0",
+                color: theme.subtext,
+                fontSize: "18px",
+                lineHeight: 1.95
+              }}
+            >
+              هذه الصفحة مخصصة لتجميع أبرز مواد {league.title} داخل الموقع، مع هوية
+              بصرية خاصة بالبطولة وربط مباشر بصفحات الأندية والمقالات ذات الصلة.
+            </p>
+
+            <div
+              style={{
+                display: "grid",
+                gap: "12px"
+              }}
+            >
+              {league.highlights.map((item, index) => (
+                <div
+                  key={index}
+                  style={{
+                    background: theme.primarySoft,
+                    border: `1px solid ${theme.border}`,
+                    color: theme.primary,
+                    padding: "12px 14px",
+                    borderRadius: "16px",
+                    fontSize: "15px",
+                    fontWeight: 700
+                  }}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
+
+        <AdSlot label="مساحة إعلانية وسط صفحة البطولة" minHeight={120} style={{ marginBottom: 24 }} />
 
         {leagueArticles.length === 0 ? (
           <section
