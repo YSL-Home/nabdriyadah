@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
 
 const teams = {
@@ -364,8 +365,7 @@ export default function TeamPage({ params }) {
     pageBg: "#f8fafc",
     heroFrom: team.colorFrom,
     heroTo: team.colorTo,
-    primary: team.accent,
-    primarySoft: "rgba(255,255,255,0.16)",
+    accent: team.accent,
     border: "#e5e7eb",
     cardBg: "#ffffff",
     text: "#111827",
@@ -507,6 +507,8 @@ export default function TeamPage({ params }) {
           </div>
         </section>
 
+        <AdSlot label="مساحة إعلانية أعلى صفحة الفريق" minHeight={90} style={{ marginBottom: 24 }} />
+
         <section
           style={{
             display: "grid",
@@ -523,7 +525,7 @@ export default function TeamPage({ params }) {
               border: "1px solid #e5e7eb"
             }}
           >
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
+            <div style={{ color: theme.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
               سنة التأسيس
             </div>
             <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.founded}</div>
@@ -537,7 +539,7 @@ export default function TeamPage({ params }) {
               border: "1px solid #e5e7eb"
             }}
           >
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
+            <div style={{ color: theme.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
               الملعب
             </div>
             <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.stadium}</div>
@@ -551,7 +553,7 @@ export default function TeamPage({ params }) {
               border: "1px solid #e5e7eb"
             }}
           >
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
+            <div style={{ color: theme.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
               المدينة
             </div>
             <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.city}</div>
@@ -565,7 +567,7 @@ export default function TeamPage({ params }) {
               border: "1px solid #e5e7eb"
             }}
           >
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
+            <div style={{ color: theme.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>
               البطولة
             </div>
             <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.leagueName}</div>
@@ -703,6 +705,8 @@ export default function TeamPage({ params }) {
           </div>
         </section>
 
+        <AdSlot label="مساحة إعلانية وسط صفحة الفريق" minHeight={120} style={{ marginBottom: 24 }} />
+
         <section
           style={{
             background: theme.cardBg,
@@ -774,8 +778,8 @@ export default function TeamPage({ params }) {
               lineHeight: 1.9
             }}
           >
-            لإثراء هذه الصفحة بصور وفيديوهات أكثر، يمكن لاحقًا إضافة مواد رسمية من
-            الموقع الرسمي أو قناة النادي الرسمية مع الحفاظ على أفضل تجربة قراءة.
+            يمكن لاحقًا توسيع هذه الصفحة بصور وفيديوهات إضافية من المصادر الرسمية
+            للنادي، مع الحفاظ على تجربة قراءة نظيفة وسريعة.
           </p>
 
           <div
