@@ -6,14 +6,7 @@ export default function AdSlot({
   style = {}
 }) {
   if (!ADS_ENABLED) {
-    return (
-      <div
-        style={{
-          display: "none",
-          minHeight
-        }}
-      />
-    );
+    return <div style={{ display: "none", minHeight }} />;
   }
 
   return (
