@@ -1,12 +1,19 @@
 const ADS_ENABLED = false;
 
 export default function AdSlot({
-  label = "مساحة إعلانية",
+  label = "إعلان",
   minHeight = 120,
   style = {}
 }) {
   if (!ADS_ENABLED) {
-    return null;
+    return (
+      <div
+        style={{
+          display: "none",
+          minHeight
+        }}
+      />
+    );
   }
 
   return (
