@@ -2,6 +2,65 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 
+const leagueBranding = {
+  "premier-league": {
+    title: "الدوري الإنجليزي الممتاز",
+    leagueLogo: "/leagues/premier-league.png",
+    teams: [
+      { name: "مانشستر سيتي", logo: "/teams/premier-league/manchester-city.png" },
+      { name: "مانشستر يونايتد", logo: "/teams/premier-league/manchester-united.png" },
+      { name: "ليفربول", logo: "/teams/premier-league/liverpool.png" },
+      { name: "آرسنال", logo: "/teams/premier-league/arsenal.png" },
+      { name: "تشيلسي", logo: "/teams/premier-league/chelsea.png" },
+      { name: "توتنهام", logo: "/teams/premier-league/tottenham.png" }
+    ],
+    theme: {
+      bg: "#f6f0ff",
+      primary: "#6d28d9",
+      primarySoft: "#ede9fe",
+      border: "#ddd6fe",
+      text: "#111827",
+      subtext: "#4b5563",
+      surface: "#ffffff"
+    }
+  },
+  "la-liga": {
+    title: "الدوري الإسباني",
+    leagueLogo: "/leagues/la-liga.png",
+    teams: [
+      { name: "ريال مدريد", logo: "/teams/la-liga/real-madrid.png" },
+      { name: "برشلونة", logo: "/teams/la-liga/barcelona.png" },
+      { name: "أتلتيكو مدريد", logo: "/teams/la-liga/atletico-madrid.png" },
+      { name: "إشبيلية", logo: "/teams/la-liga/sevilla.png" },
+      { name: "فالنسيا", logo: "/teams/la-liga/valencia.png" },
+      { name: "ريال سوسيداد", logo: "/teams/la-liga/real-sociedad.png" }
+    ],
+    theme: {
+      bg: "#fff7ed",
+      primary: "#ea580c",
+      primarySoft: "#ffedd5",
+      border: "#fed7aa",
+      text: "#111827",
+      subtext: "#4b5563",
+      surface: "#ffffff"
+    }
+  },
+  mixed: {
+    title: "كرة القدم",
+    leagueLogo: "/logo.svg",
+    teams: [],
+    theme: {
+      bg: "#f3f4f6",
+      primary: "#2563eb",
+      primarySoft: "#eff6ff",
+      border: "#dbeafe",
+      text: "#111827",
+      subtext: "#4b5563",
+      surface: "#ffffff"
+    }
+  }
+};
+
 export function generateStaticParams() {
   return articles.map((article) => ({
     slug: article.slug
@@ -68,6 +127,9 @@ export default function ArticlePage({ params }) {
     notFound();
   }
 
+  const branding = leagueBranding[article.league] || leagueBranding.mixed;
+  const theme = branding.theme;
+
   const relatedArticles = articles
     .filter((item) => item.slug !== article.slug)
     .map((item) => ({ ...item, score: scoreRelatedness(article, item) }))
@@ -78,7 +140,7 @@ export default function ArticlePage({ params }) {
     <main
       style={{
         minHeight: "100vh",
-        background: "#f3f4f6",
+        background: theme.bg,
         padding: "32px 20px 48px",
         direction: "rtl"
       }}
@@ -95,41 +157,136 @@ export default function ArticlePage({ params }) {
           <aside style={{ display: "grid", gap: "22px" }}>
             <section
               style={{
-                background: "white",
+                background: theme.surface,
                 borderRadius: "24px",
                 padding: "24px",
-                border: "1px solid #e5e7eb",
+                border: `1px solid ${theme.border}`,
                 boxShadow: "0 10px 26px rgba(0,0,0,0.04)"
               }}
             >
-              <h2
+              <div
                 style={{
-                  margin: "0 0 16px 0",
-                  fontSize: "24px",
-                  fontWeight: 800
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  marginBottom: "16px"
                 }}
               >
-                موضوع المقال
-              </h2>
+                <img
+                  src={branding.leagueLogo}
+                  alt={branding.title}
+                  style={{
+                    width: "54px",
+                    height: "54px",
+                    objectFit: "contain",
+                    display: "block"
+                  }}
+                />
+                <div>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: theme.primary
+                    }}
+                  >
+                    البطولة
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: 800,
+                      color: theme.text
+                    }}
+                  >
+                    {branding.title}
+                  </div>
+                </div>
+              </div>
 
               <div
                 style={{
-                  color: "#4b5563",
+                  color: theme.subtext,
                   fontSize: "16px",
                   lineHeight: 1.95
                 }}
               >
-                يتناول هذا المقال آخر المستجدات المرتبطة بـ {leagueLabel(article.league)} مع
+                يتناول هذا المقال آخر المستجدات المرتبطة بـ {branding.title} مع
                 متابعة لأهم التفاصيل والخلفيات المرتبطة بالخبر.
               </div>
             </section>
 
+            {branding.teams.length > 0 ? (
+              <section
+                style={{
+                  background: theme.surface,
+                  borderRadius: "24px",
+                  padding: "24px",
+                  border: `1px solid ${theme.border}`,
+                  boxShadow: "0 10px 26px rgba(0,0,0,0.04)"
+                }}
+              >
+                <h2
+                  style={{
+                    margin: "0 0 16px 0",
+                    fontSize: "24px",
+                    fontWeight: 800
+                  }}
+                >
+                  أندية بارزة
+                </h2>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                    gap: "12px"
+                  }}
+                >
+                  {branding.teams.map((team, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        background: theme.primarySoft,
+                        border: `1px solid ${theme.border}`,
+                        borderRadius: "18px",
+                        padding: "12px 10px",
+                        textAlign: "center"
+                      }}
+                    >
+                      <img
+                        src={team.logo}
+                        alt={team.name}
+                        style={{
+                          width: "46px",
+                          height: "46px",
+                          objectFit: "contain",
+                          display: "block",
+                          margin: "0 auto 8px"
+                        }}
+                      />
+                      <div
+                        style={{
+                          color: theme.primary,
+                          fontSize: "13px",
+                          fontWeight: 700,
+                          lineHeight: 1.6
+                        }}
+                      >
+                        {team.name}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
             <section
               style={{
-                background: "white",
+                background: theme.surface,
                 borderRadius: "24px",
                 padding: "24px",
-                border: "1px solid #e5e7eb",
+                border: `1px solid ${theme.border}`,
                 boxShadow: "0 10px 26px rgba(0,0,0,0.04)"
               }}
             >
@@ -168,7 +325,7 @@ export default function ArticlePage({ params }) {
 
                     <div
                       style={{
-                        color: "#6b7280",
+                        color: theme.subtext,
                         fontSize: "14px",
                         lineHeight: 1.8
                       }}
@@ -183,10 +340,10 @@ export default function ArticlePage({ params }) {
 
           <article
             style={{
-              background: "white",
+              background: theme.surface,
               borderRadius: "28px",
               overflow: "hidden",
-              border: "1px solid #e5e7eb",
+              border: `1px solid ${theme.border}`,
               boxShadow: "0 14px 34px rgba(0,0,0,0.05)"
             }}
           >
@@ -214,7 +371,7 @@ export default function ArticlePage({ params }) {
                 <Link
                   href="/"
                   style={{
-                    color: "#2563eb",
+                    color: theme.primary,
                     textDecoration: "none",
                     fontWeight: 700,
                     fontSize: "14px"
@@ -226,9 +383,15 @@ export default function ArticlePage({ params }) {
                 <span style={{ color: "#9ca3af" }}>←</span>
 
                 <Link
-                  href={article.league === "premier-league" ? "/league/premier-league/" : article.league === "la-liga" ? "/league/la-liga/" : "/"}
+                  href={
+                    article.league === "premier-league"
+                      ? "/league/premier-league/"
+                      : article.league === "la-liga"
+                      ? "/league/la-liga/"
+                      : "/"
+                  }
                   style={{
-                    color: "#2563eb",
+                    color: theme.primary,
                     textDecoration: "none",
                     fontWeight: 700,
                     fontSize: "14px"
@@ -240,17 +403,35 @@ export default function ArticlePage({ params }) {
 
               <div
                 style={{
-                  display: "inline-block",
-                  marginBottom: "14px",
-                  padding: "8px 14px",
-                  borderRadius: "999px",
-                  background: "#eff6ff",
-                  color: "#2563eb",
-                  fontSize: "13px",
-                  fontWeight: 700
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  marginBottom: "16px"
                 }}
               >
-                {leagueLabel(article.league)}
+                <img
+                  src={branding.leagueLogo}
+                  alt={branding.title}
+                  style={{
+                    width: "52px",
+                    height: "52px",
+                    objectFit: "contain",
+                    display: "block"
+                  }}
+                />
+                <div
+                  style={{
+                    display: "inline-block",
+                    padding: "8px 14px",
+                    borderRadius: "999px",
+                    background: theme.primarySoft,
+                    color: theme.primary,
+                    fontSize: "13px",
+                    fontWeight: 700
+                  }}
+                >
+                  {branding.title}
+                </div>
               </div>
 
               <h1
@@ -259,7 +440,7 @@ export default function ArticlePage({ params }) {
                   fontSize: "48px",
                   lineHeight: 1.45,
                   fontWeight: 800,
-                  color: "#111827"
+                  color: theme.text
                 }}
               >
                 {article.title}
@@ -270,7 +451,7 @@ export default function ArticlePage({ params }) {
                   margin: "0 0 22px 0",
                   fontSize: "22px",
                   lineHeight: 2,
-                  color: "#4b5563"
+                  color: theme.subtext
                 }}
               >
                 {article.description}
@@ -290,8 +471,8 @@ export default function ArticlePage({ params }) {
                     style={{
                       padding: "8px 12px",
                       borderRadius: "999px",
-                      background: "#f3f4f6",
-                      color: "#374151",
+                      background: theme.primarySoft,
+                      color: theme.primary,
                       fontSize: "14px",
                       fontWeight: 700
                     }}
@@ -304,7 +485,7 @@ export default function ArticlePage({ params }) {
               <div
                 style={{
                   background: "#f8fafc",
-                  border: "1px solid #e5e7eb",
+                  border: `1px solid ${theme.border}`,
                   borderRadius: "20px",
                   padding: "20px 22px",
                   marginBottom: "28px"
@@ -314,7 +495,7 @@ export default function ArticlePage({ params }) {
                   style={{
                     fontSize: "15px",
                     fontWeight: 800,
-                    color: "#111827",
+                    color: theme.text,
                     marginBottom: "8px"
                   }}
                 >
@@ -323,7 +504,7 @@ export default function ArticlePage({ params }) {
 
                 <div
                   style={{
-                    color: "#4b5563",
+                    color: theme.subtext,
                     fontSize: "17px",
                     lineHeight: 1.9
                   }}
@@ -335,7 +516,7 @@ export default function ArticlePage({ params }) {
               <div
                 style={{
                   height: "1px",
-                  background: "#e5e7eb",
+                  background: theme.border,
                   marginBottom: "28px"
                 }}
               />
@@ -344,7 +525,7 @@ export default function ArticlePage({ params }) {
                 style={{
                   fontSize: "20px",
                   lineHeight: 2.15,
-                  color: "#111827",
+                  color: theme.text,
                   whiteSpace: "pre-wrap"
                 }}
               >
