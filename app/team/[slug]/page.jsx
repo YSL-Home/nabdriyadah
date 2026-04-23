@@ -537,9 +537,9 @@ const teamsData = {
       "خوسيه غايا",
       "خافي غيرا",
       "هوغو دورو",
-      "أندري ألميادا",
       "أندريه ألميدا",
-      "دييغو لوبيز"
+      "دييغو لوبيز",
+      "ماما داشفيلي"
     ],
     legends: [
       "دافيد فيا",
@@ -584,9 +584,9 @@ const teamsData = {
     players: [
       "ميكيل أويارزابال",
       "تاكيفوسا كوبو",
-      "ميرينو",
+      "ميكيل ميرينو",
       "زوبيلديا",
-      "سوبيميندي",
+      "زوبيميندي",
       "ريميرو"
     ],
     legends: [
@@ -852,7 +852,7 @@ export default function TeamPage({ params }) {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "1.1fr 0.9fr",
+            gridTemplateColumns: "1.15fr 0.85fr",
             gap: "24px",
             marginBottom: "28px"
           }}
