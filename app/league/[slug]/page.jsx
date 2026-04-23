@@ -304,56 +304,60 @@ export default function LeaguePage({ params }) {
             الأندية الكبرى في البطولة
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
-              gap: "14px"
-            }}
-          >
-            {league.teams.map((team) => (
-              <Link
-                key={team.slug}
-                href={`/team/${team.slug}/`}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit"
-                }}
-              >
-                <div
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div
+              style={{
+                width: "50%",
+                minWidth: "320px",
+                display: "grid",
+                gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+                gap: "14px"
+              }}
+            >
+              {league.teams.map((team) => (
+                <Link
+                  key={team.slug}
+                  href={`/team/${team.slug}/`}
                   style={{
-                    background: theme.primarySoft,
-                    border: `1px solid ${theme.border}`,
-                    borderRadius: "20px",
-                    padding: "14px 12px",
-                    textAlign: "center",
-                    transition: "0.2s ease"
+                    textDecoration: "none",
+                    color: "inherit"
                   }}
                 >
-                  <img
-                    src={team.logo}
-                    alt={team.name}
-                    style={{
-                      width: "56px",
-                      height: "56px",
-                      objectFit: "contain",
-                      display: "block",
-                      margin: "0 auto 10px"
-                    }}
-                  />
                   <div
                     style={{
-                      color: theme.primary,
-                      fontSize: "14px",
-                      fontWeight: 700,
-                      lineHeight: 1.6
+                      background: theme.primarySoft,
+                      border: `1px solid ${theme.border}`,
+                      borderRadius: "20px",
+                      padding: "12px 8px",
+                      textAlign: "center",
+                      transition: "0.2s ease"
                     }}
                   >
-                    {team.name}
+                    <img
+                      src={team.logo}
+                      alt={team.name}
+                      style={{
+                        width: "46px",
+                        height: "46px",
+                        objectFit: "contain",
+                        display: "block",
+                        margin: "0 auto 8px"
+                      }}
+                    />
+                    <div
+                      style={{
+                        color: theme.primary,
+                        fontSize: "12px",
+                        fontWeight: 700,
+                        lineHeight: 1.5
+                      }}
+                    >
+                      {team.name}
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
