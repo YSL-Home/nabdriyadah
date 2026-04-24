@@ -204,7 +204,7 @@ export default function LivePage() {
         </section>
 
         {/* ── FILTERS ── */}
-        <section style={{ background:"white", borderRadius:"20px", padding:"18px 22px", marginBottom:"22px", boxShadow:"0 4px 14px rgba(0,0,0,0.05)", display:"flex", gap:"18px", alignItems:"flex-end", flexWrap:"wrap" }}>
+        <section className="filters-bar" style={{ background:"white", borderRadius:"20px", padding:"18px 22px", marginBottom:"22px", boxShadow:"0 4px 14px rgba(0,0,0,0.05)" }}>
 
           {/* Date filter */}
           <div style={{ display:"flex", flexDirection:"column", gap:"6px" }}>
@@ -278,7 +278,7 @@ export default function LivePage() {
               <span style={{ width:"10px", height:"10px", borderRadius:"50%", background:"#16a34a", boxShadow:"0 0 8px #16a34a", display:"inline-block" }} />
               <h2 style={{ margin:0, fontSize:"24px", fontWeight:800 }}>جارية الآن ({ar(filteredLive.length)})</h2>
             </div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(420px,1fr))", gap:"14px" }}>
+            <div className="match-grid">
               {filteredLive.map(m => <MatchCard key={m.fixture?.id} match={m} />)}
             </div>
           </section>
@@ -290,7 +290,7 @@ export default function LivePage() {
             <h2 style={{ margin:"0 0 14px", fontSize:"24px", fontWeight:800 }}>
               {isToday ? "مباريات اليوم" : "مباريات"} ({ar(filteredMatches.length)})
             </h2>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(420px,1fr))", gap:"14px" }}>
+            <div className="match-grid">
               {filteredMatches
                 .sort((a, b) => (a.fixture?.timestamp || 0) - (b.fixture?.timestamp || 0))
                 .map(m => <MatchCard key={m.fixture?.id} match={m} />)}

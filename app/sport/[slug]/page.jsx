@@ -138,7 +138,7 @@ export default function SportPage({ params }) {
               <Link href="/" style={{ display: "inline-block", textDecoration: "none", color: "white", fontWeight: 700, fontSize: "14px", opacity: 0.9, marginBottom: "16px" }}>← الرئيسية</Link>
               <div style={{ display: "flex", alignItems: "center", gap: "18px", marginBottom: "14px" }}>
                 <span style={{ fontSize: "64px" }}>{sport.icon}</span>
-                <h1 style={{ margin: 0, fontSize: "56px", lineHeight: 1.2, fontWeight: 800 }}>{sport.title}</h1>
+                <h1 className="th1" style={{ margin: 0 }}>{sport.title}</h1>
               </div>
               <p style={{ margin: "0 0 20px 0", maxWidth: "800px", fontSize: "20px", lineHeight: 1.9, opacity: 0.95 }}>{sport.description}</p>
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -152,7 +152,7 @@ export default function SportPage({ params }) {
           {/* Leagues Grid */}
           <section style={{ marginBottom: "24px" }}>
             <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>الدوريات الكبرى</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "16px" }}>
+            <div className="g4">
               {footballLeagues.map((league) => (
                 <Link key={league.slug} href={`/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: "white", border: `1px solid #e5e7eb`, borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", borderTop: `4px solid ${league.color}` }}>
@@ -172,7 +172,7 @@ export default function SportPage({ params }) {
           {/* Global Competitions */}
           <section style={{ marginBottom: "28px" }}>
             <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>البطولات الدولية والقارية</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", gap: "16px" }}>
+            <div className="g5">
               {globalCompetitions.map((comp) => (
                 <Link key={comp.slug} href={`/league/${comp.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: "white", border: `1px solid #e5e7eb`, borderRadius: "22px", padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", textAlign: "center", borderTop: `4px solid ${comp.color}` }}>
@@ -193,7 +193,7 @@ export default function SportPage({ params }) {
           {sportArticles.length > 0 && (
             <section>
               <h2 style={{ margin: "0 0 18px 0", fontSize: "30px", fontWeight: 800, color: "#111827" }}>أحدث أخبار كرة القدم</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "20px" }}>
+              <div className="g4">
                 {sportArticles.map((a) => (
                   <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                     <article style={{ background: "white", borderRadius: "22px", overflow: "hidden", border: "1px solid #e5e7eb", height: "100%" }}>
@@ -240,7 +240,7 @@ export default function SportPage({ params }) {
 
             <div style={{ display: "flex", alignItems: "center", gap: "18px", marginBottom: "16px" }}>
               <span style={{ fontSize: "64px" }}>{sport.icon}</span>
-              <h1 style={{ margin: 0, fontSize: "56px", lineHeight: 1.2, fontWeight: 800 }}>{sport.title}</h1>
+              <h1 className="th1" style={{ margin: 0 }}>{sport.title}</h1>
             </div>
 
             <p style={{ margin: "0 0 20px 0", maxWidth: "800px", fontSize: "20px", lineHeight: 1.9, opacity: 0.95 }}>
@@ -271,7 +271,7 @@ export default function SportPage({ params }) {
           <>
             {/* Featured + sidebar */}
             {featuredArticle && (
-              <section style={{ display: "grid", gridTemplateColumns: "1.3fr 0.7fr", gap: "24px", marginBottom: "28px" }}>
+              <section className="gfeat" style={{ marginBottom: "28px" }}>
                 <Link href={`/articles/${featuredArticle.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <article style={{ background: "white", borderRadius: "28px", overflow: "hidden", border: `1px solid ${sport.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", height: "100%" }}>
                     <img src={featuredArticle.image} alt={featuredArticle.title} style={{ width: "100%", height: "360px", objectFit: "cover", display: "block" }} />
@@ -313,7 +313,7 @@ export default function SportPage({ params }) {
                 <h2 style={{ margin: "0 0 18px 0", fontSize: "34px", fontWeight: 800, color: "#111827" }}>
                   مزيد من أخبار {sport.title}
                 </h2>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "20px" }}>
+                <div className="g3">
                   {restArticles.slice(3).map((a) => (
                     <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                       <article style={{ background: "white", borderRadius: "24px", overflow: "hidden", border: `1px solid ${sport.border}`, height: "100%" }}>

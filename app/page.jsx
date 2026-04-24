@@ -75,7 +75,7 @@ export default function HomePage() {
             <div style={{ display: "inline-block", background: "rgba(255,255,255,0.14)", padding: "10px 16px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, marginBottom: "18px" }}>
               منصة رياضية عربية متعددة الرياضات
             </div>
-            <h1 style={{ margin: "0 0 14px 0", fontSize: "64px", lineHeight: 1.15, fontWeight: 800 }}>نبض الرياضة</h1>
+            <h1 className="th" style={{ margin: "0 0 14px 0" }}>نبض الرياضة</h1>
             <p style={{ margin: 0, maxWidth: "800px", fontSize: "22px", lineHeight: 1.9, opacity: 0.95 }}>
               تغطية عربية يومية لكرة القدم، كرة السلة، التنس، البادل، وكرة قدم الصالات — كل الرياضة في مكان واحد.
             </p>
@@ -85,7 +85,7 @@ export default function HomePage() {
         {/* Sports navigation */}
         <section style={{ marginBottom: "30px" }}>
           <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>الأقسام الرياضية</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", gap: "16px" }}>
+          <div className="g5">
             {sportCards.map((card) => (
               <Link key={card.slug} href={card.href} style={{ textDecoration: "none", color: "inherit" }}>
                 <div style={{ background: card.bg, border: `1px solid ${card.border}`, borderRadius: "24px", padding: "24px 16px", textAlign: "center" }}>
@@ -103,7 +103,7 @@ export default function HomePage() {
             <h2 style={{ margin: 0, fontSize: "36px", fontWeight: 800, color: "#111827" }}>أحدث الأخبار</h2>
             <div style={{ color: "#6b7280", fontSize: "15px" }}>آخر المواد المنشورة</div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "22px" }}>
+          <div className="g4">
             {latest.map((article) => {
               const { bg, color } = sportColor(article.league, article.sport);
               return (
@@ -125,7 +125,7 @@ export default function HomePage() {
         </section>
 
         {/* Football + Other sports */}
-        <section style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "26px" }}>
+        <section className="g2">
           <div style={{ background: "white", borderRadius: "24px", padding: "24px", border: "1px solid #e5e7eb", boxShadow: "0 10px 26px rgba(0,0,0,0.04)" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>⚽ كرة القدم</h2>

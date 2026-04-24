@@ -67,7 +67,7 @@ export default function PlayerPage({ params }) {
             <span>{p.nameAr}</span>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+          <div className="player-hero-flex">
             {/* Photo */}
             <div style={{
               width: "140px", height: "140px", borderRadius: "50%",

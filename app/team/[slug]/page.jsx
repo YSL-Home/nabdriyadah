@@ -1352,7 +1352,7 @@ export default function TeamPage({ params }) {
         <AdSlot label="مساحة إعلانية" minHeight={90} style={{ marginBottom: 24 }} />
 
         {/* ── QUICK STATS BAR ── */}
-        <section style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0,1fr))", gap: "18px", marginBottom: "26px" }}>
+        <section className="g4" style={{ marginBottom: "26px" }}>
           {[
             { label: "سنة التأسيس", value: team.founded, icon: "📅" },
             { label: "الملعب", value: team.stadium, icon: "🏟️" },
@@ -1373,7 +1373,7 @@ export default function TeamPage({ params }) {
         </section>
 
         {/* ── HISTORY + PALMARÈS ── */}
-        <section style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "22px", marginBottom: "26px" }}>
+        <section className="gfeat" style={{ marginBottom: "26px" }}>
 
           {/* History */}
           <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
@@ -1418,7 +1418,7 @@ export default function TeamPage({ params }) {
               <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>أبرز اللاعبين الحاليين</h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0,1fr))", gap: "10px" }}>
+            <div className="g2" style={{ gap: "10px" }}>
               {players.map((player, i) => (
                 <Link key={i} href={`/player/${params.slug}--player--${i}/`} style={{ textDecoration: "none" }}>
                   <div style={{
@@ -1444,7 +1444,7 @@ export default function TeamPage({ params }) {
               <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>أساطير النادي</h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0,1fr))", gap: "10px" }}>
+            <div className="g2" style={{ gap: "10px" }}>
               {legends.map((legend, i) => (
                 <Link key={i} href={`/player/${params.slug}--legend--${i}/`} style={{ textDecoration: "none" }}>
                   <div style={{
@@ -1471,7 +1471,7 @@ export default function TeamPage({ params }) {
               <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>الجهاز الفني</h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0,1fr))", gap: "12px" }}>
+            <div className="g4" style={{ gap: "12px" }}>
               {staff.map((s, i) => (
                 <Link key={i} href={`/player/${params.slug}--staff--${i}/`} style={{ textDecoration: "none" }}>
                   <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
@@ -1604,7 +1604,7 @@ export default function TeamPage({ params }) {
               سيتم ربط الأخبار المتعلقة بـ {team.name} تلقائياً مع نمو المحتوى.
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0,1fr))", gap: "18px" }}>
+            <div className="g3" style={{ gap: "18px" }}>
               {teamArticles.map((item) => (
                 <Link key={item.slug} href={`/articles/${item.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <article style={{ background: accentSoft, borderRadius: "20px", overflow: "hidden", border: `1px solid ${accentMid}`, height: "100%" }}>
