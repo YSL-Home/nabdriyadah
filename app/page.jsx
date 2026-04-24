@@ -9,17 +9,22 @@ export const metadata = {
 };
 
 const sportCards = [
-  { slug: "premier-league", href: "/league/premier-league/", title: "الدوري الإنجليزي الممتاز", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", color: "#6d28d9", bg: "#ede9fe", border: "#ddd6fe" },
-  { slug: "la-liga", href: "/league/la-liga/", title: "الدوري الإسباني", icon: "🇪🇸", color: "#ea580c", bg: "#fff7ed", border: "#fed7aa" },
+  { slug: "football", href: "/sport/football/", title: "كرة القدم", icon: "⚽", color: "#1d4ed8", bg: "#eff6ff", border: "#bfdbfe" },
   { slug: "basketball", href: "/sport/basketball/", title: "كرة السلة", icon: "🏀", color: "#c2410c", bg: "#fff7ed", border: "#fed7aa" },
   { slug: "tennis", href: "/sport/tennis/", title: "التنس", icon: "🎾", color: "#15803d", bg: "#f0fdf4", border: "#bbf7d0" },
-  { slug: "padel", href: "/sport/padel/", title: "البادل", icon: "🏸", color: "#1d4ed8", bg: "#eff6ff", border: "#bfdbfe" },
-  { slug: "futsal", href: "/sport/futsal/", title: "كرة قدم الصالات", icon: "⚽", color: "#7c3aed", bg: "#f5f3ff", border: "#ddd6fe" }
+  { slug: "padel", href: "/sport/padel/", title: "البادل", icon: "🏸", color: "#7c3aed", bg: "#f5f3ff", border: "#ddd6fe" },
+  { slug: "futsal", href: "/sport/futsal/", title: "كرة قدم الصالات", icon: "🥅", color: "#0f766e", bg: "#f0fdfa", border: "#99f6e4" }
 ];
 
 function sportLabelAr(league, sport) {
   if (league === "premier-league") return "الدوري الإنجليزي";
   if (league === "la-liga") return "الدوري الإسباني";
+  if (league === "bundesliga") return "البوندسليغا";
+  if (league === "serie-a") return "السيريا آ";
+  if (league === "ligue-1") return "الليغ 1";
+  if (league === "champions-league") return "أبطال أوروبا";
+  if (league === "saudi-pro-league") return "الدوري السعودي";
+  if (league === "eredivisie") return "إريديفيزي";
   if (sport === "basketball") return "كرة السلة";
   if (sport === "tennis") return "التنس";
   if (sport === "padel") return "البادل";
@@ -30,11 +35,16 @@ function sportLabelAr(league, sport) {
 function sportColor(league, sport) {
   if (league === "premier-league") return { bg: "#ede9fe", color: "#6d28d9" };
   if (league === "la-liga") return { bg: "#fff7ed", color: "#ea580c" };
+  if (league === "bundesliga") return { bg: "#fee2e2", color: "#dc2626" };
+  if (league === "serie-a") return { bg: "#fef3c7", color: "#b45309" };
+  if (league === "ligue-1") return { bg: "#dbeafe", color: "#1d4ed8" };
+  if (league === "champions-league") return { bg: "#fef9c3", color: "#854d0e" };
+  if (league === "saudi-pro-league") return { bg: "#dcfce7", color: "#15803d" };
   if (sport === "basketball") return { bg: "#fff7ed", color: "#c2410c" };
   if (sport === "tennis") return { bg: "#f0fdf4", color: "#15803d" };
-  if (sport === "padel") return { bg: "#eff6ff", color: "#1d4ed8" };
-  if (sport === "futsal") return { bg: "#f5f3ff", color: "#7c3aed" };
-  return { bg: "#eff6ff", color: "#2563eb" };
+  if (sport === "padel") return { bg: "#f5f3ff", color: "#7c3aed" };
+  if (sport === "futsal") return { bg: "#f0fdfa", color: "#0f766e" };
+  return { bg: "#eff6ff", color: "#1d4ed8" };
 }
 
 export default function HomePage() {
@@ -61,50 +71,31 @@ export default function HomePage() {
         >
           <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "280px", height: "280px", borderRadius: "999px", background: "rgba(255,255,255,0.05)" }} />
           <div style={{ position: "absolute", bottom: "-60px", left: "10%", width: "200px", height: "200px", borderRadius: "999px", background: "rgba(255,255,255,0.05)" }} />
-
           <div style={{ position: "relative" }}>
             <div style={{ display: "inline-block", background: "rgba(255,255,255,0.14)", padding: "10px 16px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, marginBottom: "18px" }}>
               منصة رياضية عربية متعددة الرياضات
             </div>
-
-            <h1 style={{ margin: "0 0 14px 0", fontSize: "64px", lineHeight: 1.15, fontWeight: 800 }}>
-              نبض الرياضة
-            </h1>
-
+            <h1 style={{ margin: "0 0 14px 0", fontSize: "64px", lineHeight: 1.15, fontWeight: 800 }}>نبض الرياضة</h1>
             <p style={{ margin: "0 0 24px 0", maxWidth: "800px", fontSize: "22px", lineHeight: 1.9, opacity: 0.95 }}>
-              تغطية عربية يومية لأبرز أخبار كرة القدم، كرة السلة، التنس، البادل، وكرة قدم الصالات — كل الرياضة في مكان واحد.
+              تغطية عربية يومية لكرة القدم، كرة السلة، التنس، البادل، وكرة قدم الصالات — كل الرياضة في مكان واحد.
             </p>
-
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              {["كرة القدم", "كرة السلة", "التنس", "البادل", "الصالات", "انتقالات", "نتائج مباشرة"].map((tag) => (
-                <span key={tag} style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.18)", padding: "8px 14px", borderRadius: "999px", fontSize: "13px", fontWeight: 700 }}>
-                  {tag}
-                </span>
+              {["كرة القدم", "الدوريات الكبرى", "كرة السلة", "التنس", "البادل", "نتائج مباشرة"].map((tag) => (
+                <span key={tag} style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.18)", padding: "8px 14px", borderRadius: "999px", fontSize: "13px", fontWeight: 700 }}>{tag}</span>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Sports navigation grid */}
-        <section style={{ marginBottom: "28px" }}>
+        {/* Sports navigation */}
+        <section style={{ marginBottom: "30px" }}>
           <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>الأقسام الرياضية</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(6, minmax(0, 1fr))", gap: "14px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", gap: "16px" }}>
             {sportCards.map((card) => (
               <Link key={card.slug} href={card.href} style={{ textDecoration: "none", color: "inherit" }}>
-                <div
-                  style={{
-                    background: card.bg,
-                    border: `1px solid ${card.border}`,
-                    borderRadius: "22px",
-                    padding: "20px 14px",
-                    textAlign: "center",
-                    transition: "transform 0.15s"
-                  }}
-                >
-                  <div style={{ fontSize: "34px", marginBottom: "10px" }}>{card.icon}</div>
-                  <div style={{ color: card.color, fontSize: "15px", fontWeight: 800, lineHeight: 1.5 }}>
-                    {card.title}
-                  </div>
+                <div style={{ background: card.bg, border: `1px solid ${card.border}`, borderRadius: "24px", padding: "24px 16px", textAlign: "center" }}>
+                  <div style={{ fontSize: "42px", marginBottom: "12px" }}>{card.icon}</div>
+                  <div style={{ color: card.color, fontSize: "16px", fontWeight: 800, lineHeight: 1.4 }}>{card.title}</div>
                 </div>
               </Link>
             ))}
@@ -113,11 +104,10 @@ export default function HomePage() {
 
         {/* Latest articles */}
         <section style={{ marginBottom: "34px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px", gap: "12px", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
             <h2 style={{ margin: 0, fontSize: "36px", fontWeight: 800, color: "#111827" }}>أحدث الأخبار</h2>
-            <div style={{ color: "#6b7280", fontSize: "15px" }}>آخر المواد المنشورة على الموقع</div>
+            <div style={{ color: "#6b7280", fontSize: "15px" }}>آخر المواد المنشورة</div>
           </div>
-
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "22px" }}>
             {latest.map((article) => {
               const { bg, color } = sportColor(article.league, article.sport);
@@ -129,12 +119,8 @@ export default function HomePage() {
                       <div style={{ display: "inline-block", marginBottom: "10px", padding: "6px 12px", borderRadius: "999px", background: bg, color, fontSize: "12px", fontWeight: 700 }}>
                         {sportLabelAr(article.league, article.sport)}
                       </div>
-                      <h3 style={{ margin: "0 0 10px 0", fontSize: "20px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>
-                        {article.title}
-                      </h3>
-                      <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.85 }}>
-                        {article.description}
-                      </p>
+                      <h3 style={{ margin: "0 0 10px 0", fontSize: "20px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{article.title}</h3>
+                      <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.85 }}>{article.description}</p>
                     </div>
                   </article>
                 </Link>
@@ -143,15 +129,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Football + Other sports side by side */}
+        {/* Football + Other sports */}
         <section style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "26px" }}>
-          {/* Football */}
           <div style={{ background: "white", borderRadius: "24px", padding: "24px", border: "1px solid #e5e7eb", boxShadow: "0 10px 26px rgba(0,0,0,0.04)" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", gap: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>⚽ كرة القدم</h2>
-              <Link href="/league/premier-league/" style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none", fontSize: "14px" }}>
-                عرض المزيد
-              </Link>
+              <Link href="/sport/football/" style={{ color: "#1d4ed8", fontWeight: 700, textDecoration: "none", fontSize: "14px" }}>كل الدوريات</Link>
             </div>
             <div style={{ display: "grid", gap: "14px" }}>
               {footballLatest.map((article) => (
@@ -165,9 +148,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Other sports */}
           <div style={{ background: "white", borderRadius: "24px", padding: "24px", border: "1px solid #e5e7eb", boxShadow: "0 10px 26px rgba(0,0,0,0.04)" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", gap: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>🏆 رياضات أخرى</h2>
             </div>
             {otherSports.length > 0 ? (
@@ -191,12 +173,11 @@ export default function HomePage() {
               </div>
             ) : (
               <div style={{ color: "#9ca3af", fontSize: "16px", lineHeight: 1.9, padding: "20px 0" }}>
-                جارٍ تجميع أخبار كرة السلة، التنس، البادل والصالات. ستظهر تلقائياً في التحديث القادم.
+                جارٍ تجميع أخبار كرة السلة، التنس والبادل. ستظهر تلقائياً في التحديث القادم.
               </div>
             )}
           </div>
         </section>
-
       </div>
     </main>
   );

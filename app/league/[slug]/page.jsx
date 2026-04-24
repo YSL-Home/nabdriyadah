@@ -40,27 +40,14 @@ const leagueMap = {
   "la-liga": {
     title: "الدوري الإسباني",
     shortLabel: "LL",
-    description:
-      "أحدث أخبار الدوري الإسباني مع متابعة خاصة لريال مدريد وبرشلونة وأبرز ملفات الليغا.",
+    description: "أحدث أخبار الدوري الإسباني مع متابعة خاصة لريال مدريد وبرشلونة وأبرز ملفات الليغا.",
     leagueLogo: "/leagues/la-liga.png",
     theme: {
-      pageBg: "#fff7ed",
-      heroFrom: "#9a3412",
-      heroTo: "#f97316",
-      primary: "#ea580c",
-      primarySoft: "#ffedd5",
-      border: "#fed7aa",
-      cardBg: "#ffffff",
-      text: "#111827",
-      subtext: "#4b5563",
-      badgeBg: "rgba(255,255,255,0.16)",
-      badgeText: "#ffffff"
+      pageBg: "#fff7ed", heroFrom: "#9a3412", heroTo: "#f97316", primary: "#ea580c",
+      primarySoft: "#ffedd5", border: "#fed7aa", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
     },
-    highlights: [
-      "متابعة ريال مدريد وبرشلونة",
-      "رصد مستجدات الليغا أسبوعًا بأسبوع",
-      "ملفات المدربين والنجوم والنتائج"
-    ],
+    highlights: ["متابعة ريال مدريد وبرشلونة", "رصد مستجدات الليغا", "ملفات المدربين والنجوم والنتائج"],
     teams: [
       { name: "ريال مدريد", slug: "real-madrid", logo: "/teams/la-liga/real-madrid.png" },
       { name: "برشلونة", slug: "barcelona", logo: "/teams/la-liga/barcelona.png" },
@@ -68,6 +55,132 @@ const leagueMap = {
       { name: "إشبيلية", slug: "sevilla", logo: "/teams/la-liga/sevilla.png" },
       { name: "فالنسيا", slug: "valencia", logo: "/teams/la-liga/valencia.png" },
       { name: "ريال سوسيداد", slug: "real-sociedad", logo: "/teams/la-liga/real-sociedad.png" }
+    ]
+  },
+
+  "bundesliga": {
+    title: "الدوري الألماني — البوندسليغا",
+    shortLabel: "BL",
+    description: "تابع أحدث أخبار البوندسليغا، بايرن ميونخ، بوروسيا دورتموند وأبرز مجريات الدوري الألماني.",
+    leagueLogo: "/leagues/bundesliga.png",
+    theme: {
+      pageBg: "#fff1f2", heroFrom: "#7f1d1d", heroTo: "#dc2626", primary: "#dc2626",
+      primarySoft: "#fee2e2", border: "#fecaca", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["بايرن ميونخ ودورتموند", "المنافسة على اللقب", "الإنتاج الشبابي الألماني", "الانتقالات"],
+    teams: [
+      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "/teams/bundesliga/bayern-munich.png" },
+      { name: "بوروسيا دورتموند", slug: "borussia-dortmund", logo: "/teams/bundesliga/borussia-dortmund.png" },
+      { name: "باير ليفركوزن", slug: "bayer-leverkusen", logo: "/teams/bundesliga/bayer-leverkusen.png" },
+      { name: "آر بي لايبزيغ", slug: "rb-leipzig", logo: "/teams/bundesliga/rb-leipzig.png" },
+      { name: "إينتراخت فرانكفورت", slug: "eintracht-frankfurt", logo: "/teams/bundesliga/eintracht-frankfurt.png" },
+      { name: "بوروسيا مونشنغلادباخ", slug: "borussia-monchengladbach", logo: "/teams/bundesliga/borussia-monchengladbach.png" }
+    ]
+  },
+
+  "serie-a": {
+    title: "الدوري الإيطالي — سيريا آ",
+    shortLabel: "SA",
+    description: "أبرز أخبار الدوري الإيطالي، يوفنتوس، ميلان، إنتر ميلان وأفضل البطولات الأوروبية.",
+    leagueLogo: "/leagues/serie-a.png",
+    theme: {
+      pageBg: "#fffbeb", heroFrom: "#78350f", heroTo: "#d97706", primary: "#b45309",
+      primarySoft: "#fef3c7", border: "#fde68a", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["يوفنتوس وميلان وإنتر", "المنافسة الإيطالية", "نجوم الكالتشيو", "دوري أبطال أوروبا"],
+    teams: [
+      { name: "يوفنتوس", slug: "juventus", logo: "/teams/serie-a/juventus.png" },
+      { name: "إيه سي ميلان", slug: "ac-milan", logo: "/teams/serie-a/ac-milan.png" },
+      { name: "إنتر ميلان", slug: "inter-milan", logo: "/teams/serie-a/inter-milan.png" },
+      { name: "نابولي", slug: "napoli", logo: "/teams/serie-a/napoli.png" },
+      { name: "روما", slug: "as-roma", logo: "/teams/serie-a/as-roma.png" },
+      { name: "لاتسيو", slug: "lazio", logo: "/teams/serie-a/lazio.png" }
+    ]
+  },
+
+  "ligue-1": {
+    title: "الدوري الفرنسي — ليغ 1",
+    shortLabel: "L1",
+    description: "آخر أخبار الدوري الفرنسي، باريس سان جيرمان، مرسيليا، موناكو وأبرز أحداث الليغ 1.",
+    leagueLogo: "/leagues/ligue-1.png",
+    theme: {
+      pageBg: "#eff6ff", heroFrom: "#1e3a8a", heroTo: "#2563eb", primary: "#1d4ed8",
+      primarySoft: "#dbeafe", border: "#bfdbfe", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["باريس سان جيرمان", "الغزير الفرنسي من المواهب", "مرسيليا وموناكو", "الانتقالات"],
+    teams: [
+      { name: "باريس سان جيرمان", slug: "psg", logo: "/teams/ligue-1/psg.png" },
+      { name: "أولمبيك مرسيليا", slug: "olympique-marseille", logo: "/teams/ligue-1/olympique-marseille.png" },
+      { name: "موناكو", slug: "monaco", logo: "/teams/ligue-1/monaco.png" },
+      { name: "أولمبيك ليون", slug: "olympique-lyon", logo: "/teams/ligue-1/olympique-lyon.png" },
+      { name: "ليل", slug: "losc-lille", logo: "/teams/ligue-1/losc-lille.png" },
+      { name: "ران", slug: "stade-rennes", logo: "/teams/ligue-1/stade-rennes.png" }
+    ]
+  },
+
+  "champions-league": {
+    title: "دوري أبطال أوروبا",
+    shortLabel: "UCL",
+    description: "تابع أحدث أخبار دوري أبطال أوروبا، المباريات الكبرى، وأبرز الأندية المتنافسة على اللقب.",
+    leagueLogo: "/leagues/champions-league.png",
+    theme: {
+      pageBg: "#fefce8", heroFrom: "#713f12", heroTo: "#ca8a04", primary: "#854d0e",
+      primarySoft: "#fef9c3", border: "#fef08a", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["أبرز المجموعات", "الأدوار الإقصائية", "أفضل هداف", "تاريخ البطولة"],
+    teams: [
+      { name: "ريال مدريد", slug: "real-madrid", logo: "/teams/la-liga/real-madrid.png" },
+      { name: "مانشستر سيتي", slug: "manchester-city", logo: "/teams/premier-league/manchester-city.png" },
+      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "/teams/bundesliga/bayern-munich.png" },
+      { name: "باريس سان جيرمان", slug: "psg", logo: "/teams/ligue-1/psg.png" },
+      { name: "برشلونة", slug: "barcelona", logo: "/teams/la-liga/barcelona.png" },
+      { name: "إنتر ميلان", slug: "inter-milan", logo: "/teams/serie-a/inter-milan.png" }
+    ]
+  },
+
+  "saudi-pro-league": {
+    title: "دوري روشن للمحترفين",
+    shortLabel: "SPL",
+    description: "أخبار الدوري السعودي للمحترفين، الهلال، النصر، الاتحاد وأبرز نجوم الدوري.",
+    leagueLogo: "/leagues/saudi-pro-league.png",
+    theme: {
+      pageBg: "#f0fdf4", heroFrom: "#14532d", heroTo: "#16a34a", primary: "#15803d",
+      primarySoft: "#dcfce7", border: "#bbf7d0", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["الهلال والنصر والاتحاد", "نجوم عالميون في السعودية", "المنافسة على اللقب", "الانتقالات الكبرى"],
+    teams: [
+      { name: "الهلال", slug: "al-hilal", logo: "/teams/saudi-pro-league/al-hilal.png" },
+      { name: "النصر", slug: "al-nassr", logo: "/teams/saudi-pro-league/al-nassr.png" },
+      { name: "الاتحاد", slug: "al-ittihad", logo: "/teams/saudi-pro-league/al-ittihad.png" },
+      { name: "الأهلي", slug: "al-ahli", logo: "/teams/saudi-pro-league/al-ahli.png" },
+      { name: "الشباب", slug: "al-shabab", logo: "/teams/saudi-pro-league/al-shabab.png" },
+      { name: "الاتفاق", slug: "al-ettifaq", logo: "/teams/saudi-pro-league/al-ettifaq.png" }
+    ]
+  },
+
+  "eredivisie": {
+    title: "الدوري الهولندي — إريديفيزي",
+    shortLabel: "ERE",
+    description: "متابعة أبرز أخبار الدوري الهولندي، أياكس، بي إس في إيندهوفن وفاينورد.",
+    leagueLogo: "/leagues/eredivisie.png",
+    theme: {
+      pageBg: "#fff1f2", heroFrom: "#7f1d1d", heroTo: "#ef4444", primary: "#b91c1c",
+      primarySoft: "#fee2e2", border: "#fecaca", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["أياكس وبي إس في", "تخريج المواهب", "المسار نحو أوروبا", "الأندية الكلاسيكية"],
+    teams: [
+      { name: "أياكس", slug: "ajax", logo: "/teams/eredivisie/ajax.png" },
+      { name: "بي إس في إيندهوفن", slug: "psv-eindhoven", logo: "/teams/eredivisie/psv-eindhoven.png" },
+      { name: "فاينورد", slug: "feyenoord", logo: "/teams/eredivisie/feyenoord.png" },
+      { name: "آي زد ألكمار", slug: "az-alkmaar", logo: "/teams/eredivisie/az-alkmaar.png" },
+      { name: "أوتريخت", slug: "utrecht", logo: "/teams/eredivisie/utrecht.png" },
+      { name: "توينتي", slug: "fc-twente", logo: "/teams/eredivisie/fc-twente.png" }
     ]
   }
 };
