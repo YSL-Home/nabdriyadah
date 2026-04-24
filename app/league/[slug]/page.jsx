@@ -177,10 +177,82 @@ const leagueMap = {
     teams: [
       { name: "أياكس", slug: "ajax", logo: "/teams/eredivisie/ajax.png" },
       { name: "بي إس في إيندهوفن", slug: "psv-eindhoven", logo: "/teams/eredivisie/psv-eindhoven.png" },
-      { name: "فاينورد", slug: "feyenoord", logo: "/teams/eredivisie/feyenoord.png" },
-      { name: "آي زد ألكمار", slug: "az-alkmaar", logo: "/teams/eredivisie/az-alkmaar.png" },
-      { name: "أوتريخت", slug: "utrecht", logo: "/teams/eredivisie/utrecht.png" },
-      { name: "توينتي", slug: "fc-twente", logo: "/teams/eredivisie/fc-twente.png" }
+      { name: "فاينورد", slug: "feyenoord", logo: "/teams/eredivisie/feyenoord.png" }
+    ]
+  },
+
+  "world-cup": {
+    title: "كأس العالم FIFA",
+    shortLabel: "WC",
+    description: "تغطية شاملة لكأس العالم لكرة القدم، تاريخ البطولة، أبرز المنتخبات والنتائج.",
+    leagueLogo: "/leagues/world-cup.png",
+    theme: {
+      pageBg: "#faf5ff", heroFrom: "#1e1b4b", heroTo: "#4338ca", primary: "#4f46e5",
+      primarySoft: "#ede9fe", border: "#ddd6fe", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["أعظم بطولة في العالم", "32 منتخباً", "كل 4 سنوات", "تاريخ منذ 1930"],
+    teams: []
+  },
+
+  "euro": {
+    title: "بطولة أمم أوروبا — يورو",
+    shortLabel: "EURO",
+    description: "أخبار وتغطية بطولة أمم أوروبا، أبرز المنتخبات والنتائج.",
+    leagueLogo: "/leagues/euro.png",
+    theme: {
+      pageBg: "#eff6ff", heroFrom: "#1e3a8a", heroTo: "#3b82f6", primary: "#2563eb",
+      primarySoft: "#dbeafe", border: "#bfdbfe", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["أبرز منتخبات أوروبا", "كل 4 سنوات", "بطولة عريقة منذ 1960", "المنتخبات الكبرى"],
+    teams: []
+  },
+
+  "afcon": {
+    title: "كأس أمم أفريقيا — CAN",
+    shortLabel: "CAN",
+    description: "تغطية كأس أمم أفريقيا، أبرز المنتخبات الأفريقية، النتائج والتاريخ.",
+    leagueLogo: "/leagues/afcon.png",
+    theme: {
+      pageBg: "#fff7ed", heroFrom: "#7c2d12", heroTo: "#ea580c", primary: "#c2410c",
+      primarySoft: "#ffedd5", border: "#fed7aa", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["المغرب والسنغال ومصر", "كأس القارة الأفريقية", "تاريخ منذ 1957", "كل سنتين"],
+    teams: []
+  },
+
+  "caf-champions-league": {
+    title: "دوري أبطال أفريقيا — CAF",
+    shortLabel: "CAFCL",
+    description: "أخبار دوري أبطال أفريقيا، الأندية المشاركة والنتائج.",
+    leagueLogo: "/leagues/caf-champions-league.png",
+    theme: {
+      pageBg: "#f0fdf4", heroFrom: "#14532d", heroTo: "#16a34a", primary: "#15803d",
+      primarySoft: "#dcfce7", border: "#bbf7d0", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["أبرز الأندية الأفريقية", "البطولة القارية", "الوداد والأهلي المصري", "التاريخ والألقاب"],
+    teams: []
+  },
+
+  "club-world-cup": {
+    title: "كأس العالم للأندية — FIFA",
+    shortLabel: "CWC",
+    description: "تغطية كأس العالم للأندية، أبرز الأندية المشاركة من كل القارات والنتائج.",
+    leagueLogo: "/leagues/club-world-cup.png",
+    theme: {
+      pageBg: "#fefce8", heroFrom: "#713f12", heroTo: "#d97706", primary: "#b45309",
+      primarySoft: "#fef9c3", border: "#fef08a", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["أفضل أندية العالم", "بطولة FIFA الكبرى", "كل 4 سنوات منذ 2025", "الأندية من كل القارات"],
+    teams: [
+      { name: "ريال مدريد", slug: "real-madrid", logo: "/teams/la-liga/real-madrid.png" },
+      { name: "مانشستر سيتي", slug: "manchester-city", logo: "/teams/premier-league/manchester-city.png" },
+      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "/teams/bundesliga/bayern-munich.png" },
+      { name: "الهلال", slug: "al-hilal", logo: "/teams/saudi-pro-league/al-hilal.png" }
     ]
   }
 };

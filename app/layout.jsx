@@ -1,3 +1,5 @@
+import SiteHeader from "./components/SiteHeader";
+
 export const metadata = {
   metadataBase: new URL("https://nabdriyadah.com"),
   title: {
@@ -65,6 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
 
+        <SiteHeader />
         {children}
       </body>
     </html>

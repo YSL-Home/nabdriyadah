@@ -4,14 +4,22 @@ import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
 
 const footballLeagues = [
-  { slug: "premier-league", title: "الدوري الإنجليزي الممتاز", country: "إنجلترا", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", color: "#6d28d9", bg: "#ede9fe", border: "#ddd6fe", logo: "/leagues/premier-league.png" },
-  { slug: "la-liga", title: "الدوري الإسباني", country: "إسبانيا", flag: "🇪🇸", color: "#ea580c", bg: "#fff7ed", border: "#fed7aa", logo: "/leagues/la-liga.png" },
-  { slug: "bundesliga", title: "البوندسليغا", country: "ألمانيا", flag: "🇩🇪", color: "#dc2626", bg: "#fee2e2", border: "#fecaca", logo: "/leagues/bundesliga.png" },
-  { slug: "serie-a", title: "الدوري الإيطالي", country: "إيطاليا", flag: "🇮🇹", color: "#b45309", bg: "#fef3c7", border: "#fde68a", logo: "/leagues/serie-a.png" },
-  { slug: "ligue-1", title: "الدوري الفرنسي", country: "فرنسا", flag: "🇫🇷", color: "#1d4ed8", bg: "#dbeafe", border: "#bfdbfe", logo: "/leagues/ligue-1.png" },
-  { slug: "champions-league", title: "دوري أبطال أوروبا", country: "أوروبا", flag: "🏆", color: "#854d0e", bg: "#fef9c3", border: "#fef08a", logo: "/leagues/champions-league.png" },
-  { slug: "saudi-pro-league", title: "الدوري السعودي للمحترفين", country: "السعودية", flag: "🇸🇦", color: "#15803d", bg: "#dcfce7", border: "#bbf7d0", logo: "/leagues/saudi-pro-league.png" },
-  { slug: "eredivisie", title: "الدوري الهولندي", country: "هولندا", flag: "🇳🇱", color: "#b91c1c", bg: "#fee2e2", border: "#fecaca", logo: "/leagues/eredivisie.png" }
+  { slug: "premier-league", title: "الدوري الإنجليزي الممتاز", country: "إنجلترا", color: "#6d28d9", bg: "#ede9fe", border: "#ddd6fe", logo: "/leagues/premier-league.png" },
+  { slug: "la-liga", title: "الدوري الإسباني", country: "إسبانيا", color: "#ea580c", bg: "#fff7ed", border: "#fed7aa", logo: "/leagues/la-liga.png" },
+  { slug: "bundesliga", title: "البوندسليغا", country: "ألمانيا", color: "#dc2626", bg: "#fee2e2", border: "#fecaca", logo: "/leagues/bundesliga.png" },
+  { slug: "serie-a", title: "الدوري الإيطالي", country: "إيطاليا", color: "#b45309", bg: "#fef3c7", border: "#fde68a", logo: "/leagues/serie-a.png" },
+  { slug: "ligue-1", title: "الدوري الفرنسي", country: "فرنسا", color: "#1d4ed8", bg: "#dbeafe", border: "#bfdbfe", logo: "/leagues/ligue-1.png" },
+  { slug: "champions-league", title: "دوري أبطال أوروبا", country: "أوروبا", color: "#854d0e", bg: "#fef9c3", border: "#fef08a", logo: "/leagues/champions-league.png" },
+  { slug: "saudi-pro-league", title: "الدوري السعودي للمحترفين", country: "السعودية", color: "#15803d", bg: "#dcfce7", border: "#bbf7d0", logo: "/leagues/saudi-pro-league.png" },
+  { slug: "eredivisie", title: "الدوري الهولندي", country: "هولندا", color: "#b91c1c", bg: "#fee2e2", border: "#fecaca", logo: "/leagues/eredivisie.png" }
+];
+
+const globalCompetitions = [
+  { slug: "world-cup", title: "كأس العالم", country: "FIFA", color: "#4f46e5", bg: "#ede9fe", border: "#ddd6fe", logo: "/leagues/world-cup.png" },
+  { slug: "euro", title: "يورو", country: "UEFA", color: "#2563eb", bg: "#dbeafe", border: "#bfdbfe", logo: "/leagues/euro.png" },
+  { slug: "afcon", title: "كأس أمم أفريقيا", country: "CAF", color: "#c2410c", bg: "#ffedd5", border: "#fed7aa", logo: "/leagues/afcon.png" },
+  { slug: "caf-champions-league", title: "أبطال أفريقيا", country: "CAF", color: "#15803d", bg: "#dcfce7", border: "#bbf7d0", logo: "/leagues/caf-champions-league.png" },
+  { slug: "club-world-cup", title: "كأس العالم للأندية", country: "FIFA", color: "#b45309", bg: "#fef9c3", border: "#fef08a", logo: "/leagues/club-world-cup.png" }
 ];
 
 const sportConfig = {
@@ -142,19 +150,37 @@ export default function SportPage({ params }) {
           </section>
 
           {/* Leagues Grid */}
-          <section style={{ marginBottom: "28px" }}>
-            <h2 style={{ margin: "0 0 18px 0", fontSize: "30px", fontWeight: 800, color: "#111827" }}>أبرز الدوريات العالمية</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "18px" }}>
+          <section style={{ marginBottom: "24px" }}>
+            <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>الدوريات الكبرى</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "16px" }}>
               {footballLeagues.map((league) => (
                 <Link key={league.slug} href={`/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: "white", border: `1px solid ${league.border}`, borderRadius: "24px", padding: "22px 18px", display: "flex", alignItems: "center", gap: "14px", boxShadow: "0 8px 20px rgba(0,0,0,0.04)" }}>
-                    <div style={{ width: "56px", height: "56px", borderRadius: "14px", background: league.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "6px" }}>
+                  <div style={{ background: "white", border: `1px solid ${league.border}`, borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 16px rgba(0,0,0,0.04)", borderTop: `3px solid ${league.color}` }}>
+                    <div style={{ width: "52px", height: "52px", borderRadius: "12px", background: league.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "6px" }}>
                       <img src={league.logo} alt={league.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
                     <div>
-                      <div style={{ color: league.color, fontSize: "12px", fontWeight: 700, marginBottom: "4px" }}>{league.country}</div>
-                      <div style={{ fontSize: "16px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{league.title}</div>
+                      <div style={{ color: league.color, fontSize: "11px", fontWeight: 700, marginBottom: "3px" }}>{league.country}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{league.title}</div>
                     </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Global Competitions */}
+          <section style={{ marginBottom: "28px" }}>
+            <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>البطولات الدولية والقارية</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", gap: "16px" }}>
+              {globalCompetitions.map((comp) => (
+                <Link key={comp.slug} href={`/league/${comp.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                  <div style={{ background: "white", border: `1px solid ${comp.border}`, borderRadius: "22px", padding: "18px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", boxShadow: "0 6px 16px rgba(0,0,0,0.04)", textAlign: "center", borderTop: `3px solid ${comp.color}` }}>
+                    <div style={{ width: "56px", height: "56px", borderRadius: "12px", background: comp.bg, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: "6px" }}>
+                      <img src={comp.logo} alt={comp.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    </div>
+                    <div style={{ color: comp.color, fontSize: "11px", fontWeight: 700 }}>{comp.country}</div>
+                    <div style={{ fontSize: "14px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{comp.title}</div>
                   </div>
                 </Link>
               ))}

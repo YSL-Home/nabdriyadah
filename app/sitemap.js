@@ -10,7 +10,8 @@ export default function sitemap() {
 
   const leagueUrls = [
     "premier-league", "la-liga", "bundesliga", "serie-a",
-    "ligue-1", "champions-league", "saudi-pro-league", "eredivisie"
+    "ligue-1", "champions-league", "saudi-pro-league", "eredivisie",
+    "world-cup", "euro", "afcon", "caf-champions-league", "club-world-cup"
   ].map((slug) => ({ url: `${baseUrl}/league/${slug}/`, lastModified: new Date() }));
 
   const sportUrls = [

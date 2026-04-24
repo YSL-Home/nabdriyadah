@@ -1,4 +1,6 @@
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
 import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
 
@@ -1261,6 +1263,13 @@ export default function TeamPage({ params }) {
     .filter((a) => a.slug)
     .slice(0, 6);
 
+  // Load fixture data (populated by fetch-fixtures.mjs)
+  let fixtureData = { past: [], upcoming: [] };
+  try {
+    const fixturePath = path.join(process.cwd(), "content/fixtures", `${params.slug}.json`);
+    fixtureData = JSON.parse(fs.readFileSync(fixturePath, "utf-8"));
+  } catch {}
+
   const history = safeArray(team.history);
   const titles = safeArray(team.titles);
   const staff = safeArray(team.staff);
@@ -1488,6 +1497,75 @@ export default function TeamPage({ params }) {
             </a>
           </div>
         </section>
+
+        {/* ── FIXTURES ── */}
+        {(fixtureData.upcoming.length > 0 || fixtureData.past.length > 0) && (
+          <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "22px" }}>
+              <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>المباريات</h2>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+              {/* Upcoming */}
+              {fixtureData.upcoming.length > 0 && (
+                <div>
+                  <div style={{ fontSize: "14px", fontWeight: 700, color: team.accent, marginBottom: "12px", textTransform: "uppercase" }}>المقبلة</div>
+                  <div style={{ display: "grid", gap: "10px" }}>
+                    {fixtureData.upcoming.slice(0, 5).map((m) => (
+                      <div key={m.id} style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px" }}>
+                        <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>
+                          {m.league?.name} — {new Date(m.date).toLocaleDateString("ar-SA", { weekday: "short", month: "short", day: "numeric" })}
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                          <span style={{ fontSize: "15px", fontWeight: 800, color: "#111827" }}>{m.home?.name}</span>
+                          <span style={{ fontSize: "12px", fontWeight: 700, color: "#6b7280", padding: "3px 10px", background: "white", borderRadius: "999px" }}>vs</span>
+                          <span style={{ fontSize: "15px", fontWeight: 800, color: "#111827" }}>{m.away?.name}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Past */}
+              {fixtureData.past.length > 0 && (
+                <div>
+                  <div style={{ fontSize: "14px", fontWeight: 700, color: "#6b7280", marginBottom: "12px", textTransform: "uppercase" }}>الأخيرة</div>
+                  <div style={{ display: "grid", gap: "10px" }}>
+                    {fixtureData.past.slice(0, 5).map((m) => {
+                      const isHome = m.home?.id === fixtureData.teamId;
+                      const teamGoals = isHome ? m.goals?.home : m.goals?.away;
+                      const oppGoals = isHome ? m.goals?.away : m.goals?.home;
+                      const oppName = isHome ? m.away?.name : m.home?.name;
+                      const won = teamGoals > oppGoals;
+                      const draw = teamGoals === oppGoals;
+                      return (
+                        <div key={m.id} style={{ background: "white", border: `2px solid ${won ? "#bbf7d0" : draw ? "#fef08a" : "#fecaca"}`, borderRadius: "16px", padding: "14px 16px" }}>
+                          <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>
+                            {m.league?.name} — {new Date(m.date).toLocaleDateString("ar-SA", { month: "short", day: "numeric", year: "numeric" })}
+                          </div>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{team.name}</span>
+                            <span style={{
+                              fontSize: "18px", fontWeight: 900, letterSpacing: "-0.5px",
+                              color: won ? "#16a34a" : draw ? "#ca8a04" : "#dc2626",
+                              padding: "2px 12px", background: won ? "#dcfce7" : draw ? "#fef9c3" : "#fee2e2",
+                              borderRadius: "999px"
+                            }}>
+                              {teamGoals} — {oppGoals}
+                            </span>
+                            <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{oppName}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* ── RELATED ARTICLES ── */}
         <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>

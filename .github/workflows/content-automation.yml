@@ -32,15 +32,21 @@ jobs:
       - name: 📰 Fetch news
         run: node scripts/fetch-news.mjs
 
-      - name: ✍️ Rewrite articles
+      - name: ✍️ Rewrite articles (SEO max, no source branding)
         run: node scripts/rewrite-article.mjs
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-      - name: 🖼️ Generate article visuals
+      - name: 🖼️ Generate article images (original scenes, no logos)
         run: node scripts/generate-article-images.mjs
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: ⚽ Fetch fixtures & standings (API-Football)
+        run: node scripts/fetch-fixtures.mjs
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        continue-on-error: true
 
       - name: 🧹 Clean git cache
         run: |
@@ -54,6 +60,8 @@ jobs:
 
           git add content/articles/seo-articles.json
           git add content/raw-news.json
+          git add content/fixtures/
+          git add content/standings/
           git add public/generated
 
           if git diff --cached --quiet; then
@@ -61,7 +69,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "auto: update articles and visuals"
+          git commit -m "auto: update articles, visuals and fixtures"
 
           git pull --rebase origin main
           git push origin main
