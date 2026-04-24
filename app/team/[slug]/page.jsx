@@ -2,7 +2,9 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import articles from "../../../content/articles/seo-articles.json";
+import playerPhotos from "../../../content/player-photos.json";
 import AdSlot from "../../components/AdSlot";
+import PlayerAvatar from "../../components/PlayerAvatar";
 
 const teamsData = {
   "manchester-city": {
@@ -1413,11 +1415,14 @@ export default function TeamPage({ params }) {
               {players.map((player, i) => (
                 <div key={i} style={{
                   background: accentSoft, border: `1px solid ${accentMid}`,
-                  borderRadius: "16px", padding: "14px 16px",
+                  borderRadius: "16px", padding: "12px 14px",
                   display: "flex", alignItems: "center", gap: "10px"
                 }}>
-                  <span style={{ fontSize: "20px" }}>⚽</span>
-                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827" }}>{player}</span>
+                  <PlayerAvatar
+                    src={playerPhotos[`${params.slug}/player/${i}`] || null}
+                    name={player} size={46} accent={team.accent}
+                  />
+                  <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{player}</span>
                 </div>
               ))}
             </div>
@@ -1433,11 +1438,14 @@ export default function TeamPage({ params }) {
               {legends.map((legend, i) => (
                 <div key={i} style={{
                   background: accentSoft, border: `1px solid ${accentMid}`,
-                  borderRadius: "16px", padding: "14px 16px",
+                  borderRadius: "16px", padding: "12px 14px",
                   display: "flex", alignItems: "center", gap: "10px"
                 }}>
-                  <span style={{ fontSize: "20px" }}>⭐</span>
-                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827" }}>{legend}</span>
+                  <PlayerAvatar
+                    src={playerPhotos[`${params.slug}/legend/${i}`] || null}
+                    name={legend} size={46} accent={team.accent}
+                  />
+                  <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{legend}</span>
                 </div>
               ))}
             </div>
@@ -1453,8 +1461,12 @@ export default function TeamPage({ params }) {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0,1fr))", gap: "12px" }}>
               {staff.map((s, i) => (
-                <div key={i} style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px" }}>
-                  <div style={{ fontSize: "17px", fontWeight: 700, color: "#111827" }}>{s}</div>
+                <div key={i} style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px" }}>
+                  <PlayerAvatar
+                    src={playerPhotos[`${params.slug}/staff/${i}`] || null}
+                    name={s} size={42} accent={team.accent}
+                  />
+                  <div style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.35 }}>{s}</div>
                 </div>
               ))}
             </div>

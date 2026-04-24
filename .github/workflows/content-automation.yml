@@ -42,6 +42,10 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
+      - name: 👤 Fetch player photos
+        run: node scripts/fetch-player-photos.mjs
+        continue-on-error: true
+
       - name: 🧹 Clean git cache
         run: |
           rm -rf node_modules .next out
@@ -54,6 +58,7 @@ jobs:
 
           git add content/articles/seo-articles.json
           git add content/raw-news.json
+          git add content/player-photos.json
           git add public/generated
 
           if git diff --cached --quiet; then
