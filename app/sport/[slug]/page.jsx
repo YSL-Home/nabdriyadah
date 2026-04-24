@@ -172,7 +172,7 @@ export default function SportPage({ params }) {
           {/* Global Competitions */}
           <section style={{ marginBottom: "28px" }}>
             <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>البطولات الدولية والقارية</h2>
-            <div className="g5">
+            <div className="g5 g5-mobile2">
               {globalCompetitions.map((comp) => (
                 <Link key={comp.slug} href={`/league/${comp.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: "white", border: `1px solid #e5e7eb`, borderRadius: "22px", padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", textAlign: "center", borderTop: `4px solid ${comp.color}` }}>

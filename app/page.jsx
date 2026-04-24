@@ -85,7 +85,7 @@ export default function HomePage() {
         {/* Sports navigation */}
         <section style={{ marginBottom: "30px" }}>
           <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>الأقسام الرياضية</h2>
-          <div className="g5">
+          <div className="g5 g5-mobile2">
             {sportCards.map((card) => (
               <Link key={card.slug} href={card.href} style={{ textDecoration: "none", color: "inherit" }}>
                 <div style={{ background: card.bg, border: `1px solid ${card.border}`, borderRadius: "24px", padding: "24px 16px", textAlign: "center" }}>

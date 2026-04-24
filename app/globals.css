@@ -20,6 +20,7 @@ img { max-width: 100%; }
 
 /* ─── Tablet ≤ 1024px ──────────────────────────── */
 @media (max-width: 1024px) {
+  .g3   { grid-template-columns: repeat(2, 1fr); }
   .g4   { grid-template-columns: repeat(2, 1fr); }
   .g5   { grid-template-columns: repeat(3, 1fr); }
   .gfeat { grid-template-columns: 1fr; }
@@ -29,8 +30,16 @@ img { max-width: 100%; }
 @media (max-width: 640px) {
   .g2, .g3, .g4, .g5  { grid-template-columns: 1fr; }
   .g2sm { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  .g5-mobile2 { grid-template-columns: repeat(2, 1fr) !important; }
   .gfeat { grid-template-columns: 1fr; }
   .gauto { grid-template-columns: 1fr; }
+
+  /* Limiter la hauteur des images d'articles sur mobile */
+  .article-img-mobile { height: 160px !important; }
+
+  /* Hero sections : réduire le padding sur mobile */
+  section[style*="border-radius: \"34px\""],
+  section[style*="borderRadius: \"34px\""] { padding: 24px 16px !important; }
 }
 
 /* ─── Fluid typography ──────────────────────────── */
@@ -96,3 +105,18 @@ img { max-width: 100%; }
 
 /* ─── Cards section (teams in league page) ──────── */
 .teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+
+/* ─── Mobile general fixes ──────────────────────── */
+@media (max-width: 640px) {
+  /* Réduire padding des sections principales */
+  main { padding-left: 12px !important; padding-right: 12px !important; }
+  /* Hero hero-pad : forcer mobile */
+  .hero-section { padding: 28px 16px !important; border-radius: 20px !important; }
+  /* Score card compact */
+  .match-score { font-size: 20px !important; }
+  /* Eviter overflow horizontal */
+  body { overflow-x: hidden; }
+}
+
+/* ─── Viewport fix ───────────────────────────────── */
+html { overflow-x: hidden; }
