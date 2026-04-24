@@ -1413,17 +1413,20 @@ export default function TeamPage({ params }) {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0,1fr))", gap: "10px" }}>
               {players.map((player, i) => (
-                <div key={i} style={{
-                  background: accentSoft, border: `1px solid ${accentMid}`,
-                  borderRadius: "16px", padding: "12px 14px",
-                  display: "flex", alignItems: "center", gap: "10px"
-                }}>
-                  <PlayerAvatar
-                    src={playerPhotos[`${params.slug}/player/${i}`] || null}
-                    name={player} size={46} accent={team.accent}
-                  />
-                  <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{player}</span>
-                </div>
+                <Link key={i} href={`/player/${params.slug}--player--${i}/`} style={{ textDecoration: "none" }}>
+                  <div style={{
+                    background: accentSoft, border: `1px solid ${accentMid}`,
+                    borderRadius: "16px", padding: "12px 14px",
+                    display: "flex", alignItems: "center", gap: "10px",
+                    cursor: "pointer", transition: "box-shadow 0.15s"
+                  }}>
+                    <PlayerAvatar
+                      src={playerPhotos[`${params.slug}/player/${i}`] || null}
+                      name={player} size={46} accent={team.accent}
+                    />
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{player}</span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -1436,17 +1439,19 @@ export default function TeamPage({ params }) {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0,1fr))", gap: "10px" }}>
               {legends.map((legend, i) => (
-                <div key={i} style={{
-                  background: accentSoft, border: `1px solid ${accentMid}`,
-                  borderRadius: "16px", padding: "12px 14px",
-                  display: "flex", alignItems: "center", gap: "10px"
-                }}>
-                  <PlayerAvatar
-                    src={playerPhotos[`${params.slug}/legend/${i}`] || null}
-                    name={legend} size={46} accent={team.accent}
-                  />
-                  <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{legend}</span>
-                </div>
+                <Link key={i} href={`/player/${params.slug}--legend--${i}/`} style={{ textDecoration: "none" }}>
+                  <div style={{
+                    background: accentSoft, border: `1px solid ${accentMid}`,
+                    borderRadius: "16px", padding: "12px 14px",
+                    display: "flex", alignItems: "center", gap: "10px", cursor: "pointer"
+                  }}>
+                    <PlayerAvatar
+                      src={playerPhotos[`${params.slug}/legend/${i}`] || null}
+                      name={legend} size={46} accent={team.accent}
+                    />
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{legend}</span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -1461,13 +1466,15 @@ export default function TeamPage({ params }) {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0,1fr))", gap: "12px" }}>
               {staff.map((s, i) => (
-                <div key={i} style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px" }}>
-                  <PlayerAvatar
-                    src={playerPhotos[`${params.slug}/staff/${i}`] || null}
-                    name={s} size={42} accent={team.accent}
-                  />
-                  <div style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.35 }}>{s}</div>
-                </div>
+                <Link key={i} href={`/player/${params.slug}--staff--${i}/`} style={{ textDecoration: "none" }}>
+                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
+                    <PlayerAvatar
+                      src={playerPhotos[`${params.slug}/staff/${i}`] || null}
+                      name={s} size={42} accent={team.accent}
+                    />
+                    <div style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.35 }}>{s}</div>
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
