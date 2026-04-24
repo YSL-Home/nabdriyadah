@@ -32,17 +32,11 @@ function extractJson(text = "") {
   }
 }
 
-function containsLatin(text = "") {
-  return /[A-Za-z]/.test(String(text));
-}
-
 function sanitizeArabic(text = "") {
   let value = String(text || "");
   value = removeMarkdownFences(value).replace(/\r/g, "");
-
   const lines = value.split("\n");
   const kept = [];
-
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
@@ -52,13 +46,12 @@ function sanitizeArabic(text = "") {
     if (latinCount > arabicCount && latinCount > 4) continue;
     kept.push(trimmed);
   }
-
   return kept.join("\n\n").replace(/\n{3,}/g, "\n\n").replace(/[ ]{2,}/g, " ").trim();
 }
 
 function sanitizeKeywords(keywords) {
   if (!Array.isArray(keywords)) return [];
-  return keywords.map((k) => sanitizeArabic(k)).map((k) => normalizeText(k)).filter(Boolean).slice(0, 8);
+  return keywords.map((k) => sanitizeArabic(k)).map((k) => normalizeText(k)).filter(Boolean).slice(0, 10);
 }
 
 function sportLabel(sport = "football") {
@@ -70,25 +63,30 @@ function sportLabel(sport = "football") {
     futsal: "كرة قدم الصالات",
     "premier-league": "الدوري الإنجليزي الممتاز",
     "la-liga": "الدوري الإسباني",
+    "bundesliga": "البوندسليغا",
+    "serie-a": "الدوري الإيطالي",
+    "ligue-1": "الدوري الفرنسي",
+    "champions-league": "دوري أبطال أوروبا",
+    "saudi-pro-league": "الدوري السعودي",
+    "eredivisie": "الدوري الهولندي",
     mixed: "كرة القدم"
   };
   return labels[sport] || "الرياضة";
 }
 
+function leagueLabel(league = "") {
+  return sportLabel(league) || sportLabel("football");
+}
+
 function sportSystemPrompt(sport = "football") {
+  const base = "تكتب بالعربية الفصحى البسيطة فقط. لا تستخدم كلمة إنجليزية واحدة. أسماء الأندية واللاعبين تُكتب بحروف عربية دائماً. أسلوبك صحفي احترافي، مشوق، موضوعي.";
   const prompts = {
-    football:
-      "أنت محرر في موقع رياضي عربي متخصص في كرة القدم. اكتب بأسلوب صحفي مباشر، دقيق، ومشوق. استخدم أسماء الأندية واللاعبين بالعربية.",
-    basketball:
-      "أنت محرر في موقع رياضي عربي متخصص في كرة السلة والـ NBA. اكتب بأسلوب صحفي مباشر، متحمس، ودقيق. اذكر الفرق واللاعبين بالعربية.",
-    tennis:
-      "أنت محرر في موقع رياضي عربي متخصص في التنس. اكتب بأسلوب صحفي دقيق وشيق. اذكر البطولات واللاعبين بالعربية.",
-    padel:
-      "أنت محرر في موقع رياضي عربي متخصص في رياضة البادل. اكتب بأسلوب صحفي حديث ومشوق. قدم البادل بطريقة جذابة للقارئ العربي.",
-    futsal:
-      "أنت محرر في موقع رياضي عربي متخصص في كرة قدم الصالات. اكتب بأسلوب صحفي مباشر ومتحمس.",
-    mixed:
-      "أنت محرر في موقع رياضي عربي. اكتب بأسلوب صحفي مباشر ومقروء، دون مقدمات عامة مكررة."
+    football: `أنت محرر رياضي خبير في كرة القدم العالمية والعربية. ${base}`,
+    basketball: `أنت محرر رياضي متخصص في كرة السلة والدوري الأمريكي. ${base}`,
+    tennis: `أنت محرر رياضي متخصص في بطولات التنس الكبرى. ${base}`,
+    padel: `أنت محرر رياضي متخصص في رياضة البادل الحديثة. ${base}`,
+    futsal: `أنت محرر رياضي متخصص في كرة قدم الصالات والفوتسال. ${base}`,
+    mixed: `أنت محرر رياضي متخصص في الرياضات الجماعية. ${base}`
   };
   return prompts[sport] || prompts.mixed;
 }
@@ -99,12 +97,12 @@ function sourceArabic(source = "") {
   if (source.includes("Kooora")) return "كووورة";
   if (source.includes("Hesport")) return "هسبورت";
   if (source.includes("Al Jazeera")) return "الجزيرة رياضة";
-  if (source.includes("Al Araby")) return "العربي الجديد رياضة";
+  if (source.includes("Al Araby")) return "العربي الجديد";
   if (source.includes("Elsport")) return "إلسبورت";
-  if (source.includes("Google News Basketball")) return "جوجل نيوز - كرة السلة";
-  if (source.includes("Google News Tennis")) return "جوجل نيوز - التنس";
-  if (source.includes("Google News Padel")) return "جوجل نيوز - البادل";
-  if (source.includes("Google News Futsal")) return "جوجل نيوز - الصالات";
+  if (source.includes("Google News Basketball")) return "جوجل نيوز كرة السلة";
+  if (source.includes("Google News Tennis")) return "جوجل نيوز التنس";
+  if (source.includes("Google News Padel")) return "جوجل نيوز البادل";
+  if (source.includes("Google News Futsal")) return "جوجل نيوز الصالات";
   if (source.includes("Google News")) return "جوجل نيوز";
   return "المصدر الرياضي";
 }
@@ -112,91 +110,59 @@ function sourceArabic(source = "") {
 function buildSlug(item, index) {
   const sport = item.sport || "football";
   const league = item.league || "mixed";
-
   if (sport === "basketball") return `basketball-${index + 1}`;
   if (sport === "tennis") return `tennis-${index + 1}`;
   if (sport === "padel") return `padel-${index + 1}`;
   if (sport === "futsal") return `futsal-${index + 1}`;
   if (league === "premier-league") return `premier-league-${index + 1}`;
   if (league === "la-liga") return `la-liga-${index + 1}`;
+  if (league === "bundesliga") return `bundesliga-${index + 1}`;
+  if (league === "serie-a") return `serie-a-${index + 1}`;
+  if (league === "ligue-1") return `ligue-1-${index + 1}`;
+  if (league === "champions-league") return `ucl-${index + 1}`;
+  if (league === "saudi-pro-league") return `saudi-${index + 1}`;
   return `football-${index + 1}`;
-}
-
-function buildImage(index) {
-  const images = [
-    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1508098682722-e99c643e7485?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=1200&q=80"
-  ];
-  return images[index % images.length];
 }
 
 function fallbackArticle(item, index) {
   const sport = item.sport || "football";
-  const label = sportLabel(item.league || sport);
-  const source = sourceArabic(item.source);
+  const label = leagueLabel(item.league || sport);
   const originalTitle = normalizeText(item.originalTitle || `خبر رياضي ${index + 1}`);
-  const topic = originalTitle.length > 80 ? originalTitle.slice(0, 80) : originalTitle;
-
-  const titles = [
-    `${topic}`,
-    `تطورات مهمة: ${topic}`,
-    `آخر أخبار ${label}: ${topic}`,
-    `متابعة خاصة — ${topic}`,
-    `${label}: ${topic}`,
-    `تفاصيل جديدة — ${topic}`,
-    `مستجدات ${label}: ${topic}`,
-    `تقرير خاص: ${topic}`
-  ];
-
-  const title = titles[index % titles.length];
-  const description = `نستعرض في هذا التقرير أبرز التفاصيل المرتبطة بـ ${topic} في ${label} وفق المعطيات المتاحة.`;
-
+  const title = originalTitle.length > 90 ? originalTitle.slice(0, 90) : originalTitle;
+  const description = `تفاصيل وتحليل حول: ${title} — متابعة من نبض الرياضة.`;
   const content = [
-    `تشهد ${label} حركة ملفتة هذه الأيام، وكان من أبرز ما يتداول خبر يخص: ${topic}.`,
-    `وبحسب المعطيات المتوفرة، فإن هذا الخبر يرتبط مباشرة بالمشهد الراهن في ${label}.`,
-    `ويأتي هذا التطور في سياق المنافسة الحالية والملفات الكبيرة التي تشغل المتابعين في هذا القطاع الرياضي.`,
-    `وتحاول وسائل الإعلام الرياضية تقديم صورة أوضح عن خلفية هذا الملف وتداعياته المحتملة على المرحلة المقبلة.`,
-    `كما يرى المتخصصون أن هذه التطورات تعكس حجم الاهتمام المتنامي بـ ${label} في الوسط الرياضي العربي.`,
-    `في نبض الرياضة، نواصل متابعة هذا الملف ونقل أبرز المستجدات المرتبطة به فور ورودها.`
+    `تواصل ${label} تقديم أحداث مثيرة، وكان أبرزها في هذه الجولة: ${title}.`,
+    `وتشير المعطيات المتوفرة إلى أن هذا الحدث يمثل محطة مهمة في مسار الموسم الرياضي الحالي، ويستقطب اهتمام واسع من المتابعين العرب.`,
+    `يأتي هذا الخبر في سياق منافسة حامية الوطيس تشهدها ${label}، حيث يترقب الجمهور نتائج مفاجئة وأداء لافتاً من الأندية والأفراد.`,
+    `وقد أثارت هذه المستجدات موجة من التحليلات والتعليقات على منصات التواصل الاجتماعي بين مختلف شرائح الجمهور الرياضي.`,
+    `تبقى ${label} وجهة أولى للمتابع العربي الباحث عن أعلى مستويات التنافسية في العالم، وموقع نبض الرياضة يواصل تغطية كل التطورات لحظة بلحظة.`
   ].join("\n\n");
-
   return {
     title,
     description,
     seoTitle: `${title} | نبض الرياضة`,
-    seoDescription: description,
+    seoDescription: description.slice(0, 160),
     content,
-    keywords: [label, "أخبار رياضية", sportLabel(sport), "نتائج", "متابعة"]
+    keywords: [label, "أخبار رياضية", sportLabel(sport), "نتائج", "متابعة", "نبض الرياضة"],
+    faq: []
   };
 }
 
 async function callOpenAI(prompt, temperature = 0.3, systemPrompt = null) {
   if (!OPENAI_API_KEY) return null;
-
   try {
     const messages = [
-      {
-        role: "system",
-        content: systemPrompt || "أنت محرر في موقع رياضي عربي. اكتب بالعربية فقط، بأسلوب صحفي مباشر ومقروء."
-      },
+      { role: "system", content: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط." },
       { role: "user", content: prompt }
     ];
-
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ model: "gpt-4o-mini", temperature, messages })
+      body: JSON.stringify({ model: "gpt-4o-mini", temperature, messages, max_tokens: 2500 })
     });
-
     const data = await response.json();
     if (!response.ok) {
       console.log("OpenAI error:", JSON.stringify(data?.error || data));
@@ -209,101 +175,112 @@ async function callOpenAI(prompt, temperature = 0.3, systemPrompt = null) {
   }
 }
 
-async function arabizeIfNeeded(text, label = "النص") {
-  const cleaned = sanitizeArabic(text);
-  if (!containsLatin(cleaned)) return cleaned;
-
-  const raw = await callOpenAI(
-    `حوّل هذا ${label} إلى العربية فقط. اكتب الأسماء الأجنبية بحروف عربية. أعد النص فقط بدون شرح.\n\nالنص:\n${cleaned}`,
-    0.1
-  );
-
-  if (!raw) return sanitizeArabic(cleaned.replace(/[A-Za-z0-9][^.\n]*[.\n]?/g, ""));
-  return sanitizeArabic(raw);
-}
-
 async function rewriteArticle(item, index) {
   const fallback = fallbackArticle(item, index);
-
   const originalTitle = normalizeText(item.originalTitle || item.title || "");
   const originalDescription = normalizeText(item.originalDescription || item.description || "");
   const sport = item.sport || "football";
-  const label = sportLabel(item.league || sport);
+  const label = leagueLabel(item.league || sport);
   const source = sourceArabic(item.source);
-
-  if (!OPENAI_API_KEY) {
-    return fallback;
-  }
-
   const systemPrompt = sportSystemPrompt(sport);
 
+  if (!OPENAI_API_KEY) return fallback;
+
   const prompt = `
-أعد صياغة هذا الخبر الرياضي إلى مادة صحفية عربية كاملة.
+أنت محرر رياضي في موقع "نبض الرياضة". مهمتك: تحويل هذا الخبر إلى مقال صحفي عربي طويل ومحسَّن للبحث (SEO) بشكل احترافي.
 
-المعلومات المتاحة:
-- الرياضة / البطولة: ${label}
-- المصدر: ${source}
-- العنوان الأصلي: ${originalTitle}
-- الوصف الأصلي: ${originalDescription}
-- الوسوم الموضوعية: ${(item.topicTags || []).join("، ")}
+--- المعلومات المتاحة ---
+الرياضة/البطولة: ${label}
+المصدر: ${source}
+العنوان الأصلي: ${originalTitle}
+الوصف: ${originalDescription}
+الوسوم: ${(item.topicTags || []).join("، ")}
 
-قواعد إلزامية:
-1. العنوان: يجب أن يذكر اسم الفريق أو اللاعب أو الحدث المحدد — لا عناوين عامة مثل "تفاصيل جديدة" أو "آخر المستجدات" وحدها
-2. العنوان: بين 40 و 80 حرفاً، خبري مباشر، يثير الفضول
-3. الوصف: جملة أو جملتان تلخص الخبر بشكل مشوق، 100-160 حرف
-4. المحتوى: 5 فقرات صحفية واضحة، تبدأ بالخبر الأبرز ثم السياق والتحليل
-5. الكلمات المفتاحية: 5 إلى 8 كلمات بالعربية متعلقة بالخبر
-6. لا تستخدم أي جملة إنجليزية في المخرجات
-7. الأسماء الأجنبية تُكتب بالحروف العربية
+--- قواعد SEO إلزامية ---
+العنوان (title):
+- يجب أن يذكر اسم الفريق أو اللاعب أو الحدث المحدد بشكل صريح
+- بين 45 و 70 حرفاً
+- يبدأ بالمعلومة الأبرز مباشرة (لا يبدأ بـ"أخبار" أو "تقرير")
+- يثير الفضول ويحفز على النقر
 
-أعد JSON فقط بهذا الشكل:
+عنوان السيو (seoTitle):
+- يتضمن الكلمة المفتاحية الرئيسية في أول 60 حرف
+- صيغة: "[الكيان الرياضي] — [الخبر] | نبض الرياضة"
+
+وصف السيو (seoDescription):
+- بين 145 و 160 حرفاً بالضبط
+- يلخص الخبر ويتضمن الكيان الرياضي والفعل والنتيجة
+- يحتوي على دعوة للقراءة ضمنية
+
+المحتوى (content):
+- مقال طويل: 8 إلى 10 فقرات صحفية متدرجة
+- الفقرة 1: الخبر الأبرز والأرقام (الـ lede) — 2-3 جمل مكثفة
+- الفقرة 2: السياق والخلفية التاريخية للحدث
+- الفقرة 3: التفاصيل والمعطيات التقنية أو الإحصائية
+- الفقرة 4-5: تحليل تأثير الخبر على الموسم والمنافسة
+- الفقرة 6: آراء ومواقف (صياغة صحفية حتى بدون اقتباس حرفي)
+- الفقرة 7-8: التوقعات والسيناريوهات المحتملة
+- الفقرة 9: ربط بالمشهد الرياضي العربي والاهتمام الإقليمي
+- الفقرة 10: خاتمة تحريرية مع دعوة للمتابعة
+- افصل الفقرات بـ \\n\\n فقط — بدون عناوين فرعية أو markdown
+
+الكلمات المفتاحية (keywords):
+- 8 إلى 10 كلمات/عبارات عربية
+- تشمل: اسم الكيان + البطولة + الفعل الرياضي + كلمات LSI (مثل: نتائج، انتقالات، تحليل، موسم، ملعب...)
+- لا تكرار بين الكلمات
+
+الأسئلة الشائعة (faq):
+- 3 أسئلة وأجوبة قصيرة مرتبطة بالخبر (لـ schema FAQ)
+- كل سؤال: سؤال عربي + جواب 1-2 جملة
+
+--- تحذيرات ---
+- لا كلمة إنجليزية واحدة في المخرجات
+- الأسماء الأجنبية بالحروف العربية فقط (مثال: ريال مدريد، ليونيل ميسي)
+- لا مقدمات عامة ("في إطار" ، "في سياق" لوحدها)
+- لا تكرار بين العنوان والوصف والفقرة الأولى
+
+أعد JSON فقط بهذا الشكل الدقيق:
 {
-  "title": "عنوان خبري يذكر الفريق أو اللاعب أو الحدث",
-  "description": "وصف مختصر ومشوق",
-  "seoTitle": "عنوان سيو يتضمن الكيان الرياضي",
-  "seoDescription": "وصف سيو بين 100 و 160 حرف",
-  "content": "فقرة 1\n\nفقرة 2\n\nفقرة 3\n\nفقرة 4\n\nفقرة 5",
-  "keywords": ["كلمة1", "كلمة2", "كلمة3", "كلمة4", "كلمة5"]
+  "title": "...",
+  "description": "...",
+  "seoTitle": "...",
+  "seoDescription": "...",
+  "content": "فقرة 1\\n\\nفقرة 2\\n\\n...",
+  "keywords": ["...", "...", "..."],
+  "faq": [
+    { "q": "سؤال؟", "a": "جواب." },
+    { "q": "سؤال؟", "a": "جواب." },
+    { "q": "سؤال؟", "a": "جواب." }
+  ]
 }
 `.trim();
 
-  const raw = await callOpenAI(prompt, 0.35, systemPrompt);
-
+  const raw = await callOpenAI(prompt, 0.3, systemPrompt);
   if (!raw) return fallback;
 
   const parsed = extractJson(raw);
   if (!parsed) {
-    console.log(`JSON parse failed for article ${index + 1}, using fallback.`);
+    console.log(`  JSON parse failed for article ${index + 1}, using fallback.`);
     return fallback;
   }
 
-  let title = sanitizeArabic(parsed.title || fallback.title);
-  let description = sanitizeArabic(parsed.description || fallback.description);
-  let seoTitle = sanitizeArabic(parsed.seoTitle || `${title} | نبض الرياضة`);
-  let seoDescription = sanitizeArabic(parsed.seoDescription || description);
-  let content = sanitizeArabic(parsed.content || fallback.content);
-  let keywords = sanitizeKeywords(parsed.keywords);
-
-  title = await arabizeIfNeeded(title, "العنوان");
-  description = await arabizeIfNeeded(description, "الوصف");
-  seoTitle = await arabizeIfNeeded(seoTitle, "عنوان السيو");
-  seoDescription = await arabizeIfNeeded(seoDescription, "وصف السيو");
-  content = await arabizeIfNeeded(content, "المحتوى");
+  const title = sanitizeArabic(parsed.title || fallback.title);
+  const description = sanitizeArabic(parsed.description || fallback.description);
+  const seoTitle = sanitizeArabic(parsed.seoTitle || `${title} | نبض الرياضة`);
+  const seoDescription = sanitizeArabic(parsed.seoDescription || description).slice(0, 160);
+  const content = sanitizeArabic(parsed.content || fallback.content);
+  const keywords = sanitizeKeywords(parsed.keywords);
+  const faq = Array.isArray(parsed.faq)
+    ? parsed.faq.slice(0, 3).map((f) => ({ q: sanitizeArabic(f.q || ""), a: sanitizeArabic(f.a || "") })).filter((f) => f.q && f.a)
+    : [];
 
   if (!title || !description || !content) return fallback;
 
-  if (!keywords.length) {
-    keywords = item.topicTags?.length
-      ? [...item.topicTags.slice(0, 4), label]
-      : fallback.keywords;
-  }
-
-  return { title, description, seoTitle, seoDescription, content, keywords };
+  return { title, description, seoTitle, seoDescription, content, keywords, faq };
 }
 
 async function main() {
   let rawItems = [];
-
   try {
     rawItems = JSON.parse(fs.readFileSync(INPUT_PATH, "utf-8"));
   } catch (error) {
@@ -316,7 +293,7 @@ async function main() {
     process.exit(0);
   }
 
-  // Dedup
+  // Dedup by title
   const unique = [];
   const seen = new Set();
   for (const item of rawItems) {
@@ -328,13 +305,12 @@ async function main() {
     unique.push(item);
   }
 
-  // Spread across sports: max 16 articles, 2 per non-football sport, rest football
+  // Spread: 10 football + 2 basketball + 2 tennis + 1 padel + 1 futsal = 16 max
   const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 10);
   const basketItems = unique.filter((i) => i.sport === "basketball").slice(0, 2);
   const tennisItems = unique.filter((i) => i.sport === "tennis").slice(0, 2);
   const padelItems = unique.filter((i) => i.sport === "padel").slice(0, 1);
   const futsalItems = unique.filter((i) => i.sport === "futsal").slice(0, 1);
-
   const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems];
 
   const articles = [];
@@ -342,7 +318,7 @@ async function main() {
   for (let i = 0; i < selected.length; i++) {
     const item = selected[i];
     const label = item.originalTitle || `خبر ${i + 1}`;
-    console.log(`Rewriting [${i + 1}/${selected.length}] (${item.sport || "football"}): ${label.slice(0, 60)}`);
+    console.log(`[${i + 1}/${selected.length}] ${item.sport || "football"}: ${label.slice(0, 65)}`);
 
     const rewritten = await rewriteArticle(item, i);
 
@@ -358,13 +334,14 @@ async function main() {
       seoDescription: rewritten.seoDescription,
       content: rewritten.content,
       keywords: rewritten.keywords,
-      image: buildImage(i)
+      faq: rewritten.faq || [],
+      image: `/generated/${buildSlug(item, i)}.png`
     });
   }
 
   ensureDir(OUTPUT_PATH);
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(articles, null, 2), "utf-8");
-  console.log("SEO articles saved:", articles.length);
+  console.log(`SEO articles saved: ${articles.length}`);
 }
 
 main();

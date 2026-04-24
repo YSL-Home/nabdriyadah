@@ -80,8 +80,17 @@ export default function HomePage() {
               تغطية عربية يومية لكرة القدم، كرة السلة، التنس، البادل، وكرة قدم الصالات — كل الرياضة في مكان واحد.
             </p>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              {["كرة القدم", "الدوريات الكبرى", "كرة السلة", "التنس", "البادل", "نتائج مباشرة"].map((tag) => (
-                <span key={tag} style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.18)", padding: "8px 14px", borderRadius: "999px", fontSize: "13px", fontWeight: 700 }}>{tag}</span>
+              {[
+                { label: "كرة القدم", href: "/sport/football/" },
+                { label: "الدوريات الكبرى", href: "/sport/football/" },
+                { label: "كرة السلة", href: "/sport/basketball/" },
+                { label: "التنس", href: "/sport/tennis/" },
+                { label: "البادل", href: "/sport/padel/" },
+                { label: "الصالات", href: "/sport/futsal/" }
+              ].map((tag) => (
+                <Link key={tag.label} href={tag.href} style={{ textDecoration: "none", display: "inline-block", background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.28)", padding: "8px 16px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, color: "white" }}>
+                  {tag.label}
+                </Link>
               ))}
             </div>
           </div>

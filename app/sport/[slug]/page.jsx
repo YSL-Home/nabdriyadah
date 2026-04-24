@@ -148,8 +148,8 @@ export default function SportPage({ params }) {
               {footballLeagues.map((league) => (
                 <Link key={league.slug} href={`/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: "white", border: `1px solid ${league.border}`, borderRadius: "24px", padding: "22px 18px", display: "flex", alignItems: "center", gap: "14px", boxShadow: "0 8px 20px rgba(0,0,0,0.04)" }}>
-                    <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: league.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", flexShrink: 0 }}>
-                      {league.flag}
+                    <div style={{ width: "56px", height: "56px", borderRadius: "14px", background: league.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "6px" }}>
+                      <img src={league.logo} alt={league.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
                     <div>
                       <div style={{ color: league.color, fontSize: "12px", fontWeight: 700, marginBottom: "4px" }}>{league.country}</div>

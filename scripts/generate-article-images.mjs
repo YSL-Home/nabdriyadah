@@ -23,45 +23,104 @@ function safeReadJson(filePath) {
   }
 }
 
-function buildSportStyle(league = "") {
-  const styles = {
-    "premier-league": "ملعب كرة قدم إنجليزي، أجواء احترافية أوروبية، إضاءة قوية، حشود غفيرة، صورة صحفية رياضية",
-    "la-liga": "ملعب كرة قدم إسباني، أجواء حارة ومتوسطية، ألوان زاهية، لحظة رياضية مشوقة",
-    "basketball": "ملعب كرة سلة احترافي، إضاءة ساطعة، طاقة عالية، لاعبون في حركة، طابع NBA",
-    "padel": "ملعب بادل احترافي، زجاج شفاف، إضاءة داخلية، أجواء رياضية حديثة",
-    "tennis": "ملعب تنس احترافي، سطح أحمر أو أزرق، لحظة ضرب كرة، طابع بطولة كبرى",
-    "futsal": "ملعب كرة قدم صالات، أجواء ساخنة، طاقة عالية، لاعبون في حركة سريعة",
-    "mixed": "ملعب رياضي احترافي حديث، أجواء تنافسية، طابع صحفي رياضي عربي"
+// Visual style per sport/league — all described as original scenes, no logos, no trademarks
+function buildVisualScene(sport = "football", league = "") {
+  const scenes = {
+    "premier-league": [
+      "a packed football stadium at night, green pitch under floodlights, roaring crowd in stands, dramatic aerial view, cinematic photography",
+      "two football players competing for a header in midfield, english stadium atmosphere, crowd blur in background, high-speed photography",
+      "a football rolling across wet grass in a stadium, rain drops on pitch, shallow depth of field, sports photography"
+    ],
+    "la-liga": [
+      "spanish football stadium interior, bright sunny afternoon, tifosi style fans with colorful scarves, pitch perfectly manicured",
+      "football match action scene in a mediterranean stadium, intense tackle on grass, stadium lights",
+      "close-up of football boots on pitch grass, spanish stadium background blur, golden hour light"
+    ],
+    "bundesliga": [
+      "german football stadium full of fans in yellow and black, aerial view, evening floodlights",
+      "football goalkeeper diving for save, german bundesliga stadium atmosphere, dramatic action",
+      "training session at a german stadium, players warming up, morning light, professional photography"
+    ],
+    "serie-a": [
+      "italian stadium architecture at sunset, marble stadium details, packed stands, cinematic",
+      "football player celebrating goal in italian stadium, fans standing, emotional moment, telephoto lens",
+      "midfield battle scene in an italian league match, grass texture close-up, stadium crowd blur"
+    ],
+    "ligue-1": [
+      "french football stadium at dusk, city lights visible beyond stands, match underway, aerial cinematic",
+      "football skill move on pitch, paris-style stadium atmosphere, evening match, blur crowd",
+      "goalkeeper commands area in a french league stadium, training moment, wide angle"
+    ],
+    "champions-league": [
+      "massive european football stadium at night, star-shaped spotlights, epic crowd energy, cinematic wide shot",
+      "football player lifts trophy under stadium lights, confetti raining, emotional celebration",
+      "two sets of players walking out of tunnel onto lit pitch, stadium electric atmosphere"
+    ],
+    "saudi-pro-league": [
+      "modern middle eastern football stadium exterior at sunset, palm trees, golden architecture",
+      "football match in a saudi stadium, vivid green pitch, enthusiastic fans in white thobes, evening",
+      "stadium action shot in saudi arabia, floodlit pitch, dynamic play moment, photography"
+    ],
+    "eredivisie": [
+      "dutch football stadium at golden hour, canal city visible behind stands, match day atmosphere",
+      "football action in a compact european stadium, dutch fans waving flags, vivid colors",
+      "training pitch in netherlands, windmill silhouette in background at sunset, professional football"
+    ],
+    "basketball": [
+      "professional basketball arena with bright court lighting, hardwood floor perspective, empty arena before game",
+      "basketball player driving to basket in a packed arena, crowd lights blur, dramatic action",
+      "basketball going through net from below, arena ceiling and lights, dramatic upward shot"
+    ],
+    "tennis": [
+      "tennis court aerial view, clay red surface, white lines, single player serving, dramatic shadow",
+      "tennis ball close-up spinning mid-air over grass court, blurred player in background",
+      "grand slam tournament atmosphere, packed stands, centre court, sunny day, cinematic wide"
+    ],
+    "padel": [
+      "modern padel court interior with glass walls, clean bright lighting, two players mid-rally",
+      "padel racket and ball close-up on blue court surface, shallow depth of field",
+      "padel sports complex exterior at night, glass courts illuminated, modern architecture"
+    ],
+    "futsal": [
+      "indoor futsal arena with bright overhead lights, small goals, polished floor, match in progress",
+      "futsal players in fast motion, indoor hall, vibrant crowd, wide angle photography",
+      "futsal ball on indoor court floor, goals visible, arena atmosphere, sports photography"
+    ],
+    "football": [
+      "football stadium golden hour, packed stands, perfectly cut pitch, cinematic wide angle",
+      "football player performing skill on pitch, stadium full of fans, action photography",
+      "aerial view of football match in progress, bird's eye perspective, stadium surrounded by city"
+    ]
   };
-  return styles[league] || styles["mixed"];
+
+  const sportKey = league && scenes[league] ? league : (sport && scenes[sport] ? sport : "football");
+  const options = scenes[sportKey];
+  const idx = Math.floor(Math.random() * options.length);
+  return options[idx];
 }
 
 function buildPrompt(article) {
   const title = normalizeText(article.title || "");
-  const description = normalizeText(article.description || "");
+  const sport = normalizeText(article.sport || "football");
   const league = normalizeText(article.league || "");
-  const keywords = Array.isArray(article.keywords) ? article.keywords.slice(0, 5).join("، ") : "";
-  const sportStyle = buildSportStyle(league);
+  const scene = buildVisualScene(sport, league);
 
-  return `
-صورة غلاف احترافية لمقال رياضي عربي.
+  return `Create a high-quality sports news article cover image.
 
-المطلوب:
-- صورة أفقية لموقع أخبار رياضية
-- أسلوب واقعي واحترافي كأغلفة المواقع الرياضية الحديثة
-- بدون أي نص أو شعارات أو علامات مائية أو وجوه مشهورة
-- تركيز على الرياضة أو أجواء الملاعب أو لحظة رياضية معبرة
-- تكوين بصري قوي، ألوان واضحة، تباين جيد
-- ليست كرتونية
+Style requirements:
+- Photorealistic, professional sports journalism photography style
+- Horizontal/landscape orientation for web article header
+- High contrast, vivid colors, dramatic lighting
+- NO text, NO logos, NO jersey numbers, NO brand marks, NO watermarks, NO recognizable player faces
+- NO team badges, NO sponsor logos, NO trademark symbols
+- Original artistic composition inspired by sports atmosphere
 
-المقال:
-- العنوان: ${title}
-- الوصف: ${description}
-- الرياضة/البطولة: ${league}
-- الكلمات المفتاحية: ${keywords}
+Scene to depict:
+${scene}
 
-الطابع البصري المطلوب: ${sportStyle}
-`.trim();
+Context: Article about "${title.slice(0, 120)}"
+
+The image should feel like a premium sports magazine cover photo: dynamic, emotional, and visually striking.`.trim();
 }
 
 async function tryGptImage1(prompt) {
@@ -85,7 +144,6 @@ async function tryGptImage1(prompt) {
 
   const b64 = data?.data?.[0]?.b64_json;
   if (!b64) throw new Error("gpt-image-1: no image data returned");
-
   return b64;
 }
 
@@ -113,7 +171,6 @@ async function tryDallE3(prompt) {
 
   const b64 = data?.data?.[0]?.b64_json;
   if (!b64) throw new Error("dall-e-3: no image data returned");
-
   return b64;
 }
 
@@ -121,7 +178,7 @@ async function generateImageBase64(prompt) {
   try {
     return await tryGptImage1(prompt);
   } catch (e1) {
-    console.log(`gpt-image-1 failed (${e1.message}), trying dall-e-3...`);
+    console.log(`  gpt-image-1 failed (${e1.message.slice(0, 80)}), trying dall-e-3...`);
     return await tryDallE3(prompt);
   }
 }
@@ -155,7 +212,11 @@ async function main() {
     const absoluteImagePath = path.join(OUTPUT_DIR, fileName);
     const publicImagePath = `/generated/${fileName}`;
 
-    if (!FORCE_REGENERATE && fs.existsSync(absoluteImagePath)) {
+    // Skip if image already exists and is not Unsplash / not forced
+    const alreadyGenerated = fs.existsSync(absoluteImagePath);
+    const isUnsplash = (article.image || "").includes("unsplash.com");
+
+    if (!FORCE_REGENERATE && alreadyGenerated && !isUnsplash) {
       if (article.image !== publicImagePath) {
         article.image = publicImagePath;
         changed = true;
@@ -165,21 +226,22 @@ async function main() {
     }
 
     try {
-      console.log(`Generating image: ${slug}`);
+      console.log(`Generating image: ${slug} (sport: ${article.sport || "football"})`);
       const prompt = buildPrompt(article);
       const base64 = await generateImageBase64(prompt);
       fs.writeFileSync(absoluteImagePath, Buffer.from(base64, "base64"));
       article.image = publicImagePath;
       changed = true;
-      await sleep(1200);
+      console.log(`  Generated: ${fileName}`);
+      await sleep(1500);
     } catch (error) {
-      console.log(`Image failed for ${slug}: ${error.message}`);
+      console.log(`  Image failed for ${slug}: ${error.message}`);
     }
   }
 
   if (changed) {
     fs.writeFileSync(ARTICLES_PATH, JSON.stringify(articles, null, 2), "utf-8");
-    console.log("Updated articles with new image paths.");
+    console.log("Updated articles with generated image paths.");
   }
 
   console.log("Image generation finished.");

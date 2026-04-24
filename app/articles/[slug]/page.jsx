@@ -84,19 +84,30 @@ export function generateMetadata({ params }) {
     };
   }
 
+  const canonicalUrl = `https://nabdriyadah.com/articles/${article.slug}/`;
+  const imageUrl = article.image?.startsWith("http")
+    ? article.image
+    : `https://nabdriyadah.com${article.image}`;
+
   return {
     title: article.seoTitle || article.title,
     description: article.seoDescription || article.description,
-    alternates: {
-      canonical: `https://nabdriyadah.com/articles/${article.slug}/`
-    },
+    keywords: (article.keywords || []).join("، "),
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title: article.seoTitle || article.title,
       description: article.seoDescription || article.description,
-      url: `https://nabdriyadah.com/articles/${article.slug}/`,
+      url: canonicalUrl,
       siteName: "نبض الرياضة",
       locale: "ar_AR",
-      type: "article"
+      type: "article",
+      images: [{ url: imageUrl, width: 1536, height: 1024, alt: article.title }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.seoTitle || article.title,
+      description: article.seoDescription || article.description,
+      images: [imageUrl]
     }
   };
 }
@@ -544,10 +555,63 @@ export default function ArticlePage({ params }) {
               >
                 {article.content}
               </div>
+
+              {article.faq && article.faq.length > 0 && (
+                <div style={{ marginTop: "36px" }}>
+                  <div style={{ height: "1px", background: theme.border, marginBottom: "28px" }} />
+                  <h2 style={{ margin: "0 0 22px 0", fontSize: "28px", fontWeight: 800, color: theme.text }}>
+                    أسئلة شائعة
+                  </h2>
+                  <div style={{ display: "grid", gap: "16px" }}>
+                    {article.faq.map((item, i) => (
+                      <div key={i} style={{ background: theme.primarySoft, border: `1px solid ${theme.border}`, borderRadius: "18px", padding: "20px 22px" }}>
+                        <div style={{ fontSize: "18px", fontWeight: 800, color: theme.primary, marginBottom: "10px" }}>
+                          {item.q}
+                        </div>
+                        <div style={{ fontSize: "17px", lineHeight: 1.9, color: theme.text }}>
+                          {item.a}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </article>
         </div>
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "NewsArticle",
+                "headline": article.seoTitle || article.title,
+                "description": article.seoDescription || article.description,
+                "url": `https://nabdriyadah.com/articles/${article.slug}/`,
+                "inLanguage": "ar",
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "نبض الرياضة",
+                  "url": "https://nabdriyadah.com"
+                },
+                "keywords": (article.keywords || []).join(", ")
+              },
+              ...(article.faq && article.faq.length > 0 ? [{
+                "@type": "FAQPage",
+                "mainEntity": article.faq.map((f) => ({
+                  "@type": "Question",
+                  "name": f.q,
+                  "acceptedAnswer": { "@type": "Answer", "text": f.a }
+                }))
+              }] : [])
+            ]
+          })
+        }}
+      />
     </main>
   );
 }
