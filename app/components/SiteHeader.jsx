@@ -34,7 +34,7 @@ export default function SiteHeader() {
         <Link href="/" style={{ textDecoration: "none", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <img
-              src="/logo.svg"
+              src="/logo-v2.svg"
               alt="نبض الرياضة"
               style={{ height: "36px", width: "auto", objectFit: "contain" }}
             />

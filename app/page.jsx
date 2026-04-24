@@ -76,23 +76,9 @@ export default function HomePage() {
               منصة رياضية عربية متعددة الرياضات
             </div>
             <h1 style={{ margin: "0 0 14px 0", fontSize: "64px", lineHeight: 1.15, fontWeight: 800 }}>نبض الرياضة</h1>
-            <p style={{ margin: "0 0 24px 0", maxWidth: "800px", fontSize: "22px", lineHeight: 1.9, opacity: 0.95 }}>
+            <p style={{ margin: 0, maxWidth: "800px", fontSize: "22px", lineHeight: 1.9, opacity: 0.95 }}>
               تغطية عربية يومية لكرة القدم، كرة السلة، التنس، البادل، وكرة قدم الصالات — كل الرياضة في مكان واحد.
             </p>
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              {[
-                { label: "كرة القدم", href: "/sport/football/" },
-                { label: "الدوريات الكبرى", href: "/sport/football/" },
-                { label: "كرة السلة", href: "/sport/basketball/" },
-                { label: "التنس", href: "/sport/tennis/" },
-                { label: "البادل", href: "/sport/padel/" },
-                { label: "الصالات", href: "/sport/futsal/" }
-              ].map((tag) => (
-                <Link key={tag.label} href={tag.href} style={{ textDecoration: "none", display: "inline-block", background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.28)", padding: "8px 16px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, color: "white" }}>
-                  {tag.label}
-                </Link>
-              ))}
-            </div>
           </div>
         </section>
 
