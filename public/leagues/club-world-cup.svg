@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#002B5B"/>
+      <stop offset="100%" style="stop-color:#004994"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#bg)" stroke="#FFD700" stroke-width="4"/>
+  <!-- Globe lines -->
+  <ellipse cx="100" cy="100" rx="60" ry="95" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <ellipse cx="100" cy="100" rx="95" ry="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <line x1="5" y1="100" x2="195" y2="100" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <line x1="100" y1="5" x2="100" y2="195" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <!-- Trophy cup simplified -->
+  <rect x="80" y="65" width="40" height="55" rx="6" fill="#FFD700"/>
+  <rect x="73" y="115" width="54" height="8" rx="3" fill="#FFD700"/>
+  <rect x="88" y="123" width="24" height="12" rx="2" fill="#FFD700"/>
+  <rect x="78" y="135" width="44" height="6" rx="3" fill="#FFD700"/>
+  <!-- Handles -->
+  <path d="M80 80 Q65 90 68 105 Q72 112 80 110" fill="none" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+  <path d="M120 80 Q135 90 132 105 Q128 112 120 110" fill="none" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+  <!-- FIFA text -->
+  <text x="100" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="14" fill="white" letter-spacing="3">FIFA</text>
+</svg>
