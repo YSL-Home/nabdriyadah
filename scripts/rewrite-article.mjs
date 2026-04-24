@@ -20,14 +20,11 @@ function removeMarkdownFences(text = "") {
 
 function extractJson(text = "") {
   const cleaned = removeMarkdownFences(text);
-
   try {
     return JSON.parse(cleaned);
   } catch {}
-
   const match = cleaned.match(/\{[\s\S]*\}/);
   if (!match) return null;
-
   try {
     return JSON.parse(match[0]);
   } catch {
@@ -49,59 +46,80 @@ function sanitizeArabic(text = "") {
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
-
     const latinCount = (trimmed.match(/[A-Za-z]/g) || []).length;
     const arabicCount = (trimmed.match(/[\u0600-\u06FF]/g) || []).length;
-
     if (latinCount > 0 && arabicCount === 0) continue;
     if (latinCount > arabicCount && latinCount > 4) continue;
-
     kept.push(trimmed);
   }
 
-  value = kept.join("\n\n");
-  value = value.replace(/\n{3,}/g, "\n\n");
-  value = value.replace(/[ ]{2,}/g, " ").trim();
-
-  return value;
+  return kept.join("\n\n").replace(/\n{3,}/g, "\n\n").replace(/[ ]{2,}/g, " ").trim();
 }
 
 function sanitizeKeywords(keywords) {
   if (!Array.isArray(keywords)) return [];
-  return keywords
-    .map((k) => sanitizeArabic(k))
-    .map((k) => normalizeText(k))
-    .filter(Boolean)
-    .slice(0, 8);
+  return keywords.map((k) => sanitizeArabic(k)).map((k) => normalizeText(k)).filter(Boolean).slice(0, 8);
 }
 
-function leagueName(slug = "") {
-  if (slug === "premier-league") return "الدوري الإنجليزي الممتاز";
-  if (slug === "la-liga") return "الدوري الإسباني";
-  return "كرة القدم";
+function sportLabel(sport = "football") {
+  const labels = {
+    football: "كرة القدم",
+    basketball: "كرة السلة",
+    tennis: "التنس",
+    padel: "البادل",
+    futsal: "كرة قدم الصالات",
+    "premier-league": "الدوري الإنجليزي الممتاز",
+    "la-liga": "الدوري الإسباني",
+    mixed: "كرة القدم"
+  };
+  return labels[sport] || "الرياضة";
+}
+
+function sportSystemPrompt(sport = "football") {
+  const prompts = {
+    football:
+      "أنت محرر في موقع رياضي عربي متخصص في كرة القدم. اكتب بأسلوب صحفي مباشر، دقيق، ومشوق. استخدم أسماء الأندية واللاعبين بالعربية.",
+    basketball:
+      "أنت محرر في موقع رياضي عربي متخصص في كرة السلة والـ NBA. اكتب بأسلوب صحفي مباشر، متحمس، ودقيق. اذكر الفرق واللاعبين بالعربية.",
+    tennis:
+      "أنت محرر في موقع رياضي عربي متخصص في التنس. اكتب بأسلوب صحفي دقيق وشيق. اذكر البطولات واللاعبين بالعربية.",
+    padel:
+      "أنت محرر في موقع رياضي عربي متخصص في رياضة البادل. اكتب بأسلوب صحفي حديث ومشوق. قدم البادل بطريقة جذابة للقارئ العربي.",
+    futsal:
+      "أنت محرر في موقع رياضي عربي متخصص في كرة قدم الصالات. اكتب بأسلوب صحفي مباشر ومتحمس.",
+    mixed:
+      "أنت محرر في موقع رياضي عربي. اكتب بأسلوب صحفي مباشر ومقروء، دون مقدمات عامة مكررة."
+  };
+  return prompts[sport] || prompts.mixed;
 }
 
 function sourceArabic(source = "") {
   if (source.includes("BBC")) return "بي بي سي سبورت";
-  if (source.includes("Sky")) return "سكاي سبورت";
   if (source.includes("Btolat")) return "بطولات";
   if (source.includes("Kooora")) return "كووورة";
   if (source.includes("Hesport")) return "هسبورت";
   if (source.includes("Al Jazeera")) return "الجزيرة رياضة";
   if (source.includes("Al Araby")) return "العربي الجديد رياضة";
   if (source.includes("Elsport")) return "إلسبورت";
+  if (source.includes("Google News Basketball")) return "جوجل نيوز - كرة السلة";
+  if (source.includes("Google News Tennis")) return "جوجل نيوز - التنس";
+  if (source.includes("Google News Padel")) return "جوجل نيوز - البادل";
+  if (source.includes("Google News Futsal")) return "جوجل نيوز - الصالات";
+  if (source.includes("Google News")) return "جوجل نيوز";
   return "المصدر الرياضي";
 }
 
 function buildSlug(item, index) {
-  const prefix =
-    item.league === "premier-league"
-      ? "premier-league"
-      : item.league === "la-liga"
-      ? "la-liga"
-      : "football";
+  const sport = item.sport || "football";
+  const league = item.league || "mixed";
 
-  return `${prefix}-${index + 1}`;
+  if (sport === "basketball") return `basketball-${index + 1}`;
+  if (sport === "tennis") return `tennis-${index + 1}`;
+  if (sport === "padel") return `padel-${index + 1}`;
+  if (sport === "futsal") return `futsal-${index + 1}`;
+  if (league === "premier-league") return `premier-league-${index + 1}`;
+  if (league === "la-liga") return `la-liga-${index + 1}`;
+  return `football-${index + 1}`;
 }
 
 function buildImage(index) {
@@ -111,68 +129,41 @@ function buildImage(index) {
     "https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1508098682722-e99c643e7485?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=1200&q=80"
+    "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=1200&q=80"
   ];
-
   return images[index % images.length];
 }
 
-function buildTitleVariant(baseTopic, league, index) {
-  const patterns = [
-    `تفاصيل جديدة حول ${baseTopic}`,
-    `ماذا يحدث في ملف ${baseTopic}؟`,
-    `تطورات لافتة تخص ${baseTopic}`,
-    `قراءة في خلفيات ${baseTopic}`,
-    `آخر المستجدات بشأن ${baseTopic}`,
-    `ملف ${baseTopic} يفرض نفسه في ${league}`,
-    `كيف تتطور قصة ${baseTopic}؟`,
-    `متابعة خاصة لتفاصيل ${baseTopic}`
-  ];
-
-  return patterns[index % patterns.length];
-}
-
-function buildDescriptionVariant(baseTopic, league, source, index) {
-  const patterns = [
-    `نستعرض في هذا التقرير أبرز التفاصيل المرتبطة بملف ${baseTopic} في ${league} وفق المعطيات المتداولة في ${source}.`,
-    `يتناول هذا المقال آخر التطورات الخاصة بموضوع ${baseTopic} مع قراءة عربية لأبعاده داخل ${league}.`,
-    `في هذا التقرير نتابع الخلفيات الأساسية لخبر ${baseTopic} وتأثيره المحتمل على المشهد الحالي في ${league}.`,
-    `نقدم قراءة صحفية مختصرة لملف ${baseTopic} كما يظهر في التغطية الرياضية المرتبطة بـ ${league}.`
-  ];
-
-  return patterns[index % patterns.length];
-}
-
 function fallbackArticle(item, index) {
-  const league = leagueName(item.league);
+  const sport = item.sport || "football";
+  const label = sportLabel(item.league || sport);
   const source = sourceArabic(item.source);
   const originalTitle = normalizeText(item.originalTitle || `خبر رياضي ${index + 1}`);
-  const topic = originalTitle.length > 70 ? originalTitle.slice(0, 70) : originalTitle;
+  const topic = originalTitle.length > 80 ? originalTitle.slice(0, 80) : originalTitle;
 
-  const title = buildTitleVariant(topic, league, index);
-  const description = buildDescriptionVariant(topic, league, source, index);
-
-  const intros = [
-    `يحظى هذا الملف بمتابعة كبيرة داخل ${league} في ظل تزايد الحديث عن أبعاده الفنية والرياضية.`,
-    `يتصدر هذا الموضوع مساحة مهمة من النقاشات المرتبطة بـ ${league} خلال المرحلة الحالية.`,
-    `يعيد هذا الخبر تسليط الضوء على واحد من الملفات البارزة في ${league}.`,
-    `تواصل التطورات المرتبطة بهذا الملف جذب اهتمام المتابعين في ${league}.`
+  const titles = [
+    `${topic}`,
+    `تطورات مهمة: ${topic}`,
+    `آخر أخبار ${label}: ${topic}`,
+    `متابعة خاصة — ${topic}`,
+    `${label}: ${topic}`,
+    `تفاصيل جديدة — ${topic}`,
+    `مستجدات ${label}: ${topic}`,
+    `تقرير خاص: ${topic}`
   ];
 
-  const p2 = [
-    `وتشير المعطيات المتاحة إلى أن جوهر الخبر يرتبط بعنوان متداول يدور حول: ${topic}.`,
-    `وبحسب ما يتم تداوله في التغطيات الحالية، فإن القضية الأساسية في هذا الخبر تتمحور حول: ${topic}.`,
-    `ويبدو من متابعة الخبر أن النقاش الرئيسي يدور حول ملف عنوانه العام: ${topic}.`
-  ];
+  const title = titles[index % titles.length];
+  const description = `نستعرض في هذا التقرير أبرز التفاصيل المرتبطة بـ ${topic} في ${label} وفق المعطيات المتاحة.`;
 
   const content = [
-    intros[index % intros.length],
-    p2[index % p2.length],
-    `ويأتي هذا الاهتمام في وقت تزداد فيه أهمية التفاصيل المرتبطة بالأندية واللاعبين والخيارات الفنية داخل ${league}.`,
-    `وتحاول وسائل الإعلام الرياضية تقديم صورة أوضح عن خلفية هذا الملف، خاصة مع ارتباطه باحتمالات قد يكون لها أثر على المرحلة المقبلة.`,
-    `كما ينظر المتابعون إلى هذه التطورات باعتبارها جزءًا من المشهد الأوسع داخل المنافسة، سواء من حيث القرارات أو التحركات أو الانعكاسات المحتملة.`,
-    `ومن المتوقع أن تكشف الأيام المقبلة عن معلومات إضافية تساعد على فهم هذا الموضوع بصورة أدق، وهو ما يمنح الخبر أهمية أكبر لدى الجمهور.`,
-    `في نبض الرياضة، نتابع مثل هذه الملفات بصياغة عربية واضحة تركز على الفكرة الأساسية وتقدمها للقارئ بشكل مباشر ومفيد.`
+    `تشهد ${label} حركة ملفتة هذه الأيام، وكان من أبرز ما يتداول خبر يخص: ${topic}.`,
+    `وبحسب المعطيات المتوفرة، فإن هذا الخبر يرتبط مباشرة بالمشهد الراهن في ${label}.`,
+    `ويأتي هذا التطور في سياق المنافسة الحالية والملفات الكبيرة التي تشغل المتابعين في هذا القطاع الرياضي.`,
+    `وتحاول وسائل الإعلام الرياضية تقديم صورة أوضح عن خلفية هذا الملف وتداعياته المحتملة على المرحلة المقبلة.`,
+    `كما يرى المتخصصون أن هذه التطورات تعكس حجم الاهتمام المتنامي بـ ${label} في الوسط الرياضي العربي.`,
+    `في نبض الرياضة، نواصل متابعة هذا الملف ونقل أبرز المستجدات المرتبطة به فور ورودها.`
   ].join("\n\n");
 
   return {
@@ -181,44 +172,36 @@ function fallbackArticle(item, index) {
     seoTitle: `${title} | نبض الرياضة`,
     seoDescription: description,
     content,
-    keywords: [league, "أخبار رياضية", "كرة القدم", "نتائج المباريات", "انتقالات"]
+    keywords: [label, "أخبار رياضية", sportLabel(sport), "نتائج", "متابعة"]
   };
 }
 
-async function callOpenAI(prompt, temperature = 0.3) {
+async function callOpenAI(prompt, temperature = 0.3, systemPrompt = null) {
   if (!OPENAI_API_KEY) return null;
 
   try {
+    const messages = [
+      {
+        role: "system",
+        content: systemPrompt || "أنت محرر في موقع رياضي عربي. اكتب بالعربية فقط، بأسلوب صحفي مباشر ومقروء."
+      },
+      { role: "user", content: prompt }
+    ];
+
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        temperature,
-        messages: [
-          {
-            role: "system",
-            content:
-              "أنت محرر في موقع رياضي عربي. أعد صياغة الأخبار بالعربية فقط، بأسلوب صحفي مباشر ومقروء، دون مقدمات عامة مكررة."
-          },
-          {
-            role: "user",
-            content: prompt
-          }
-        ]
-      })
+      body: JSON.stringify({ model: "gpt-4o-mini", temperature, messages })
     });
 
     const data = await response.json();
-
     if (!response.ok) {
-      console.log("OpenAI API error:", JSON.stringify(data));
+      console.log("OpenAI error:", JSON.stringify(data?.error || data));
       return null;
     }
-
     return data?.choices?.[0]?.message?.content || null;
   } catch (error) {
     console.log("OpenAI request failed:", error.message);
@@ -230,59 +213,13 @@ async function arabizeIfNeeded(text, label = "النص") {
   const cleaned = sanitizeArabic(text);
   if (!containsLatin(cleaned)) return cleaned;
 
-  const prompt = `
-حوّل هذا ${label} إلى العربية فقط.
-- لا تترك أي عبارة إنجليزية
-- اكتب الأسماء الأجنبية بالعربية
-- أعد النص فقط
+  const raw = await callOpenAI(
+    `حوّل هذا ${label} إلى العربية فقط. اكتب الأسماء الأجنبية بحروف عربية. أعد النص فقط بدون شرح.\n\nالنص:\n${cleaned}`,
+    0.1
+  );
 
-النص:
-${cleaned}
-`;
-
-  const raw = await callOpenAI(prompt, 0.1);
-
-  if (!raw) {
-    return sanitizeArabic(cleaned.replace(/[A-Za-z0-9][^.\n]*[.\n]?/g, ""));
-  }
-
+  if (!raw) return sanitizeArabic(cleaned.replace(/[A-Za-z0-9][^.\n]*[.\n]?/g, ""));
   return sanitizeArabic(raw);
-}
-
-async function extractTopic(item) {
-  const originalTitle = normalizeText(item.originalTitle || "");
-  const originalDescription = normalizeText(item.originalDescription || "");
-  const league = leagueName(item.league);
-  const source = sourceArabic(item.source);
-
-  const prompt = `
-استخرج من هذا الخبر الرياضي موضوعه الرئيسي بصياغة عربية قصيرة ودقيقة.
-
-المعطيات:
-- البطولة: ${league}
-- المصدر: ${source}
-- العنوان: ${originalTitle}
-- الوصف: ${originalDescription}
-
-أعد JSON فقط:
-{
-  "topic": "الموضوع الرئيسي بالعربية",
-  "headlineStyle": "نمط عنوان مناسب بالعربية",
-  "summary": "ملخص قصير بالعربية"
-}
-`;
-
-  const raw = await callOpenAI(prompt, 0.2);
-  if (!raw) return null;
-
-  const parsed = extractJson(raw);
-  if (!parsed) return null;
-
-  return {
-    topic: sanitizeArabic(parsed.topic || ""),
-    headlineStyle: sanitizeArabic(parsed.headlineStyle || ""),
-    summary: sanitizeArabic(parsed.summary || "")
-  };
 }
 
 async function rewriteArticle(item, index) {
@@ -290,70 +227,58 @@ async function rewriteArticle(item, index) {
 
   const originalTitle = normalizeText(item.originalTitle || item.title || "");
   const originalDescription = normalizeText(item.originalDescription || item.description || "");
-  const league = leagueName(item.league);
+  const sport = item.sport || "football";
+  const label = sportLabel(item.league || sport);
   const source = sourceArabic(item.source);
 
   if (!OPENAI_API_KEY) {
-    console.log("OPENAI_API_KEY missing, using fallback.");
     return fallback;
   }
 
-  const topicData = await extractTopic(item);
-  const baseTopic = topicData?.topic || sanitizeArabic(originalTitle) || `خبر في ${league}`;
-
-  const titleSeed = buildTitleVariant(baseTopic, league, index);
-  const descriptionSeed = buildDescriptionVariant(baseTopic, league, source, index);
+  const systemPrompt = sportSystemPrompt(sport);
 
   const prompt = `
-أعد صياغة هذا الخبر الرياضي إلى مادة صحفية عربية وفية للمعنى والسياق.
+أعد صياغة هذا الخبر الرياضي إلى مادة صحفية عربية كاملة.
 
-المعطيات:
-- البطولة: ${league}
+المعلومات المتاحة:
+- الرياضة / البطولة: ${label}
 - المصدر: ${source}
-- عنوان الخبر الأصلي: ${originalTitle}
-- وصف الخبر الأصلي: ${originalDescription}
-- الموضوع المستخرج بالعربية: ${baseTopic}
-- عنوان مقترح مبدئي: ${titleSeed}
-- وصف مقترح مبدئي: ${descriptionSeed}
-- الكلمات المفتاحية الموضوعية الحالية: ${(item.topicTags || []).join("، ")}
+- العنوان الأصلي: ${originalTitle}
+- الوصف الأصلي: ${originalDescription}
+- الوسوم الموضوعية: ${(item.topicTags || []).join("، ")}
 
-التعليمات:
-- حافظ على الفكرة الأصلية والسياق
-- لا تكتب مقالًا عامًا
-- اجعل الصياغة قريبة من أسلوب المواقع الرياضية العربية
-- لا تستخدم أي جملة إنجليزية
-- اكتب الأسماء بالعربية
-- حافظ على نبرة خبرية مشوقة ولكن غير مبالغ فيها
-- اجعل العنوان والوصف مختلفين عن المقالات الأخرى
-- اكتب 4 إلى 6 فقرات صحفية واضحة
-- أعد JSON فقط
+قواعد إلزامية:
+1. العنوان: يجب أن يذكر اسم الفريق أو اللاعب أو الحدث المحدد — لا عناوين عامة مثل "تفاصيل جديدة" أو "آخر المستجدات" وحدها
+2. العنوان: بين 40 و 80 حرفاً، خبري مباشر، يثير الفضول
+3. الوصف: جملة أو جملتان تلخص الخبر بشكل مشوق، 100-160 حرف
+4. المحتوى: 5 فقرات صحفية واضحة، تبدأ بالخبر الأبرز ثم السياق والتحليل
+5. الكلمات المفتاحية: 5 إلى 8 كلمات بالعربية متعلقة بالخبر
+6. لا تستخدم أي جملة إنجليزية في المخرجات
+7. الأسماء الأجنبية تُكتب بالحروف العربية
 
-الصيغة:
+أعد JSON فقط بهذا الشكل:
 {
-  "title": "عنوان عربي خبري مختلف",
-  "description": "وصف عربي مختصر مختلف",
-  "seoTitle": "عنوان سيو عربي",
-  "seoDescription": "وصف سيو عربي",
-  "content": "محتوى عربي صحفي",
-  "keywords": ["...", "...", "...", "..."]
+  "title": "عنوان خبري يذكر الفريق أو اللاعب أو الحدث",
+  "description": "وصف مختصر ومشوق",
+  "seoTitle": "عنوان سيو يتضمن الكيان الرياضي",
+  "seoDescription": "وصف سيو بين 100 و 160 حرف",
+  "content": "فقرة 1\n\nفقرة 2\n\nفقرة 3\n\nفقرة 4\n\nفقرة 5",
+  "keywords": ["كلمة1", "كلمة2", "كلمة3", "كلمة4", "كلمة5"]
 }
-`;
+`.trim();
 
-  const raw = await callOpenAI(prompt, 0.35);
+  const raw = await callOpenAI(prompt, 0.35, systemPrompt);
 
-  if (!raw) {
-    return fallback;
-  }
+  if (!raw) return fallback;
 
   const parsed = extractJson(raw);
-
   if (!parsed) {
-    console.log("JSON parse failed, using fallback.");
+    console.log(`JSON parse failed for article ${index + 1}, using fallback.`);
     return fallback;
   }
 
-  let title = sanitizeArabic(parsed.title || titleSeed);
-  let description = sanitizeArabic(parsed.description || descriptionSeed);
+  let title = sanitizeArabic(parsed.title || fallback.title);
+  let description = sanitizeArabic(parsed.description || fallback.description);
   let seoTitle = sanitizeArabic(parsed.seoTitle || `${title} | نبض الرياضة`);
   let seoDescription = sanitizeArabic(parsed.seoDescription || description);
   let content = sanitizeArabic(parsed.content || fallback.content);
@@ -365,24 +290,15 @@ async function rewriteArticle(item, index) {
   seoDescription = await arabizeIfNeeded(seoDescription, "وصف السيو");
   content = await arabizeIfNeeded(content, "المحتوى");
 
-  if (!title || !description || !content) {
-    return fallback;
-  }
+  if (!title || !description || !content) return fallback;
 
   if (!keywords.length) {
     keywords = item.topicTags?.length
-      ? [...item.topicTags.slice(0, 4), league]
+      ? [...item.topicTags.slice(0, 4), label]
       : fallback.keywords;
   }
 
-  return {
-    title,
-    description,
-    seoTitle,
-    seoDescription,
-    content,
-    keywords
-  };
+  return { title, description, seoTitle, seoDescription, content, keywords };
 }
 
 async function main() {
@@ -400,34 +316,42 @@ async function main() {
     process.exit(0);
   }
 
+  // Dedup
   const unique = [];
   const seen = new Set();
-
   for (const item of rawItems) {
     const title = normalizeText(item.originalTitle || item.title || "");
     if (!title) continue;
-
     const key = title.toLowerCase();
     if (seen.has(key)) continue;
-
     seen.add(key);
     unique.push(item);
   }
 
-  const selected = unique.slice(0, 12);
+  // Spread across sports: max 16 articles, 2 per non-football sport, rest football
+  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 10);
+  const basketItems = unique.filter((i) => i.sport === "basketball").slice(0, 2);
+  const tennisItems = unique.filter((i) => i.sport === "tennis").slice(0, 2);
+  const padelItems = unique.filter((i) => i.sport === "padel").slice(0, 1);
+  const futsalItems = unique.filter((i) => i.sport === "futsal").slice(0, 1);
+
+  const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems];
+
   const articles = [];
 
   for (let i = 0; i < selected.length; i++) {
-    const label = selected[i].originalTitle || `خبر ${i + 1}`;
-    console.log("Rewriting:", label);
+    const item = selected[i];
+    const label = item.originalTitle || `خبر ${i + 1}`;
+    console.log(`Rewriting [${i + 1}/${selected.length}] (${item.sport || "football"}): ${label.slice(0, 60)}`);
 
-    const rewritten = await rewriteArticle(selected[i], i);
+    const rewritten = await rewriteArticle(item, i);
 
     articles.push({
-      slug: buildSlug(selected[i], i),
-      league: selected[i].league || "mixed",
-      source: selected[i].source || "",
-      topicTags: selected[i].topicTags || ["كرة القدم"],
+      slug: buildSlug(item, i),
+      sport: item.sport || "football",
+      league: item.league || "mixed",
+      source: item.source || "",
+      topicTags: item.topicTags || ["الرياضة"],
       title: rewritten.title,
       description: rewritten.description,
       seoTitle: rewritten.seoTitle,

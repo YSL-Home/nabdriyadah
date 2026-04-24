@@ -5,6 +5,7 @@ import articles from "../../../content/articles/seo-articles.json";
 const leagueBranding = {
   "premier-league": {
     title: "الدوري الإنجليزي الممتاز",
+    href: "/league/premier-league/",
     leagueLogo: "/leagues/premier-league.png",
     teams: [
       { name: "مانشستر سيتي", logo: "/teams/premier-league/manchester-city.png" },
@@ -14,18 +15,11 @@ const leagueBranding = {
       { name: "تشيلسي", logo: "/teams/premier-league/chelsea.png" },
       { name: "توتنهام", logo: "/teams/premier-league/tottenham.png" }
     ],
-    theme: {
-      bg: "#f6f0ff",
-      primary: "#6d28d9",
-      primarySoft: "#ede9fe",
-      border: "#ddd6fe",
-      text: "#111827",
-      subtext: "#4b5563",
-      surface: "#ffffff"
-    }
+    theme: { bg: "#f6f0ff", primary: "#6d28d9", primarySoft: "#ede9fe", border: "#ddd6fe", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
   },
   "la-liga": {
     title: "الدوري الإسباني",
+    href: "/league/la-liga/",
     leagueLogo: "/leagues/la-liga.png",
     teams: [
       { name: "ريال مدريد", logo: "/teams/la-liga/real-madrid.png" },
@@ -35,29 +29,42 @@ const leagueBranding = {
       { name: "فالنسيا", logo: "/teams/la-liga/valencia.png" },
       { name: "ريال سوسيداد", logo: "/teams/la-liga/real-sociedad.png" }
     ],
-    theme: {
-      bg: "#fff7ed",
-      primary: "#ea580c",
-      primarySoft: "#ffedd5",
-      border: "#fed7aa",
-      text: "#111827",
-      subtext: "#4b5563",
-      surface: "#ffffff"
-    }
+    theme: { bg: "#fff7ed", primary: "#ea580c", primarySoft: "#ffedd5", border: "#fed7aa", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
+  },
+  basketball: {
+    title: "كرة السلة",
+    href: "/sport/basketball/",
+    leagueLogo: "/logo.svg",
+    teams: [],
+    theme: { bg: "#fff7ed", primary: "#c2410c", primarySoft: "#ffedd5", border: "#fed7aa", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
+  },
+  tennis: {
+    title: "التنس",
+    href: "/sport/tennis/",
+    leagueLogo: "/logo.svg",
+    teams: [],
+    theme: { bg: "#f0fdf4", primary: "#15803d", primarySoft: "#dcfce7", border: "#bbf7d0", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
+  },
+  padel: {
+    title: "البادل",
+    href: "/sport/padel/",
+    leagueLogo: "/logo.svg",
+    teams: [],
+    theme: { bg: "#eff6ff", primary: "#1d4ed8", primarySoft: "#dbeafe", border: "#bfdbfe", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
+  },
+  futsal: {
+    title: "كرة قدم الصالات",
+    href: "/sport/futsal/",
+    leagueLogo: "/logo.svg",
+    teams: [],
+    theme: { bg: "#f5f3ff", primary: "#7c3aed", primarySoft: "#ede9fe", border: "#ddd6fe", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
   },
   mixed: {
     title: "كرة القدم",
+    href: "/",
     leagueLogo: "/logo.svg",
     teams: [],
-    theme: {
-      bg: "#f3f4f6",
-      primary: "#2563eb",
-      primarySoft: "#eff6ff",
-      border: "#dbeafe",
-      text: "#111827",
-      subtext: "#4b5563",
-      surface: "#ffffff"
-    }
+    theme: { bg: "#f3f4f6", primary: "#2563eb", primarySoft: "#eff6ff", border: "#dbeafe", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
   }
 };
 
@@ -94,10 +101,24 @@ export function generateMetadata({ params }) {
   };
 }
 
-function leagueLabel(slug) {
-  if (slug === "premier-league") return "الدوري الإنجليزي الممتاز";
-  if (slug === "la-liga") return "الدوري الإسباني";
+function leagueLabel(league, sport) {
+  if (league === "premier-league") return "الدوري الإنجليزي الممتاز";
+  if (league === "la-liga") return "الدوري الإسباني";
+  if (sport === "basketball") return "كرة السلة";
+  if (sport === "tennis") return "التنس";
+  if (sport === "padel") return "البادل";
+  if (sport === "futsal") return "كرة قدم الصالات";
   return "كرة القدم";
+}
+
+function sportHref(league, sport) {
+  if (league === "premier-league") return "/league/premier-league/";
+  if (league === "la-liga") return "/league/la-liga/";
+  if (sport === "basketball") return "/sport/basketball/";
+  if (sport === "tennis") return "/sport/tennis/";
+  if (sport === "padel") return "/sport/padel/";
+  if (sport === "futsal") return "/sport/futsal/";
+  return "/";
 }
 
 function scoreRelatedness(baseArticle, otherArticle) {
@@ -127,7 +148,10 @@ export default function ArticlePage({ params }) {
     notFound();
   }
 
-  const branding = leagueBranding[article.league] || leagueBranding.mixed;
+  const brandingKey = leagueBranding[article.sport] ? article.sport
+    : leagueBranding[article.league] ? article.league
+    : "mixed";
+  const branding = leagueBranding[brandingKey];
   const theme = branding.theme;
 
   const relatedArticles = articles
@@ -383,21 +407,10 @@ export default function ArticlePage({ params }) {
                 <span style={{ color: "#9ca3af" }}>←</span>
 
                 <Link
-                  href={
-                    article.league === "premier-league"
-                      ? "/league/premier-league/"
-                      : article.league === "la-liga"
-                      ? "/league/la-liga/"
-                      : "/"
-                  }
-                  style={{
-                    color: theme.primary,
-                    textDecoration: "none",
-                    fontWeight: 700,
-                    fontSize: "14px"
-                  }}
+                  href={sportHref(article.league, article.sport)}
+                  style={{ color: theme.primary, textDecoration: "none", fontWeight: 700, fontSize: "14px" }}
                 >
-                  {leagueLabel(article.league)}
+                  {leagueLabel(article.league, article.sport)}
                 </Link>
               </div>
 
