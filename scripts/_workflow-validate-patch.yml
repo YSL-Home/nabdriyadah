@@ -1,0 +1,11 @@
+# À COPIER dans .github/workflows/content-automation.yml
+# Ajouter ces étapes AVANT "Commit and push if changed"
+# ⚠️ Nécessite d'être ajouté manuellement sur GitHub.com (PAT sans scope workflow)
+
+      - name: 🔍 Validate team information
+        run: node scripts/validate-info.mjs
+        continue-on-error: true
+
+# Et dans la section "git add", ajouter :
+#   git add content/validation-report.json
+#   git add app/team/[slug]/page.jsx

@@ -23,6 +23,11 @@ function todayStr() {
   return new Date().toISOString().slice(0, 10);
 }
 
+// Convertit les chiffres occidentaux en chiffres arabes-orientaux (٠١٢٣٤٥٦٧٨٩)
+function ar(n) {
+  return String(n ?? "").replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+}
+
 function statusColor(s) {
   if (["1H","2H","ET","BT","P","LIVE"].includes(s)) return "#16a34a";
   if (["FT","AET","PEN"].includes(s)) return "#6b7280";
@@ -33,7 +38,7 @@ function statusColor(s) {
 function statusLabel(s, elapsed) {
   const m = { HT:"استراحة", FT:"انتهى", AET:"انتهى (و.إ)", PEN:"انتهى (ترجيح)", NS:"لم يبدأ", PST:"مؤجل", CANC:"ملغي", P:"ضربات ترجيح" };
   if (m[s]) return m[s];
-  if ((s === "1H" || s === "2H" || s === "ET") && elapsed) return `${elapsed}'`;
+  if ((s === "1H" || s === "2H" || s === "ET") && elapsed) return `${ar(elapsed)}'`;
   return s;
 }
 
@@ -79,7 +84,7 @@ function MatchCard({ match }) {
 
         <div style={{ textAlign:"center", minWidth:"70px" }}>
           {goals?.home !== null && goals?.away !== null ? (
-            <span style={{ fontSize:"26px", fontWeight:900, color:"#111827", letterSpacing:"-1px" }}>{goals.home} — {goals.away}</span>
+            <span style={{ fontSize:"26px", fontWeight:900, color:"#111827", letterSpacing:"-1px" }}>{ar(goals.home)} — {ar(goals.away)}</span>
           ) : (
             <span style={{ fontSize:"14px", fontWeight:700, color:"#9ca3af" }}>{kickoff || "vs"}</span>
           )}
@@ -243,7 +248,7 @@ export default function LivePage() {
                 onChange={e => setSelectedLeague(e.target.value)}
                 style={{ padding:"9px 14px", borderRadius:"12px", border:"1.5px solid #e5e7eb", fontSize:"14px", fontWeight:700, color:"#111827", cursor:"pointer", outline:"none", background:"#f9fafb", width:"100%" }}
               >
-                <option value="all">جميع الدوريات ({allMatches.length} مباراة)</option>
+                <option value="all">جميع الدوريات ({ar(allMatches.length)} مباراة)</option>
                 {leagues.map(l => (
                   <option key={l.id} value={String(l.id)}>
                     {TOP_LEAGUE_IDS.includes(l.id) ? "★ " : ""}{l.name}
@@ -271,7 +276,7 @@ export default function LivePage() {
           <section style={{ marginBottom:"28px" }}>
             <div style={{ display:"flex", alignItems:"center", gap:"10px", marginBottom:"14px" }}>
               <span style={{ width:"10px", height:"10px", borderRadius:"50%", background:"#16a34a", boxShadow:"0 0 8px #16a34a", display:"inline-block" }} />
-              <h2 style={{ margin:0, fontSize:"24px", fontWeight:800 }}>جارية الآن ({filteredLive.length})</h2>
+              <h2 style={{ margin:0, fontSize:"24px", fontWeight:800 }}>جارية الآن ({ar(filteredLive.length)})</h2>
             </div>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(420px,1fr))", gap:"14px" }}>
               {filteredLive.map(m => <MatchCard key={m.fixture?.id} match={m} />)}
@@ -283,7 +288,7 @@ export default function LivePage() {
         {!loading && filteredMatches.length > 0 && (
           <section>
             <h2 style={{ margin:"0 0 14px", fontSize:"24px", fontWeight:800 }}>
-              {isToday ? "مباريات اليوم" : "مباريات"} ({filteredMatches.length})
+              {isToday ? "مباريات اليوم" : "مباريات"} ({ar(filteredMatches.length)})
             </h2>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(420px,1fr))", gap:"14px" }}>
               {filteredMatches
