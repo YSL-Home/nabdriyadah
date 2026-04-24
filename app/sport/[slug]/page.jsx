@@ -155,8 +155,8 @@ export default function SportPage({ params }) {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "16px" }}>
               {footballLeagues.map((league) => (
                 <Link key={league.slug} href={`/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: "white", border: `1px solid ${league.border}`, borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 16px rgba(0,0,0,0.04)", borderTop: `3px solid ${league.color}` }}>
-                    <div style={{ width: "52px", height: "52px", borderRadius: "12px", background: league.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "6px" }}>
+                  <div style={{ background: "white", border: `1px solid #e5e7eb`, borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", borderTop: `4px solid ${league.color}`, transition: "box-shadow 0.2s" }}>
+                    <div style={{ width: "56px", height: "56px", borderRadius: "14px", background: "white", border: "1px solid #f1f5f9", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "6px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}>
                       <img src={league.logo} alt={league.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
                     <div>
@@ -175,8 +175,8 @@ export default function SportPage({ params }) {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", gap: "16px" }}>
               {globalCompetitions.map((comp) => (
                 <Link key={comp.slug} href={`/league/${comp.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: "white", border: `1px solid ${comp.border}`, borderRadius: "22px", padding: "18px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", boxShadow: "0 6px 16px rgba(0,0,0,0.04)", textAlign: "center", borderTop: `3px solid ${comp.color}` }}>
-                    <div style={{ width: "56px", height: "56px", borderRadius: "12px", background: comp.bg, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: "6px" }}>
+                  <div style={{ background: "white", border: `1px solid #e5e7eb`, borderRadius: "22px", padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", textAlign: "center", borderTop: `4px solid ${comp.color}` }}>
+                    <div style={{ width: "60px", height: "60px", borderRadius: "14px", background: "white", border: "1px solid #f1f5f9", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: "6px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}>
                       <img src={comp.logo} alt={comp.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
                     <div style={{ color: comp.color, fontSize: "11px", fontWeight: 700 }}>{comp.country}</div>
