@@ -1219,21 +1219,26 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }) {
   const team = teamsData[params.slug];
-
-  if (!team) {
-    return {
-      title: "الفريق غير موجود",
-      description: "هذه الصفحة غير متاحة حالياً."
-    };
-  }
-
+  if (!team) return { title: "الفريق غير موجود", description: "هذه الصفحة غير متاحة." };
   return {
-    title: team.name,
-    description: `تعرف على تاريخ ${team.name}، أبرز الألقاب، الملعب، المدينة، والملفات الأساسية الخاصة بالنادي.`,
-    alternates: {
-      canonical: `https://nabdriyadah.com/team/${params.slug}/`
+    title: `${team.name} — تاريخ، ألقاب، ملعب وأبطال | نبض الرياضة`,
+    description: `كل ما تريد معرفته عن ${team.name}: التاريخ، الألقاب، الملعب، الجهاز الفني، أبرز اللاعبين والأساطير. متابعة حصرية على نبض الرياضة.`,
+    keywords: [team.name, team.leagueName, team.city, team.stadium, "كرة القدم", "نبض الرياضة"].join(", "),
+    alternates: { canonical: `https://nabdriyadah.com/team/${params.slug}/` },
+    openGraph: {
+      title: `${team.name} | نبض الرياضة`,
+      description: `تاريخ ${team.name}، الألقاب، الملعب والأبطال — تغطية شاملة.`,
+      url: `https://nabdriyadah.com/team/${params.slug}/`,
+      siteName: "نبض الرياضة",
+      locale: "ar_AR",
+      type: "website"
     }
   };
+}
+
+// Derive a soft background from the team accent color
+function softBg(hex = "#1d4ed8") {
+  return hex + "18";
 }
 
 export default function TeamPage({ params }) {
@@ -1241,23 +1246,9 @@ export default function TeamPage({ params }) {
 
   if (!team) {
     return (
-      <main
-        style={{
-          minHeight: "100vh",
-          padding: "40px 20px",
-          direction: "rtl",
-          background: "#f8fafc"
-        }}
-      >
+      <main style={{ minHeight: "100vh", padding: "40px 20px", direction: "rtl", background: "#f8fafc" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div
-            style={{
-              background: "white",
-              borderRadius: "24px",
-              padding: "28px",
-              border: "1px solid #e5e7eb"
-            }}
-          >
+          <div style={{ background: "white", borderRadius: "24px", padding: "28px", border: "1px solid #e5e7eb" }}>
             الفريق غير موجود.
           </div>
         </div>
@@ -1266,19 +1257,8 @@ export default function TeamPage({ params }) {
   }
 
   const teamArticles = articles
-    .filter((article) => article.league === team.league)
-    .filter((article) => {
-      const haystack = [
-        article.title,
-        article.description,
-        ...(Array.isArray(article.keywords) ? article.keywords : [])
-      ]
-        .join(" ")
-        .toLowerCase();
-
-      const teamTokens = team.name.toLowerCase().split(" ");
-      return teamTokens.some((token) => token && haystack.includes(token));
-    })
+    .filter((a) => a.league === team.league || (a.keywords || []).some((k) => team.name.includes(k) || k.includes(team.name.split(" ")[0])))
+    .filter((a) => a.slug)
     .slice(0, 6);
 
   const history = safeArray(team.history);
@@ -1287,468 +1267,247 @@ export default function TeamPage({ params }) {
   const players = safeArray(team.players);
   const legends = safeArray(team.legends);
 
-  return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#f8fafc",
-        padding: "28px 20px 52px",
-        direction: "rtl"
-      }}
-    >
-      <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
-        <section
-          style={{
-            position: "relative",
-            overflow: "hidden",
-            background: `linear-gradient(135deg, ${team.colorFrom}, ${team.colorTo})`,
-            borderRadius: "34px",
-            padding: "34px",
-            color: "white",
-            marginBottom: "28px",
-            boxShadow: "0 18px 42px rgba(0,0,0,0.12)"
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: "-70px",
-              left: "-70px",
-              width: "220px",
-              height: "220px",
-              borderRadius: "999px",
-              background: "rgba(255,255,255,0.08)"
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-90px",
-              right: "-40px",
-              width: "240px",
-              height: "240px",
-              borderRadius: "999px",
-              background: "rgba(255,255,255,0.08)"
-            }}
-          />
+  const accentSoft = team.accent + "22";
+  const accentMid = team.accent + "44";
+  const pageBg = team.colorFrom + "0d";
 
-          <div
-            style={{
-              position: "relative",
-              display: "grid",
-              gridTemplateColumns: "220px minmax(0, 1fr)",
-              gap: "30px",
-              alignItems: "center"
-            }}
-          >
-            <div
-              style={{
-                background: "rgba(255,255,255,0.10)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                borderRadius: "30px",
-                padding: "22px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-              <img
-                src={team.logo}
-                alt={team.name}
-                style={{
-                  width: "140px",
-                  height: "140px",
-                  objectFit: "contain",
-                  display: "block"
-                }}
+  return (
+    <main style={{ minHeight: "100vh", background: pageBg || "#f3f4f6", padding: "0 0 60px", direction: "rtl" }}>
+
+      {/* ── FULL-WIDTH HERO ── */}
+      <section style={{
+        position: "relative", overflow: "hidden",
+        background: `linear-gradient(135deg, ${team.colorFrom} 0%, ${team.colorTo} 60%, ${team.accent} 100%)`,
+        padding: "0", color: "white", marginBottom: "0"
+      }}>
+        {/* Decorative blobs */}
+        <div style={{ position: "absolute", top: "-100px", right: "-100px", width: "350px", height: "350px", borderRadius: "999px", background: "rgba(255,255,255,0.06)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "-120px", left: "5%", width: "280px", height: "280px", borderRadius: "999px", background: "rgba(255,255,255,0.05)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "30%", left: "45%", width: "180px", height: "180px", borderRadius: "999px", background: "rgba(255,255,255,0.04)", pointerEvents: "none" }} />
+
+        <div style={{ maxWidth: "1450px", margin: "0 auto", padding: "40px 24px 44px", position: "relative" }}>
+          <Link href={team.leagueUrl} style={{ display: "inline-block", textDecoration: "none", color: "rgba(255,255,255,0.85)", fontWeight: 700, fontSize: "14px", marginBottom: "20px" }}>
+            ← {team.leagueName}
+          </Link>
+
+          <div style={{ display: "grid", gridTemplateColumns: "200px minmax(0,1fr)", gap: "36px", alignItems: "center" }}>
+            {/* Logo box */}
+            <div style={{
+              background: "rgba(255,255,255,0.12)", border: "2px solid rgba(255,255,255,0.22)",
+              borderRadius: "32px", padding: "24px",
+              display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+            }}>
+              <img src={team.logo} alt={team.name} style={{ width: "130px", height: "130px", objectFit: "contain", display: "block" }} />
+            </div>
+
+            {/* Name + meta */}
+            <div>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "14px" }}>
+                <span style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.22)", padding: "6px 14px", borderRadius: "999px", fontSize: "13px", fontWeight: 700 }}>
+                  تأسس {team.founded}
+                </span>
+                <span style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.22)", padding: "6px 14px", borderRadius: "999px", fontSize: "13px", fontWeight: 700 }}>
+                  {team.city}
+                </span>
+                <span style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.22)", padding: "6px 14px", borderRadius: "999px", fontSize: "13px", fontWeight: 700 }}>
+                  {team.leagueName}
+                </span>
+              </div>
+              <h1 style={{ margin: "0 0 12px 0", fontSize: "62px", lineHeight: 1.15, fontWeight: 900, letterSpacing: "-1px" }}>{team.name}</h1>
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                {titles.slice(0, 3).map((t, i) => (
+                  <span key={i} style={{ background: "rgba(255,255,255,0.13)", padding: "5px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, opacity: 0.9 }}>
+                    🏆 {t.split(":")[0]}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Color band at bottom */}
+        <div style={{ height: "6px", background: `linear-gradient(90deg, ${team.accent}, rgba(255,255,255,0.4), ${team.colorFrom})` }} />
+      </section>
+
+      <div style={{ maxWidth: "1450px", margin: "0 auto", padding: "28px 24px 0" }}>
+
+        <AdSlot label="مساحة إعلانية" minHeight={90} style={{ marginBottom: 24 }} />
+
+        {/* ── QUICK STATS BAR ── */}
+        <section style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0,1fr))", gap: "18px", marginBottom: "26px" }}>
+          {[
+            { label: "سنة التأسيس", value: team.founded, icon: "📅" },
+            { label: "الملعب", value: team.stadium, icon: "🏟️" },
+            { label: "المدينة", value: team.city, icon: "📍" },
+            { label: "المدرب", value: team.coach, icon: "👨‍💼" }
+          ].map((stat, i) => (
+            <div key={i} style={{
+              background: "white", borderRadius: "22px", padding: "20px 22px",
+              border: `1px solid ${accentMid}`,
+              borderTop: `4px solid ${team.accent}`,
+              boxShadow: "0 6px 18px rgba(0,0,0,0.04)"
+            }}>
+              <div style={{ fontSize: "22px", marginBottom: "8px" }}>{stat.icon}</div>
+              <div style={{ color: team.accent, fontSize: "12px", fontWeight: 700, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>{stat.label}</div>
+              <div style={{ fontSize: "18px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{stat.value}</div>
+            </div>
+          ))}
+        </section>
+
+        {/* ── HISTORY + PALMARÈS ── */}
+        <section style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "22px", marginBottom: "26px" }}>
+
+          {/* History */}
+          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+              <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
+              <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800, color: "#111827" }}>تاريخ النادي</h2>
+            </div>
+            <div style={{ display: "grid", gap: "16px" }}>
+              {history.map((p, i) => (
+                <p key={i} style={{ margin: 0, fontSize: "17px", lineHeight: 1.95, color: "#374151", borderRight: `3px solid ${accentSoft}`, paddingRight: "14px" }}>{p}</p>
+              ))}
+            </div>
+          </div>
+
+          {/* Palmarès */}
+          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+              <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
+              <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800, color: "#111827" }}>قاعة الألقاب</h2>
+            </div>
+            <div style={{ display: "grid", gap: "10px" }}>
+              {titles.map((title, i) => (
+                <div key={i} style={{
+                  background: accentSoft, borderRadius: "14px", padding: "12px 16px",
+                  display: "flex", alignItems: "flex-start", gap: "10px",
+                  border: `1px solid ${accentMid}`
+                }}>
+                  <span style={{ fontSize: "18px", flexShrink: 0, marginTop: "1px" }}>🏆</span>
+                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827", lineHeight: 1.5 }}>{title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SQUAD + LEGENDS ── */}
+        <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "22px", marginBottom: "26px" }}>
+
+          {/* Current players */}
+          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+              <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>أبرز اللاعبين الحاليين</h2>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0,1fr))", gap: "10px" }}>
+              {players.map((player, i) => (
+                <div key={i} style={{
+                  background: accentSoft, border: `1px solid ${accentMid}`,
+                  borderRadius: "16px", padding: "14px 16px",
+                  display: "flex", alignItems: "center", gap: "10px"
+                }}>
+                  <span style={{ fontSize: "20px" }}>⚽</span>
+                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827" }}>{player}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Legends */}
+          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+              <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>أساطير النادي</h2>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0,1fr))", gap: "10px" }}>
+              {legends.map((legend, i) => (
+                <div key={i} style={{
+                  background: accentSoft, border: `1px solid ${accentMid}`,
+                  borderRadius: "16px", padding: "14px 16px",
+                  display: "flex", alignItems: "center", gap: "10px"
+                }}>
+                  <span style={{ fontSize: "20px" }}>⭐</span>
+                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827" }}>{legend}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── COACHING STAFF ── */}
+        {staff.length > 0 && (
+          <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
+              <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>الجهاز الفني</h2>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0,1fr))", gap: "12px" }}>
+              {staff.map((s, i) => (
+                <div key={i} style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px" }}>
+                  <div style={{ fontSize: "17px", fontWeight: 700, color: "#111827" }}>{s}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <AdSlot label="مساحة إعلانية وسط" minHeight={120} style={{ marginBottom: 26 }} />
+
+        {/* ── VIDEO ── */}
+        {team.videoEmbed && (
+          <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
+              <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>فيديو</h2>
+            </div>
+            <div style={{ position: "relative", paddingBottom: "52%", height: 0, overflow: "hidden", borderRadius: "20px" }}>
+              <iframe src={team.videoEmbed} title={team.name}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0, borderRadius: "20px" }}
               />
             </div>
+          </section>
+        )}
 
-            <div>
-              <Link
-                href={team.leagueUrl}
-                style={{
-                  display: "inline-block",
-                  textDecoration: "none",
-                  color: "white",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  opacity: 0.95,
-                  marginBottom: "14px"
-                }}
-              >
-                العودة إلى صفحة البطولة
-              </Link>
-
-              <div
-                style={{
-                  display: "inline-block",
-                  background: "rgba(255,255,255,0.14)",
-                  padding: "10px 16px",
-                  borderRadius: "999px",
-                  fontSize: "13px",
-                  fontWeight: 700,
-                  marginBottom: "16px",
-                  border: "1px solid rgba(255,255,255,0.15)"
-                }}
-              >
-                صفحة فريق
-              </div>
-
-              <h1
-                style={{
-                  margin: "0 0 14px 0",
-                  fontSize: "58px",
-                  lineHeight: 1.18,
-                  fontWeight: 800
-                }}
-              >
-                {team.name}
-              </h1>
-
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: "21px",
-                  lineHeight: 2,
-                  maxWidth: "900px",
-                  opacity: 0.96
-                }}
-              >
-                صفحة تعريفية شاملة عن {team.name} تتضمن لمحة تاريخية، الملعب، المدينة،
-                أبرز الألقاب، وأهم المواد المرتبطة بالنادي داخل الموقع.
-              </p>
-            </div>
+        {/* ── OFFICIAL LINKS ── */}
+        <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
+            <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
+            <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>روابط رسمية</h2>
           </div>
-        </section>
-
-        <AdSlot label="مساحة إعلانية أعلى صفحة الفريق" minHeight={90} style={{ marginBottom: 24 }} />
-
-        <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-            gap: "20px",
-            marginBottom: "28px"
-          }}
-        >
-          <div style={{ background: "white", borderRadius: "22px", padding: "22px", border: "1px solid #e5e7eb" }}>
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>سنة التأسيس</div>
-            <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.founded}</div>
-          </div>
-
-          <div style={{ background: "white", borderRadius: "22px", padding: "22px", border: "1px solid #e5e7eb" }}>
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>الملعب</div>
-            <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.stadium}</div>
-          </div>
-
-          <div style={{ background: "white", borderRadius: "22px", padding: "22px", border: "1px solid #e5e7eb" }}>
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>المدينة</div>
-            <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.city}</div>
-          </div>
-
-          <div style={{ background: "white", borderRadius: "22px", padding: "22px", border: "1px solid #e5e7eb" }}>
-            <div style={{ color: team.accent, fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>البطولة</div>
-            <div style={{ fontSize: "30px", fontWeight: 800, color: "#111827" }}>{team.leagueName}</div>
-          </div>
-        </section>
-
-        <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1.15fr 0.85fr",
-            gap: "24px",
-            marginBottom: "28px"
-          }}
-        >
-          <div style={{ background: "white", borderRadius: "28px", padding: "28px", border: "1px solid #e5e7eb" }}>
-            <h2 style={{ margin: "0 0 18px 0", fontSize: "34px", fontWeight: 800, color: "#111827" }}>تاريخ النادي</h2>
-
-            <div style={{ color: "#4b5563", fontSize: "18px", lineHeight: 2, display: "grid", gap: "14px" }}>
-              {history.map((paragraph, index) => (
-                <p key={index} style={{ margin: 0 }}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ display: "grid", gap: "24px" }}>
-            <div style={{ background: "white", borderRadius: "28px", padding: "28px", border: "1px solid #e5e7eb" }}>
-              <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800 }}>الجهاز الفني</h2>
-
-              <div style={{ display: "grid", gap: "10px" }}>
-                <div
-                  style={{
-                    background: "#f8fafc",
-                    borderRadius: "16px",
-                    padding: "12px 14px",
-                    color: "#111827",
-                    fontWeight: 700
-                  }}
-                >
-                  {team.coach}
-                </div>
-
-                {staff.map((item, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      background: "#f8fafc",
-                      borderRadius: "16px",
-                      padding: "12px 14px",
-                      color: "#4b5563",
-                      fontWeight: 700
-                    }}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div style={{ background: "white", borderRadius: "28px", padding: "28px", border: "1px solid #e5e7eb" }}>
-              <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800 }}>أبرز الألقاب</h2>
-
-              <div style={{ display: "grid", gap: "10px" }}>
-                {titles.map((title, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      background: "#f8fafc",
-                      borderRadius: "16px",
-                      padding: "12px 14px",
-                      color: "#111827",
-                      fontWeight: 700
-                    }}
-                  >
-                    {title}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <AdSlot label="مساحة إعلانية وسط صفحة الفريق" minHeight={120} style={{ marginBottom: 24 }} />
-
-        <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "24px",
-            marginBottom: "28px"
-          }}
-        >
-          <div style={{ background: "white", borderRadius: "28px", padding: "28px", border: "1px solid #e5e7eb" }}>
-            <h2 style={{ margin: "0 0 16px 0", fontSize: "30px", fontWeight: 800 }}>اللاعبون الحاليون</h2>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-                gap: "12px"
-              }}
-            >
-              {players.map((player, index) => (
-                <div
-                  key={index}
-                  style={{
-                    background: "#f8fafc",
-                    borderRadius: "16px",
-                    padding: "14px",
-                    color: "#111827",
-                    fontWeight: 700
-                  }}
-                >
-                  {player}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ background: "white", borderRadius: "28px", padding: "28px", border: "1px solid #e5e7eb" }}>
-            <h2 style={{ margin: "0 0 16px 0", fontSize: "30px", fontWeight: 800 }}>أساطير النادي</h2>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-                gap: "12px"
-              }}
-            >
-              {legends.map((legend, index) => (
-                <div
-                  key={index}
-                  style={{
-                    background: "#f8fafc",
-                    borderRadius: "16px",
-                    padding: "14px",
-                    color: "#111827",
-                    fontWeight: 700
-                  }}
-                >
-                  {legend}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section
-          style={{
-            background: "white",
-            borderRadius: "28px",
-            padding: "28px",
-            border: "1px solid #e5e7eb",
-            marginBottom: "28px"
-          }}
-        >
-          <h2 style={{ margin: "0 0 18px 0", fontSize: "30px", fontWeight: 800 }}>فيديو رسمي</h2>
-
-          <div
-            style={{
-              position: "relative",
-              paddingBottom: "56.25%",
-              height: 0,
-              overflow: "hidden",
-              borderRadius: "20px"
-            }}
-          >
-            <iframe
-              src={team.videoEmbed}
-              title={team.name}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                border: 0,
-                borderRadius: "20px"
-              }}
-            />
-          </div>
-        </section>
-
-        <section
-          style={{
-            background: "white",
-            borderRadius: "28px",
-            padding: "28px",
-            border: "1px solid #e5e7eb",
-            marginBottom: "28px"
-          }}
-        >
-          <h2 style={{ margin: "0 0 18px 0", fontSize: "30px", fontWeight: 800 }}>روابط ومصادر رسمية</h2>
-
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <a
-              href={team.officialLinks.website}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                textDecoration: "none",
-                padding: "12px 16px",
-                borderRadius: "999px",
-                background: "#f8fafc",
-                color: "#111827",
-                fontWeight: 700
-              }}
-            >
-              الموقع الرسمي
+            <a href={team.officialLinks.website} target="_blank" rel="noreferrer nofollow"
+              style={{ textDecoration: "none", padding: "12px 22px", borderRadius: "999px", background: team.accent, color: "white", fontWeight: 700, fontSize: "15px" }}>
+              🌐 الموقع الرسمي
             </a>
-
-            <a
-              href={team.officialLinks.youtube}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                textDecoration: "none",
-                padding: "12px 16px",
-                borderRadius: "999px",
-                background: "#f8fafc",
-                color: "#111827",
-                fontWeight: 700
-              }}
-            >
-              القناة الرسمية
+            <a href={team.officialLinks.youtube} target="_blank" rel="noreferrer nofollow"
+              style={{ textDecoration: "none", padding: "12px 22px", borderRadius: "999px", background: "#dc2626", color: "white", fontWeight: 700, fontSize: "15px" }}>
+              ▶ القناة الرسمية
             </a>
           </div>
         </section>
 
-        <section
-          style={{
-            background: "white",
-            borderRadius: "28px",
-            padding: "28px",
-            border: "1px solid #e5e7eb"
-          }}
-        >
-          <h2 style={{ margin: "0 0 18px 0", fontSize: "30px", fontWeight: 800 }}>مواد مرتبطة بالنادي</h2>
-
+        {/* ── RELATED ARTICLES ── */}
+        <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+            <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
+            <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>أحدث أخبار {team.name}</h2>
+          </div>
           {teamArticles.length === 0 ? (
             <div style={{ color: "#6b7280", fontSize: "17px", lineHeight: 1.9 }}>
-              لا توجد بعد مواد كثيرة مرتبطة مباشرة بهذا النادي داخل الموقع، لكن سيتم توسيع الربط تلقائيًا مع نمو المحتوى.
+              سيتم ربط الأخبار المتعلقة بـ {team.name} تلقائياً مع نمو المحتوى.
             </div>
           ) : (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: "18px"
-              }}
-            >
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0,1fr))", gap: "18px" }}>
               {teamArticles.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={`/articles/${item.slug}/`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <article
-                    style={{
-                      background: "#f8fafc",
-                      borderRadius: "22px",
-                      overflow: "hidden",
-                      border: "1px solid #e5e7eb",
-                      height: "100%"
-                    }}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      style={{
-                        width: "100%",
-                        height: "190px",
-                        objectFit: "cover",
-                        display: "block"
-                      }}
-                    />
-                    <div style={{ padding: "18px" }}>
-                      <h3
-                        style={{
-                          margin: "0 0 10px 0",
-                          fontSize: "22px",
-                          lineHeight: 1.6,
-                          fontWeight: 800,
-                          color: "#111827"
-                        }}
-                      >
-                        {item.title}
-                      </h3>
-
-                      <p
-                        style={{
-                          margin: 0,
-                          color: "#4b5563",
-                          fontSize: "15px",
-                          lineHeight: 1.8
-                        }}
-                      >
-                        {item.description}
-                      </p>
+                <Link key={item.slug} href={`/articles/${item.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                  <article style={{ background: accentSoft, borderRadius: "20px", overflow: "hidden", border: `1px solid ${accentMid}`, height: "100%" }}>
+                    <img src={item.image} alt={item.title} style={{ width: "100%", height: "170px", objectFit: "cover", display: "block" }} />
+                    <div style={{ padding: "16px" }}>
+                      <h3 style={{ margin: "0 0 8px 0", fontSize: "17px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{item.title}</h3>
+                      <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.75 }}>{item.description}</p>
                     </div>
                   </article>
                 </Link>
@@ -1756,6 +1515,18 @@ export default function TeamPage({ params }) {
             </div>
           )}
         </section>
+
+        {/* ── JSON-LD ── */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SportsTeam",
+          "name": team.name,
+          "sport": "كرة القدم",
+          "foundingDate": team.founded,
+          "location": { "@type": "Place", "name": team.stadium, "address": team.city },
+          "memberOf": { "@type": "SportsOrganization", "name": team.leagueName },
+          "url": `https://nabdriyadah.com/team/${params.slug}/`
+        })}} />
       </div>
     </main>
   );
