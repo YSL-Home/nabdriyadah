@@ -12,9 +12,9 @@ const teamsData = {
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
     leagueUrl: "/league/premier-league/",
-    colorFrom: "#4f46e5",
-    colorTo: "#7c3aed",
-    accent: "#6366f1",
+    colorFrom: "#003f7f",
+    colorTo: "#5ab4e5",
+    accent: "#6CABDD",
     logo: "/teams/premier-league/manchester-city.png",
     founded: "1880",
     stadium: "ملعب الاتحاد",
@@ -26,10 +26,11 @@ const teamsData = {
       "بفضل الاستقرار الفني والإداري، تحول الفريق إلى أحد أهم الأسماء في كرة القدم الأوروبية."
     ],
     titles: [
-      "الدوري الإنجليزي الممتاز",
-      "كأس الاتحاد الإنجليزي",
-      "كأس الرابطة الإنجليزية",
-      "دوري أبطال أوروبا"
+      "الدوري الإنجليزي الممتاز: 10 ألقاب",
+      "كأس الاتحاد الإنجليزي: 7 ألقاب",
+      "كأس الرابطة: 9 ألقاب",
+      "دوري أبطال أوروبا: لقب 2023",
+      "كأس العالم للأندية: لقب 2023"
     ],
     staff: [
       "مدير فني",
@@ -63,9 +64,9 @@ const teamsData = {
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
     leagueUrl: "/league/premier-league/",
-    colorFrom: "#7f1d1d",
-    colorTo: "#dc2626",
-    accent: "#ef4444",
+    colorFrom: "#4a0000",
+    colorTo: "#DA291C",
+    accent: "#DA291C",
     logo: "/teams/premier-league/manchester-united.png",
     founded: "1878",
     stadium: "أولد ترافورد",
@@ -114,9 +115,9 @@ const teamsData = {
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
     leagueUrl: "/league/premier-league/",
-    colorFrom: "#991b1b",
-    colorTo: "#ef4444",
-    accent: "#dc2626",
+    colorFrom: "#4d0000",
+    colorTo: "#C8102E",
+    accent: "#C8102E",
     logo: "/teams/premier-league/liverpool.png",
     founded: "1892",
     stadium: "أنفيلد",
@@ -128,10 +129,11 @@ const teamsData = {
       "يبقى النادي أحد أهم رموز الكرة الإنجليزية وأكثرها تأثيرًا جماهيريًا."
     ],
     titles: [
-      "الدوري الإنجليزي",
-      "كأس الاتحاد الإنجليزي",
-      "كأس الرابطة",
-      "دوري أبطال أوروبا"
+      "الدوري الإنجليزي: 20 لقباً",
+      "كأس الاتحاد الإنجليزي: 8 ألقاب",
+      "دوري أبطال أوروبا: 6 ألقاب (1977، 1978، 1981، 1984، 2005، 2019)",
+      "الدوري الأوروبي: 3 ألقاب",
+      "كأس العالم للأندية: لقب 2019"
     ],
     staff: [
       "مدير فني",
@@ -165,9 +167,9 @@ const teamsData = {
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
     leagueUrl: "/league/premier-league/",
-    colorFrom: "#991b1b",
-    colorTo: "#f97316",
-    accent: "#ef4444",
+    colorFrom: "#4d0000",
+    colorTo: "#EF0107",
+    accent: "#EF0107",
     logo: "/teams/premier-league/arsenal.png",
     founded: "1886",
     stadium: "ملعب الإمارات",
@@ -179,9 +181,10 @@ const teamsData = {
       "ويواصل النادي حضوره في قمة النقاشات المرتبطة بالبريميرليغ بفضل مشروعه الفني الحالي."
     ],
     titles: [
-      "الدوري الإنجليزي",
-      "كأس الاتحاد الإنجليزي",
-      "الدرع الخيرية"
+      "الدوري الإنجليزي: 13 لقباً",
+      "كأس الاتحاد الإنجليزي: 14 لقباً (سجل قياسي إنجليزي)",
+      "الدرع الخيرية: 16 لقباً",
+      "الدوري الأوروبي: وصيف 2000 و2019"
     ],
     staff: [
       "مدير فني",
@@ -215,9 +218,9 @@ const teamsData = {
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
     leagueUrl: "/league/premier-league/",
-    colorFrom: "#1d4ed8",
-    colorTo: "#2563eb",
-    accent: "#3b82f6",
+    colorFrom: "#020e42",
+    colorTo: "#034694",
+    accent: "#034694",
     logo: "/teams/premier-league/chelsea.png",
     founded: "1905",
     stadium: "ستامفورد بريدج",
@@ -265,9 +268,9 @@ const teamsData = {
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
     leagueUrl: "/league/premier-league/",
-    colorFrom: "#0f172a",
-    colorTo: "#334155",
-    accent: "#475569",
+    colorFrom: "#000614",
+    colorTo: "#132257",
+    accent: "#132257",
     logo: "/teams/premier-league/tottenham.png",
     founded: "1882",
     stadium: "توتنهام هوتسبير",
@@ -314,9 +317,9 @@ const teamsData = {
     league: "la-liga",
     leagueName: "الدوري الإسباني",
     leagueUrl: "/league/la-liga/",
-    colorFrom: "#1e293b",
-    colorTo: "#64748b",
-    accent: "#94a3b8",
+    colorFrom: "#0f172a",
+    colorTo: "#c9a227",
+    accent: "#c9a227",
     logo: "/teams/la-liga/real-madrid.png",
     founded: "1902",
     stadium: "سانتياغو برنابيو",
@@ -328,10 +331,12 @@ const teamsData = {
       "ويبقى من أكثر الفرق متابعة وتأثيرًا في المشهد الكروي العالمي."
     ],
     titles: [
-      "الدوري الإسباني",
-      "كأس الملك",
-      "دوري أبطال أوروبا",
-      "كأس العالم للأندية"
+      "الدوري الإسباني: 36 لقباً",
+      "كأس الملك: 20 لقباً",
+      "دوري أبطال أوروبا: 15 لقباً (سجل قياسي عالمي)",
+      "كأس العالم للأندية: 8 ألقاب",
+      "الدوري الأوروبي: 2 لقب",
+      "السوبر الأوروبي: 5 ألقاب"
     ],
     staff: [
       "مدير فني",
@@ -365,9 +370,9 @@ const teamsData = {
     league: "la-liga",
     leagueName: "الدوري الإسباني",
     leagueUrl: "/league/la-liga/",
-    colorFrom: "#1d4ed8",
-    colorTo: "#7c2d12",
-    accent: "#2563eb",
+    colorFrom: "#003870",
+    colorTo: "#A50044",
+    accent: "#004D9C",
     logo: "/teams/la-liga/barcelona.png",
     founded: "1899",
     stadium: "كامب نو",
@@ -379,10 +384,12 @@ const teamsData = {
       "ويرتبط اسم برشلونة بأسلوب لعب جذاب وبنجوم بارزين تركوا بصمتهم في تاريخ اللعبة."
     ],
     titles: [
-      "الدوري الإسباني",
-      "كأس الملك",
-      "دوري أبطال أوروبا",
-      "السوبر الإسباني"
+      "الدوري الإسباني: 27 لقباً",
+      "كأس الملك: 31 لقباً",
+      "دوري أبطال أوروبا: 5 ألقاب",
+      "كأس العالم للأندية: 3 ألقاب",
+      "الدوري الأوروبي: 4 ألقاب",
+      "السوبر الأوروبي: 5 ألقاب"
     ],
     staff: [
       "مدير فني",
@@ -416,9 +423,9 @@ const teamsData = {
     league: "la-liga",
     leagueName: "الدوري الإسباني",
     leagueUrl: "/league/la-liga/",
-    colorFrom: "#991b1b",
-    colorTo: "#1d4ed8",
-    accent: "#ef4444",
+    colorFrom: "#660018",
+    colorTo: "#CB3524",
+    accent: "#CB3524",
     logo: "/teams/la-liga/atletico-madrid.png",
     founded: "1903",
     stadium: "ميتروبوليتانو",
@@ -466,9 +473,9 @@ const teamsData = {
     league: "la-liga",
     leagueName: "الدوري الإسباني",
     leagueUrl: "/league/la-liga/",
-    colorFrom: "#b91c1c",
-    colorTo: "#ef4444",
-    accent: "#f87171",
+    colorFrom: "#6d0000",
+    colorTo: "#cf0000",
+    accent: "#d20a11",
     logo: "/teams/la-liga/sevilla.png",
     founded: "1890",
     stadium: "رامون سانشيز بيزخوان",
@@ -515,8 +522,8 @@ const teamsData = {
     leagueName: "الدوري الإسباني",
     leagueUrl: "/league/la-liga/",
     colorFrom: "#111827",
-    colorTo: "#f59e0b",
-    accent: "#fbbf24",
+    colorTo: "#e88a00",
+    accent: "#e88a00",
     logo: "/teams/la-liga/valencia.png",
     founded: "1919",
     stadium: "ميستايا",
@@ -563,9 +570,9 @@ const teamsData = {
     league: "la-liga",
     leagueName: "الدوري الإسباني",
     leagueUrl: "/league/la-liga/",
-    colorFrom: "#1d4ed8",
-    colorTo: "#0f172a",
-    accent: "#60a5fa",
+    colorFrom: "#001a66",
+    colorTo: "#00adef",
+    accent: "#0f68b3",
     logo: "/teams/la-liga/real-sociedad.png",
     founded: "1909",
     stadium: "أنويتا",
@@ -610,7 +617,7 @@ const teamsData = {
   "bayern-munich": {
     name: "بايرن ميونخ",
     league: "bundesliga", leagueName: "الدوري الألماني", leagueUrl: "/league/bundesliga/",
-    colorFrom: "#7f1d1d", colorTo: "#dc2626", accent: "#ef4444",
+    colorFrom: "#660000", colorTo: "#DC052D", accent: "#DC052D",
     logo: "/teams/bundesliga/bayern-munich.png",
     founded: "1900", stadium: "أليانز أرينا", city: "ميونخ", coach: "فينسنت كومباني",
     history: [
@@ -635,7 +642,7 @@ const teamsData = {
   "borussia-dortmund": {
     name: "بوروسيا دورتموند",
     league: "bundesliga", leagueName: "الدوري الألماني", leagueUrl: "/league/bundesliga/",
-    colorFrom: "#713f12", colorTo: "#ca8a04", accent: "#eab308",
+    colorFrom: "#1a1000", colorTo: "#FDE100", accent: "#FDE100",
     logo: "/teams/bundesliga/borussia-dortmund.png",
     founded: "1909", stadium: "زيغنال إيدونا بارك", city: "دورتموند", coach: "نيكو كوفاتش",
     history: [
@@ -660,7 +667,7 @@ const teamsData = {
   "bayer-leverkusen": {
     name: "باير ليفركوزن",
     league: "bundesliga", leagueName: "الدوري الألماني", leagueUrl: "/league/bundesliga/",
-    colorFrom: "#991b1b", colorTo: "#ef4444", accent: "#f87171",
+    colorFrom: "#660000", colorTo: "#E21E0E", accent: "#E21E0E",
     logo: "/teams/bundesliga/bayer-leverkusen.png",
     founded: "1904", stadium: "باي أرينا", city: "ليفركوزن", coach: "تشابي ألونسو",
     history: [
@@ -684,7 +691,7 @@ const teamsData = {
   "rb-leipzig": {
     name: "آر بي لايبزيغ",
     league: "bundesliga", leagueName: "الدوري الألماني", leagueUrl: "/league/bundesliga/",
-    colorFrom: "#1e1b4b", colorTo: "#4f46e5", accent: "#6366f1",
+    colorFrom: "#0d0d1f", colorTo: "#CC1524", accent: "#CC1524",
     logo: "/teams/bundesliga/rb-leipzig.png",
     founded: "2009", stadium: "ريد بول أرينا", city: "لايبزيغ", coach: "ماركو روزه",
     history: [
@@ -707,7 +714,7 @@ const teamsData = {
   "eintracht-frankfurt": {
     name: "إينتراخت فرانكفورت",
     league: "bundesliga", leagueName: "الدوري الألماني", leagueUrl: "/league/bundesliga/",
-    colorFrom: "#111827", colorTo: "#374151", accent: "#6b7280",
+    colorFrom: "#0d0d0d", colorTo: "#E2001A", accent: "#E2001A",
     logo: "/teams/bundesliga/eintracht-frankfurt.png",
     founded: "1899", stadium: "دويتشه بانك بارك", city: "فرانكفورت", coach: "دينو توبموللر",
     history: [
@@ -731,7 +738,7 @@ const teamsData = {
   "borussia-monchengladbach": {
     name: "بوروسيا مونشنغلادباخ",
     league: "bundesliga", leagueName: "الدوري الألماني", leagueUrl: "/league/bundesliga/",
-    colorFrom: "#166534", colorTo: "#16a34a", accent: "#22c55e",
+    colorFrom: "#0d2210", colorTo: "#006633", accent: "#006633",
     logo: "/teams/bundesliga/borussia-monchengladbach.png",
     founded: "1900", stadium: "بوروسيا بارك", city: "مونشنغلادباخ", coach: "غيرارد سيوان",
     history: [
@@ -755,7 +762,7 @@ const teamsData = {
   "juventus": {
     name: "يوفنتوس",
     league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
-    colorFrom: "#111827", colorTo: "#374151", accent: "#6b7280",
+    colorFrom: "#0a0a0a", colorTo: "#383838", accent: "#111827",
     logo: "/teams/serie-a/juventus.png",
     founded: "1897", stadium: "يوفنتوس ستاديوم", city: "تورينو", coach: "ثياغو موتا",
     history: [
@@ -780,7 +787,7 @@ const teamsData = {
   "ac-milan": {
     name: "إيه سي ميلان",
     league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
-    colorFrom: "#7f1d1d", colorTo: "#dc2626", accent: "#ef4444",
+    colorFrom: "#4a0000", colorTo: "#AC0B00", accent: "#AC0B00",
     logo: "/teams/serie-a/ac-milan.png",
     founded: "1899", stadium: "سان سيرو", city: "ميلان", coach: "سيرجيو كونتشيتو",
     history: [
@@ -805,7 +812,7 @@ const teamsData = {
   "inter-milan": {
     name: "إنتر ميلان",
     league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
-    colorFrom: "#1e3a8a", colorTo: "#1d4ed8", accent: "#3b82f6",
+    colorFrom: "#001a4d", colorTo: "#0066A1", accent: "#0066A1",
     logo: "/teams/serie-a/inter-milan.png",
     founded: "1908", stadium: "سان سيرو", city: "ميلان", coach: "سيمون إنزاغي",
     history: [
@@ -830,7 +837,7 @@ const teamsData = {
   "napoli": {
     name: "نابولي",
     league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
-    colorFrom: "#1e3a8a", colorTo: "#2563eb", accent: "#60a5fa",
+    colorFrom: "#004d6e", colorTo: "#007AC4", accent: "#007AC4",
     logo: "/teams/serie-a/napoli.png",
     founded: "1926", stadium: "ستاديو مارادونا", city: "نابولي", coach: "أنطونيو كونتي",
     history: [
@@ -853,7 +860,7 @@ const teamsData = {
   "as-roma": {
     name: "روما",
     league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
-    colorFrom: "#7c2d12", colorTo: "#ea580c", accent: "#f97316",
+    colorFrom: "#4a1900", colorTo: "#9B1C1C", accent: "#8B0000",
     logo: "/teams/serie-a/as-roma.png",
     founded: "1927", stadium: "ستاديو أوليمبيكو", city: "روما", coach: "كلاوديو رانييري",
     history: [
@@ -876,7 +883,7 @@ const teamsData = {
   "lazio": {
     name: "لاتسيو",
     league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
-    colorFrom: "#0c4a6e", colorTo: "#0369a1", accent: "#38bdf8",
+    colorFrom: "#003d66", colorTo: "#00ABDE", accent: "#00ABDE",
     logo: "/teams/serie-a/lazio.png",
     founded: "1900", stadium: "ستاديو أوليمبيكو", city: "روما", coach: "ماركو باروني",
     history: [
@@ -901,7 +908,7 @@ const teamsData = {
   "psg": {
     name: "باريس سان جيرمان",
     league: "ligue-1", leagueName: "الدوري الفرنسي", leagueUrl: "/league/ligue-1/",
-    colorFrom: "#1e3a8a", colorTo: "#dc2626", accent: "#3b82f6",
+    colorFrom: "#001a5e", colorTo: "#1a1a5e", accent: "#004170",
     logo: "/teams/ligue-1/psg.png",
     founded: "1970", stadium: "بارك دي برانس", city: "باريس", coach: "لويس إنريكي",
     history: [
@@ -910,11 +917,11 @@ const teamsData = {
       "رغم هذا الإنفاق الهائل، يسعى النادي جاهداً للفوز بلقب دوري أبطال أوروبا الذي ظل بعيد المنال حتى الآن."
     ],
     titles: [
-      "الدوري الفرنسي (ليغ 1): 12 لقباً",
+      "الدوري الفرنسي: 12 لقباً",
       "كأس فرنسا: 15 لقباً",
       "كأس الرابطة الفرنسية: 9 ألقاب",
-      "سوبر كأس فرنسا: 12 لقباً",
-      "نهائي دوري الأبطال: 2020 (وصيف)"
+      "السوبر الفرنسي: 11 لقباً",
+      "نهائي دوري أبطال أوروبا 2020 (وصيف)"
     ],
     staff: ["لويس إنريكي — المدرب الرئيسي", "جهاز فني متكامل", "لويس كامبوس — المستشار الرياضي", "طاقم طبي وبدني"],
     players: ["جيان لويجي دوناروما", "آشرف حكيمي", "خوان برييغاس", "فيتينيا دياني", "مارك باردييلا", "دسيريه دوي"],
@@ -926,7 +933,7 @@ const teamsData = {
   "olympique-marseille": {
     name: "أولمبيك مرسيليا",
     league: "ligue-1", leagueName: "الدوري الفرنسي", leagueUrl: "/league/ligue-1/",
-    colorFrom: "#1e3a8a", colorTo: "#2563eb", accent: "#60a5fa",
+    colorFrom: "#00205B", colorTo: "#009ADE", accent: "#009ADE",
     logo: "/teams/ligue-1/olympique-marseille.png",
     founded: "1899", stadium: "فيلودروم", city: "مرسيليا", coach: "روبرتو دي زيربي",
     history: [
@@ -950,7 +957,7 @@ const teamsData = {
   "monaco": {
     name: "موناكو",
     league: "ligue-1", leagueName: "الدوري الفرنسي", leagueUrl: "/league/ligue-1/",
-    colorFrom: "#7f1d1d", colorTo: "#f59e0b", accent: "#fbbf24",
+    colorFrom: "#4d0000", colorTo: "#A50000", accent: "#CE0E2D",
     logo: "/teams/ligue-1/monaco.png",
     founded: "1924", stadium: "ستاد لويس الثاني", city: "موناكو", coach: "أدي هوتر",
     history: [
@@ -973,7 +980,7 @@ const teamsData = {
   "olympique-lyon": {
     name: "أولمبيك ليون",
     league: "ligue-1", leagueName: "الدوري الفرنسي", leagueUrl: "/league/ligue-1/",
-    colorFrom: "#713f12", colorTo: "#d97706", accent: "#f59e0b",
+    colorFrom: "#1a1a1a", colorTo: "#CC0000", accent: "#CC0000",
     logo: "/teams/ligue-1/olympique-lyon.png",
     founded: "1950", stadium: "بارك أولبيكي ليون", city: "ليون", coach: "بيار ساج",
     history: [
@@ -996,7 +1003,7 @@ const teamsData = {
   "losc-lille": {
     name: "ليل",
     league: "ligue-1", leagueName: "الدوري الفرنسي", leagueUrl: "/league/ligue-1/",
-    colorFrom: "#1e3a8a", colorTo: "#dc2626", accent: "#ef4444",
+    colorFrom: "#4d0000", colorTo: "#CC0000", accent: "#CC0000",
     logo: "/teams/ligue-1/losc-lille.png",
     founded: "1944", stadium: "ستاد بيار موروا", city: "ليل", coach: "برونو جينيسيو",
     history: [
@@ -1042,7 +1049,7 @@ const teamsData = {
   "al-hilal": {
     name: "الهلال",
     league: "saudi-pro-league", leagueName: "دوري روشن للمحترفين", leagueUrl: "/league/saudi-pro-league/",
-    colorFrom: "#1e3a8a", colorTo: "#2563eb", accent: "#3b82f6",
+    colorFrom: "#001a5e", colorTo: "#1038c6", accent: "#1038c6",
     logo: "/teams/saudi-pro-league/al-hilal.png",
     founded: "1957", stadium: "ملعب الأمير فيصل بن فهد", city: "الرياض", coach: "ماتياس فيلمان",
     history: [
@@ -1067,7 +1074,7 @@ const teamsData = {
   "al-nassr": {
     name: "النصر",
     league: "saudi-pro-league", leagueName: "دوري روشن للمحترفين", leagueUrl: "/league/saudi-pro-league/",
-    colorFrom: "#713f12", colorTo: "#ca8a04", accent: "#eab308",
+    colorFrom: "#1a0a00", colorTo: "#C9A11A", accent: "#C9A11A",
     logo: "/teams/saudi-pro-league/al-nassr.png",
     founded: "1955", stadium: "ملعب مرسول بارك", city: "الرياض", coach: "ستيفانو بيولي",
     history: [
@@ -1091,7 +1098,7 @@ const teamsData = {
   "al-ittihad": {
     name: "الاتحاد",
     league: "saudi-pro-league", leagueName: "دوري روشن للمحترفين", leagueUrl: "/league/saudi-pro-league/",
-    colorFrom: "#111827", colorTo: "#ca8a04", accent: "#eab308",
+    colorFrom: "#0d0d00", colorTo: "#FFD700", accent: "#FFD700",
     logo: "/teams/saudi-pro-league/al-ittihad.png",
     founded: "1927", stadium: "ملعب مدينة الملك عبدالله الرياضية", city: "جدة", coach: "نونو إسبيريتو سانتو",
     history: [
@@ -1115,7 +1122,7 @@ const teamsData = {
   "al-ahli": {
     name: "الأهلي",
     league: "saudi-pro-league", leagueName: "دوري روشن للمحترفين", leagueUrl: "/league/saudi-pro-league/",
-    colorFrom: "#14532d", colorTo: "#16a34a", accent: "#22c55e",
+    colorFrom: "#001a00", colorTo: "#006633", accent: "#006633",
     logo: "/teams/saudi-pro-league/al-ahli.png",
     founded: "1937", stadium: "ملعب مرسول بارك", city: "جدة", coach: "ماتياس فيلمان (سابق)",
     history: [
@@ -1139,7 +1146,7 @@ const teamsData = {
   "ajax": {
     name: "أياكس",
     league: "eredivisie", leagueName: "الدوري الهولندي", leagueUrl: "/league/eredivisie/",
-    colorFrom: "#7f1d1d", colorTo: "#dc2626", accent: "#ef4444",
+    colorFrom: "#4d0000", colorTo: "#CC0000", accent: "#CC0000",
     logo: "/teams/eredivisie/ajax.png",
     founded: "1900", stadium: "يوهان كرويف أرينا", city: "أمستردام", coach: "فرانشيسكو فاليفيرد",
     history: [
@@ -1164,7 +1171,7 @@ const teamsData = {
   "psv-eindhoven": {
     name: "بي إس في إيندهوفن",
     league: "eredivisie", leagueName: "الدوري الهولندي", leagueUrl: "/league/eredivisie/",
-    colorFrom: "#7f1d1d", colorTo: "#dc2626", accent: "#f87171",
+    colorFrom: "#4d0000", colorTo: "#CC0000", accent: "#CC0000",
     logo: "/teams/eredivisie/psv-eindhoven.png",
     founded: "1913", stadium: "فيليبس ستاديون", city: "إيندهوفن", coach: "بيتر بوش",
     history: [
@@ -1188,7 +1195,7 @@ const teamsData = {
   "feyenoord": {
     name: "فاينورد",
     league: "eredivisie", leagueName: "الدوري الهولندي", leagueUrl: "/league/eredivisie/",
-    colorFrom: "#7f1d1d", colorTo: "#111827", accent: "#ef4444",
+    colorFrom: "#4d0000", colorTo: "#CC0000", accent: "#CC0000",
     logo: "/teams/eredivisie/feyenoord.png",
     founded: "1908", stadium: "دي كويب", city: "روتردام", coach: "براين بروز",
     history: [
