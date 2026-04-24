@@ -23,10 +23,8 @@ function todayStr() {
   return new Date().toISOString().slice(0, 10);
 }
 
-// Convertit les chiffres occidentaux en chiffres arabes-orientaux (٠١٢٣٤٥٦٧٨٩)
-function ar(n) {
-  return String(n ?? "").replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
-}
+// Affiche les chiffres standards (1, 2, 3...)
+function ar(n) { return String(n ?? ""); }
 
 function statusColor(s) {
   if (["1H","2H","ET","BT","P","LIVE"].includes(s)) return "#16a34a";

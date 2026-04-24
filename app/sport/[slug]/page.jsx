@@ -3,23 +3,26 @@ import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
 
+// Logos fiables depuis le CDN API-Football (même source que la page live)
+const CDN = "https://media.api-sports.io/football/leagues";
+
 const footballLeagues = [
-  { slug: "premier-league", title: "الدوري الإنجليزي الممتاز", country: "إنجلترا", color: "#6d28d9", border: "#ddd6fe", logo: "/leagues/premier-league.svg" },
-  { slug: "la-liga", title: "الدوري الإسباني", country: "إسبانيا", color: "#ea580c", border: "#fed7aa", logo: "/leagues/la-liga.svg" },
-  { slug: "bundesliga", title: "البوندسليغا", country: "ألمانيا", color: "#dc2626", border: "#fecaca", logo: "/leagues/bundesliga.svg" },
-  { slug: "serie-a", title: "الدوري الإيطالي", country: "إيطاليا", color: "#b45309", border: "#fde68a", logo: "/leagues/serie-a.svg" },
-  { slug: "ligue-1", title: "الدوري الفرنسي", country: "فرنسا", color: "#1d4ed8", border: "#bfdbfe", logo: "/leagues/ligue-1.svg" },
-  { slug: "champions-league", title: "دوري أبطال أوروبا", country: "أوروبا", color: "#f59e0b", border: "#fef08a", logo: "/leagues/champions-league.svg" },
-  { slug: "saudi-pro-league", title: "الدوري السعودي للمحترفين", country: "السعودية", color: "#15803d", border: "#bbf7d0", logo: "/leagues/saudi-pro-league.png" },
-  { slug: "eredivisie", title: "الدوري الهولندي", country: "هولندا", color: "#b91c1c", border: "#fecaca", logo: "/leagues/eredivisie.svg" }
+  { slug: "premier-league", title: "الدوري الإنجليزي الممتاز", country: "إنجلترا", color: "#6d28d9", border: "#ddd6fe", logo: `${CDN}/39.png` },
+  { slug: "la-liga",        title: "الدوري الإسباني",          country: "إسبانيا",  color: "#ea580c", border: "#fed7aa", logo: `${CDN}/140.png` },
+  { slug: "bundesliga",     title: "البوندسليغا",              country: "ألمانيا",  color: "#dc2626", border: "#fecaca", logo: `${CDN}/78.png` },
+  { slug: "serie-a",        title: "الدوري الإيطالي",          country: "إيطاليا",  color: "#b45309", border: "#fde68a", logo: `${CDN}/135.png` },
+  { slug: "ligue-1",        title: "الدوري الفرنسي",           country: "فرنسا",   color: "#1d4ed8", border: "#bfdbfe", logo: `${CDN}/61.png` },
+  { slug: "champions-league", title: "دوري أبطال أوروبا",    country: "أوروبا",   color: "#f59e0b", border: "#fef08a", logo: `${CDN}/2.png` },
+  { slug: "saudi-pro-league", title: "الدوري السعودي للمحترفين", country: "السعودية", color: "#15803d", border: "#bbf7d0", logo: `${CDN}/307.png` },
+  { slug: "eredivisie",     title: "الدوري الهولندي",          country: "هولندا",   color: "#b91c1c", border: "#fecaca", logo: `${CDN}/88.png` }
 ];
 
 const globalCompetitions = [
-  { slug: "world-cup", title: "كأس العالم", country: "FIFA", color: "#818cf8", border: "#ddd6fe", logo: "/leagues/world-cup.png" },
-  { slug: "euro", title: "يورو", country: "UEFA", color: "#60a5fa", border: "#bfdbfe", logo: "/leagues/euro.png" },
-  { slug: "afcon", title: "كأس أمم أفريقيا", country: "CAF", color: "#fb923c", border: "#fed7aa", logo: "/leagues/afcon.png" },
-  { slug: "caf-champions-league", title: "أبطال أفريقيا", country: "CAF", color: "#34d399", border: "#bbf7d0", logo: "/leagues/caf-champions-league.png" },
-  { slug: "club-world-cup", title: "كأس العالم للأندية", country: "FIFA", color: "#fbbf24", border: "#fef08a", logo: "/leagues/club-world-cup.svg" }
+  { slug: "world-cup",           title: "كأس العالم",         country: "FIFA",  color: "#818cf8", border: "#ddd6fe", logo: `${CDN}/1.png` },
+  { slug: "euro",                title: "يورو",               country: "UEFA",  color: "#60a5fa", border: "#bfdbfe", logo: `${CDN}/4.png` },
+  { slug: "afcon",               title: "كأس أمم أفريقيا",    country: "CAF",   color: "#fb923c", border: "#fed7aa", logo: `${CDN}/6.png` },
+  { slug: "caf-champions-league",title: "أبطال أفريقيا",      country: "CAF",   color: "#34d399", border: "#bbf7d0", logo: `${CDN}/12.png` },
+  { slug: "club-world-cup",      title: "كأس العالم للأندية", country: "FIFA",  color: "#fbbf24", border: "#fef08a", logo: `${CDN}/15.png` }
 ];
 
 const sportConfig = {

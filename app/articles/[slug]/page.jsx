@@ -6,7 +6,7 @@ const leagueBranding = {
   "premier-league": {
     title: "الدوري الإنجليزي الممتاز",
     href: "/league/premier-league/",
-    leagueLogo: "/leagues/premier-league.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/39.png",
     teams: [
       { name: "مانشستر سيتي", logo: "/teams/premier-league/manchester-city.png" },
       { name: "مانشستر يونايتد", logo: "/teams/premier-league/manchester-united.png" },
@@ -20,7 +20,7 @@ const leagueBranding = {
   "la-liga": {
     title: "الدوري الإسباني",
     href: "/league/la-liga/",
-    leagueLogo: "/leagues/la-liga.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/140.png",
     teams: [
       { name: "ريال مدريد", logo: "/teams/la-liga/real-madrid.png" },
       { name: "برشلونة", logo: "/teams/la-liga/barcelona.png" },

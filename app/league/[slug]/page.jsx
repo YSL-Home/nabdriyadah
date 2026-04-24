@@ -9,7 +9,7 @@ const leagueMap = {
     shortLabel: "EPL",
     description:
       "تابع آخر أخبار الدوري الإنجليزي الممتاز، أبرز المستجدات، والتحليلات الخاصة بالأندية واللاعبين.",
-    leagueLogo: "/leagues/premier-league.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/39.png",
     theme: {
       pageBg: "#f6f0ff",
       heroFrom: "#3b0764",
@@ -41,7 +41,7 @@ const leagueMap = {
     title: "الدوري الإسباني",
     shortLabel: "LL",
     description: "أحدث أخبار الدوري الإسباني مع متابعة خاصة لريال مدريد وبرشلونة وأبرز ملفات الليغا.",
-    leagueLogo: "/leagues/la-liga.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/140.png",
     theme: {
       pageBg: "#fff7ed", heroFrom: "#9a3412", heroTo: "#f97316", primary: "#ea580c",
       primarySoft: "#ffedd5", border: "#fed7aa", cardBg: "#ffffff",
@@ -62,7 +62,7 @@ const leagueMap = {
     title: "الدوري الألماني — البوندسليغا",
     shortLabel: "BL",
     description: "تابع أحدث أخبار البوندسليغا، بايرن ميونخ، بوروسيا دورتموند وأبرز مجريات الدوري الألماني.",
-    leagueLogo: "/leagues/bundesliga.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/78.png",
     theme: {
       pageBg: "#fff1f2", heroFrom: "#7f1d1d", heroTo: "#dc2626", primary: "#dc2626",
       primarySoft: "#fee2e2", border: "#fecaca", cardBg: "#ffffff",
@@ -83,7 +83,7 @@ const leagueMap = {
     title: "الدوري الإيطالي — سيريا آ",
     shortLabel: "SA",
     description: "أبرز أخبار الدوري الإيطالي، يوفنتوس، ميلان، إنتر ميلان وأفضل البطولات الأوروبية.",
-    leagueLogo: "/leagues/serie-a.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/135.png",
     theme: {
       pageBg: "#fffbeb", heroFrom: "#78350f", heroTo: "#d97706", primary: "#b45309",
       primarySoft: "#fef3c7", border: "#fde68a", cardBg: "#ffffff",
@@ -104,7 +104,7 @@ const leagueMap = {
     title: "الدوري الفرنسي — ليغ 1",
     shortLabel: "L1",
     description: "آخر أخبار الدوري الفرنسي، باريس سان جيرمان، مرسيليا، موناكو وأبرز أحداث الليغ 1.",
-    leagueLogo: "/leagues/ligue-1.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/61.png",
     theme: {
       pageBg: "#eff6ff", heroFrom: "#1e3a8a", heroTo: "#2563eb", primary: "#1d4ed8",
       primarySoft: "#dbeafe", border: "#bfdbfe", cardBg: "#ffffff",
@@ -125,7 +125,7 @@ const leagueMap = {
     title: "دوري أبطال أوروبا",
     shortLabel: "UCL",
     description: "تابع أحدث أخبار دوري أبطال أوروبا، المباريات الكبرى، وأبرز الأندية المتنافسة على اللقب.",
-    leagueLogo: "/leagues/champions-league.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/2.png",
     theme: {
       pageBg: "#fefce8", heroFrom: "#713f12", heroTo: "#ca8a04", primary: "#854d0e",
       primarySoft: "#fef9c3", border: "#fef08a", cardBg: "#ffffff",
@@ -146,7 +146,7 @@ const leagueMap = {
     title: "دوري روشن للمحترفين",
     shortLabel: "SPL",
     description: "أخبار الدوري السعودي للمحترفين، الهلال، النصر، الاتحاد وأبرز نجوم الدوري.",
-    leagueLogo: "/leagues/saudi-pro-league.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/307.png",
     theme: {
       pageBg: "#f0fdf4", heroFrom: "#14532d", heroTo: "#16a34a", primary: "#15803d",
       primarySoft: "#dcfce7", border: "#bbf7d0", cardBg: "#ffffff",
@@ -167,7 +167,7 @@ const leagueMap = {
     title: "الدوري الهولندي — إريديفيزي",
     shortLabel: "ERE",
     description: "متابعة أبرز أخبار الدوري الهولندي، أياكس، بي إس في إيندهوفن وفاينورد.",
-    leagueLogo: "/leagues/eredivisie.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/88.png",
     theme: {
       pageBg: "#fff1f2", heroFrom: "#7f1d1d", heroTo: "#ef4444", primary: "#b91c1c",
       primarySoft: "#fee2e2", border: "#fecaca", cardBg: "#ffffff",
@@ -185,7 +185,7 @@ const leagueMap = {
     title: "كأس العالم FIFA",
     shortLabel: "WC",
     description: "تغطية شاملة لكأس العالم لكرة القدم، تاريخ البطولة، أبرز المنتخبات والنتائج.",
-    leagueLogo: "/leagues/world-cup.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/1.png",
     theme: {
       pageBg: "#faf5ff", heroFrom: "#1e1b4b", heroTo: "#4338ca", primary: "#4f46e5",
       primarySoft: "#ede9fe", border: "#ddd6fe", cardBg: "#ffffff",
@@ -199,7 +199,7 @@ const leagueMap = {
     title: "بطولة أمم أوروبا — يورو",
     shortLabel: "EURO",
     description: "أخبار وتغطية بطولة أمم أوروبا، أبرز المنتخبات والنتائج.",
-    leagueLogo: "/leagues/euro.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/4.png",
     theme: {
       pageBg: "#eff6ff", heroFrom: "#1e3a8a", heroTo: "#3b82f6", primary: "#2563eb",
       primarySoft: "#dbeafe", border: "#bfdbfe", cardBg: "#ffffff",
@@ -213,7 +213,7 @@ const leagueMap = {
     title: "كأس أمم أفريقيا — CAN",
     shortLabel: "CAN",
     description: "تغطية كأس أمم أفريقيا، أبرز المنتخبات الأفريقية، النتائج والتاريخ.",
-    leagueLogo: "/leagues/afcon.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/6.png",
     theme: {
       pageBg: "#fff7ed", heroFrom: "#7c2d12", heroTo: "#ea580c", primary: "#c2410c",
       primarySoft: "#ffedd5", border: "#fed7aa", cardBg: "#ffffff",
@@ -227,7 +227,7 @@ const leagueMap = {
     title: "دوري أبطال أفريقيا — CAF",
     shortLabel: "CAFCL",
     description: "أخبار دوري أبطال أفريقيا، الأندية المشاركة والنتائج.",
-    leagueLogo: "/leagues/caf-champions-league.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/12.png",
     theme: {
       pageBg: "#f0fdf4", heroFrom: "#14532d", heroTo: "#16a34a", primary: "#15803d",
       primarySoft: "#dcfce7", border: "#bbf7d0", cardBg: "#ffffff",
@@ -241,7 +241,7 @@ const leagueMap = {
     title: "كأس العالم للأندية — FIFA",
     shortLabel: "CWC",
     description: "تغطية كأس العالم للأندية، أبرز الأندية المشاركة من كل القارات والنتائج.",
-    leagueLogo: "/leagues/club-world-cup.png",
+    leagueLogo: "https://media.api-sports.io/football/leagues/15.png",
     theme: {
       pageBg: "#fefce8", heroFrom: "#713f12", heroTo: "#d97706", primary: "#b45309",
       primarySoft: "#fef9c3", border: "#fef08a", cardBg: "#ffffff",
