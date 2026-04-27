@@ -7,14 +7,14 @@ import AdSlot from "../../components/AdSlot";
 const CDN = "https://media.api-sports.io/football/leagues";
 
 const footballLeagues = [
-  { slug: "premier-league", title: "الدوري الإنجليزي الممتاز", country: "إنجلترا", color: "#6d28d9", border: "#ddd6fe", logo: `${CDN}/39.png`,  logoBg: "#38003c" },
-  { slug: "la-liga",        title: "الدوري الإسباني",          country: "إسبانيا",  color: "#ea580c", border: "#fed7aa", logo: `${CDN}/140.png`, logoBg: "#1a1224" },
-  { slug: "bundesliga",     title: "البوندسليغا",              country: "ألمانيا",  color: "#dc2626", border: "#fecaca", logo: `${CDN}/78.png`,  logoBg: "#1c0000" },
-  { slug: "serie-a",        title: "الدوري الإيطالي",          country: "إيطاليا",  color: "#b45309", border: "#fde68a", logo: `${CDN}/135.png`, logoBg: "#0a1628" },
-  { slug: "ligue-1",        title: "الدوري الفرنسي",           country: "فرنسا",   color: "#1d4ed8", border: "#bfdbfe", logo: `${CDN}/61.png`,  logoBg: "#001220" },
-  { slug: "champions-league", title: "دوري أبطال أوروبا",    country: "أوروبا",   color: "#f59e0b", border: "#fef08a", logo: `${CDN}/2.png`,   logoBg: "#0a1528" },
-  { slug: "saudi-pro-league", title: "الدوري السعودي للمحترفين", country: "السعودية", color: "#15803d", border: "#bbf7d0", logo: `${CDN}/307.png`, logoBg: "#003319" },
-  { slug: "eredivisie",     title: "الدوري الهولندي",          country: "هولندا",   color: "#b91c1c", border: "#fecaca", logo: `${CDN}/88.png`,  logoBg: "#1a0000" }
+  { slug: "premier-league", title: "الدوري الإنجليزي الممتاز", country: "إنجلترا", color: "#6d28d9", border: "#ddd6fe", logo: `${CDN}/39.png`,  logoBg: "#5b2d8e" },
+  { slug: "la-liga",        title: "الدوري الإسباني",          country: "إسبانيا",  color: "#ea580c", border: "#fed7aa", logo: `${CDN}/140.png`, logoBg: "#1a1a2e" },
+  { slug: "bundesliga",     title: "البوندسليغا",              country: "ألمانيا",  color: "#dc2626", border: "#fecaca", logo: `${CDN}/78.png`,  logoBg: "#7f1d1d" },
+  { slug: "serie-a",        title: "الدوري الإيطالي",          country: "إيطاليا",  color: "#b45309", border: "#fde68a", logo: `${CDN}/135.png`, logoBg: "#1e3a5f" },
+  { slug: "ligue-1",        title: "الدوري الفرنسي",           country: "فرنسا",   color: "#1d4ed8", border: "#bfdbfe", logo: `${CDN}/61.png`,  logoBg: "#1e3a8a" },
+  { slug: "champions-league", title: "دوري أبطال أوروبا",    country: "أوروبا",   color: "#f59e0b", border: "#fef08a", logo: `${CDN}/2.png`,   logoBg: "#1e3a8a" },
+  { slug: "saudi-pro-league", title: "الدوري السعودي للمحترفين", country: "السعودية", color: "#15803d", border: "#bbf7d0", logo: `${CDN}/307.png`, logoBg: "#14532d" },
+  { slug: "eredivisie",     title: "الدوري الهولندي",          country: "هولندا",   color: "#b91c1c", border: "#fecaca", logo: `${CDN}/88.png`,  logoBg: "#991b1b" }
 ];
 
 const globalCompetitions = [
