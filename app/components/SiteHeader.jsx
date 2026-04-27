@@ -20,9 +20,9 @@ export default function SiteHeader() {
           </div>
         </Link>
         {/* Nav */}
-        <nav className="hdr-nav">
+        <nav className="sports-nav">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} style={{ textDecoration: "none", color: "rgba(255,255,255,0.9)", fontWeight: 700, fontSize: "14px", padding: "8px 12px", borderRadius: "999px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", whiteSpace: "nowrap" }}>
+            <Link key={link.href} href={link.href} className="sports-nav-item">
               {link.label}
             </Link>
           ))}

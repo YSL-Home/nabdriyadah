@@ -49,7 +49,7 @@ function MatchCard({ match }) {
   const away = match.teams?.away;
   const goals = match.goals;
   const kickoff = match.fixture?.date
-    ? new Date(match.fixture.date).toLocaleTimeString("ar-SA", { hour: "2-digit", minute: "2-digit" })
+    ? new Date(match.fixture.date).toLocaleTimeString("ar-SA-u-nu-latn", { hour: "2-digit", minute: "2-digit" })
     : null;
 
   return (

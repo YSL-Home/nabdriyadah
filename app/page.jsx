@@ -1,5 +1,6 @@
 import Link from "next/link";
 import articles from "../content/articles/seo-articles.json";
+import ArticleImage from "./components/ArticleImage";
 
 export const metadata = {
   title: "أخبار الرياضة العربية والعالمية",
@@ -109,7 +110,7 @@ export default function HomePage() {
               return (
                 <Link key={article.slug} href={`/articles/${article.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <article style={{ background: "white", borderRadius: "22px", overflow: "hidden", border: "1px solid #e5e7eb", boxShadow: "0 12px 30px rgba(0,0,0,0.05)", height: "100%" }}>
-                    <img src={article.image} alt={article.title} style={{ width: "100%", height: "210px", objectFit: "cover", display: "block" }} />
+                    <ArticleImage src={article.image} alt={article.title} sport={article.sport} style={{ height: "210px" }} />
                     <div style={{ padding: "20px" }}>
                       <div style={{ display: "inline-block", marginBottom: "10px", padding: "6px 12px", borderRadius: "999px", background: bg, color, fontSize: "12px", fontWeight: 700 }}>
                         {sportLabelAr(article.league, article.sport)}
