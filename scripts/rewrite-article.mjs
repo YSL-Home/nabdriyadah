@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { execFileSync } from "child_process";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
@@ -364,6 +365,19 @@ async function main() {
   ensureDir(OUTPUT_PATH);
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(articles, null, 2), "utf-8");
   console.log(`SEO articles saved: ${articles.length}`);
+
+  // Auto-lance la génération d'images après chaque réécriture
+  if (OPENAI_API_KEY) {
+    console.log("Lancement génération images...");
+    try {
+      execFileSync("node", [path.join(process.cwd(), "scripts/generate-article-images.mjs")], {
+        stdio: "inherit",
+        env: process.env
+      });
+    } catch (e) {
+      console.log("Image generation error:", e.message?.slice(0, 120));
+    }
+  }
 }
 
 main();

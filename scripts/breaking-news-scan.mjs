@@ -3,10 +3,13 @@
  * Scanne les flux RSS, compare avec les articles existants.
  * Si un titre vraiment nouveau est détecté, écrit /tmp/breaking_changed = true
  * et met à jour content/raw-news.json avec UNIQUEMENT les nouveaux articles.
+ *
+ * Si FORCE_FULL_PIPELINE=true → lance fetch-news.mjs d'abord + marque toujours changed=true
  */
 import fs from "fs";
 import path from "path";
 import Parser from "rss-parser";
+import { execFileSync } from "child_process";
 
 const RAW_PATH    = path.join(process.cwd(), "content/raw-news.json");
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
@@ -29,6 +32,18 @@ function normalizeTitle(t = "") {
 }
 
 async function main() {
+  // Mode pipeline complet (déclenché manuellement)
+  if (process.env.FORCE_FULL_PIPELINE === "true") {
+    console.log("FORCE_FULL_PIPELINE=true — lancement du pipeline complet...");
+    try {
+      execFileSync("node", [path.join(process.cwd(), "scripts/fetch-news.mjs")], { stdio: "inherit" });
+    } catch (e) {
+      console.log("fetch-news failed:", e.message?.slice(0, 100));
+    }
+    fs.writeFileSync(FLAG_FILE, "true");
+    process.exit(0);
+  }
+
   // Titres déjà publiés
   let existingTitles = new Set();
   try {
