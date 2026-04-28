@@ -168,7 +168,7 @@ async function callOpenAI(prompt, temperature = 0.3, systemPrompt = null) {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ model: "gpt-4o-mini", temperature, messages, max_tokens: 2500 })
+      body: JSON.stringify({ model: "gpt-4o", temperature, messages, max_tokens: 3000 })
     });
     const data = await response.json();
     if (!response.ok) {
@@ -245,6 +245,9 @@ async function rewriteArticle(item, index) {
 - الأسماء الأجنبية بالحروف العربية فقط (مثال: ريال مدريد، ليونيل ميسي)
 - لا مقدمات عامة ("في إطار" ، "في سياق" لوحدها)
 - لا تكرار بين العنوان والوصف والفقرة الأولى
+- لا تستخدم عبارات الحشو الشائعة مثل "في هذا الإطار" و"تجدر الإشارة" و"وفي هذا الصدد"
+- كل فقرة يجب أن تضيف معلومة جديدة — لا تكرار أفكار بصياغة مختلفة
+- أسلوب جريدة رياضية راقية: مباشر، موجز، غني بالمعطيات الدقيقة
 
 أعد JSON فقط بهذا الشكل الدقيق:
 {
@@ -262,7 +265,7 @@ async function rewriteArticle(item, index) {
 }
 `.trim();
 
-  const raw = await callOpenAI(prompt, 0.3, systemPrompt);
+  const raw = await callOpenAI(prompt, 0.45, systemPrompt);
   if (!raw) return fallback;
 
   const parsed = extractJson(raw);
@@ -329,12 +332,14 @@ async function main() {
 
     const rewritten = await rewriteArticle(item, i);
 
+    const slug = buildSlug(item, i);
     articles.push({
-      slug: buildSlug(item, i),
+      slug,
       sport: item.sport || "football",
       league: item.league || "mixed",
       source: item.source || "",
       topicTags: item.topicTags || ["الرياضة"],
+      publishedAt: item.publishedAt || new Date().toISOString(),
       title: rewritten.title,
       description: rewritten.description,
       seoTitle: rewritten.seoTitle,
@@ -342,7 +347,8 @@ async function main() {
       content: rewritten.content,
       keywords: rewritten.keywords,
       faq: rewritten.faq || [],
-      image: `/generated/${buildSlug(item, i)}.png`
+      imageUrl: item.imageUrl || null,
+      image: `/generated/${slug}.png`
     });
   }
 

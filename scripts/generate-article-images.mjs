@@ -187,6 +187,19 @@ async function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+async function downloadImage(url, destPath) {
+  const response = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0" },
+    redirect: "follow"
+  });
+  if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("image")) throw new Error(`Not an image: ${contentType}`);
+  const buffer = Buffer.from(await response.arrayBuffer());
+  if (buffer.length < 5000) throw new Error("Image too small, likely a placeholder");
+  fs.writeFileSync(destPath, buffer);
+}
+
 async function main() {
   if (!OPENAI_API_KEY) {
     console.log("OPENAI_API_KEY missing, skipping image generation.");
@@ -225,6 +238,22 @@ async function main() {
       continue;
     }
 
+    // Try RSS image URL first (free, no API cost)
+    const rssImageUrl = article.imageUrl;
+    if (rssImageUrl && !FORCE_REGENERATE) {
+      try {
+        console.log(`Downloading RSS image: ${slug}`);
+        await downloadImage(rssImageUrl, absoluteImagePath);
+        article.image = publicImagePath;
+        changed = true;
+        console.log(`  Downloaded from RSS: ${fileName}`);
+        continue;
+      } catch (dlErr) {
+        console.log(`  RSS image download failed (${dlErr.message.slice(0, 60)}), falling back to AI...`);
+      }
+    }
+
+    // AI generation fallback
     try {
       console.log(`Generating image: ${slug} (sport: ${article.sport || "football"})`);
       const prompt = buildPrompt(article);

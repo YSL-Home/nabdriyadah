@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Template 1 — Dark Pulse</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Cairo',Arial,sans-serif;background:#080c14;color:white;direction:rtl}
+  a{text-decoration:none;color:inherit}
+
+  /* ── HEADER ── */
+  header{background:rgba(8,12,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,179,237,0.15);position:sticky;top:0;z-index:100}
+  .hdr{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:58px;gap:16px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:900;letter-spacing:-0.5px}
+  .logo-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);box-shadow:0 0 10px #3b82f6}
+  nav{display:flex;gap:4px}
+  .pill{padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);transition:all .2s}
+  .pill:hover,.pill.active{background:rgba(59,130,246,0.2);color:#93c5fd;border-color:rgba(59,130,246,0.3)}
+  .live{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#dc2626,#b91c1c);padding:7px 14px;border-radius:999px;font-size:13px;font-weight:800;box-shadow:0 0 16px rgba(220,38,38,0.4)}
+  .dot{width:7px;height:7px;border-radius:50%;background:#fca5a5;animation:blink 1.4s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* ── BREAKING TICKER ── */
+  .ticker{background:linear-gradient(90deg,#dc2626,#b91c1c);padding:8px 0;overflow:hidden;font-size:13px;font-weight:700}
+  .ticker-inner{display:flex;gap:60px;white-space:nowrap;animation:scroll 25s linear infinite}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .ticker-label{background:rgba(0,0,0,0.3);padding:2px 12px;border-radius:999px;margin-left:20px;flex-shrink:0}
+
+  /* ── HERO ── */
+  .hero{max-width:1400px;margin:20px auto;padding:0 20px;display:grid;grid-template-columns:1fr 320px;gap:14px;height:460px}
+  .hero-main{position:relative;border-radius:20px;overflow:hidden;background:#1a1f2e}
+  .hero-main img{width:100%;height:100%;object-fit:cover;opacity:.8}
+  .hero-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.2) 55%,transparent 100%)}
+  .hero-badge{position:absolute;top:18px;right:18px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:700;color:#93c5fd;z-index:1}
+  .hero-content{position:absolute;bottom:0;left:0;right:0;padding:28px;z-index:1}
+  .hero-title{font-size:clamp(18px,2.2vw,28px);font-weight:900;line-height:1.4;margin-bottom:10px}
+  .hero-desc{font-size:14px;color:rgba(255,255,255,.65);line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .hero-date{font-size:12px;color:rgba(255,255,255,.35);margin-top:10px}
+
+  .hero-stack{display:flex;flex-direction:column;gap:14px}
+  .hero-card{position:relative;border-radius:16px;overflow:hidden;flex:1;background:#1a1f2e}
+  .hero-card img{width:100%;height:100%;object-fit:cover;opacity:.75}
+  .hero-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,transparent 60%)}
+  .hero-card .card-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;color:#93c5fd;z-index:1}
+  .hero-card .card-title{position:absolute;bottom:0;left:0;right:0;padding:12px 16px;font-size:14px;font-weight:800;line-height:1.5;z-index:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+  /* ── SECTION ── */
+  .section{max-width:1400px;margin:28px auto;padding:0 20px}
+  .sec-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .sec-title{font-size:19px;font-weight:900;display:flex;align-items:center;gap:10px}
+  .sec-bar{width:4px;height:20px;border-radius:2px;background:linear-gradient(180deg,#3b82f6,#8b5cf6);flex-shrink:0}
+  .sec-link{font-size:13px;color:#60a5fa;font-weight:700}
+
+  /* ── GRID ── */
+  .content-wrap{display:grid;grid-template-columns:1fr 280px;gap:16px;align-items:start}
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .news-card{background:#0f1520;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);transition:transform .25s,border-color .2s}
+  .news-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.3)}
+  .news-card img{width:100%;height:150px;object-fit:cover}
+  .nc-body{padding:13px 14px}
+  .nc-meta{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .nc-badge{padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700}
+  .nc-date{font-size:11px;color:rgba(255,255,255,.3)}
+  .nc-title{font-size:14px;font-weight:800;line-height:1.55;color:rgba(255,255,255,.95);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px}
+  .nc-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+  /* ── SIDEBAR ── */
+  .sidebar{background:#0f1520;border-radius:16px;border:1px solid rgba(255,255,255,.07);overflow:hidden}
+  .sb-head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px;font-weight:800}
+  .sb-item{padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s}
+  .sb-item:hover{background:rgba(255,255,255,.04)}
+  .sb-badge{margin-bottom:4px}
+  .sb-title{font-size:13px;font-weight:700;line-height:1.55;color:rgba(255,255,255,.85);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .sb-date{font-size:11px;color:rgba(255,255,255,.28);margin-top:4px}
+
+  /* ── LABEL ── */
+  .template-label{position:fixed;bottom:20px;left:20px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:white;padding:10px 20px;border-radius:999px;font-size:14px;font-weight:800;box-shadow:0 8px 24px rgba(59,130,246,.4);z-index:999}
+</style>
+</head>
+<body>
+
+<div class="template-label">🎨 Template 1 — Dark Pulse</div>
+
+<!-- Breaking ticker -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-label">🔴 عاجل</span>
+    <span>أرسنال يُعمّق أزمة ليفربول في سباق لقب الدوري الإنجليزي</span>
+    <span>•</span>
+    <span>أوكلاهوما سيتي ثاندر يُفاجئ دنفر نغتس ويتقدم في نصف نهائي NBA</span>
+    <span>•</span>
+    <span>ألكاراز يعود ودمغ على لقبه في رولان غاروس 2026</span>
+    <span>•</span>
+    <span>الأهلي السعودي يفوز بكأس الملك للمرة الثالثة على التوالي</span>
+    <span class="ticker-label">🔴 عاجل</span>
+    <span>أرسنال يُعمّق أزمة ليفربول في سباق لقب الدوري الإنجليزي</span>
+    <span>•</span>
+    <span>أوكلاهوما سيتي ثاندر يُفاجئ دنفر نغتس ويتقدم في نصف نهائي NBA</span>
+    <span>•</span>
+    <span>ألكاراز يعود ودمغ على لقبه في رولان غاروس 2026</span>
+    <span>•</span>
+    <span>الأهلي السعودي يفوز بكأس الملك للمرة الثالثة على التوالي</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="hdr">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      نبض الرياضة
+    </div>
+    <nav>
+      <a href="#" class="pill active">⚽ كرة القدم</a>
+      <a href="#" class="pill">🏀 كرة السلة</a>
+      <a href="#" class="pill">🎾 التنس</a>
+      <a href="#" class="pill">🏸 البادل</a>
+      <a href="#" class="pill">🥅 الصالات</a>
+    </nav>
+    <div class="live"><div class="dot"></div> مباشر</div>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-main">
+    <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=900&q=80" alt="">
+    <div class="hero-badge">🏴󠁧󠁢󠁥󠁮󠁧󠁿 الإنجليزي</div>
+    <div class="hero-content">
+      <div class="hero-title">أرسنال يُعمّق أزمة ليفربول في سباق لقب الدوري الإنجليزي الممتاز</div>
+      <p class="hero-desc">أرسنال يفوز على ليفربول في قمة مثيرة ويُعيد رسم خريطة الصراع على لقب الدوري الإنجليزي الممتاز قبل ثلاث جولات من النهاية</p>
+      <div class="hero-date">26 أبريل 2026</div>
+    </div>
+  </div>
+  <div class="hero-stack">
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80" alt="">
+      <div class="card-badge">🏀 كرة السلة</div>
+      <div class="card-title">أوكلاهوما سيتي ثاندر يُفاجئ دنفر نغتس ويتقدم في نصف نهائي NBA</div>
+    </div>
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80" alt="">
+      <div class="card-badge">🇪🇸 الإسباني</div>
+      <div class="card-title">أتلتيكو مدريد يتعثّر أمام فياريال ويُبعد نفسه عن منافسة اللقب</div>
+    </div>
+  </div>
+</div>
+
+<!-- News section -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-title"><div class="sec-bar"></div> أحدث الأخبار</div>
+    <a href="#" class="sec-link">عرض الكل ←</a>
+  </div>
+  <div class="content-wrap">
+    <div class="news-grid">
+      <!-- Card 1 -->
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1552318965-6e6be7484ada?w=600&q=80" alt="">
+        <div class="nc-body">
+          <div class="nc-meta"><span class="nc-badge" style="color:#7c3aed;background:#7c3aed22;border:1px solid #7c3aed44">الإنجليزي</span><span class="nc-date">25 أبريل</span></div>
+          <div class="nc-title">مانشستر سيتي يتعثّر مجدداً وأزمة الموسم تتعمّق في ظل غياب هالاند</div>
+          <div class="nc-desc">لا تزال أزمة مانشستر سيتي تتعمّق، وقد جاء التعادل المُحبط أمام إيفرتون بهدف لكل فريق ليكون أحدث فصول موسم صعب</div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&q=80" alt="">
+        <div class="nc-body">
+          <div class="nc-meta"><span class="nc-badge" style="color:#15803d;background:#15803d22;border:1px solid #15803d44">التنس</span><span class="nc-date">24 أبريل</span></div>
+          <div class="nc-title">رولان غاروس 2026 — ألكاراز يعود ودمغ على لقبه في البطولة التراثية</div>
+          <div class="nc-desc">كارلوس ألكاراز يؤكد حضوره في رولان غاروس 2026 متحدياً الإصابة التي أقصته من الدوري الفرنسي</div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1620472478041-3c7984cc3ef4?w=600&q=80" alt="">
+        <div class="nc-body">
+          <div class="nc-meta"><span class="nc-badge" style="color:#15803d;background:#15803d22;border:1px solid #15803d44">السعودي</span><span class="nc-date">24 أبريل</span></div>
+          <div class="nc-title">الاتحاد الأول في الضغط العالي ويحسم مهمة ببراعة تكتيكية نادرة</div>
+          <div class="nc-desc">الاتحاد السعودي يواصل زحفه نحو اللقب بفوز استراتيجي يُكرّس هيمنته في الدوري السعودي للمحترفين</div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1608831540955-35094d48694a?w=600&q=80" alt="">
+        <div class="nc-body">
+          <div class="nc-meta"><span class="nc-badge" style="color:#d97706;background:#d9770622;border:1px solid #d9770644">أبطال أوروبا</span><span class="nc-date">23 أبريل</span></div>
+          <div class="nc-title">ريال مدريد يُؤجّل التتويج ونصف النهائي يستعر في مباراة الإعادة</div>
+          <div class="nc-desc">ريال مدريد يُبقي على آماله في بلوغ النهائي بتعادل يُبقي الكفتين متوازنتين قبل مباراة الإعادة</div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=600&q=80" alt="">
+        <div class="nc-body">
+          <div class="nc-meta"><span class="nc-badge" style="color:#dc2626;background:#dc262622;border:1px solid #dc262644">البوندسليغا</span><span class="nc-date">22 أبريل</span></div>
+          <div class="nc-title">باير ليفركوزن يقترب بلقب البوندسليغا للموسم الثاني على التوالي</div>
+          <div class="nc-desc">باير ليفركوزن يُحكم قبضته على صدارة البوندسليغا مع اقتراب نهاية الموسم</div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1529926706528-db9e5010cd8e?w=600&q=80" alt="">
+        <div class="nc-body">
+          <div class="nc-meta"><span class="nc-badge" style="color:#7c3aed;background:#7c3aed22;border:1px solid #7c3aed44">البادل</span><span class="nc-date">21 أبريل</span></div>
+          <div class="nc-title">البادل العالمي — قطر تحتضن أول بطولة APT كبرى على أرضها</div>
+          <div class="nc-desc">الدوحة تُطلق صافرة انطلاق أول بطولة APT Padel Tour كبرى في المنطقة العربية</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sb-head">📋 آخر المقالات</div>
+      <div class="sb-item">
+        <div class="sb-badge"><span style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;color:#c2410c;background:#c2410c22">كرة السلة</span></div>
+        <div class="sb-title">بوستن سيلتيكس يُعادل نتيجة السلسلة ضد إنديانا بيسرز في الدوري الأمريكي</div>
+        <div class="sb-date">20 أبريل</div>
+      </div>
+      <div class="sb-item">
+        <div class="sb-badge"><span style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;color:#ea580c;background:#ea580c22">الإسباني</span></div>
+        <div class="sb-title">برشلونة يتراجع عن صفقة الانتقال الكبرى ويُعلن موقفه النهائي</div>
+        <div class="sb-date">19 أبريل</div>
+      </div>
+      <div class="sb-item">
+        <div class="sb-badge"><span style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;color:#15803d;background:#15803d22">التنس</span></div>
+        <div class="sb-title">إيغا شفيونتك تُسيطر على بطولة مدريد المفتوحة وتُعزز صدارتها العالمية</div>
+        <div class="sb-date">18 أبريل</div>
+      </div>
+      <div class="sb-item">
+        <div class="sb-badge"><span style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;color:#0f766e;background:#0f766e22">الصالات</span></div>
+        <div class="sb-title">صنعاء يتألق بقيادة مدرب مجنّد لبلوغ نهائي بطولة العرب لكرة الصالات</div>
+        <div class="sb-date">17 أبريل</div>
+      </div>
+      <div class="sb-item">
+        <div class="sb-badge"><span style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;color:#7c3aed;background:#7c3aed22">الإنجليزي</span></div>
+        <div class="sb-title">مدير الملعب: أنكارا قاطعوا آرشة وينتزع اللقب من بين يدي ليفربول شهر</div>
+        <div class="sb-date">16 أبريل</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

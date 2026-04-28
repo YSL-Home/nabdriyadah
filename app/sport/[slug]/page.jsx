@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
+import ArticleImage from "../../components/ArticleImage";
 
 // Logos fiables depuis le CDN API-Football (même source que la page live)
 const CDN = "https://media.api-sports.io/football/leagues";
@@ -200,7 +201,7 @@ export default function SportPage({ params }) {
                 {sportArticles.map((a) => (
                   <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                     <article style={{ background: "white", borderRadius: "22px", overflow: "hidden", border: "1px solid #e5e7eb", height: "100%" }}>
-                      <img src={a.image} alt={a.title} style={{ width: "100%", height: "190px", objectFit: "cover", display: "block" }} />
+                      <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "190px", display: "block" }} />
                       <div style={{ padding: "18px" }}>
                         <h3 style={{ margin: "0 0 8px 0", fontSize: "18px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{a.title}</h3>
                         <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.8 }}>{a.description}</p>
@@ -277,7 +278,7 @@ export default function SportPage({ params }) {
               <section className="gfeat" style={{ marginBottom: "28px" }}>
                 <Link href={`/articles/${featuredArticle.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <article style={{ background: "white", borderRadius: "28px", overflow: "hidden", border: `1px solid ${sport.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", height: "100%" }}>
-                    <img src={featuredArticle.image} alt={featuredArticle.title} style={{ width: "100%", height: "360px", objectFit: "cover", display: "block" }} />
+                    <ArticleImage src={featuredArticle.image} imageUrl={featuredArticle.imageUrl} alt={featuredArticle.title} sport={featuredArticle.sport} league={featuredArticle.league} slug={featuredArticle.slug} style={{ width: "100%", height: "360px", display: "block" }} />
                     <div style={{ padding: "28px" }}>
                       <div style={{ display: "inline-block", marginBottom: "12px", padding: "8px 14px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "13px", fontWeight: 700 }}>
                         الخبر الأبرز
@@ -296,7 +297,7 @@ export default function SportPage({ params }) {
                   {restArticles.slice(0, 3).map((a) => (
                     <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                       <div style={{ background: "white", borderRadius: "22px", padding: "18px", border: `1px solid ${sport.border}`, display: "flex", gap: "14px", alignItems: "flex-start" }}>
-                        <img src={a.image} alt={a.title} style={{ width: "80px", height: "80px", objectFit: "cover", borderRadius: "14px", flexShrink: 0 }} />
+                        <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "80px", height: "80px", borderRadius: "14px", flexShrink: 0 }} />
                         <div>
                           <div style={{ fontSize: "16px", fontWeight: 800, lineHeight: 1.55, color: "#111827", marginBottom: "6px" }}>{a.title}</div>
                           <div style={{ color: "#6b7280", fontSize: "14px", lineHeight: 1.7 }}>{a.description?.slice(0, 80)}...</div>
@@ -320,7 +321,7 @@ export default function SportPage({ params }) {
                   {restArticles.slice(3).map((a) => (
                     <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                       <article style={{ background: "white", borderRadius: "24px", overflow: "hidden", border: `1px solid ${sport.border}`, height: "100%" }}>
-                        <img src={a.image} alt={a.title} style={{ width: "100%", height: "200px", objectFit: "cover", display: "block" }} />
+                        <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "200px", display: "block" }} />
                         <div style={{ padding: "20px" }}>
                           <div style={{ display: "inline-block", marginBottom: "10px", padding: "6px 12px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "12px", fontWeight: 700 }}>
                             {sport.title}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
+import ArticleImage from "../../components/ArticleImage";
 
 const leagueBranding = {
   "premier-league": {
@@ -112,6 +113,17 @@ export function generateMetadata({ params }) {
   };
 }
 
+function formatDate(iso) {
+  if (!iso) return "";
+  try {
+    return new Date(iso).toLocaleDateString("ar-SA-u-nu-latn", {
+      day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"
+    });
+  } catch {
+    return "";
+  }
+}
+
 function leagueLabel(league, sport) {
   if (league === "premier-league") return "الدوري الإنجليزي الممتاز";
   if (league === "la-liga") return "الدوري الإسباني";
@@ -181,15 +193,8 @@ export default function ArticlePage({ params }) {
       }}
     >
       <div style={{ maxWidth: "1320px", margin: "0 auto" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "330px minmax(0, 1fr)",
-            gap: "28px",
-            alignItems: "start"
-          }}
-        >
-          <aside style={{ display: "grid", gap: "22px" }}>
+        <div className="article-layout">
+          <aside className="article-sidebar" style={{ display: "grid", gap: "22px" }}>
             <section
               style={{
                 background: theme.surface,
@@ -374,6 +379,7 @@ export default function ArticlePage({ params }) {
           </aside>
 
           <article
+            className="article-main"
             style={{
               background: theme.surface,
               borderRadius: "28px",
@@ -382,18 +388,17 @@ export default function ArticlePage({ params }) {
               boxShadow: "0 14px 34px rgba(0,0,0,0.05)"
             }}
           >
-            <img
+            <ArticleImage
               src={article.image}
+              imageUrl={article.imageUrl}
               alt={article.title}
-              style={{
-                width: "100%",
-                height: "430px",
-                objectFit: "cover",
-                display: "block"
-              }}
+              sport={article.sport}
+              league={article.league}
+              slug={article.slug}
+              style={{ width: "100%", height: "430px", display: "block" }}
             />
 
-            <div style={{ padding: "34px" }}>
+            <div className="article-pad">
               <div
                 style={{
                   display: "flex",
@@ -423,6 +428,13 @@ export default function ArticlePage({ params }) {
                 >
                   {leagueLabel(article.league, article.sport)}
                 </Link>
+
+                {article.publishedAt && (
+                  <>
+                    <span style={{ color: "#9ca3af" }}>•</span>
+                    <span style={{ color: "#9ca3af", fontSize: "13px" }}>{formatDate(article.publishedAt)}</span>
+                  </>
+                )}
               </div>
 
               <div
@@ -459,11 +471,9 @@ export default function ArticlePage({ params }) {
               </div>
 
               <h1
+                className="article-h1"
                 style={{
                   margin: "0 0 16px 0",
-                  fontSize: "48px",
-                  lineHeight: 1.45,
-                  fontWeight: 800,
                   color: theme.text
                 }}
               >

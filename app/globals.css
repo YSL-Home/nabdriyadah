@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source "../components/**/*.{tsx,ts,jsx,js}";
+@source "../app/**/*.{tsx,ts,jsx,js}";
 
 @layer base {
   :root {
@@ -28,7 +29,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #f3f4f6;
   color: #111827;
   font-family: Arial, sans-serif;
 }
@@ -69,6 +69,21 @@ img { max-width: 100%; }
   section[style*="borderRadius: \"34px\""] { padding: 24px 16px !important; }
 }
 
+/* ─── League hero grid ──────────────────────────── */
+.league-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .league-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
 /* ─── Fluid typography ──────────────────────────── */
 .th  { font-size: clamp(32px, 6vw, 64px); line-height: 1.1; font-weight: 800; }
 .th1 { font-size: clamp(26px, 4.5vw, 56px); line-height: 1.15; font-weight: 800; }
@@ -82,61 +97,93 @@ img { max-width: 100%; }
 }
 
 /* ─── Header ────────────────────────────────────── */
-.hdr-inner {
-  max-width: 1450px;
-  margin: 0 auto;
-  padding: 0 16px;
+
+/* Desktop nav pills */
+.hdr-nav-desktop {
   display: flex;
+  gap: 6px;
   align-items: center;
-  justify-content: space-between;
-  min-height: 64px;
-  gap: 12px;
-  flex-wrap: wrap;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
-/* Navigation sports — scroll horizontal (mobile-first) */
-.sports-nav {
-  display: flex;
-  overflow-x: auto;
-  gap: 8px;
-  padding: 8px 16px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+.hdr-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-weight: 700;
+  text-decoration: none;
+  color: rgba(255,255,255,0.88);
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.13);
   white-space: nowrap;
-  flex-shrink: 1;
-  min-width: 0;
-  align-items: center;
+  transition: background 0.15s, color 0.15s;
 }
-.sports-nav::-webkit-scrollbar { display: none; }
+.hdr-pill:hover { background: rgba(255,255,255,0.2); color: white; }
 
-.sports-nav-item {
+.live-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  border-radius: 20px;
+  background: #dc2626;
+  color: white;
+  font-weight: 800;
+  font-size: clamp(11px, 1.5vw, 13px);
+  padding: 6px 12px;
+  border-radius: 999px;
   white-space: nowrap;
-  flex-shrink: 0;
-  font-size: clamp(12px, 3.5vw, 14px);
+  box-shadow: 0 0 12px rgba(220,38,38,0.5);
+}
+
+/* Mobile nav row — hidden on desktop */
+.hdr-nav-mobile {
+  display: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  gap: 6px;
+  padding: 6px 12px 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.hdr-nav-mobile::-webkit-scrollbar { display: none; }
+
+.hdr-pill-mobile {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 12px;
   font-weight: 700;
   text-decoration: none;
-  color: rgba(255,255,255,0.9);
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.sports-nav-item:hover,
-.sports-nav-item:active {
-  background: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* Alias pour compatibilité ancienne classe */
+/* Breakpoints */
+@media (max-width: 768px) {
+  .hdr-nav-desktop { display: none; }
+  .hdr-nav-mobile  { display: flex; }
+  .live-badge { font-size: 11px; padding: 5px 10px; }
+}
+
+/* Legacy aliases */
+.hdr-inner { display: contents; }
+.sports-nav { display: flex; overflow-x: auto; gap: 8px; padding: 8px 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; white-space: nowrap; flex-shrink: 1; min-width: 0; align-items: center; }
+.sports-nav::-webkit-scrollbar { display: none; }
+.sports-nav-item { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; font-size: 13px; font-weight: 700; text-decoration: none; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); cursor: pointer; transition: background 0.15s; }
 .hdr-nav { display: contents; }
 
-@media (max-width: 768px) {
-  .hdr-inner { padding: 8px 16px; }
-  .sports-nav { order: 3; width: 100%; padding: 4px 0 8px; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 /* ─── Hero padding ──────────────────────────────── */
@@ -175,3 +222,114 @@ img { max-width: 100%; }
 
 /* ─── Viewport fix ───────────────────────────────── */
 html { overflow-x: hidden; }
+
+/* ─── Homepage dark redesign ─────────────────────── */
+
+/* Hero layout */
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 14px;
+  height: 440px;
+}
+.hero-featured { height: 100%; }
+.hero-secondary { display: flex; flex-direction: column; gap: 14px; height: 100%; }
+.hero-card-inner  { min-height: 440px; }
+.hero-sec-inner   { min-height: 200px; }
+
+/* Content layout (grid + sidebar) */
+.content-layout {
+  display: grid;
+  grid-template-columns: 1fr 268px;
+  gap: 16px;
+  align-items: start;
+}
+
+/* News grid */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Sport row */
+.sport-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Hover effects */
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+/* Sidebar row hover */
+.sidebar-row {
+  transition: background 0.15s;
+}
+.sidebar-row:hover { background: rgba(255,255,255,0.04); }
+
+/* News card inner hover */
+.news-card-inner {
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), border-color 0.2s;
+}
+.news-card-inner:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.14) !important;
+}
+
+/* ─── Responsive dark design ─────────────────────── */
+@media (max-width: 1100px) {
+  .hero-layout      { grid-template-columns: 1fr; height: auto; gap: 10px; }
+  .hero-card-inner  { height: 300px !important; min-height: unset !important; }
+  .hero-sec-inner   { height: 150px !important; min-height: unset !important; }
+  .hero-secondary   { flex-direction: row; gap: 10px; }
+  .content-layout   { grid-template-columns: 1fr; }
+  .news-grid        { grid-template-columns: repeat(2, 1fr); }
+  .sport-row        { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .hero-layout      { gap: 8px; }
+  .hero-card-inner  { height: 220px !important; }
+  .hero-sec-inner   { height: 120px !important; }
+  .hero-secondary   { flex-direction: column; }
+  .news-grid        { grid-template-columns: 1fr; }
+  .sport-row        { grid-template-columns: repeat(2, 1fr); }
+  .content-layout   { gap: 10px; }
+}
+
+@media (max-width: 400px) {
+  .hero-card-inner  { height: 180px !important; }
+  .hero-sec-inner   { height: 100px !important; }
+  .sport-row        { grid-template-columns: 1fr; }
+}
+
+/* ─── Article layout (sidebar + main) ───────────── */
+.article-layout {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.article-h1 { font-size: 48px; line-height: 1.45; font-weight: 800; }
+.article-img { width: 100%; height: 430px; object-fit: cover; display: block; }
+.article-pad { padding: 34px; }
+
+@media (max-width: 900px) {
+  .article-layout { grid-template-columns: 1fr; }
+  .article-sidebar { order: 2; }
+  .article-main    { order: 1; }
+}
+@media (max-width: 640px) {
+  .article-h1 { font-size: 26px !important; }
+  .article-img { height: 220px !important; }
+  /* ArticleImage wrapper dans la page article */
+  .article-main > div[style*="height: 430px"] { height: 220px !important; }
+  .article-pad { padding: 18px !important; }
+}

@@ -2,7 +2,15 @@ import fs from "fs";
 import path from "path";
 import Parser from "rss-parser";
 
-const parser = new Parser();
+const parser = new Parser({
+  customFields: {
+    item: [
+      ["media:thumbnail", "mediaThumbnail"],
+      ["media:content", "mediaContent"],
+      ["enclosure", "enclosure"]
+    ]
+  }
+});
 const OUTPUT_PATH = path.join(process.cwd(), "content/raw-news.json");
 
 const SOURCES = [
@@ -215,6 +223,16 @@ async function fetchRss(source) {
       const combined = `${title} ${description}`;
       const sport = detectSport(combined, source.sport);
 
+      // Extract image URL from RSS enclosure or media fields
+      let imageUrl = null;
+      if (item.enclosure?.url && /\.(jpg|jpeg|png|webp)/i.test(item.enclosure.url)) {
+        imageUrl = item.enclosure.url;
+      } else if (item.mediaThumbnail?.["$"]?.url) {
+        imageUrl = item.mediaThumbnail["$"].url;
+      } else if (item.mediaContent?.["$"]?.url && /\.(jpg|jpeg|png|webp)/i.test(item.mediaContent["$"].url)) {
+        imageUrl = item.mediaContent["$"].url;
+      }
+
       return {
         originalTitle: title,
         originalDescription: description,
@@ -225,7 +243,8 @@ async function fetchRss(source) {
         league: sport === "football" ? detectLeague(combined) : sport,
         topicTags: detectTopicTags(combined, sport),
         publishedAt: item.pubDate || new Date().toISOString(),
-        slug: slugFromTitle(title, index)
+        slug: slugFromTitle(title, index),
+        ...(imageUrl ? { imageUrl } : {})
       };
     });
   } catch (error) {

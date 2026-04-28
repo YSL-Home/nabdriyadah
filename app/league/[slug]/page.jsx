@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
+import ArticleImage from "../../components/ArticleImage";
 
 const leagueMap = {
   "premier-league": {
@@ -351,15 +352,7 @@ export default function LeaguePage({ params }) {
             }}
           />
 
-          <div
-            style={{
-              position: "relative",
-              display: "grid",
-              gridTemplateColumns: "220px minmax(0, 1fr)",
-              gap: "30px",
-              alignItems: "center"
-            }}
-          >
+          <div className="league-hero-grid">
             <div
               style={{
                 background: "rgba(255,255,255,0.10)",
@@ -368,22 +361,23 @@ export default function LeaguePage({ params }) {
                 padding: "22px",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                width: "fit-content"
               }}
             >
               <img
                 src={league.leagueLogo}
                 alt={league.title}
                 style={{
-                  width: "140px",
-                  height: "140px",
+                  width: "100px",
+                  height: "100px",
                   objectFit: "contain",
                   display: "block"
                 }}
               />
             </div>
 
-            <div>
+            <div style={{ minWidth: 0 }}>
               <Link
                 href="/"
                 style={{
@@ -396,7 +390,7 @@ export default function LeaguePage({ params }) {
                   marginBottom: "14px"
                 }}
               >
-                العودة إلى الرئيسية
+                ← العودة إلى الرئيسية
               </Link>
 
               <div
@@ -404,11 +398,12 @@ export default function LeaguePage({ params }) {
                   display: "inline-block",
                   background: theme.badgeBg,
                   color: theme.badgeText,
-                  padding: "10px 16px",
+                  padding: "8px 14px",
                   borderRadius: "999px",
-                  fontSize: "13px",
+                  fontSize: "12px",
                   fontWeight: 700,
-                  marginBottom: "16px",
+                  marginBottom: "14px",
+                  marginRight: "10px",
                   border: "1px solid rgba(255,255,255,0.15)"
                 }}
               >
@@ -417,9 +412,9 @@ export default function LeaguePage({ params }) {
 
               <h1
                 style={{
-                  margin: "0 0 14px 0",
-                  fontSize: "58px",
-                  lineHeight: 1.18,
+                  margin: "0 0 12px 0",
+                  fontSize: "clamp(26px, 5vw, 52px)",
+                  lineHeight: 1.2,
                   fontWeight: 800
                 }}
               >
@@ -429,8 +424,8 @@ export default function LeaguePage({ params }) {
               <p
                 style={{
                   margin: 0,
-                  fontSize: "21px",
-                  lineHeight: 2,
+                  fontSize: "clamp(15px, 2.5vw, 20px)",
+                  lineHeight: 1.9,
                   maxWidth: "900px",
                   opacity: 0.96
                 }}
@@ -441,9 +436,9 @@ export default function LeaguePage({ params }) {
               <div
                 style={{
                   display: "flex",
-                  gap: "12px",
+                  gap: "10px",
                   flexWrap: "wrap",
-                  marginTop: "20px"
+                  marginTop: "16px"
                 }}
               >
                 {league.highlights.map((item, index) => (
@@ -452,9 +447,9 @@ export default function LeaguePage({ params }) {
                     style={{
                       background: "rgba(255,255,255,0.14)",
                       border: "1px solid rgba(255,255,255,0.16)",
-                      padding: "9px 14px",
+                      padding: "7px 12px",
                       borderRadius: "999px",
-                      fontSize: "14px",
+                      fontSize: "13px",
                       fontWeight: 700
                     }}
                   >
@@ -566,15 +561,14 @@ export default function LeaguePage({ params }) {
                   height: "100%"
                 }}
               >
-                <img
+                <ArticleImage
                   src={featuredArticle.image}
+                  imageUrl={featuredArticle.imageUrl}
                   alt={featuredArticle.title}
-                  style={{
-                    width: "100%",
-                    height: "360px",
-                    objectFit: "cover",
-                    display: "block"
-                  }}
+                  sport={featuredArticle.sport}
+                  league={featuredArticle.league}
+                  slug={featuredArticle.slug}
+                  style={{ width: "100%", height: "360px", display: "block" }}
                 />
 
                 <div style={{ padding: "28px" }}>
@@ -765,15 +759,14 @@ export default function LeaguePage({ params }) {
                     }}
                   >
                     <div style={{ position: "relative" }}>
-                      <img
+                      <ArticleImage
                         src={article.image}
+                        imageUrl={article.imageUrl}
                         alt={article.title}
-                        style={{
-                          width: "100%",
-                          height: "220px",
-                          objectFit: "cover",
-                          display: "block"
-                        }}
+                        sport={article.sport}
+                        league={article.league}
+                        slug={article.slug}
+                        style={{ width: "100%", height: "220px", display: "block" }}
                       />
 
                       <div

@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import articles from "../../../content/articles/seo-articles.json";
 import playerPhotos from "../../../content/player-photos.json";
+import ArticleImage from "../../components/ArticleImage";
 import AdSlot from "../../components/AdSlot";
 import PlayerAvatar from "../../components/PlayerAvatar";
 
@@ -1608,7 +1609,7 @@ export default function TeamPage({ params }) {
               {teamArticles.map((item) => (
                 <Link key={item.slug} href={`/articles/${item.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                   <article style={{ background: accentSoft, borderRadius: "20px", overflow: "hidden", border: `1px solid ${accentMid}`, height: "100%" }}>
-                    <img src={item.image} alt={item.title} style={{ width: "100%", height: "170px", objectFit: "cover", display: "block" }} />
+                    <ArticleImage src={item.image} imageUrl={item.imageUrl} alt={item.title} sport={item.sport} league={item.league} slug={item.slug} style={{ width: "100%", height: "170px", display: "block" }} />
                     <div style={{ padding: "16px" }}>
                       <h3 style={{ margin: "0 0 8px 0", fontSize: "17px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{item.title}</h3>
                       <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.75 }}>{item.description}</p>

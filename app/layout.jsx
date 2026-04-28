@@ -54,7 +54,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <body
         style={{
           margin: 0,
-          background: "#f3f4f6",
           color: "#111827",
           fontFamily: "Arial, sans-serif"
         }}
