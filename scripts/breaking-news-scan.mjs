@@ -89,7 +89,22 @@ async function main() {
     }
   }
 
+  // Vérifie si des sports sont absents du site → déclenche un rebuild complet
   if (newItems.length === 0) {
+    try {
+      const published = JSON.parse(fs.readFileSync(ARTICLES_PATH, "utf-8"));
+      const sports = new Set(published.map(a => a.sport));
+      const required = ["basketball", "tennis", "padel", "futsal"];
+      const missing = required.filter(s => !sports.has(s));
+      if (missing.length > 0) {
+        console.log(`Sports manquants dans les articles publiés: ${missing.join(", ")} — lancement fetch + rebuild...`);
+        try {
+          execFileSync("node", [path.join(process.cwd(), "scripts/fetch-news.mjs")], { stdio: "inherit" });
+        } catch (e) { console.log("fetch-news failed:", e.message?.slice(0, 100)); }
+        fs.writeFileSync(FLAG_FILE, "true");
+        process.exit(0);
+      }
+    } catch {}
     console.log("Aucun nouveau titre breaking détecté.");
     fs.writeFileSync(FLAG_FILE, "false");
     process.exit(0);
