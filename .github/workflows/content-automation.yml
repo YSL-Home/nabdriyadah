@@ -1,8 +1,8 @@
-name: 🚀 Content Automation
+name: 🚨 Breaking News Scanner
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "*/15 * * * *"   # toutes les 15 minutes
   workflow_dispatch:
 
 permissions:
@@ -12,11 +12,11 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
-  automate:
+  scan:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
+      - name: 📥 Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -29,39 +29,32 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: 📰 Fetch news
-        run: node scripts/fetch-news.mjs
+      - name: 🔍 Scan RSS pour nouveaux titres
+        id: scan
+        run: |
+          node scripts/breaking-news-scan.mjs
+          echo "changed=$(cat /tmp/breaking_changed 2>/dev/null || echo false)" >> $GITHUB_OUTPUT
 
-      - name: ✍️ Rewrite articles
+      - name: ✍️ Réécriture breaking (si nouveau)
+        if: steps.scan.outputs.changed == 'true'
         run: node scripts/rewrite-article.mjs
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BREAKING_ONLY: "true"
 
-      - name: 🖼️ Generate article visuals
-        run: node scripts/generate-article-images.mjs
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-      - name: 🧹 Clean git cache
-        run: |
-          rm -rf node_modules .next out
-          git rm -r --cached --ignore-unmatch node_modules .next out
-
-      - name: 💾 Commit and push if changed
+      - name: 💾 Commit si changement
+        if: steps.scan.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions@github.com"
 
-          git add content/articles/seo-articles.json
-          git add content/raw-news.json
-          git add public/generated
+          git add content/articles/seo-articles.json content/raw-news.json
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "Rien à committer."
             exit 0
           fi
 
-          git commit -m "auto: update articles and visuals"
-
+          git commit -m "breaking: mise à jour urgente — $(date '+%H:%M')"
           git pull --rebase origin main
           git push origin main
