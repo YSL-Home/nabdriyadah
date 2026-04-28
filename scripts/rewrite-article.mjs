@@ -131,14 +131,23 @@ function buildSlug(item, index) {
   return `football-${index + 1}`;
 }
 
+function isArabic(text = "") {
+  const latin = (text.match(/[A-Za-z]/g) || []).length;
+  const arabic = (text.match(/[؀-ۿ]/g) || []).length;
+  return arabic > 0 && arabic >= latin;
+}
+
 function fallbackArticle(item, index) {
   const sport = item.sport || "football";
   const label = leagueLabel(item.league || sport);
-  const originalTitle = normalizeText(item.originalTitle || `خبر رياضي ${index + 1}`);
+  // Si le titre original est en anglais, on génère un titre arabe générique
+  const rawTitle = normalizeText(item.originalTitle || "");
+  const arabicGeneric = `أبرز أحداث ${label} — الجولة ${index + 1}`;
+  const originalTitle = (rawTitle && isArabic(rawTitle)) ? rawTitle : arabicGeneric;
   const title = originalTitle.length > 90 ? originalTitle.slice(0, 90) : originalTitle;
   const description = `تفاصيل وتحليل حول: ${title} — متابعة من نبض الرياضة.`;
   const content = [
-    `تواصل ${label} تقديم أحداث مثيرة، وكان أبرزها في هذه الجولة: ${title}.`,
+    `تواصل ${label} تقديم أحداث مثيرة يترقبها الجمهور الرياضي العربي بشغف كبير.`,
     `وتشير المعطيات المتوفرة إلى أن هذا الحدث يمثل محطة مهمة في مسار الموسم الرياضي الحالي، ويستقطب اهتمام واسع من المتابعين العرب.`,
     `يأتي هذا الخبر في سياق منافسة حامية الوطيس تشهدها ${label}، حيث يترقب الجمهور نتائج مفاجئة وأداء لافتاً من الأندية والأفراد.`,
     `وقد أثارت هذه المستجدات موجة من التحليلات والتعليقات على منصات التواصل الاجتماعي بين مختلف شرائح الجمهور الرياضي.`,
