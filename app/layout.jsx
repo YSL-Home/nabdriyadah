@@ -1,5 +1,6 @@
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
+import ThemeController from "./components/ThemeController";
 
 export const metadata = {
   metadataBase: new URL("https://nabdriyadah.com"),
@@ -40,6 +41,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
       <head>
+        {/* Anti-flash: applique le thème AVANT le premier rendu */}
+        <script dangerouslySetInnerHTML={{ __html:
+          `(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-theme',h>=6&&h<20?'light':'dark');})();`
+        }} />
+        {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,22 +57,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
 
-      <body
-        style={{
-          margin: 0,
-          color: "#111827",
-          fontFamily: "Arial, sans-serif"
-        }}
-      >
+      <body style={{ margin: 0, fontFamily: "Arial, sans-serif" }}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-MHCF745N"
-            height="0"
-            width="0"
+            height="0" width="0"
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
 
+        {/* Contrôleur de thème jour/nuit — client uniquement */}
+        <ThemeController />
         <SiteHeader />
         {children}
       </body>

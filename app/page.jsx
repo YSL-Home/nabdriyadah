@@ -33,7 +33,7 @@ export default function HomePage() {
   const padel      = sorted.filter((a) => a.sport === "padel").slice(0, 4);
 
   return (
-    <div style={{ background: "#0d1117", minHeight: "100vh", direction: "rtl" }}>
+    <div style={{ background: "var(--bg-page)", minHeight: "100vh", direction: "rtl" }}>
 
       {/* Breaking ticker */}
       {breaking.length > 0 && <BreakingTicker items={breaking} />}

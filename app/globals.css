@@ -3,34 +3,86 @@
 @source "../components/**/*.{tsx,ts,jsx,js}";
 @source "../app/**/*.{tsx,ts,jsx,js}";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-  }
+/* ══════════════════════════════════════════════════════
+   THÈME NUIT — Dark Glassmorphism (20h → 6h)
+   Défaut sur serveur (SSR) pour éviter le flash
+   ══════════════════════════════════════════════════════ */
+html {
+  /* Page */
+  --bg-page:        #080c14;
+  --bg-card:        #0f172a;
+  --bg-card-hover:  #131d33;
+  --bg-soft:        rgba(255,255,255,0.04);
+  --bg-glass:       rgba(15,23,42,0.85);
+
+  /* Texte */
+  --text-1:         #f1f5f9;
+  --text-2:         #94a3b8;
+  --text-3:         rgba(255,255,255,0.32);
+
+  /* Bordures & ombres */
+  --border:         rgba(255,255,255,0.08);
+  --border-hover:   rgba(255,255,255,0.16);
+  --shadow:         0 4px 24px rgba(0,0,0,0.55);
+  --shadow-hover:   0 16px 40px rgba(0,0,0,0.7);
+
+  /* Accent (bleu nuit) */
+  --accent:         #3b82f6;
+  --accent-soft:    rgba(59,130,246,0.15);
+  --section-bar:    #3b82f6;
+  --section-link:   #3b82f6;
+
+  /* Sidebar */
+  --sidebar-row-hover: rgba(255,255,255,0.04);
+
+  /* News card */
+  --news-card-border: rgba(255,255,255,0.07);
+  --news-card-border-hover: rgba(255,255,255,0.14);
+}
+
+/* ══════════════════════════════════════════════════════
+   THÈME JOUR — Light ESPN / Goal.com  (6h → 20h)
+   ══════════════════════════════════════════════════════ */
+html[data-theme="light"] {
+  /* Page */
+  --bg-page:        #f0f2f5;
+  --bg-card:        #ffffff;
+  --bg-card-hover:  #f9fafb;
+  --bg-soft:        #f3f4f6;
+  --bg-glass:       rgba(255,255,255,0.95);
+
+  /* Texte */
+  --text-1:         #111827;
+  --text-2:         #4b5563;
+  --text-3:         #9ca3af;
+
+  /* Bordures & ombres */
+  --border:         #e5e7eb;
+  --border-hover:   #d1d5db;
+  --shadow:         0 2px 12px rgba(0,0,0,0.07);
+  --shadow-hover:   0 8px 28px rgba(0,0,0,0.13);
+
+  /* Accent (bleu ESPN) */
+  --accent:         #2563eb;
+  --accent-soft:    #eff6ff;
+  --section-bar:    #2563eb;
+  --section-link:   #2563eb;
+
+  /* Sidebar */
+  --sidebar-row-hover: #f9fafb;
+
+  /* News card */
+  --news-card-border: #e5e7eb;
+  --news-card-border-hover: #d1d5db;
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  color: #111827;
+  background: var(--bg-page);
+  color: var(--text-1);
   font-family: Arial, sans-serif;
+  transition: background 0.4s ease, color 0.3s ease;
 }
 
 * { box-sizing: border-box; }
@@ -265,14 +317,14 @@ html { overflow-x: hidden; }
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  box-shadow: var(--shadow-hover);
 }
 
 /* Sidebar row hover */
 .sidebar-row {
   transition: background 0.15s;
 }
-.sidebar-row:hover { background: rgba(255,255,255,0.04); }
+.sidebar-row:hover { background: var(--sidebar-row-hover); }
 
 /* News card inner hover */
 .news-card-inner {
@@ -280,8 +332,27 @@ html { overflow-x: hidden; }
 }
 .news-card-inner:hover {
   transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.14) !important;
+  border-color: var(--news-card-border-hover) !important;
 }
+
+/* ─── Theme badge (indicateur jour/nuit) ─────────── */
+.theme-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.15);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── Sport row card width ───────────────────────── */
+.sport-row-card { width: 100%; }
 
 /* ─── Responsive dark design ─────────────────────── */
 @media (max-width: 1100px) {

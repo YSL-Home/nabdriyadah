@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { label: "⚽", full: "كرة القدم", href: "/sport/football/" },
@@ -10,6 +11,20 @@ const navLinks = [
 ];
 
 export default function SiteHeader() {
+  const [isDark, setIsDark] = useState(true); // défaut nuit (SSR)
+
+  useEffect(() => {
+    const check = () => {
+      const theme = document.documentElement.getAttribute("data-theme");
+      setIsDark(theme !== "light");
+    };
+    check();
+    // Observer l'attribut data-theme sur <html>
+    const obs = new MutationObserver(check);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <header style={{
       background: "linear-gradient(135deg, #0f172a 0%, #1d3a8a 100%)",
@@ -34,14 +49,19 @@ export default function SiteHeader() {
         {/* Logo */}
         <Link href="/" style={{ textDecoration: "none", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <img src="/logo-v2.svg" alt="نبض الرياضة" style={{ height: "30px", width: "auto" }} onError={e => { e.currentTarget.style.display = "none"; }} />
+            <img
+              src="/logo-v2.svg"
+              alt="نبض الرياضة"
+              style={{ height: "30px", width: "auto" }}
+              onError={e => { e.currentTarget.style.display = "none"; }}
+            />
             <span style={{ fontSize: "clamp(15px, 3.5vw, 20px)", fontWeight: 900, color: "white", letterSpacing: "-0.5px", whiteSpace: "nowrap" }}>
               نبض الرياضة
             </span>
           </div>
         </Link>
 
-        {/* Desktop nav — hidden on mobile via CSS */}
+        {/* Desktop nav */}
         <nav className="hdr-nav-desktop">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="hdr-pill">
@@ -50,16 +70,28 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        {/* Live badge */}
-        <Link href="/live/" style={{ textDecoration: "none", flexShrink: 0 }}>
-          <span className="live-badge">
-            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#fca5a5", display: "inline-block", animation: "pulse 1.5s infinite" }} />
-            مباشر
+        {/* Right cluster: theme badge + live */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+          {/* Indicateur jour/nuit */}
+          <span className="theme-badge" title={isDark ? "وضع الليل" : "وضع النهار"}>
+            {isDark ? "🌙 ليل" : "☀️ نهار"}
           </span>
-        </Link>
+
+          {/* Live badge */}
+          <Link href="/live/" style={{ textDecoration: "none" }}>
+            <span className="live-badge">
+              <span style={{
+                width: "6px", height: "6px", borderRadius: "50%",
+                background: "#fca5a5", display: "inline-block",
+                animation: "pulse 1.5s infinite"
+              }} />
+              مباشر
+            </span>
+          </Link>
+        </div>
       </div>
 
-      {/* Mobile nav row — full width scrollable pills */}
+      {/* Mobile nav row */}
       <div className="hdr-nav-mobile">
         {navLinks.map((link) => (
           <Link key={link.href} href={link.href} className="hdr-pill-mobile">
@@ -69,6 +101,9 @@ export default function SiteHeader() {
         <Link href="/live/" className="hdr-pill-mobile" style={{ color: "#fca5a5", borderColor: "rgba(252,165,165,0.3)" }}>
           🔴 مباشر
         </Link>
+        <span className="hdr-pill-mobile" style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.1)", cursor: "default" }}>
+          {isDark ? "🌙" : "☀️"}
+        </span>
       </div>
     </header>
   );
