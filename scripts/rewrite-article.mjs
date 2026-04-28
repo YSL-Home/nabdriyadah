@@ -324,12 +324,12 @@ async function main() {
     unique.push(item);
   }
 
-  // Spread: 10 football + 2 basketball + 2 tennis + 1 padel + 1 futsal = 16 max
-  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 10);
-  const basketItems = unique.filter((i) => i.sport === "basketball").slice(0, 2);
-  const tennisItems = unique.filter((i) => i.sport === "tennis").slice(0, 2);
-  const padelItems = unique.filter((i) => i.sport === "padel").slice(0, 1);
-  const futsalItems = unique.filter((i) => i.sport === "futsal").slice(0, 1);
+  // Spread: 8 football + 4 basketball + 4 tennis + 3 padel + 2 futsal = 21 max
+  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 8);
+  const basketItems = unique.filter((i) => i.sport === "basketball").slice(0, 4);
+  const tennisItems = unique.filter((i) => i.sport === "tennis").slice(0, 4);
+  const padelItems = unique.filter((i) => i.sport === "padel").slice(0, 3);
+  const futsalItems = unique.filter((i) => i.sport === "futsal").slice(0, 2);
   const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems];
 
   const articles = [];

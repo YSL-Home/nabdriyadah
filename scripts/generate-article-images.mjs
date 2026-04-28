@@ -23,104 +23,93 @@ function safeReadJson(filePath) {
   }
 }
 
-// Visual style per sport/league — all described as original scenes, no logos, no trademarks
-function buildVisualScene(sport = "football", league = "") {
-  const scenes = {
-    "premier-league": [
-      "a packed football stadium at night, green pitch under floodlights, roaring crowd in stands, dramatic aerial view, cinematic photography",
-      "two football players competing for a header in midfield, english stadium atmosphere, crowd blur in background, high-speed photography",
-      "a football rolling across wet grass in a stadium, rain drops on pitch, shallow depth of field, sports photography"
-    ],
-    "la-liga": [
-      "spanish football stadium interior, bright sunny afternoon, tifosi style fans with colorful scarves, pitch perfectly manicured",
-      "football match action scene in a mediterranean stadium, intense tackle on grass, stadium lights",
-      "close-up of football boots on pitch grass, spanish stadium background blur, golden hour light"
-    ],
-    "bundesliga": [
-      "german football stadium full of fans in yellow and black, aerial view, evening floodlights",
-      "football goalkeeper diving for save, german bundesliga stadium atmosphere, dramatic action",
-      "training session at a german stadium, players warming up, morning light, professional photography"
-    ],
-    "serie-a": [
-      "italian stadium architecture at sunset, marble stadium details, packed stands, cinematic",
-      "football player celebrating goal in italian stadium, fans standing, emotional moment, telephoto lens",
-      "midfield battle scene in an italian league match, grass texture close-up, stadium crowd blur"
-    ],
-    "ligue-1": [
-      "french football stadium at dusk, city lights visible beyond stands, match underway, aerial cinematic",
-      "football skill move on pitch, paris-style stadium atmosphere, evening match, blur crowd",
-      "goalkeeper commands area in a french league stadium, training moment, wide angle"
-    ],
-    "champions-league": [
-      "massive european football stadium at night, star-shaped spotlights, epic crowd energy, cinematic wide shot",
-      "football player lifts trophy under stadium lights, confetti raining, emotional celebration",
-      "two sets of players walking out of tunnel onto lit pitch, stadium electric atmosphere"
-    ],
-    "saudi-pro-league": [
-      "modern middle eastern football stadium exterior at sunset, palm trees, golden architecture",
-      "football match in a saudi stadium, vivid green pitch, enthusiastic fans in white thobes, evening",
-      "stadium action shot in saudi arabia, floodlit pitch, dynamic play moment, photography"
-    ],
-    "eredivisie": [
-      "dutch football stadium at golden hour, canal city visible behind stands, match day atmosphere",
-      "football action in a compact european stadium, dutch fans waving flags, vivid colors",
-      "training pitch in netherlands, windmill silhouette in background at sunset, professional football"
-    ],
-    "basketball": [
-      "professional basketball arena with bright court lighting, hardwood floor perspective, empty arena before game",
-      "basketball player driving to basket in a packed arena, crowd lights blur, dramatic action",
-      "basketball going through net from below, arena ceiling and lights, dramatic upward shot"
-    ],
-    "tennis": [
-      "tennis court aerial view, clay red surface, white lines, single player serving, dramatic shadow",
-      "tennis ball close-up spinning mid-air over grass court, blurred player in background",
-      "grand slam tournament atmosphere, packed stands, centre court, sunny day, cinematic wide"
-    ],
-    "padel": [
-      "modern padel court interior with glass walls, clean bright lighting, two players mid-rally",
-      "padel racket and ball close-up on blue court surface, shallow depth of field",
-      "padel sports complex exterior at night, glass courts illuminated, modern architecture"
-    ],
-    "futsal": [
-      "indoor futsal arena with bright overhead lights, small goals, polished floor, match in progress",
-      "futsal players in fast motion, indoor hall, vibrant crowd, wide angle photography",
-      "futsal ball on indoor court floor, goals visible, arena atmosphere, sports photography"
-    ],
-    "football": [
-      "football stadium golden hour, packed stands, perfectly cut pitch, cinematic wide angle",
-      "football player performing skill on pitch, stadium full of fans, action photography",
-      "aerial view of football match in progress, bird's eye perspective, stadium surrounded by city"
-    ]
+// Extract meaningful visual keywords from article title/description
+function extractVisualKeywords(article) {
+  const text = `${article.title || ""} ${article.description || ""} ${(article.keywords || []).join(" ")}`;
+
+  // Detect transfer/departure
+  if (/رحيل|يغادر|يُودّع|انتقال|صفقة|تعاقد|ينضم/.test(text)) return "transfer";
+  // Detect trophy/title/championship
+  if (/لقب|بطولة|كأس|تتويج|يرفع|الفوز|بطل/.test(text)) return "trophy";
+  // Detect injury
+  if (/إصابة|غياب|يتعافى|يعود/.test(text)) return "injury";
+  // Detect press conference / statement
+  if (/مؤتمر|تصريح|يؤكد|كشف|قال|يرفض/.test(text)) return "statement";
+  // Detect match / game action
+  if (/مباراة|هدف|فاز|تعادل|خسر|نتيجة|الجولة|لقاء/.test(text)) return "match";
+  // Detect training / performance
+  if (/تدريب|استعداد|موسم|أداء|تحليل/.test(text)) return "training";
+  return "general";
+}
+
+// Build a rich, content-aware visual scene description
+function buildVisualScene(sport, league, article) {
+  const context = extractVisualKeywords(article);
+
+  // Sport-specific environments
+  const environments = {
+    "premier-league":    { bg: "iconic english football stadium at night, emerald pitch under floodlights, packed terraces of 60 000 fans, north london or manchester skyline visible", light: "cinematic blue-white stadium floodlights, high contrast, dramatic shadows" },
+    "la-liga":           { bg: "mediterranean football stadium on a bright sunday afternoon, terracotta architecture visible beyond stands, pitch immaculately manicured, sold-out capacity", light: "warm golden hour sunlight cutting across the pitch, long player shadows" },
+    "bundesliga":        { bg: "iconic german football stadium, lower ring packed in vibrant yellow, tifo display visible, city skyline at dusk", light: "stadium floodlights mixed with sunset orange glow" },
+    "serie-a":           { bg: "grand italian football stadium, marble colonnades visible, packed curva stand with scarves, roman architecture detail", light: "late afternoon mediterranean light, warm amber tones" },
+    "champions-league":  { bg: "enormous european football stadium at night, star-shaped spotlights, 80 000 seat capacity full, anthem atmosphere, confetti in the air", light: "dramatic blue UEFA-style lighting, intense spotlights from above" },
+    "saudi-pro-league":  { bg: "ultra-modern middle eastern football stadium, palm trees silhouetted, fans in white thobes, gold architectural accents on facades", light: "desert twilight purple and gold sky, vivid green pitch" },
+    "basketball":        { bg: "iconic NBA-style basketball arena, gleaming hardwood court, 20 000-seat sold-out venue, spotlight-lit court from above, rafter banners", light: "intense cool-white arena spotlights on the court, crowd in dramatic blur" },
+    "tennis":            { bg: "grand slam centre court, red clay or manicured grass, full grandstand, tournament atmosphere, dramatic shadow across baseline", light: "bright afternoon sun, sharp player shadow on court surface" },
+    "padel":             { bg: "professional padel court with panoramic glass walls, premium indoor sports complex, court lit in electric blue-white, modern stadium seating", light: "crisp bright indoor LED lighting, reflections in glass walls" },
+    "futsal":            { bg: "indoor futsal arena, polished wooden floor, compact goals, passionate crowd close to pitch, vibrant colorful stands", light: "overhead industrial stadium lights, bright and even" },
+    "football":          { bg: "football stadium at golden hour, packed stands, perfectly cut pitch, city skyline glowing in background", light: "golden hour sunlight, dramatic long shadows across the pitch" },
   };
 
-  const sportKey = league && scenes[league] ? league : (sport && scenes[sport] ? sport : "football");
-  const options = scenes[sportKey];
-  const idx = Math.floor(Math.random() * options.length);
-  return options[idx];
+  // Context-specific action layers
+  const actions = {
+    transfer:  "lone athletic figure standing at the edge of the pitch staring into the distance, suitcase silhouette metaphor, emotional farewell composition, shallow depth of field",
+    trophy:    "large golden trophy sitting on the pitch grass, confetti raining from above, celebration atmosphere, dramatic low-angle hero shot",
+    injury:    "medical staff and physiotherapist silhouettes on the pitch, focused and professional, golden hour backlight, empty stadium in background",
+    statement: "press conference podium on pitch, microphones, dramatic spotlight from above on empty chair, anticipation atmosphere",
+    match:     "intense athletic duel, two silhouetted players competing at peak athletic moment, motion blur, crowd energy in background",
+    training:  "lone athlete silhouetted against a goal, dawn light on pitch, precision and focus, wide angle cinematic framing",
+    general:   "sweeping aerial view of packed stadium, bird's eye perspective, geometric patterns of stands and pitch, crowd color mosaic",
+  };
+
+  const sportKey = (league && environments[league]) ? league : (sport && environments[sport] ? sport : "football");
+  const env = environments[sportKey];
+  const action = actions[context] || actions.general;
+
+  return `${env.bg}. Scene: ${action}. Lighting: ${env.light}.`;
 }
 
 function buildPrompt(article) {
   const title = normalizeText(article.title || "");
   const sport = normalizeText(article.sport || "football");
   const league = normalizeText(article.league || "");
-  const scene = buildVisualScene(sport, league);
+  const scene = buildVisualScene(sport, league, article);
 
-  return `Create a high-quality sports news article cover image.
+  // Extract up to 3 content keywords for extra specificity
+  const kw = (article.keywords || []).filter(k => k && k.length > 2).slice(0, 3).join(", ");
 
-Style requirements:
-- Photorealistic, professional sports journalism photography style
-- Horizontal/landscape orientation for web article header
-- High contrast, vivid colors, dramatic lighting
-- NO text, NO logos, NO jersey numbers, NO brand marks, NO watermarks, NO recognizable player faces
-- NO team badges, NO sponsor logos, NO trademark symbols
-- Original artistic composition inspired by sports atmosphere
+  return `You are generating a professional sports news article header image for an Arabic sports news website.
 
-Scene to depict:
+STRICT RULES — never violate:
+- NO text, letters, numbers, captions, watermarks, or UI elements anywhere in the image
+- NO recognizable real player faces or portraits
+- NO team logos, club badges, sponsor marks, jersey numbers, or brand trademarks
+- NO flags used as main subject (background crowd flags are OK)
+- Photorealistic photography style only — no illustration, no cartoon, no painting
+- Horizontal/landscape format (16:9 ratio), suitable for a web article banner
+
+VISUAL COMPOSITION:
 ${scene}
 
-Context: Article about "${title.slice(0, 120)}"
+ARTICLE CONTEXT (for tonal reference only — do NOT add text):
+Topic: "${title.slice(0, 100)}"
+${kw ? `Themes: ${kw}` : ""}
 
-The image should feel like a premium sports magazine cover photo: dynamic, emotional, and visually striking.`.trim();
+QUALITY TARGET:
+- Premium sports journalism photography, like Getty Images or AFP wire photo
+- Emotionally resonant, visually striking, immediately communicates the sport's energy
+- High contrast, rich colors, sharp focus on the main subject with cinematic depth of field
+- The image must feel SPECIFIC to this article's story, not a generic stock photo`.trim();
 }
 
 async function tryGptImage1(prompt) {

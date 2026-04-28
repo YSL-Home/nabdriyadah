@@ -29,46 +29,25 @@ const SOURCES = [
     url: "https://news.google.com/rss/search?q=كرة+القدم+أخبار&hl=ar&gl=SA&ceid=SA:ar"
   },
   // ── Basketball ────────────────────────────────────────────────
-  {
-    name: "Google News Basketball",
-    type: "rss",
-    priority: "arabic",
-    sport: "basketball",
-    url: "https://news.google.com/rss/search?q=كرة+السلة+NBA&hl=ar&gl=SA&ceid=SA:ar"
-  },
-  {
-    name: "Google News NBA",
-    type: "rss",
-    priority: "arabic",
-    sport: "basketball",
-    url: "https://news.google.com/rss/search?q=الدوري+الأمريكي+للمحترفين+باسكيت&hl=ar&gl=SA&ceid=SA:ar"
-  },
+  { name: "Google News Basketball AR",  type: "rss", priority: "arabic",   sport: "basketball", url: "https://news.google.com/rss/search?q=كرة+السلة+NBA&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "Google News NBA AR",         type: "rss", priority: "arabic",   sport: "basketball", url: "https://news.google.com/rss/search?q=الدوري+الأمريكي+للمحترفين+باسكيت&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "BBC Sport Basketball",       type: "rss", priority: "fallback", sport: "basketball", url: "https://feeds.bbci.co.uk/sport/basketball/rss.xml" },
+  { name: "ESPN NBA RSS",               type: "rss", priority: "fallback", sport: "basketball", url: "https://www.espn.com/espn/rss/nba/news" },
+  { name: "Google News NBA EN",         type: "rss", priority: "fallback", sport: "basketball", url: "https://news.google.com/rss/search?q=NBA+basketball+playoffs+2025&hl=en&gl=US&ceid=US:en" },
   // ── Tennis ────────────────────────────────────────────────────
-  {
-    name: "Google News Tennis",
-    type: "rss",
-    priority: "arabic",
-    sport: "tennis",
-    url: "https://news.google.com/rss/search?q=كرة+المضرب+تنس+بطولة&hl=ar&gl=SA&ceid=SA:ar"
-  },
+  { name: "Google News Tennis AR",      type: "rss", priority: "arabic",   sport: "tennis",     url: "https://news.google.com/rss/search?q=تنس+ATP+WTA+بطولة&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "Google News Tennis AR2",     type: "rss", priority: "arabic",   sport: "tennis",     url: "https://news.google.com/rss/search?q=كرة+المضرب+لاعب+تنس&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "BBC Sport Tennis",           type: "rss", priority: "fallback", sport: "tennis",     url: "https://feeds.bbci.co.uk/sport/tennis/rss.xml" },
+  { name: "Google News Tennis EN",      type: "rss", priority: "fallback", sport: "tennis",     url: "https://news.google.com/rss/search?q=tennis+ATP+WTA+tournament+2025&hl=en&gl=US&ceid=US:en" },
   // ── Padel ─────────────────────────────────────────────────────
-  {
-    name: "Google News Padel",
-    type: "rss",
-    priority: "arabic",
-    sport: "padel",
-    url: "https://news.google.com/rss/search?q=رياضة+البادل+padel&hl=ar&gl=SA&ceid=SA:ar"
-  },
+  { name: "Google News Padel AR",       type: "rss", priority: "arabic",   sport: "padel",      url: "https://news.google.com/rss/search?q=البادل+بادل+رياضة&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "Google News Premier Padel",  type: "rss", priority: "fallback", sport: "padel",      url: "https://news.google.com/rss/search?q=Premier+Padel+World+Padel+Tour+2025&hl=en&gl=US&ceid=US:en" },
+  { name: "Google News Padel EN",       type: "rss", priority: "fallback", sport: "padel",      url: "https://news.google.com/rss/search?q=padel+sport+tournament+ranking&hl=en&gl=US&ceid=US:en" },
   // ── Futsal ────────────────────────────────────────────────────
-  {
-    name: "Google News Futsal",
-    type: "rss",
-    priority: "arabic",
-    sport: "futsal",
-    url: "https://news.google.com/rss/search?q=كرة+قدم+صالات+فوتسال&hl=ar&gl=SA&ceid=SA:ar"
-  },
-  // ── Fallback anglais ──────────────────────────────────────────
-  { name: "BBC Sport", type: "rss", priority: "fallback", sport: "football", url: "https://feeds.bbci.co.uk/sport/football/rss.xml" }
+  { name: "Google News Futsal AR",      type: "rss", priority: "arabic",   sport: "futsal",     url: "https://news.google.com/rss/search?q=فوتسال+كرة+قدم+صالات&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "Google News Futsal EN",      type: "rss", priority: "fallback", sport: "futsal",     url: "https://news.google.com/rss/search?q=futsal+championship+FIFA+2025&hl=en&gl=US&ceid=US:en" },
+  // ── Fallback Football ──────────────────────────────────────────
+  { name: "BBC Sport Football",         type: "rss", priority: "fallback", sport: "football",   url: "https://feeds.bbci.co.uk/sport/football/rss.xml" }
 ];
 
 function ensureDir(filePath) {
@@ -331,8 +310,20 @@ async function main() {
   const arabicItems = unique.filter((item) => item.sourcePriority === "arabic");
   const fallbackItems = unique.filter((item) => item.sourcePriority !== "arabic");
 
-  // 28 arabic + 2 fallback
-  const prioritized = [...arabicItems.slice(0, 28), ...fallbackItems.slice(0, 2)];
+  // Per-sport caps to guarantee variety: arabic preferred, fallback fills gaps
+  const bySport = (items, sport) => items.filter(i => i.sport === sport);
+  const footballAr  = bySport(arabicItems, "football").slice(0, 12);
+  const basketAr    = bySport(arabicItems, "basketball").slice(0, 6);
+  const tennisAr    = bySport(arabicItems, "tennis").slice(0, 6);
+  const padelAr     = bySport(arabicItems, "padel").slice(0, 5);
+  const futsalAr    = bySport(arabicItems, "futsal").slice(0, 4);
+  const footballFb  = bySport(fallbackItems, "football").slice(0, Math.max(0, 12 - footballAr.length));
+  const basketFb    = bySport(fallbackItems, "basketball").slice(0, Math.max(0, 6 - basketAr.length));
+  const tennisFb    = bySport(fallbackItems, "tennis").slice(0, Math.max(0, 6 - tennisAr.length));
+  const padelFb     = bySport(fallbackItems, "padel").slice(0, Math.max(0, 5 - padelAr.length));
+  const futsalFb    = bySport(fallbackItems, "futsal").slice(0, Math.max(0, 4 - futsalAr.length));
+  const prioritized = [...footballAr, ...basketAr, ...tennisAr, ...padelAr, ...futsalAr,
+                       ...footballFb, ...basketFb, ...tennisFb, ...padelFb, ...futsalFb];
 
   ensureDir(OUTPUT_PATH);
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(prioritized, null, 2), "utf-8");
