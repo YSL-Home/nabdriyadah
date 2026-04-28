@@ -19,10 +19,12 @@ function sortByDate(items) {
 export default function HomePage() {
   const sorted = sortByDate(articles);
 
-  const breaking = sorted.filter((a) => {
+  // Ticker : articles des dernières 24h. Si aucun, on prend les 8 plus récents.
+  const recentBreaking = sorted.filter((a) => {
     if (!a.publishedAt) return false;
-    return Date.now() - new Date(a.publishedAt).getTime() < 6 * 60 * 60 * 1000;
-  }).slice(0, 8);
+    return Date.now() - new Date(a.publishedAt).getTime() < 24 * 60 * 60 * 1000;
+  });
+  const breaking = (recentBreaking.length > 0 ? recentBreaking : sorted).slice(0, 8);
 
   const featured  = sorted[0]           ?? null;
   const secondary = sorted.slice(1, 3);
@@ -35,8 +37,8 @@ export default function HomePage() {
   return (
     <div style={{ background: "var(--bg-page)", minHeight: "100vh", direction: "rtl" }}>
 
-      {/* Breaking ticker */}
-      {breaking.length > 0 && <BreakingTicker items={breaking} />}
+      {/* Bandeau عاجل — toujours visible */}
+      <BreakingTicker items={breaking} />
 
       {/* Main animated content — client component */}
       <div style={{ maxWidth: "1450px", margin: "0 auto", padding: "20px 16px 60px" }}>
