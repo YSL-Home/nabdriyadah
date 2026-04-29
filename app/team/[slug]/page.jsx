@@ -57,7 +57,8 @@ const teamsData = {
       website: "https://www.mancity.com",
       youtube: "https://www.youtube.com/@mancity"
     },
-    videoEmbed: "https://www.youtube.com/embed/eN8xwT4f4Nw"
+    videoEmbed: "https://www.youtube.com/embed/eN8xwT4f4Nw",
+    videos: ["eN8xwT4f4Nw", "6LGJFOTl7gQ", "WnLJrEAVpTI"]
   },
 
   "manchester-united": {
@@ -108,7 +109,8 @@ const teamsData = {
       website: "https://www.manutd.com",
       youtube: "https://www.youtube.com/@manutd"
     },
-    videoEmbed: "https://www.youtube.com/embed/8M7KGe2UnmE"
+    videoEmbed: "https://www.youtube.com/embed/8M7KGe2UnmE",
+    videos: ["8M7KGe2UnmE", "7k_9fXxNVmo", "bCIRXMlT6do"]
   },
 
   "liverpool": {
@@ -160,7 +162,8 @@ const teamsData = {
       website: "https://www.liverpoolfc.com",
       youtube: "https://www.youtube.com/@LiverpoolFC"
     },
-    videoEmbed: "https://www.youtube.com/embed/gR1VjA6Yx5M"
+    videoEmbed: "https://www.youtube.com/embed/gR1VjA6Yx5M",
+    videos: ["gR1VjA6Yx5M", "cDCPVGqzCO4", "kQVX8BPOIUI"]
   },
 
   "arsenal": {
@@ -211,7 +214,8 @@ const teamsData = {
       website: "https://www.arsenal.com",
       youtube: "https://www.youtube.com/@arsenal"
     },
-    videoEmbed: "https://www.youtube.com/embed/ed8nC7D2v1Q"
+    videoEmbed: "https://www.youtube.com/embed/ed8nC7D2v1Q",
+    videos: ["ed8nC7D2v1Q", "uHnN4uLzXJc", "7QCQ9HQ8YAg"]
   },
 
   "chelsea": {
@@ -261,7 +265,8 @@ const teamsData = {
       website: "https://www.chelseafc.com",
       youtube: "https://www.youtube.com/@chelseafc"
     },
-    videoEmbed: "https://www.youtube.com/embed/fb1fM9h7n2Q"
+    videoEmbed: "https://www.youtube.com/embed/fb1fM9h7n2Q",
+    videos: ["fb1fM9h7n2Q", "rQCkpCIVOls", "nxFcIVvqiUg"]
   },
 
   "tottenham": {
@@ -310,7 +315,8 @@ const teamsData = {
       website: "https://www.tottenhamhotspur.com",
       youtube: "https://www.youtube.com/@TottenhamHotspur"
     },
-    videoEmbed: "https://www.youtube.com/embed/2h5mKQJ3d0Y"
+    videoEmbed: "https://www.youtube.com/embed/2h5mKQJ3d0Y",
+    videos: ["2h5mKQJ3d0Y", "7VumhcR9s9I", "vTBQPdXAnkQ"]
   },
 
   "real-madrid": {
@@ -363,7 +369,8 @@ const teamsData = {
       website: "https://www.realmadrid.com",
       youtube: "https://www.youtube.com/@RealMadrid"
     },
-    videoEmbed: "https://www.youtube.com/embed/c0Qw0Q6M6Y8"
+    videoEmbed: "https://www.youtube.com/embed/c0Qw0Q6M6Y8",
+    videos: ["c0Qw0Q6M6Y8", "jBmQFWQJIKA", "3J5kLHrPLCQ"]
   },
 
   "barcelona": {
@@ -416,7 +423,8 @@ const teamsData = {
       website: "https://www.fcbarcelona.com",
       youtube: "https://www.youtube.com/@FCBarcelona"
     },
-    videoEmbed: "https://www.youtube.com/embed/RM0R7s0TQ2A"
+    videoEmbed: "https://www.youtube.com/embed/RM0R7s0TQ2A",
+    videos: ["RM0R7s0TQ2A", "Dl2sMYyaRHQ", "KMg4qeSwSq4"]
   },
 
   "atletico-madrid": {
@@ -466,7 +474,8 @@ const teamsData = {
       website: "https://en.atleticodemadrid.com",
       youtube: "https://www.youtube.com/@atleticodemadrid"
     },
-    videoEmbed: "https://www.youtube.com/embed/uN4zJm6ZdFE"
+    videoEmbed: "https://www.youtube.com/embed/uN4zJm6ZdFE",
+    videos: ["uN4zJm6ZdFE", "xZ9JFJ6X7b0", "sEovMJl3G5U"]
   },
 
   "sevilla": {
@@ -514,7 +523,8 @@ const teamsData = {
       website: "https://www.sevillafc.es",
       youtube: "https://www.youtube.com/@sevillafc"
     },
-    videoEmbed: "https://www.youtube.com/embed/7v5r9Q4bR9A"
+    videoEmbed: "https://www.youtube.com/embed/7v5r9Q4bR9A",
+    videos: ["7v5r9Q4bR9A", "9JYt4s3wXv0", "qLkJZxrJW14"]
   },
 
   "valencia": {
@@ -563,7 +573,8 @@ const teamsData = {
       website: "https://www.valenciacf.com",
       youtube: "https://www.youtube.com/@valenciacf"
     },
-    videoEmbed: "https://www.youtube.com/embed/p5cbA4m4o2Q"
+    videoEmbed: "https://www.youtube.com/embed/p5cbA4m4o2Q",
+    videos: ["p5cbA4m4o2Q", "4Yn1-nM6BKs", "pLJMhBbIGN4"]
   },
 
   "real-sociedad": {
@@ -611,7 +622,8 @@ const teamsData = {
       website: "https://www.realsociedad.eus",
       youtube: "https://www.youtube.com/@RealSociedadTV"
     },
-    videoEmbed: "https://www.youtube.com/embed/kL0vF6YdC4M"
+    videoEmbed: "https://www.youtube.com/embed/kL0vF6YdC4M",
+    videos: ["kL0vF6YdC4M", "WCy3mS0FMXU", "YzW0OeF4o38"]
   },
 
   // ── BUNDESLIGA ─────────────────────────────────────────────────────────────
@@ -637,7 +649,8 @@ const teamsData = {
     players: ["هاري كين", "مانويل نوير", "خوشوا كيميتش", "ليون غوريتسكا", "جمال موسيالا", "ليروي سانيه"],
     legends: ["غيرد مولر", "فرانز بيكنباور", "كارل-هاينز رومينيغه", "أوليفر كان"],
     officialLinks: { website: "https://fcbayern.com", youtube: "https://www.youtube.com/@FCBayern" },
-    videoEmbed: "https://www.youtube.com/embed/GxHGf1X1t2A"
+    videoEmbed: "https://www.youtube.com/embed/GxHGf1X1t2A",
+    videos: ["GxHGf1X1t2A", "Z5iFfvMdqo4", "LqN_VqFSQto"]
   },
 
   "borussia-dortmund": {
@@ -662,7 +675,8 @@ const teamsData = {
     players: ["غريغور كوبل", "نيكلاس فولكروغ", "مارسيل سابيتسر", "فليكس نومان", "يوليان ريرسون", "ياياه موسا"],
     legends: ["مايكل زورك", "مارسيو أموروسو", "روبرت ليفاندوفسكي", "ماتس هوميلس"],
     officialLinks: { website: "https://www.bvb.de", youtube: "https://www.youtube.com/@BVB09" },
-    videoEmbed: "https://www.youtube.com/embed/bP8OLWLdvaE"
+    videoEmbed: "https://www.youtube.com/embed/bP8OLWLdvaE",
+    videos: ["bP8OLWLdvaE", "XSQnuG7h1-I", "tFVzHrgLBOA"]
   },
 
   "bayer-leverkusen": {
@@ -686,7 +700,8 @@ const teamsData = {
     players: ["غرانيت تشاكا", "فلوريان فيرتز", "فيكتور بوني فاس", "جوناثان تاه", "خاي هافيرتز (سابق)", "لوكاس أوكامبوس"],
     legends: ["ميشائيل باليت", "لوثر ماتياوس", "فولكر روث", "باولو سيزار فونسيكا"],
     officialLinks: { website: "https://www.bayer04.de", youtube: "https://www.youtube.com/@bayer04" },
-    videoEmbed: "https://www.youtube.com/embed/Ej5gS1gCYbI"
+    videoEmbed: "https://www.youtube.com/embed/Ej5gS1gCYbI",
+    videos: ["Ej5gS1gCYbI", "ZFqMVTmRe4k", "Wr9mFMJRIus"]
   },
 
   "rb-leipzig": {
@@ -709,7 +724,8 @@ const teamsData = {
     players: ["بينيامين شيشكو", "دافيد رافينيا", "فابيان نوسلر", "خافي سيمونس", "يوسف بولايلي", "أنتوني نزينزي"],
     legends: ["تيمو فيرنر", "مارسيل هالشتنبرغ", "ناغيلسمان (مدرب)", "نابي كيتا"],
     officialLinks: { website: "https://www.rbleipzig.com", youtube: "https://www.youtube.com/@RBLeipzig" },
-    videoEmbed: "https://www.youtube.com/embed/7v5r9Q4bR9A"
+    videoEmbed: "https://www.youtube.com/embed/7v5r9Q4bR9A",
+    videos: ["7v5r9Q4bR9A", "mXnABwPOa5U", "k4w8RL3xyE4"]
   },
 
   "eintracht-frankfurt": {
@@ -733,7 +749,8 @@ const teamsData = {
     players: ["كيفن تراب", "علي تشوهامي", "فارون سانتياغو", "فرانكو ميكائيليدس", "ميكايلو موكوبو", "هوغو إيكيتيكي"],
     legends: ["يورغن غراب", "أنتوني يبواه", "مارسيل ميتزلدر", "ألكسندر ميلنر"],
     officialLinks: { website: "https://www.eintracht.de", youtube: "https://www.youtube.com/@EintrachtFrankfurt" },
-    videoEmbed: "https://www.youtube.com/embed/ed8nC7D2v1Q"
+    videoEmbed: "https://www.youtube.com/embed/ed8nC7D2v1Q",
+    videos: ["ed8nC7D2v1Q", "YoGcm6XZLIY", "9Gf27ZnqEvo"]
   },
 
   "borussia-monchengladbach": {
@@ -756,7 +773,8 @@ const teamsData = {
     players: ["يوناس أومالين", "لارس ستيندل", "فلوريان نوهاوس", "جوردان بايير", "مارفين فريدريش", "مارتن أوستيك"],
     legends: ["يوب هاينكس", "راينر بوندنبرغ", "هانس-يورغن فيتكامب", "ألان سيمونسن"],
     officialLinks: { website: "https://www.borussia.de", youtube: "https://www.youtube.com/@borussia" },
-    videoEmbed: "https://www.youtube.com/embed/2h5mKQJ3d0Y"
+    videoEmbed: "https://www.youtube.com/embed/2h5mKQJ3d0Y",
+    videos: ["2h5mKQJ3d0Y", "s1W6ZGT_3jc", "8eAvR3u6Y7s"]
   },
 
   // ── SERIE A ────────────────────────────────────────────────────────────────
@@ -782,7 +800,8 @@ const teamsData = {
     players: ["فيليبي كوسكو", "أدريان ربيوت", "تيمو فيرنر", "فيدريكو كييزا", "ماتيا دي سيليو", "لوكاس ديغني"],
     legends: ["ميشيل بلاتيني", "روبيرتو باجيو", "أليساندرو ديل بييرو", "جيانلويجي بوفون"],
     officialLinks: { website: "https://www.juventus.com", youtube: "https://www.youtube.com/@juventus" },
-    videoEmbed: "https://www.youtube.com/embed/fb1fM9h7n2Q"
+    videoEmbed: "https://www.youtube.com/embed/fb1fM9h7n2Q",
+    videos: ["fb1fM9h7n2Q", "C4uIDRp3M04", "RtFfI0HMqJ0"]
   },
 
   "ac-milan": {
@@ -807,7 +826,8 @@ const teamsData = {
     players: ["مايك ماينيان", "تيو هيرنانديز", "رافائيل ليائو", "بييرو ستيفان موساء", "فرانشيسكو كامارديلا", "فيكتور زييكزيزيا"],
     legends: ["باولو مالديني", "رويناليدو", "أندريا بيرلو (مؤقتاً)", "زيبيجنيف بوني"],
     officialLinks: { website: "https://www.acmilan.com", youtube: "https://www.youtube.com/@ACMilan" },
-    videoEmbed: "https://www.youtube.com/embed/eN8xwT4f4Nw"
+    videoEmbed: "https://www.youtube.com/embed/eN8xwT4f4Nw",
+    videos: ["eN8xwT4f4Nw", "J3bS8BVrppM", "OUi1HqvpM6o"]
   },
 
   "inter-milan": {
@@ -832,7 +852,8 @@ const teamsData = {
     players: ["يان سومير", "لوتارو مارتينيز", "نيقولو باريلا", "دنزل دومفريس", "آلكسيس سانشيز", "هاكان تشالهانوغلو"],
     legends: ["رونالدو البرازيلي", "خافيير زانيتي", "والتر صموئيل", "إيفان كورتيسيرو"],
     officialLinks: { website: "https://www.inter.it", youtube: "https://www.youtube.com/@Inter" },
-    videoEmbed: "https://www.youtube.com/embed/8M7KGe2UnmE"
+    videoEmbed: "https://www.youtube.com/embed/8M7KGe2UnmE",
+    videos: ["8M7KGe2UnmE", "dFTRJmPlEtA", "e1S5P1RDnIM"]
   },
 
   "napoli": {
@@ -855,7 +876,8 @@ const teamsData = {
     players: ["أليكس ميريت", "خافيير إسبايسيتو", "خفيزيتسو كبارالياني", "جيوفاني دي لورينسو", "هيرفينغ لوزانو (سابق)", "كريستوفر نكونكو"],
     legends: ["دييغو مارادونا", "إيزيدورو كاريكا", "موريسيو رياني", "روبيرتو مورينو"],
     officialLinks: { website: "https://www.sscnapoli.it", youtube: "https://www.youtube.com/@sscnapoli" },
-    videoEmbed: "https://www.youtube.com/embed/gR1VjA6Yx5M"
+    videoEmbed: "https://www.youtube.com/embed/gR1VjA6Yx5M",
+    videos: ["gR1VjA6Yx5M", "kkT6MrGtLRQ", "F43qfnZjx8Q"]
   },
 
   "as-roma": {
@@ -878,7 +900,8 @@ const teamsData = {
     players: ["مايلز برودجيك", "أنخيل إيباريا", "ماتياس سولير", "فيليبي أنانداب", "سباستيان فيثيرتنغيل", "إلياس أبو خلال"],
     legends: ["فرانشيسكو توتي", "داني ألفيس (سابق)", "فينسنزو مونتيلا", "جابرييل باتيستوتا"],
     officialLinks: { website: "https://www.asroma.com", youtube: "https://www.youtube.com/@officialasroma" },
-    videoEmbed: "https://www.youtube.com/embed/c0Qw0Q6M6Y8"
+    videoEmbed: "https://www.youtube.com/embed/c0Qw0Q6M6Y8",
+    videos: ["c0Qw0Q6M6Y8", "cNBGEF7Nzxo", "m2JLqj6fMOg"]
   },
 
   "lazio": {
@@ -902,7 +925,8 @@ const teamsData = {
     players: ["إيفان بروفيديل", "سيرو إيموبيلي", "لويس ألبرتو", "ماتياس فيسينو", "بيدرو رودريغيز", "غوستاف إيلسون"],
     legends: ["سيلفيو بيرلوسكوني (رئيس سابق)", "ألسيدي ستوراسي", "بييرلويجي كاسيراغي", "يوان فيرون"],
     officialLinks: { website: "https://www.sslazio.it", youtube: "https://www.youtube.com/@OfficialSSLazio" },
-    videoEmbed: "https://www.youtube.com/embed/RM0R7s0TQ2A"
+    videoEmbed: "https://www.youtube.com/embed/RM0R7s0TQ2A",
+    videos: ["RM0R7s0TQ2A", "HfzZbSSPRGE", "byj9MJKIDNI"]
   },
 
   // ── LIGUE 1 ────────────────────────────────────────────────────────────────
@@ -928,7 +952,8 @@ const teamsData = {
     players: ["جيان لويجي دوناروما", "آشرف حكيمي", "خوان برييغاس", "فيتينيا دياني", "مارك باردييلا", "دسيريه دوي"],
     legends: ["كيليان مبابي", "ليونيل ميسي", "نيمار", "زلاتان إبراهيموفيتش"],
     officialLinks: { website: "https://www.psg.fr", youtube: "https://www.youtube.com/@psg" },
-    videoEmbed: "https://www.youtube.com/embed/uN4zJm6ZdFE"
+    videoEmbed: "https://www.youtube.com/embed/uN4zJm6ZdFE",
+    videos: ["uN4zJm6ZdFE", "fT0JMUHxn60", "WbrDVHrLpus"]
   },
 
   "olympique-marseille": {
@@ -952,7 +977,8 @@ const teamsData = {
     players: ["باو لوبيز", "ليوناردو باريديس", "أكيوس نديكا", "إسماعيل كونيتي", "لويس هندريكس", "بيري أميان"],
     legends: ["دروغبا (سابق)", "فرانك سوريب", "لوران بلان", "جي بيير باباييف"],
     officialLinks: { website: "https://www.om.fr", youtube: "https://www.youtube.com/@OM" },
-    videoEmbed: "https://www.youtube.com/embed/bP8OLWLdvaE"
+    videoEmbed: "https://www.youtube.com/embed/bP8OLWLdvaE",
+    videos: ["bP8OLWLdvaE", "h3n7W0JXuWI", "3vUuaRsHnHo"]
   },
 
   "monaco": {
@@ -975,7 +1001,8 @@ const teamsData = {
     players: ["الكسندر نوبيل", "ميناكير تشيكيزي", "فيليكس لوميكالي", "بنجامين سيسكو", "جورج اليس موكامبي", "بروس ستيف بيير"],
     legends: ["كيليان مبابي", "فابيان بارتيز", "توريسيلو مونتانا", "مارك ديزاي"],
     officialLinks: { website: "https://www.asmonaco.com", youtube: "https://www.youtube.com/@ASMonaco" },
-    videoEmbed: "https://www.youtube.com/embed/Ej5gS1gCYbI"
+    videoEmbed: "https://www.youtube.com/embed/Ej5gS1gCYbI",
+    videos: ["Ej5gS1gCYbI", "BPLkh0SJKSY", "UiImXm84wbk"]
   },
 
   "olympique-lyon": {
@@ -998,7 +1025,8 @@ const teamsData = {
     players: ["لوكاس بيريز", "ألكسندر لاكازيت", "كورنتان توليسو", "نيكلاس تاليزيني", "أيمريك لابورت (سابق)", "مالك فوفانا"],
     legends: ["ثيري هنري (سابق)", "جون ميشال أكاس", "غريغوري كوبيه", "بيكو مونتييل"],
     officialLinks: { website: "https://www.ol.fr", youtube: "https://www.youtube.com/@OlympiqueLyonnais" },
-    videoEmbed: "https://www.youtube.com/embed/7v5r9Q4bR9A"
+    videoEmbed: "https://www.youtube.com/embed/7v5r9Q4bR9A",
+    videos: ["7v5r9Q4bR9A", "gOGWVg-XJRI", "Vny5T6UBe3k"]
   },
 
   "losc-lille": {
@@ -1021,7 +1049,8 @@ const teamsData = {
     players: ["ليو جارنيتش", "يوسف يازيتشي", "أنغ زيو", "داجوت دووي", "مارسيل ديسالي (سابق مدرباً)", "آدم ماستور"],
     legends: ["إيدن هازارد", "بيبي داكور", "بيير-أميريك أوبامينانغ", "خوسيه ميمبراني"],
     officialLinks: { website: "https://www.losc.fr", youtube: "https://www.youtube.com/@LOSCLille" },
-    videoEmbed: "https://www.youtube.com/embed/p5cbA4m4o2Q"
+    videoEmbed: "https://www.youtube.com/embed/p5cbA4m4o2Q",
+    videos: ["p5cbA4m4o2Q", "R2-2h9e4lOk", "vSADPPRCmEo"]
   },
 
   "stade-rennes": {
@@ -1043,7 +1072,8 @@ const teamsData = {
     players: ["ستيف مانداندا", "بنجامين بوريغارد", "فلوريان موريس", "مارتن تيري", "كيلييان أنديهاسي", "باتريك فيلت"],
     legends: ["سيلفان ويلتورد", "روناالدو (انتقل من رين كشاب)", "يوان ميلان", "بنويه كوستيل"],
     officialLinks: { website: "https://www.staderennais.com", youtube: "https://www.youtube.com/@StadeRennaisFC" },
-    videoEmbed: "https://www.youtube.com/embed/kL0vF6YdC4M"
+    videoEmbed: "https://www.youtube.com/embed/kL0vF6YdC4M",
+    videos: ["kL0vF6YdC4M", "BXYkp3Gn4Gk", "r7jz0CzuMFc"]
   },
 
   // ── SAUDI PRO LEAGUE ───────────────────────────────────────────────────────
@@ -1069,7 +1099,8 @@ const teamsData = {
     players: ["ملاك رييز", "سالم الدوسري", "علي البليهي", "مالكوم", "سيرخيو ميلينكوفيتش سافيتش", "خوان كانسيلو"],
     legends: ["سامي الجابر", "فهد المهلل", "محمد الدعيع", "أيمن نور"],
     officialLinks: { website: "https://www.alhilal.com", youtube: "https://www.youtube.com/@alhilal" },
-    videoEmbed: "https://www.youtube.com/embed/eN8xwT4f4Nw"
+    videoEmbed: "https://www.youtube.com/embed/eN8xwT4f4Nw",
+    videos: ["eN8xwT4f4Nw", "OqV6YLqjUSI", "4tsMYRp8aBc"]
   },
 
   "al-nassr": {
@@ -1093,7 +1124,8 @@ const teamsData = {
     players: ["كريستيانو رونالدو", "ساديو ماني", "رودريغو سيرافيم", "سلطان غنام", "علي البليهي", "أبو عمر الأيمن"],
     legends: ["يامي العمر", "عبدالله الزيبق", "سامي العيسى", "ماجد عبدالله"],
     officialLinks: { website: "https://www.alnassr.sa", youtube: "https://www.youtube.com/@alnassr" },
-    videoEmbed: "https://www.youtube.com/embed/8M7KGe2UnmE"
+    videoEmbed: "https://www.youtube.com/embed/8M7KGe2UnmE",
+    videos: ["8M7KGe2UnmE", "BqsAZn12lx8", "v_a7pFUCuOE"]
   },
 
   "al-ittihad": {
@@ -1117,7 +1149,8 @@ const teamsData = {
     players: ["كريم بنزيما", "إنغولو كانتي", "روبن نيفيس", "فراس البريكان", "محمد كنو", "جعفر عسيري"],
     legends: ["علي العبسي", "عامر كوستا", "أيمن سعيد", "محمد بارسيج"],
     officialLinks: { website: "https://www.al-ittihad.com", youtube: "https://www.youtube.com/@AlIttihad" },
-    videoEmbed: "https://www.youtube.com/embed/GxHGf1X1t2A"
+    videoEmbed: "https://www.youtube.com/embed/GxHGf1X1t2A",
+    videos: ["GxHGf1X1t2A", "UrEzFJOvK8Y", "5zS0Oy0wMmg"]
   },
 
   "al-ahli": {
@@ -1140,7 +1173,8 @@ const teamsData = {
     players: ["روبيرتو فيرمينو", "رياض محرز", "إدوارد ميندي", "ماتياس فيدال", "أيمن يحيى", "عبدالإله العمري"],
     legends: ["خالد مسعد", "موسى هوساوي", "بدر الرجوان", "ثامر محمد"],
     officialLinks: { website: "https://www.alahli.com", youtube: "https://www.youtube.com/@alahlifc" },
-    videoEmbed: "https://www.youtube.com/embed/Ej5gS1gCYbI"
+    videoEmbed: "https://www.youtube.com/embed/Ej5gS1gCYbI",
+    videos: ["Ej5gS1gCYbI", "NVP1rQ3Rnlk", "G9xPu4PXnG4"]
   },
 
   // ── EREDIVISIE ─────────────────────────────────────────────────────────────
@@ -1166,7 +1200,8 @@ const teamsData = {
     players: ["دريس مرتنز (سابق)", "كينيث تايلور", "يوردان سيريو", "مالا بروكلين", "ستيف بيرهويس", "أنتوني تايلور"],
     legends: ["يوهان كرويف", "ريكي فان دير فارت", "مارك أوفرمارس", "داني بليند"],
     officialLinks: { website: "https://www.ajax.nl", youtube: "https://www.youtube.com/@Ajax" },
-    videoEmbed: "https://www.youtube.com/embed/gR1VjA6Yx5M"
+    videoEmbed: "https://www.youtube.com/embed/gR1VjA6Yx5M",
+    videos: ["gR1VjA6Yx5M", "2v9HDAXV9cA", "i2yZzGHQVWg"]
   },
 
   "psv-eindhoven": {
@@ -1190,7 +1225,8 @@ const teamsData = {
     players: ["فريديريكو فيستيرغارد", "لوكاس روميرو", "آيلاند دارفاش", "نوا لانغ", "جوردان تيزي", "إيفان بيريبا"],
     legends: ["رونالدو البرازيلي (انطلق من PSV)", "أريين روبن", "مارك فان بومل", "روميداريو"],
     officialLinks: { website: "https://www.psv.nl", youtube: "https://www.youtube.com/@PSV" },
-    videoEmbed: "https://www.youtube.com/embed/c0Qw0Q6M6Y8"
+    videoEmbed: "https://www.youtube.com/embed/c0Qw0Q6M6Y8",
+    videos: ["c0Qw0Q6M6Y8", "TiP5g2Rq6Io", "YUKbNrn8I_Y"]
   },
 
   "feyenoord": {
@@ -1215,7 +1251,329 @@ const teamsData = {
     players: ["ييلا فيشير", "تيانو لوكا", "ساين رايني", "رامي بيرسي", "فران كافانا", "ايجي أيمانو"],
     legends: ["يوهان كرويف (تطور هناك)", "رونالد كومان", "بيير فان هوجدونك", "روبن فان بيرسي"],
     officialLinks: { website: "https://www.feyenoord.nl", youtube: "https://www.youtube.com/@Feyenoord" },
-    videoEmbed: "https://www.youtube.com/embed/RM0R7s0TQ2A"
+    videoEmbed: "https://www.youtube.com/embed/RM0R7s0TQ2A",
+    videos: ["RM0R7s0TQ2A", "jWyRhCO8dIo", "N5C0fIeJuSA"]
+  },
+
+  // ── PREMIER LEAGUE (additional) ────────────────────────────────────────────
+  "aston-villa": {
+    name: "أستون فيلا",
+    league: "premier-league", leagueName: "الدوري الإنجليزي الممتاز", leagueUrl: "/league/premier-league/",
+    colorFrom: "#3d0028", colorTo: "#95BFE5", accent: "#670E36",
+    logo: "/teams/premier-league/aston-villa.png",
+    founded: "1874", stadium: "فيلا بارك", city: "برمنغهام", coach: "أوناي إيمري",
+    history: [
+      "أستون فيلا أحد أعرق الأندية الإنجليزية، وكان من مؤسسي الدوري الإنجليزي عام 1888.",
+      "حقق النادي لقب دوري أبطال أوروبا عام 1982، وهو إنجاز تاريخي بقي حتى الآن رمزاً للذاكرة الجميلة لجماهيره.",
+      "عاد فيلا إلى المنافسة الأوروبية في موسم 2024-25 بقيادة أوناي إيمري الذي أحيا الطموح الكروي بالنادي."
+    ],
+    titles: [
+      "الدوري الإنجليزي: 7 ألقاب (آخرها 1981)",
+      "كأس الاتحاد الإنجليزي: 7 ألقاب",
+      "دوري أبطال أوروبا: لقب 1982 (الأول لنادٍ إنجليزي خارج ليفربول ومانشستر يونايتد)",
+      "كأس الاتحاد الأوروبي: لقب 1982",
+      "كأس الرابطة: 5 ألقاب"
+    ],
+    staff: ["أوناي إيمري — المدرب الرئيسي", "جهاز فني متكامل", "داميان هانكوكس — المدير الرياضي", "طاقم طبي وبدني"],
+    players: ["أولي واتكينز", "إيمريك لابورت", "يوري تيليمانز", "جون ماكغين", "ماتي كاش", "بواكي سارما"],
+    legends: ["بيتر ويث", "غاري شو", "روني فاريا", "دون هوي"],
+    officialLinks: { website: "https://www.avfc.co.uk", youtube: "https://www.youtube.com/@AVFCOfficial" },
+    videoEmbed: "https://www.youtube.com/embed/s1W6ZGT_3jc",
+    videos: ["s1W6ZGT_3jc", "LFlcOxPXs5Y", "2tJD6S9Yp-E"]
+  },
+
+  "newcastle": {
+    name: "نيوكاسل يونايتد",
+    league: "premier-league", leagueName: "الدوري الإنجليزي الممتاز", leagueUrl: "/league/premier-league/",
+    colorFrom: "#0a0a0a", colorTo: "#383838", accent: "#111827",
+    logo: "/teams/premier-league/newcastle.png",
+    founded: "1892", stadium: "سانت جيمس بارك", city: "نيوكاسل", coach: "إيدي هوي",
+    history: [
+      "نيوكاسل يونايتد نادٍ يمثل مدينة عمالية عريقة في شمال إنجلترا، ويتمتع بجماهيرية حارة تملأ سانت جيمس بارك في كل مباراة.",
+      "في عام 2021 استحوذ على النادي صندوق الاستثمارات العامة السعودي مما أطلق مرحلة جديدة من الطموح والاستثمار.",
+      "منذ ذلك الحين يبني النادي مشروعاً جدياً للعودة إلى المنافسة على الألقاب والانضمام إلى نخبة الدوري الإنجليزي."
+    ],
+    titles: [
+      "الدوري الإنجليزي: 4 ألقاب (آخرها 1927)",
+      "كأس الاتحاد الإنجليزي: 6 ألقاب (آخرها 1955)",
+      "كأس بنغالين: 1 لقب"
+    ],
+    staff: ["إيدي هوي — المدرب الرئيسي", "جهاز فني محترف", "بول ويلسون — مدير الكشافة", "طاقم طبي وبدني"],
+    players: ["برونو غيمارايش", "سيفن تونالي", "تريفور تشالوبا", "المحمد إيساكا", "كيفان تروبويل", "دان بيرن"],
+    legends: ["ألان شيرر", "كيفن كيغان", "لي كلارك", "ستيف بروس"],
+    officialLinks: { website: "https://www.nufc.co.uk", youtube: "https://www.youtube.com/@NUFC" },
+    videoEmbed: "https://www.youtube.com/embed/8eAvR3u6Y7s",
+    videos: ["8eAvR3u6Y7s", "H5QZ2Q2FsZY", "Kcy1VHhqpFY"]
+  },
+
+  "west-ham": {
+    name: "وست هام يونايتد",
+    league: "premier-league", leagueName: "الدوري الإنجليزي الممتاز", leagueUrl: "/league/premier-league/",
+    colorFrom: "#4d0000", colorTo: "#7C2C3B", accent: "#7A263A",
+    logo: "/teams/premier-league/west-ham.png",
+    founded: "1895", stadium: "لندن ستاديوم", city: "لندن", coach: "خوليو لوبيز",
+    history: [
+      "وست هام يونايتد نادٍ ذو جذور عمالية عميقة في لندن، وأنتج عدداً من أبرز لاعبي المنتخب الإنجليزي في التاريخ.",
+      "انتقل النادي إلى الملعب الأولمبي الجديد في 2016 مما أحدث تحولاً في بنيته التحتية وطموحاته.",
+      "في موسم 2022-23 حقق الفريق الدوري الأوروبي للكونفرنس، محققاً أول لقب أوروبي منذ عقود."
+    ],
+    titles: [
+      "الدوري الأوروبي للكونفرنس: لقب 2023",
+      "كأس الاتحاد الإنجليزي: 3 ألقاب (1964، 1975، 1980)",
+      "الكأس الأوروبية للكؤوس: لقب 1965"
+    ],
+    staff: ["خوليو لوبيز — المدرب الرئيسي", "جهاز فني متكامل", "تيم دافني — مدير العمليات", "طاقم طبي وبدني"],
+    players: ["دوكو موكيلي", "لوكاس باكيتا", "جارود بوين", "جيمس وارد-براوس", "محمد كودوس", "نايجل ديكالان"],
+    legends: ["بوبي مور", "غيف هيرست", "مارتن بيترز", "تريفور بروكينغ"],
+    officialLinks: { website: "https://www.whufc.com", youtube: "https://www.youtube.com/@WestHamUtd" },
+    videoEmbed: "https://www.youtube.com/embed/mXnABwPOa5U",
+    videos: ["mXnABwPOa5U", "k4w8RL3xyE4", "IEDyMqFPi6g"]
+  },
+
+  "everton": {
+    name: "إيفرتون",
+    league: "premier-league", leagueName: "الدوري الإنجليزي الممتاز", leagueUrl: "/league/premier-league/",
+    colorFrom: "#003380", colorTo: "#003399", accent: "#003399",
+    logo: "/teams/premier-league/everton.png",
+    founded: "1878", stadium: "جوديسون بارك", city: "ليفربول", coach: "شين ديفيد",
+    history: [
+      "إيفرتون أحد الأندية المؤسسة للدوري الإنجليزي، وينافس ليفربول في أحد أشهر الديربيات المحلية.",
+      "يملك النادي تاريخاً كروياً ثرياً ولقباً في الكأس الأوروبية للكؤوس عام 1985.",
+      "يواجه النادي مرحلة تاريخية جديدة بالانتقال إلى ملعب بريما سايتس في موسم 2025-26."
+    ],
+    titles: [
+      "الدوري الإنجليزي: 9 ألقاب (آخرها 1987)",
+      "كأس الاتحاد الإنجليزي: 5 ألقاب",
+      "الكأس الأوروبية للكؤوس: لقب 1985"
+    ],
+    staff: ["شين ديفيد — المدرب الرئيسي", "جهاز فني متكامل", "كيفن ثيويلس — مدير الكشافة", "طاقم طبي"],
+    players: ["جوردان بيكفورد", "دومينيك كالفيرت-لوين", "إيلانو الإيرلندي", "فارنو مبيلا", "كيفن بوهل", "تشاو جوشيا"],
+    legends: ["ويين روني (انطلق من إيفرتون)", "تيم كاهيل", "دنكان فيرغسون", "نيفيل سوثال"],
+    officialLinks: { website: "https://www.evertonfc.com", youtube: "https://www.youtube.com/@EvertonFC" },
+    videoEmbed: "https://www.youtube.com/embed/WCy3mS0FMXU",
+    videos: ["WCy3mS0FMXU", "j0LKcH5yQrU", "qUiTQzKo6ck"]
+  },
+
+  "brighton": {
+    name: "برايتون",
+    league: "premier-league", leagueName: "الدوري الإنجليزي الممتاز", leagueUrl: "/league/premier-league/",
+    colorFrom: "#003087", colorTo: "#0057B8", accent: "#0057B8",
+    logo: "/teams/premier-league/brighton.png",
+    founded: "1901", stadium: "أمكس ستاديوم", city: "برايتون", coach: "فابيان هورتسلر",
+    history: [
+      "برايتون أحد أكثر الأندية الإنجليزية تطوراً في مرحلة ما بعد 2020، وحقق حضوراً أوروبياً مفاجئاً.",
+      "تحت قيادة روبرتو دي زيربي وقبله غراهام بوتر، تميز النادي بأسلوب لعب هجومي منظم واستقطب اهتماماً واسعاً.",
+      "يُعرف النادي بعقليته التحليلية في الانتقالات وبتطوير مواهب شابة بأسعار معقولة وبيعها بأرباح كبيرة."
+    ],
+    titles: [
+      "الدوري الإنجليزي الممتاز — المشاركة منذ 2017",
+      "الدوري الأوروبي — مشاركة 2023-24",
+      "بطولات في الدوريات الدنيا قبل الصعود"
+    ],
+    staff: ["فابيان هورتسلر — المدرب الرئيسي", "جهاز فني متكامل", "بول بارني — المدير التقني", "طاقم طبي وبدني"],
+    players: ["جولي ديجكرا-مان", "داني ويلبيك", "ياسين آيوب", "تارق لامبتي", "إيفان فيرغسون", "سيمون أدينغبرا"],
+    legends: ["غلين موري", "بوبي زاموراه", "دنيس غيكو", "توني مافسوكو"],
+    officialLinks: { website: "https://www.brightonandhovealbion.com", youtube: "https://www.youtube.com/@BrightonFC" },
+    videoEmbed: "https://www.youtube.com/embed/k4w8RL3xyE4",
+    videos: ["k4w8RL3xyE4", "fOqh7OxzbaE", "cSBhGfkfO58"]
+  },
+
+  // ── LA LIGA (additional) ────────────────────────────────────────────────────
+  "villarreal": {
+    name: "فياريال",
+    league: "la-liga", leagueName: "الدوري الإسباني", leagueUrl: "/league/la-liga/",
+    colorFrom: "#4d4700", colorTo: "#F7D002", accent: "#F7D002",
+    logo: "/teams/la-liga/villarreal.png",
+    founded: "1923", stadium: "إيستاديو دي لا سيراميكا", city: "فياريال", coach: "المدرب الحالي",
+    history: [
+      "فياريال نادٍ إسباني من منطقة فالنسيا، ويُعرف بـ'الغواصة الصفراء' بسبب ألوانه اللافتة.",
+      "حقق الكأس الأوروبية لعام 2021 بفوزه بالدوري الأوروبي عبر إقصاء مانشستر يونايتد في الدور النهائي.",
+      "يمثل النموذج الأمثل للنادي الصغير الذي حقق نجاحات كبيرة بفضل إدارة رشيدة وانتقالات ذكية."
+    ],
+    titles: [
+      "الدوري الأوروبي: لقب 2021",
+      "كأس الملك الإسباني",
+      "الدوري الأوروبي — وصيف 2006"
+    ],
+    staff: ["المدرب الرئيسي", "جهاز فني متكامل", "إدارة رياضية", "طاقم طبي وبدني"],
+    players: ["خيرار مورينو", "خوسيه لويس موريلاس غونثاليث", "خوان فوي فيييس", "باو توريس", "إتيين كابو", "فرانسيس كوكو"],
+    legends: ["خوان رومان ريكيلمي (سابق)", "روبير بيريس", "دييغو فورلان (سابق)", "كارلوس ماركيز"],
+    officialLinks: { website: "https://www.villarrealcf.es", youtube: "https://www.youtube.com/@VillarrealCFofficial" },
+    videoEmbed: "https://www.youtube.com/embed/ZFqMVTmRe4k",
+    videos: ["ZFqMVTmRe4k", "Wr9mFMJRIus", "DfaZ5ZvQKzA"]
+  },
+
+  "athletic-bilbao": {
+    name: "أتلتيك بلباو",
+    league: "la-liga", leagueName: "الدوري الإسباني", leagueUrl: "/league/la-liga/",
+    colorFrom: "#4d0000", colorTo: "#CC0000", accent: "#CC0000",
+    logo: "/teams/la-liga/athletic-bilbao.png",
+    founded: "1898", stadium: "سان ماميس", city: "بلباو", coach: "أرنيستو فالفيردي",
+    history: [
+      "أتلتيك بلباو من الأندية الأكثر تميزاً في إسبانيا، إذ يعتمد سياسة فريدة تقتصر على الاعتماد على لاعبين من المنطقة الباسكية فقط.",
+      "رغم هذا القيد الاستثنائي، لم يهبط النادي قط من الدوري الإسباني منذ تأسيسه، وهو إنجاز رياضي نادر عالمياً.",
+      "يملك النادي إرثاً تاريخياً ضخماً وملعب سان ماميس الاستثنائي الذي يُعدّ من أجمل الملاعب الأوروبية."
+    ],
+    titles: [
+      "الدوري الإسباني: 8 ألقاب",
+      "كأس الملك الإسباني: 24 لقباً (الأكثر تتويجاً في تاريخ الكأس)",
+      "الدوري الأوروبي — وصيف 2012"
+    ],
+    staff: ["أرنيستو فالفيردي — المدرب الرئيسي", "جهاز فني متكامل", "مانيكسين دو لا فوينتي — المدير الرياضي", "طاقم طبي"],
+    players: ["أونيكا ويليامز", "يونير رابورت", "نيكو وييامز", "غرانيت تشاكا (سابق)", "أون ييانكو باييخا", "مارتن تشيريتشو"],
+    legends: ["بيشتي ليزارازو", "أراستوكزا أرغويليس", "تيلمو زارا", "دانييل زوبيزاريتا"],
+    officialLinks: { website: "https://www.athletic-club.eus", youtube: "https://www.youtube.com/@AthleticClub" },
+    videoEmbed: "https://www.youtube.com/embed/YoGcm6XZLIY",
+    videos: ["YoGcm6XZLIY", "9Gf27ZnqEvo", "EoRXUwBBJSE"]
+  },
+
+  // ── BUNDESLIGA (additional) ─────────────────────────────────────────────────
+  "vfb-stuttgart": {
+    name: "فيإف بي شتوتغارت",
+    league: "bundesliga", leagueName: "الدوري الألماني", leagueUrl: "/league/bundesliga/",
+    colorFrom: "#660022", colorTo: "#CC0033", accent: "#CC0033",
+    logo: "/teams/bundesliga/vfb-stuttgart.png",
+    founded: "1893", stadium: "ميرسيدس-بنز أرينا", city: "شتوتغارت", coach: "سيباستيان هونيس",
+    history: [
+      "شتوتغارت أحد الأندية التاريخية في ألمانيا، وانتزع لقب البوندسليغا خمس مرات آخرها عام 2007.",
+      "بعد سنوات من الهبوط والصعود عاد النادي إلى الصدارة في موسم 2024-25 بقيادة المدرب سيباستيان هونيس.",
+      "يُعرف بتطويره المواهب الشابة الألمانية، ونجح أخيراً في التأهل لدوري أبطال أوروبا بأسلوب لعب مثير."
+    ],
+    titles: [
+      "البوندسليغا: 5 ألقاب (1950، 1952، 1984، 1992، 2007)",
+      "كأس ألمانيا: 3 ألقاب",
+      "الكأس الأوروبية للكؤوس: لقب 1957"
+    ],
+    staff: ["سيباستيان هونيس — المدرب الرئيسي", "جهاز فني متكامل", "فيسل هاوفيلد — المدير الرياضي", "طاقم طبي وبدني"],
+    players: ["أليكساندر نوبيل", "أنتون أنتون", "ديميترييفسكي ستيفان", "كريس فورنشروت", "نيك ويليامسون", "سيياكا ديبيلس"],
+    legends: ["غيرت موير", "تيلبر دولكه", "مانفريد بورمان", "فريدي بوبيتش"],
+    officialLinks: { website: "https://www.vfb.de", youtube: "https://www.youtube.com/@VfBStuttgart" },
+    videoEmbed: "https://www.youtube.com/embed/gOGWVg-XJRI",
+    videos: ["gOGWVg-XJRI", "Vny5T6UBe3k", "RBTRnqWtqKs"]
+  },
+
+  // ── SERIE A (additional) ────────────────────────────────────────────────────
+  "atalanta": {
+    name: "أتالانتا",
+    league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
+    colorFrom: "#003380", colorTo: "#1C4F9C", accent: "#1C4F9C",
+    logo: "/teams/serie-a/atalanta.png",
+    founded: "1907", stadium: "غيويس بي كابريني", city: "بيرغامو", coach: "غيان باولو غاسبيريني",
+    history: [
+      "أتالانتا تحولت في السنوات الأخيرة إلى واحدة من أكثر الفرق إثارة في أوروبا بأسلوب لعب هجومي لافت.",
+      "تحت قيادة غاسبيريني، بات النادي صانعاً للنجوم ومورداً دائماً للمنتخب الإيطالي.",
+      "فازت أتالانتا بالدوري الأوروبي 2024 لتحقق أول لقب أوروبي في تاريخها في مفاجأة استثنائية."
+    ],
+    titles: [
+      "الدوري الأوروبي: لقب 2024 (أول في التاريخ)",
+      "كأس إيطاليا: 3 ألقاب",
+      "الدوري الإيطالي — عدة مواسم في المراتب الأوروبية"
+    ],
+    staff: ["غيان باولو غاسبيريني — المدرب الرئيسي", "جهاز فني متكامل", "توني ديالومي — المدير الرياضي", "طاقم طبي وبدني"],
+    players: ["جيانلوكا سكاماكا", "أليكسي سافيليف", "ماتيو بيساني", "دافيد زابالييتا", "راسموس هويلوند (سابق)", "كوبيا ميرال"],
+    legends: ["كورلانو كومبي", "لويجي ريفا (سابق قصيراً)", "باولو بيرلو (تدريب)", "جيانياندريا ثروري"],
+    officialLinks: { website: "https://www.atalanta.it", youtube: "https://www.youtube.com/@Atalanta_BC" },
+    videoEmbed: "https://www.youtube.com/embed/Vny5T6UBe3k",
+    videos: ["Vny5T6UBe3k", "gOGWVg-XJRI", "RBTRnqWtqKs"]
+  },
+
+  "fiorentina": {
+    name: "فيورنتينا",
+    league: "serie-a", leagueName: "الدوري الإيطالي", leagueUrl: "/league/serie-a/",
+    colorFrom: "#3d0069", colorTo: "#6B1DA6", accent: "#7C2AC7",
+    logo: "/teams/serie-a/fiorentina.png",
+    founded: "1926", stadium: "ستاديو أرتيميو فرانكي", city: "فلورنسا", coach: "رافاييل باليافيكينو",
+    history: [
+      "فيورنتينا تمثل مدينة فلورنسا الثقافية، وتتميز بألوانها البنفسجية الجميلة وبهوية ثقافية راسخة.",
+      "حقق النادي لقبين في الدوري الإيطالي وكأساً أوروبياً واحداً، ويمثل قوة مستمرة في عالم كرة القدم الإيطالية.",
+      "وصل إلى نهائي الدوري الأوروبي للكونفرنس في 2024 و2025، مؤكداً طموحه الأوروبي المتنامي."
+    ],
+    titles: [
+      "الدوري الإيطالي (سيريا آ): لقبان (1956، 1969)",
+      "كأس إيطاليا: 6 ألقاب",
+      "الكأس الأوروبية للكؤوس: لقب 1961",
+      "نهائي الكونفرنس ليغ: 2024، 2025 (وصيف)"
+    ],
+    staff: ["رافاييل باليافيكينو — المدرب الرئيسي", "جهاز فني متكامل", "داريو ماردريني — المدير الرياضي", "طاقم طبي"],
+    players: ["دافيد دي خيا (سابق)", "لوكا يوريتيش", "الاس دودي", "ميشاييل كاكيريدش", "خوناثان إيكونيش", "ألبيرتو تشيس"],
+    legends: ["غابرييل باتيستوتا", "روبيرتو باجيو", "نورمان مورتيمر", "غيانكا فرانكو دي ماجيستريس"],
+    officialLinks: { website: "https://www.acffiorentina.it", youtube: "https://www.youtube.com/@ACFFiorentina" },
+    videoEmbed: "https://www.youtube.com/embed/cNBGEF7Nzxo",
+    videos: ["cNBGEF7Nzxo", "m2JLqj6fMOg", "GxHGf1X1t2A"]
+  },
+
+  // ── EREDIVISIE (additional) ─────────────────────────────────────────────────
+  "az-alkmaar": {
+    name: "إيه زي ألكمار",
+    league: "eredivisie", leagueName: "الدوري الهولندي", leagueUrl: "/league/eredivisie/",
+    colorFrom: "#7a0000", colorTo: "#CC0000", accent: "#CC0000",
+    logo: "/teams/eredivisie/az-alkmaar.png",
+    founded: "1967", stadium: "إيه زي ستاديون", city: "ألكمار", coach: "ماطياس يانسن",
+    history: [
+      "إيه زي ألكمار أحد الأندية الهولندية المنافسة، ويُعرف باستمراره في المراتب العليا من الدوري الهولندي.",
+      "حقق لقب الدوري الهولندي مرتين، وبنى سمعة قوية في تخريج المواهب الشابة المتميزة.",
+      "يواصل النادي تحديه لثلاثي الكرة الهولندية التقليدي: أياكس وفاينورد وبي إس في."
+    ],
+    titles: [
+      "الدوري الهولندي: لقبان (1981، 2009)",
+      "كأس هولندا: 4 ألقاب",
+      "كأس الاتحاد الأوروبي UEFA — وصيف 1981"
+    ],
+    staff: ["ماطياس يانسن — المدرب الرئيسي", "جهاز فني متكامل", "ماكس هوسيلز — المدير الرياضي", "طاقم طبي وبدني"],
+    players: ["جورديان تيزي", "فلور فان دير بروك", "نيس فيرمولن", "مارك فلاكنيا", "داني ثيكوث", "إيهدي دروغبا-آند"],
+    legends: ["تون لوهمان", "ييف باستياانسن", "إلياس يوهانسن", "رون فلار"],
+    officialLinks: { website: "https://www.az.nl", youtube: "https://www.youtube.com/@AZAlkmaar" },
+    videoEmbed: "https://www.youtube.com/embed/2v9HDAXV9cA",
+    videos: ["2v9HDAXV9cA", "i2yZzGHQVWg", "TiP5g2Rq6Io"]
+  },
+
+  // ── SAUDI PRO LEAGUE (additional) ──────────────────────────────────────────
+  "al-shabab": {
+    name: "الشباب",
+    league: "saudi-pro-league", leagueName: "دوري روشن للمحترفين", leagueUrl: "/league/saudi-pro-league/",
+    colorFrom: "#0a0a1a", colorTo: "#1a1a5e", accent: "#3949AB",
+    logo: "/teams/saudi-pro-league/al-shabab.png",
+    founded: "1947", stadium: "ملعب الأمير فيصل بن فهد", city: "الرياض", coach: "المدرب الحالي",
+    history: [
+      "الشباب نادٍ سعودي عريق من الرياض، ويملك تاريخاً طويلاً في الكرة السعودية مع حضور مستمر في الدوري.",
+      "حقق النادي ألقاباً متعددة في الدوريات والكؤوس السعودية عبر العقود الماضية.",
+      "يواصل النادي مسيرته في دوري روشن للمحترفين ساعياً للتنافس على الصدارة مع الأندية الكبرى."
+    ],
+    titles: [
+      "الدوري السعودي: 6 ألقاب",
+      "كأس الملك: 4 ألقاب",
+      "كأس ولي العهد: 3 ألقاب"
+    ],
+    staff: ["المدرب الرئيسي", "جهاز فني متكامل", "إدارة رياضية", "طاقم طبي وبدني"],
+    players: ["عبدالرحمن الغامدي", "نواف العقيدي", "خالد الشهري", "عمار الحاج", "محمد البقمي", "فيصل المولد"],
+    legends: ["حمد الله سالم", "عدنان الدانيال", "عبدالله الزيبق", "ياسر القحطاني (سابق)"],
+    officialLinks: { website: "https://www.alshabab.com.sa", youtube: "https://www.youtube.com/@AlShahabFC" },
+    videoEmbed: "https://www.youtube.com/embed/OqV6YLqjUSI",
+    videos: ["OqV6YLqjUSI", "4tsMYRp8aBc", "NVP1rQ3Rnlk"]
+  },
+
+  "al-qadsiah": {
+    name: "القادسية",
+    league: "saudi-pro-league", leagueName: "دوري روشن للمحترفين", leagueUrl: "/league/saudi-pro-league/",
+    colorFrom: "#003d00", colorTo: "#005500", accent: "#006633",
+    logo: "/teams/saudi-pro-league/al-qadsiah.png",
+    founded: "1964", stadium: "ملعب الأمير محمد بن فهد", city: "الخبر", coach: "المدرب الحالي",
+    history: [
+      "القادسية نادٍ من منطقة الشرق السعودية، وحقق نجاحات لافتة في مراحل مختلفة من تاريخه الكروي.",
+      "عاد النادي إلى دوري المحترفين الممتاز وصعد بشكل مثير في تصنيفات الدوري السعودي.",
+      "يسعى النادي لتطوير بنيته الكروية والاستفادة من التحول الضخم الذي تشهده كرة القدم السعودية."
+    ],
+    titles: [
+      "كأس الملك: ألقاب تاريخية",
+      "الدوري السعودي — مشاركات في الدرجة الأولى",
+      "بطولات الأندية السعودية"
+    ],
+    staff: ["المدرب الرئيسي", "جهاز فني متكامل", "إدارة رياضية", "طاقم طبي وبدني"],
+    players: ["محمد الشهراني", "عبدالرحمن الشيخ", "فهد الهمد", "علي المعيوف", "عمر السومة", "أيوب المدي"],
+    legends: ["عمر السومة", "أيمن نور (سابق)", "نجوم تاريخيون من الشرق السعودي"],
+    officialLinks: { website: "https://www.alqadsiah.com.sa", youtube: "https://www.youtube.com/@AlQadsiah" },
+    videoEmbed: "https://www.youtube.com/embed/G9xPu4PXnG4",
+    videos: ["G9xPu4PXnG4", "4tsMYRp8aBc", "UrEzFJOvK8Y"]
   }
 };
 
@@ -1490,22 +1848,37 @@ export default function TeamPage({ params }) {
 
         <AdSlot label="مساحة إعلانية وسط" minHeight={120} style={{ marginBottom: 26 }} />
 
-        {/* ── VIDEO ── */}
-        {team.videoEmbed && (
-          <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
-              <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
-              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>فيديو</h2>
-            </div>
-            <div style={{ position: "relative", paddingBottom: "52%", height: 0, overflow: "hidden", borderRadius: "20px" }}>
-              <iframe src={team.videoEmbed} title={team.name}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0, borderRadius: "20px" }}
-              />
-            </div>
-          </section>
-        )}
+        {/* ── VIDEOS ── */}
+        {(() => {
+          const videoIds = (team.videos && team.videos.length > 0)
+            ? team.videos
+            : team.videoEmbed
+              ? [team.videoEmbed.replace("https://www.youtube.com/embed/", "").split("?")[0]]
+              : [];
+          if (videoIds.length === 0) return null;
+          return (
+            <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
+                <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
+                <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>▶ فيديوهات الفريق</h2>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: videoIds.length === 1 ? "1fr" : "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
+                {videoIds.map((id, idx) => (
+                  <div key={idx} style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "16px", background: "#000" }}>
+                    <iframe
+                      src={`https://www.youtube.com/embed/${id}`}
+                      title={`${team.name} — فيديو ${idx + 1}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0, borderRadius: "16px" }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* ── OFFICIAL LINKS ── */}
         <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
