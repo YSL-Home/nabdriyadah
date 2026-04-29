@@ -51,7 +51,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions@github.com"
 
-          git add content/articles/seo-articles.json content/raw-news.json
+          git add -A
 
           if git diff --cached --quiet; then
             echo "Rien à committer."
