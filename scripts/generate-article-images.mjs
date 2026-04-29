@@ -1,8 +1,12 @@
 import fs from "fs";
 import path from "path";
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+// Clés API disponibles — ordre de priorité coût croissant
+const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY;   // Gemini Imagen — priorité 1
+const OPENAI_API_KEY  = process.env.OPENAI_API_KEY;   // GPT            — priorité 2
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
+
+const HAS_IMAGE_API = !!(GOOGLE_API_KEY || OPENAI_API_KEY);
 
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 const OUTPUT_DIR = path.join(process.cwd(), "public/generated");
@@ -112,6 +116,30 @@ QUALITY TARGET:
 - The image must feel SPECIFIC to this article's story, not a generic stock photo`.trim();
 }
 
+// ── Gemini Imagen (Google AI) — priorité 1, rapide et moins cher ─────────
+async function tryGeminiImagen(prompt) {
+  if (!GOOGLE_API_KEY) throw new Error("No GOOGLE_API_KEY");
+  // Tronque le prompt à 480 chars (limite Imagen)
+  const p = prompt.slice(0, 480);
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-fast-generate-001:predict?key=${GOOGLE_API_KEY}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        instances: [{ prompt: p }],
+        parameters: { sampleCount: 1, aspectRatio: "16:9", safetyFilterLevel: "BLOCK_SOME" }
+      })
+    }
+  );
+  const data = await response.json();
+  if (!response.ok) throw new Error(`Gemini Imagen error: ${JSON.stringify(data?.error || data).slice(0, 120)}`);
+  const b64 = data?.predictions?.[0]?.bytesBase64Encoded;
+  if (!b64) throw new Error("Gemini: no image data returned");
+  return b64;
+}
+
+// ── GPT-Image-1 ───────────────────────────────────────────────────────────
 async function tryGptImage1(prompt) {
   const response = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
@@ -163,13 +191,37 @@ async function tryDallE3(prompt) {
   return b64;
 }
 
+// ── Orchestrateur : Gemini → GPT-Image-1 → DALL-E-3 ─────────────────────
 async function generateImageBase64(prompt) {
-  try {
-    return await tryGptImage1(prompt);
-  } catch (e1) {
-    console.log(`  gpt-image-1 failed (${e1.message.slice(0, 80)}), trying dall-e-3...`);
-    return await tryDallE3(prompt);
+  // 1. Gemini (le moins cher, souvent gratuit dans la free tier)
+  if (GOOGLE_API_KEY) {
+    try {
+      const b64 = await tryGeminiImagen(prompt);
+      console.log("    ✓ Gemini Imagen");
+      return b64;
+    } catch (e) {
+      console.log(`    Gemini failed: ${e.message.slice(0, 80)}`);
+    }
   }
+  // 2. GPT-Image-1
+  if (OPENAI_API_KEY) {
+    try {
+      const b64 = await tryGptImage1(prompt);
+      console.log("    ✓ gpt-image-1");
+      return b64;
+    } catch (e) {
+      console.log(`    gpt-image-1 failed: ${e.message.slice(0, 80)}`);
+    }
+    // 3. DALL-E-3 (fallback GPT)
+    try {
+      const b64 = await tryDallE3(prompt);
+      console.log("    ✓ dall-e-3");
+      return b64;
+    } catch (e) {
+      throw new Error(`All image APIs failed. Last: ${e.message.slice(0, 80)}`);
+    }
+  }
+  throw new Error("No image API key configured");
 }
 
 async function sleep(ms) {
@@ -190,10 +242,11 @@ async function downloadImage(url, destPath) {
 }
 
 async function main() {
-  if (!OPENAI_API_KEY) {
-    console.log("OPENAI_API_KEY missing, skipping image generation.");
+  if (!HAS_IMAGE_API) {
+    console.log("Aucune clé API image (GOOGLE_API_KEY / OPENAI_API_KEY) — génération images ignorée.");
     process.exit(0);
   }
+  console.log(`Image API: ${GOOGLE_API_KEY ? "Gemini ✓" : ""}${OPENAI_API_KEY ? " GPT ✓" : ""}`);
 
   const articles = safeReadJson(ARTICLES_PATH);
 

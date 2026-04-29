@@ -2,7 +2,10 @@ import fs from "fs";
 import path from "path";
 import { execFileSync } from "child_process";
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+// Priorité coût : Anthropic Claude (moins cher) → OpenAI GPT (fallback)
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const ANTHROPIC_MODEL   = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
+const OPENAI_API_KEY    = process.env.OPENAI_API_KEY;
 
 const INPUT_PATH = path.join(process.cwd(), "content/raw-news.json");
 const OUTPUT_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
@@ -165,31 +168,67 @@ function fallbackArticle(item, index) {
   };
 }
 
-async function callOpenAI(prompt, temperature = 0.3, systemPrompt = null) {
-  if (!OPENAI_API_KEY) return null;
+// ── Anthropic Claude (priorité — moins cher) ─────────────────────────────
+async function callAnthropic(prompt, systemPrompt = null) {
+  if (!ANTHROPIC_API_KEY) return null;
   try {
-    const messages = [
-      { role: "system", content: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط." },
-      { role: "user", content: prompt }
-    ];
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
+        "x-api-key": ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json"
       },
-      body: JSON.stringify({ model: "gpt-4o", temperature, messages, max_tokens: 3000 })
+      body: JSON.stringify({
+        model: ANTHROPIC_MODEL,
+        max_tokens: 3000,
+        system: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط.",
+        messages: [{ role: "user", content: prompt }]
+      })
     });
     const data = await response.json();
     if (!response.ok) {
-      console.log("OpenAI error:", JSON.stringify(data?.error || data));
+      console.log("Anthropic error:", data?.error?.message || JSON.stringify(data).slice(0, 120));
       return null;
     }
+    return data?.content?.[0]?.text || null;
+  } catch (error) {
+    console.log("Anthropic request failed:", error.message);
+    return null;
+  }
+}
+
+// ── OpenAI GPT (fallback si Anthropic indisponible) ───────────────────────
+async function callOpenAI(prompt, systemPrompt = null) {
+  if (!OPENAI_API_KEY) return null;
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${OPENAI_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",  // mini = 15× moins cher que gpt-4o
+        temperature: 0.4,
+        messages: [
+          { role: "system", content: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط." },
+          { role: "user", content: prompt }
+        ],
+        max_tokens: 3000
+      })
+    });
+    const data = await response.json();
+    if (!response.ok) { console.log("OpenAI error:", JSON.stringify(data?.error || data).slice(0, 120)); return null; }
     return data?.choices?.[0]?.message?.content || null;
   } catch (error) {
     console.log("OpenAI request failed:", error.message);
     return null;
   }
+}
+
+// ── Sélecteur : Anthropic d'abord, sinon OpenAI ───────────────────────────
+async function callLLM(prompt, systemPrompt = null) {
+  const result = await callAnthropic(prompt, systemPrompt);
+  if (result) return result;
+  return await callOpenAI(prompt, systemPrompt);
 }
 
 async function rewriteArticle(item, index) {
@@ -201,7 +240,7 @@ async function rewriteArticle(item, index) {
   const source = sourceArabic(item.source);
   const systemPrompt = sportSystemPrompt(sport);
 
-  if (!OPENAI_API_KEY) return fallback;
+  if (!ANTHROPIC_API_KEY && !OPENAI_API_KEY) return fallback;
 
   const prompt = `
 أنت محرر رياضي في موقع "نبض الرياضة". مهمتك: تحويل هذا الخبر إلى مقال صحفي عربي طويل ومحسَّن للبحث (SEO) بشكل احترافي.
@@ -275,7 +314,7 @@ async function rewriteArticle(item, index) {
 }
 `.trim();
 
-  const raw = await callOpenAI(prompt, 0.45, systemPrompt);
+  const raw = await callLLM(prompt, systemPrompt);
   if (!raw) return fallback;
 
   const parsed = extractJson(raw);
@@ -367,7 +406,7 @@ async function main() {
   console.log(`SEO articles saved: ${articles.length}`);
 
   // Auto-lance la génération d'images après chaque réécriture
-  if (OPENAI_API_KEY) {
+  if (OPENAI_API_KEY || process.env.GOOGLE_API_KEY) {
     console.log("Lancement génération images...");
     try {
       execFileSync("node", [path.join(process.cwd(), "scripts/generate-article-images.mjs")], {
