@@ -33,12 +33,12 @@ const leagueMap = {
       "تحليلات المباريات والنتائج والسباق على القمة"
     ],
     teams: [
-      { name: "مانشستر سيتي", slug: "manchester-city", logo: "/teams/premier-league/manchester-city.png" },
-      { name: "مانشستر يونايتد", slug: "manchester-united", logo: "/teams/premier-league/manchester-united.png" },
-      { name: "ليفربول", slug: "liverpool", logo: "/teams/premier-league/liverpool.png" },
-      { name: "آرسنال", slug: "arsenal", logo: "/teams/premier-league/arsenal.png" },
-      { name: "تشيلسي", slug: "chelsea", logo: "/teams/premier-league/chelsea.png" },
-      { name: "توتنهام", slug: "tottenham", logo: "/teams/premier-league/tottenham.png" }
+      { name: "مانشستر سيتي", slug: "manchester-city", logo: "https://media.api-sports.io/football/teams/50.png" },
+      { name: "مانشستر يونايتد", slug: "manchester-united", logo: "https://media.api-sports.io/football/teams/33.png" },
+      { name: "ليفربول", slug: "liverpool", logo: "https://media.api-sports.io/football/teams/40.png" },
+      { name: "آرسنال", slug: "arsenal", logo: "https://media.api-sports.io/football/teams/42.png" },
+      { name: "تشيلسي", slug: "chelsea", logo: "https://media.api-sports.io/football/teams/49.png" },
+      { name: "توتنهام", slug: "tottenham", logo: "https://media.api-sports.io/football/teams/47.png" }
     ]
   },
   "la-liga": {
@@ -53,12 +53,12 @@ const leagueMap = {
     },
     highlights: ["متابعة ريال مدريد وبرشلونة", "رصد مستجدات الليغا", "ملفات المدربين والنجوم والنتائج"],
     teams: [
-      { name: "ريال مدريد", slug: "real-madrid", logo: "/teams/la-liga/real-madrid.png" },
-      { name: "برشلونة", slug: "barcelona", logo: "/teams/la-liga/barcelona.png" },
-      { name: "أتلتيكو مدريد", slug: "atletico-madrid", logo: "/teams/la-liga/atletico-madrid.png" },
-      { name: "إشبيلية", slug: "sevilla", logo: "/teams/la-liga/sevilla.png" },
-      { name: "فالنسيا", slug: "valencia", logo: "/teams/la-liga/valencia.png" },
-      { name: "ريال سوسيداد", slug: "real-sociedad", logo: "/teams/la-liga/real-sociedad.png" }
+      { name: "ريال مدريد", slug: "real-madrid", logo: "https://media.api-sports.io/football/teams/541.png" },
+      { name: "برشلونة", slug: "barcelona", logo: "https://media.api-sports.io/football/teams/529.png" },
+      { name: "أتلتيكو مدريد", slug: "atletico-madrid", logo: "https://media.api-sports.io/football/teams/530.png" },
+      { name: "إشبيلية", slug: "sevilla", logo: "https://media.api-sports.io/football/teams/536.png" },
+      { name: "فالنسيا", slug: "valencia", logo: "https://media.api-sports.io/football/teams/532.png" },
+      { name: "ريال سوسيداد", slug: "real-sociedad", logo: "https://media.api-sports.io/football/teams/548.png" }
     ]
   },
 
@@ -74,12 +74,12 @@ const leagueMap = {
     },
     highlights: ["بايرن ميونخ ودورتموند", "المنافسة على اللقب", "الإنتاج الشبابي الألماني", "الانتقالات"],
     teams: [
-      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "/teams/bundesliga/bayern-munich.png" },
-      { name: "بوروسيا دورتموند", slug: "borussia-dortmund", logo: "/teams/bundesliga/borussia-dortmund.png" },
-      { name: "باير ليفركوزن", slug: "bayer-leverkusen", logo: "/teams/bundesliga/bayer-leverkusen.png" },
-      { name: "آر بي لايبزيغ", slug: "rb-leipzig", logo: "/teams/bundesliga/rb-leipzig.png" },
-      { name: "إينتراخت فرانكفورت", slug: "eintracht-frankfurt", logo: "/teams/bundesliga/eintracht-frankfurt.png" },
-      { name: "بوروسيا مونشنغلادباخ", slug: "borussia-monchengladbach", logo: "/teams/bundesliga/borussia-monchengladbach.png" }
+      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "https://media.api-sports.io/football/teams/157.png" },
+      { name: "بوروسيا دورتموند", slug: "borussia-dortmund", logo: "https://media.api-sports.io/football/teams/165.png" },
+      { name: "باير ليفركوزن", slug: "bayer-leverkusen", logo: "https://media.api-sports.io/football/teams/168.png" },
+      { name: "آر بي لايبزيغ", slug: "rb-leipzig", logo: "https://media.api-sports.io/football/teams/173.png" },
+      { name: "إينتراخت فرانكفورت", slug: "eintracht-frankfurt", logo: "https://media.api-sports.io/football/teams/169.png" },
+      { name: "بوروسيا مونشنغلادباخ", slug: "borussia-monchengladbach", logo: "https://media.api-sports.io/football/teams/163.png" }
     ]
   },
 
@@ -95,12 +95,12 @@ const leagueMap = {
     },
     highlights: ["يوفنتوس وميلان وإنتر", "المنافسة الإيطالية", "نجوم الكالتشيو", "دوري أبطال أوروبا"],
     teams: [
-      { name: "يوفنتوس", slug: "juventus", logo: "/teams/serie-a/juventus.png" },
-      { name: "إيه سي ميلان", slug: "ac-milan", logo: "/teams/serie-a/ac-milan.png" },
-      { name: "إنتر ميلان", slug: "inter-milan", logo: "/teams/serie-a/inter-milan.png" },
-      { name: "نابولي", slug: "napoli", logo: "/teams/serie-a/napoli.png" },
-      { name: "روما", slug: "as-roma", logo: "/teams/serie-a/as-roma.png" },
-      { name: "لاتسيو", slug: "lazio", logo: "/teams/serie-a/lazio.png" }
+      { name: "يوفنتوس", slug: "juventus", logo: "https://media.api-sports.io/football/teams/496.png" },
+      { name: "إيه سي ميلان", slug: "ac-milan", logo: "https://media.api-sports.io/football/teams/489.png" },
+      { name: "إنتر ميلان", slug: "inter-milan", logo: "https://media.api-sports.io/football/teams/505.png" },
+      { name: "نابولي", slug: "napoli", logo: "https://media.api-sports.io/football/teams/492.png" },
+      { name: "روما", slug: "as-roma", logo: "https://media.api-sports.io/football/teams/497.png" },
+      { name: "لاتسيو", slug: "lazio", logo: "https://media.api-sports.io/football/teams/487.png" }
     ]
   },
 
@@ -116,12 +116,12 @@ const leagueMap = {
     },
     highlights: ["باريس سان جيرمان", "الغزير الفرنسي من المواهب", "مرسيليا وموناكو", "الانتقالات"],
     teams: [
-      { name: "باريس سان جيرمان", slug: "psg", logo: "/teams/ligue-1/psg.png" },
-      { name: "أولمبيك مرسيليا", slug: "olympique-marseille", logo: "/teams/ligue-1/olympique-marseille.png" },
-      { name: "موناكو", slug: "monaco", logo: "/teams/ligue-1/monaco.png" },
-      { name: "أولمبيك ليون", slug: "olympique-lyon", logo: "/teams/ligue-1/olympique-lyon.png" },
-      { name: "ليل", slug: "losc-lille", logo: "/teams/ligue-1/losc-lille.png" },
-      { name: "ران", slug: "stade-rennes", logo: "/teams/ligue-1/stade-rennes.png" }
+      { name: "باريس سان جيرمان", slug: "psg", logo: "https://media.api-sports.io/football/teams/85.png" },
+      { name: "أولمبيك مرسيليا", slug: "olympique-marseille", logo: "https://media.api-sports.io/football/teams/81.png" },
+      { name: "موناكو", slug: "monaco", logo: "https://media.api-sports.io/football/teams/91.png" },
+      { name: "أولمبيك ليون", slug: "olympique-lyon", logo: "https://media.api-sports.io/football/teams/80.png" },
+      { name: "ليل", slug: "losc-lille", logo: "https://media.api-sports.io/football/teams/79.png" },
+      { name: "ران", slug: "stade-rennes", logo: "https://media.api-sports.io/football/teams/95.png" }
     ]
   },
 
@@ -137,12 +137,12 @@ const leagueMap = {
     },
     highlights: ["أبرز المجموعات", "الأدوار الإقصائية", "أفضل هداف", "تاريخ البطولة"],
     teams: [
-      { name: "ريال مدريد", slug: "real-madrid", logo: "/teams/la-liga/real-madrid.png" },
-      { name: "مانشستر سيتي", slug: "manchester-city", logo: "/teams/premier-league/manchester-city.png" },
-      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "/teams/bundesliga/bayern-munich.png" },
-      { name: "باريس سان جيرمان", slug: "psg", logo: "/teams/ligue-1/psg.png" },
-      { name: "برشلونة", slug: "barcelona", logo: "/teams/la-liga/barcelona.png" },
-      { name: "إنتر ميلان", slug: "inter-milan", logo: "/teams/serie-a/inter-milan.png" }
+      { name: "ريال مدريد", slug: "real-madrid", logo: "https://media.api-sports.io/football/teams/541.png" },
+      { name: "مانشستر سيتي", slug: "manchester-city", logo: "https://media.api-sports.io/football/teams/50.png" },
+      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "https://media.api-sports.io/football/teams/157.png" },
+      { name: "باريس سان جيرمان", slug: "psg", logo: "https://media.api-sports.io/football/teams/85.png" },
+      { name: "برشلونة", slug: "barcelona", logo: "https://media.api-sports.io/football/teams/529.png" },
+      { name: "إنتر ميلان", slug: "inter-milan", logo: "https://media.api-sports.io/football/teams/505.png" }
     ]
   },
 
@@ -158,12 +158,12 @@ const leagueMap = {
     },
     highlights: ["الهلال والنصر والاتحاد", "نجوم عالميون في السعودية", "المنافسة على اللقب", "الانتقالات الكبرى"],
     teams: [
-      { name: "الهلال", slug: "al-hilal", logo: "/teams/saudi-pro-league/al-hilal.png" },
-      { name: "النصر", slug: "al-nassr", logo: "/teams/saudi-pro-league/al-nassr.png" },
-      { name: "الاتحاد", slug: "al-ittihad", logo: "/teams/saudi-pro-league/al-ittihad.png" },
-      { name: "الأهلي", slug: "al-ahli", logo: "/teams/saudi-pro-league/al-ahli.png" },
-      { name: "الشباب", slug: "al-shabab", logo: "/teams/saudi-pro-league/al-shabab.png" },
-      { name: "الاتفاق", slug: "al-ettifaq", logo: "/teams/saudi-pro-league/al-ettifaq.png" }
+      { name: "الهلال", slug: "al-hilal", logo: "https://media.api-sports.io/football/teams/2932.png" },
+      { name: "النصر", slug: "al-nassr", logo: "https://media.api-sports.io/football/teams/2939.png" },
+      { name: "الاتحاد", slug: "al-ittihad", logo: "https://media.api-sports.io/football/teams/2933.png" },
+      { name: "الأهلي", slug: "al-ahli", logo: "https://media.api-sports.io/football/teams/2937.png" },
+      { name: "الشباب", slug: "al-shabab", logo: "https://media.api-sports.io/football/teams/2936.png" },
+      { name: "الاتفاق", slug: "al-ettifaq", logo: "https://media.api-sports.io/football/teams/2938.png" }
     ]
   },
 
@@ -179,9 +179,9 @@ const leagueMap = {
     },
     highlights: ["أياكس وبي إس في", "تخريج المواهب", "المسار نحو أوروبا", "الأندية الكلاسيكية"],
     teams: [
-      { name: "أياكس", slug: "ajax", logo: "/teams/eredivisie/ajax.png" },
-      { name: "بي إس في إيندهوفن", slug: "psv-eindhoven", logo: "/teams/eredivisie/psv-eindhoven.png" },
-      { name: "فاينورد", slug: "feyenoord", logo: "/teams/eredivisie/feyenoord.png" }
+      { name: "أياكس", slug: "ajax", logo: "https://media.api-sports.io/football/teams/194.png" },
+      { name: "بي إس في إيندهوفن", slug: "psv-eindhoven", logo: "https://media.api-sports.io/football/teams/197.png" },
+      { name: "فاينورد", slug: "feyenoord", logo: "https://media.api-sports.io/football/teams/192.png" }
     ]
   },
 
@@ -253,10 +253,73 @@ const leagueMap = {
     },
     highlights: ["أفضل أندية العالم", "بطولة FIFA الكبرى", "كل 4 سنوات منذ 2025", "الأندية من كل القارات"],
     teams: [
-      { name: "ريال مدريد", slug: "real-madrid", logo: "/teams/la-liga/real-madrid.png" },
-      { name: "مانشستر سيتي", slug: "manchester-city", logo: "/teams/premier-league/manchester-city.png" },
-      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "/teams/bundesliga/bayern-munich.png" },
-      { name: "الهلال", slug: "al-hilal", logo: "/teams/saudi-pro-league/al-hilal.png" }
+      { name: "ريال مدريد", slug: "real-madrid", logo: "https://media.api-sports.io/football/teams/541.png" },
+      { name: "مانشستر سيتي", slug: "manchester-city", logo: "https://media.api-sports.io/football/teams/50.png" },
+      { name: "بايرن ميونخ", slug: "bayern-munich", logo: "https://media.api-sports.io/football/teams/157.png" },
+      { name: "الهلال", slug: "al-hilal", logo: "https://media.api-sports.io/football/teams/2932.png" }
+    ]
+  },
+
+  "botola": {
+    title: "البطولة الاحترافية — بطولة المغرب",
+    shortLabel: "BOT",
+    description: "أحدث أخبار البطولة الاحترافية المغربية، الوداد، الرجاء، الجيش الملكي وأبرز أندية البوطولة.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/200.png",
+    theme: {
+      pageBg: "#fff7ed", heroFrom: "#92400e", heroTo: "#f59e0b", primary: "#d97706",
+      primarySoft: "#fef3c7", border: "#fde68a", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["الوداد والرجاء الكلاسيكو المغربي", "الجيش الملكي وحسنية أكادير", "نجوم الكرة المغربية", "الطريق نحو الاحترافية"],
+    teams: [
+      { name: "الوداد الرياضي", slug: "wydad", logo: "https://media.api-sports.io/football/teams/5593.png" },
+      { name: "الرجاء الرياضي", slug: "raja-casablanca", logo: "https://media.api-sports.io/football/teams/2575.png" },
+      { name: "الجيش الملكي", slug: "far-rabat", logo: "https://media.api-sports.io/football/teams/7027.png" },
+      { name: "نهضة بركان", slug: "renaissance-berkane", logo: "https://media.api-sports.io/football/teams/7028.png" },
+      { name: "المغرب التطواني", slug: "moghreb-tetouan", logo: "https://media.api-sports.io/football/teams/7029.png" },
+      { name: "حسنية أكادير", slug: "hassania-agadir", logo: "https://media.api-sports.io/football/teams/7030.png" }
+    ]
+  },
+
+  "liga-portugal": {
+    title: "الدوري البرتغالي — ليغا بورتوغال",
+    shortLabel: "LP",
+    description: "أحدث أخبار الدوري البرتغالي، بنفيكا، بورتو، سبورتينغ لشبونة وأبرز مجريات الموسم.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/94.png",
+    theme: {
+      pageBg: "#fef2f2", heroFrom: "#7f1d1d", heroTo: "#ef4444", primary: "#b91c1c",
+      primarySoft: "#fee2e2", border: "#fecaca", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["بنفيكا وبورتو وسبورتينغ", "المواهب البرتغالية", "التنافس على اللقب", "دوري أبطال أوروبا"],
+    teams: [
+      { name: "بنفيكا", slug: "benfica", logo: "https://media.api-sports.io/football/teams/211.png" },
+      { name: "بورتو", slug: "porto", logo: "https://media.api-sports.io/football/teams/212.png" },
+      { name: "سبورتينغ لشبونة", slug: "sporting-cp", logo: "https://media.api-sports.io/football/teams/228.png" },
+      { name: "براغا", slug: "braga", logo: "https://media.api-sports.io/football/teams/217.png" },
+      { name: "فيتوريا غيمارايش", slug: "vitoria-guimaraes", logo: "https://media.api-sports.io/football/teams/232.png" },
+      { name: "كاسا بيا", slug: "casa-pia", logo: "https://media.api-sports.io/football/teams/2284.png" }
+    ]
+  },
+
+  "mls": {
+    title: "الدوري الأمريكي — MLS",
+    shortLabel: "MLS",
+    description: "أحدث أخبار دوري كرة القدم الأمريكي، لوس أنجلوس غالاكسي، إنتر ميامي وأبرز النجوم.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/253.png",
+    theme: {
+      pageBg: "#eff6ff", heroFrom: "#1e3a8a", heroTo: "#3b82f6", primary: "#2563eb",
+      primarySoft: "#dbeafe", border: "#bfdbfe", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["إنتر ميامي ومبسي", "لوس أنجلوس غالاكسي", "نجوم عالميون في أمريكا", "التوسع الكبير للدوري"],
+    teams: [
+      { name: "لوس أنجلوس غالاكسي", slug: "la-galaxy", logo: "https://media.api-sports.io/football/teams/1598.png" },
+      { name: "إنتر ميامي", slug: "inter-miami", logo: "https://media.api-sports.io/football/teams/1611.png" },
+      { name: "سياتل ساوندرز", slug: "seattle-sounders", logo: "https://media.api-sports.io/football/teams/1600.png" },
+      { name: "أتلانتا يونايتد", slug: "atlanta-united", logo: "https://media.api-sports.io/football/teams/1605.png" },
+      { name: "بورتلاند تيمبرز", slug: "portland-timbers", logo: "https://media.api-sports.io/football/teams/1601.png" },
+      { name: "نيويورك سيتي", slug: "nycfc", logo: "https://media.api-sports.io/football/teams/1603.png" }
     ]
   }
 };

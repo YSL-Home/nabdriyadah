@@ -4,7 +4,7 @@ export const teamsMap = {
     name: "مانشستر سيتي",
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
-    logo: "/teams/premier-league/manchester-city.png",
+    logo: "https://media.api-sports.io/football/teams/50.png",
     colors: {
       bg: "#eef7ff",
       primary: "#0f6cbd",
@@ -47,7 +47,7 @@ export const teamsMap = {
     name: "مانشستر يونايتد",
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
-    logo: "/teams/premier-league/manchester-united.png",
+    logo: "https://media.api-sports.io/football/teams/33.png",
     colors: {
       bg: "#fff1f2",
       primary: "#b91c1c",
@@ -80,7 +80,7 @@ export const teamsMap = {
     name: "ليفربول",
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
-    logo: "/teams/premier-league/liverpool.png",
+    logo: "https://media.api-sports.io/football/teams/40.png",
     colors: {
       bg: "#fff1f2",
       primary: "#c1121f",
@@ -113,7 +113,7 @@ export const teamsMap = {
     name: "آرسنال",
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
-    logo: "/teams/premier-league/arsenal.png",
+    logo: "https://media.api-sports.io/football/teams/42.png",
     colors: {
       bg: "#fff7ed",
       primary: "#b91c1c",
@@ -146,7 +146,7 @@ export const teamsMap = {
     name: "تشيلسي",
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
-    logo: "/teams/premier-league/chelsea.png",
+    logo: "https://media.api-sports.io/football/teams/49.png",
     colors: {
       bg: "#eff6ff",
       primary: "#1d4ed8",
@@ -179,7 +179,7 @@ export const teamsMap = {
     name: "توتنهام",
     league: "premier-league",
     leagueName: "الدوري الإنجليزي الممتاز",
-    logo: "/teams/premier-league/tottenham.png",
+    logo: "https://media.api-sports.io/football/teams/47.png",
     colors: {
       bg: "#f8fafc",
       primary: "#0f172a",
@@ -212,7 +212,7 @@ export const teamsMap = {
     name: "ريال مدريد",
     league: "la-liga",
     leagueName: "الدوري الإسباني",
-    logo: "/teams/la-liga/real-madrid.png",
+    logo: "https://media.api-sports.io/football/teams/541.png",
     colors: {
       bg: "#f8fafc",
       primary: "#1d4ed8",
@@ -245,7 +245,7 @@ export const teamsMap = {
     name: "برشلونة",
     league: "la-liga",
     leagueName: "الدوري الإسباني",
-    logo: "/teams/la-liga/barcelona.png",
+    logo: "https://media.api-sports.io/football/teams/529.png",
     colors: {
       bg: "#eff6ff",
       primary: "#1d4ed8",
@@ -278,7 +278,7 @@ export const teamsMap = {
     name: "أتلتيكو مدريد",
     league: "la-liga",
     leagueName: "الدوري الإسباني",
-    logo: "/teams/la-liga/atletico-madrid.png",
+    logo: "https://media.api-sports.io/football/teams/530.png",
     colors: {
       bg: "#fff1f2",
       primary: "#b91c1c",
@@ -311,7 +311,7 @@ export const teamsMap = {
     name: "إشبيلية",
     league: "la-liga",
     leagueName: "الدوري الإسباني",
-    logo: "/teams/la-liga/sevilla.png",
+    logo: "https://media.api-sports.io/football/teams/536.png",
     colors: {
       bg: "#fff1f2",
       primary: "#b91c1c",
@@ -344,7 +344,7 @@ export const teamsMap = {
     name: "فالنسيا",
     league: "la-liga",
     leagueName: "الدوري الإسباني",
-    logo: "/teams/la-liga/valencia.png",
+    logo: "https://media.api-sports.io/football/teams/532.png",
     colors: {
       bg: "#f8fafc",
       primary: "#111827",
@@ -377,7 +377,7 @@ export const teamsMap = {
     name: "ريال سوسيداد",
     league: "la-liga",
     leagueName: "الدوري الإسباني",
-    logo: "/teams/la-liga/real-sociedad.png",
+    logo: "https://media.api-sports.io/football/teams/548.png",
     colors: {
       bg: "#eff6ff",
       primary: "#1d4ed8",

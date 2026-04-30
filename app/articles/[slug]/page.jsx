@@ -9,12 +9,12 @@ const leagueBranding = {
     href: "/league/premier-league/",
     leagueLogo: "https://media.api-sports.io/football/leagues/39.png",
     teams: [
-      { name: "مانشستر سيتي", logo: "/teams/premier-league/manchester-city.png" },
-      { name: "مانشستر يونايتد", logo: "/teams/premier-league/manchester-united.png" },
-      { name: "ليفربول", logo: "/teams/premier-league/liverpool.png" },
-      { name: "آرسنال", logo: "/teams/premier-league/arsenal.png" },
-      { name: "تشيلسي", logo: "/teams/premier-league/chelsea.png" },
-      { name: "توتنهام", logo: "/teams/premier-league/tottenham.png" }
+      { name: "مانشستر سيتي", logo: "https://media.api-sports.io/football/teams/50.png" },
+      { name: "مانشستر يونايتد", logo: "https://media.api-sports.io/football/teams/33.png" },
+      { name: "ليفربول", logo: "https://media.api-sports.io/football/teams/40.png" },
+      { name: "آرسنال", logo: "https://media.api-sports.io/football/teams/42.png" },
+      { name: "تشيلسي", logo: "https://media.api-sports.io/football/teams/49.png" },
+      { name: "توتنهام", logo: "https://media.api-sports.io/football/teams/47.png" }
     ],
     theme: { bg: "#f6f0ff", primary: "#6d28d9", primarySoft: "#ede9fe", border: "#ddd6fe", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
   },
@@ -23,12 +23,12 @@ const leagueBranding = {
     href: "/league/la-liga/",
     leagueLogo: "https://media.api-sports.io/football/leagues/140.png",
     teams: [
-      { name: "ريال مدريد", logo: "/teams/la-liga/real-madrid.png" },
-      { name: "برشلونة", logo: "/teams/la-liga/barcelona.png" },
-      { name: "أتلتيكو مدريد", logo: "/teams/la-liga/atletico-madrid.png" },
-      { name: "إشبيلية", logo: "/teams/la-liga/sevilla.png" },
-      { name: "فالنسيا", logo: "/teams/la-liga/valencia.png" },
-      { name: "ريال سوسيداد", logo: "/teams/la-liga/real-sociedad.png" }
+      { name: "ريال مدريد", logo: "https://media.api-sports.io/football/teams/541.png" },
+      { name: "برشلونة", logo: "https://media.api-sports.io/football/teams/529.png" },
+      { name: "أتلتيكو مدريد", logo: "https://media.api-sports.io/football/teams/530.png" },
+      { name: "إشبيلية", logo: "https://media.api-sports.io/football/teams/536.png" },
+      { name: "فالنسيا", logo: "https://media.api-sports.io/football/teams/532.png" },
+      { name: "ريال سوسيداد", logo: "https://media.api-sports.io/football/teams/548.png" }
     ],
     theme: { bg: "#fff7ed", primary: "#ea580c", primarySoft: "#ffedd5", border: "#fed7aa", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
   },
