@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import fs from "fs";
+import path from "path";
 import articles from "../../../content/articles/seo-articles.json";
+import teamsDataRaw from "../../../content/teams-data.json";
 import AdSlot from "../../components/AdSlot";
 import ArticleImage from "../../components/ArticleImage";
 
@@ -296,6 +299,37 @@ export function generateMetadata({ params }) {
   };
 }
 
+// Build standings for a league from teams-data + standings JSON
+function getLeagueStandings(leagueSlug) {
+  // Try live standings file first
+  try {
+    const standingsPath = path.join(process.cwd(), "content/standings", `${leagueSlug}.json`);
+    const data = JSON.parse(fs.readFileSync(standingsPath, "utf-8"));
+    if (data.standings && data.standings.length > 0) {
+      return data.standings;
+    }
+  } catch {}
+
+  // Fallback: build from teams-data ordered alphabetically (no live data yet)
+  const leagueTeams = Object.entries(teamsDataRaw)
+    .filter(([, t]) => t.league === leagueSlug)
+    .map(([slug, t], idx) => ({
+      rank: idx + 1,
+      slug,
+      name: t.name,
+      logo: t.logo,
+      played: 0,
+      won: 0,
+      drawn: 0,
+      lost: 0,
+      gf: 0,
+      ga: 0,
+      gd: 0,
+      points: 0
+    }));
+  return leagueTeams;
+}
+
 export default function LeaguePage({ params }) {
   const league = leagueMap[params.slug];
 
@@ -306,6 +340,12 @@ export default function LeaguePage({ params }) {
   const theme = league.theme;
   const leagueArticles = articles.filter((article) => article.league === params.slug).slice(0, 12);
   const featuredArticle = leagueArticles[0] || null;
+
+  // Standings data
+  const standings = getLeagueStandings(params.slug);
+  const hasLiveStandings = standings.length > 0 && standings[0].points > 0;
+  const top10 = standings.slice(0, 10);
+  const rest = standings.slice(10);
 
   return (
     <main
@@ -463,80 +503,180 @@ export default function LeaguePage({ params }) {
 
         <AdSlot label="مساحة إعلانية أعلى صفحة البطولة" minHeight={90} style={{ marginBottom: 24 }} />
 
-        <section
-          style={{
-            background: theme.cardBg,
-            borderRadius: "28px",
-            padding: "24px",
-            border: `1px solid ${theme.border}`,
-            boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
-            marginBottom: "24px"
-          }}
-        >
-          <div
+        {/* ── STANDINGS TABLE ── */}
+        {standings.length > 0 && (
+          <section
             style={{
-              color: theme.primary,
-              fontSize: "14px",
-              fontWeight: 700,
-              marginBottom: "12px"
+              background: theme.cardBg,
+              borderRadius: "28px",
+              padding: "24px",
+              border: `1px solid ${theme.border}`,
+              boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
+              marginBottom: "24px"
             }}
           >
-            الأندية الكبرى في البطولة
-          </div>
-
-          <div
-            style={{
-              width: "50%",
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              gap: "14px"
-            }}
-          >
-            {league.teams.map((team) => (
-              <Link
-                key={team.slug}
-                href={`/team/${team.slug}/`}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit"
-                }}
-              >
-                <div
-                  style={{
-                    background: theme.primarySoft,
-                    border: `1px solid ${theme.border}`,
-                    borderRadius: "20px",
-                    padding: "14px 12px",
-                    textAlign: "center"
-                  }}
-                >
-                  <img
-                    src={team.logo}
-                    alt={team.name}
-                    style={{
-                      width: "52px",
-                      height: "52px",
-                      objectFit: "contain",
-                      display: "block",
-                      margin: "0 auto 10px"
-                    }}
-                  />
-                  <div
-                    style={{
-                      color: theme.primary,
-                      fontSize: "14px",
-                      fontWeight: 700,
-                      lineHeight: 1.6
-                    }}
-                  >
-                    {team.name}
-                  </div>
-                </div>
+            {/* Header */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
+                <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>
+                  الترتيب {hasLiveStandings ? "" : "— قيد التحديث"}
+                </span>
+                {!hasLiveStandings && (
+                  <span style={{ background: theme.primarySoft, color: theme.primary, padding: "3px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, border: `1px solid ${theme.border}` }}>
+                    سيُحدَّث تلقائياً
+                  </span>
+                )}
+              </div>
+              <Link href={`/league/${params.slug}/classement/`} style={{ textDecoration: "none", color: theme.primary, fontSize: "13px", fontWeight: 700, background: theme.primarySoft, padding: "7px 16px", borderRadius: "999px", border: `1px solid ${theme.border}` }}>
+                الترتيب الكامل ←
               </Link>
-            ))}
-          </div>
-        </section>
+            </div>
+
+            {/* Table header */}
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "36px 1fr 40px 40px 40px 40px 44px",
+              gap: "4px",
+              padding: "8px 12px",
+              background: theme.primarySoft,
+              borderRadius: "12px",
+              marginBottom: "6px",
+              fontSize: "12px",
+              fontWeight: 700,
+              color: theme.primary
+            }}>
+              <span style={{ textAlign: "center" }}>#</span>
+              <span>الفريق</span>
+              <span style={{ textAlign: "center" }}>ل</span>
+              <span style={{ textAlign: "center" }}>ف</span>
+              <span style={{ textAlign: "center" }}>ت</span>
+              <span style={{ textAlign: "center" }}>خ</span>
+              <span style={{ textAlign: "center", fontWeight: 800 }}>نق</span>
+            </div>
+
+            {/* Top 10 rows */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              {top10.map((team, i) => (
+                <Link
+                  key={team.slug || i}
+                  href={`/team/${team.slug || "#"}/`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "36px 1fr 40px 40px 40px 40px 44px",
+                    gap: "4px",
+                    padding: "10px 12px",
+                    borderRadius: "12px",
+                    alignItems: "center",
+                    background: i < 4 ? theme.primarySoft : "transparent",
+                    border: `1px solid ${i < 4 ? theme.border : "transparent"}`,
+                    cursor: "pointer",
+                    transition: "background 0.15s"
+                  }}>
+                    <span style={{
+                      textAlign: "center",
+                      fontWeight: 800,
+                      fontSize: "14px",
+                      color: i < 3 ? theme.primary : "#6b7280",
+                      width: "24px",
+                      height: "24px",
+                      borderRadius: "50%",
+                      background: i === 0 ? theme.primary : "transparent",
+                      color: i === 0 ? "white" : i < 3 ? theme.primary : "#6b7280",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "0 auto",
+                      fontSize: "13px"
+                    }}>
+                      {team.rank || i + 1}
+                    </span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
+                      <img
+                        src={team.logo}
+                        alt={team.name}
+                        style={{ width: "28px", height: "28px", objectFit: "contain", flexShrink: 0 }}
+                      />
+                      <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {team.name}
+                      </span>
+                    </div>
+                    <span style={{ textAlign: "center", fontSize: "13px", color: "#6b7280" }}>{team.played ?? "—"}</span>
+                    <span style={{ textAlign: "center", fontSize: "13px", color: "#16a34a", fontWeight: 700 }}>{team.won ?? "—"}</span>
+                    <span style={{ textAlign: "center", fontSize: "13px", color: "#ca8a04" }}>{team.drawn ?? "—"}</span>
+                    <span style={{ textAlign: "center", fontSize: "13px", color: "#dc2626" }}>{team.lost ?? "—"}</span>
+                    <span style={{ textAlign: "center", fontSize: "15px", fontWeight: 900, color: theme.primary }}>{team.points ?? "—"}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Collapsible rest */}
+            {rest.length > 0 && (
+              <details style={{ marginTop: "8px" }}>
+                <summary style={{
+                  cursor: "pointer",
+                  textAlign: "center",
+                  padding: "10px",
+                  color: theme.primary,
+                  fontSize: "13px",
+                  fontWeight: 700,
+                  background: theme.primarySoft,
+                  borderRadius: "12px",
+                  border: `1px solid ${theme.border}`,
+                  listStyle: "none",
+                  userSelect: "none"
+                }}>
+                  ▼ عرض باقي الترتيب ({rest.length} فريق)
+                </summary>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px", marginTop: "6px" }}>
+                  {rest.map((team, i) => (
+                    <Link
+                      key={team.slug || i}
+                      href={`/team/${team.slug || "#"}/`}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <div style={{
+                        display: "grid",
+                        gridTemplateColumns: "36px 1fr 40px 40px 40px 40px 44px",
+                        gap: "4px",
+                        padding: "10px 12px",
+                        borderRadius: "12px",
+                        alignItems: "center",
+                        cursor: "pointer"
+                      }}>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#9ca3af", fontWeight: 700 }}>{team.rank || top10.length + i + 1}</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
+                          <img src={team.logo} alt={team.name} style={{ width: "26px", height: "26px", objectFit: "contain", flexShrink: 0 }} />
+                          <span style={{ fontSize: "13px", fontWeight: 600, color: "#374151", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{team.name}</span>
+                        </div>
+                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.played ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.won ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.drawn ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.lost ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: "#374151" }}>{team.points ?? "—"}</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            )}
+
+            {/* Footer link */}
+            <div style={{ textAlign: "center", marginTop: "14px" }}>
+              <Link href={`/league/${params.slug}/classement/`} style={{
+                display: "inline-block", textDecoration: "none",
+                background: theme.primary, color: "white",
+                padding: "10px 28px", borderRadius: "999px",
+                fontSize: "14px", fontWeight: 800
+              }}>
+                الترتيب الكامل للبطولة →
+              </Link>
+            </div>
+          </section>
+        )}
 
         <section
           style={{
