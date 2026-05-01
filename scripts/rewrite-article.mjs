@@ -118,21 +118,32 @@ function sourceArabic(source = "") {
   return "المصدر الرياضي";
 }
 
+// Short hash from string to guarantee unique slug suffixes
+function shortHash(str = "") {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) { h = (h * 31 + str.charCodeAt(i)) >>> 0; }
+  return h.toString(36).slice(0, 6);
+}
+
 function buildSlug(item, index) {
   const sport = item.sport || "football";
   const league = item.league || "mixed";
-  if (sport === "basketball") return `basketball-${index + 1}`;
-  if (sport === "tennis") return `tennis-${index + 1}`;
-  if (sport === "padel") return `padel-${index + 1}`;
-  if (sport === "futsal") return `futsal-${index + 1}`;
-  if (league === "premier-league") return `premier-league-${index + 1}`;
-  if (league === "la-liga") return `la-liga-${index + 1}`;
-  if (league === "bundesliga") return `bundesliga-${index + 1}`;
-  if (league === "serie-a") return `serie-a-${index + 1}`;
-  if (league === "ligue-1") return `ligue-1-${index + 1}`;
-  if (league === "champions-league") return `ucl-${index + 1}`;
-  if (league === "saudi-pro-league") return `saudi-${index + 1}`;
-  return `football-${index + 1}`;
+  const titleHash = shortHash(item.originalTitle || item.title || String(index));
+  const prefix =
+    sport === "basketball" ? "bball" :
+    sport === "tennis"     ? "tennis" :
+    sport === "padel"      ? "padel" :
+    sport === "futsal"     ? "futsal" :
+    league === "premier-league"   ? "epl" :
+    league === "la-liga"          ? "liga" :
+    league === "bundesliga"       ? "bund" :
+    league === "serie-a"          ? "seriea" :
+    league === "ligue-1"          ? "l1" :
+    league === "champions-league" ? "ucl" :
+    league === "saudi-pro-league" ? "saudi" :
+    league === "mls"              ? "mls" :
+    "ft";
+  return `${prefix}-${titleHash}`;
 }
 
 function isArabic(text = "") {
@@ -141,29 +152,107 @@ function isArabic(text = "") {
   return arabic > 0 && arabic >= latin;
 }
 
+// Extract useful keywords from an English title to make fallback more unique
+function extractEnglishKeywords(title = "") {
+  // Remove common stop words, keep nouns/proper nouns
+  const stop = new Set(["the","a","an","is","are","was","were","be","been","being","have","has","had","do","does","did","will","would","could","should","may","might","must","can","to","of","in","on","at","by","for","with","from","and","or","but","not","this","that","these","those","it","its","they","their","what","why","how","who","when","where","which","i","he","she","we","you","why","just","as","also","more","than","then","so","yet","both","after","before","because","if","into","through","during","about","against","between","through","during","before","after","above","below","out","off","over","under","again","further","once","here","there","all","each","every","few","more","other","some","such","no","only","same","too","very","just","because"]);
+  return title.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(w => w.length > 3 && !stop.has(w))
+    .slice(0, 4)
+    .join("-");
+}
+
+// Article type templates — adds variety to fallback articles
+const ARTICLE_TYPES = [
+  {
+    type: "analysis",
+    titlePrefix: (label) => `تحليل معمّق`,
+    intro: (label, hint) => `يتواصل الجدل الرياضي حول آخر مستجدات ${label}، في تحليل يكشف أبعاداً دقيقة لم تتناولها معظم التغطيات السابقة.`,
+    body: (label) => [
+      `تُجسّد ${label} نموذجاً فريداً في عالم الرياضة الاحترافية، حيث تتشابك عوامل التكتيك والاستراتيجية مع المتغيرات الميدانية اليومية.`,
+      `يرى المراقبون أن ما يجري في ${label} يعكس تحولات عميقة في طريقة التفكير الرياضي الحديث، إذ تتجاوز المسألة حدود النتائج لتطال بنية اللعبة ذاتها.`,
+      `وقد كشفت الأرقام والإحصائيات المتراكمة خلال الموسم الحالي عن مفارقات لافتة، يصعب تفسيرها بمعادلات تقليدية دون الغوص في تفاصيل المباريات الفردية.`,
+      `تبقى ${label} محوراً أساسياً في نقاشات الجمهور العربي، الذي يتابع بشغف كبير كل مستجد على الصعيدين الميداني والإداري.`,
+      `في نبض الرياضة، نواصل تقديم التغطية المتخصصة لكل تطور في هذا الملف، بعيون تحليلية تضع المتابع العربي في صلب الحدث.`
+    ]
+  },
+  {
+    type: "news",
+    titlePrefix: (label) => `عاجل`,
+    intro: (label, hint) => `تشهد ${label} حركية لافتة، وسط معطيات جديدة تُعيد رسم خريطة التوقعات لما تبقى من الموسم.`,
+    body: (label) => [
+      `كشفت المصادر المتابعة لشأن ${label} عن تطورات مفاجئة، يرى فيها المتابعون نقطة تحول فارقة في مسار المنافسة.`,
+      `وتجمع التقديرات على أن هذه المعطيات ستُلقي بظلالها على قرارات المدربين والأندية خلال الأسابيع القادمة، مع اشتداد المنافسة في المراحل الفاصلة.`,
+      `وتتسع دائرة التأثير لتشمل مختلف أطراف المشهد الرياضي، من اللاعبين إلى الجهاز الإداري، في ظل ضغوط متزايدة من الجماهير المتحمسة.`,
+      `${label} تُعدّ من أكثر البيئات الرياضية ثراءً بالمعطيات التنافسية، وهو ما يجعل كل خبر أو تطور فيها حدثاً رياضياً بكل المقاييس.`,
+      `نبض الرياضة يرصد هذه التطورات لحظة بلحظة، ليمنحك الصورة الكاملة قبل أن تنتشر في أي مكان آخر.`
+    ]
+  },
+  {
+    type: "preview",
+    titlePrefix: (label) => `توقعات`,
+    intro: (label, hint) => `مع اشتداد المنافسة في ${label}، تُطرح تساؤلات جوهرية حول مآلات الموسم وأبرز المرشحين للمفاجآت.`,
+    body: (label) => [
+      `تسير ${label} نحو مرحلة حاسمة يتوقع فيها الخبراء انقلابات جذرية في ترتيب القوى، إذ لا يزال عدد كبير من الأندية قادراً على قلب موازين الترتيب.`,
+      `وتبرز عدة عوامل مؤثرة ينبغي أخذها بعين الاعتبار عند قراءة المشهد، أبرزها حالات الإصابة وعوامل التعب البدني في الجداول المكتظة.`,
+      `ويُجمع المحللون على أن الفريق الأكثر انضباطاً تكتيكياً سيحوز الأفضلية في نهاية المطاف، حتى وإن لم يكن الأوفر حظاً في بداية الموسم.`,
+      `المواجهات المباشرة القادمة ستكون المحطة الفيصل، وستضع الأرقام والتوقعات أمام اختبار الحقيقة الميدانية.`,
+      `ابقَ مع نبض الرياضة لمتابعة كل جديد بتحليل عميق ومعطيات حصرية ترسم الصورة كاملة.`
+    ]
+  },
+  {
+    type: "recap",
+    titlePrefix: (label) => `ملخص`,
+    intro: (label, hint) => `رصدنا في نبض الرياضة أبرز ما جرى في ${label} خلال الفترة الأخيرة، مع تسليط الضوء على اللقطات والأرقام الأكثر تأثيراً.`,
+    body: (label) => [
+      `اتسمت المرحلة الأخيرة في ${label} بمستوى رفيع من التنافسية، أفضت إلى تغييرات ملموسة في مراكز عدة أندية.`,
+      `سجّل عدد من اللاعبين حضوراً استثنائياً، مما أضفى على المشهد الرياضي مزيداً من الجاذبية ورفع من سقف توقعات الجماهير.`,
+      `في المقابل، عانت بعض الأندية من تفاوت في الأداء أثار موجة من الانتقادات، وكشف عن ثغرات في الاستعداد أو التوافق بين عناصر الفريق.`,
+      `وتكشف قراءة الأرقام التفصيلية عن تباين واضح في المردودية، يعكس عمق الهوّة بين أصحاب الأداء المتميز وأولئك الذين يبحثون عن استعادة مستواهم.`,
+      `في نبض الرياضة، نختصر لك أهم ما لم تره في أي مكان آخر، مع تحليل منصف يتجاوز السطح إلى جوهر الأحداث.`
+    ]
+  }
+];
+
+function pickArticleType(index) {
+  return ARTICLE_TYPES[index % ARTICLE_TYPES.length];
+}
+
 function fallbackArticle(item, index) {
   const sport = item.sport || "football";
   const label = leagueLabel(item.league || sport);
-  // Si le titre original est en anglais, on génère un titre arabe générique
   const rawTitle = normalizeText(item.originalTitle || "");
-  const arabicGeneric = `أبرز أحداث ${label} — الجولة ${index + 1}`;
-  const originalTitle = (rawTitle && isArabic(rawTitle)) ? rawTitle : arabicGeneric;
-  const title = originalTitle.length > 90 ? originalTitle.slice(0, 90) : originalTitle;
-  const description = `تفاصيل وتحليل حول: ${title} — متابعة من نبض الرياضة.`;
-  const content = [
-    `تواصل ${label} تقديم أحداث مثيرة يترقبها الجمهور الرياضي العربي بشغف كبير.`,
-    `وتشير المعطيات المتوفرة إلى أن هذا الحدث يمثل محطة مهمة في مسار الموسم الرياضي الحالي، ويستقطب اهتمام واسع من المتابعين العرب.`,
-    `يأتي هذا الخبر في سياق منافسة حامية الوطيس تشهدها ${label}، حيث يترقب الجمهور نتائج مفاجئة وأداء لافتاً من الأندية والأفراد.`,
-    `وقد أثارت هذه المستجدات موجة من التحليلات والتعليقات على منصات التواصل الاجتماعي بين مختلف شرائح الجمهور الرياضي.`,
-    `تبقى ${label} وجهة أولى للمتابع العربي الباحث عن أعلى مستويات التنافسية في العالم، وموقع نبض الرياضة يواصل تغطية كل التطورات لحظة بلحظة.`
-  ].join("\n\n");
+
+  // If the original title is in Arabic, use it; otherwise extract keywords
+  let titleHint = "";
+  if (rawTitle && isArabic(rawTitle)) {
+    titleHint = rawTitle.slice(0, 60);
+  } else if (rawTitle) {
+    // Use English keywords to vary the title
+    const kw = extractEnglishKeywords(rawTitle);
+    if (kw) titleHint = kw.replace(/-/g, " ");
+  }
+
+  const typeTemplate = pickArticleType(index);
+  const prefix = typeTemplate.titlePrefix(label);
+
+  // Build a unique title using label + prefix + hint (no predictable "الجولة N")
+  const title = titleHint
+    ? `${prefix}: ${label} — ${titleHint}`.slice(0, 90)
+    : `${prefix}: آخر مستجدات ${label} — ${new Date().toLocaleDateString("ar-SA", { month: "long", year: "numeric" })}`.slice(0, 90);
+
+  const description = `${typeTemplate.intro(label, titleHint)} متابعة حصرية من نبض الرياضة.`.slice(0, 200);
+  const content = [typeTemplate.intro(label, titleHint), ...typeTemplate.body(label)].join("\n\n");
+
   return {
     title,
     description,
     seoTitle: `${title} | نبض الرياضة`,
     seoDescription: description.slice(0, 160),
     content,
-    keywords: [label, "أخبار رياضية", sportLabel(sport), "نتائج", "متابعة", "نبض الرياضة"],
+    keywords: [label, sportLabel(sport), "أخبار رياضية", "تحليل", "نتائج", "نبض الرياضة"],
     faq: []
   };
 }
@@ -231,6 +320,18 @@ async function callLLM(prompt, systemPrompt = null) {
   return await callOpenAI(prompt, systemPrompt);
 }
 
+// Article format types — rotates per article to ensure variety
+const ARTICLE_FORMATS = [
+  { ar: "ملخص مباراة", en: "match recap", hint: "ركّز على أبرز أحداث اللقاء وأهدافه ونقطة التحول الفارقة" },
+  { ar: "تحليل تكتيكي", en: "tactical analysis", hint: "ادرس نظام اللعب والثغرات والتفوق التكتيكي بعيون خبير" },
+  { ar: "ملف لاعب", en: "player profile", hint: "أبرز اللاعب الأكثر حضوراً في الخبر وحلّل أداءه وإحصاءاته" },
+  { ar: "أخبار انتقالات", en: "transfer news", hint: "غطّ المفاوضات والأرقام المتداولة وأثرها على الفريق" },
+  { ar: "توقعات المباراة", en: "match preview", hint: "قدّم توقعاتك المبنية على البيانات لنتيجة اللقاء القادم" },
+  { ar: "مراجعة موسمية", en: "season review", hint: "قيّم مسار الفريق خلال الموسم بالأرقام والتحولات" },
+  { ar: "تقرير استقصائي", en: "investigative report", hint: "اكشف ما وراء الأخبار من سياق وأسباب وعوامل خفية" },
+  { ar: "خبر عاجل", en: "breaking news", hint: "قدّم الخبر بأسلوب خبر مقتضب ومكثف يركز على المعلومة" },
+];
+
 async function rewriteArticle(item, index) {
   const fallback = fallbackArticle(item, index);
   const originalTitle = normalizeText(item.originalTitle || item.title || "");
@@ -239,11 +340,15 @@ async function rewriteArticle(item, index) {
   const label = leagueLabel(item.league || sport);
   const source = sourceArabic(item.source);
   const systemPrompt = sportSystemPrompt(sport);
+  const format = ARTICLE_FORMATS[index % ARTICLE_FORMATS.length];
 
   if (!ANTHROPIC_API_KEY && !OPENAI_API_KEY) return fallback;
 
   const prompt = `
-أنت محرر رياضي في موقع "نبض الرياضة". مهمتك: تحويل هذا الخبر إلى مقال صحفي عربي طويل ومحسَّن للبحث (SEO) بشكل احترافي.
+أنت محرر رياضي في موقع "نبض الرياضة". مهمتك: تحويل هذا الخبر إلى مقال صحفي عربي طويل ومحسَّن للبحث (SEO).
+
+⚡ نوع المقال المطلوب: **${format.ar}** (${format.en})
+تعليمات الأسلوب: ${format.hint}
 
 --- المعلومات المتاحة ---
 الرياضة/البطولة: ${label}
@@ -361,12 +466,22 @@ async function main() {
     existingArticles = JSON.parse(fs.readFileSync(OUTPUT_PATH, "utf-8"));
     if (!Array.isArray(existingArticles)) existingArticles = [];
   } catch {}
+
+  // Deduplicate existing articles on load (defence against race-condition duplicates)
+  const seenExistingTitles = new Set();
+  existingArticles = existingArticles.filter(a => {
+    const key = normalizeText(a.title || "").toLowerCase();
+    if (!key || seenExistingTitles.has(key)) return false;
+    seenExistingTitles.add(key);
+    return true;
+  });
   console.log(`Existing articles: ${existingArticles.length}`);
 
   // Build a set of known slugs + normalised titles to avoid duplicates
   const existingSlugs = new Set(existingArticles.map((a) => a.slug).filter(Boolean));
-  const existingTitles = new Set(
-    existingArticles.map((a) => normalizeText(a.title || "").toLowerCase()).filter(Boolean)
+  // Also index by raw news title (to skip already-processed source articles)
+  const existingSourceKeys = new Set(
+    existingArticles.map((a) => normalizeText(a.sourceTitle || a.title || "").toLowerCase().slice(0, 80)).filter(Boolean)
   );
 
   // ── Dedup raw items by title ──────────────────────────────────────────────
@@ -375,11 +490,11 @@ async function main() {
   for (const item of rawItems) {
     const title = normalizeText(item.originalTitle || item.title || "");
     if (!title) continue;
-    const key = title.toLowerCase();
+    const key = title.toLowerCase().slice(0, 80);
     if (seenRaw.has(key)) continue;
     seenRaw.add(key);
-    // Skip if we already wrote this article
-    if (existingTitles.has(key)) continue;
+    // Skip if we already processed this source article
+    if (existingSourceKeys.has(key)) continue;
     unique.push(item);
   }
 
@@ -412,11 +527,20 @@ async function main() {
     if (existingSlugs.has(slug)) slug = `${slug}-${Date.now()}`;
     existingSlugs.add(slug);
 
+    // Skip if the rewritten title matches an existing one (fallback collision guard)
+    const rewrittenTitleKey = normalizeText(rewritten.title || "").toLowerCase().slice(0, 80);
+    if (seenExistingTitles.has(rewrittenTitleKey)) {
+      console.log(`  ↩ Skipped (title already exists): ${rewritten.title?.slice(0, 60)}`);
+      continue;
+    }
+    seenExistingTitles.add(rewrittenTitleKey);
+
     newArticles.push({
       slug,
       sport: item.sport || "football",
       league: item.league || "mixed",
       source: item.source || "",
+      sourceTitle: normalizeText(item.originalTitle || item.title || "").slice(0, 120),
       topicTags: item.topicTags || ["الرياضة"],
       publishedAt: item.publishedAt || new Date().toISOString(),
       title: rewritten.title,

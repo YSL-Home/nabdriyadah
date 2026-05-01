@@ -61,24 +61,33 @@ export default function TeamPage({ params }) {
     );
   }
 
-  // Match articles by: exact league match → team name in title/body → general football
+  // Match articles: team name in title → same league → general football only (no tennis/basketball/etc)
   const teamName0 = team.name || "";
   const teamNameParts = teamName0.split(/\s+/).filter(p => p.length > 2);
-  const footballLeagues = ["mixed", "football", team.league, "premier-league", "la-liga", "bundesliga", "serie-a", "ligue-1", "champions-league", "saudi-pro-league", "eredivisie", "mls", "liga-portugal", "botola"];
+  const NON_FOOTBALL_SPORTS = new Set(["tennis", "basketball", "padel", "futsal"]);
   const teamArticles = (() => {
-    const withSlug = articles.filter(a => a.slug);
-    // 1) Articles that explicitly match team name in title or body
+    // Deduplicate by title and exclude wrong sports
+    const seen = new Set();
+    const withSlug = articles.filter(a => {
+      if (!a.slug) return false;
+      if (NON_FOOTBALL_SPORTS.has(a.sport)) return false; // never tennis/bball on football team pages
+      const key = (a.title || "").toLowerCase().slice(0, 80);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    // 1) Team name appears in article title
     const specific = withSlug.filter(a => {
-      const text = `${a.title || ""} ${a.body || ""}`;
+      const text = `${a.title || ""} ${a.content || ""}`;
       return teamNameParts.some(part => text.includes(part));
     });
     if (specific.length >= 3) return specific.slice(0, 6);
-    // 2) Articles matching exact league
-    const leagueMatch = withSlug.filter(a => a.league === team.league);
-    if (leagueMatch.length >= 2) return [...specific, ...leagueMatch.filter(a => !specific.includes(a))].slice(0, 6);
-    // 3) Fall back to any football/mixed articles
-    const fallback = withSlug.filter(a => footballLeagues.includes(a.league));
-    return [...specific, ...fallback.filter(a => !specific.includes(a))].slice(0, 6);
+    // 2) Same league
+    const leagueMatch = withSlug.filter(a => a.league === team.league && !specific.includes(a));
+    const combined = [...specific, ...leagueMatch];
+    if (combined.length >= 3) return combined.slice(0, 6);
+    // 3) General football/mixed fallback
+    return [...combined, ...withSlug.filter(a => !combined.includes(a))].slice(0, 6);
   })();
 
   // Load fixture data (populated by fetch-fixtures.mjs)

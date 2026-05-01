@@ -29,21 +29,28 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
     </main>
   );
 
-  // Articles matching this team
+  // Articles matching this team — football only, no tennis/basketball/etc
   const teamName0 = team.name || "";
   const teamNameParts = teamName0.split(/\s+/).filter(p => p.length > 2);
-  const footballLeagues = ["mixed", "football", team.league, "premier-league", "la-liga", "bundesliga", "serie-a", "ligue-1", "champions-league", "saudi-pro-league", "eredivisie", "mls", "liga-portugal", "botola"];
+  const NON_FOOTBALL = new Set(["tennis", "basketball", "padel", "futsal"]);
   const teamArticles = (() => {
-    const withSlug = articles.filter(a => a.slug);
+    const seen = new Set();
+    const withSlug = articles.filter(a => {
+      if (!a.slug || NON_FOOTBALL.has(a.sport)) return false;
+      const key = (a.title || "").toLowerCase().slice(0, 80);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
     const specific = withSlug.filter(a => {
-      const text = `${a.title || ""} ${a.body || ""}`;
+      const text = `${a.title || ""} ${a.content || ""}`;
       return teamNameParts.some(part => text.includes(part));
     });
     if (specific.length >= 3) return specific.slice(0, 6);
-    const leagueMatch = withSlug.filter(a => a.league === team.league);
-    if (leagueMatch.length >= 2) return [...specific, ...leagueMatch.filter(a => !specific.includes(a))].slice(0, 6);
-    const fallback = withSlug.filter(a => footballLeagues.includes(a.league));
-    return [...specific, ...fallback.filter(a => !specific.includes(a))].slice(0, 6);
+    const leagueMatch = withSlug.filter(a => a.league === team.league && !specific.includes(a));
+    const combined = [...specific, ...leagueMatch];
+    if (combined.length >= 3) return combined.slice(0, 6);
+    return [...combined, ...withSlug.filter(a => !combined.includes(a))].slice(0, 6);
   })();
 
   let fixtureData = { past: [], upcoming: [], slug };
