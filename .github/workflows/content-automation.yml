@@ -120,5 +120,5 @@ jobs:
             exit 0
           fi
           git commit -m "refresh: $(date '+%d/%m %H:%M')"
-          git pull --rebase origin main
+          bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
           git push origin main
