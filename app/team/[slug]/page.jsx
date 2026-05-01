@@ -332,73 +332,207 @@ export default function TeamPage({ params }) {
         </section>
 
         {/* ── FIXTURES ── */}
-        {(fixtureData.upcoming.length > 0 || fixtureData.past.length > 0) && (
-          <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "22px" }}>
+        <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", marginBottom: "24px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
-              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>المباريات</h2>
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>📅 جدول المباريات</h2>
+            </div>
+            {fixtureData.fetchedAt && (
+              <span style={{ fontSize: "12px", color: "#9ca3af", fontWeight: 600 }}>
+                آخر تحديث: {new Date(fixtureData.fetchedAt).toLocaleDateString("ar-SA", { day: "numeric", month: "long" })}
+              </span>
+            )}
+          </div>
+
+          {/* ── UPCOMING ── */}
+          <div style={{ marginBottom: "28px" }}>
+            <div style={{
+              display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px",
+              paddingBottom: "10px", borderBottom: `2px solid ${accentSoft}`
+            }}>
+              <span style={{ fontSize: "16px" }}>🔜</span>
+              <span style={{ fontSize: "15px", fontWeight: 800, color: team.accent }}>المباريات القادمة</span>
+              {fixtureData.upcoming.length > 0 && (
+                <span style={{ marginRight: "auto", background: team.accent, color: "white", fontSize: "12px", fontWeight: 700, padding: "2px 10px", borderRadius: "999px" }}>
+                  {fixtureData.upcoming.length}
+                </span>
+              )}
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
-              {/* Upcoming */}
-              {fixtureData.upcoming.length > 0 && (
-                <div>
-                  <div style={{ fontSize: "14px", fontWeight: 700, color: team.accent, marginBottom: "12px", textTransform: "uppercase" }}>المقبلة</div>
-                  <div style={{ display: "grid", gap: "10px" }}>
-                    {fixtureData.upcoming.slice(0, 5).map((m) => (
-                      <div key={m.id} style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px" }}>
-                        <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>
-                          {m.league?.name} — {new Date(m.date).toLocaleDateString("ar-SA", { weekday: "short", month: "short", day: "numeric" })}
+            {fixtureData.upcoming.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "32px 20px", color: "#9ca3af" }}>
+                <div style={{ fontSize: "36px", marginBottom: "10px" }}>🗓️</div>
+                <div style={{ fontSize: "15px", fontWeight: 600 }}>لا توجد مباريات مجدولة حالياً</div>
+                <div style={{ fontSize: "13px", marginTop: "6px" }}>سيتم التحديث تلقائياً مع الإعلان عن المباريات</div>
+              </div>
+            ) : (
+              <div style={{ display: "grid", gap: "10px" }}>
+                {fixtureData.upcoming.map((m) => {
+                  const matchDate = new Date(m.date);
+                  const isHome = m.home?.id === fixtureData.teamId;
+                  const opponent = isHome ? m.away : m.home;
+                  const homeAway = isHome ? "홈" : "خارج";
+                  return (
+                    <div key={m.id} style={{
+                      background: accentSoft,
+                      border: `1px solid ${accentMid}`,
+                      borderRight: `4px solid ${team.accent}`,
+                      borderRadius: "16px",
+                      padding: "14px 16px",
+                      display: "grid",
+                      gridTemplateColumns: "90px 1fr auto",
+                      alignItems: "center",
+                      gap: "14px"
+                    }}>
+                      {/* Date */}
+                      <div style={{ textAlign: "center" }}>
+                        <div style={{ fontSize: "11px", fontWeight: 700, color: team.accent, marginBottom: "2px" }}>
+                          {matchDate.toLocaleDateString("ar-SA", { weekday: "short" })}
                         </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                          <span style={{ fontSize: "15px", fontWeight: 800, color: "#111827" }}>{m.home?.name}</span>
-                          <span style={{ fontSize: "12px", fontWeight: 700, color: "#6b7280", padding: "3px 10px", background: "white", borderRadius: "999px" }}>vs</span>
-                          <span style={{ fontSize: "15px", fontWeight: 800, color: "#111827" }}>{m.away?.name}</span>
+                        <div style={{ fontSize: "22px", fontWeight: 900, color: "#111827", lineHeight: 1 }}>
+                          {matchDate.getDate()}
+                        </div>
+                        <div style={{ fontSize: "11px", color: "#6b7280", fontWeight: 600 }}>
+                          {matchDate.toLocaleDateString("ar-SA", { month: "short" })}
+                        </div>
+                        <div style={{ fontSize: "13px", fontWeight: 700, color: "#374151", marginTop: "2px" }}>
+                          {matchDate.toLocaleTimeString("ar-SA", { hour: "2-digit", minute: "2-digit" })}
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
-              {/* Past */}
-              {fixtureData.past.length > 0 && (
-                <div>
-                  <div style={{ fontSize: "14px", fontWeight: 700, color: "#6b7280", marginBottom: "12px", textTransform: "uppercase" }}>الأخيرة</div>
-                  <div style={{ display: "grid", gap: "10px" }}>
-                    {fixtureData.past.slice(0, 5).map((m) => {
-                      const isHome = m.home?.id === fixtureData.teamId;
-                      const teamGoals = isHome ? m.goals?.home : m.goals?.away;
-                      const oppGoals = isHome ? m.goals?.away : m.goals?.home;
-                      const oppName = isHome ? m.away?.name : m.home?.name;
-                      const won = teamGoals > oppGoals;
-                      const draw = teamGoals === oppGoals;
-                      return (
-                        <div key={m.id} style={{ background: "white", border: `2px solid ${won ? "#bbf7d0" : draw ? "#fef08a" : "#fecaca"}`, borderRadius: "16px", padding: "14px 16px" }}>
-                          <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>
-                            {m.league?.name} — {new Date(m.date).toLocaleDateString("ar-SA", { month: "short", day: "numeric", year: "numeric" })}
-                          </div>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{team.name}</span>
-                            <span style={{
-                              fontSize: "18px", fontWeight: 900, letterSpacing: "-0.5px",
-                              color: won ? "#16a34a" : draw ? "#ca8a04" : "#dc2626",
-                              padding: "2px 12px", background: won ? "#dcfce7" : draw ? "#fef9c3" : "#fee2e2",
-                              borderRadius: "999px"
-                            }}>
-                              {teamGoals} — {oppGoals}
-                            </span>
-                            <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{oppName}</span>
-                          </div>
+                      {/* Match info */}
+                      <div>
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+                          <img
+                            src={opponent?.logo}
+                            alt={opponent?.name}
+                            style={{ width: "28px", height: "28px", objectFit: "contain" }}
+                            onError={(e) => { e.target.style.display = "none"; }}
+                          />
+                          <span style={{ fontSize: "16px", fontWeight: 800, color: "#111827" }}>
+                            {isHome ? `${team.name} ضد ${opponent?.name}` : `${opponent?.name} ضد ${team.name}`}
+                          </span>
                         </div>
-                      );
-                    })}
-                  </div>
-                </div>
+                        <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                          <span style={{ fontSize: "11px", color: "#6b7280", background: "white", padding: "3px 8px", borderRadius: "999px", fontWeight: 600 }}>
+                            {m.league?.name}
+                          </span>
+                          <span style={{ fontSize: "11px", color: "#6b7280", background: "white", padding: "3px 8px", borderRadius: "999px", fontWeight: 600 }}>
+                            {m.league?.round}
+                          </span>
+                          {m.venue && (
+                            <span style={{ fontSize: "11px", color: "#6b7280", background: "white", padding: "3px 8px", borderRadius: "999px", fontWeight: 600 }}>
+                              🏟 {m.venue}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Home/Away badge */}
+                      <div style={{
+                        padding: "6px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 800,
+                        background: isHome ? team.accent : "white",
+                        color: isHome ? "white" : team.accent,
+                        border: `2px solid ${team.accent}`,
+                        textAlign: "center", whiteSpace: "nowrap"
+                      }}>
+                        {isHome ? "홈" : "خارج"}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* ── PAST ── */}
+          <div>
+            <div style={{
+              display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px",
+              paddingBottom: "10px", borderBottom: "2px solid #f3f4f6"
+            }}>
+              <span style={{ fontSize: "16px" }}>📊</span>
+              <span style={{ fontSize: "15px", fontWeight: 800, color: "#374151" }}>آخر النتائج</span>
+              {fixtureData.past.length > 0 && (
+                <span style={{ marginRight: "auto", background: "#6b7280", color: "white", fontSize: "12px", fontWeight: 700, padding: "2px 10px", borderRadius: "999px" }}>
+                  {Math.min(fixtureData.past.length, 10)}
+                </span>
               )}
             </div>
-          </section>
-        )}
+
+            {fixtureData.past.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "24px 20px", color: "#9ca3af" }}>
+                <div style={{ fontSize: "13px", fontWeight: 600 }}>ستظهر نتائج المباريات هنا بعد الانتهاء منها</div>
+              </div>
+            ) : (
+              <div style={{ display: "grid", gap: "8px" }}>
+                {fixtureData.past.slice(0, 10).map((m) => {
+                  const isHome = m.home?.id === fixtureData.teamId;
+                  const teamGoals = isHome ? m.goals?.home : m.goals?.away;
+                  const oppGoals = isHome ? m.goals?.away : m.goals?.home;
+                  const opp = isHome ? m.away : m.home;
+                  const won = teamGoals !== null && oppGoals !== null && teamGoals > oppGoals;
+                  const draw = teamGoals !== null && oppGoals !== null && teamGoals === oppGoals;
+                  const resultColor = won ? "#16a34a" : draw ? "#ca8a04" : "#dc2626";
+                  const resultBg = won ? "#dcfce7" : draw ? "#fef9c3" : "#fee2e2";
+                  const resultBorder = won ? "#bbf7d0" : draw ? "#fde68a" : "#fecaca";
+                  const resultLabel = won ? "ف" : draw ? "ت" : "خ";
+                  return (
+                    <div key={m.id} style={{
+                      display: "grid",
+                      gridTemplateColumns: "32px 80px 1fr auto 1fr",
+                      alignItems: "center",
+                      gap: "10px",
+                      padding: "12px 14px",
+                      background: "#f9fafb",
+                      border: `1px solid ${resultBorder}`,
+                      borderRight: `4px solid ${resultColor}`,
+                      borderRadius: "14px"
+                    }}>
+                      {/* Result badge */}
+                      <div style={{
+                        width: "28px", height: "28px", borderRadius: "999px",
+                        background: resultBg, color: resultColor,
+                        fontSize: "12px", fontWeight: 900,
+                        display: "flex", alignItems: "center", justifyContent: "center"
+                      }}>
+                        {resultLabel}
+                      </div>
+
+                      {/* Date */}
+                      <div style={{ fontSize: "12px", color: "#6b7280", fontWeight: 600, textAlign: "center" }}>
+                        {new Date(m.date).toLocaleDateString("ar-SA", { day: "numeric", month: "short", year: "2-digit" })}
+                      </div>
+
+                      {/* Home team */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "6px", justifyContent: "flex-end" }}>
+                        <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", textAlign: "left" }}>{m.home?.name}</span>
+                        <img src={m.home?.logo} alt="" style={{ width: "22px", height: "22px", objectFit: "contain" }} onError={(e) => { e.target.style.display = "none"; }} />
+                      </div>
+
+                      {/* Score */}
+                      <div style={{
+                        fontSize: "18px", fontWeight: 900, letterSpacing: "-0.5px",
+                        color: resultColor, background: resultBg,
+                        padding: "3px 14px", borderRadius: "999px",
+                        textAlign: "center", whiteSpace: "nowrap"
+                      }}>
+                        {m.goals?.home ?? "?"} – {m.goals?.away ?? "?"}
+                      </div>
+
+                      {/* Away team */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        <img src={m.away?.logo} alt="" style={{ width: "22px", height: "22px", objectFit: "contain" }} onError={(e) => { e.target.style.display = "none"; }} />
+                        <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{m.away?.name}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
 
         {/* ── RELATED ARTICLES ── */}
         <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>

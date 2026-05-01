@@ -1,9 +1,15 @@
-name: 🚨 Breaking News Scanner
+name: 🤖 Nabdriyadah — Content Automation
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # toutes les 15 minutes
+    - cron: "*/5 * * * *"    # breaking news: toutes les 5 min
+    - cron: "0 * * * *"       # full refresh: toutes les heures
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "Mode: auto | breaking | full"
+        required: false
+        default: "auto"
 
 permissions:
   contents: write
@@ -12,8 +18,12 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
-  scan:
+
+  # ── JOB 1 : Breaking news (toutes les 5 min) ─────────────────────────────
+  breaking-news:
+    name: 🚨 Breaking News
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode != 'full' || github.event_name == 'schedule'
 
     steps:
       - name: 📥 Checkout
@@ -29,7 +39,7 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: 🔍 Scan RSS pour nouveaux titres
+      - name: 🔍 Scan RSS — nouveaux titres
         id: scan
         run: |
           node scripts/breaking-news-scan.mjs
@@ -50,14 +60,71 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions@github.com"
-
           git add -A
-
           if git diff --cached --quiet; then
             echo "Rien à committer."
             exit 0
           fi
-
           git commit -m "breaking: mise à jour urgente — $(date '+%H:%M')"
+          git pull --rebase origin main
+          git push origin main
+
+  # ── JOB 2 : Full content refresh (toutes les heures) ────────────────────
+  full-content-refresh:
+    name: 🔄 Full Refresh
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'full' || github.event_name == 'schedule'
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 📰 Réécriture articles complets
+        run: node scripts/rewrite-article.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: 📊 Fetch standings (classements)
+        run: node scripts/fetch-standings.mjs
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        continue-on-error: true
+
+      - name: 📅 Fetch fixtures (matchs & résultats)
+        run: node scripts/fetch-fixtures.mjs
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        continue-on-error: true
+
+      - name: 🖼 Generate images
+        run: node scripts/generate-images.mjs
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        continue-on-error: true
+
+      - name: 💾 Commit tout
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions@github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Rien à committer."
+            exit 0
+          fi
+          git commit -m "refresh: mise à jour complète — $(date '+%d/%m %H:%M')"
           git pull --rebase origin main
           git push origin main

@@ -1,78 +1,124 @@
+/**
+ * fetch-fixtures.mjs
+ * Stratégie efficace: 1 requête par ligue (next=50 + last=50)
+ * puis distribution vers content/fixtures/[team-slug].json
+ * Total: ~20 requêtes au lieu de 350 (1 par équipe)
+ */
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.join(__dirname, "..");
+const OUTPUT_DIR = path.join(ROOT, "content/fixtures");
+const STANDINGS_DIR = path.join(ROOT, "content/standings");
 
 const API_KEY = process.env.API_FOOTBALL_KEY;
 const BASE_URL = "https://v3.football.api-sports.io";
-const OUTPUT_DIR = path.join(process.cwd(), "content/fixtures");
-const TEAMS_MAP_PATH = path.join(process.cwd(), "content/team-ids.json");
+const SEASON = 2024;
 
-// API-Football team IDs for all our clubs
+// ── Slug → API-Football team ID ──────────────────────────────────────────────
 const TEAM_IDS = {
   // Premier League
-  "manchester-city": 50,
-  "manchester-united": 33,
-  "liverpool": 40,
-  "arsenal": 42,
-  "chelsea": 49,
-  "tottenham": 47,
+  "manchester-city": 50, "manchester-united": 33, "liverpool": 40,
+  "arsenal": 42, "chelsea": 49, "tottenham": 47, "aston-villa": 66,
+  "brighton": 51, "west-ham": 48, "fulham": 36, "ipswich": 57,
+  "crystal-palace": 52, "newcastle": 67, "brentford": 55,
+  "leeds-united": 63, "southampton": 41, "wolves": 39,
+  "nottingham-forest": 34, "everton": 45, "leicester-city": 46,
+  "bournemouth": 35,
   // La Liga
-  "real-madrid": 541,
-  "barcelona": 529,
-  "atletico-madrid": 530,
-  "sevilla": 536,
-  "valencia": 532,
-  "real-sociedad": 548,
+  "real-madrid": 541, "barcelona": 529, "atletico-madrid": 530,
+  "sevilla": 536, "valencia": 532, "real-sociedad": 548,
+  "villarreal": 533, "celta-vigo": 538, "athletic-bilbao": 534,
+  "getafe": 546, "alaves": 542, "espanyol": 543,
+  "girona": 547, "granada": 545, "cadiz": 540,
+  "osasuna": 544, "mallorca": 539, "las-palmas": 723,
+  "real-valladolid": 549, "leganes": 727, "rayo-vallecano": 728,
+  "real-betis": 543,
   // Bundesliga
-  "bayern-munich": 157,
-  "borussia-dortmund": 165,
-  "bayer-leverkusen": 168,
-  "rb-leipzig": 173,
-  "eintracht-frankfurt": 169,
-  "borussia-monchengladbach": 163,
+  "bayern-munich": 157, "borussia-dortmund": 165, "bayer-leverkusen": 168,
+  "rb-leipzig": 173, "eintracht-frankfurt": 169, "borussia-monchengladbach": 163,
+  "vfb-stuttgart": 172, "vfl-wolfsburg": 161, "tsg-hoffenheim": 167,
+  "werder-bremen": 162, "sc-freiburg": 175, "augsburg": 174,
+  "mainz": 176, "union-berlin": 164, "bochum": 180,
+  "fc-koln": 170, "hertha-bsc": 171, "holstein-kiel": 1099,
+  "heidenheim": 1093, "st-pauli": 186,
   // Serie A
-  "juventus": 496,
-  "ac-milan": 489,
-  "inter-milan": 505,
-  "napoli": 492,
-  "roma": 497,
-  "lazio": 487,
+  "juventus": 496, "ac-milan": 489, "inter-milan": 505,
+  "napoli": 492, "as-roma": 497, "lazio": 487,
+  "atalanta": 488, "fiorentina": 494, "bologna": 500,
+  "udinese": 491, "torino": 498, "empoli": 502,
+  "cagliari": 499, "hellas-verona": 503, "lecce": 504,
+  "venezia": 501, "parma": 506, "como": 867,
+  "genoa": 507, "monza": 495, "salernitana": 514,
   // Ligue 1
-  "psg": 85,
-  "marseille": 81,
-  "monaco": 91,
-  "lyon": 80,
-  "lille": 79,
-  "rennes": 95,
-  // Saudi Pro League
-  "al-hilal": 2932,
-  "al-nassr": 2939,
-  "al-ittihad": 2933,
-  "al-ahli": 2937,
+  "psg": 85, "olympique-marseille": 81, "monaco": 91,
+  "olympique-lyon": 80, "losc-lille": 79, "stade-rennes": 95,
+  "nice": 84, "stade-de-reims": 82, "nantes": 93,
+  "strasbourg": 78, "lens": 94, "toulouse": 87,
+  "montpellier": 111, "brest": 108, "angers": 116,
+  "auxerre": 83, "saint-etienne": 96, "metz": 119,
+  "stade-brestois": 108, "le-havre": 1139, "reims": 82,
   // Eredivisie
-  "ajax": 194,
-  "psv": 197,
-  "feyenoord": 192
+  "ajax": 194, "psv-eindhoven": 197, "feyenoord": 192,
+  "az-alkmaar": 198, "fc-utrecht": 195, "fc-groningen": 193,
+  "vitesse": 210, "sparta-rotterdam": 206, "rkc-waalwijk": 209,
+  "nec-nijmegen": 204, "sc-heerenveen": 201, "pec-zwolle": 207,
+  "go-ahead-eagles": 205, "almere-city": 678, "fortuna-sittard": 1388,
+  "heracles": 200, "fc-twente": 203, "fc-emmen": 208,
+  "heerenveen": 201, "nac-breda": 2318, "groningen": 193, "sc-volendam": 2283,
+  // Saudi Pro League
+  "al-hilal": 2932, "al-nassr": 2939, "al-ittihad": 2933,
+  "al-ahli": 2937, "al-shabab": 2936, "al-ettifaq": 2938,
+  "al-qadsiah": 2934, "al-fateh": 2943, "al-taawon": 2940,
+  "al-fayha": 7795, "damac": 7796, "al-khaleej": 7797,
+  "abha": 7799, "al-riyadh": 7800, "al-hazm": 7801, "al-okhdood": 7802,
+  "al-wehda": 7804, "al-orobah": 7803, "al-kholood": 2941, "al-tai": 2942,
+  // Botola
+  "wydad": 5593, "raja-casablanca": 2575, "far-rabat": 7027,
+  "renaissance-berkane": 7028, "moghreb-tetouan": 7029, "hassania-agadir": 7030,
+  "difaa-eljadidi": 7031, "olympique-khouribga": 7032, "ittihad-tanger": 7033,
+  "mouloudia-oujda": 7034, "fus-rabat": 7035, "maghreb-fez": 7036,
+  "chabab-mohammedia": 7037, "rapide-oued-zem": 7038, "youssoufia-berrechid": 7039,
+  // Liga Portugal
+  "benfica": 211, "porto": 212, "sporting-cp": 228,
+  "braga": 217, "vitoria-guimaraes": 232, "casa-pia": 2284,
+  "boavista": 222, "rio-ave": 218, "famalicao": 220,
+  "moreirense": 231, "estoril": 219, "portimonense": 223,
+  "nacional": 229, "arouca": 216, "gil-vicente": 2309, "farense": 245,
+  // MLS
+  "la-galaxy": 1598, "inter-miami": 1611, "seattle-sounders": 1600,
+  "atlanta-united": 1605, "portland-timbers": 1601, "nycfc": 1603,
+  "new-england-revolution": 1602, "philadelphia-union": 1608,
+  "fc-cincinnati": 1609, "columbus-crew": 1607,
+  "austin-fc": 1614, "real-salt-lake": 1612,
 };
 
-// API-Football league IDs for competitions
-const LEAGUE_IDS = {
-  "premier-league": 39,
-  "la-liga": 140,
-  "bundesliga": 78,
-  "serie-a": 135,
-  "ligue-1": 61,
-  "champions-league": 2,
-  "saudi-pro-league": 307,
-  "eredivisie": 88,
-  "world-cup": 1,
-  "euro": 4,
-  "afcon": 6,
-  "caf-champions-league": 12,
-  "club-world-cup": 15
-};
+// ── League ID → slug (for distribution) ───────────────────────────────────────
+const LEAGUES = [
+  { slug: "premier-league",   id: 39  },
+  { slug: "la-liga",          id: 140 },
+  { slug: "bundesliga",       id: 78  },
+  { slug: "serie-a",          id: 135 },
+  { slug: "ligue-1",          id: 61  },
+  { slug: "eredivisie",       id: 88  },
+  { slug: "saudi-pro-league", id: 307 },
+  { slug: "botola",           id: 200 },
+  { slug: "liga-portugal",    id: 94  },
+  { slug: "mls",              id: 253 },
+  { slug: "champions-league", id: 2   },
+];
 
-function ensureDir(dir) {
-  fs.mkdirSync(dir, { recursive: true });
+// Reverse map: apiTeamId → slug
+const ID_TO_SLUG = Object.fromEntries(
+  Object.entries(TEAM_IDS).map(([slug, id]) => [id, slug])
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
 }
 
 async function apiFetch(endpoint) {
@@ -84,166 +130,200 @@ async function apiFetch(endpoint) {
       "x-rapidapi-host": "v3.football.api-sports.io"
     }
   });
-  if (!res.ok) throw new Error(`API error ${res.status} for ${endpoint}`);
-  const data = await res.json();
-  if (data.errors && Object.keys(data.errors).length > 0) {
-    throw new Error(`API errors: ${JSON.stringify(data.errors)}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+  if (json.errors && Object.keys(json.errors).length > 0) {
+    const msg = JSON.stringify(json.errors);
+    if (msg.includes("rateLimit") || msg.includes("requests")) throw new Error("RATE_LIMIT");
+    throw new Error(`API: ${msg}`);
   }
-  return data.response || [];
+  return json.response || [];
 }
 
-function sleep(ms) {
-  return new Promise(r => setTimeout(r, ms));
-}
-
-function formatMatch(fixture) {
-  const f = fixture.fixture;
-  const teams = fixture.teams;
-  const goals = fixture.goals;
-  const score = fixture.score;
-  const league = fixture.league;
-
+function formatFixture(f) {
   return {
-    id: f.id,
-    date: f.date,
-    timestamp: f.timestamp,
-    status: f.status?.short || "NS",
-    statusLong: f.status?.long || "",
-    elapsed: f.status?.elapsed || null,
-    venue: f.venue?.name || "",
-    city: f.venue?.city || "",
+    id: f.fixture.id,
+    date: f.fixture.date,
+    timestamp: f.fixture.timestamp,
+    status: f.fixture.status?.short || "NS",
+    statusLong: f.fixture.status?.long || "",
+    elapsed: f.fixture.status?.elapsed || null,
+    venue: f.fixture.venue?.name || "",
+    city: f.fixture.venue?.city || "",
     home: {
-      id: teams.home?.id,
-      name: teams.home?.name || "",
-      logo: teams.home?.logo || "",
-      winner: teams.home?.winner
+      id: f.teams.home?.id,
+      name: f.teams.home?.name || "",
+      logo: f.teams.home?.logo || "",
+      winner: f.teams.home?.winner ?? null
     },
     away: {
-      id: teams.away?.id,
-      name: teams.away?.name || "",
-      logo: teams.away?.logo || "",
-      winner: teams.away?.winner
+      id: f.teams.away?.id,
+      name: f.teams.away?.name || "",
+      logo: f.teams.away?.logo || "",
+      winner: f.teams.away?.winner ?? null
     },
     goals: {
-      home: goals.home,
-      away: goals.away
-    },
-    halftime: {
-      home: score?.halftime?.home,
-      away: score?.halftime?.away
+      home: f.goals?.home ?? null,
+      away: f.goals?.away ?? null
     },
     league: {
-      id: league?.id,
-      name: league?.name || "",
-      logo: league?.logo || "",
-      round: league?.round || ""
+      id: f.league?.id,
+      name: f.league?.name || "",
+      logo: f.league?.logo || "",
+      round: f.league?.round || ""
     }
   };
 }
 
-async function fetchTeamFixtures(slug, teamId) {
-  try {
-    // Last 10 matches
-    const past = await apiFetch(`/fixtures?team=${teamId}&last=10`);
-    await sleep(400);
-
-    // Next 5 matches
-    const next = await apiFetch(`/fixtures?team=${teamId}&next=5`);
-    await sleep(400);
-
-    const pastFormatted = past.map(formatMatch).sort((a, b) => b.timestamp - a.timestamp);
-    const nextFormatted = next.map(formatMatch).sort((a, b) => a.timestamp - b.timestamp);
-
-    const data = {
-      teamId,
-      slug,
-      fetchedAt: new Date().toISOString(),
-      past: pastFormatted,
-      upcoming: nextFormatted
-    };
-
-    fs.writeFileSync(
-      path.join(OUTPUT_DIR, `${slug}.json`),
-      JSON.stringify(data, null, 2),
-      "utf-8"
-    );
-
-    console.log(`  ✓ ${slug}: ${pastFormatted.length} past, ${nextFormatted.length} upcoming`);
-    return true;
-  } catch (err) {
-    console.log(`  ✗ ${slug}: ${err.message}`);
-    return false;
+// Initialise empty fixture buckets for every known team
+function initBuckets() {
+  const buckets = {};
+  for (const [slug, id] of Object.entries(TEAM_IDS)) {
+    if (!buckets[slug]) {
+      buckets[slug] = { teamId: id, slug, past: [], upcoming: [] };
+    }
   }
+  return buckets;
 }
 
-async function fetchLeagueStandings(slug, leagueId) {
+async function fetchLeagueFixtures(leagueId, leagueSlug) {
+  const now = Math.floor(Date.now() / 1000);
+
+  // Upcoming: next 30 matches in this league
+  let upcoming = [];
   try {
-    const current = await apiFetch(`/standings?league=${leagueId}&season=2024`);
-    await sleep(400);
-
-    if (!current.length) return;
-
-    const standings = current[0]?.league?.standings?.[0] || [];
-    const formatted = standings.map(entry => ({
-      rank: entry.rank,
-      team: {
-        id: entry.team?.id,
-        name: entry.team?.name || "",
-        logo: entry.team?.logo || ""
-      },
-      played: entry.all?.played || 0,
-      win: entry.all?.win || 0,
-      draw: entry.all?.draw || 0,
-      lose: entry.all?.lose || 0,
-      goalsFor: entry.all?.goals?.for || 0,
-      goalsAgainst: entry.all?.goals?.against || 0,
-      points: entry.points || 0,
-      form: entry.form || ""
-    }));
-
-    fs.writeFileSync(
-      path.join(process.cwd(), `content/standings/${slug}.json`),
-      JSON.stringify({ leagueId, slug, fetchedAt: new Date().toISOString(), standings: formatted }, null, 2),
-      "utf-8"
+    const raw = await apiFetch(
+      `/fixtures?league=${leagueId}&season=${SEASON}&next=30`
     );
-
-    console.log(`  ✓ standings ${slug}: ${formatted.length} teams`);
-  } catch (err) {
-    console.log(`  ✗ standings ${slug}: ${err.message}`);
+    upcoming = raw.map(formatFixture);
+    console.log(`  → ${leagueSlug} upcoming: ${upcoming.length}`);
+  } catch (e) {
+    if (e.message === "RATE_LIMIT") { await sleep(60000); }
+    console.warn(`  ✗ upcoming ${leagueSlug}: ${e.message}`);
   }
+  await sleep(1500);
+
+  // Past: last 50 played matches in this league
+  let past = [];
+  try {
+    const raw = await apiFetch(
+      `/fixtures?league=${leagueId}&season=${SEASON}&last=50`
+    );
+    past = raw.map(formatFixture).sort((a, b) => b.timestamp - a.timestamp);
+    console.log(`  → ${leagueSlug} past: ${past.length}`);
+  } catch (e) {
+    if (e.message === "RATE_LIMIT") { await sleep(60000); }
+    console.warn(`  ✗ past ${leagueSlug}: ${e.message}`);
+  }
+  await sleep(1500);
+
+  return { upcoming, past };
 }
 
 async function main() {
   if (!API_KEY) {
-    console.log("API_FOOTBALL_KEY not set — skipping fixture fetch.");
+    console.log("⚠ API_FOOTBALL_KEY not set — skipping fixture fetch.");
     process.exit(0);
   }
 
-  ensureDir(OUTPUT_DIR);
-  ensureDir(path.join(process.cwd(), "content/standings"));
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  fs.mkdirSync(STANDINGS_DIR, { recursive: true });
 
-  // Check API status
+  // Check quota
   try {
     const status = await apiFetch("/status");
-    console.log(`API-Football: ${status.account?.firstname || "connected"}, requests today: ${status.requests?.current || 0}/${status.requests?.limit_day || 100}`);
+    const req = status[0]?.requests || status?.requests || {};
+    console.log(`✅ API connected — requests today: ${req.current || "?"}/${req.limit_day || "?"}`);
   } catch (e) {
-    console.log("API status check failed:", e.message);
+    console.warn("Status check failed:", e.message);
+  }
+  await sleep(1000);
+
+  const buckets = initBuckets();
+
+  console.log("\n── Fetching fixtures by league ──");
+  for (const league of LEAGUES) {
+    console.log(`\n📅 ${league.slug}`);
+    const { upcoming, past } = await fetchLeagueFixtures(league.id, league.slug);
+
+    // Distribute into per-team buckets
+    for (const fix of upcoming) {
+      for (const side of ["home", "away"]) {
+        const apiId = fix[side]?.id;
+        const slug = ID_TO_SLUG[apiId];
+        if (slug && buckets[slug]) {
+          buckets[slug].upcoming.push(fix);
+        }
+      }
+    }
+    for (const fix of past) {
+      for (const side of ["home", "away"]) {
+        const apiId = fix[side]?.id;
+        const slug = ID_TO_SLUG[apiId];
+        if (slug && buckets[slug]) {
+          // Avoid duplicates (fixture already added from the other side)
+          const already = buckets[slug].past.some(f => f.id === fix.id);
+          if (!already) buckets[slug].past.push(fix);
+        }
+      }
+    }
+
+    // Also fetch standings for this league
+    try {
+      const rows = await apiFetch(`/standings?league=${league.id}&season=${SEASON}`);
+      await sleep(1000);
+      if (rows.length && rows[0]?.league?.standings?.[0]) {
+        const standingsList = rows[0].league.standings[0];
+        const standings = standingsList.map(entry => {
+          const apiId = entry.team?.id;
+          const teamSlug = ID_TO_SLUG[apiId] || null;
+          return {
+            rank: entry.rank,
+            slug: teamSlug,
+            name: entry.team?.name || "",
+            logo: entry.team?.logo || "",
+            played: entry.all?.played ?? 0,
+            won: entry.all?.win ?? 0,
+            drawn: entry.all?.draw ?? 0,
+            lost: entry.all?.lose ?? 0,
+            gf: entry.all?.goals?.for ?? 0,
+            ga: entry.all?.goals?.against ?? 0,
+            gd: entry.goalsDiff ?? 0,
+            points: entry.points ?? 0,
+            form: entry.form || null,
+            description: entry.description || null
+          };
+        });
+        fs.writeFileSync(
+          path.join(STANDINGS_DIR, `${league.slug}.json`),
+          JSON.stringify({ standings, slug: league.slug, leagueId: league.id, season: SEASON, fetchedAt: new Date().toISOString() }, null, 2)
+        );
+        console.log(`  ✓ standings saved: ${standings.length} teams`);
+      }
+    } catch (e) {
+      console.warn(`  ✗ standings ${league.slug}: ${e.message}`);
+    }
+    await sleep(1000);
   }
 
-  console.log("\n── Fetching team fixtures ──");
-  const teamSlugs = Object.keys(TEAM_IDS);
-  for (const slug of teamSlugs) {
-    await fetchTeamFixtures(slug, TEAM_IDS[slug]);
+  // Write all per-team fixture files
+  console.log("\n── Writing per-team fixture files ──");
+  let written = 0;
+  for (const [slug, data] of Object.entries(buckets)) {
+    // Sort past desc, upcoming asc
+    data.past.sort((a, b) => b.timestamp - a.timestamp);
+    data.upcoming.sort((a, b) => a.timestamp - b.timestamp);
+    data.fetchedAt = new Date().toISOString();
+    fs.writeFileSync(
+      path.join(OUTPUT_DIR, `${slug}.json`),
+      JSON.stringify(data, null, 2)
+    );
+    written++;
   }
-
-  console.log("\n── Fetching league standings ──");
-  const leagueSlugs = Object.keys(LEAGUE_IDS);
-  for (const slug of leagueSlugs) {
-    await fetchLeagueStandings(slug, LEAGUE_IDS[slug]);
-    await sleep(300);
-  }
-
-  console.log("\nFixture fetch complete.");
+  console.log(`✅ Written ${written} fixture files`);
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+main().catch(e => {
+  console.error("Fatal:", e.message);
+  process.exit(1);
+});
