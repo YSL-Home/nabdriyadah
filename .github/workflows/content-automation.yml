@@ -93,16 +93,14 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-      - name: Fetch standings
-        run: node scripts/fetch-standings.mjs
-        env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+      - name: Fetch ESPN data (standings + fixtures — no API key needed)
+        run: node scripts/fetch-espn.mjs
         continue-on-error: true
 
-      - name: Fetch fixtures
-        run: node scripts/fetch-fixtures.mjs
+      - name: Fetch team videos (YouTube)
+        run: node scripts/fetch-team-videos.mjs
         env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         continue-on-error: true
 
       - name: Generate images
