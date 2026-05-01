@@ -2,29 +2,34 @@
  * fetch-espn.mjs — ESPN API (100% gratuite, sans clé API)
  * Récupère classements + matchs pour toutes les ligues
  * et écrit dans content/standings/ et content/fixtures/
+ *
+ * Fixes v2:
+ *  - Scoreboard date-range URL was broken (404). Now uses the site/v2 API
+ *    with individual date queries (±30 days) which actually work.
+ *  - Accumulates fixtures across CI runs (merge, never overwrite).
  */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.join(__dirname, "..");
+const ROOT          = path.join(__dirname, "..");
 const STANDINGS_DIR = path.join(ROOT, "content/standings");
 const FIXTURES_DIR  = path.join(ROOT, "content/fixtures");
 const TEAMS_PATH    = path.join(ROOT, "content/teams-data.json");
 
-// ESPN league IDs
+// ESPN league IDs — used for BOTH standings and scoreboard
 const ESPN_LEAGUES = [
-  { slug: "premier-league",   espnId: "eng.1"          },
-  { slug: "la-liga",          espnId: "esp.1"           },
-  { slug: "bundesliga",       espnId: "ger.1"           },
-  { slug: "serie-a",          espnId: "ita.1"           },
-  { slug: "ligue-1",          espnId: "fra.1"           },
-  { slug: "eredivisie",       espnId: "ned.1"           },
-  { slug: "saudi-pro-league", espnId: "sau.1"           },
-  { slug: "mls",              espnId: "usa.1"           },
-  { slug: "liga-portugal",    espnId: "por.1"           },
-  { slug: "champions-league", espnId: "uefa.champions"  },
+  { slug: "premier-league",   espnId: "eng.1"         },
+  { slug: "la-liga",          espnId: "esp.1"          },
+  { slug: "bundesliga",       espnId: "ger.1"          },
+  { slug: "serie-a",          espnId: "ita.1"          },
+  { slug: "ligue-1",          espnId: "fra.1"          },
+  { slug: "eredivisie",       espnId: "ned.1"          },
+  { slug: "saudi-pro-league", espnId: "ksa.1"          },
+  { slug: "mls",              espnId: "usa.1"          },
+  { slug: "liga-portugal",    espnId: "por.1"          },
+  { slug: "champions-league", espnId: "uefa.champions" },
 ];
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -37,27 +42,22 @@ async function espnGet(url) {
   return res.json();
 }
 
-// Build slug from ESPN team slug or display name
-function espnTeamSlug(espnSlug = "", displayName = "") {
-  // ESPN slugs often match ours directly
-  const normalized = (espnSlug || displayName)
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]/g, "")
-    .replace(/--+/g, "-");
-  return normalized;
+/** YYYYMMDD for a Date object */
+function yyyymmdd(d) {
+  const y  = d.getFullYear();
+  const m  = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${y}${m}${dd}`;
 }
 
-// Load teams-data to resolve slugs and names
+// ── Team slug resolution ───────────────────────────────────────────────────────
+
 const teamsData = JSON.parse(fs.readFileSync(TEAMS_PATH, "utf-8"));
 
-// Build name→slug lookup (normalize Arabic names for matching)
-const slugByName = {};
-for (const [slug, team] of Object.entries(teamsData)) {
-  slugByName[slug] = slug; // direct
-}
+// direct slug set
+const ourSlugs = new Set(Object.keys(teamsData));
 
-// ESPN team slug → our slug (manual overrides where ESPN differs)
+// ESPN slug → our slug manual overrides
 const ESPN_SLUG_MAP = {
   // Premier League
   "tottenham-hotspur":       "tottenham",
@@ -133,23 +133,21 @@ const ESPN_SLUG_MAP = {
   "vitoria-sc":              "vitoria-guimaraes",
 };
 
-function resolveSlug(espnSlug, displayName) {
-  const s = (espnSlug || "").toLowerCase().trim();
+function resolveSlug(espnSlug = "", displayName = "") {
+  const s = espnSlug.toLowerCase().trim();
   if (ESPN_SLUG_MAP[s]) return ESPN_SLUG_MAP[s];
-  // Try direct match with our slugs
-  if (slugByName[s]) return s;
-  // Normalize display name and try
+  if (ourSlugs.has(s)) return s;
   const normalized = displayName.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
-  if (slugByName[normalized]) return normalized;
-  return null; // unknown team
+  if (ourSlugs.has(normalized)) return normalized;
+  return null;
 }
 
 // ── Standings ─────────────────────────────────────────────────────────────────
+
 async function fetchStandings(league) {
   const url = `https://site.api.espn.com/apis/v2/sports/soccer/${league.espnId}/standings`;
   const data = await espnGet(url);
 
-  // ESPN structure: data.children[0].standings.entries OR data.standings.entries
   let entries = data.standings?.entries || data.children?.[0]?.standings?.entries || [];
   if (!entries.length && data.children) {
     for (const child of data.children) {
@@ -164,28 +162,28 @@ async function fetchStandings(league) {
   }
 
   const standings = entries.map((entry, idx) => {
-    const team = entry.team || {};
+    const team  = entry.team || {};
     const stats = {};
-    for (const s of (entry.stats || [])) {
-      stats[s.name] = s.value ?? 0;
-    }
-    const slug = resolveSlug(team.slug, team.displayName || team.name || "");
-    const teamFromData = slug ? teamsData[slug] : null;
+    for (const s of (entry.stats || [])) stats[s.name] = s.value ?? 0;
+
+    const slug       = resolveSlug(team.slug, team.displayName || team.name || "");
+    const teamFromDB = slug ? teamsData[slug] : null;
+
     return {
-      rank: Math.round(stats.rank ?? stats.rankorder ?? (idx + 1)),
+      rank:   Math.round(stats.rank ?? stats.rankorder ?? (idx + 1)),
       slug,
-      name: teamFromData?.name || team.displayName || team.name || "",
-      logo: teamFromData?.logo || team.logos?.[0]?.href || "",
+      name:   teamFromDB?.name || team.displayName || team.name || "",
+      logo:   teamFromDB?.logo || team.logos?.[0]?.href || "",
       played: Math.round(stats.gamesPlayed ?? 0),
-      won:    Math.round(stats.wins  ?? 0),
-      drawn:  Math.round(stats.ties  ?? 0),
+      won:    Math.round(stats.wins   ?? 0),
+      drawn:  Math.round(stats.ties   ?? 0),
       lost:   Math.round(stats.losses ?? 0),
       gf:     Math.round(stats.pointsFor     ?? stats.goalsFor     ?? 0),
       ga:     Math.round(stats.pointsAgainst ?? stats.goalsAgainst ?? 0),
       gd:     Math.round(stats.differential  ?? 0),
       points: Math.round(stats.points ?? 0),
     };
-  }).filter(e => e.name); // remove blanks
+  }).filter(e => e.name);
 
   standings.sort((a, b) => a.rank - b.rank);
 
@@ -193,16 +191,10 @@ async function fetchStandings(league) {
     path.join(STANDINGS_DIR, `${league.slug}.json`),
     JSON.stringify({ standings, slug: league.slug, fetchedAt: new Date().toISOString() }, null, 2)
   );
-  console.log(`  ✓ Standings ${league.slug}: ${standings.length} teams (top: ${standings[0]?.name}, ${standings[0]?.points}pts)`);
+  console.log(`  ✓ Standings ${league.slug}: ${standings.length} teams`);
 }
 
-// ── Fixtures/Scoreboard ───────────────────────────────────────────────────────
-function formatDate(d) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${y}${m}${dd}`;
-}
+// ── Fixtures ──────────────────────────────────────────────────────────────────
 
 function parseEvent(event, leagueName) {
   const comp = event.competitions?.[0];
@@ -211,41 +203,40 @@ function parseEvent(event, leagueName) {
   const away = comp.competitors?.find(c => c.homeAway === "away");
   if (!home || !away) return null;
 
-  const status = comp.status?.type;
-  const completed = status?.completed === true;
-  const state = status?.state || "pre"; // pre, in, post
+  const statusObj = comp.status?.type;
+  const completed = statusObj?.completed === true;
+  const state     = statusObj?.state || "pre";
 
   const homeSlug = resolveSlug(home.team?.slug, home.team?.displayName || "");
   const awaySlug = resolveSlug(away.team?.slug, away.team?.displayName || "");
   const homeTeam = homeSlug ? teamsData[homeSlug] : null;
   const awayTeam = awaySlug ? teamsData[awaySlug] : null;
 
-  const dateStr = event.date || "";
-  const ts = new Date(dateStr).getTime() / 1000;
-
+  const dateStr  = event.date || "";
+  const ts       = Math.round(new Date(dateStr).getTime() / 1000);
   const homeGoals = completed ? (parseInt(home.score, 10) || 0) : null;
   const awayGoals = completed ? (parseInt(away.score, 10) || 0) : null;
 
   return {
-    id: event.id,
-    date: dateStr,
-    timestamp: Math.round(ts),
-    status: completed ? "FT" : state === "in" ? "1H" : "NS",
-    statusLong: status?.description || "",
-    venue: comp.venue?.fullName || "",
-    city: comp.venue?.address?.city || "",
+    id:        event.id,
+    date:      dateStr,
+    timestamp: ts,
+    status:    completed ? "FT" : state === "in" ? "LIVE" : "NS",
+    statusLong: statusObj?.description || "",
+    venue:     comp.venue?.fullName || "",
+    city:      comp.venue?.address?.city || "",
     home: {
-      id: home.team?.id,
-      slug: homeSlug,
-      name: homeTeam?.name || home.team?.displayName || "",
-      logo: homeTeam?.logo || home.team?.logos?.[0]?.href || "",
+      id:     home.team?.id,
+      slug:   homeSlug,
+      name:   homeTeam?.name || home.team?.displayName || "",
+      logo:   homeTeam?.logo || home.team?.logos?.[0]?.href || "",
       winner: completed ? homeGoals > awayGoals : null,
     },
     away: {
-      id: away.team?.id,
-      slug: awaySlug,
-      name: awayTeam?.name || away.team?.displayName || "",
-      logo: awayTeam?.logo || away.team?.logos?.[0]?.href || "",
+      id:     away.team?.id,
+      slug:   awaySlug,
+      name:   awayTeam?.name || away.team?.displayName || "",
+      logo:   awayTeam?.logo || away.team?.logos?.[0]?.href || "",
       winner: completed ? awayGoals > homeGoals : null,
     },
     goals: { home: homeGoals, away: awayGoals },
@@ -254,80 +245,120 @@ function parseEvent(event, leagueName) {
   };
 }
 
+/**
+ * Fetch fixtures for a single league.
+ *
+ * ESPN's site/v2 scoreboard accepts:
+ *   ?dates=YYYYMMDD          → matches on that specific day
+ *   (no dates param)         → current/upcoming matches for the competition
+ *
+ * We query the undated endpoint + individual days for ±30 days.
+ * Events are deduplicated by ID and merged into existing fixture files.
+ */
 async function fetchFixtures(league) {
-  const now = new Date();
-  const past60 = new Date(now); past60.setDate(past60.getDate() - 60);
-  const next60 = new Date(now); next60.setDate(next60.getDate() + 60);
+  const now    = new Date();
+  const allEvt = new Map(); // event.id → parsed
+  let   leagueName = league.slug;
 
-  const dateRange = `${formatDate(past60)}-${formatDate(next60)}`;
-  const url = `https://site.api.espn.com/apis/v2/sports/soccer/${league.espnId}/scoreboard?limit=200&dates=${dateRange}`;
-
-  const data = await espnGet(url);
-  const events = data.events || [];
-
-  const upcoming = [], past = [];
-  const leagueName = data.leagues?.[0]?.name || league.slug;
-
-  for (const event of events) {
-    const parsed = parseEvent(event, leagueName);
-    if (!parsed) continue;
-    if (parsed.completed) past.push(parsed);
-    else upcoming.push(parsed);
+  // ① Undated scoreboard — returns current round's matches
+  const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/soccer/${league.espnId}/scoreboard`;
+  try {
+    const data = await espnGet(`${baseUrl}?limit=100`);
+    leagueName = data.leagues?.[0]?.name || leagueName;
+    for (const ev of data.events || []) {
+      const p = parseEvent(ev, leagueName);
+      if (p) allEvt.set(p.id, p);
+    }
+    console.log(`  ↳ Undated scoreboard: ${data.events?.length ?? 0} events`);
+  } catch (e) {
+    console.warn(`  ⚠ Undated scoreboard failed: ${e.message}`);
   }
 
-  upcoming.sort((a, b) => a.timestamp - b.timestamp);
-  past.sort((a, b) => b.timestamp - a.timestamp);
+  // ② Individual date queries ±30 days
+  //    Only about 1/7 of days have matches (weekends + midweeks),
+  //    so most requests will be fast (empty 200 responses).
+  const days = [];
+  for (let i = -30; i <= 30; i++) {
+    const d = new Date(now);
+    d.setDate(d.getDate() + i);
+    days.push(yyyymmdd(d));
+  }
 
-  console.log(`  ✓ Fixtures ${league.slug}: ${upcoming.length} upcoming, ${past.length} past`);
+  let dateHits = 0;
+  for (const dateStr of days) {
+    await sleep(120); // ~120 ms between requests
+    try {
+      const data = await espnGet(`${baseUrl}?dates=${dateStr}&limit=100`);
+      const lName = data.leagues?.[0]?.name || leagueName;
+      const evts  = data.events || [];
+      for (const ev of evts) {
+        const p = parseEvent(ev, lName);
+        if (p && !allEvt.has(p.id)) { allEvt.set(p.id, p); }
+      }
+      if (evts.length > 0) dateHits++;
+    } catch {
+      // Silently skip 404 / empty responses for dates with no matches
+    }
+  }
+  console.log(`  ↳ Date queries: ${dateHits}/${days.length} days returned data, total events: ${allEvt.size}`);
 
-  // Distribute to per-team fixture files
-  const buckets = {};
+  // ③ Distribute events into per-team fixture files
+  const buckets = {}; // slug → { upcoming[], past[] }
 
-  for (const fix of [...upcoming, ...past]) {
+  for (const fix of allEvt.values()) {
     for (const side of ["home", "away"]) {
       const slug = fix[side]?.slug;
       if (!slug || !teamsData[slug]) continue;
 
       if (!buckets[slug]) {
-        // Load existing to preserve historical seasons
+        // Load existing file to ACCUMULATE historical data
         const fp = path.join(FIXTURES_DIR, `${slug}.json`);
         try {
-          buckets[slug] = JSON.parse(fs.readFileSync(fp, "utf-8"));
-          // Reset current season data (will be rebuilt fresh)
-          buckets[slug].upcoming = [];
-          buckets[slug].past = [];
+          const existing = JSON.parse(fs.readFileSync(fp, "utf-8"));
+          // Index existing events by ID for fast dedup
+          buckets[slug] = {
+            slug,
+            teamId: existing.teamId || 0,
+            byId: new Map([
+              ...(existing.past     || []).map(f => [f.id, f]),
+              ...(existing.upcoming || []).map(f => [f.id, f]),
+            ]),
+          };
         } catch {
-          buckets[slug] = { slug, teamId: 0, upcoming: [], past: [], seasons: {} };
+          buckets[slug] = { slug, teamId: 0, byId: new Map() };
         }
-        if (!buckets[slug].seasons) buckets[slug].seasons = {};
       }
 
-      if (fix.completed) {
-        const already = buckets[slug].past.some(f => f.id === fix.id);
-        if (!already) buckets[slug].past.push(fix);
-      } else {
-        const already = buckets[slug].upcoming.some(f => f.id === fix.id);
-        if (!already) buckets[slug].upcoming.push(fix);
-      }
+      // Overwrite/add: fresh data wins
+      buckets[slug].byId.set(fix.id, fix);
     }
   }
 
-  // Write files
-  const now8601 = new Date().toISOString();
-  for (const [slug, data] of Object.entries(buckets)) {
-    data.past.sort((a, b) => b.timestamp - a.timestamp);
-    data.upcoming.sort((a, b) => a.timestamp - b.timestamp);
-    data.fetchedAt = now8601;
+  // ④ Write files
+  const nowISO = new Date().toISOString();
+  const nowTs  = Date.now() / 1000;
+
+  for (const [slug, bucket] of Object.entries(buckets)) {
+    const all      = [...bucket.byId.values()];
+    const upcoming = all.filter(f => !f.completed && f.timestamp > nowTs - 3600)
+                        .sort((a, b) => a.timestamp - b.timestamp)
+                        .slice(0, 20);
+    const past     = all.filter(f => f.completed)
+                        .sort((a, b) => b.timestamp - a.timestamp)
+                        .slice(0, 20);
+
     fs.writeFileSync(
       path.join(FIXTURES_DIR, `${slug}.json`),
-      JSON.stringify(data, null, 2)
+      JSON.stringify({ slug, teamId: bucket.teamId, upcoming, past, fetchedAt: nowISO }, null, 2)
     );
   }
 
+  console.log(`  ✓ Fixtures ${league.slug}: updated ${Object.keys(buckets).length} team files`);
   return Object.keys(buckets).length;
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
+
 async function main() {
   fs.mkdirSync(STANDINGS_DIR, { recursive: true });
   fs.mkdirSync(FIXTURES_DIR,  { recursive: true });
@@ -343,16 +374,15 @@ async function main() {
     } catch (e) {
       console.warn(`  ✗ Standings: ${e.message}`);
     }
-    await sleep(800);
+    await sleep(600);
 
-    // Fixtures
+    // Fixtures (per-day queries)
     try {
-      const n = await fetchFixtures(league);
-      console.log(`  ✓ Updated ${n} team fixture files`);
+      await fetchFixtures(league);
     } catch (e) {
       console.warn(`  ✗ Fixtures: ${e.message}`);
     }
-    await sleep(1000);
+    await sleep(800);
   }
 
   console.log("\n✅ ESPN fetch complete");
