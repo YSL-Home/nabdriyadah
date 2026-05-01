@@ -9,17 +9,17 @@ import ArticleImage from "../../../components/ArticleImage";
 import { getT } from "../../../../lib/i18n";
 
 const leagueConfig = {
-  "premier-league": { title: "Premier League", logo: "https://media.api-sports.io/football/leagues/39.png", theme: { heroFrom: "#3b0764", heroTo: "#7c3aed", primary: "#6d28d9", primarySoft: "#ede9fe", border: "#ddd6fe" } },
-  "la-liga":        { title: "La Liga",         logo: "https://media.api-sports.io/football/leagues/140.png", theme: { heroFrom: "#9a3412", heroTo: "#f97316", primary: "#ea580c", primarySoft: "#fff7ed", border: "#fed7aa" } },
-  "bundesliga":     { title: "Bundesliga",      logo: "https://media.api-sports.io/football/leagues/78.png", theme: { heroFrom: "#1a1a1a", heroTo: "#dc2626", primary: "#dc2626", primarySoft: "#fef2f2", border: "#fecaca" } },
-  "serie-a":        { title: "Serie A",         logo: "https://media.api-sports.io/football/leagues/135.png", theme: { heroFrom: "#1e3a8a", heroTo: "#3b82f6", primary: "#2563eb", primarySoft: "#eff6ff", border: "#bfdbfe" } },
-  "ligue-1":        { title: "Ligue 1",         logo: "https://media.api-sports.io/football/leagues/61.png", theme: { heroFrom: "#1e3a5f", heroTo: "#2563eb", primary: "#1d4ed8", primarySoft: "#eff6ff", border: "#bfdbfe" } },
-  "champions-league": { title: "Ligue des Champions", logo: "https://media.api-sports.io/football/leagues/2.png", theme: { heroFrom: "#1e3a8a", heroTo: "#7c3aed", primary: "#4f46e5", primarySoft: "#eef2ff", border: "#c7d2fe" } },
-  "saudi-pro-league": { title: "Saudi Pro League", logo: "https://media.api-sports.io/football/leagues/307.png", theme: { heroFrom: "#14532d", heroTo: "#16a34a", primary: "#16a34a", primarySoft: "#f0fdf4", border: "#bbf7d0" } },
-  "eredivisie":     { title: "Eredivisie",      logo: "https://media.api-sports.io/football/leagues/88.png", theme: { heroFrom: "#dc2626", heroTo: "#f97316", primary: "#dc2626", primarySoft: "#fef2f2", border: "#fecaca" } },
-  "mls":            { title: "MLS",             logo: "https://media.api-sports.io/football/leagues/253.png", theme: { heroFrom: "#1e3a8a", heroTo: "#dc2626", primary: "#1d4ed8", primarySoft: "#eff6ff", border: "#bfdbfe" } },
-  "liga-portugal":  { title: "Liga Portugal",   logo: "https://media.api-sports.io/football/leagues/94.png", theme: { heroFrom: "#7f1d1d", heroTo: "#dc2626", primary: "#dc2626", primarySoft: "#fef2f2", border: "#fecaca" } },
-  "botola":         { title: "Botola Pro",      logo: "https://media.api-sports.io/football/leagues/200.png", theme: { heroFrom: "#14532d", heroTo: "#16a34a", primary: "#16a34a", primarySoft: "#f0fdf4", border: "#bbf7d0" } },
+  "premier-league":   { title: "Premier League",      logo: "https://media.api-sports.io/football/leagues/39.png",  theme: { heroFrom: "#3b0764", heroTo: "#7c3aed", primary: "#6d28d9", primarySoft: "#ede9fe", border: "#ddd6fe" } },
+  "la-liga":          { title: "La Liga",              logo: "https://media.api-sports.io/football/leagues/140.png", theme: { heroFrom: "#9a3412", heroTo: "#f97316", primary: "#ea580c", primarySoft: "#fff7ed", border: "#fed7aa" } },
+  "bundesliga":       { title: "Bundesliga",           logo: "https://media.api-sports.io/football/leagues/78.png",  theme: { heroFrom: "#1a1a1a", heroTo: "#dc2626", primary: "#dc2626", primarySoft: "#fef2f2", border: "#fecaca" } },
+  "serie-a":          { title: "Serie A",              logo: "https://media.api-sports.io/football/leagues/135.png", theme: { heroFrom: "#1e3a8a", heroTo: "#3b82f6", primary: "#2563eb", primarySoft: "#eff6ff", border: "#bfdbfe" } },
+  "ligue-1":          { title: "Ligue 1",              logo: "https://media.api-sports.io/football/leagues/61.png",  theme: { heroFrom: "#1e3a5f", heroTo: "#2563eb", primary: "#1d4ed8", primarySoft: "#eff6ff", border: "#bfdbfe" } },
+  "champions-league": { title: "Ligue des Champions",  logo: "https://media.api-sports.io/football/leagues/2.png",   theme: { heroFrom: "#1e3a8a", heroTo: "#7c3aed", primary: "#4f46e5", primarySoft: "#eef2ff", border: "#c7d2fe" } },
+  "saudi-pro-league": { title: "Saudi Pro League",    logo: "https://media.api-sports.io/football/leagues/307.png", theme: { heroFrom: "#14532d", heroTo: "#16a34a", primary: "#16a34a", primarySoft: "#f0fdf4", border: "#bbf7d0" } },
+  "eredivisie":       { title: "Eredivisie",           logo: "https://media.api-sports.io/football/leagues/88.png",  theme: { heroFrom: "#dc2626", heroTo: "#f97316", primary: "#dc2626", primarySoft: "#fef2f2", border: "#fecaca" } },
+  "mls":              { title: "MLS",                  logo: "https://media.api-sports.io/football/leagues/253.png", theme: { heroFrom: "#1e3a8a", heroTo: "#dc2626", primary: "#1d4ed8", primarySoft: "#eff6ff", border: "#bfdbfe" } },
+  "liga-portugal":    { title: "Liga Portugal",        logo: "https://media.api-sports.io/football/leagues/94.png",  theme: { heroFrom: "#7f1d1d", heroTo: "#dc2626", primary: "#dc2626", primarySoft: "#fef2f2", border: "#fecaca" } },
+  "botola":           { title: "Botola Pro",           logo: "https://media.api-sports.io/football/leagues/200.png", theme: { heroFrom: "#14532d", heroTo: "#16a34a", primary: "#16a34a", primarySoft: "#f0fdf4", border: "#bbf7d0" } },
 };
 
 export function generateStaticParams() {
@@ -31,7 +31,7 @@ export function generateMetadata({ params }) {
   if (!cfg) return { title: "Ligue introuvable" };
   return {
     title: `${cfg.title} — Classement, Équipes & Actualités | Sports Pulse`,
-    description: `Suivez les dernières actualités ${cfg.title}, classements et couverture des équipes sur Sports Pulse.`,
+    description: `Suivez les dernières actualités, le classement et les équipes de ${cfg.title} sur Sports Pulse.`,
     alternates: { canonical: `https://nabdriyadah.com/fr/league/${params.slug}/` },
   };
 }
@@ -66,10 +66,8 @@ export default function FrLeaguePage({ params }) {
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", alignItems: "center", gap: "24px" }}>
           <img src={cfg.logo} alt={cfg.title} style={{ width: "80px", height: "80px", objectFit: "contain", filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.3))" }} />
           <div>
-            <h1 style={{ margin: 0, fontSize: "clamp(28px, 5vw, 48px)", fontWeight: 900 }}>{cfg.title}</h1>
-            <p style={{ margin: "8px 0 0", opacity: 0.85, fontSize: "16px" }}>
-              Classement, résultats et actualités {cfg.title}
-            </p>
+            <h1 style={{ margin: 0, fontSize: "clamp(28px,5vw,48px)", fontWeight: 900 }}>{cfg.title}</h1>
+            <p style={{ margin: "8px 0 0", opacity: 0.85, fontSize: "16px" }}>Classement, résultats et actualités — {cfg.title}</p>
           </div>
         </div>
       </section>
@@ -77,16 +75,17 @@ export default function FrLeaguePage({ params }) {
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "28px 24px 0" }}>
         <AdSlot label="Publicité" minHeight={90} style={{ marginBottom: 24 }} />
 
+        {/* Classement */}
         <section style={{ background: "white", borderRadius: "24px", padding: "28px", border: `1px solid ${theme.border}`, marginBottom: "28px", boxShadow: "0 4px 16px rgba(0,0,0,0.04)" }}>
-          <h2 style={{ margin: "0 0 20px", fontSize: "24px", fontWeight: 800 }}>📊 {tr.leagueStandings}</h2>
+          <h2 style={{ margin: "0 0 20px", fontSize: "24px", fontWeight: 800 }}>📊 Classement</h2>
           {standings.length === 0 ? (
-            <p style={{ color: "#6b7280" }}>Le classement sera disponible prochainement.</p>
+            <p style={{ color: "#6b7280" }}>Le classement est en cours de mise à jour, revenez bientôt.</p>
           ) : (
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
                 <thead>
                   <tr style={{ background: theme.primarySoft, color: theme.primary }}>
-                    {[tr.rank, "", "Équipe", tr.played, tr.won, tr.drawn, tr.lost, tr.gf, tr.ga, tr.gd, tr.points].map((h, i) => (
+                    {["#", "", "Équipe", "J", "V", "N", "D", "BP", "BC", "DB", "Pts"].map((h, i) => (
                       <th key={i} style={{ padding: "10px 8px", fontWeight: 800, textAlign: i > 1 ? "center" : "left", whiteSpace: "nowrap" }}>{h}</th>
                     ))}
                   </tr>
@@ -110,8 +109,9 @@ export default function FrLeaguePage({ params }) {
           )}
         </section>
 
+        {/* Équipes */}
         <section style={{ marginBottom: "28px" }}>
-          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>🏟️ {tr.leagueTeams}</h2>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>🏟️ Équipes</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: "12px" }}>
             {leagueTeams.map(t => (
               <Link key={t.slug} href={`/fr/team/${t.slug}/`} style={{ textDecoration: "none" }}>
@@ -124,16 +124,21 @@ export default function FrLeaguePage({ params }) {
           </div>
         </section>
 
+        {/* Actualités */}
         <section>
-          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>📰 {tr.leagueArticles}</h2>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>📰 Actualités</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "18px" }}>
             {leagueArticles.map(a => (
               <Link key={a.slug} href={`/fr/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                 <article style={{ background: "white", borderRadius: "20px", overflow: "hidden", border: `1px solid ${theme.border}` }}>
-                  <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "160px", display: "block" }} />
+                  <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.fr_title || a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "160px", display: "block" }} />
                   <div style={{ padding: "14px" }}>
-                    <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.5 }}>{a.title}</h3>
-                    <p style={{ margin: 0, fontSize: "13px", color: "#6b7280", lineHeight: 1.6 }}>{a.description}</p>
+                    <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.5 }}>
+                      {a.fr_title || a.sourceTitle || a.title}
+                    </h3>
+                    <p style={{ margin: 0, fontSize: "13px", color: "#6b7280", lineHeight: 1.6 }}>
+                      {a.fr_description || a.description}
+                    </p>
                   </div>
                 </article>
               </Link>

@@ -141,10 +141,14 @@ export default function EnLeaguePage({ params }) {
             {leagueArticles.map(a => (
               <Link key={a.slug} href={`/en/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
                 <article style={{ background: "white", borderRadius: "20px", overflow: "hidden", border: `1px solid ${theme.border}` }}>
-                  <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "160px", display: "block" }} />
+                  <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.en_title || a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "160px", display: "block" }} />
                   <div style={{ padding: "14px" }}>
-                    <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.5 }}>{a.title}</h3>
-                    <p style={{ margin: 0, fontSize: "13px", color: "#6b7280", lineHeight: 1.6 }}>{a.description}</p>
+                    <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.5 }}>
+                      {a.en_title || a.sourceTitle || a.title}
+                    </h3>
+                    <p style={{ margin: 0, fontSize: "13px", color: "#6b7280", lineHeight: 1.6 }}>
+                      {a.en_description || a.description}
+                    </p>
                   </div>
                 </article>
               </Link>

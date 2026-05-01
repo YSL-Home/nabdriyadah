@@ -289,17 +289,30 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
             </div>
           ) : (
             <div className="g3" style={{ gap: "18px" }}>
-              {teamArticles.map((item) => (
-                <Link key={item.slug} href={`${prefix}/articles/${item.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                  <article style={{ background: accentSoft, borderRadius: "20px", overflow: "hidden", border: `1px solid ${accentMid}`, height: "100%" }}>
-                    <ArticleImage src={item.image} imageUrl={item.imageUrl} alt={item.title} sport={item.sport} league={item.league} slug={item.slug} style={{ width: "100%", height: "170px", display: "block" }} />
-                    <div style={{ padding: "16px" }}>
-                      <h3 style={{ margin: "0 0 8px 0", fontSize: "17px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{item.title}</h3>
-                      <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.75 }}>{item.description}</p>
-                    </div>
-                  </article>
-                </Link>
-              ))}
+              {teamArticles.map((item) => {
+                // Use translated title/description for EN/FR pages
+                const displayTitle = lang === "en"
+                  ? (item.en_title || item.sourceTitle || item.title)
+                  : lang === "fr"
+                  ? (item.fr_title || item.sourceTitle || item.title)
+                  : item.title;
+                const displayDesc = lang === "en"
+                  ? (item.en_description || item.description)
+                  : lang === "fr"
+                  ? (item.fr_description || item.description)
+                  : item.description;
+                return (
+                  <Link key={item.slug} href={`${prefix}/articles/${item.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                    <article style={{ background: accentSoft, borderRadius: "20px", overflow: "hidden", border: `1px solid ${accentMid}`, height: "100%" }}>
+                      <ArticleImage src={item.image} imageUrl={item.imageUrl} alt={displayTitle} sport={item.sport} league={item.league} slug={item.slug} style={{ width: "100%", height: "170px", display: "block" }} />
+                      <div style={{ padding: "16px" }}>
+                        <h3 style={{ margin: "0 0 8px 0", fontSize: "17px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{displayTitle}</h3>
+                        <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.75 }}>{displayDesc}</p>
+                      </div>
+                    </article>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </section>

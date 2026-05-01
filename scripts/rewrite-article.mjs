@@ -405,17 +405,21 @@ async function rewriteArticle(item, index) {
 
 أعد JSON فقط بهذا الشكل الدقيق:
 {
-  "title": "...",
-  "description": "...",
-  "seoTitle": "...",
-  "seoDescription": "...",
+  "title": "العنوان بالعربية...",
+  "description": "الوصف بالعربية...",
+  "seoTitle": "عنوان السيو بالعربية...",
+  "seoDescription": "وصف السيو بالعربية...",
   "content": "فقرة 1\\n\\nفقرة 2\\n\\n...",
   "keywords": ["...", "...", "..."],
   "faq": [
     { "q": "سؤال؟", "a": "جواب." },
     { "q": "سؤال؟", "a": "جواب." },
     { "q": "سؤال؟", "a": "جواب." }
-  ]
+  ],
+  "en_title": "English title (50-70 chars, professional sports journalism style)",
+  "en_description": "English meta description (145-160 chars, SEO-optimized)",
+  "fr_title": "Titre en français (50-70 caractères, style journalistique sportif)",
+  "fr_description": "Description méta en français (145-160 caractères, optimisée SEO)"
 }
 `.trim();
 
@@ -440,7 +444,13 @@ async function rewriteArticle(item, index) {
 
   if (!title || !description || !content) return fallback;
 
-  return { title, description, seoTitle, seoDescription, content, keywords, faq };
+  const en_title       = (parsed.en_title       || "").trim().slice(0, 100) || null;
+  const en_description = (parsed.en_description || "").trim().slice(0, 200) || null;
+  const fr_title       = (parsed.fr_title       || "").trim().slice(0, 100) || null;
+  const fr_description = (parsed.fr_description || "").trim().slice(0, 200) || null;
+
+  return { title, description, seoTitle, seoDescription, content, keywords, faq,
+           en_title, en_description, fr_title, fr_description };
 }
 
 // Maximum articles to keep in seo-articles.json (oldest pruned beyond this)
@@ -550,6 +560,11 @@ async function main() {
       content: rewritten.content,
       keywords: rewritten.keywords,
       faq: rewritten.faq || [],
+      // Translations (generated in same API call — no extra cost)
+      en_title:       rewritten.en_title       || null,
+      en_description: rewritten.en_description || null,
+      fr_title:       rewritten.fr_title       || null,
+      fr_description: rewritten.fr_description || null,
       imageUrl: item.imageUrl || null,
       image: `/generated/${slug}.png`
     });
