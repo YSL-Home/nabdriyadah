@@ -175,47 +175,60 @@ function formatFixture(f) {
   };
 }
 
+// Historical seasons to fetch (for the year filter)
+const HISTORICAL_SEASONS = [2023, 2022, 2021];
+
 // Initialise empty fixture buckets for every known team
 function initBuckets() {
   const buckets = {};
   for (const [slug, id] of Object.entries(TEAM_IDS)) {
     if (!buckets[slug]) {
-      buckets[slug] = { teamId: id, slug, past: [], upcoming: [] };
+      // Load existing file to preserve historical data
+      const filePath = path.join(OUTPUT_DIR, `${slug}.json`);
+      let existing = { teamId: id, slug, past: [], upcoming: [], seasons: {} };
+      try {
+        const raw = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        existing = { ...existing, ...raw, teamId: id, slug };
+        if (!existing.seasons) existing.seasons = {};
+      } catch {}
+      buckets[slug] = existing;
     }
   }
   return buckets;
 }
 
-async function fetchLeagueFixtures(leagueId, leagueSlug) {
-  const now = Math.floor(Date.now() / 1000);
+async function fetchLeagueFixtures(leagueId, leagueSlug, season = SEASON) {
+  const isCurrent = season === SEASON;
 
-  // Upcoming: next 30 matches in this league
+  // Upcoming: only for current season
   let upcoming = [];
-  try {
-    const raw = await apiFetch(
-      `/fixtures?league=${leagueId}&season=${SEASON}&next=30`
-    );
-    upcoming = raw.map(formatFixture);
-    console.log(`  → ${leagueSlug} upcoming: ${upcoming.length}`);
-  } catch (e) {
-    if (e.message === "RATE_LIMIT") { await sleep(60000); }
-    console.warn(`  ✗ upcoming ${leagueSlug}: ${e.message}`);
+  if (isCurrent) {
+    try {
+      const raw = await apiFetch(`/fixtures?league=${leagueId}&season=${season}&next=30`);
+      upcoming = raw.map(formatFixture);
+      console.log(`  → ${leagueSlug} upcoming: ${upcoming.length}`);
+    } catch (e) {
+      if (e.message === "RATE_LIMIT") { await sleep(60000); }
+      console.warn(`  ✗ upcoming ${leagueSlug}: ${e.message}`);
+    }
+    await sleep(1200);
   }
-  await sleep(1500);
 
-  // Past: last 50 played matches in this league
+  // Past: all finished matches (status=FT) for this season
   let past = [];
   try {
     const raw = await apiFetch(
-      `/fixtures?league=${leagueId}&season=${SEASON}&last=50`
+      isCurrent
+        ? `/fixtures?league=${leagueId}&season=${season}&last=60`
+        : `/fixtures?league=${leagueId}&season=${season}&status=FT`
     );
     past = raw.map(formatFixture).sort((a, b) => b.timestamp - a.timestamp);
-    console.log(`  → ${leagueSlug} past: ${past.length}`);
+    console.log(`  → ${leagueSlug} season ${season} past: ${past.length}`);
   } catch (e) {
     if (e.message === "RATE_LIMIT") { await sleep(60000); }
-    console.warn(`  ✗ past ${leagueSlug}: ${e.message}`);
+    console.warn(`  ✗ past ${leagueSlug} ${season}: ${e.message}`);
   }
-  await sleep(1500);
+  await sleep(1200);
 
   return { upcoming, past };
 }
@@ -241,12 +254,35 @@ async function main() {
 
   const buckets = initBuckets();
 
-  console.log("\n── Fetching fixtures by league ──");
-  for (const league of LEAGUES) {
-    console.log(`\n📅 ${league.slug}`);
-    const { upcoming, past } = await fetchLeagueFixtures(league.id, league.slug);
+  // Helper: distribute fixtures into team buckets
+  function distribute(fixtures, buckets, season) {
+    const isCurrent = season === SEASON;
+    for (const fix of fixtures) {
+      for (const side of ["home", "away"]) {
+        const apiId = fix[side]?.id;
+        const slug = ID_TO_SLUG[apiId];
+        if (!slug || !buckets[slug]) continue;
 
-    // Distribute into per-team buckets
+        if (isCurrent) {
+          const already = buckets[slug].past.some(f => f.id === fix.id);
+          if (!already) buckets[slug].past.push(fix);
+        } else {
+          // Store in historical seasons map
+          if (!buckets[slug].seasons) buckets[slug].seasons = {};
+          if (!buckets[slug].seasons[season]) buckets[slug].seasons[season] = [];
+          const already = buckets[slug].seasons[season].some(f => f.id === fix.id);
+          if (!already) buckets[slug].seasons[season].push(fix);
+        }
+      }
+    }
+  }
+
+  console.log("\n── Fetching current season fixtures & standings ──");
+  for (const league of LEAGUES) {
+    console.log(`\n📅 ${league.slug} (${SEASON})`);
+    const { upcoming, past } = await fetchLeagueFixtures(league.id, league.slug, SEASON);
+
+    // Distribute upcoming
     for (const fix of upcoming) {
       for (const side of ["home", "away"]) {
         const apiId = fix[side]?.id;
@@ -256,17 +292,8 @@ async function main() {
         }
       }
     }
-    for (const fix of past) {
-      for (const side of ["home", "away"]) {
-        const apiId = fix[side]?.id;
-        const slug = ID_TO_SLUG[apiId];
-        if (slug && buckets[slug]) {
-          // Avoid duplicates (fixture already added from the other side)
-          const already = buckets[slug].past.some(f => f.id === fix.id);
-          if (!already) buckets[slug].past.push(fix);
-        }
-      }
-    }
+    // Distribute past (current season)
+    distribute(past, buckets, SEASON);
 
     // Also fetch standings for this league
     try {
@@ -306,13 +333,43 @@ async function main() {
     await sleep(1000);
   }
 
+  // ── Fetch historical seasons ───────────────────────────────────────────────
+  // Only fetch if we have enough quota left (historical = nice-to-have)
+  console.log("\n── Fetching historical seasons ──");
+  for (const season of HISTORICAL_SEASONS) {
+    for (const league of LEAGUES) {
+      // Skip if we already have data for this season in most teams
+      const sampleSlug = Object.keys(buckets).find(s =>
+        buckets[s].seasons?.[season]?.length > 0
+      );
+      if (sampleSlug) {
+        console.log(`  ✓ ${league.slug} ${season} — already cached`);
+        continue;
+      }
+
+      console.log(`  📅 ${league.slug} ${season}...`);
+      try {
+        const { past } = await fetchLeagueFixtures(league.id, league.slug, season);
+        distribute(past, buckets, season);
+      } catch (e) {
+        console.warn(`  ✗ ${league.slug} ${season}: ${e.message}`);
+      }
+    }
+  }
+
   // Write all per-team fixture files
   console.log("\n── Writing per-team fixture files ──");
   let written = 0;
   for (const [slug, data] of Object.entries(buckets)) {
-    // Sort past desc, upcoming asc
+    // Sort current season: past desc, upcoming asc
     data.past.sort((a, b) => b.timestamp - a.timestamp);
     data.upcoming.sort((a, b) => a.timestamp - b.timestamp);
+    // Sort historical seasons
+    if (data.seasons) {
+      for (const y of Object.keys(data.seasons)) {
+        data.seasons[y].sort((a, b) => b.timestamp - a.timestamp);
+      }
+    }
     data.fetchedAt = new Date().toISOString();
     fs.writeFileSync(
       path.join(OUTPUT_DIR, `${slug}.json`),

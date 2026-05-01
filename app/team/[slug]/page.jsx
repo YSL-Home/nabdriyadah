@@ -6,6 +6,8 @@ import playerPhotos from "../../../content/player-photos.json";
 import ArticleImage from "../../components/ArticleImage";
 import AdSlot from "../../components/AdSlot";
 import PlayerAvatar from "../../components/PlayerAvatar";
+import FixturesSection from "../../components/FixturesSection";
+import VideoSection from "../../components/VideoSection";
 import teamsDataRaw from "../../../content/teams-data.json";
 
 const teamsData = teamsDataRaw;
@@ -281,37 +283,8 @@ export default function TeamPage({ params }) {
 
         <AdSlot label="مساحة إعلانية وسط" minHeight={120} style={{ marginBottom: 26 }} />
 
-        {/* ── VIDEOS ── */}
-        {(() => {
-          const videoIds = (team.videos && team.videos.length > 0)
-            ? team.videos
-            : team.videoEmbed
-              ? [team.videoEmbed.replace("https://www.youtube.com/embed/", "").split("?")[0]]
-              : [];
-          if (videoIds.length === 0) return null;
-          return (
-            <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
-                <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
-                <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>▶ فيديوهات الفريق</h2>
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: videoIds.length === 1 ? "1fr" : "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
-                {videoIds.map((id, idx) => (
-                  <div key={idx} style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "16px", background: "#000" }}>
-                    <iframe
-                      src={`https://www.youtube.com/embed/${id}`}
-                      title={`${team.name} — فيديو ${idx + 1}`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0, borderRadius: "16px" }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </section>
-          );
-        })()}
+        {/* ── VIDEOS ── thumbnail-first lazy loader, hides broken videos ── */}
+        <VideoSection videos={team.videos} videoEmbed={team.videoEmbed} teamName={team.name} accent={team.accent} accentMid={accentMid} />
 
         {/* ── OFFICIAL LINKS ── */}
         <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
@@ -331,8 +304,11 @@ export default function TeamPage({ params }) {
           </div>
         </section>
 
-        {/* ── FIXTURES ── */}
-        <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+        {/* ── FIXTURES (client component with year filter) ── */}
+        <FixturesSection fixtureData={fixtureData} teamName={team.name} accent={team.accent} />
+
+        {/* ── OLD FIXTURES (hidden — replaced by FixturesSection above) ── */}
+        {false && <section style={{ display: "none" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", marginBottom: "24px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
@@ -532,7 +508,7 @@ export default function TeamPage({ params }) {
               </div>
             )}
           </div>
-        </section>
+        </section>}
 
         {/* ── RELATED ARTICLES ── */}
         <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
