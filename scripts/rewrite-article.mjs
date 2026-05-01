@@ -338,6 +338,9 @@ async function rewriteArticle(item, index) {
   return { title, description, seoTitle, seoDescription, content, keywords, faq };
 }
 
+// Maximum articles to keep in seo-articles.json (oldest pruned beyond this)
+const MAX_ARTICLES = 600;
+
 async function main() {
   let rawItems = [];
   try {
@@ -352,27 +355,50 @@ async function main() {
     process.exit(0);
   }
 
-  // Dedup by title
+  // ── Load existing articles (accumulate, never overwrite) ──────────────────
+  let existingArticles = [];
+  try {
+    existingArticles = JSON.parse(fs.readFileSync(OUTPUT_PATH, "utf-8"));
+    if (!Array.isArray(existingArticles)) existingArticles = [];
+  } catch {}
+  console.log(`Existing articles: ${existingArticles.length}`);
+
+  // Build a set of known slugs + normalised titles to avoid duplicates
+  const existingSlugs = new Set(existingArticles.map((a) => a.slug).filter(Boolean));
+  const existingTitles = new Set(
+    existingArticles.map((a) => normalizeText(a.title || "").toLowerCase()).filter(Boolean)
+  );
+
+  // ── Dedup raw items by title ──────────────────────────────────────────────
   const unique = [];
-  const seen = new Set();
+  const seenRaw = new Set();
   for (const item of rawItems) {
     const title = normalizeText(item.originalTitle || item.title || "");
     if (!title) continue;
     const key = title.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
+    if (seenRaw.has(key)) continue;
+    seenRaw.add(key);
+    // Skip if we already wrote this article
+    if (existingTitles.has(key)) continue;
     unique.push(item);
   }
 
-  // Spread: 8 football + 4 basketball + 4 tennis + 3 padel + 2 futsal = 21 max
+  if (unique.length === 0) {
+    console.log("No new articles to write — all already exist.");
+    process.exit(0);
+  }
+
+  // Spread: 8 football + 4 basketball + 4 tennis + 3 padel + 2 futsal per run
   const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 8);
-  const basketItems = unique.filter((i) => i.sport === "basketball").slice(0, 4);
-  const tennisItems = unique.filter((i) => i.sport === "tennis").slice(0, 4);
-  const padelItems = unique.filter((i) => i.sport === "padel").slice(0, 3);
-  const futsalItems = unique.filter((i) => i.sport === "futsal").slice(0, 2);
+  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 4);
+  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 4);
+  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 3);
+  const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 2);
   const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems];
 
-  const articles = [];
+  console.log(`New items to write: ${selected.length}`);
+
+  const newArticles = [];
 
   for (let i = 0; i < selected.length; i++) {
     const item = selected[i];
@@ -381,8 +407,12 @@ async function main() {
 
     const rewritten = await rewriteArticle(item, i);
 
-    const slug = buildSlug(item, i);
-    articles.push({
+    // Build slug — ensure uniqueness vs existing
+    let slug = buildSlug(item, i);
+    if (existingSlugs.has(slug)) slug = `${slug}-${Date.now()}`;
+    existingSlugs.add(slug);
+
+    newArticles.push({
       slug,
       sport: item.sport || "football",
       league: item.league || "mixed",
@@ -401,9 +431,22 @@ async function main() {
     });
   }
 
+  // ── Merge: new articles first (newest), then existing ────────────────────
+  const merged = [...newArticles, ...existingArticles];
+
+  // Sort by publishedAt descending (most recent first)
+  merged.sort((a, b) => {
+    const da = new Date(a.publishedAt || 0).getTime();
+    const db = new Date(b.publishedAt || 0).getTime();
+    return db - da;
+  });
+
+  // Cap at MAX_ARTICLES to prevent unbounded growth
+  const final = merged.slice(0, MAX_ARTICLES);
+
   ensureDir(OUTPUT_PATH);
-  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(articles, null, 2), "utf-8");
-  console.log(`SEO articles saved: ${articles.length}`);
+  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(final, null, 2), "utf-8");
+  console.log(`✅ Articles: ${existingArticles.length} existing + ${newArticles.length} new = ${final.length} total (cap: ${MAX_ARTICLES})`);
 
   // Auto-lance la génération d'images après chaque réécriture
   if (OPENAI_API_KEY || process.env.GOOGLE_API_KEY) {
