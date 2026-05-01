@@ -24,7 +24,12 @@ export const metadata = {
     "تحليلات رياضية"
   ],
   alternates: {
-    canonical: "https://nabdriyadah.com/"
+    canonical: "https://nabdriyadah.com/",
+    languages: {
+      "ar": "https://nabdriyadah.com/",
+      "fr": "https://nabdriyadah.com/fr/",
+      "en": "https://nabdriyadah.com/en/",
+    }
   },
   openGraph: {
     title: "نبض الرياضة",

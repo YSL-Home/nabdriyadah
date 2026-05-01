@@ -1,17 +1,53 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import LangSwitcher from "./LangSwitcher";
 
-const navLinks = [
-  { label: "⚽", full: "كرة القدم", href: "/sport/football/" },
-  { label: "🏀", full: "كرة السلة", href: "/sport/basketball/" },
-  { label: "🎾", full: "التنس",     href: "/sport/tennis/"    },
-  { label: "🏸", full: "البادل",    href: "/sport/padel/"     },
-  { label: "🥅", full: "الصالات",   href: "/sport/futsal/"    },
-];
+function detectLang(pathname = "/") {
+  if (pathname.startsWith("/en")) return "en";
+  if (pathname.startsWith("/fr")) return "fr";
+  return "ar";
+}
+
+const NAV = {
+  ar: [
+    { emoji: "⚽", label: "كرة القدم", base: "/sport/football/" },
+    { emoji: "🏀", label: "كرة السلة", base: "/sport/basketball/" },
+    { emoji: "🎾", label: "التنس",     base: "/sport/tennis/" },
+    { emoji: "🏸", label: "البادل",    base: "/sport/padel/" },
+    { emoji: "🥅", label: "الصالات",   base: "/sport/futsal/" },
+  ],
+  fr: [
+    { emoji: "⚽", label: "Football",    base: "/sport/football/" },
+    { emoji: "🏀", label: "Basketball",  base: "/sport/basketball/" },
+    { emoji: "🎾", label: "Tennis",      base: "/sport/tennis/" },
+    { emoji: "🏸", label: "Padel",       base: "/sport/padel/" },
+    { emoji: "🥅", label: "Futsal",      base: "/sport/futsal/" },
+  ],
+  en: [
+    { emoji: "⚽", label: "Football",    base: "/sport/football/" },
+    { emoji: "🏀", label: "Basketball",  base: "/sport/basketball/" },
+    { emoji: "🎾", label: "Tennis",      base: "/sport/tennis/" },
+    { emoji: "🏸", label: "Padel",       base: "/sport/padel/" },
+    { emoji: "🥅", label: "Futsal",      base: "/sport/futsal/" },
+  ],
+};
+
+const SITE_NAME = { ar: "نبض الرياضة", fr: "Sports Pulse", en: "Sports Pulse" };
+const HOME     = { ar: "/", fr: "/fr", en: "/en" };
+const LIVE     = { ar: "مباشر", fr: "En direct", en: "Live" };
+const LIVE_HREF = { ar: "/live/", fr: "/fr/live/", en: "/en/live/" };
+const DARK_LABEL = { ar: "ليل", fr: "Nuit", en: "Night" };
+const LIGHT_LABEL = { ar: "نهار", fr: "Jour", en: "Day" };
 
 export default function SiteHeader() {
-  const [isDark, setIsDark] = useState(true); // défaut nuit (SSR)
+  const pathname = usePathname() || "/";
+  const lang = detectLang(pathname);
+  const prefix = lang === "ar" ? "" : `/${lang}`;
+  const links = NAV[lang] || NAV.ar;
+
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     const check = () => {
@@ -19,17 +55,18 @@ export default function SiteHeader() {
       setIsDark(theme !== "light");
     };
     check();
-    // Observer l'attribut data-theme sur <html>
     const obs = new MutationObserver(check);
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     return () => obs.disconnect();
   }, []);
 
+  const isRTL = lang === "ar";
+
   return (
     <header style={{
       background: "linear-gradient(135deg, #0f172a 0%, #1d3a8a 100%)",
       color: "white",
-      direction: "rtl",
+      direction: isRTL ? "rtl" : "ltr",
       position: "sticky",
       top: 0,
       zIndex: 100,
@@ -47,45 +84,48 @@ export default function SiteHeader() {
         gap: "12px",
       }}>
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none", flexShrink: 0 }}>
+        <Link href={HOME[lang]} style={{ textDecoration: "none", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <img
               src="/logo-v2.svg"
-              alt="نبض الرياضة"
+              alt={SITE_NAME[lang]}
               style={{ height: "30px", width: "auto" }}
               onError={e => { e.currentTarget.style.display = "none"; }}
             />
             <span style={{ fontSize: "clamp(15px, 3.5vw, 20px)", fontWeight: 900, color: "white", letterSpacing: "-0.5px", whiteSpace: "nowrap" }}>
-              نبض الرياضة
+              {SITE_NAME[lang]}
             </span>
           </div>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hdr-nav-desktop">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hdr-pill">
-              {link.label} {link.full}
+          {links.map((link) => (
+            <Link key={link.base} href={`${prefix}${link.base}`} className="hdr-pill">
+              {link.emoji} {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Right cluster: theme badge + live */}
+        {/* Right cluster: language switcher + theme + live */}
         <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-          {/* Indicateur jour/nuit */}
-          <span className="theme-badge" title={isDark ? "وضع الليل" : "وضع النهار"}>
-            {isDark ? "🌙 ليل" : "☀️ نهار"}
+          {/* Language switcher */}
+          <LangSwitcher />
+
+          {/* Day/Night indicator */}
+          <span className="theme-badge" title={isDark ? DARK_LABEL[lang] : LIGHT_LABEL[lang]}>
+            {isDark ? `🌙 ${DARK_LABEL[lang]}` : `☀️ ${LIGHT_LABEL[lang]}`}
           </span>
 
           {/* Live badge */}
-          <Link href="/live/" style={{ textDecoration: "none" }}>
+          <Link href={LIVE_HREF[lang]} style={{ textDecoration: "none" }}>
             <span className="live-badge">
               <span style={{
                 width: "6px", height: "6px", borderRadius: "50%",
                 background: "#fca5a5", display: "inline-block",
                 animation: "pulse 1.5s infinite"
               }} />
-              مباشر
+              {LIVE[lang]}
             </span>
           </Link>
         </div>
@@ -93,13 +133,13 @@ export default function SiteHeader() {
 
       {/* Mobile nav row */}
       <div className="hdr-nav-mobile">
-        {navLinks.map((link) => (
-          <Link key={link.href} href={link.href} className="hdr-pill-mobile">
-            {link.label} {link.full}
+        {links.map((link) => (
+          <Link key={link.base} href={`${prefix}${link.base}`} className="hdr-pill-mobile">
+            {link.emoji} {link.label}
           </Link>
         ))}
-        <Link href="/live/" className="hdr-pill-mobile" style={{ color: "#fca5a5", borderColor: "rgba(252,165,165,0.3)" }}>
-          🔴 مباشر
+        <Link href={LIVE_HREF[lang]} className="hdr-pill-mobile" style={{ color: "#fca5a5", borderColor: "rgba(252,165,165,0.3)" }}>
+          🔴 {LIVE[lang]}
         </Link>
         <span className="hdr-pill-mobile" style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.1)", cursor: "default" }}>
           {isDark ? "🌙" : "☀️"}
