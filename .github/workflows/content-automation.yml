@@ -1,9 +1,15 @@
-name: 🚨 Breaking News Scanner
+name: 🤖 Nabdriyadah — Content Automation
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # toutes les 15 minutes
+    - cron: "*/5 * * * *"    # breaking news: toutes les 5 min
+    - cron: "0 * * * *"       # full refresh: toutes les heures
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "Mode: auto | breaking | full"
+        required: false
+        default: "auto"
 
 permissions:
   contents: write
@@ -12,30 +18,23 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
-  scan:
+
+  breaking-news:
+    name: 🚨 Breaking News
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: 🟢 Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: 📦 Install dependencies
-        run: npm install
-
-      - name: 🔍 Scan RSS pour nouveaux titres
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm install
+      - name: 🔍 Scan RSS
         id: scan
         run: |
           node scripts/breaking-news-scan.mjs
           echo "changed=$(cat /tmp/breaking_changed 2>/dev/null || echo false)" >> $GITHUB_OUTPUT
-
-      - name: ✍️ Réécriture breaking (si nouveau)
+      - name: ✍️ Réécriture breaking
         if: steps.scan.outputs.changed == 'true'
         run: node scripts/rewrite-article.mjs
         env:
@@ -44,20 +43,54 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           BREAKING_ONLY: "true"
-
-      - name: 💾 Commit si changement
+      - name: 💾 Commit
         if: steps.scan.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions@github.com"
-
           git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "breaking: $(date '+%H:%M')"
+          git pull --rebase origin main
+          git push origin main
 
-          if git diff --cached --quiet; then
-            echo "Rien à committer."
-            exit 0
-          fi
+  full-content-refresh:
+    name: 🔄 Full Refresh
+    runs-on: ubuntu-latest
 
-          git commit -m "breaking: mise à jour urgente — $(date '+%H:%M')"
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm install
+      - name: 📰 Articles
+        run: node scripts/rewrite-article.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: 📊 Standings
+        run: node scripts/fetch-standings.mjs
+        env: { API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }} }
+        continue-on-error: true
+      - name: 📅 Fixtures
+        run: node scripts/fetch-fixtures.mjs
+        env: { API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }} }
+        continue-on-error: true
+      - name: 🖼 Images
+        run: node scripts/generate-images.mjs
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        continue-on-error: true
+      - name: 💾 Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "refresh: $(date '+%d/%m %H:%M')"
           git pull --rebase origin main
           git push origin main
