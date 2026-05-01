@@ -65,9 +65,9 @@ export default function FixturesSection({ fixtureData, teamName, accent }) {
 
   const upcomingFixtures = fixtureData.upcoming || [];
 
-  // Result logic
+  // Result logic — use slug (ESPN data has teamId=0)
   function getResult(m) {
-    const isHome = m.home?.id === fixtureData.teamId;
+    const isHome = m.home?.slug === fixtureData.slug || m.home?.id === fixtureData.teamId;
     const tg = isHome ? m.goals?.home : m.goals?.away;
     const og = isHome ? m.goals?.away : m.goals?.home;
     const opp = isHome ? m.away : m.home;
@@ -162,7 +162,7 @@ export default function FixturesSection({ fixtureData, teamName, accent }) {
             <div style={{ display: "grid", gap: "10px" }}>
               {upcomingFixtures.map((m) => {
                 const matchDate = new Date(m.date);
-                const isHome = m.home?.id === fixtureData.teamId;
+                const isHome = m.home?.slug === fixtureData.slug || m.home?.id === fixtureData.teamId;
                 const opponent = isHome ? m.away : m.home;
                 return (
                   <div key={m.id} style={{
@@ -233,7 +233,7 @@ export default function FixturesSection({ fixtureData, teamName, accent }) {
                       textAlign: "center",
                       whiteSpace: "nowrap"
                     }}>
-                      {isHome ? "홈" : "خارج"}
+                      {isHome ? "🏠 دار" : "✈ خارج"}
                     </div>
                   </div>
                 );

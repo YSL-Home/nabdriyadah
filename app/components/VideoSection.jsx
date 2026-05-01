@@ -1,12 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 // YouTube thumbnail URL: if video doesn't exist, YouTube returns a gray placeholder
 // We detect it by checking the thumbnail image dimensions (default = 120x90)
-function VideoCard({ videoId, teamName, index, accent }) {
+function VideoCard({ videoId, teamName, index, accent, onFail }) {
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
   const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+  const handleFail = useCallback(() => {
+    if (!failed) {
+      setFailed(true);
+      onFail?.();
+    }
+  }, [failed, onFail]);
 
   if (failed) return null;
 
@@ -31,11 +38,11 @@ function VideoCard({ videoId, teamName, index, accent }) {
             src={thumbUrl}
             alt={`${teamName} فيديو ${index + 1}`}
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            onError={() => setFailed(true)}
+            onError={handleFail}
             onLoad={(e) => {
               // YouTube returns a 120×90 "no thumbnail" image for invalid videos
               if (e.target.naturalWidth <= 120 && e.target.naturalHeight <= 90) {
-                setFailed(true);
+                handleFail();
               }
             }}
           />
@@ -70,7 +77,14 @@ export default function VideoSection({ videos, videoEmbed, teamName, accent, acc
       ? [videoEmbed.replace("https://www.youtube.com/embed/", "").split("?")[0]]
       : [];
 
+  // Track how many cards have failed
+  const [failCount, setFailCount] = useState(0);
+  const handleFail = useCallback(() => setFailCount(c => c + 1), []);
+
   if (videoIds.length === 0) return null;
+
+  // Hide entire section once all cards have failed
+  if (failCount >= videoIds.length) return null;
 
   return (
     <section style={{
@@ -91,7 +105,14 @@ export default function VideoSection({ videos, videoEmbed, teamName, accent, acc
         gap: "16px"
       }}>
         {videoIds.map((id, idx) => (
-          <VideoCard key={id + idx} videoId={id} teamName={teamName} index={idx} accent={accent} />
+          <VideoCard
+            key={id + idx}
+            videoId={id}
+            teamName={teamName}
+            index={idx}
+            accent={accent}
+            onFail={handleFail}
+          />
         ))}
       </div>
     </section>

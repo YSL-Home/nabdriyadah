@@ -24,12 +24,14 @@ const VIDEOS_PER_TEAM = 6;
 // Arabic queries get Arabic highlight channels, English ones get international channels
 function buildQueries(teamName, teamSlug) {
   return [
+    `ملخص ${teamName} 2025 beIN Sports`,   // Arabic: beIN Sports highlights
     `ملخص ${teamName} 2025`,              // Arabic: "highlights [team] 2025"
     `${teamName} highlights 2025`,         // English highlights
     `${teamName} match recap 2025`,        // English recap
     `أهداف ${teamName}`,                   // Arabic: "goals [team]"
     `${teamName} goals compilation`,       // Goals compilation
     `${teamName} résumé match 2025`,       // French (for Moroccan/French teams)
+    `ملخص مباراة ${teamName} بين سبورت`,  // Arabic: beIN Sports specific
   ];
 }
 

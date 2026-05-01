@@ -61,10 +61,25 @@ export default function TeamPage({ params }) {
     );
   }
 
-  const teamArticles = articles
-    .filter((a) => a.league === team.league || (a.keywords || []).some((k) => team.name.includes(k) || k.includes(team.name.split(" ")[0])))
-    .filter((a) => a.slug)
-    .slice(0, 6);
+  // Match articles by: exact league match → team name in title/body → general football
+  const teamName0 = team.name || "";
+  const teamNameParts = teamName0.split(/\s+/).filter(p => p.length > 2);
+  const footballLeagues = ["mixed", "football", team.league, "premier-league", "la-liga", "bundesliga", "serie-a", "ligue-1", "champions-league", "saudi-pro-league", "eredivisie", "mls", "liga-portugal", "botola"];
+  const teamArticles = (() => {
+    const withSlug = articles.filter(a => a.slug);
+    // 1) Articles that explicitly match team name in title or body
+    const specific = withSlug.filter(a => {
+      const text = `${a.title || ""} ${a.body || ""}`;
+      return teamNameParts.some(part => text.includes(part));
+    });
+    if (specific.length >= 3) return specific.slice(0, 6);
+    // 2) Articles matching exact league
+    const leagueMatch = withSlug.filter(a => a.league === team.league);
+    if (leagueMatch.length >= 2) return [...specific, ...leagueMatch.filter(a => !specific.includes(a))].slice(0, 6);
+    // 3) Fall back to any football/mixed articles
+    const fallback = withSlug.filter(a => footballLeagues.includes(a.league));
+    return [...specific, ...fallback.filter(a => !specific.includes(a))].slice(0, 6);
+  })();
 
   // Load fixture data (populated by fetch-fixtures.mjs)
   let fixtureData = { past: [], upcoming: [] };
