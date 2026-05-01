@@ -2,8 +2,8 @@ name: Nabdriyadah Content Automation
 
 on:
   schedule:
-    - cron: "*/5 * * * *"   # breaking-news every 5 min
-    - cron: "0 * * * *"     # full-refresh every hour
+    - cron: "*/5 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -19,12 +19,9 @@ env:
 
 jobs:
 
-  # ── Breaking news (every 5 min) ──────────────────────────────────────────────
   breaking-news:
     name: Breaking News
     runs-on: ubuntu-latest
-    # Concurrency group: only one push job runs at a time.
-    # The second job WAITS (cancel-in-progress: false) instead of being killed.
     concurrency:
       group: nabdriyadah-git-push
       cancel-in-progress: false
@@ -35,7 +32,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Pull latest BEFORE doing any work — avoids working on stale content
       - name: Sync with remote
         run: |
           git config user.name  "github-actions[bot]"
@@ -70,7 +66,6 @@ jobs:
         if: steps.scan.outputs.changed == 'true'
         run: bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
 
-  # ── Full refresh (every hour) ────────────────────────────────────────────────
   full-refresh:
     name: Full Content Refresh
     runs-on: ubuntu-latest
@@ -84,7 +79,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Pull latest BEFORE doing any work
       - name: Sync with remote
         run: |
           git config user.name  "github-actions[bot]"
