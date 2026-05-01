@@ -55,17 +55,7 @@ jobs:
 
       - name: Commit
         if: steps.scan.outputs.changed == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions@github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Nothing to commit."
-            exit 0
-          fi
-          git commit -m "breaking: $(date '+%H:%M')"
-          git pull --rebase origin main
-          git push origin main
+        run: bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
 
   full-refresh:
     name: Full Content Refresh
@@ -93,7 +83,7 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-      - name: Fetch ESPN data (standings + fixtures — no API key needed)
+      - name: Fetch ESPN data (standings + fixtures)
         run: node scripts/fetch-espn.mjs
         continue-on-error: true
 
@@ -111,14 +101,4 @@ jobs:
         continue-on-error: true
 
       - name: Commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions@github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Nothing to commit."
-            exit 0
-          fi
-          git commit -m "refresh: $(date '+%d/%m %H:%M')"
-          bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
-          git push origin main
+        run: bash scripts/git-safe-push.sh "refresh: $(date '+%d/%m %H:%M')"
