@@ -61,7 +61,7 @@ export default function FrLeaguePage({ params }) {
     .slice(0, 6);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#f8fafc", padding: "0 0 60px", direction: "ltr" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-page)", padding: "0 0 60px", direction: "ltr" }}>
       <section style={{ background: `linear-gradient(135deg, ${theme.heroFrom} 0%, ${theme.heroTo} 100%)`, color: "white", padding: "40px 24px 50px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", alignItems: "center", gap: "24px" }}>
           <img src={cfg.logo} alt={cfg.title} style={{ width: "80px", height: "80px", objectFit: "contain", filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.3))" }} />
@@ -76,10 +76,10 @@ export default function FrLeaguePage({ params }) {
         <AdSlot label="Publicité" minHeight={90} style={{ marginBottom: 24 }} />
 
         {/* Classement */}
-        <section style={{ background: "white", borderRadius: "24px", padding: "28px", border: `1px solid ${theme.border}`, marginBottom: "28px", boxShadow: "0 4px 16px rgba(0,0,0,0.04)" }}>
-          <h2 style={{ margin: "0 0 20px", fontSize: "24px", fontWeight: 800 }}>📊 Classement</h2>
+        <section style={{ background: "var(--bg-card)", borderRadius: "24px", padding: "28px", border: `1px solid ${theme.border}`, marginBottom: "28px", boxShadow: "var(--shadow)" }}>
+          <h2 style={{ margin: "0 0 20px", fontSize: "24px", fontWeight: 800, color: "var(--text-1)" }}>📊 Classement</h2>
           {standings.length === 0 ? (
-            <p style={{ color: "#6b7280" }}>Le classement est en cours de mise à jour, revenez bientôt.</p>
+            <p style={{ color: "var(--text-2)" }}>Le classement est en cours de mise à jour, revenez bientôt.</p>
           ) : (
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
@@ -92,14 +92,14 @@ export default function FrLeaguePage({ params }) {
                 </thead>
                 <tbody>
                   {standings.map((row, i) => (
-                    <tr key={row.slug || i} style={{ borderBottom: `1px solid ${theme.border}`, background: i % 2 === 0 ? "white" : theme.primarySoft + "66" }}>
+                    <tr key={row.slug || i} style={{ borderBottom: `1px solid var(--border)`, background: i % 2 === 0 ? "var(--bg-card)" : "var(--bg-soft)" }}>
                       <td style={{ padding: "10px 8px", fontWeight: 800, color: theme.primary, textAlign: "center" }}>{row.rank}</td>
                       <td style={{ padding: "10px 8px" }}>{row.logo && <img src={row.logo} alt="" style={{ width: "24px", height: "24px", objectFit: "contain" }} />}</td>
-                      <td style={{ padding: "10px 8px", fontWeight: 700 }}>
-                        {row.slug ? <Link href={`/fr/team/${row.slug}/`} style={{ textDecoration: "none", color: "#111827" }}>{row.name}</Link> : row.name}
+                      <td style={{ padding: "10px 8px", fontWeight: 700, color: "var(--text-1)" }}>
+                        {row.slug ? <Link href={`/fr/team/${row.slug}/`} style={{ textDecoration: "none", color: "var(--text-1)" }}>{row.name}</Link> : row.name}
                       </td>
                       {[row.played, row.won, row.drawn, row.lost, row.gf, row.ga, row.gd, row.points].map((v, j) => (
-                        <td key={j} style={{ padding: "10px 8px", textAlign: "center", fontWeight: j === 7 ? 900 : 600, color: j === 7 ? theme.primary : "#374151" }}>{v ?? 0}</td>
+                        <td key={j} style={{ padding: "10px 8px", textAlign: "center", fontWeight: j === 7 ? 900 : 600, color: j === 7 ? theme.primary : "var(--text-2)" }}>{v ?? 0}</td>
                       ))}
                     </tr>
                   ))}
@@ -111,13 +111,13 @@ export default function FrLeaguePage({ params }) {
 
         {/* Équipes */}
         <section style={{ marginBottom: "28px" }}>
-          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>🏟️ Équipes</h2>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px", color: "var(--text-1)" }}>🏟️ Équipes</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: "12px" }}>
             {leagueTeams.map(t => (
               <Link key={t.slug} href={`/fr/team/${t.slug}/`} style={{ textDecoration: "none" }}>
-                <div style={{ background: "white", borderRadius: "16px", padding: "16px", textAlign: "center", border: `1px solid ${theme.border}`, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+                <div style={{ background: "var(--bg-card)", borderRadius: "16px", padding: "16px", textAlign: "center", border: `1px solid var(--border)`, boxShadow: "var(--shadow)", transition: "box-shadow 0.15s" }}>
                   <img src={t.logo} alt={t.name} style={{ width: "48px", height: "48px", objectFit: "contain", marginBottom: "8px" }} />
-                  <div style={{ fontSize: "13px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{t.name}</div>
+                  <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.3 }}>{t.name}</div>
                 </div>
               </Link>
             ))}
@@ -126,17 +126,17 @@ export default function FrLeaguePage({ params }) {
 
         {/* Actualités */}
         <section>
-          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>📰 Actualités</h2>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px", color: "var(--text-1)" }}>📰 Actualités</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "18px" }}>
             {leagueArticles.map(a => (
               <Link key={a.slug} href={`/fr/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                <article style={{ background: "white", borderRadius: "20px", overflow: "hidden", border: `1px solid ${theme.border}` }}>
+                <article style={{ background: "var(--bg-card)", borderRadius: "20px", overflow: "hidden", border: `1px solid var(--border)` }}>
                   <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.fr_title || a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "160px", display: "block" }} />
                   <div style={{ padding: "14px" }}>
-                    <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.5 }}>
+                    <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 800, color: "var(--text-1)", lineHeight: 1.5 }}>
                       {a.fr_title || a.sourceTitle || a.title}
                     </h3>
-                    <p style={{ margin: 0, fontSize: "13px", color: "#6b7280", lineHeight: 1.6 }}>
+                    <p style={{ margin: 0, fontSize: "13px", color: "var(--text-2)", lineHeight: 1.6 }}>
                       {a.fr_description || a.description}
                     </p>
                   </div>

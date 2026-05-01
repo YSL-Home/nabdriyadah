@@ -20,16 +20,16 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
 
   const team = teamsDataRaw[slug];
   if (!team) return (
-    <main style={{ minHeight: "100vh", padding: "40px 20px", direction: isRTL ? "rtl" : "ltr", background: "#f8fafc" }}>
+    <main style={{ minHeight: "100vh", padding: "40px 20px", direction: isRTL ? "rtl" : "ltr", background: "var(--bg-page)" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div style={{ background: "white", borderRadius: "24px", padding: "28px", border: "1px solid #e5e7eb" }}>
+        <div style={{ background: "var(--bg-card)", borderRadius: "24px", padding: "28px", border: "1px solid var(--border)" }}>
           {tr.notFound}
         </div>
       </div>
     </main>
   );
 
-  // Articles matching this team — football only, no tennis/basketball/etc
+  // Articles matching this team — football only
   const teamName0 = team.name || "";
   const teamNameParts = teamName0.split(/\s+/).filter(p => p.length > 2);
   const NON_FOOTBALL = new Set(["tennis", "basketball", "padel", "futsal"]);
@@ -67,12 +67,10 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
 
   const accentSoft = team.accent + "22";
   const accentMid  = team.accent + "44";
-  const pageBg     = team.colorFrom + "0d";
 
   // Locale for date formatting
   const locale = lang === "ar" ? "ar-SA" : lang === "fr" ? "fr-FR" : "en-GB";
 
-  // Labels translated
   const statLabels = [
     { label: lang === "ar" ? "سنة التأسيس" : lang === "fr" ? "Fondé en" : "Founded", value: team.founded, icon: "📅" },
     { label: tr.teamStadium, value: team.stadium, icon: "🏟️" },
@@ -81,7 +79,7 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
   ];
 
   return (
-    <main style={{ minHeight: "100vh", background: pageBg || "#f3f4f6", padding: "0 0 60px", direction: isRTL ? "rtl" : "ltr" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-page)", padding: "0 0 60px", direction: isRTL ? "rtl" : "ltr" }}>
 
       {/* HERO */}
       <section style={{
@@ -146,35 +144,35 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
         <section className="g4" style={{ marginBottom: "26px" }}>
           {statLabels.map((stat, i) => (
             <div key={i} style={{
-              background: "white", borderRadius: "22px", padding: "20px 22px",
+              background: "var(--bg-card)", borderRadius: "22px", padding: "20px 22px",
               border: `1px solid ${accentMid}`, borderTop: `4px solid ${team.accent}`,
-              boxShadow: "0 6px 18px rgba(0,0,0,0.04)"
+              boxShadow: "var(--shadow)"
             }}>
               <div style={{ fontSize: "22px", marginBottom: "8px" }}>{stat.icon}</div>
               <div style={{ color: team.accent, fontSize: "12px", fontWeight: 700, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>{stat.label}</div>
-              <div style={{ fontSize: "18px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{stat.value}</div>
+              <div style={{ fontSize: "18px", fontWeight: 800, color: "var(--text-1)", lineHeight: 1.4 }}>{stat.value}</div>
             </div>
           ))}
         </section>
 
         {/* HISTORY + HONOURS */}
         <section className="gfeat" style={{ marginBottom: "26px" }}>
-          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <div style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "var(--shadow)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
-              <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800, color: "#111827" }}>{tr.teamHistory}</h2>
+              <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800, color: "var(--text-1)" }}>{tr.teamHistory}</h2>
             </div>
             <div style={{ display: "grid", gap: "16px" }}>
               {history.map((p, i) => (
-                <p key={i} style={{ margin: 0, fontSize: "17px", lineHeight: 1.95, color: "#374151", borderRight: isRTL ? `3px solid ${accentSoft}` : "none", borderLeft: !isRTL ? `3px solid ${accentSoft}` : "none", paddingRight: isRTL ? "14px" : 0, paddingLeft: !isRTL ? "14px" : 0 }}>{p}</p>
+                <p key={i} style={{ margin: 0, fontSize: "17px", lineHeight: 1.95, color: "var(--text-2)", borderRight: isRTL ? `3px solid ${accentSoft}` : "none", borderLeft: !isRTL ? `3px solid ${accentSoft}` : "none", paddingRight: isRTL ? "14px" : 0, paddingLeft: !isRTL ? "14px" : 0 }}>{p}</p>
               ))}
             </div>
           </div>
 
-          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <div style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "var(--shadow)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
-              <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800, color: "#111827" }}>{tr.teamTitles}</h2>
+              <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800, color: "var(--text-1)" }}>{tr.teamTitles}</h2>
             </div>
             <div style={{ display: "grid", gap: "10px" }}>
               {titles.map((title, i) => (
@@ -183,7 +181,7 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
                   display: "flex", alignItems: "flex-start", gap: "10px", border: `1px solid ${accentMid}`
                 }}>
                   <span style={{ fontSize: "18px", flexShrink: 0, marginTop: "1px" }}>🏆</span>
-                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827", lineHeight: 1.5 }}>{title}</span>
+                  <span style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.5 }}>{title}</span>
                 </div>
               ))}
             </div>
@@ -192,34 +190,34 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
 
         {/* SQUAD + LEGENDS */}
         <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "22px", marginBottom: "26px" }}>
-          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <div style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "var(--shadow)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
-              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>{tr.teamPlayers}</h2>
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>{tr.teamPlayers}</h2>
             </div>
             <div className="g2" style={{ gap: "10px" }}>
               {players.map((player, i) => (
                 <Link key={i} href={`${prefix}/player/${slug}--player--${i}/`} style={{ textDecoration: "none" }}>
                   <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "12px 14px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
                     <PlayerAvatar src={playerPhotos[`${slug}/player/${i}`] || null} name={player} size={46} accent={team.accent} />
-                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{player}</span>
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.3 }}>{player}</span>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
 
-          <div style={{ background: "white", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <div style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "30px", border: `1px solid ${accentMid}`, boxShadow: "var(--shadow)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <div style={{ width: "5px", height: "36px", borderRadius: "999px", background: team.accent }} />
-              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>{tr.teamLegends}</h2>
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>{tr.teamLegends}</h2>
             </div>
             <div className="g2" style={{ gap: "10px" }}>
               {legends.map((legend, i) => (
                 <Link key={i} href={`${prefix}/player/${slug}--legend--${i}/`} style={{ textDecoration: "none" }}>
                   <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "12px 14px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
                     <PlayerAvatar src={playerPhotos[`${slug}/legend/${i}`] || null} name={legend} size={46} accent={team.accent} />
-                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{legend}</span>
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.3 }}>{legend}</span>
                   </div>
                 </Link>
               ))}
@@ -229,17 +227,19 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
 
         {/* COACHING STAFF */}
         {staff.length > 0 && (
-          <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+          <section style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "var(--shadow)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
               <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
-              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>{lang === "ar" ? "الجهاز الفني" : lang === "fr" ? "Staff technique" : "Coaching staff"}</h2>
+              <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>
+                {lang === "ar" ? "الجهاز الفني" : lang === "fr" ? "Staff technique" : "Coaching staff"}
+              </h2>
             </div>
             <div className="g4" style={{ gap: "12px" }}>
               {staff.map((s, i) => (
                 <Link key={i} href={`${prefix}/player/${slug}--staff--${i}/`} style={{ textDecoration: "none" }}>
                   <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
                     <PlayerAvatar src={playerPhotos[`${slug}/staff/${i}`] || null} name={s} size={42} accent={team.accent} />
-                    <div style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.35 }}>{s}</div>
+                    <div style={{ fontSize: "14px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.35 }}>{s}</div>
                   </div>
                 </Link>
               ))}
@@ -253,10 +253,10 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
         <VideoSection videos={team.videos} videoEmbed={team.videoEmbed} teamName={team.name} accent={team.accent} accentMid={accentMid} />
 
         {/* OFFICIAL LINKS */}
-        <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+        <section style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "var(--shadow)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
             <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
-            <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>
+            <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>
               {lang === "ar" ? "روابط رسمية" : lang === "fr" ? "Liens officiels" : "Official links"}
             </h2>
           </div>
@@ -276,21 +276,20 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
         <FixturesSection fixtureData={fixtureData} teamName={team.name} accent={team.accent} lang={lang} />
 
         {/* RELATED ARTICLES */}
-        <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+        <section style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, boxShadow: "var(--shadow)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
             <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: team.accent }} />
-            <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>
+            <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>
               {lang === "ar" ? `أحدث أخبار ${team.name}` : lang === "fr" ? `Actualités — ${team.name}` : `News — ${team.name}`}
             </h2>
           </div>
           {teamArticles.length === 0 ? (
-            <div style={{ color: "#6b7280", fontSize: "17px", lineHeight: 1.9 }}>
+            <div style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.9 }}>
               {lang === "ar" ? `سيتم ربط الأخبار المتعلقة بـ ${team.name} تلقائياً` : lang === "fr" ? `Les articles sur ${team.name} apparaîtront ici automatiquement.` : `Articles about ${team.name} will appear here automatically.`}
             </div>
           ) : (
             <div className="g3" style={{ gap: "18px" }}>
               {teamArticles.map((item) => {
-                // Use translated title/description for EN/FR pages
                 const displayTitle = lang === "en"
                   ? (item.en_title || item.sourceTitle || item.title)
                   : lang === "fr"
@@ -306,8 +305,8 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
                     <article style={{ background: accentSoft, borderRadius: "20px", overflow: "hidden", border: `1px solid ${accentMid}`, height: "100%" }}>
                       <ArticleImage src={item.image} imageUrl={item.imageUrl} alt={displayTitle} sport={item.sport} league={item.league} slug={item.slug} style={{ width: "100%", height: "170px", display: "block" }} />
                       <div style={{ padding: "16px" }}>
-                        <h3 style={{ margin: "0 0 8px 0", fontSize: "17px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{displayTitle}</h3>
-                        <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.75 }}>{displayDesc}</p>
+                        <h3 style={{ margin: "0 0 8px 0", fontSize: "17px", lineHeight: 1.6, fontWeight: 800, color: "var(--text-1)" }}>{displayTitle}</h3>
+                        <p style={{ margin: 0, color: "var(--text-2)", fontSize: "14px", lineHeight: 1.75 }}>{displayDesc}</p>
                       </div>
                     </article>
                   </Link>

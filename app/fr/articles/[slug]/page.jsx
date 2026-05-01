@@ -32,17 +32,17 @@ export default function FrArticlePage({ params }) {
     ? `/fr/league/${article.league}/` : "/fr/";
 
   return (
-    <main style={{ minHeight: "100vh", background: "#f8fafc", padding: "0 0 60px", direction: "ltr" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-page)", padding: "0 0 60px", direction: "ltr" }}>
       <div style={{ maxWidth: "900px", margin: "0 auto", padding: "28px 24px 0" }}>
-        <Link href={leagueHref} style={{ color: "#1d4ed8", fontWeight: 700, textDecoration: "none", fontSize: "14px" }}>
+        <Link href={leagueHref} style={{ color: "var(--accent)", fontWeight: 700, textDecoration: "none", fontSize: "14px" }}>
           ← Retour
         </Link>
 
-        <h1 style={{ fontSize: "clamp(22px, 4vw, 38px)", fontWeight: 900, color: "#111827", lineHeight: 1.3, margin: "18px 0 14px" }}>
+        <h1 style={{ fontSize: "clamp(22px, 4vw, 38px)", fontWeight: 900, color: "var(--text-1)", lineHeight: 1.3, margin: "18px 0 14px" }}>
           {title}
         </h1>
 
-        <p style={{ fontSize: "17px", color: "#4b5563", lineHeight: 1.75, marginBottom: "24px", fontStyle: "italic" }}>
+        <p style={{ fontSize: "17px", color: "var(--text-2)", lineHeight: 1.75, marginBottom: "24px", fontStyle: "italic" }}>
           {description}
         </p>
 
@@ -58,40 +58,45 @@ export default function FrArticlePage({ params }) {
 
         <AdSlot label="Publicité" minHeight={90} style={{ marginBottom: 28 }} />
 
+        {/* Corps de l'article */}
         <div style={{
-          background: "white", borderRadius: "20px", padding: "32px",
-          border: "1px solid #e5e7eb", boxShadow: "0 4px 16px rgba(0,0,0,0.04)"
+          background: "var(--bg-card)", borderRadius: "20px", padding: "32px",
+          border: "1px solid var(--border)", boxShadow: "var(--shadow)"
         }}>
+          {/* Bannière notice */}
           <div style={{
-            background: "#eff6ff", border: "1px solid #bfdbfe", borderRadius: "12px",
-            padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "#1d4ed8", fontWeight: 600
+            background: "var(--accent-soft)", border: "1px solid var(--accent)", borderRadius: "12px",
+            padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "var(--accent)", fontWeight: 600
           }}>
             📖 Article complet en arabe — titre et résumé traduits ci-dessus
           </div>
 
+          {/* Contenu arabe */}
           <div
             dir="rtl"
-            style={{ fontSize: "17px", lineHeight: 2, color: "#1f2937", fontFamily: "serif" }}
+            style={{ fontSize: "17px", lineHeight: 2, color: "var(--text-1)", fontFamily: "serif" }}
             dangerouslySetInnerHTML={{ __html: (article.content || "").replace(/\n\n/g, "</p><p>").replace(/^/, "<p>").replace(/$/, "</p>") }}
           />
 
+          {/* Source */}
           {article.source && (
-            <p style={{ marginTop: "28px", fontSize: "13px", color: "#9ca3af" }}>
+            <p style={{ marginTop: "28px", fontSize: "13px", color: "var(--text-3)" }}>
               Source : {article.source}
             </p>
           )}
         </div>
 
+        {/* FAQ */}
         {article.faq?.length > 0 && (
           <section style={{ marginTop: "28px" }}>
-            <h2 style={{ fontSize: "20px", fontWeight: 800, marginBottom: "14px" }}>Questions fréquentes</h2>
+            <h2 style={{ fontSize: "20px", fontWeight: 800, marginBottom: "14px", color: "var(--text-1)" }}>Questions fréquentes</h2>
             <div style={{ display: "grid", gap: "12px" }}>
               {article.faq.map((f, i) => (
-                <details key={i} style={{ background: "white", borderRadius: "14px", padding: "16px 20px", border: "1px solid #e5e7eb" }}>
-                  <summary style={{ fontWeight: 700, cursor: "pointer", fontSize: "15px", color: "#111827" }}>
+                <details key={i} style={{ background: "var(--bg-card)", borderRadius: "14px", padding: "16px 20px", border: "1px solid var(--border)" }}>
+                  <summary style={{ fontWeight: 700, cursor: "pointer", fontSize: "15px", color: "var(--text-1)" }}>
                     {f.q}
                   </summary>
-                  <p style={{ marginTop: "10px", fontSize: "14px", color: "#4b5563", lineHeight: 1.7 }}>{f.a}</p>
+                  <p style={{ marginTop: "10px", fontSize: "14px", color: "var(--text-2)", lineHeight: 1.7 }}>{f.a}</p>
                 </details>
               ))}
             </div>

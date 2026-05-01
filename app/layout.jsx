@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Anti-flash: applique le thème AVANT le premier rendu */}
         <script dangerouslySetInnerHTML={{ __html:
-          `(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-theme',h>=6&&h<20?'light':'dark');})();`
+          `(function(){var h=new Date().getHours(),n=h<6||h>=20,t;if(n){t='dark';}else{try{t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}document.documentElement.setAttribute('data-theme',t);})();`
         }} />
         {/* Google Tag Manager */}
         <script
