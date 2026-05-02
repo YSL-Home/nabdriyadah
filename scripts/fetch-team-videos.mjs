@@ -72,8 +72,24 @@ async function verifyIds(ids) {
       .filter(v => v.status?.embeddable !== false && v.status?.privacyStatus === "public")
       .map(v => v.id);
   } catch {
-    return ids; // If verification fails, keep originals
+    return ids;
   }
+}
+
+// Double-check by verifying thumbnail exists (> 5 KB = real video, ~1 KB = deleted/private)
+async function filterByThumbnail(ids) {
+  const valid = [];
+  for (const id of ids) {
+    try {
+      const res = await fetch(`https://img.youtube.com/vi/${id}/hqdefault.jpg`, { method: "HEAD" });
+      const size = parseInt(res.headers.get("content-length") || "0");
+      if (size > 5000) valid.push(id);
+    } catch {
+      valid.push(id); // keep on network error
+    }
+    await sleep(100);
+  }
+  return valid;
 }
 
 async function getTeamVideos(slug, teamName) {
@@ -105,11 +121,14 @@ async function getTeamVideos(slug, teamName) {
 
   if (results.length === 0) return [];
 
-  // Verify embeddability (batch check)
+  // Step 1: verify via YouTube API (embeddability + public status)
   const verified = await verifyIds(results.slice(0, VIDEOS_PER_TEAM * 2));
   await sleep(300);
 
-  return verified.slice(0, VIDEOS_PER_TEAM);
+  // Step 2: double-check thumbnail exists (catches deleted/unavailable videos)
+  const withThumbnail = await filterByThumbnail(verified);
+
+  return withThumbnail.slice(0, VIDEOS_PER_TEAM);
 }
 
 async function main() {

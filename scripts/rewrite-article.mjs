@@ -225,23 +225,25 @@ function fallbackArticle(item, index) {
   const label = leagueLabel(item.league || sport);
   const rawTitle = normalizeText(item.originalTitle || "");
 
-  // If the original title is in Arabic, use it; otherwise extract keywords
+  // If the original title is in Arabic, use it — NEVER include English words in the Arabic title
   let titleHint = "";
   if (rawTitle && isArabic(rawTitle)) {
     titleHint = rawTitle.slice(0, 60);
-  } else if (rawTitle) {
-    // Use English keywords to vary the title
-    const kw = extractEnglishKeywords(rawTitle);
-    if (kw) titleHint = kw.replace(/-/g, " ");
   }
+  // English titles → no hint (generate fully Arabic title using date variant)
 
   const typeTemplate = pickArticleType(index);
   const prefix = typeTemplate.titlePrefix(label);
 
-  // Build a unique title using label + prefix + hint (no predictable "الجولة N")
+  // Arabic months for varied titles
+  const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+  const now = new Date();
+  const monthLabel = arabicMonths[now.getMonth()];
+  const yearLabel  = now.getFullYear();
+
   const title = titleHint
     ? `${prefix}: ${label} — ${titleHint}`.slice(0, 90)
-    : `${prefix}: آخر مستجدات ${label} — ${new Date().toLocaleDateString("ar-SA", { month: "long", year: "numeric" })}`.slice(0, 90);
+    : `${prefix}: آخر أخبار ${label} — ${monthLabel} ${yearLabel}`.slice(0, 90);
 
   const description = `${typeTemplate.intro(label, titleHint)} متابعة حصرية من نبض الرياضة.`.slice(0, 200);
   const content = [typeTemplate.intro(label, titleHint), ...typeTemplate.body(label)].join("\n\n");
