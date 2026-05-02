@@ -170,7 +170,7 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
             </div>
             <div style={{ display: "grid", gap: "16px" }}>
               {history.map((p, i) => (
-                <p key={i} style={{ margin: 0, fontSize: "17px", lineHeight: 1.95, color: "var(--text-2)", borderRight: isRTL ? `3px solid ${accentSoft}` : "none", borderLeft: !isRTL ? `3px solid ${accentSoft}` : "none", paddingRight: isRTL ? "14px" : 0, paddingLeft: !isRTL ? "14px" : 0 }}>{p}</p>
+                <p key={i} dir="rtl" style={{ margin: 0, fontSize: "17px", lineHeight: 1.95, color: "var(--text-2)", borderRight: `3px solid ${accentSoft}`, paddingRight: "14px", textAlign: "right" }}>{p}</p>
               ))}
             </div>
           </div>
@@ -256,7 +256,14 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
         <AdSlot label={lang === "ar" ? "مساحة إعلانية وسط" : "Advertisement"} minHeight={120} style={{ marginBottom: 26 }} />
 
         {/* VIDEOS */}
-        <VideoSection videos={team.videos} videoEmbed={team.videoEmbed} teamName={team.name} accent={team.accent} accentMid={accentMid} />
+        <VideoSection
+          videos={team.videos}
+          videoEmbed={team.videoEmbed}
+          youtubeChannelId={team.youtubeChannelId}
+          teamName={team.name}
+          accent={team.accent}
+          accentMid={accentMid}
+        />
 
         {/* OFFICIAL LINKS */}
         <section style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "var(--shadow)" }}>

@@ -7,6 +7,7 @@ import teamsDataRaw from "../../../../content/teams-data.json";
 import AdSlot from "../../../components/AdSlot";
 import ArticleImage from "../../../components/ArticleImage";
 import { getT } from "../../../../lib/i18n";
+import { displayName } from "../../../../lib/teamNames";
 
 const leagueConfig = {
   "premier-league":   { title: "Premier League",      logo: "https://media.api-sports.io/football/leagues/39.png",  theme: { heroFrom: "#3b0764", heroTo: "#7c3aed", primary: "#6d28d9", primarySoft: "#ede9fe", border: "#ddd6fe" } },
@@ -104,7 +105,9 @@ export default function EnLeaguePage({ params }) {
                         {row.logo && <img src={row.logo} alt="" style={{ width: "24px", height: "24px", objectFit: "contain" }} />}
                       </td>
                       <td style={{ padding: "10px 8px", fontWeight: 700, color: "var(--text-1)" }}>
-                        {row.slug ? <Link href={`/en/team/${row.slug}/`} style={{ textDecoration: "none", color: "var(--text-1)" }}>{row.name}</Link> : row.name}
+                        {row.slug
+                          ? <Link href={`/en/team/${row.slug}/`} style={{ textDecoration: "none", color: "var(--text-1)" }}>{displayName(row.slug, row.name, "en")}</Link>
+                          : displayName(row.slug, row.name, "en")}
                       </td>
                       {[row.played, row.won, row.drawn, row.lost, row.gf, row.ga, row.gd, row.points].map((v, j) => (
                         <td key={j} style={{ padding: "10px 8px", textAlign: "center", fontWeight: j === 7 ? 900 : 600, color: j === 7 ? theme.primary : "var(--text-2)" }}>{v ?? 0}</td>
