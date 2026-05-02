@@ -401,7 +401,13 @@ export default function LeaguePage({ params }) {
   }
 
   const theme = league.theme;
-  const leagueArticles = articles.filter((article) => article.league === params.slug).slice(0, 12);
+  // Prefer league-specific → then football/mixed fallback
+  const leagueArticles = (() => {
+    const specific = articles.filter(a => a.slug && a.league === params.slug);
+    if (specific.length >= 3) return specific.slice(0, 12);
+    const fallback = articles.filter(a => a.slug && (a.league === "mixed" || a.sport === "football") && a.league !== params.slug);
+    return [...specific, ...fallback].slice(0, 12);
+  })();
   const featuredArticle = leagueArticles[0] || null;
 
   // Standings data

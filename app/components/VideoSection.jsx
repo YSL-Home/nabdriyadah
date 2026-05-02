@@ -42,13 +42,11 @@ function VideoCard({ videoId, teamName, index, accent, onFail }) {
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             onError={handleFail}
             onLoad={(e) => {
-              // YouTube returns a 120×90 gray image for deleted/private videos
               if (e.target.naturalWidth > 0 && e.target.naturalWidth <= 120) {
                 handleFail();
               }
             }}
           />
-          {/* Play button overlay */}
           <div style={{
             position: "absolute", inset: 0,
             display: "flex", alignItems: "center", justifyContent: "center",
@@ -71,6 +69,40 @@ function VideoCard({ videoId, teamName, index, accent, onFail }) {
   );
 }
 
+/* Fallback: YouTube search button when no stored valid IDs */
+function YouTubeSearchFallback({ teamName, accent }) {
+  const query = encodeURIComponent(`ملخص ${teamName} 2025`);
+  const url = `https://www.youtube.com/results?search_query=${query}`;
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center",
+      justifyContent: "center", gap: "16px",
+      padding: "32px 20px",
+      background: "var(--bg-soft)", borderRadius: "20px",
+      border: "1px solid var(--border)"
+    }}>
+      <div style={{ fontSize: "48px" }}>▶</div>
+      <p style={{ margin: 0, fontSize: "15px", color: "var(--text-2)", fontWeight: 700, textAlign: "center" }}>
+        فيديوهات {teamName} متوفرة على يوتيوب
+      </p>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: "inline-flex", alignItems: "center", gap: "8px",
+          padding: "12px 24px", borderRadius: "999px",
+          background: accent || "#dc2626", color: "white",
+          fontWeight: 800, fontSize: "15px", textDecoration: "none",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.15)"
+        }}
+      >
+        🔎 مشاهدة على يوتيوب
+      </a>
+    </div>
+  );
+}
+
 export default function VideoSection({ videos, videoEmbed, teamName, accent, accentMid }) {
   const videoIds = Array.isArray(videos) && videos.length > 0
     ? videos
@@ -81,8 +113,8 @@ export default function VideoSection({ videos, videoEmbed, teamName, accent, acc
   const [failCount, setFailCount] = useState(0);
   const handleFail = useCallback(() => setFailCount(c => c + 1), []);
 
-  if (videoIds.length === 0) return null;
-  if (failCount >= videoIds.length) return null;
+  const allFailed = videoIds.length > 0 && failCount >= videoIds.length;
+  const noVideos  = videoIds.length === 0;
 
   return (
     <section style={{
@@ -99,24 +131,27 @@ export default function VideoSection({ videos, videoEmbed, teamName, accent, acc
           ▶ فيديوهات الفريق
         </h2>
       </div>
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: videoIds.length === 1
-          ? "1fr"
-          : "repeat(auto-fit, minmax(280px, 1fr))",
-        gap: "16px"
-      }}>
-        {videoIds.map((id, idx) => (
-          <VideoCard
-            key={id + idx}
-            videoId={id}
-            teamName={teamName}
-            index={idx}
-            accent={accent}
-            onFail={handleFail}
-          />
-        ))}
-      </div>
+
+      {(noVideos || allFailed) ? (
+        <YouTubeSearchFallback teamName={teamName} accent={accent} />
+      ) : (
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: videoIds.length === 1 ? "1fr" : "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "16px"
+        }}>
+          {videoIds.map((id, idx) => (
+            <VideoCard
+              key={id + idx}
+              videoId={id}
+              teamName={teamName}
+              index={idx}
+              accent={accent}
+              onFail={handleFail}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
