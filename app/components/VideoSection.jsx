@@ -1,7 +1,7 @@
 "use client";
 import { useState, useCallback } from "react";
 
-/** A single video card with thumbnail-first → iframe on click */
+/** Validated video ID → thumbnail + click-to-play */
 function VideoCard({ videoId, teamName, index, accent, onFail }) {
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed]   = useState(false);
@@ -31,10 +31,7 @@ function VideoCard({ videoId, teamName, index, accent, onFail }) {
       ) : (
         <button
           onClick={() => setPlaying(true)}
-          style={{
-            position: "absolute", inset: 0, width: "100%", height: "100%",
-            border: "none", padding: 0, cursor: "pointer", background: "transparent"
-          }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none", padding: 0, cursor: "pointer", background: "transparent" }}
           aria-label={`تشغيل الفيديو ${index + 1}`}
         >
           <img
@@ -42,27 +39,11 @@ function VideoCard({ videoId, teamName, index, accent, onFail }) {
             alt={`${teamName} فيديو ${index + 1}`}
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             onError={handleFail}
-            onLoad={(e) => {
-              // YouTube returns a 120×90 grey placeholder for deleted/invalid videos
-              if (e.target.naturalWidth > 0 && e.target.naturalWidth <= 120) {
-                handleFail();
-              }
-            }}
+            onLoad={(e) => { if (e.target.naturalWidth > 0 && e.target.naturalWidth <= 120) handleFail(); }}
           />
-          <div style={{
-            position: "absolute", inset: 0,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            background: "rgba(0,0,0,0.30)"
-          }}>
-            <div style={{
-              width: "64px", height: "64px", borderRadius: "50%",
-              background: accent || "#dc2626",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              boxShadow: "0 4px 24px rgba(0,0,0,0.5)"
-            }}>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.30)" }}>
+            <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: accent || "#dc2626", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 24px rgba(0,0,0,0.5)" }}>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
             </div>
           </div>
         </button>
@@ -71,27 +52,18 @@ function VideoCard({ videoId, teamName, index, accent, onFail }) {
   );
 }
 
-/**
- * Direct embed — used for videoEmbed field (skips thumbnail validation).
- * Even if the specific video is removed, YouTube shows a proper "Video unavailable" UI.
- */
-function DirectEmbed({ embedUrl, teamName, accent }) {
+/** Direct embed for videoEmbed field — no thumbnail validation */
+function DirectEmbed({ embedUrl, teamName, accent, label }) {
   const [clicked, setClicked] = useState(false);
-  // Build a clean embed URL
-  const src = embedUrl.includes("?")
-    ? embedUrl + "&rel=0"
-    : embedUrl + "?rel=0";
+  const src = (embedUrl.includes("?") ? embedUrl + "&rel=0&autoplay=1" : embedUrl + "?rel=0&autoplay=1");
+  const preview = embedUrl.includes("?") ? embedUrl + "&rel=0" : embedUrl + "?rel=0";
 
   return (
-    <div style={{
-      position: "relative", borderRadius: "16px", overflow: "hidden",
-      background: "var(--bg-soft)", aspectRatio: "16/9",
-      border: "1px solid var(--border)"
-    }}>
+    <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden", background: "var(--bg-soft)", aspectRatio: "16/9", border: "1px solid var(--border)" }}>
       {clicked ? (
         <iframe
-          src={src.replace("rel=0", "autoplay=1&rel=0")}
-          title={`${teamName} — فيديو الفريق`}
+          src={src}
+          title={`${teamName} — ${label}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
@@ -99,27 +71,14 @@ function DirectEmbed({ embedUrl, teamName, accent }) {
       ) : (
         <button
           onClick={() => setClicked(true)}
-          style={{
-            position: "absolute", inset: 0, width: "100%", height: "100%",
-            border: "none", padding: 0, cursor: "pointer",
-            background: "linear-gradient(135deg, var(--bg-soft) 0%, rgba(0,0,0,0.4) 100%)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            flexDirection: "column", gap: "12px"
-          }}
-          aria-label="تشغيل الفيديو"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none", padding: 0, cursor: "pointer", background: "linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.30) 100%)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "12px" }}
+          aria-label={`تشغيل ${label}`}
         >
-          <div style={{
-            width: "72px", height: "72px", borderRadius: "50%",
-            background: accent || "#dc2626",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 4px 24px rgba(0,0,0,0.5)"
-          }}>
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+          <div style={{ width: "68px", height: "68px", borderRadius: "50%", background: accent || "#dc2626", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 24px rgba(0,0,0,0.5)" }}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
           </div>
-          <span style={{ color: "white", fontWeight: 700, fontSize: "15px", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>
-            {teamName} — فيديو الفريق
+          <span style={{ color: "white", fontWeight: 700, fontSize: "14px", textShadow: "0 1px 4px rgba(0,0,0,0.8)", maxWidth: "220px", textAlign: "center", lineHeight: 1.4 }}>
+            {label}
           </span>
         </button>
       )}
@@ -127,63 +86,75 @@ function DirectEmbed({ embedUrl, teamName, accent }) {
   );
 }
 
-/** Fallback: YouTube search button when no stored IDs and no embed URL */
-function YouTubeSearchFallback({ teamName, accent }) {
-  const query = encodeURIComponent(`ملخص ${teamName} 2025`);
-  const url = `https://www.youtube.com/results?search_query=${query}`;
+/** YouTube search card — links to a YouTube search query */
+function YouTubeSearchCard({ query, label, icon, accent }) {
+  const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
   return (
-    <div style={{
-      display: "flex", flexDirection: "column", alignItems: "center",
-      justifyContent: "center", gap: "16px",
-      padding: "32px 20px",
-      background: "var(--bg-soft)", borderRadius: "20px",
-      border: "1px solid var(--border)"
-    }}>
-      <div style={{ fontSize: "48px" }}>▶</div>
-      <p style={{ margin: 0, fontSize: "15px", color: "var(--text-2)", fontWeight: 700, textAlign: "center" }}>
-        فيديوهات {teamName} متوفرة على يوتيوب
-      </p>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          display: "inline-flex", alignItems: "center", gap: "8px",
-          padding: "12px 24px", borderRadius: "999px",
-          background: accent || "#dc2626", color: "white",
-          fontWeight: 800, fontSize: "15px", textDecoration: "none",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.15)"
-        }}
-      >
-        🔎 مشاهدة على يوتيوب
-      </a>
-    </div>
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+        gap: "10px", aspectRatio: "16/9", borderRadius: "16px", textDecoration: "none",
+        background: "var(--bg-soft)", border: "1px solid var(--border)",
+        transition: "transform 0.15s, box-shadow 0.15s",
+        cursor: "pointer"
+      }}
+    >
+      <div style={{ fontSize: "36px" }}>{icon}</div>
+      <span style={{ color: "var(--text-1)", fontWeight: 700, fontSize: "13px", textAlign: "center", lineHeight: 1.4, padding: "0 12px" }}>
+        {label}
+      </span>
+      <div style={{ display: "flex", alignItems: "center", gap: "6px", padding: "6px 14px", borderRadius: "999px", background: accent || "#dc2626" }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+        <span style={{ color: "white", fontWeight: 800, fontSize: "12px" }}>YouTube</span>
+      </div>
+    </a>
   );
 }
 
-export default function VideoSection({ videos, videoEmbed, teamName, accent, accentMid }) {
-  // Priority 1: validated video IDs array
-  const videoIds = Array.isArray(videos) && videos.length > 0 ? videos : [];
-
+export default function VideoSection({ videos, videoEmbed, teamName, accent }) {
+  const validIds = Array.isArray(videos) && videos.length > 0 ? videos : [];
   const [failCount, setFailCount] = useState(0);
   const handleFail = useCallback(() => setFailCount(c => c + 1), []);
+  const allFailed = validIds.length > 0 && failCount >= validIds.length;
 
-  const allFailed = videoIds.length > 0 && failCount >= videoIds.length;
+  // Search queries for when we don't have enough real videos
+  const searchCards = [
+    { query: `ملخص ${teamName} 2025`,             label: `ملخص مباريات ${teamName}`,    icon: "🎬" },
+    { query: `أهداف ${teamName} 2025`,             label: `أهداف ${teamName}`,            icon: "⚽" },
+    { query: `${teamName} highlights 2025`,         label: `${teamName} Highlights`,       icon: "🏆" },
+    { query: `ملخص ${teamName} بين سبورت 2025`,    label: `${teamName} — beIN Sports`,    icon: "📺" },
+  ];
 
-  // Priority 2: direct videoEmbed URL (shown when no valid IDs array)
-  const showDirect = (videoIds.length === 0 || allFailed) && Boolean(videoEmbed);
-  // Priority 3: YouTube search fallback
-  const showSearch = !showDirect && (videoIds.length === 0 || allFailed);
+  // How many validated video slots we have
+  const realSlots = allFailed ? 0 : validIds.length;
+
+  // We want a grid of 4 total items
+  // → fill with real videos first, then videoEmbed (if no real), then search cards
+  const items = [];
+
+  if (realSlots > 0) {
+    // Real validated video IDs
+    validIds.forEach((id, idx) => {
+      items.push({ type: "video", id, idx });
+    });
+  } else if (videoEmbed) {
+    // videoEmbed as first item
+    items.push({ type: "embed", url: videoEmbed, label: `فيديو رسمي — ${teamName}` });
+  }
+
+  // Fill up to 4 with search cards
+  const needed = Math.max(0, 4 - items.length);
+  searchCards.slice(0, needed).forEach(card => {
+    items.push({ type: "search", ...card });
+  });
+
+  const cols = items.length === 1 ? "1fr" : items.length === 2 ? "repeat(2, 1fr)" : "repeat(2, 1fr)";
 
   return (
-    <section style={{
-      background: "var(--bg-card)",
-      borderRadius: "28px",
-      padding: "28px",
-      border: "1px solid var(--border)",
-      marginBottom: "26px",
-      boxShadow: "var(--shadow)"
-    }}>
+    <section style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "28px", border: "1px solid var(--border)", marginBottom: "26px", boxShadow: "var(--shadow)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
         <div style={{ width: "5px", height: "32px", borderRadius: "999px", background: accent }} />
         <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>
@@ -191,28 +162,42 @@ export default function VideoSection({ videos, videoEmbed, teamName, accent, acc
         </h2>
       </div>
 
-      {showSearch ? (
-        <YouTubeSearchFallback teamName={teamName} accent={accent} />
-      ) : showDirect ? (
-        <DirectEmbed embedUrl={videoEmbed} teamName={teamName} accent={accent} />
-      ) : (
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: videoIds.length === 1 ? "1fr" : "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "16px"
-        }}>
-          {videoIds.map((id, idx) => (
-            <VideoCard
-              key={id + idx}
-              videoId={id}
-              teamName={teamName}
-              index={idx}
+      <div style={{ display: "grid", gridTemplateColumns: cols, gap: "14px" }}>
+        {items.map((item, i) => {
+          if (item.type === "video") {
+            return (
+              <VideoCard
+                key={item.id + item.idx}
+                videoId={item.id}
+                teamName={teamName}
+                index={item.idx}
+                accent={accent}
+                onFail={handleFail}
+              />
+            );
+          }
+          if (item.type === "embed") {
+            return (
+              <DirectEmbed
+                key="embed"
+                embedUrl={item.url}
+                teamName={teamName}
+                accent={accent}
+                label={item.label}
+              />
+            );
+          }
+          return (
+            <YouTubeSearchCard
+              key={item.query}
+              query={item.query}
+              label={item.label}
+              icon={item.icon}
               accent={accent}
-              onFail={handleFail}
             />
-          ))}
-        </div>
-      )}
+          );
+        })}
+      </div>
     </section>
   );
 }
