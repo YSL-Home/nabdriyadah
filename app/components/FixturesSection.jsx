@@ -1,9 +1,10 @@
 "use client";
 import { useState, useMemo } from "react";
 
+// "ar-SA-u-nu-latn" = Arabic labels (day/month names) + Western digits (1 2 3…)
 function formatDate(dateStr, opts) {
   try {
-    return new Date(dateStr).toLocaleDateString("ar-SA", opts);
+    return new Date(dateStr).toLocaleDateString("ar-SA-u-nu-latn", opts);
   } catch {
     return dateStr;
   }
@@ -11,7 +12,9 @@ function formatDate(dateStr, opts) {
 
 function formatTime(dateStr) {
   try {
-    return new Date(dateStr).toLocaleTimeString("ar-SA", { hour: "2-digit", minute: "2-digit" });
+    return new Date(dateStr).toLocaleTimeString("ar-SA-u-nu-latn", {
+      hour: "2-digit", minute: "2-digit", hour12: false
+    });
   } catch {
     return "";
   }
