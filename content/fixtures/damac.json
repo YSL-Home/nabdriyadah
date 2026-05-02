@@ -3,38 +3,6 @@
   "teamId": 7796,
   "upcoming": [
     {
-      "id": "756181",
-      "date": "2026-05-02T16:10Z",
-      "timestamp": 1777738200,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "Prince Sultan bin Abdulaziz Sports City Stadium",
-      "city": "Abha",
-      "home": {
-        "id": "21828",
-        "slug": "damac",
-        "name": "ضمك",
-        "logo": "https://media.api-sports.io/football/teams/7796.png",
-        "winner": null
-      },
-      "away": {
-        "id": "21829",
-        "slug": null,
-        "name": "Al Khaleej",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Saudi Pro League",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "756188",
       "date": "2026-05-10T18:00Z",
       "timestamp": 1778436000,
@@ -132,6 +100,38 @@
     }
   ],
   "past": [
+    {
+      "id": "756181",
+      "date": "2026-05-02T16:10Z",
+      "timestamp": 1777738200,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Prince Sultan bin Abdulaziz Sports City Stadium",
+      "city": "Abha",
+      "home": {
+        "id": "21828",
+        "slug": "damac",
+        "name": "ضمك",
+        "logo": "https://media.api-sports.io/football/teams/7796.png",
+        "winner": false
+      },
+      "away": {
+        "id": "21829",
+        "slug": null,
+        "name": "Al Khaleej",
+        "logo": "",
+        "winner": true
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "league": {
+        "name": "Saudi Pro League",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "756168",
       "date": "2026-04-28T18:00Z",
@@ -261,5 +261,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-02T15:07:32.740Z"
+  "fetchedAt": "2026-05-02T21:13:24.604Z"
 }

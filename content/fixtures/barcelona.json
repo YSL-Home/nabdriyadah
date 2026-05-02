@@ -3,38 +3,6 @@
   "teamId": 0,
   "upcoming": [
     {
-      "id": "748480",
-      "date": "2026-05-02T19:00Z",
-      "timestamp": 1777748400,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "El Sadar",
-      "city": "Pamplona",
-      "home": {
-        "id": "97",
-        "slug": "osasuna",
-        "name": "أوساسونا",
-        "logo": "https://media.api-sports.io/football/teams/544.png",
-        "winner": null
-      },
-      "away": {
-        "id": "83",
-        "slug": "barcelona",
-        "name": "برشلونة",
-        "logo": "https://media.api-sports.io/football/teams/529.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748484",
       "date": "2026-05-10T19:00Z",
       "timestamp": 1778439600,
@@ -164,6 +132,38 @@
     }
   ],
   "past": [
+    {
+      "id": "748480",
+      "date": "2026-05-02T19:00Z",
+      "timestamp": 1777748400,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "El Sadar",
+      "city": "Pamplona",
+      "home": {
+        "id": "97",
+        "slug": "osasuna",
+        "name": "أوساسونا",
+        "logo": "https://media.api-sports.io/football/teams/544.png",
+        "winner": false
+      },
+      "away": {
+        "id": "83",
+        "slug": "barcelona",
+        "name": "برشلونة",
+        "logo": "https://media.api-sports.io/football/teams/529.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "748460",
       "date": "2026-04-25T14:15Z",
@@ -357,5 +357,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-02T15:08:18.043Z"
+  "fetchedAt": "2026-05-02T21:14:09.225Z"
 }

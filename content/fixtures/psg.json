@@ -3,38 +3,6 @@
   "teamId": 0,
   "upcoming": [
     {
-      "id": "746695",
-      "date": "2026-05-02T15:00Z",
-      "timestamp": 1777734000,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Parc des Princes",
-      "city": "Paris",
-      "home": {
-        "id": "160",
-        "slug": "psg",
-        "name": "باريس سان جيرمان",
-        "logo": "https://media.api-sports.io/football/teams/85.png",
-        "winner": null
-      },
-      "away": {
-        "id": "273",
-        "slug": "lorient",
-        "name": "Lorient",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "French Ligue 1",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "401862895",
       "date": "2026-05-06T19:00Z",
       "timestamp": 1778094000,
@@ -164,6 +132,38 @@
     }
   ],
   "past": [
+    {
+      "id": "746695",
+      "date": "2026-05-02T15:00Z",
+      "timestamp": 1777734000,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Parc des Princes",
+      "city": "Paris",
+      "home": {
+        "id": "160",
+        "slug": "psg",
+        "name": "باريس سان جيرمان",
+        "logo": "https://media.api-sports.io/football/teams/85.png",
+        "winner": false
+      },
+      "away": {
+        "id": "273",
+        "slug": "lorient",
+        "name": "Lorient",
+        "logo": "",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "league": {
+        "name": "French Ligue 1",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "401862893",
       "date": "2026-04-28T19:00Z",
@@ -389,5 +389,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-02T15:08:18.043Z"
+  "fetchedAt": "2026-05-02T21:14:09.225Z"
 }

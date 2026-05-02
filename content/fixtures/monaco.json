@@ -3,38 +3,6 @@
   "teamId": 0,
   "upcoming": [
     {
-      "id": "746693",
-      "date": "2026-05-02T17:00Z",
-      "timestamp": 1777741200,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "Stade Saint-Symphorien",
-      "city": "Metz",
-      "home": {
-        "id": "177",
-        "slug": "metz",
-        "name": "Metz",
-        "logo": "",
-        "winner": null
-      },
-      "away": {
-        "id": "174",
-        "slug": "monaco",
-        "name": "موناكو",
-        "logo": "https://media.api-sports.io/football/teams/91.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "French Ligue 1",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "746703",
       "date": "2026-05-10T19:00Z",
       "timestamp": 1778439600,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "746693",
+      "date": "2026-05-02T17:00Z",
+      "timestamp": 1777741200,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Stade Saint-Symphorien",
+      "city": "Metz",
+      "home": {
+        "id": "177",
+        "slug": "metz",
+        "name": "Metz",
+        "logo": "",
+        "winner": false
+      },
+      "away": {
+        "id": "174",
+        "slug": "monaco",
+        "name": "موناكو",
+        "logo": "https://media.api-sports.io/football/teams/91.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "league": {
+        "name": "French Ligue 1",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "746690",
       "date": "2026-04-25T19:05Z",
@@ -229,5 +229,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-02T15:07:01.384Z"
+  "fetchedAt": "2026-05-02T21:12:53.960Z"
 }
