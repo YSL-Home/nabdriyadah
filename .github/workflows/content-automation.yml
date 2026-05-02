@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: nabdriyadah-git-push
-      cancel-in-progress: false
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
@@ -38,7 +38,8 @@ jobs:
           git config user.email "github-actions@github.com"
           git config pull.rebase false
           git config branch.main.rebase false
-          git pull origin main --no-edit
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -73,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: nabdriyadah-git-push
-      cancel-in-progress: false
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
@@ -87,7 +88,8 @@ jobs:
           git config user.email "github-actions@github.com"
           git config pull.rebase false
           git config branch.main.rebase false
-          git pull origin main --no-edit
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Setup Node
         uses: actions/setup-node@v4
