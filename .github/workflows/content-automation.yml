@@ -67,7 +67,8 @@ jobs:
 
       - name: Commit & push
         if: steps.scan.outputs.changed == 'true'
-        run: bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
+        run: |
+          bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
 
   full-refresh:
     name: Full Content Refresh
@@ -125,4 +126,5 @@ jobs:
         continue-on-error: true
 
       - name: Commit & push
-        run: bash scripts/git-safe-push.sh "refresh: $(date '+%d/%m %H:%M')"
+        run: |
+          bash scripts/git-safe-push.sh "refresh: $(date '+%d/%m %H:%M')"
