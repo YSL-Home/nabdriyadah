@@ -3,38 +3,6 @@
   "teamId": 533,
   "upcoming": [
     {
-      "id": "748477",
-      "date": "2026-05-02T12:00Z",
-      "timestamp": 1777723200,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "Estadio de la Cerámica",
-      "city": "Villarreal",
-      "home": {
-        "id": "102",
-        "slug": "villarreal",
-        "name": "فياريال",
-        "logo": "https://media.api-sports.io/football/teams/533.png",
-        "winner": null
-      },
-      "away": {
-        "id": "1538",
-        "slug": null,
-        "name": "Levante",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748490",
       "date": "2026-05-10T12:00Z",
       "timestamp": 1778414400,
@@ -165,6 +133,38 @@
   ],
   "past": [
     {
+      "id": "748477",
+      "date": "2026-05-02T12:00Z",
+      "timestamp": 1777723200,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Estadio de la Cerámica",
+      "city": "Villarreal",
+      "home": {
+        "id": "102",
+        "slug": "villarreal",
+        "name": "فياريال",
+        "logo": "https://media.api-sports.io/football/teams/533.png",
+        "winner": true
+      },
+      "away": {
+        "id": "1538",
+        "slug": null,
+        "name": "Levante",
+        "logo": "",
+        "winner": false
+      },
+      "goals": {
+        "home": 5,
+        "away": 1
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
+    {
       "id": "748463",
       "date": "2026-04-26T19:00Z",
       "timestamp": 1777230000,
@@ -293,5 +293,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-01T19:01:19.282Z"
+  "fetchedAt": "2026-05-02T15:06:16.945Z"
 }

@@ -3,38 +3,6 @@
   "teamId": 498,
   "upcoming": [
     {
-      "id": "737128",
-      "date": "2026-05-02T13:00Z",
-      "timestamp": 1777726800,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "Stadio Friuli",
-      "city": "Udine",
-      "home": {
-        "id": "118",
-        "slug": "udinese",
-        "name": "أودينيزي",
-        "logo": "https://media.api-sports.io/football/teams/491.png",
-        "winner": null
-      },
-      "away": {
-        "id": "239",
-        "slug": "torino",
-        "name": "تورينو",
-        "logo": "https://media.api-sports.io/football/teams/498.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Italian Serie A",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "737143",
       "date": "2026-05-08T18:45Z",
       "timestamp": 1778265900,
@@ -132,6 +100,38 @@
     }
   ],
   "past": [
+    {
+      "id": "737128",
+      "date": "2026-05-02T13:00Z",
+      "timestamp": 1777726800,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Stadio Friuli",
+      "city": "Udine",
+      "home": {
+        "id": "118",
+        "slug": "udinese",
+        "name": "أودينيزي",
+        "logo": "https://media.api-sports.io/football/teams/491.png",
+        "winner": true
+      },
+      "away": {
+        "id": "239",
+        "slug": "torino",
+        "name": "تورينو",
+        "logo": "https://media.api-sports.io/football/teams/498.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "league": {
+        "name": "Italian Serie A",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "737118",
       "date": "2026-04-26T16:00Z",
@@ -261,5 +261,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-01T19:02:40.429Z"
+  "fetchedAt": "2026-05-02T15:06:46.526Z"
 }

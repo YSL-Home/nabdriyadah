@@ -3,38 +3,6 @@
   "teamId": 81,
   "upcoming": [
     {
-      "id": "746694",
-      "date": "2026-05-02T13:00Z",
-      "timestamp": 1777726800,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "Stade de la Beaujoire",
-      "city": "Nantes",
-      "home": {
-        "id": "165",
-        "slug": "nantes",
-        "name": "نانت",
-        "logo": "https://media.api-sports.io/football/teams/93.png",
-        "winner": null
-      },
-      "away": {
-        "id": "176",
-        "slug": "olympique-marseille",
-        "name": "أولمبيك مرسيليا",
-        "logo": "https://media.api-sports.io/football/teams/81.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "French Ligue 1",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "746701",
       "date": "2026-05-10T19:00Z",
       "timestamp": 1778439600,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "746694",
+      "date": "2026-05-02T13:00Z",
+      "timestamp": 1777726800,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Stade de la Beaujoire",
+      "city": "Nantes",
+      "home": {
+        "id": "165",
+        "slug": "nantes",
+        "name": "نانت",
+        "logo": "https://media.api-sports.io/football/teams/93.png",
+        "winner": true
+      },
+      "away": {
+        "id": "176",
+        "slug": "olympique-marseille",
+        "name": "أولمبيك مرسيليا",
+        "logo": "https://media.api-sports.io/football/teams/81.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 3,
+        "away": 0
+      },
+      "league": {
+        "name": "French Ligue 1",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "746687",
       "date": "2026-04-26T18:45Z",
@@ -229,5 +229,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-01T19:03:19.782Z"
+  "fetchedAt": "2026-05-02T15:07:01.384Z"
 }

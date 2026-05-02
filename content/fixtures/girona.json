@@ -3,38 +3,6 @@
   "teamId": 547,
   "upcoming": [
     {
-      "id": "748476",
-      "date": "2026-05-01T19:00Z",
-      "timestamp": 1777662000,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "Estadi Montilivi",
-      "city": "Girona",
-      "home": {
-        "id": "9812",
-        "slug": "girona",
-        "name": "خيرونا",
-        "logo": "https://media.api-sports.io/football/teams/547.png",
-        "winner": null
-      },
-      "away": {
-        "id": "84",
-        "slug": "mallorca",
-        "name": "مايوركا",
-        "logo": "https://media.api-sports.io/football/teams/539.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748489",
       "date": "2026-05-11T19:00Z",
       "timestamp": 1778526000,
@@ -165,6 +133,38 @@
   ],
   "past": [
     {
+      "id": "748476",
+      "date": "2026-05-01T19:00Z",
+      "timestamp": 1777662000,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Estadi Montilivi",
+      "city": "Girona",
+      "home": {
+        "id": "9812",
+        "slug": "girona",
+        "name": "خيرونا",
+        "logo": "https://media.api-sports.io/football/teams/547.png",
+        "winner": false
+      },
+      "away": {
+        "id": "84",
+        "slug": "mallorca",
+        "name": "مايوركا",
+        "logo": "https://media.api-sports.io/football/teams/539.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
+    {
       "id": "748454",
       "date": "2026-04-25T16:30Z",
       "timestamp": 1777134600,
@@ -293,5 +293,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-01T19:01:19.282Z"
+  "fetchedAt": "2026-05-02T15:06:16.945Z"
 }

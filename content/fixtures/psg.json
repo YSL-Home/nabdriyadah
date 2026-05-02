@@ -6,8 +6,8 @@
       "id": "746695",
       "date": "2026-05-02T15:00Z",
       "timestamp": 1777734000,
-      "status": "NS",
-      "statusLong": "Scheduled",
+      "status": "LIVE",
+      "statusLong": "First Half",
       "venue": "Parc des Princes",
       "city": "Paris",
       "home": {
@@ -31,6 +31,38 @@
       "league": {
         "name": "French Ligue 1",
         "round": ""
+      },
+      "completed": false
+    },
+    {
+      "id": "401862895",
+      "date": "2026-05-06T19:00Z",
+      "timestamp": 1778094000,
+      "status": "NS",
+      "statusLong": "Scheduled",
+      "venue": "Allianz Arena",
+      "city": "München",
+      "home": {
+        "id": "132",
+        "slug": "bayern-munich",
+        "name": "بايرن ميونخ",
+        "logo": "https://media.api-sports.io/football/teams/157.png",
+        "winner": null
+      },
+      "away": {
+        "id": "160",
+        "slug": "psg",
+        "name": "باريس سان جيرمان",
+        "logo": "https://media.api-sports.io/football/teams/85.png",
+        "winner": null
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "league": {
+        "name": "UEFA Champions League",
+        "round": "2nd Leg - Paris Saint-Germain lead 5-4 on aggregate"
       },
       "completed": false
     },
@@ -133,6 +165,38 @@
   ],
   "past": [
     {
+      "id": "401862893",
+      "date": "2026-04-28T19:00Z",
+      "timestamp": 1777402800,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Parc des Princes",
+      "city": "Paris",
+      "home": {
+        "id": "160",
+        "slug": "psg",
+        "name": "باريس سان جيرمان",
+        "logo": "https://media.api-sports.io/football/teams/85.png",
+        "winner": true
+      },
+      "away": {
+        "id": "132",
+        "slug": "bayern-munich",
+        "name": "بايرن ميونخ",
+        "logo": "https://media.api-sports.io/football/teams/157.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 5,
+        "away": 4
+      },
+      "league": {
+        "name": "UEFA Champions League",
+        "round": "1st Leg"
+      },
+      "completed": true
+    },
+    {
       "id": "746682",
       "date": "2026-04-25T17:00Z",
       "timestamp": 1777136400,
@@ -229,6 +293,70 @@
       "completed": true
     },
     {
+      "id": "401862889",
+      "date": "2026-04-14T19:00Z",
+      "timestamp": 1776193200,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Anfield",
+      "city": "Liverpool",
+      "home": {
+        "id": "364",
+        "slug": "liverpool",
+        "name": "ليفربول",
+        "logo": "https://media.api-sports.io/football/teams/40.png",
+        "winner": false
+      },
+      "away": {
+        "id": "160",
+        "slug": "psg",
+        "name": "باريس سان جيرمان",
+        "logo": "https://media.api-sports.io/football/teams/85.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "league": {
+        "name": "UEFA Champions League",
+        "round": "2nd Leg - Paris Saint-Germain advance 4-0 on aggregate"
+      },
+      "completed": true
+    },
+    {
+      "id": "401862885",
+      "date": "2026-04-08T19:00Z",
+      "timestamp": 1775674800,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Parc des Princes",
+      "city": "Paris",
+      "home": {
+        "id": "160",
+        "slug": "psg",
+        "name": "باريس سان جيرمان",
+        "logo": "https://media.api-sports.io/football/teams/85.png",
+        "winner": true
+      },
+      "away": {
+        "id": "364",
+        "slug": "liverpool",
+        "name": "ليفربول",
+        "logo": "https://media.api-sports.io/football/teams/40.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "league": {
+        "name": "UEFA Champions League",
+        "round": "1st Leg"
+      },
+      "completed": true
+    },
+    {
       "id": "746662",
       "date": "2026-04-03T18:45Z",
       "timestamp": 1775241900,
@@ -261,5 +389,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-01T19:03:19.782Z"
+  "fetchedAt": "2026-05-02T15:08:18.043Z"
 }
