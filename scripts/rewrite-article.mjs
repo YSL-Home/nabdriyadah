@@ -464,21 +464,6 @@ async function rewriteArticle(item, index) {
 const MAX_ARTICLES = 600;
 
 async function main() {
-  // ── STEP 0: Auto-refresh raw-news.json (full-refresh mode only) ──────────
-  // Breaking-news runs skip this — they have their own fetch logic.
-  if (process.env.BREAKING_ONLY !== "true") {
-    console.log("📡 Fetching fresh news before rewrite...");
-    try {
-      execFileSync("node", [path.join(process.cwd(), "scripts/fetch-news.mjs")], {
-        stdio: "inherit",
-        timeout: 90000,
-        env: process.env
-      });
-    } catch (e) {
-      console.log("⚠ fetch-news warning (continuing with cached data):", e.message?.slice(0, 100));
-    }
-  }
-
   let rawItems = [];
   try {
     rawItems = JSON.parse(fs.readFileSync(INPUT_PATH, "utf-8"));
@@ -585,10 +570,8 @@ async function main() {
       // Translations (generated in same API call — no extra cost)
       en_title:       rewritten.en_title       || null,
       en_description: rewritten.en_description || null,
-      en_content:     rewritten.en_content     || null,
       fr_title:       rewritten.fr_title       || null,
       fr_description: rewritten.fr_description || null,
-      fr_content:     rewritten.fr_content     || null,
       imageUrl: item.imageUrl || null,
       image: `/generated/${slug}.png`
     });

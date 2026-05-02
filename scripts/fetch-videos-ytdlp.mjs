@@ -63,75 +63,21 @@ async function filterValid(ids) {
   return valid;
 }
 
-// ── International team name map (slug → English name) ────────────────────
-// Arabic ytsearch queries return "no results" on GitHub Actions non-interactive shells.
-// English queries work reliably for all teams.
-const TEAM_EN_NAMES = {
-  "arsenal": "Arsenal", "aston-villa": "Aston Villa", "brentford": "Brentford",
-  "brighton": "Brighton", "chelsea": "Chelsea", "crystal-palace": "Crystal Palace",
-  "everton": "Everton", "fulham": "Fulham", "liverpool": "Liverpool",
-  "manchester-city": "Manchester City", "manchester-united": "Manchester United",
-  "newcastle": "Newcastle United", "nottingham-forest": "Nottingham Forest",
-  "tottenham": "Tottenham Hotspur", "west-ham": "West Ham United",
-  "wolves": "Wolverhampton Wanderers", "real-madrid": "Real Madrid",
-  "barcelona": "FC Barcelona", "atletico-madrid": "Atletico Madrid",
-  "villarreal": "Villarreal", "real-betis": "Real Betis", "real-sociedad": "Real Sociedad",
-  "athletic-bilbao": "Athletic Bilbao", "celta-vigo": "Celta Vigo", "sevilla": "Sevilla FC",
-  "getafe": "Getafe CF", "osasuna": "Osasuna", "girona": "Girona FC",
-  "mallorca": "RCD Mallorca", "rayo-vallecano": "Rayo Vallecano", "espanyol": "RCD Espanyol",
-  "alaves": "Alaves", "valencia": "Valencia CF", "bayern-munich": "Bayern Munich",
-  "borussia-dortmund": "Borussia Dortmund", "rb-leipzig": "RB Leipzig",
-  "bayer-leverkusen": "Bayer Leverkusen", "eintracht-frankfurt": "Eintracht Frankfurt",
-  "vfb-stuttgart": "VfB Stuttgart", "wolfsburg": "VfL Wolfsburg",
-  "hoffenheim": "TSG Hoffenheim", "freiburg": "SC Freiburg", "mainz": "FSV Mainz 05",
-  "augsburg": "FC Augsburg", "werder-bremen": "Werder Bremen", "union-berlin": "Union Berlin",
-  "fc-koln": "FC Koln", "heidenheim": "FC Heidenheim", "st-pauli": "FC St. Pauli",
-  "ac-milan": "AC Milan", "inter-milan": "Inter Milan", "juventus": "Juventus",
-  "napoli": "Napoli", "as-roma": "AS Roma", "lazio": "SS Lazio", "atalanta": "Atalanta",
-  "fiorentina": "Fiorentina", "bologna": "Bologna FC", "torino": "Torino FC",
-  "genoa": "Genoa", "udinese": "Udinese", "cagliari": "Cagliari", "lecce": "US Lecce",
-  "hellas-verona": "Hellas Verona", "como": "Como 1907", "parma": "Parma Calcio",
-  "psg": "Paris Saint-Germain", "olympique-marseille": "Olympique Marseille",
-  "olympique-lyon": "Olympique Lyonnais", "monaco": "AS Monaco", "losc-lille": "LOSC Lille",
-  "nice": "OGC Nice", "stade-rennes": "Stade Rennais", "lens": "RC Lens",
-  "toulouse": "Toulouse FC", "stade-brestois": "Stade Brestois", "nantes": "FC Nantes",
-  "strasbourg": "RC Strasbourg", "le-havre": "Le Havre AC", "lorient": "FC Lorient",
-  "metz": "FC Metz", "angers": "Angers SCO", "auxerre": "AJ Auxerre",
-  "al-hilal": "Al-Hilal", "al-nassr": "Al-Nassr", "al-ittihad": "Al-Ittihad",
-  "al-ahli": "Al-Ahli", "al-shabab": "Al-Shabab", "al-qadsiah": "Al-Qadsiah",
-  "al-ettifaq": "Al-Ettifaq", "al-fateh": "Al-Fateh", "al-riyadh": "Al-Riyadh",
-  "al-fayha": "Al-Fayha", "al-hazm": "Al-Hazm", "al-kholood": "Al-Kholood",
-  "al-okhdood": "Al-Okhdood", "al-taawon": "Al-Taawon", "al-wahda": "Al-Wahda",
-  "al-wehda": "Al-Wehda", "damac": "Damac FC",
-  "psv-eindhoven": "PSV Eindhoven", "az-alkmaar": "AZ Alkmaar", "fc-twente": "FC Twente",
-  "fc-utrecht": "FC Utrecht", "ajax": "Ajax Amsterdam", "feyenoord": "Feyenoord",
-  "benfica": "SL Benfica", "porto": "FC Porto", "sporting-cp": "Sporting CP", "braga": "SC Braga",
-  "inter-miami": "Inter Miami CF", "atlanta-united": "Atlanta United",
-  "columbus-crew": "Columbus Crew", "fc-cincinnati": "FC Cincinnati",
-  "nycfc": "New York City FC", "philadelphia-union": "Philadelphia Union", "austin-fc": "Austin FC",
-};
-
-function getEnglishName(slug) {
-  if (TEAM_EN_NAMES[slug]) return TEAM_EN_NAMES[slug];
-  return slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-}
-
-/** Build English-only search queries — works reliably on GitHub Actions */
-function buildQueries(slug) {
-  const en = getEnglishName(slug);
+/** Build search queries for a team (Arabic + English for wider coverage) */
+function buildQueries(teamName) {
   return [
-    `${en} highlights 2025`,
-    `${en} goals 2025`,
-    `${en} match highlights`,
-    `${en} best moments 2025`,
+    `ملخص ${teamName} 2025`,               // Arabic highlights 2025
+    `أهداف ${teamName} 2025`,              // Arabic goals 2025
+    `${teamName} highlights 2025`,          // English highlights
+    `ملخص مباراة ${teamName} بين سبورت`,   // beIN Sports specific
   ];
 }
 
-async function getVideosForTeam(slug) {
+async function getVideosForTeam(teamName) {
   const seen = new Set();
   const candidates = [];
 
-  for (const query of buildQueries(slug)) {
+  for (const query of buildQueries(teamName)) {
     const ids = ytdlpSearch(query, SEARCH_COUNT);
     for (const id of ids) {
       if (!seen.has(id)) { seen.add(id); candidates.push(id); }
@@ -168,10 +114,10 @@ async function main() {
       continue;
     }
 
-    process.stdout.write(`  ${getEnglishName(slug)} (${slug})... `);
+    process.stdout.write(`  ${team.name} (${slug})... `);
 
     try {
-      const ids = await getVideosForTeam(slug);
+      const ids = await getVideosForTeam(team.name);
 
       if (ids.length > 0) {
         team.videos = ids;
