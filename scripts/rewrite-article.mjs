@@ -460,8 +460,7 @@ async function rewriteArticle(item, index) {
            fr_title, fr_description, fr_content };
 }
 
-// Maximum articles to keep in seo-articles.json (oldest pruned beyond this)
-const MAX_ARTICLES = 600;
+// No article cap — keep full history forever
 
 async function main() {
   let rawItems = [];
@@ -587,12 +586,9 @@ async function main() {
     return db - da;
   });
 
-  // Cap at MAX_ARTICLES to prevent unbounded growth
-  const final = merged.slice(0, MAX_ARTICLES);
-
   ensureDir(OUTPUT_PATH);
-  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(final, null, 2), "utf-8");
-  console.log(`✅ Articles: ${existingArticles.length} existing + ${newArticles.length} new = ${final.length} total (cap: ${MAX_ARTICLES})`);
+  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(merged, null, 2), "utf-8");
+  console.log(`✅ Articles: ${existingArticles.length} existing + ${newArticles.length} new = ${merged.length} total`);
 
   // Auto-lance la génération d'images après chaque réécriture
   if (OPENAI_API_KEY || process.env.GOOGLE_API_KEY) {
