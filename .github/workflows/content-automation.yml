@@ -112,10 +112,18 @@ jobs:
         run: node scripts/fetch-espn.mjs
         continue-on-error: true
 
-      - name: Fetch team videos (YouTube)
+      - name: Fetch team videos (YouTube API)
         run: node scripts/fetch-team-videos.mjs
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        continue-on-error: true
+
+      - name: Install yt-dlp
+        run: pip install -q yt-dlp
+        continue-on-error: true
+
+      - name: Fetch team videos (yt-dlp fallback, no API key)
+        run: node scripts/fetch-videos-ytdlp.mjs --max-teams 40
         continue-on-error: true
 
       - name: Generate images
