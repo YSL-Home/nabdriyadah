@@ -21,12 +21,28 @@ export function generateMetadata({ params }) {
   };
 }
 
+/** Render plain-text article body as paragraphs (no dangerouslySetInnerHTML) */
+function ArticleBody({ text, dir = "ltr" }) {
+  if (!text) return null;
+  const paragraphs = text.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
+  return (
+    <div dir={dir} style={{ fontSize: "18px", lineHeight: 2, color: "var(--text-1)", fontFamily: "Georgia, serif" }}>
+      {paragraphs.map((p, i) => (
+        <p key={i} style={{ marginBottom: "20px" }}>{p}</p>
+      ))}
+    </div>
+  );
+}
+
 export default function EnArticlePage({ params }) {
   const article = articles.find(a => a.slug === params.slug);
   if (!article) return notFound();
 
   const title       = article.en_title       || article.sourceTitle || article.title;
   const description = article.en_description || article.description;
+  // Prefer English body; fall back to Arabic content with a notice
+  const hasEnContent = Boolean(article.en_content?.trim());
+  const bodyText     = hasEnContent ? article.en_content : article.content;
 
   const leagueHref = article.league && article.league !== "mixed"
     ? `/en/league/${article.league}/` : "/en/";
@@ -63,20 +79,16 @@ export default function EnArticlePage({ params }) {
           background: "var(--bg-card)", borderRadius: "20px", padding: "32px",
           border: "1px solid var(--border)", boxShadow: "var(--shadow)"
         }}>
-          {/* Notice banner */}
-          <div style={{
-            background: "var(--accent-soft)", border: "1px solid var(--accent)", borderRadius: "12px",
-            padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "var(--accent)", fontWeight: 600
-          }}>
-            📖 Full article in Arabic — translated title &amp; summary above
-          </div>
+          {!hasEnContent && (
+            <div style={{
+              background: "var(--accent-soft)", border: "1px solid var(--accent)", borderRadius: "12px",
+              padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "var(--accent)", fontWeight: 600
+            }}>
+              📖 English translation coming soon — title &amp; summary above are translated
+            </div>
+          )}
 
-          {/* Arabic content */}
-          <div
-            dir="rtl"
-            style={{ fontSize: "17px", lineHeight: 2, color: "var(--text-1)", fontFamily: "serif" }}
-            dangerouslySetInnerHTML={{ __html: (article.content || "").replace(/\n\n/g, "</p><p>").replace(/^/, "<p>").replace(/$/, "</p>") }}
-          />
+          <ArticleBody text={bodyText} dir={hasEnContent ? "ltr" : "rtl"} />
 
           {/* Source */}
           {article.source && (

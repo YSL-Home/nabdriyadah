@@ -272,7 +272,7 @@ async function callAnthropic(prompt, systemPrompt = null) {
       },
       body: JSON.stringify({
         model: ANTHROPIC_MODEL,
-        max_tokens: 3000,
+        max_tokens: 6000,
         system: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط.",
         messages: [{ role: "user", content: prompt }]
       })
@@ -303,7 +303,7 @@ async function callOpenAI(prompt, systemPrompt = null) {
           { role: "system", content: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط." },
           { role: "user", content: prompt }
         ],
-        max_tokens: 3000
+        max_tokens: 6000
       })
     });
     const data = await response.json();
@@ -418,10 +418,12 @@ async function rewriteArticle(item, index) {
     { "q": "سؤال؟", "a": "جواب." },
     { "q": "سؤال؟", "a": "جواب." }
   ],
-  "en_title": "English title (50-70 chars, professional sports journalism style)",
-  "en_description": "English meta description (145-160 chars, SEO-optimized)",
-  "fr_title": "Titre en français (50-70 caractères, style journalistique sportif)",
-  "fr_description": "Description méta en français (145-160 caractères, optimisée SEO)"
+  "en_title": "English title (50-70 chars, professional sports journalism style, specific not generic)",
+  "en_description": "English meta description (145-160 chars, SEO-optimized, mention team/player name)",
+  "en_content": "Full English article body: 5 paragraphs of professional sports journalism. Paragraph 1: lead with the key fact. Paragraph 2: context and background. Paragraph 3: analysis and impact. Paragraph 4: reactions and implications. Paragraph 5: outlook. NO Arabic text, NO generic phrases. Write like ESPN or Sky Sports.",
+  "fr_title": "Titre en français (50-70 caractères, style journalistique sportif, précis et accrocheur)",
+  "fr_description": "Description méta en français (145-160 caractères, optimisée SEO, mention équipe/joueur)",
+  "fr_content": "Corps complet de l'article en français: 5 paragraphes de journalisme sportif professionnel. Paragraphe 1: l'essentiel du fait. Paragraphe 2: contexte et historique. Paragraphe 3: analyse et impact. Paragraphe 4: réactions et enjeux. Paragraphe 5: perspectives. PAS de texte arabe, PAS de phrases génériques. Style L'Équipe ou RMC Sport."
 }
 `.trim();
 
@@ -450,9 +452,12 @@ async function rewriteArticle(item, index) {
   const en_description = (parsed.en_description || "").trim().slice(0, 200) || null;
   const fr_title       = (parsed.fr_title       || "").trim().slice(0, 100) || null;
   const fr_description = (parsed.fr_description || "").trim().slice(0, 200) || null;
+  const en_content     = (parsed.en_content     || "").trim() || null;
+  const fr_content     = (parsed.fr_content     || "").trim() || null;
 
   return { title, description, seoTitle, seoDescription, content, keywords, faq,
-           en_title, en_description, fr_title, fr_description };
+           en_title, en_description, en_content,
+           fr_title, fr_description, fr_content };
 }
 
 // Maximum articles to keep in seo-articles.json (oldest pruned beyond this)

@@ -21,12 +21,28 @@ export function generateMetadata({ params }) {
   };
 }
 
+/** Render plain-text article body as paragraphs (no dangerouslySetInnerHTML) */
+function ArticleBody({ text, dir = "ltr" }) {
+  if (!text) return null;
+  const paragraphs = text.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
+  return (
+    <div dir={dir} style={{ fontSize: "18px", lineHeight: 2, color: "var(--text-1)", fontFamily: "Georgia, serif" }}>
+      {paragraphs.map((p, i) => (
+        <p key={i} style={{ marginBottom: "20px" }}>{p}</p>
+      ))}
+    </div>
+  );
+}
+
 export default function FrArticlePage({ params }) {
   const article = articles.find(a => a.slug === params.slug);
   if (!article) return notFound();
 
   const title       = article.fr_title       || article.sourceTitle || article.title;
   const description = article.fr_description || article.description;
+  // Préférer le corps en français ; sinon afficher l'arabe avec une notice
+  const hasFrContent = Boolean(article.fr_content?.trim());
+  const bodyText     = hasFrContent ? article.fr_content : article.content;
 
   const leagueHref = article.league && article.league !== "mixed"
     ? `/fr/league/${article.league}/` : "/fr/";
@@ -63,20 +79,16 @@ export default function FrArticlePage({ params }) {
           background: "var(--bg-card)", borderRadius: "20px", padding: "32px",
           border: "1px solid var(--border)", boxShadow: "var(--shadow)"
         }}>
-          {/* Bannière notice */}
-          <div style={{
-            background: "var(--accent-soft)", border: "1px solid var(--accent)", borderRadius: "12px",
-            padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "var(--accent)", fontWeight: 600
-          }}>
-            📖 Article complet en arabe — titre et résumé traduits ci-dessus
-          </div>
+          {!hasFrContent && (
+            <div style={{
+              background: "var(--accent-soft)", border: "1px solid var(--accent)", borderRadius: "12px",
+              padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "var(--accent)", fontWeight: 600
+            }}>
+              📖 Traduction française en cours — le titre et le résumé sont traduits ci-dessus
+            </div>
+          )}
 
-          {/* Contenu arabe */}
-          <div
-            dir="rtl"
-            style={{ fontSize: "17px", lineHeight: 2, color: "var(--text-1)", fontFamily: "serif" }}
-            dangerouslySetInnerHTML={{ __html: (article.content || "").replace(/\n\n/g, "</p><p>").replace(/^/, "<p>").replace(/$/, "</p>") }}
-          />
+          <ArticleBody text={bodyText} dir={hasFrContent ? "ltr" : "rtl"} />
 
           {/* Source */}
           {article.source && (
