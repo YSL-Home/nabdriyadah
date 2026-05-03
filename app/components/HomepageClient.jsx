@@ -2,33 +2,27 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ArticleImage from "./ArticleImage";
-import { leagueNames, sportNames } from "../../lib/i18n";
 
-/* ── Title / description resolution by lang ───────────── */
-function getTitle(article, lang) {
-  if (lang === "en") return article.en_title || article.sourceTitle || article.title;
-  if (lang === "fr") return article.fr_title || article.sourceTitle || article.title;
-  return article.title;
+/* ── Utilities ─────────────────────────────────────── */
+function sportLabel(league, sport) {
+  const map = {
+    "premier-league":   "الإنجليزي",
+    "la-liga":          "الإسباني",
+    "bundesliga":       "البوندسليغا",
+    "serie-a":          "السيريا آ",
+    "ligue-1":          "الليغ 1",
+    "champions-league": "أبطال أوروبا",
+    "saudi-pro-league": "السعودي",
+    "eredivisie":       "الهولندي",
+  };
+  if (map[league]) return map[league];
+  if (sport === "basketball") return "كرة السلة";
+  if (sport === "tennis")     return "التنس";
+  if (sport === "padel")      return "البادل";
+  if (sport === "futsal")     return "الصالات";
+  return "كرة القدم";
 }
 
-function getDesc(article, lang) {
-  if (lang === "en") return article.en_description || article.description;
-  if (lang === "fr") return article.fr_description || article.description;
-  return article.description;
-}
-
-function articleHref(slug, prefix) {
-  return `${prefix}/articles/${slug}/`;
-}
-
-/* ── Sport / league badge label ──────────────────────── */
-function sportLabel(league, sport, lang = "ar") {
-  if (league && leagueNames[league]) return leagueNames[league][lang] || leagueNames[league].ar;
-  if (sport  && sportNames[sport])   return sportNames[sport][lang]   || sportNames[sport].ar;
-  return sportNames.football[lang] || "كرة القدم";
-}
-
-/* ── Sport accent color ──────────────────────────────── */
 function sportAccent(league, sport) {
   if (league === "premier-league")   return "#7c3aed";
   if (league === "la-liga")          return "#ea580c";
@@ -37,28 +31,21 @@ function sportAccent(league, sport) {
   if (league === "ligue-1")          return "#1d4ed8";
   if (league === "champions-league") return "#d97706";
   if (league === "saudi-pro-league") return "#15803d";
-  if (league === "eredivisie")       return "#dc2626";
-  if (sport  === "basketball")       return "#c2410c";
-  if (sport  === "tennis")           return "#15803d";
-  if (sport  === "padel")            return "#7c3aed";
-  if (sport  === "futsal")           return "#0f766e";
+  if (sport === "basketball")        return "#c2410c";
+  if (sport === "tennis")            return "#15803d";
+  if (sport === "padel")             return "#7c3aed";
+  if (sport === "futsal")            return "#0f766e";
   return "#2563eb";
 }
 
-/* ── Date formatter ──────────────────────────────────── */
-function formatDate(iso, lang = "ar") {
+function formatDate(iso) {
   if (!iso) return "";
   try {
-    const locale = lang === "en" ? "en-US" : lang === "fr" ? "fr-FR" : "ar-SA-u-nu-latn";
-    return new Date(iso).toLocaleDateString(locale, { day: "numeric", month: "short" });
+    return new Date(iso).toLocaleDateString("ar-SA-u-nu-latn", { day: "numeric", month: "short" });
   } catch { return ""; }
 }
 
-/* ── See-all text ────────────────────────────────────── */
-const SEE_ALL = { ar: "عرض الكل →", fr: "Voir tout →", en: "See all →" };
-const LATEST  = { ar: "آخر المقالات", fr: "Derniers articles", en: "Latest articles" };
-
-/* ── Motion presets ──────────────────────────────────── */
+/* ── Motion presets ─────────────────────────────────── */
 const ease = [0.22, 1, 0.36, 1];
 
 const fadeUp = (delay = 0, y = 28) => ({
@@ -76,7 +63,7 @@ const staggerChild = {
   show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
 };
 
-/* ── Badge ───────────────────────────────────────────── */
+/* ── Badge ─────────────────────────────────────────── */
 function Badge({ accent, children }) {
   return (
     <span style={{
@@ -88,24 +75,14 @@ function Badge({ accent, children }) {
       color:        accent,
       background:   accent + "22",
       border:       `1px solid ${accent}44`,
-      whiteSpace:   "nowrap",
     }}>
       {children}
     </span>
   );
 }
 
-/* ════════════════════════════════════════════════════════
-   MAIN EXPORT
-   ════════════════════════════════════════════════════════ */
-export default function HomepageClient({
-  featured, secondary, grid, sidebar,
-  basketball, tennis, padel,
-  lang = "ar", prefix = "", tr = {},
-}) {
-  const isRTL = lang === "ar";
-  const seeAll = SEE_ALL[lang] || SEE_ALL.ar;
-
+/* ── Main ─────────────────────────────────────────── */
+export default function HomepageClient({ featured, secondary, grid, sidebar, basketball, tennis, padel }) {
   return (
     <div>
       {/* ── HERO ZONE ─────────────────────────────────── */}
@@ -115,33 +92,35 @@ export default function HomepageClient({
           {/* Featured */}
           {featured && (
             <motion.div className="hero-featured" {...fadeUp(0)}>
-              <Link href={articleHref(featured.slug, prefix)} style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                <div className="card-hover hero-card-inner img-zoom" style={{
+              <Link href={`/articles/${featured.slug}/`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+                <div className="card-hover hero-card-inner" style={{
                   position: "relative", borderRadius: "20px", overflow: "hidden", height: "100%",
                   background: "var(--bg-card)", boxShadow: "var(--shadow)",
                   border: "1px solid var(--border)"
                 }}>
                   <ArticleImage
-                    src={featured.image} imageUrl={featured.imageUrl} alt={getTitle(featured, lang)}
+                    src={featured.image} imageUrl={featured.imageUrl} alt={featured.title}
                     sport={featured.sport} league={featured.league} slug={featured.slug}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1)" }}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                   />
-                  <div className="hero-overlay" style={{ position: "absolute", inset: 0 }} />
-                  <div style={{ position: "absolute", top: "16px", [isRTL ? "right" : "left"]: "16px", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", padding: "5px 12px", borderRadius: "999px", border: "1px solid rgba(255,255,255,0.15)" }}>
+                  {/* Gradient overlay — fonctionne dans les 2 thèmes car l'image a un fond */}
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 55%, transparent 100%)" }} />
+                  {/* League badge */}
+                  <div style={{ position: "absolute", top: "16px", right: "16px", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", padding: "5px 12px", borderRadius: "999px", border: "1px solid rgba(255,255,255,0.15)" }}>
                     <Badge accent={sportAccent(featured.league, featured.sport)}>
-                      {sportLabel(featured.league, featured.sport, lang)}
+                      {sportLabel(featured.league, featured.sport)}
                     </Badge>
                   </div>
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "24px 24px 26px" }}>
-                    <div style={{ fontSize: "clamp(18px, 2.2vw, 28px)", fontWeight: 800, color: "white", lineHeight: 1.45, marginBottom: "10px", direction: isRTL ? "rtl" : "ltr" }}>
-                      {getTitle(featured, lang)}
+                    <div style={{ fontSize: "clamp(18px, 2.2vw, 28px)", fontWeight: 800, color: "white", lineHeight: 1.45, marginBottom: "10px" }}>
+                      {featured.title}
                     </div>
-                    <p style={{ margin: 0, fontSize: "14px", color: "rgba(255,255,255,0.65)", lineHeight: 1.75, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", direction: isRTL ? "rtl" : "ltr" }}>
-                      {getDesc(featured, lang)}
+                    <p style={{ margin: 0, fontSize: "14px", color: "rgba(255,255,255,0.65)", lineHeight: 1.75, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      {featured.description}
                     </p>
                     {featured.publishedAt && (
                       <div style={{ color: "rgba(255,255,255,0.35)", fontSize: "12px", marginTop: "10px" }}>
-                        {formatDate(featured.publishedAt, lang)}
+                        {formatDate(featured.publishedAt)}
                       </div>
                     )}
                   </div>
@@ -156,24 +135,24 @@ export default function HomepageClient({
               const accent = sportAccent(article.league, article.sport);
               return (
                 <motion.div key={article.slug} {...fadeUp(0.12 + i * 0.1)} style={{ flex: 1 }}>
-                  <Link href={articleHref(article.slug, prefix)} style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                    <div className="card-hover hero-sec-inner img-zoom" style={{
+                  <Link href={`/articles/${article.slug}/`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+                    <div className="card-hover hero-sec-inner" style={{
                       position: "relative", borderRadius: "16px", overflow: "hidden", height: "100%",
                       background: "var(--bg-card)", boxShadow: "var(--shadow)",
                       border: "1px solid var(--border)"
                     }}>
                       <ArticleImage
-                        src={article.image} imageUrl={article.imageUrl} alt={getTitle(article, lang)}
+                        src={article.image} imageUrl={article.imageUrl} alt={article.title}
                         sport={article.sport} league={article.league} slug={article.slug}
-                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1)" }}
+                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                       />
-                      <div className="hero-overlay" style={{ position: "absolute", inset: 0 }} />
-                      <div style={{ position: "absolute", top: "12px", [isRTL ? "right" : "left"]: "12px" }}>
-                        <Badge accent={accent}>{sportLabel(article.league, article.sport, lang)}</Badge>
+                      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)" }} />
+                      <div style={{ position: "absolute", top: "12px", right: "12px" }}>
+                        <Badge accent={accent}>{sportLabel(article.league, article.sport)}</Badge>
                       </div>
                       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "14px 16px" }}>
-                        <div style={{ fontSize: "14px", fontWeight: 800, color: "white", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", direction: isRTL ? "rtl" : "ltr" }}>
-                          {getTitle(article, lang)}
+                        <div style={{ fontSize: "14px", fontWeight: 800, color: "white", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                          {article.title}
                         </div>
                       </div>
                     </div>
@@ -186,12 +165,7 @@ export default function HomepageClient({
       </section>
 
       {/* ── LATEST NEWS ───────────────────────────────── */}
-      <SectionHeader
-        title={tr.latestNews || "Latest news"}
-        href={`${prefix}/sport/football/`}
-        seeAll={seeAll}
-        delay={0.15}
-      />
+      <SectionHeader title="أحدث الأخبار" href="/sport/football/" delay={0.15} />
 
       <div className="content-layout" style={{ marginBottom: "36px" }}>
         {/* 3-col grid */}
@@ -203,78 +177,49 @@ export default function HomepageClient({
           viewport={{ once: true, margin: "-50px" }}
         >
           {grid.map((article) => (
-            <NewsCard key={article.slug} article={article} lang={lang} prefix={prefix} />
+            <NewsCard key={article.slug} article={article} />
           ))}
         </motion.div>
 
         {/* Sidebar */}
         <motion.aside
-          initial={{ opacity: 0, x: isRTL ? -16 : 16 }}
+          initial={{ opacity: 0, x: 16 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.2, ease }}
         >
-          <SidebarList
-            articles={sidebar}
-            title={`📋 ${LATEST[lang]}`}
-            lang={lang}
-            prefix={prefix}
-          />
+          <SidebarList articles={sidebar} title="📋 آخر المقالات" />
         </motion.aside>
       </div>
 
       {/* ── OTHER SPORTS ──────────────────────────────── */}
       {basketball.length > 0 && (
-        <SportRow
-          articles={basketball}
-          label={`🏀 ${tr.basketball || "Basketball"}`}
-          href={`${prefix}/sport/basketball/`}
-          accent="#c2410c"
-          lang={lang}
-          prefix={prefix}
-          seeAll={seeAll}
-        />
+        <SportRow sport="basketball" articles={basketball} label="🏀 كرة السلة" href="/sport/basketball/" accent="#c2410c" />
       )}
       {tennis.length > 0 && (
-        <SportRow
-          articles={tennis}
-          label={`🎾 ${tr.tennis || "Tennis"}`}
-          href={`${prefix}/sport/tennis/`}
-          accent="#15803d"
-          lang={lang}
-          prefix={prefix}
-          seeAll={seeAll}
-        />
+        <SportRow sport="tennis" articles={tennis} label="🎾 التنس" href="/sport/tennis/" accent="#15803d" />
       )}
       {padel.length > 0 && (
-        <SportRow
-          articles={padel}
-          label={`🏸 ${tr.padel || "Padel"}`}
-          href={`${prefix}/sport/padel/`}
-          accent="#7c3aed"
-          lang={lang}
-          prefix={prefix}
-          seeAll={seeAll}
-        />
+        <SportRow sport="padel" articles={padel} label="🏸 البادل" href="/sport/padel/" accent="#7c3aed" />
       )}
     </div>
   );
 }
 
 /* ── Section header ──────────────────────────────────── */
-function SectionHeader({ title, href, seeAll, delay = 0 }) {
+function SectionHeader({ title, href, delay = 0 }) {
   return (
     <motion.div
       {...fadeUp(delay)}
       style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}
     >
       <h2 style={{ margin: 0, fontSize: "19px", fontWeight: 800, color: "var(--text-1)", display: "flex", alignItems: "center", gap: "10px" }}>
-        <span style={{ display: "block", width: "4px", height: "22px", borderRadius: "2px", background: "var(--grad-accent, var(--section-bar))", flexShrink: 0, boxShadow: "0 0 10px var(--accent-glow)" }} />
+        <span style={{ display: "block", width: "4px", height: "20px", borderRadius: "2px", background: "var(--section-bar)", flexShrink: 0 }} />
         {title}
       </h2>
       {href && (
-        <Link href={href} className="btn-ghost" style={{ fontSize: "12px", padding: "6px 14px" }}>
-          {seeAll}
+        <Link href={href} style={{ color: "var(--section-link)", fontSize: "12px", fontWeight: 700, textDecoration: "none" }}>
+          عرض الكل ←
         </Link>
       )}
     </motion.div>
@@ -282,14 +227,13 @@ function SectionHeader({ title, href, seeAll, delay = 0 }) {
 }
 
 /* ── News card ───────────────────────────────────────── */
-function NewsCard({ article, lang, prefix }) {
+function NewsCard({ article }) {
   const accent = sportAccent(article.league, article.sport);
-  const isRTL  = lang === "ar";
   return (
     <motion.div variants={staggerChild}>
-      <Link href={articleHref(article.slug, prefix)} style={{ textDecoration: "none", display: "block" }}>
+      <Link href={`/articles/${article.slug}/`} style={{ textDecoration: "none", display: "block" }}>
         <div
-          className="card-hover news-card-inner img-zoom"
+          className="card-hover news-card-inner"
           style={{
             background:    "var(--bg-card)",
             borderRadius:  "14px",
@@ -299,33 +243,31 @@ function NewsCard({ article, lang, prefix }) {
           }}
         >
           <ArticleImage
-            src={article.image} imageUrl={article.imageUrl} alt={getTitle(article, lang)}
+            src={article.image} imageUrl={article.imageUrl} alt={article.title}
             sport={article.sport} league={article.league} slug={article.slug}
-            style={{ height: "155px", display: "block", transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1)" }}
+            style={{ height: "155px", display: "block" }}
           />
           <div style={{ padding: "13px 14px" }}>
-            <div style={{ marginBottom: "7px", display: "flex", alignItems: "center", gap: "7px", flexWrap: "wrap" }}>
-              <Badge accent={accent}>{sportLabel(article.league, article.sport, lang)}</Badge>
+            <div style={{ marginBottom: "7px", display: "flex", alignItems: "center", gap: "7px" }}>
+              <Badge accent={accent}>{sportLabel(article.league, article.sport)}</Badge>
               {article.publishedAt && (
                 <span style={{ color: "var(--text-3)", fontSize: "11px" }}>
-                  {formatDate(article.publishedAt, lang)}
+                  {formatDate(article.publishedAt)}
                 </span>
               )}
             </div>
             <h3 style={{
               margin: "0 0 5px 0", fontSize: "14px", fontWeight: 800,
               color: "var(--text-1)", lineHeight: 1.55,
-              display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
-              direction: isRTL ? "rtl" : "ltr",
+              display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden"
             }}>
-              {getTitle(article, lang)}
+              {article.title}
             </h3>
             <p style={{
               margin: 0, fontSize: "12px", color: "var(--text-2)", lineHeight: 1.7,
-              display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
-              direction: isRTL ? "rtl" : "ltr",
+              display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden"
             }}>
-              {getDesc(article, lang)}
+              {article.description}
             </p>
           </div>
         </div>
@@ -334,9 +276,8 @@ function NewsCard({ article, lang, prefix }) {
   );
 }
 
-/* ── Sidebar list ────────────────────────────────────── */
-function SidebarList({ articles, title, lang, prefix }) {
-  const isRTL = lang === "ar";
+/* ── Sidebar list ───────────────────────────────────── */
+function SidebarList({ articles, title }) {
   return (
     <div style={{
       background:    "var(--bg-card)",
@@ -345,13 +286,13 @@ function SidebarList({ articles, title, lang, prefix }) {
       boxShadow:     "var(--shadow)",
       overflow:      "hidden",
     }}>
-      <div style={{ padding: "13px 16px", borderBottom: "1px solid var(--border)", background: "var(--bg-soft)" }}>
+      <div style={{ padding: "13px 16px", borderBottom: "1px solid var(--border)" }}>
         <span style={{ fontSize: "14px", fontWeight: 800, color: "var(--text-1)" }}>{title}</span>
       </div>
       {articles.map((article, i) => {
         const accent = sportAccent(article.league, article.sport);
         return (
-          <Link key={article.slug} href={articleHref(article.slug, prefix)} style={{ textDecoration: "none", display: "block" }}>
+          <Link key={article.slug} href={`/articles/${article.slug}/`} style={{ textDecoration: "none", display: "block" }}>
             <div
               className="sidebar-row"
               style={{
@@ -360,18 +301,17 @@ function SidebarList({ articles, title, lang, prefix }) {
               }}
             >
               <div style={{ marginBottom: "4px" }}>
-                <Badge accent={accent}>{sportLabel(article.league, article.sport, lang)}</Badge>
+                <Badge accent={accent}>{sportLabel(article.league, article.sport)}</Badge>
               </div>
               <div style={{
                 fontSize: "13px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.55,
-                display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
-                direction: isRTL ? "rtl" : "ltr",
+                display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden"
               }}>
-                {getTitle(article, lang)}
+                {article.title}
               </div>
               {article.publishedAt && (
                 <div style={{ color: "var(--text-3)", fontSize: "11px", marginTop: "4px" }}>
-                  {formatDate(article.publishedAt, lang)}
+                  {formatDate(article.publishedAt)}
                 </div>
               )}
             </div>
@@ -382,9 +322,8 @@ function SidebarList({ articles, title, lang, prefix }) {
   );
 }
 
-/* ── Sport row ───────────────────────────────────────── */
-function SportRow({ articles, label, href, accent, lang, prefix, seeAll }) {
-  const isRTL = lang === "ar";
+/* ── Sport row ────────────────────────────────────── */
+function SportRow({ articles, label, href, accent }) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -393,13 +332,13 @@ function SportRow({ articles, label, href, accent, lang, prefix, seeAll }) {
       transition={{ duration: 0.5, ease }}
       style={{ marginBottom: "32px" }}
     >
-      <SectionHeader title={label} href={href} seeAll={seeAll} />
+      <SectionHeader title={label} href={href} />
       <div className="sport-row">
         {articles.map((article) => {
           const ac = sportAccent(article.league, article.sport);
           return (
-            <Link key={article.slug} href={articleHref(article.slug, prefix)} style={{ textDecoration: "none", display: "block" }} className="sport-row-card">
-              <div className="card-hover img-zoom" style={{
+            <Link key={article.slug} href={`/articles/${article.slug}/`} style={{ textDecoration: "none", display: "block" }} className="sport-row-card">
+              <div className="card-hover" style={{
                 background:    "var(--bg-card)",
                 borderRadius:  "14px",
                 overflow:      "hidden",
@@ -407,20 +346,19 @@ function SportRow({ articles, label, href, accent, lang, prefix, seeAll }) {
                 boxShadow:     "var(--shadow)",
               }}>
                 <ArticleImage
-                  src={article.image} imageUrl={article.imageUrl} alt={getTitle(article, lang)}
+                  src={article.image} imageUrl={article.imageUrl} alt={article.title}
                   sport={article.sport} league={article.league} slug={article.slug}
-                  style={{ height: "130px", display: "block", transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1)" }}
+                  style={{ height: "130px", display: "block" }}
                 />
                 <div style={{ padding: "11px 12px" }}>
                   <div style={{ marginBottom: "5px" }}>
-                    <Badge accent={ac}>{sportLabel(article.league, article.sport, lang)}</Badge>
+                    <Badge accent={ac}>{sportLabel(article.league, article.sport)}</Badge>
                   </div>
                   <div style={{
                     fontSize: "13px", fontWeight: 800, color: "var(--text-1)", lineHeight: 1.5,
-                    display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
-                    direction: isRTL ? "rtl" : "ltr",
+                    display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden"
                   }}>
-                    {getTitle(article, lang)}
+                    {article.title}
                   </div>
                 </div>
               </div>
