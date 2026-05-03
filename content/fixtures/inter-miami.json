@@ -3,38 +3,6 @@
   "teamId": 1611,
   "upcoming": [
     {
-      "id": "761587",
-      "date": "2026-05-02T23:15Z",
-      "timestamp": 1777763700,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Nu Stadium",
-      "city": "Miami, Florida",
-      "home": {
-        "id": "20232",
-        "slug": "inter-miami",
-        "name": "إنتر ميامي",
-        "logo": "https://media.api-sports.io/football/teams/1611.png",
-        "winner": null
-      },
-      "away": {
-        "id": "12011",
-        "slug": null,
-        "name": "Orlando City SC",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761611",
       "date": "2026-05-09T17:00Z",
       "timestamp": 1778346000,
@@ -164,6 +132,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761587",
+      "date": "2026-05-02T23:15Z",
+      "timestamp": 1777763700,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Nu Stadium",
+      "city": "Miami, Florida",
+      "home": {
+        "id": "20232",
+        "slug": "inter-miami",
+        "name": "إنتر ميامي",
+        "logo": "https://media.api-sports.io/football/teams/1611.png",
+        "winner": false
+      },
+      "away": {
+        "id": "12011",
+        "slug": null,
+        "name": "Orlando City SC",
+        "logo": "",
+        "winner": true
+      },
+      "goals": {
+        "home": 3,
+        "away": 4
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761574",
       "date": "2026-04-25T23:30Z",
@@ -325,5 +325,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-03T00:03:14.773Z"
+  "fetchedAt": "2026-05-03T02:17:41.389Z"
 }

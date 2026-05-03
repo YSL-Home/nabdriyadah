@@ -3,38 +3,6 @@
   "teamId": 1602,
   "upcoming": [
     {
-      "id": "761591",
-      "date": "2026-05-02T23:30Z",
-      "timestamp": 1777764600,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Gillette Stadium",
-      "city": "Foxborough, Massachusetts",
-      "home": {
-        "id": "189",
-        "slug": "new-england-revolution",
-        "name": "نيو إنغلاند ريفولوشن",
-        "logo": "https://media.api-sports.io/football/teams/1602.png",
-        "winner": null
-      },
-      "away": {
-        "id": "21300",
-        "slug": null,
-        "name": "Charlotte FC",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761601",
       "date": "2026-05-09T23:30Z",
       "timestamp": 1778369400,
@@ -164,6 +132,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761591",
+      "date": "2026-05-02T23:30Z",
+      "timestamp": 1777764600,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, Massachusetts",
+      "home": {
+        "id": "189",
+        "slug": "new-england-revolution",
+        "name": "نيو إنغلاند ريفولوشن",
+        "logo": "https://media.api-sports.io/football/teams/1602.png",
+        "winner": true
+      },
+      "away": {
+        "id": "21300",
+        "slug": null,
+        "name": "Charlotte FC",
+        "logo": "",
+        "winner": false
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761574",
       "date": "2026-04-25T23:30Z",
@@ -325,5 +325,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-03T00:03:14.773Z"
+  "fetchedAt": "2026-05-03T02:17:41.389Z"
 }
