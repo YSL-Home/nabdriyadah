@@ -3,38 +3,6 @@
   "teamId": 538,
   "upcoming": [
     {
-      "id": "748483",
-      "date": "2026-05-03T12:00Z",
-      "timestamp": 1777809600,
-      "status": "LIVE",
-      "statusLong": "Halftime",
-      "venue": "Balaidos",
-      "city": "Vigo",
-      "home": {
-        "id": "85",
-        "slug": "celta-vigo",
-        "name": "سيلتا فيغو",
-        "logo": "https://media.api-sports.io/football/teams/538.png",
-        "winner": null
-      },
-      "away": {
-        "id": "3751",
-        "slug": null,
-        "name": "Elche",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748487",
       "date": "2026-05-09T16:30Z",
       "timestamp": 1778344200,
@@ -165,6 +133,38 @@
   ],
   "past": [
     {
+      "id": "748483",
+      "date": "2026-05-03T12:00Z",
+      "timestamp": 1777809600,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Balaidos",
+      "city": "Vigo",
+      "home": {
+        "id": "85",
+        "slug": "celta-vigo",
+        "name": "سيلتا فيغو",
+        "logo": "https://media.api-sports.io/football/teams/538.png",
+        "winner": true
+      },
+      "away": {
+        "id": "3751",
+        "slug": null,
+        "name": "Elche",
+        "logo": "",
+        "winner": false
+      },
+      "goals": {
+        "home": 3,
+        "away": 1
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
+    {
       "id": "748463",
       "date": "2026-04-26T19:00Z",
       "timestamp": 1777230000,
@@ -293,5 +293,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-03T12:58:07.417Z"
+  "fetchedAt": "2026-05-03T14:11:10.863Z"
 }
