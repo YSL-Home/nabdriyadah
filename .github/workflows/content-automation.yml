@@ -19,6 +19,10 @@ env:
 
 jobs:
 
+  # ──────────────────────────────────────────────────────────────────────────
+  # JOB 1 : Breaking News — toutes les 5 minutes
+  # Commit du contenu uniquement, AUCUN déploiement Cloudflare
+  # ──────────────────────────────────────────────────────────────────────────
   breaking-news:
     name: Breaking News
     runs-on: ubuntu-latest
@@ -65,13 +69,19 @@ jobs:
           OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
           BREAKING_ONLY: "true"
 
-      - name: Commit & push
+      # Commit sans déclencher de build Cloudflare (le déploiement est géré par full-refresh)
+      - name: Commit & push content only
         if: steps.scan.outputs.changed == 'true'
         run: |
-          bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
+          bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M') [skip deploy]"
 
+  # ──────────────────────────────────────────────────────────────────────────
+  # JOB 2 : Full Refresh — toutes les heures
+  # Génère le contenu + BUILD Next.js + DÉPLOIE sur Cloudflare via wrangler
+  # (ne consomme pas les build minutes Cloudflare)
+  # ──────────────────────────────────────────────────────────────────────────
   full-refresh:
-    name: Full Content Refresh
+    name: Full Content Refresh + Deploy
     runs-on: ubuntu-latest
     concurrency:
       group: nabdriyadah-git-push
@@ -139,6 +149,24 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         continue-on-error: true
 
-      - name: Commit & push
+      - name: Commit & push content
         run: |
           bash scripts/git-safe-push.sh "refresh: $(date '+%d/%m %H:%M')"
+
+      # ── Build Next.js (sur GitHub Actions, pas Cloudflare) ───────────────
+      - name: Build Next.js
+        run: npm run build
+
+      # ── Deploy sur Cloudflare Pages via wrangler (direct upload) ─────────
+      # Ne consomme PAS les build minutes Cloudflare Pages
+      - name: Deploy to Cloudflare Pages
+        if: env.CF_API_TOKEN != ''
+        run: |
+          npx wrangler pages deploy out/ \
+            --project-name="${{ secrets.CF_PROJECT_NAME || 'nabdriyadah' }}" \
+            --commit-dirty=true \
+            --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
