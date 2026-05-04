@@ -579,6 +579,48 @@ async function main() {
   // ── Merge: new articles first (newest), then existing ────────────────────
   const merged = [...newArticles, ...existingArticles];
 
+  // ── BACKFILL: translate existing articles without en_title/fr_title ───────
+  // Runs only in full-refresh mode (not breaking-only), max 8 per run
+  if (process.env.BREAKING_ONLY !== "true") {
+    const needsTranslation = merged.filter(a => !a.en_title);
+    const toTranslate = needsTranslation.slice(0, 8);
+    if (toTranslate.length > 0) {
+      console.log(`\n🌍 Backfill translations: ${toTranslate.length} articles without EN/FR titles...`);
+      for (const article of toTranslate) {
+        try {
+          const prompt = `You are a professional sports translator. Translate this Arabic sports article title and description into English and French.
+
+Arabic title: ${article.title}
+Arabic description: ${article.description || ""}
+
+Return ONLY valid JSON (no markdown, no extra text):
+{
+  "en_title": "English title (concise, professional, 50-80 chars)",
+  "en_description": "English description (1-2 sentences, professional sports journalism)",
+  "fr_title": "Titre en français (concis, professionnel, 50-80 caractères)",
+  "fr_description": "Description en français (1-2 phrases, journalisme sportif professionnel)"
+}`;
+          const raw = await callLLM(prompt);
+          if (!raw) continue;
+          let parsed;
+          try {
+            const jsonMatch = raw.match(/\{[\s\S]*\}/);
+            parsed = JSON.parse(jsonMatch?.[0] || raw);
+          } catch { continue; }
+          article.en_title       = (parsed.en_title       || "").trim().slice(0, 100) || null;
+          article.en_description = (parsed.en_description || "").trim().slice(0, 200) || null;
+          article.fr_title       = (parsed.fr_title       || "").trim().slice(0, 100) || null;
+          article.fr_description = (parsed.fr_description || "").trim().slice(0, 200) || null;
+          if (article.en_title) {
+            process.stdout.write(`  ✓ ${article.slug} → "${article.en_title.slice(0, 50)}"\n`);
+          }
+        } catch (e) {
+          console.log(`  ⚠ Translation failed for ${article.slug}: ${e.message?.slice(0, 60)}`);
+        }
+      }
+    }
+  }
+
   // Sort by publishedAt descending (most recent first)
   merged.sort((a, b) => {
     const da = new Date(a.publishedAt || 0).getTime();
