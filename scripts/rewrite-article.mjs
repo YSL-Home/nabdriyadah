@@ -583,7 +583,7 @@ async function main() {
   // Runs only in full-refresh mode (not breaking-only), max 8 per run
   if (process.env.BREAKING_ONLY !== "true") {
     const needsTranslation = merged.filter(a => !a.en_title);
-    const toTranslate = needsTranslation.slice(0, 8);
+    const toTranslate = needsTranslation.slice(0, 30);
     if (toTranslate.length > 0) {
       console.log(`\n🌍 Backfill translations: ${toTranslate.length} articles without EN/FR titles...`);
       for (const article of toTranslate) {

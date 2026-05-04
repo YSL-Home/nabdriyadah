@@ -18,7 +18,7 @@ const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const YT_SEARCH = "https://www.googleapis.com/youtube/v3/search";
 const YT_VIDEOS = "https://www.googleapis.com/youtube/v3/videos";
 
-const VIDEOS_PER_TEAM = 6;
+const VIDEOS_PER_TEAM = 12;
 
 // Multiple search queries per team to get diverse content
 // Arabic queries get Arabic highlight channels, English ones get international channels

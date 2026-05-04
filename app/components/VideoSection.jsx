@@ -144,7 +144,7 @@ export default function VideoSection({ videos, videoEmbed, youtubeChannelId, tea
   const scrollRef = useRef(null);
   const scroll = (dir) => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir * 320, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir * 300, behavior: "smooth" });
   };
 
   // Search cards (fallback)
@@ -153,7 +153,15 @@ export default function VideoSection({ videos, videoEmbed, youtubeChannelId, tea
     { query: `أهداف ${teamName} 2025`,       label: `أهداف ${teamName}`,        icon: "⚽" },
     { query: `${teamName} highlights 2025`,   label: `${teamName} Highlights`,   icon: "🏆" },
     { query: `${teamName} best goals 2025`,   label: `أجمل أهداف ${teamName}`,   icon: "🌟" },
+    { query: `${teamName} match recap 2025`,  label: `ملخص المباريات`,           icon: "📺" },
+    { query: `ملخص ${teamName} بين سبورت`,   label: `${teamName} beIN Sports`,   icon: "🔴" },
   ];
+
+  // Split videos into 2 rows: odd indices → row 1, even indices → row 2
+  const row1 = validIds.filter((_, i) => i % 2 === 0);  // 0, 2, 4 …
+  const row2 = validIds.filter((_, i) => i % 2 === 1);  // 1, 3, 5 …
+  const sc1  = searchCards.filter((_, i) => i % 2 === 0);
+  const sc2  = searchCards.filter((_, i) => i % 2 === 1);
 
   return (
     <section style={{ background: "var(--bg-card)", borderRadius: "28px", padding: "24px 0", border: "1px solid var(--border)", marginBottom: "26px", boxShadow: "var(--shadow)" }}>
@@ -170,31 +178,36 @@ export default function VideoSection({ videos, videoEmbed, youtubeChannelId, tea
         </div>
         {/* Scroll arrows */}
         <div style={{ display: "flex", gap: "8px" }}>
-          <button onClick={() => scroll(-1)} style={{ width: "36px", height: "36px", borderRadius: "50%", border: "1px solid var(--border)", background: "var(--bg-soft)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-1)", fontSize: "16px" }}>‹</button>
-          <button onClick={() => scroll(1)}  style={{ width: "36px", height: "36px", borderRadius: "50%", border: "1px solid var(--border)", background: "var(--bg-soft)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-1)", fontSize: "16px" }}>›</button>
+          <button onClick={() => scroll(-1)} style={{ width: "36px", height: "36px", borderRadius: "50%", border: "1px solid var(--border)", background: "var(--bg-soft)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-1)", fontSize: "18px", fontWeight: 700 }}>‹</button>
+          <button onClick={() => scroll(1)}  style={{ width: "36px", height: "36px", borderRadius: "50%", border: "1px solid var(--border)", background: "var(--bg-soft)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-1)", fontSize: "18px", fontWeight: 700 }}>›</button>
         </div>
       </div>
 
-      {/* Horizontal scroll strip */}
+      {/* 2-row horizontal scroll grid */}
       <div
         ref={scrollRef}
         style={{
-          display: "flex",
-          gap: "14px",
+          display: "grid",
+          gridTemplateRows: "1fr 1fr",
+          gridAutoFlow: "column",
+          gridAutoColumns: "280px",
+          gap: "12px",
           overflowX: "auto",
           paddingInline: "24px",
-          paddingBottom: "8px",
+          paddingBottom: "10px",
           scrollbarWidth: "thin",
           scrollbarColor: `${accent || "#4f8eff"} transparent`,
           WebkitOverflowScrolling: "touch",
         }}
       >
-        {/* Official channel — wide card at start */}
+        {/* Official channel — spans 2 rows */}
         {hasChannel && (
-          <ChannelPlaylist channelId={youtubeChannelId} teamName={teamName} accent={accent} />
+          <div style={{ gridRow: "1 / span 2" }}>
+            <ChannelPlaylist channelId={youtubeChannelId} teamName={teamName} accent={accent} />
+          </div>
         )}
 
-        {/* Real video IDs — newest first */}
+        {/* Real video IDs — distributed across 2 rows */}
         {hasRealIds && validIds.map((id, idx) => (
           <VideoCard
             key={id + idx}
@@ -206,14 +219,14 @@ export default function VideoSection({ videos, videoEmbed, youtubeChannelId, tea
           />
         ))}
 
-        {/* Single embed */}
+        {/* Single embed — spans 2 rows */}
         {!hasRealIds && hasEmbed && (
-          <div style={{ position: "relative", flexShrink: 0, width: "380px", aspectRatio: "16/9", borderRadius: "14px", overflow: "hidden", background: "var(--bg-soft)", border: "1px solid var(--border)" }}>
+          <div style={{ gridRow: "1 / span 2", position: "relative", borderRadius: "14px", overflow: "hidden", background: "var(--bg-soft)", border: "1px solid var(--border)" }}>
             <iframe src={videoEmbed.includes("?") ? videoEmbed + "&rel=0" : videoEmbed + "?rel=0"} title={teamName} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
           </div>
         )}
 
-        {/* Search cards — always show as extra cards after real videos */}
+        {/* Search cards — fill remaining slots in 2-row grid */}
         {searchCards.map(c => (
           <SearchCard key={c.query} query={c.query} label={c.label} icon={c.icon} accent={accent} />
         ))}
