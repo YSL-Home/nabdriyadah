@@ -134,14 +134,6 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         continue-on-error: true
 
-      - name: Install yt-dlp
-        run: pip install -q yt-dlp
-        continue-on-error: true
-
-      - name: Fetch team videos (yt-dlp fallback, no API key)
-        run: node scripts/fetch-videos-ytdlp.mjs --max-teams 40
-        continue-on-error: true
-
       - name: Generate images
         run: node scripts/generate-images.mjs
         env:
