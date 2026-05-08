@@ -118,6 +118,12 @@ export function generateMetadata({ params }) {
   };
 }
 
+function fmtDate(iso) {
+  if (!iso) return "";
+  try { return new Date(iso).toLocaleDateString("ar-SA-u-nu-latn", { day: "numeric", month: "short", year: "numeric" }); }
+  catch { return ""; }
+}
+
 export default function SportPage({ params }) {
   const sport = sportConfig[params.slug];
   if (!sport) notFound();
@@ -203,6 +209,10 @@ export default function SportPage({ params }) {
                     <article style={{ background: "white", borderRadius: "22px", overflow: "hidden", border: "1px solid #e5e7eb", height: "100%" }}>
                       <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "190px", display: "block" }} />
                       <div style={{ padding: "18px" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", flexWrap: "wrap" }}>
+                          <span style={{ padding: "4px 10px", borderRadius: "999px", background: "#f0fdf4", color: "#16a34a", fontSize: "11px", fontWeight: 700 }}>كرة القدم</span>
+                          {a.publishedAt && <span style={{ color: "#9ca3af", fontSize: "11px" }}>🕐 {fmtDate(a.publishedAt)}</span>}
+                        </div>
                         <h3 style={{ margin: "0 0 8px 0", fontSize: "18px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{a.title}</h3>
                         <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.8 }}>{a.description}</p>
                       </div>
@@ -280,8 +290,9 @@ export default function SportPage({ params }) {
                   <article style={{ background: "white", borderRadius: "28px", overflow: "hidden", border: `1px solid ${sport.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", height: "100%" }}>
                     <ArticleImage src={featuredArticle.image} imageUrl={featuredArticle.imageUrl} alt={featuredArticle.title} sport={featuredArticle.sport} league={featuredArticle.league} slug={featuredArticle.slug} style={{ width: "100%", height: "360px", display: "block" }} />
                     <div style={{ padding: "28px" }}>
-                      <div style={{ display: "inline-block", marginBottom: "12px", padding: "8px 14px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "13px", fontWeight: 700 }}>
-                        الخبر الأبرز
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px", flexWrap: "wrap" }}>
+                        <span style={{ padding: "6px 14px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "13px", fontWeight: 700 }}>الخبر الأبرز</span>
+                        {featuredArticle.publishedAt && <span style={{ color: "#9ca3af", fontSize: "13px" }}>🕐 {fmtDate(featuredArticle.publishedAt)}</span>}
                       </div>
                       <h2 style={{ margin: "0 0 12px 0", fontSize: "32px", lineHeight: 1.55, fontWeight: 800, color: "#111827" }}>
                         {featuredArticle.title}
@@ -299,8 +310,9 @@ export default function SportPage({ params }) {
                       <div style={{ background: "white", borderRadius: "22px", padding: "18px", border: `1px solid ${sport.border}`, display: "flex", gap: "14px", alignItems: "flex-start" }}>
                         <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "80px", height: "80px", borderRadius: "14px", flexShrink: 0 }} />
                         <div>
-                          <div style={{ fontSize: "16px", fontWeight: 800, lineHeight: 1.55, color: "#111827", marginBottom: "6px" }}>{a.title}</div>
-                          <div style={{ color: "#6b7280", fontSize: "14px", lineHeight: 1.7 }}>{a.description?.slice(0, 80)}...</div>
+                          <div style={{ fontSize: "16px", fontWeight: 800, lineHeight: 1.55, color: "#111827", marginBottom: "5px" }}>{a.title}</div>
+                          <div style={{ color: "#6b7280", fontSize: "13px", lineHeight: 1.7, marginBottom: "4px" }}>{a.description?.slice(0, 80)}...</div>
+                          {a.publishedAt && <div style={{ color: "#9ca3af", fontSize: "12px" }}>🕐 {fmtDate(a.publishedAt)}</div>}
                         </div>
                       </div>
                     </Link>
@@ -323,8 +335,9 @@ export default function SportPage({ params }) {
                       <article style={{ background: "white", borderRadius: "24px", overflow: "hidden", border: `1px solid ${sport.border}`, height: "100%" }}>
                         <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "200px", display: "block" }} />
                         <div style={{ padding: "20px" }}>
-                          <div style={{ display: "inline-block", marginBottom: "10px", padding: "6px 12px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "12px", fontWeight: 700 }}>
-                            {sport.title}
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px", flexWrap: "wrap" }}>
+                            <span style={{ padding: "5px 12px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "12px", fontWeight: 700 }}>{sport.title}</span>
+                            {a.publishedAt && <span style={{ color: "#9ca3af", fontSize: "12px" }}>🕐 {fmtDate(a.publishedAt)}</span>}
                           </div>
                           <h3 style={{ margin: "0 0 10px 0", fontSize: "20px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{a.title}</h3>
                           <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.8 }}>{a.description}</p>

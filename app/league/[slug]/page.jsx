@@ -324,6 +324,12 @@ const leagueMap = {
   }
 };
 
+function fmtDate(iso) {
+  if (!iso) return "";
+  try { return new Date(iso).toLocaleDateString("ar-SA-u-nu-latn", { day: "numeric", month: "short", year: "numeric" }); }
+  catch { return ""; }
+}
+
 function getGridColumns(count) {
   if (count <= 1) return "minmax(0, 420px)";
   if (count === 2) return "repeat(2, minmax(0, 1fr))";
@@ -997,19 +1003,13 @@ export default function LeaguePage({ params }) {
                     </div>
 
                     <div style={{ padding: "22px" }}>
-                      <div
-                        style={{
-                          display: "inline-block",
-                          marginBottom: "12px",
-                          padding: "8px 12px",
-                          borderRadius: "999px",
-                          background: theme.primarySoft,
-                          color: theme.primary,
-                          fontSize: "13px",
-                          fontWeight: 700
-                        }}
-                      >
-                        {league.title}
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px", flexWrap: "wrap" }}>
+                        <span style={{ padding: "6px 12px", borderRadius: "999px", background: theme.primarySoft, color: theme.primary, fontSize: "13px", fontWeight: 700 }}>
+                          {league.title}
+                        </span>
+                        {article.publishedAt && (
+                          <span style={{ color: "#9ca3af", fontSize: "12px" }}>🕐 {fmtDate(article.publishedAt)}</span>
+                        )}
                       </div>
 
                       <h3
