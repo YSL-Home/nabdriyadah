@@ -183,7 +183,7 @@ export default function VideoSection({ videos, videoEmbed, youtubeChannelId, tea
         </div>
       </div>
 
-      {/* 2-row horizontal scroll grid */}
+      {/* 2-row horizontal scroll grid — always LTR so scroll starts at videos */}
       <div
         ref={scrollRef}
         style={{
@@ -198,6 +198,7 @@ export default function VideoSection({ videos, videoEmbed, youtubeChannelId, tea
           scrollbarWidth: "thin",
           scrollbarColor: `${accent || "#4f8eff"} transparent`,
           WebkitOverflowScrolling: "touch",
+          direction: "ltr",  // Force LTR so videos always appear first (left = start)
         }}
       >
         {/* Official channel — spans 2 rows */}

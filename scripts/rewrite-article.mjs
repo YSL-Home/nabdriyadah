@@ -519,11 +519,11 @@ async function main() {
     process.exit(0);
   }
 
-  // Spread: 8 football + 4 basketball + 4 tennis + 3 padel + 2 futsal per run
-  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 8);
-  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 4);
-  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 4);
-  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 3);
+  // Spread: 14 football + 5 basketball + 5 tennis + 4 padel + 2 futsal per run
+  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 14);
+  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 5);
+  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 5);
+  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 4);
   const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 2);
   const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems];
 
@@ -566,11 +566,20 @@ async function main() {
       content: rewritten.content,
       keywords: rewritten.keywords,
       faq: rewritten.faq || [],
-      // Translations (generated in same API call — no extra cost)
-      en_title:       rewritten.en_title       || null,
-      en_description: rewritten.en_description || null,
-      fr_title:       rewritten.fr_title       || null,
-      fr_description: rewritten.fr_description || null,
+      // Translations: use source title directly if source is English/French (no LLM cost)
+      // Otherwise use LLM-generated translations from same API call
+      en_title:       item.sourceLang === "en"
+                        ? normalizeText(item.originalTitle || "").slice(0, 100) || rewritten.en_title || null
+                        : rewritten.en_title       || null,
+      en_description: item.sourceLang === "en"
+                        ? normalizeText(item.originalDescription || "").slice(0, 200) || rewritten.en_description || null
+                        : rewritten.en_description || null,
+      fr_title:       item.sourceLang === "fr"
+                        ? normalizeText(item.originalTitle || "").slice(0, 100) || rewritten.fr_title || null
+                        : rewritten.fr_title       || null,
+      fr_description: item.sourceLang === "fr"
+                        ? normalizeText(item.originalDescription || "").slice(0, 200) || rewritten.fr_description || null
+                        : rewritten.fr_description || null,
       imageUrl: item.imageUrl || null,
       image: `/generated/${slug}.png`
     });
