@@ -6,6 +6,7 @@ import articles from "../../../../content/articles/seo-articles.json";
 import teamsDataRaw from "../../../../content/teams-data.json";
 import AdSlot from "../../../components/AdSlot";
 import ArticleImage from "../../../components/ArticleImage";
+import ArticleFiltersClient from "../../../components/ArticleFiltersClient";
 import { getT } from "../../../../lib/i18n";
 import { displayName } from "../../../../lib/teamNames";
 
@@ -138,23 +139,13 @@ export default function EnLeaguePage({ params }) {
         {/* Articles */}
         <section>
           <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px", color: "var(--text-1)" }}>📰 {tr.leagueArticles}</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "18px" }}>
-            {leagueArticles.map(a => (
-              <Link key={a.slug} href={`/en/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                <article style={{ background: "var(--bg-card)", borderRadius: "20px", overflow: "hidden", border: `1px solid var(--border)` }}>
-                  <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.en_title || a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "160px", display: "block" }} />
-                  <div style={{ padding: "14px" }}>
-                    <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 800, color: "var(--text-1)", lineHeight: 1.5 }}>
-                      {a.en_title || a.sourceTitle || a.title}
-                    </h3>
-                    <p style={{ margin: 0, fontSize: "13px", color: "var(--text-2)", lineHeight: 1.6 }}>
-                      {a.en_description || a.description}
-                    </p>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
+          <ArticleFiltersClient
+            articles={leagueArticles}
+            lang="en"
+            prefix="/en"
+            primaryColor={theme.primary}
+            showSportFilter={true}
+          />
         </section>
       </div>
     </main>

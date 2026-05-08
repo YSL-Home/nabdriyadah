@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
 import ArticleImage from "../../components/ArticleImage";
+import ArticleFiltersClient from "../../components/ArticleFiltersClient";
 
 // Logos fiables depuis le CDN API-Football (même source que la page live)
 const CDN = "https://media.api-sports.io/football/leagues";
@@ -203,23 +204,13 @@ export default function SportPage({ params }) {
           {sportArticles.length > 0 && (
             <section>
               <h2 style={{ margin: "0 0 18px 0", fontSize: "30px", fontWeight: 800, color: "#111827" }}>أحدث أخبار كرة القدم</h2>
-              <div className="g4">
-                {sportArticles.map((a) => (
-                  <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                    <article style={{ background: "white", borderRadius: "22px", overflow: "hidden", border: "1px solid #e5e7eb", height: "100%" }}>
-                      <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "190px", display: "block" }} />
-                      <div style={{ padding: "18px" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", flexWrap: "wrap" }}>
-                          <span style={{ padding: "4px 10px", borderRadius: "999px", background: "#f0fdf4", color: "#16a34a", fontSize: "11px", fontWeight: 700 }}>كرة القدم</span>
-                          {a.publishedAt && <span style={{ color: "#9ca3af", fontSize: "11px" }}>🕐 {fmtDate(a.publishedAt)}</span>}
-                        </div>
-                        <h3 style={{ margin: "0 0 8px 0", fontSize: "18px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{a.title}</h3>
-                        <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.8 }}>{a.description}</p>
-                      </div>
-                    </article>
-                  </Link>
-                ))}
-              </div>
+              <ArticleFiltersClient
+                articles={sportArticles}
+                lang="ar"
+                prefix=""
+                primaryColor={sport.primary}
+                showSportFilter={false}
+              />
             </section>
           )}
         </div>
@@ -282,73 +273,18 @@ export default function SportPage({ params }) {
             </p>
           </section>
         ) : (
-          <>
-            {/* Featured + sidebar */}
-            {featuredArticle && (
-              <section className="gfeat" style={{ marginBottom: "28px" }}>
-                <Link href={`/articles/${featuredArticle.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                  <article style={{ background: "white", borderRadius: "28px", overflow: "hidden", border: `1px solid ${sport.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", height: "100%" }}>
-                    <ArticleImage src={featuredArticle.image} imageUrl={featuredArticle.imageUrl} alt={featuredArticle.title} sport={featuredArticle.sport} league={featuredArticle.league} slug={featuredArticle.slug} style={{ width: "100%", height: "360px", display: "block" }} />
-                    <div style={{ padding: "28px" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px", flexWrap: "wrap" }}>
-                        <span style={{ padding: "6px 14px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "13px", fontWeight: 700 }}>الخبر الأبرز</span>
-                        {featuredArticle.publishedAt && <span style={{ color: "#9ca3af", fontSize: "13px" }}>🕐 {fmtDate(featuredArticle.publishedAt)}</span>}
-                      </div>
-                      <h2 style={{ margin: "0 0 12px 0", fontSize: "32px", lineHeight: 1.55, fontWeight: 800, color: "#111827" }}>
-                        {featuredArticle.title}
-                      </h2>
-                      <p style={{ margin: 0, color: "#4b5563", fontSize: "17px", lineHeight: 1.9 }}>
-                        {featuredArticle.description}
-                      </p>
-                    </div>
-                  </article>
-                </Link>
-
-                <div style={{ display: "grid", gap: "16px", alignContent: "start" }}>
-                  {restArticles.slice(0, 3).map((a) => (
-                    <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                      <div style={{ background: "white", borderRadius: "22px", padding: "18px", border: `1px solid ${sport.border}`, display: "flex", gap: "14px", alignItems: "flex-start" }}>
-                        <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "80px", height: "80px", borderRadius: "14px", flexShrink: 0 }} />
-                        <div>
-                          <div style={{ fontSize: "16px", fontWeight: 800, lineHeight: 1.55, color: "#111827", marginBottom: "5px" }}>{a.title}</div>
-                          <div style={{ color: "#6b7280", fontSize: "13px", lineHeight: 1.7, marginBottom: "4px" }}>{a.description?.slice(0, 80)}...</div>
-                          {a.publishedAt && <div style={{ color: "#9ca3af", fontSize: "12px" }}>🕐 {fmtDate(a.publishedAt)}</div>}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            <AdSlot label="مساحة إعلانية وسط الصفحة" minHeight={120} style={{ marginBottom: 24 }} />
-
-            {/* Grid of remaining articles */}
-            {restArticles.slice(3).length > 0 && (
-              <section>
-                <h2 style={{ margin: "0 0 18px 0", fontSize: "34px", fontWeight: 800, color: "#111827" }}>
-                  مزيد من أخبار {sport.title}
-                </h2>
-                <div className="g3">
-                  {restArticles.slice(3).map((a) => (
-                    <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                      <article style={{ background: "white", borderRadius: "24px", overflow: "hidden", border: `1px solid ${sport.border}`, height: "100%" }}>
-                        <ArticleImage src={a.image} imageUrl={a.imageUrl} alt={a.title} sport={a.sport} league={a.league} slug={a.slug} style={{ width: "100%", height: "200px", display: "block" }} />
-                        <div style={{ padding: "20px" }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px", flexWrap: "wrap" }}>
-                            <span style={{ padding: "5px 12px", borderRadius: "999px", background: sport.primarySoft, color: sport.primary, fontSize: "12px", fontWeight: 700 }}>{sport.title}</span>
-                            {a.publishedAt && <span style={{ color: "#9ca3af", fontSize: "12px" }}>🕐 {fmtDate(a.publishedAt)}</span>}
-                          </div>
-                          <h3 style={{ margin: "0 0 10px 0", fontSize: "20px", lineHeight: 1.6, fontWeight: 800, color: "#111827" }}>{a.title}</h3>
-                          <p style={{ margin: 0, color: "#4b5563", fontSize: "14px", lineHeight: 1.8 }}>{a.description}</p>
-                        </div>
-                      </article>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )}
-          </>
+          <section>
+            <h2 style={{ margin: "0 0 18px 0", fontSize: "34px", fontWeight: 800, color: "#111827" }}>
+              أحدث أخبار {sport.title}
+            </h2>
+            <ArticleFiltersClient
+              articles={sportArticles}
+              lang="ar"
+              prefix=""
+              primaryColor={sport.primary}
+              showSportFilter={false}
+            />
+          </section>
         )}
       </div>
     </main>

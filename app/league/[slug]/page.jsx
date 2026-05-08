@@ -6,6 +6,7 @@ import articles from "../../../content/articles/seo-articles.json";
 import teamsDataRaw from "../../../content/teams-data.json";
 import AdSlot from "../../components/AdSlot";
 import ArticleImage from "../../components/ArticleImage";
+import ArticleFiltersClient from "../../components/ArticleFiltersClient";
 
 const leagueMap = {
   "premier-league": {
@@ -328,13 +329,6 @@ function fmtDate(iso) {
   if (!iso) return "";
   try { return new Date(iso).toLocaleDateString("ar-SA-u-nu-latn", { day: "numeric", month: "short", year: "numeric" }); }
   catch { return ""; }
-}
-
-function getGridColumns(count) {
-  if (count <= 1) return "minmax(0, 420px)";
-  if (count === 2) return "repeat(2, minmax(0, 1fr))";
-  if (count === 3) return "repeat(3, minmax(0, 1fr))";
-  return "repeat(4, minmax(0, 1fr))";
 }
 
 export function generateStaticParams() {
@@ -919,126 +913,16 @@ export default function LeaguePage({ params }) {
           </section>
         ) : (
           <section>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "18px",
-                gap: "12px",
-                flexWrap: "wrap"
-              }}
-            >
-              <h2
-                style={{
-                  margin: 0,
-                  fontSize: "38px",
-                  fontWeight: 800,
-                  color: theme.text
-                }}
-              >
-                أحدث مواد {league.title}
-              </h2>
-
-              <div
-                style={{
-                  color: theme.subtext,
-                  fontSize: "15px"
-                }}
-              >
-                تغطية متخصصة بنفس هوية البطولة وصفحتها
-              </div>
-            </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: getGridColumns(leagueArticles.length),
-                gap: "22px",
-                justifyContent: leagueArticles.length <= 1 ? "start" : "stretch"
-              }}
-            >
-              {leagueArticles.map((article, index) => (
-                <Link
-                  key={article.slug}
-                  href={`/articles/${article.slug}/`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <article
-                    style={{
-                      background: theme.cardBg,
-                      borderRadius: "24px",
-                      overflow: "hidden",
-                      border: `1px solid ${theme.border}`,
-                      boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
-                      height: "100%"
-                    }}
-                  >
-                    <div style={{ position: "relative" }}>
-                      <ArticleImage
-                        src={article.image}
-                        imageUrl={article.imageUrl}
-                        alt={article.title}
-                        sport={article.sport}
-                        league={article.league}
-                        slug={article.slug}
-                        style={{ width: "100%", height: "220px", display: "block" }}
-                      />
-
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: "14px",
-                          right: "14px",
-                          background: "rgba(255,255,255,0.94)",
-                          color: theme.primary,
-                          padding: "8px 12px",
-                          borderRadius: "999px",
-                          fontSize: "13px",
-                          fontWeight: 700
-                        }}
-                      >
-                        {index === 0 ? league.shortLabel : "مقال"}
-                      </div>
-                    </div>
-
-                    <div style={{ padding: "22px" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px", flexWrap: "wrap" }}>
-                        <span style={{ padding: "6px 12px", borderRadius: "999px", background: theme.primarySoft, color: theme.primary, fontSize: "13px", fontWeight: 700 }}>
-                          {league.title}
-                        </span>
-                        {article.publishedAt && (
-                          <span style={{ color: "#9ca3af", fontSize: "12px" }}>🕐 {fmtDate(article.publishedAt)}</span>
-                        )}
-                      </div>
-
-                      <h3
-                        style={{
-                          margin: "0 0 12px 0",
-                          fontSize: "22px",
-                          lineHeight: 1.6,
-                          fontWeight: 800,
-                          color: theme.text
-                        }}
-                      >
-                        {article.title}
-                      </h3>
-
-                      <p
-                        style={{
-                          margin: 0,
-                          color: theme.subtext,
-                          fontSize: "16px",
-                          lineHeight: 1.9
-                        }}
-                      >
-                        {article.description}
-                      </p>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
+            <h2 style={{ margin: "0 0 18px 0", fontSize: "38px", fontWeight: 800, color: theme.text }}>
+              أحدث مواد {league.title}
+            </h2>
+            <ArticleFiltersClient
+              articles={leagueArticles}
+              lang="ar"
+              prefix=""
+              primaryColor={theme.primary}
+              showSportFilter={true}
+            />
           </section>
         )}
       </div>
