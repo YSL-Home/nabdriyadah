@@ -123,8 +123,8 @@ export default function SportPage({ params }) {
   if (!sport) notFound();
 
   const sportArticles = articles
-    .filter((a) => a.sport === params.slug || a.sport === "football" && params.slug === "football")
-    .slice(0, 8);
+    .filter((a) => a.sport === params.slug || (a.sport === "football" && params.slug === "football"))
+    .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
 
   const featuredArticle = sportArticles[0] || null;
   const restArticles = sportArticles.slice(1);

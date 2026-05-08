@@ -57,9 +57,10 @@ export default function FrLeaguePage({ params }) {
     .map(([s, t]) => ({ slug: s, name: t.name, logo: t.logo }))
     .slice(0, 24);
 
+  // Articles — all matching, sorted newest first
   const leagueArticles = articles
-    .filter(a => a.slug && (a.league === slug || a.league === "mixed" || a.sport === "football"))
-    .slice(0, 6);
+    .filter(a => a.slug && (a.league === slug || (a.league === "mixed" && a.sport === "football") || a.sport === "football"))
+    .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg-page)", padding: "0 0 60px", direction: "ltr" }}>

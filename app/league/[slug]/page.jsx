@@ -401,12 +401,13 @@ export default function LeaguePage({ params }) {
   }
 
   const theme = league.theme;
-  // Prefer league-specific → then football/mixed fallback
+  // All articles for this league, sorted newest first — no artificial limit
   const leagueArticles = (() => {
+    const sorted = (arr) => arr.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
     const specific = articles.filter(a => a.slug && a.league === params.slug);
-    if (specific.length >= 3) return specific.slice(0, 12);
+    if (specific.length >= 3) return sorted(specific);
     const fallback = articles.filter(a => a.slug && (a.league === "mixed" || a.sport === "football") && a.league !== params.slug);
-    return [...specific, ...fallback].slice(0, 12);
+    return sorted([...specific, ...fallback]);
   })();
   const featuredArticle = leagueArticles[0] || null;
 
