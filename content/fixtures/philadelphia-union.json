@@ -3,38 +3,6 @@
   "teamId": 1608,
   "upcoming": [
     {
-      "id": "761601",
-      "date": "2026-05-09T23:30Z",
-      "timestamp": 1778369400,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Gillette Stadium",
-      "city": "Foxborough, Massachusetts",
-      "home": {
-        "id": "189",
-        "slug": "new-england-revolution",
-        "name": "نيو إنغلاند ريفولوشن",
-        "logo": "https://media.api-sports.io/football/teams/1602.png",
-        "winner": null
-      },
-      "away": {
-        "id": "10739",
-        "slug": "philadelphia-union",
-        "name": "فيلادلفيا يونيون",
-        "logo": "https://media.api-sports.io/football/teams/1608.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761616",
       "date": "2026-05-13T23:30Z",
       "timestamp": 1778715000,
@@ -132,6 +100,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761601",
+      "date": "2026-05-09T23:30Z",
+      "timestamp": 1778369400,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, Massachusetts",
+      "home": {
+        "id": "189",
+        "slug": "new-england-revolution",
+        "name": "نيو إنغلاند ريفولوشن",
+        "logo": "https://media.api-sports.io/football/teams/1602.png",
+        "winner": true
+      },
+      "away": {
+        "id": "10739",
+        "slug": "philadelphia-union",
+        "name": "فيلادلفيا يونيون",
+        "logo": "https://media.api-sports.io/football/teams/1608.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761588",
       "date": "2026-05-02T23:30Z",
@@ -325,5 +325,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-10T00:01:40.023Z"
+  "fetchedAt": "2026-05-10T02:29:50.215Z"
 }
