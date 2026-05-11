@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ArticleImage from "./ArticleImage";
+import AdSlot from "./AdSlot";
 
 /* ── Language helpers ───────────────────────────────── */
 function getTitle(a, lang) {
@@ -53,8 +54,21 @@ const UI = {
   basketball:   { ar: "🏀 كرة السلة",    fr: "🏀 Basketball",        en: "🏀 Basketball"       },
   tennis:       { ar: "🎾 التنس",         fr: "🎾 Tennis",            en: "🎾 Tennis"           },
   padel:        { ar: "🏸 البادل",        fr: "🏸 Padel",             en: "🏸 Padel"            },
+  articles:     { ar: "مقال",            fr: "article",              en: "article"            },
+  sports:       { ar: "رياضة",           fr: "sport",                en: "sport"              },
+  competitions: { ar: "بطولة",           fr: "compétition",          en: "competition"        },
+  allSports:    { ar: "كل الرياضات",     fr: "Tous les sports",      en: "All sports"         },
 };
 function ui(key, lang) { return UI[key]?.[lang] || UI[key]?.ar || key; }
+
+/* ── Sport categories config ────────────────────────── */
+const SPORT_CATS = [
+  { key: "football",   emoji: "⚽", label: { ar: "كرة القدم", fr: "Football",   en: "Football"   }, color: "#2563eb", href: "/sport/football/"   },
+  { key: "basketball", emoji: "🏀", label: { ar: "كرة السلة", fr: "Basketball", en: "Basketball" }, color: "#c2410c", href: "/sport/basketball/" },
+  { key: "tennis",     emoji: "🎾", label: { ar: "التنس",     fr: "Tennis",     en: "Tennis"     }, color: "#15803d", href: "/sport/tennis/"     },
+  { key: "padel",      emoji: "🏸", label: { ar: "البادل",    fr: "Padel",      en: "Padel"      }, color: "#7c3aed", href: "/sport/padel/"      },
+  { key: "futsal",     emoji: "🥅", label: { ar: "الصالات",   fr: "Futsal",     en: "Futsal"     }, color: "#0f766e", href: "/sport/futsal/"     },
+];
 
 /* ── Date formatting ────────────────────────────────── */
 function formatDate(iso, lang = "ar") {
@@ -110,12 +124,69 @@ function Badge({ accent, children }) {
   );
 }
 
+/* ── Sport categories bar ───────────────────────────── */
+function SportCategoriesBar({ lang, prefix, sportCounts }) {
+  return (
+    <motion.div {...fadeUp(0)} style={{ marginBottom: "22px" }}>
+      <div className="sport-cats-bar">
+        {SPORT_CATS.map((s) => {
+          const count = sportCounts?.[s.key] || 0;
+          return (
+            <Link key={s.key} href={`${prefix}${s.href}`} className="sport-cat-pill">
+              <span style={{ fontSize: "18px", lineHeight: 1 }}>{s.emoji}</span>
+              <span style={{ fontWeight: 800, color: s.color, fontSize: "13px" }}>
+                {s.label[lang] || s.label.ar}
+              </span>
+              {count > 0 && (
+                <span style={{
+                  fontSize: "11px", fontWeight: 700,
+                  background: s.color + "18", color: s.color,
+                  padding: "1px 7px", borderRadius: "999px",
+                }}>
+                  {count}
+                </span>
+              )}
+            </Link>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Stats strip ────────────────────────────────────── */
+function StatsStrip({ totalArticles, lang }) {
+  const stats = [
+    { value: totalArticles, label: ui("articles", lang), icon: "📰" },
+    { value: 5,             label: ui("sports", lang),   icon: "🏅" },
+    { value: 13,            label: ui("competitions", lang), icon: "🏆" },
+  ];
+  return (
+    <motion.div {...fadeUp(0.05)} style={{ marginBottom: "20px" }}>
+      <div className="stats-strip">
+        {stats.map((s, i) => (
+          <div key={i} className="stat-item">
+            <span style={{ fontSize: "16px" }}>{s.icon}</span>
+            <span style={{ fontWeight: 900, fontSize: "18px", color: "var(--accent)", lineHeight: 1 }}>
+              {s.value}+
+            </span>
+            <span style={{ fontSize: "12px", color: "var(--text-2)", fontWeight: 600 }}>
+              {s.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 /* ══════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════ */
 export default function HomepageClient({
   featured, secondary, grid, sidebar,
   basketball, tennis, padel,
+  sportCounts, totalArticles = 0,
   lang = "ar", prefix = "",
 }) {
   const isRTL = lang === "ar";
@@ -123,6 +194,12 @@ export default function HomepageClient({
 
   return (
     <div style={{ direction: dir }}>
+
+      {/* ── SPORT CATEGORIES ─────────────────────────── */}
+      <SportCategoriesBar lang={lang} prefix={prefix} sportCounts={sportCounts} />
+
+      {/* ── STATS STRIP ──────────────────────────────── */}
+      {totalArticles > 0 && <StatsStrip totalArticles={totalArticles} lang={lang} />}
 
       {/* ── HERO ─────────────────────────────────────── */}
       <section style={{ marginBottom: "30px" }}>
@@ -229,6 +306,9 @@ export default function HomepageClient({
           <SidebarList articles={sidebar} title={ui("lastArticles", lang)} lang={lang} prefix={prefix} />
         </motion.aside>
       </div>
+
+      {/* ── PUBLICITÉ MID-PAGE ───────────────────────── */}
+      <AdSlot style={{ marginBottom: "32px" }} format="auto" />
 
       {/* ── OTHER SPORTS ─────────────────────────────── */}
       {basketball.length > 0 && (

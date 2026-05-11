@@ -26,13 +26,22 @@ export default function HomePage() {
   });
   const breaking = (recentBreaking.length > 0 ? recentBreaking : sorted).slice(0, 8);
 
-  const featured  = sorted[0]           ?? null;
-  const secondary = sorted.slice(1, 3);
-  const grid      = sorted.slice(3, 9);
-  const sidebar   = sorted.slice(9, 15);
+  const featured   = sorted[0] ?? null;
+  const secondary  = sorted.slice(1, 3);
+  const grid       = sorted.slice(3, 9);
+  const sidebar    = sorted.slice(9, 15);
   const basketball = sorted.filter((a) => a.sport === "basketball").slice(0, 4);
   const tennis     = sorted.filter((a) => a.sport === "tennis").slice(0, 4);
   const padel      = sorted.filter((a) => a.sport === "padel").slice(0, 4);
+
+  // Sport counts for categories bar
+  const sportCounts = {
+    football:   sorted.filter((a) => a.sport === "football").length,
+    basketball: sorted.filter((a) => a.sport === "basketball").length,
+    tennis:     sorted.filter((a) => a.sport === "tennis").length,
+    padel:      sorted.filter((a) => a.sport === "padel").length,
+    futsal:     sorted.filter((a) => a.sport === "futsal").length,
+  };
 
   return (
     <div style={{ background: "var(--bg-page)", minHeight: "100vh", direction: "rtl" }}>
@@ -50,6 +59,8 @@ export default function HomePage() {
           basketball={basketball}
           tennis={tennis}
           padel={padel}
+          sportCounts={sportCounts}
+          totalArticles={sorted.length}
         />
       </div>
     </div>
