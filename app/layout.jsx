@@ -58,8 +58,7 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html:
           `(function(){var h=new Date().getHours(),night=h<6||h>=20;var dark=night||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&!night===false);if(dark){document.documentElement.setAttribute('data-theme','dark');}})();`
         }} />
-        {/* Google AdSense — vérification compte + auto-ads */}
-        <meta name="google-adsense-account" content="ca-pub-6870790039775701" />
+        {/* Google AdSense — auto-ads activés sur tout le site */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6870790039775701"
