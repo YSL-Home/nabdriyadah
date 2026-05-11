@@ -56,6 +56,12 @@ const IMGS = {
     "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=900&q=80",
     "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&q=80",
     "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80",
+    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80",
+    "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80",
+    "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80",
+    "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=900&q=80",
+    "https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=900&q=80",
+    "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=900&q=80",
   ],
 };
 

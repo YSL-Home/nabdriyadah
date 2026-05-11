@@ -26,27 +26,31 @@ export default function HomePage() {
   });
   const breaking = (recentBreaking.length > 0 ? recentBreaking : sorted).slice(0, 8);
 
-  // Football toujours en tête — les autres sports en bas de page
-  const football    = sorted.filter((a) => a.sport === "football");
-  const nonFootball = sorted.filter((a) => a.sport !== "football");
+  // ── Tri intelligent : récence + bonus football ──────────────────────────
+  // Le foot obtient un bonus de 48h (comme s'il était 2 jours plus récent),
+  // ce qui le priorise sans jamais mettre un article de 3 semaines avant
+  // un article d'hier d'un autre sport.
+  const FOOTBALL_BONUS_MS = 96 * 60 * 60 * 1000; // 96h en ms — foot prioritaire si < 4j de décalage
 
-  // Featured : meilleur article foot récent, sinon le plus récent toutes catégories
-  const featured = football[0] ?? sorted[0] ?? null;
+  function effectiveDate(a) {
+    const ts = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+    return a.sport === "football" ? ts + FOOTBALL_BONUS_MS : ts;
+  }
 
-  // Secondary (2 cards hero) : foot en priorité
-  const poolAfterFeatured = sorted.filter((a) => a !== featured);
-  const footAfter = poolAfterFeatured.filter((a) => a.sport === "football");
-  const secondary = footAfter.length >= 2
-    ? footAfter.slice(0, 2)
-    : [...footAfter, ...poolAfterFeatured.filter((a) => a.sport !== "football")].slice(0, 2);
+  const boosted = [...sorted].sort((a, b) => effectiveDate(b) - effectiveDate(a));
 
-  // Grid (6 cards) : foot d'abord, puis les autres
+  // Featured : 1er article du tri boosté
+  const featured = boosted[0] ?? null;
+
+  // Secondary (2 cartes hero) : 2 suivants du tri boosté
+  const poolAfterFeatured = boosted.filter((a) => a !== featured);
+  const secondary = poolAfterFeatured.slice(0, 2);
+
+  // Grid (9 cartes max) : suivants du tri boosté
   const alreadyUsed = new Set([featured, ...secondary].filter(Boolean).map((a) => a.slug));
-  const footGrid  = football.filter((a) => !alreadyUsed.has(a.slug));
-  const otherGrid = nonFootball.filter((a) => !alreadyUsed.has(a.slug));
-  const grid      = [...footGrid, ...otherGrid].slice(0, 9);
+  const grid = boosted.filter((a) => !alreadyUsed.has(a.slug)).slice(0, 9);
 
-  // Sidebar : derniers articles quelle que soit la catégorie
+  // Sidebar : articles récents mixtes (triés par date réelle, pas boostée)
   const gridSlugs = new Set(grid.map((a) => a.slug));
   const sidebar = sorted
     .filter((a) => !alreadyUsed.has(a.slug) && !gridSlugs.has(a.slug))
