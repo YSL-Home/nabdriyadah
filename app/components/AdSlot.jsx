@@ -1,13 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-/* ── Config ─────────────────────────────────────────────
-   Ajoutez NEXT_PUBLIC_ADSENSE_PUB_ID dans Cloudflare env vars
-   (ex: ca-pub-1234567890123456) pour activer les annonces.
-   Sans cette variable, le composant est invisible (pas de layout shift).
-   ──────────────────────────────────────────────────────── */
-const PUB_ID = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID || "";
-const ADS_ENABLED = !!PUB_ID;
+/* ── Publisher ID Google AdSense ─────────────────────
+   ca-pub-6870790039775701
+   (non-secret : visible dans le HTML de toute façon)
+   ──────────────────────────────────────────────────── */
+const PUB_ID = "ca-pub-6870790039775701";
 
 export default function AdSlot({
   slot = "",
@@ -19,13 +17,11 @@ export default function AdSlot({
   const ref = useRef(null);
 
   useEffect(() => {
-    if (!ADS_ENABLED || !ref.current) return;
+    if (!ref.current) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch {}
   }, []);
-
-  if (!ADS_ENABLED) return null;
 
   return (
     <div style={{ overflow: "hidden", minHeight, textAlign: "center", ...style }}>
