@@ -60,14 +60,24 @@ function fmtDate(iso, lang = "ar") {
   } catch { return ""; }
 }
 
+function hasArabic(text) { return /[؀-ۿ]/.test(text || ""); }
+
 function getTitle(a, lang) {
-  if (lang === "en") return a.en_title || a.sourceTitle || a.title;
-  if (lang === "fr") return a.fr_title || a.sourceTitle || a.title;
+  if (lang === "en") {
+    if (a.en_title) return a.en_title;
+    if (a.sourceTitle && !hasArabic(a.sourceTitle)) return a.sourceTitle;
+    return null; // filtered out for non-Arabic pages
+  }
+  if (lang === "fr") {
+    if (a.fr_title) return a.fr_title;
+    if (a.sourceTitle && !hasArabic(a.sourceTitle)) return a.sourceTitle;
+    return null;
+  }
   return a.title;
 }
 function getDesc(a, lang) {
-  if (lang === "en") return a.en_description || a.description;
-  if (lang === "fr") return a.fr_description || a.description;
+  if (lang === "en") return a.en_description || (!hasArabic(a.description) ? a.description : "") || "";
+  if (lang === "fr") return a.fr_description || (!hasArabic(a.description) ? a.description : "") || "";
   return a.description;
 }
 
@@ -159,6 +169,8 @@ export default function ArticleFiltersClient({
     const kw = keyword.trim().toLowerCase();
 
     let result = articles.filter(a => {
+      // For non-Arabic langs, hide articles without a proper translated title
+      if (lang !== "ar" && !getTitle(a, lang)) return false;
       if (sportFilter  && a.sport   !== sportFilter)  return false;
       if (leagueFilter && a.league  !== leagueFilter) return false;
       if (topicFilter  && !(a.topicTags || []).includes(topicFilter)) return false;
@@ -170,7 +182,7 @@ export default function ArticleFiltersClient({
         const haystack = [
           getTitle(a, lang), getDesc(a, lang),
           a.sourceTitle, ...(a.topicTags || []), a.keywords?.join(" ") || ""
-        ].join(" ").toLowerCase();
+        ].filter(Boolean).join(" ").toLowerCase();
         if (!haystack.includes(kw)) return false;
       }
       return true;
@@ -291,7 +303,12 @@ export default function ArticleFiltersClient({
       {filtered.length === 0 ? (
         <div style={{ textAlign: "center", padding: "60px 20px", color: "var(--text-3)" }}>
           <div style={{ fontSize: "48px", marginBottom: "12px" }}>🔍</div>
-          <div style={{ fontSize: "18px", fontWeight: 700 }}>{t.noResults}</div>
+          <div style={{ fontSize: "18px", fontWeight: 700 }}>{hasFilters ? t.noResults : lang === "en" ? "Translated articles loading soon — check back shortly!" : lang === "fr" ? "Articles traduits bientôt disponibles — revenez dans quelques instants !" : t.noResults}</div>
+          {!hasFilters && lang !== "ar" && (
+            <div style={{ marginTop: "10px", fontSize: "14px", color: "var(--text-3)", opacity: 0.7 }}>
+              {lang === "en" ? "Our system is translating content automatically every hour." : "Notre système traduit le contenu automatiquement chaque heure."}
+            </div>
+          )}
         </div>
       ) : (
         <div style={{

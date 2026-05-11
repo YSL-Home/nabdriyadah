@@ -551,12 +551,17 @@ async function main() {
     }
     seenExistingTitles.add(rewrittenTitleKey);
 
+    const srcTitle = normalizeText(item.originalTitle || "").slice(0, 100);
+    const srcDesc  = normalizeText(item.originalDescription || "").slice(0, 200);
+    const hasArabicTitle = /[؀-ۿ؀-ۿ]/.test(srcTitle);
+
     newArticles.push({
       slug,
       sport: item.sport || "football",
       league: item.league || "mixed",
       source: item.source || "",
-      sourceTitle: normalizeText(item.originalTitle || item.title || "").slice(0, 120),
+      sourceLang: item.sourceLang || "ar",
+      sourceTitle: srcTitle.slice(0, 120),
       topicTags: item.topicTags || ["الرياضة"],
       publishedAt: item.publishedAt || new Date().toISOString(),
       title: rewritten.title,
@@ -566,19 +571,18 @@ async function main() {
       content: rewritten.content,
       keywords: rewritten.keywords,
       faq: rewritten.faq || [],
-      // Translations: use source title directly if source is English/French (no LLM cost)
-      // Otherwise use LLM-generated translations from same API call
-      en_title:       item.sourceLang === "en"
-                        ? normalizeText(item.originalTitle || "").slice(0, 100) || rewritten.en_title || null
-                        : rewritten.en_title       || null,
-      en_description: item.sourceLang === "en"
-                        ? normalizeText(item.originalDescription || "").slice(0, 200) || rewritten.en_description || null
+      // Translations: source-title shortcut (free) → LLM result
+      en_title:       item.sourceLang === "en" && !hasArabicTitle
+                        ? srcTitle || rewritten.en_title || null
+                        : rewritten.en_title || null,
+      en_description: item.sourceLang === "en" && !hasArabicTitle
+                        ? srcDesc || rewritten.en_description || null
                         : rewritten.en_description || null,
-      fr_title:       item.sourceLang === "fr"
-                        ? normalizeText(item.originalTitle || "").slice(0, 100) || rewritten.fr_title || null
-                        : rewritten.fr_title       || null,
-      fr_description: item.sourceLang === "fr"
-                        ? normalizeText(item.originalDescription || "").slice(0, 200) || rewritten.fr_description || null
+      fr_title:       item.sourceLang === "fr" && !hasArabicTitle
+                        ? srcTitle || rewritten.fr_title || null
+                        : rewritten.fr_title || null,
+      fr_description: item.sourceLang === "fr" && !hasArabicTitle
+                        ? srcDesc || rewritten.fr_description || null
                         : rewritten.fr_description || null,
       imageUrl: item.imageUrl || null,
       image: `/generated/${slug}.png`
@@ -589,25 +593,39 @@ async function main() {
   const merged = [...newArticles, ...existingArticles];
 
   // ── BACKFILL: translate existing articles without en_title/fr_title ───────
-  // Runs only in full-refresh mode (not breaking-only), max 8 per run
+  // Pass 1 (free, instant): use non-Arabic sourceTitle as en_title
+  // Pass 2 (LLM): translate remaining Arabic titles
   if (process.env.BREAKING_ONLY !== "true") {
-    const needsTranslation = merged.filter(a => !a.en_title);
-    const toTranslate = needsTranslation.slice(0, 30);
+    function hasArabicChars(t) { return /[؀-ۿ]/.test(t || ""); }
+
+    // Pass 1: sourceTitle shortcut (zero API cost)
+    let freePatched = 0;
+    for (const article of merged) {
+      if (!article.en_title && article.sourceTitle && !hasArabicChars(article.sourceTitle)) {
+        article.en_title = article.sourceTitle.trim().slice(0, 100);
+        freePatched++;
+      }
+    }
+    if (freePatched > 0) console.log(`\n⚡ Free backfill: ${freePatched} en_title from sourceTitle`);
+
+    // Pass 2: LLM translation for remaining (max 60/run to stay within CI timeout)
+    const needsTranslation = merged.filter(a => !a.en_title || !a.fr_title);
+    const toTranslate = needsTranslation.slice(0, 60);
     if (toTranslate.length > 0) {
-      console.log(`\n🌍 Backfill translations: ${toTranslate.length} articles without EN/FR titles...`);
+      console.log(`\n🌍 LLM backfill: ${toTranslate.length} articles need EN/FR translation...`);
       for (const article of toTranslate) {
         try {
-          const prompt = `You are a professional sports translator. Translate this Arabic sports article title and description into English and French.
+          const prompt = `You are a professional sports translator. Translate this Arabic sports article into English and French.
 
 Arabic title: ${article.title}
 Arabic description: ${article.description || ""}
 
-Return ONLY valid JSON (no markdown, no extra text):
+Return ONLY valid JSON:
 {
   "en_title": "English title (concise, professional, 50-80 chars)",
-  "en_description": "English description (1-2 sentences, professional sports journalism)",
+  "en_description": "English description (1-2 sentences, sports journalism style)",
   "fr_title": "Titre en français (concis, professionnel, 50-80 caractères)",
-  "fr_description": "Description en français (1-2 phrases, journalisme sportif professionnel)"
+  "fr_description": "Description en français (1-2 phrases, style journalisme sportif)"
 }`;
           const raw = await callLLM(prompt);
           if (!raw) continue;
@@ -616,10 +634,14 @@ Return ONLY valid JSON (no markdown, no extra text):
             const jsonMatch = raw.match(/\{[\s\S]*\}/);
             parsed = JSON.parse(jsonMatch?.[0] || raw);
           } catch { continue; }
-          article.en_title       = (parsed.en_title       || "").trim().slice(0, 100) || null;
-          article.en_description = (parsed.en_description || "").trim().slice(0, 200) || null;
-          article.fr_title       = (parsed.fr_title       || "").trim().slice(0, 100) || null;
-          article.fr_description = (parsed.fr_description || "").trim().slice(0, 200) || null;
+          if (!article.en_title) {
+            article.en_title       = (parsed.en_title       || "").trim().slice(0, 100) || null;
+            article.en_description = (parsed.en_description || "").trim().slice(0, 200) || null;
+          }
+          if (!article.fr_title) {
+            article.fr_title       = (parsed.fr_title       || "").trim().slice(0, 100) || null;
+            article.fr_description = (parsed.fr_description || "").trim().slice(0, 200) || null;
+          }
           if (article.en_title) {
             process.stdout.write(`  ✓ ${article.slug} → "${article.en_title.slice(0, 50)}"\n`);
           }

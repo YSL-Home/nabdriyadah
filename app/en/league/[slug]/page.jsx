@@ -49,9 +49,12 @@ export default function EnLeaguePage({ params }) {
   // Load standings
   let standings = [];
   try {
-    const p = path.join(process.cwd(), "content/standings", `${slug}.json`);
-    const raw = JSON.parse(fs.readFileSync(p, "utf-8"));
-    standings = raw.standings || [];
+    const base = path.join(process.cwd(), "content/standings");
+    const p = path.join(base, `${slug}.json`);
+    if (p.startsWith(base + path.sep) || p === base) {
+      const raw = JSON.parse(fs.readFileSync(p, "utf-8"));
+      standings = raw.standings || [];
+    }
   } catch {}
 
   // Teams for this league

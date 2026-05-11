@@ -366,7 +366,10 @@ export function generateMetadata({ params }) {
 function getLeagueStandings(leagueSlug) {
   // Try live standings file first
   try {
-    const standingsPath = path.join(process.cwd(), "content/standings", `${leagueSlug}.json`);
+    const base = path.join(process.cwd(), "content/standings");
+    const standingsPath = path.join(base, `${leagueSlug}.json`);
+    // Path traversal guard
+    if (!standingsPath.startsWith(base + path.sep) && standingsPath !== base) return [];
     const data = JSON.parse(fs.readFileSync(standingsPath, "utf-8"));
     if (data.standings && data.standings.length > 0) {
       return data.standings;
