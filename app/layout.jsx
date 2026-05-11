@@ -54,9 +54,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl" className={inter.variable}>
       <head>
-        {/* Anti-flash: applique le thème AVANT le premier rendu */}
+        {/* Anti-flash: CLAIR par défaut — sombre seulement 20h–6h ou préférence système */}
         <script dangerouslySetInnerHTML={{ __html:
-          `(function(){var h=new Date().getHours(),n=h<6||h>=20,t;if(n){t='dark';}else{try{t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}document.documentElement.setAttribute('data-theme',t);})();`
+          `(function(){var h=new Date().getHours(),night=h<6||h>=20;var dark=night||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&!night===false);if(dark){document.documentElement.setAttribute('data-theme','dark');}})();`
         }} />
         {/* Google Tag Manager */}
         <script

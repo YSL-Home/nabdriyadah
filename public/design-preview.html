@@ -2,269 +2,140 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NEXUS DARK — Design Preview</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>نبض الرياضة — Design Preview Clair</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg:       #020408;
-  --surface:  #070d1a;
-  --card:     #0a1525;
-  --cyan:     #00c8ff;
-  --violet:   #8b5cf6;
-  --text:     #e8f0fe;
-  --muted:    #6b8099;
-  --border:   rgba(0,200,255,0.1);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f6f9; --card:#fff; --soft:#eef1f7;
+  --text:#0d1526; --muted:#4a5568; --faint:#9aa5b8;
+  --border:#e4e9f0; --border2:#c8d4e8;
+  --blue:#1a56db; --violet:#7c3aed; --teal:#0891b2;
+  --shadow:0 1px 4px rgba(0,20,60,.06),0 4px 16px rgba(0,20,60,.04);
+  --shadow-hover:0 6px 24px rgba(0,20,80,.1),0 1px 4px rgba(0,20,60,.06);
 }
-body {
-  font-family: "Inter", Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-body::before {
-  content:"";
-  position:fixed; inset:0; pointer-events:none; z-index:0;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(0,200,255,0.05) 0%, transparent 50%),
-    radial-gradient(circle at 85% 85%, rgba(139,92,246,0.05) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(0,200,255,0.02) 0%, transparent 70%);
-}
+body{font-family:"Inter",Arial,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 
-/* HEADER */
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(5,10,20,0.82);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(0,200,255,0.08);
-  padding: 0 20px;
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 1px 12px rgba(0,20,80,.07);
 }
-header::before {
-  content:""; display:block; height:1px;
-  background: linear-gradient(90deg,transparent,rgba(0,200,255,0.4),rgba(139,92,246,0.3),transparent);
-}
-.header-inner {
-  max-width: 1400px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; min-height: 56px;
-}
-.logo {
-  display: flex; align-items: center; gap: 9px;
-  text-decoration: none; color: var(--text); flex-shrink: 0;
-}
-.logo-icon {
-  width: 30px; height: 30px; border-radius: 8px;
-  background: linear-gradient(135deg,rgba(0,200,255,0.2),rgba(139,92,246,0.2));
-  border: 1px solid rgba(0,200,255,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  box-shadow: 0 0 12px rgba(0,200,255,0.15);
-}
-.logo-name { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; }
-.nav { display: flex; gap: 4px; }
-.nav a {
-  padding: 6px 14px; border-radius: 10px; font-size: 13px; font-weight: 700;
-  color: rgba(180,215,255,0.8); text-decoration: none;
-  background: rgba(0,200,255,0.04); border: 1px solid rgba(0,200,255,0.1);
-  transition: all 0.2s; white-space: nowrap;
-}
-.nav a:hover {
-  background: rgba(0,200,255,0.12); border-color: rgba(0,200,255,0.3);
-  color: var(--cyan); box-shadow: 0 0 16px rgba(0,200,255,0.12);
-}
-.live-btn {
-  padding: 6px 14px; border-radius: 10px; font-size: 13px; font-weight: 700;
-  color: #ff6b6b; background: rgba(220,38,38,0.12);
-  border: 1px solid rgba(220,38,38,0.25);
-  display: flex; align-items: center; gap: 6px;
-  cursor: pointer;
-}
-.dot { width:6px; height:6px; border-radius:50%; background:#ff6b6b;
-  animation: pulse 1.4s ease infinite; }
-@keyframes pulse {
-  0%,100%{opacity:1;box-shadow:0 0 6px #ff4444}
-  50%{opacity:.4;box-shadow:0 0 2px #ff4444}
-}
+.accent-bar{height:3px;background:linear-gradient(90deg,#1a56db,#7c3aed,#0891b2)}
+.hdr{max-width:1400px;margin:0 auto;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--text)}
+.logo-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#1a56db,#7c3aed);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(26,86,219,.3)}
+.logo-name{font-size:18px;font-weight:900;letter-spacing:-.5px}
+.nav{display:flex;gap:3px}
+.nav a{padding:6px 13px;border-radius:8px;font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;border:1px solid transparent;transition:all .18s}
+.nav a:hover{background:#e8f0ff;border-color:rgba(26,86,219,.15);color:var(--blue)}
+.live{display:inline-flex;align-items:center;gap:6px;padding:6px 13px;border-radius:8px;background:#fff0f0;color:#c81e1e;font-weight:800;font-size:13px;border:1px solid #fcc}
+.dot{width:6px;height:6px;border-radius:50%;background:#c81e1e;animation:pulse 1.4s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* HERO */
-.page { max-width: 1400px; margin: 0 auto; padding: 24px 20px 60px; position: relative; z-index:1; }
+/* ── PAGE ── */
+.page{max-width:1400px;margin:0 auto;padding:22px 18px 60px}
 
-.hero-section {
-  border-radius: 20px; overflow: hidden;
-  background: linear-gradient(135deg, #0a0f28 0%, #0d1a3a 40%, #150a2a 100%);
-  border: 1px solid rgba(0,200,255,0.12);
-  padding: 52px 44px;
-  position: relative;
-  margin-bottom: 20px;
-}
-.hero-section::before {
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background: radial-gradient(ellipse at 0% 0%, rgba(0,200,255,0.12) 0%,transparent 60%),
-              radial-gradient(ellipse at 100% 100%, rgba(139,92,246,0.1) 0%,transparent 55%);
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 13px; border-radius: 999px; font-size: 11px; font-weight: 800;
-  color: var(--cyan); background: rgba(0,200,255,0.1); border: 1px solid rgba(0,200,255,0.2);
-  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px;
-}
-.hero-badge::before { content:""; width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan); }
-.hero-title {
-  font-size: clamp(32px, 5vw, 58px); font-weight: 900; letter-spacing: -2px;
-  line-height: 1.05; margin-bottom: 16px;
-}
-.hero-title span {
-  background: linear-gradient(135deg, var(--cyan), var(--violet));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero-sub { font-size: 16px; color: rgba(180,210,255,0.65); line-height: 1.7; max-width: 520px; margin-bottom: 28px; }
-.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-.tag {
-  padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;
-  color: rgba(160,200,255,0.8); background: rgba(0,200,255,0.06); border: 1px solid rgba(0,200,255,0.12);
-}
+/* ── STATS ── */
+.stats{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.stat{padding:12px 20px;border-radius:14px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);flex:1;min-width:90px;text-align:center}
+.stat-n{font-size:22px;font-weight:900;letter-spacing:-1px;color:var(--blue)}
+.stat-n.v{color:var(--violet)}
+.stat-l{font-size:11px;color:var(--faint);margin-top:2px;font-weight:600}
 
-/* GRID */
-.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
-.grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
-@media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr);} .grid4{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:600px){ .grid3,.grid4{grid-template-columns:1fr;} }
+/* ── HERO ── */
+.hero{
+  border-radius:20px;padding:48px 44px;margin-bottom:18px;
+  background:linear-gradient(135deg,#0f2456 0%,#1a3a8a 45%,#2d1a6e 100%);
+  color:#fff;position:relative;overflow:hidden;
+}
+.hero::before{content:"";position:absolute;top:-80px;left:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero::after{content:"";position:absolute;bottom:-100px;right:-60px;width:320px;height:320px;border-radius:50%;background:rgba(139,92,246,.12)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;font-size:11px;font-weight:800;color:rgba(255,255,255,.85);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:18px}
+.hero-title{font-size:clamp(28px,4.5vw,52px);font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:14px}
+.hero-title b{background:linear-gradient(135deg,#93c5fd,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:15px;color:rgba(200,220,255,.7);line-height:1.75;max-width:500px;margin-bottom:24px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap}
+.hero-tag{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;color:rgba(200,220,255,.85);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
 
-/* SECTION HEADER */
-.sec-head {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 18px; font-weight: 900; letter-spacing: -0.5px;
-  margin-bottom: 14px;
-}
-.sec-head::before {
-  content:""; display:block; width:4px; height:22px; border-radius:2px;
-  background: linear-gradient(180deg, var(--cyan), var(--violet));
-  box-shadow: 0 0 8px rgba(0,200,255,0.4);
-}
-.sec-line { height:1px; background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),transparent); margin:20px 0; border:none; }
+/* ── SECTION TITLES ── */
+.sec-head{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;letter-spacing:-.4px;margin-bottom:12px}
+.sec-head::before{content:"";display:block;width:4px;height:22px;min-height:22px;border-radius:2px;background:linear-gradient(180deg,var(--blue),var(--violet))}
+.divider{height:1px;background:var(--border);margin:20px 0;border:none}
 
-/* CARDS */
-.card {
-  background: var(--card); border-radius: 16px;
-  border: 1px solid rgba(0,200,255,0.08);
-  overflow: hidden; cursor: pointer;
-  transition: transform .26s cubic-bezier(.22,1,.36,1), box-shadow .26s ease, border-color .2s;
-  position: relative;
-}
-.card::before {
-  content:""; position:absolute; inset:-1px; border-radius:inherit;
-  background: linear-gradient(135deg,rgba(0,200,255,0.15),transparent 50%,rgba(139,92,246,0.1));
-  opacity:0; transition:opacity .3s; pointer-events:none; z-index:1;
-}
-.card:hover { transform:translateY(-5px) scale(1.005); box-shadow:0 12px 40px rgba(0,200,255,0.12),0 4px 20px rgba(0,0,0,0.7); border-color:rgba(0,200,255,0.22); }
-.card:hover::before { opacity:1; }
-.card-img { width:100%; height:175px; object-fit:cover; display:block; background:linear-gradient(135deg,#0d1a35,#1a0d35); }
-.card-img-placeholder {
-  width:100%; height:175px; display:flex; align-items:center; justify-content:center;
-  background: linear-gradient(135deg, #0d1525, #12203a);
-  font-size:40px;
-}
-.card-body { padding: 14px 16px 16px; }
-.card-badge {
-  display: inline-flex; align-items:center; gap:5px;
-  padding: 3px 9px; border-radius:6px; font-size:10px; font-weight:800;
-  letter-spacing:.8px; text-transform:uppercase; margin-bottom:8px;
-}
-.card-title { font-size:14px; font-weight:800; line-height:1.5; color:var(--text); margin-bottom:6px; }
-.card-desc { font-size:12px; color:var(--muted); line-height:1.6; }
-.card-meta { display:flex; align-items:center; gap:6px; margin-top:10px; }
-.card-date { font-size:11px; color:rgba(100,150,200,0.6); }
+/* ── LEAGUES ── */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:4px}
+.league-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:var(--shadow);transition:all .2s}
+.league-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);border-color:var(--border2)}
+.league-logo{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.league-name{font-size:13px;font-weight:800;color:var(--text)}
+.league-sub{font-size:10px;color:var(--faint);margin-top:2px}
 
-/* LEAGUE CARDS */
-.league-card {
-  background: var(--card); border-radius:14px;
-  border: 1px solid rgba(0,200,255,0.08);
-  padding: 16px; display:flex; align-items:center; gap:12px;
-  cursor:pointer; transition:all .22s;
-}
-.league-card:hover { border-color:rgba(0,200,255,0.25); background:#0d1a2d; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,200,255,0.08); }
-.league-logo {
-  width:44px;height:44px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px; flex-shrink:0;
-}
-.league-name { font-size:13px; font-weight:800; }
-.league-country { font-size:10px; color:var(--muted); margin-top:2px; }
+/* ── FILTER BAR ── */
+.filter-bar{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fi{flex:1;min-width:200px;padding:9px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--soft);color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .18s}
+.fi:focus{border-color:rgba(26,86,219,.4)}
+.chip{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:700;color:var(--faint);background:var(--soft);border:1.5px solid var(--border);cursor:pointer;transition:all .15s}
+.chip.on,.chip:hover{background:#e8f0ff;border-color:rgba(26,86,219,.25);color:var(--blue)}
+.sel{padding:8px 12px;border-radius:9px;border:1.5px solid var(--border);background:var(--soft);color:var(--muted);font-size:12px;font-weight:700;font-family:inherit;outline:none}
 
-/* STANDINGS */
-.standings {
-  background:var(--card); border-radius:18px; padding:20px;
-  border:1px solid rgba(0,200,255,0.1);
-}
-.standings-row {
-  display:grid; grid-template-columns:28px 1fr 36px 36px 36px 42px;
-  gap:4px; padding:9px 10px; border-radius:10px; align-items:center;
-  transition:background .15s;
-}
-.standings-row:hover { background:rgba(0,200,255,0.04); }
-.standings-row.top { background:rgba(0,200,255,0.06); border:1px solid rgba(0,200,255,0.08); }
-.rank { text-align:center; font-weight:900; font-size:13px; }
-.rank.first { color:var(--cyan); background:rgba(0,200,255,0.15); width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:11px; }
-.pts { text-align:center; font-weight:900; font-size:14px; color:var(--cyan); }
-.col { text-align:center; font-size:12px; color:var(--muted); }
-.th-row {
-  display:grid; grid-template-columns:28px 1fr 36px 36px 36px 42px;
-  gap:4px; padding:7px 10px; margin-bottom:6px;
-  background:rgba(0,200,255,0.05); border-radius:10px;
-  font-size:11px;font-weight:800;color:rgba(0,200,255,0.6);letter-spacing:.5px;
-}
-.th-col { text-align:center; }
+/* ── ARTICLES GRID ── */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s,border-color .18s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:var(--border2)}
+.card-img{width:100%;height:170px;background:linear-gradient(135deg,#e8f0ff,#f0e8ff);display:flex;align-items:center;justify-content:center;font-size:48px}
+.card-body{padding:14px 16px 16px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:800;line-height:1.5;color:var(--text);margin-bottom:6px}
+.card-desc{font-size:12px;color:var(--muted);line-height:1.65}
+.card-date{font-size:11px;color:var(--faint);margin-top:9px}
 
-/* STAT PILLS */
-.stats-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
-.stat-pill {
-  padding:10px 18px; border-radius:12px; text-align:center;
-  background:var(--card); border:1px solid rgba(0,200,255,0.1);
-  flex:1; min-width:100px;
-}
-.stat-n { font-size:22px; font-weight:900; color:var(--cyan); letter-spacing:-1px; }
-.stat-l { font-size:11px; color:var(--muted); margin-top:2px; font-weight:600; }
+/* ── STANDINGS ── */
+.standings-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.standings{background:var(--card);border-radius:18px;padding:18px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.th-row{display:grid;grid-template-columns:26px 1fr 34px 34px 34px 40px;gap:4px;padding:7px 10px;background:var(--soft);border-radius:9px;margin-bottom:5px;font-size:11px;font-weight:800;color:var(--faint);letter-spacing:.4px}
+.tc{text-align:center}
+.st-row{display:grid;grid-template-columns:26px 1fr 34px 34px 34px 40px;gap:4px;padding:8px 10px;border-radius:9px;align-items:center;transition:background .12s}
+.st-row:hover{background:var(--soft)}
+.st-row.top{background:#f0f5ff;border:1px solid rgba(26,86,219,.08)}
+.rank{text-align:center;font-weight:900;font-size:13px}
+.rank.f{color:#fff;background:var(--blue);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:10px}
+.rank.s{color:var(--violet)}
+.pts{text-align:center;font-weight:900;font-size:14px;color:var(--blue)}
+.col{text-align:center;font-size:12px;color:var(--faint)}
+.team-name{font-size:13px;font-weight:800;color:var(--text)}
+.team-name.s{color:var(--muted)}
 
-/* FILTER BAR */
-.filter-bar {
-  background:var(--card); border-radius:16px; padding:14px 18px;
-  border:1px solid rgba(0,200,255,0.1); margin-bottom:18px;
-  display:flex; gap:8px; flex-wrap:wrap; align-items:center;
-}
-.filter-input {
-  flex:1; min-width:180px; padding:9px 14px; border-radius:10px;
-  background:rgba(0,200,255,0.04); border:1px solid rgba(0,200,255,0.12);
-  color:var(--text); font-size:13px; outline:none;
-  transition:border-color .2s;
-}
-.filter-input:focus { border-color:rgba(0,200,255,0.35); box-shadow:0 0 12px rgba(0,200,255,0.08); }
-.filter-chip {
-  padding:6px 13px; border-radius:8px; font-size:12px; font-weight:700;
-  color:rgba(160,200,255,0.7); background:rgba(0,200,255,0.04);
-  border:1.5px solid rgba(0,200,255,0.12); cursor:pointer; transition:all .15s;
-}
-.filter-chip.active,.filter-chip:hover {
-  background:rgba(0,200,255,0.15); border-color:rgba(0,200,255,0.4); color:var(--cyan);
-}
+/* ── SIDEBAR ── */
+.sidebar-card{display:flex;gap:12px;align-items:center;padding:12px;background:var(--card);border-radius:12px;border:1px solid var(--border);cursor:pointer;box-shadow:var(--shadow);transition:all .18s}
+.sidebar-card:hover{border-color:var(--border2);box-shadow:var(--shadow-hover);transform:translateX(-2px)}
+.sidebar-img{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.sidebar-title{font-size:12px;font-weight:800;line-height:1.4;color:var(--text)}
+.sidebar-date{font-size:10px;color:var(--faint);margin-top:3px}
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:3px;height:3px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:rgba(0,200,255,0.2);border-radius:2px}
+@media(max-width:900px){.grid4,.grid3{grid-template-columns:repeat(2,1fr)}.standings-wrap{grid-template-columns:1fr}}
+@media(max-width:600px){.grid4,.grid3{grid-template-columns:1fr}.hdr .nav{display:none}}
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header>
-  <div class="header-inner">
+  <div class="accent-bar"></div>
+  <div class="hdr">
     <a class="logo" href="#">
-      <div class="logo-icon">⚡</div>
+      <div class="logo-icon">
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10 L8 6 L12 10 L16 6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 14 L8 10 L12 14 L16 10" stroke="rgba(255,255,255,.55)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <span class="logo-name">نبض الرياضة</span>
     </a>
     <nav class="nav">
@@ -274,173 +145,157 @@ header::before {
       <a href="#">🏸 البادل</a>
       <a href="#">🥅 الصالات</a>
     </nav>
-    <div class="live-btn"><span class="dot"></span> مباشر</div>
+    <div class="live"><span class="dot"></span> مباشر</div>
   </div>
 </header>
 
-<!-- PAGE -->
 <div class="page">
 
-  <!-- STATS BAR -->
-  <div class="stats-row">
-    <div class="stat-pill"><div class="stat-n">91</div><div class="stat-l">مقال منشور</div></div>
-    <div class="stat-pill"><div class="stat-n">11</div><div class="stat-l">دوريات تُغطّى</div></div>
-    <div class="stat-pill"><div class="stat-n">5</div><div class="stat-l">رياضات</div></div>
-    <div class="stat-pill"><div class="stat-n" style="color:#8b5cf6">3</div><div class="stat-l">لغات</div></div>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-n">91</div><div class="stat-l">مقال منشور</div></div>
+    <div class="stat"><div class="stat-n">11</div><div class="stat-l">دوريات</div></div>
+    <div class="stat"><div class="stat-n">5</div><div class="stat-l">رياضات</div></div>
+    <div class="stat"><div class="stat-n v">3</div><div class="stat-l">لغات</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0891b2">⚡</div><div class="stat-l">تحديث كل 5 دقائق</div></div>
   </div>
 
-  <!-- HERO SECTION -->
-  <div class="hero-section" style="margin-bottom:20px">
-    <div class="hero-badge"><span></span>LIVE COVERAGE</div>
-    <h1 class="hero-title">
-      نبض الرياضة<br>
-      <span>كل الأخبار. لحظة بلحظة.</span>
-    </h1>
-    <p class="hero-sub">تغطية متكاملة لكرة القدم والدوريات الكبرى — الدوري الإنجليزي، الليغا، البوندسليغا، أبطال أوروبا والمزيد.</p>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">LIVE COVERAGE</div>
+    <h1 class="hero-title">نبض الرياضة<br><b>كل الأخبار. لحظة بلحظة.</b></h1>
+    <p class="hero-sub">تغطية متكاملة لأبرز دوريات كرة القدم والأخبار الرياضية العالمية بالعربية والإنجليزية والفرنسية.</p>
     <div class="hero-tags">
-      <span class="tag">⚽ كرة القدم</span>
-      <span class="tag">🏆 أبطال أوروبا</span>
-      <span class="tag">🌟 الدوري الإنجليزي</span>
-      <span class="tag">🔥 نتائج مباشرة</span>
+      <span class="hero-tag">⚽ كرة القدم</span>
+      <span class="hero-tag">🏆 أبطال أوروبا</span>
+      <span class="hero-tag">🌟 الدوري الإنجليزي</span>
+      <span class="hero-tag">🔥 نتائج مباشرة</span>
     </div>
   </div>
 
   <!-- LEAGUES -->
   <div class="sec-head">الدوريات الكبرى</div>
-  <div class="grid4" style="margin-bottom:6px">
-    <div class="league-card"><div class="league-logo" style="background:linear-gradient(135deg,#3b0764,#7c3aed)">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div><div class="league-name">الدوري الإنجليزي</div><div class="league-country">England · Premier League</div></div></div>
-    <div class="league-card"><div class="league-logo" style="background:linear-gradient(135deg,#9a3412,#f97316)">🇪🇸</div><div><div class="league-name">الدوري الإسباني</div><div class="league-country">Spain · La Liga</div></div></div>
-    <div class="league-card"><div class="league-logo" style="background:linear-gradient(135deg,#1e3a8a,#7c3aed)">⭐</div><div><div class="league-name">أبطال أوروبا</div><div class="league-country">Europe · UCL</div></div></div>
-    <div class="league-card"><div class="league-logo" style="background:linear-gradient(135deg,#14532d,#16a34a)">🇸🇦</div><div><div class="league-name">الدوري السعودي</div><div class="league-country">Saudi Arabia · SPL</div></div></div>
+  <div class="grid4">
+    <div class="league-card"><div class="league-logo" style="background:#f0e8ff">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div><div class="league-name">الدوري الإنجليزي</div><div class="league-sub">Premier League</div></div></div>
+    <div class="league-card"><div class="league-logo" style="background:#fff3e8">🇪🇸</div><div><div class="league-name">الدوري الإسباني</div><div class="league-sub">La Liga</div></div></div>
+    <div class="league-card"><div class="league-logo" style="background:#fffbe8">⭐</div><div><div class="league-name">أبطال أوروبا</div><div class="league-sub">Champions League</div></div></div>
+    <div class="league-card"><div class="league-logo" style="background:#edfcf2">🇸🇦</div><div><div class="league-name">الدوري السعودي</div><div class="league-sub">Saudi Pro League</div></div></div>
   </div>
-  <hr class="sec-line">
+  <hr class="divider">
 
-  <!-- ARTICLES GRID -->
+  <!-- ARTICLES -->
   <div class="sec-head">أحدث الأخبار</div>
-
-  <!-- FILTER BAR -->
   <div class="filter-bar">
-    <input class="filter-input" type="text" placeholder="🔍  ابحث بكلمة مفتاحية، فريق، لاعب...">
-    <span class="filter-chip active">كل الوقت</span>
-    <span class="filter-chip">آخر 24 ساعة</span>
-    <span class="filter-chip">آخر أسبوع</span>
-    <select style="padding:7px 12px;border-radius:8px;background:rgba(0,200,255,0.04);border:1px solid rgba(0,200,255,0.12);color:rgba(160,200,255,0.7);font-size:12px;font-weight:700;outline:none">
+    <input class="fi" type="text" placeholder="🔍  ابحث بكلمة مفتاحية، فريق، لاعب...">
+    <span class="chip on">كل الوقت</span>
+    <span class="chip">آخر 24 ساعة</span>
+    <span class="chip">آخر أسبوع</span>
+    <select class="sel">
       <option>🏆 البطولة</option>
       <option>الدوري الإنجليزي</option>
       <option>الليغا</option>
-      <option>أبطال أوروبا</option>
     </select>
   </div>
 
-  <div class="grid3">
-    <!-- Card 1 (featured style) -->
+  <div class="grid3" style="margin-bottom:20px">
+    <!-- Featured 2-col -->
     <div class="card" style="grid-column:span 2">
-      <div class="card-img-placeholder" style="height:240px;font-size:60px">⚽</div>
+      <div class="card-img" style="height:220px;background:linear-gradient(135deg,#1a3a8a,#2d1a6e)"><span>⚽</span></div>
       <div class="card-body">
-        <div class="card-badge" style="background:rgba(0,200,255,0.12);color:#00c8ff;border:1px solid rgba(0,200,255,0.2)">🏴󠁧󠁢󠁥󠁮󠁧󠁿 بريميرليغ</div>
-        <div class="card-title" style="font-size:18px">أرسنال يُعزّز موقعه في صدارة الدوري الإنجليزي بفوز رباعي أمام بايرن</div>
-        <div class="card-desc">سجّل أودوي واتكينز هدفين ليقود الغانرز نحو فوز تاريخي يُرسّخ طموحاتهم في الموسم الحالي...</div>
-        <div class="card-meta"><span class="card-date">🕐 11 مايو 2026</span></div>
+        <div class="badge" style="background:#e8f0ff;color:#1a56db;border:1px solid rgba(26,86,219,.15)">🏴󠁧󠁢󠁥󠁮󠁧󠁿 الدوري الإنجليزي</div>
+        <div class="card-title" style="font-size:17px;letter-spacing:-.3px">أرسنال يُعزّز موقعه في صدارة الدوري الإنجليزي بفوز رباعي تاريخي</div>
+        <div class="card-desc">سجّل أودوي واتكينز هدفين ليقود الغانرز نحو فوز تاريخي يُرسّخ طموحاتهم في السباق على لقب الموسم...</div>
+        <div class="card-date">🕐 11 مايو 2026</div>
       </div>
     </div>
-
-    <!-- Card 2 -->
     <div class="card">
-      <div class="card-img-placeholder">🏀</div>
+      <div class="card-img" style="background:linear-gradient(135deg,#fff3e8,#fde68a)">🏀</div>
       <div class="card-body">
-        <div class="card-badge" style="background:rgba(234,88,12,0.15);color:#f97316;border:1px solid rgba(234,88,12,0.2)">🏀 NBA</div>
+        <div class="badge" style="background:#fff3e8;color:#c2410c;border:1px solid rgba(234,88,12,.15)">🏀 NBA</div>
         <div class="card-title">ليكرز يُقصي وورريرز في المباراة السابعة</div>
-        <div class="card-desc">ليبرون جيمس يُسجّل triple-double في ليلة تاريخية بـ Madison Square Garden...</div>
-        <div class="card-meta"><span class="card-date">🕐 10 مايو 2026</span></div>
+        <div class="card-desc">ليبرون يُسجّل triple-double في ليلة تاريخية...</div>
+        <div class="card-date">🕐 10 مايو 2026</div>
       </div>
     </div>
-
-    <!-- Card 3 -->
     <div class="card">
-      <div class="card-img-placeholder">🎾</div>
+      <div class="card-img" style="background:linear-gradient(135deg,#edfcf2,#d1fae5)">🎾</div>
       <div class="card-body">
-        <div class="card-badge" style="background:rgba(22,163,74,0.12);color:#22c55e;border:1px solid rgba(22,163,74,0.2)">🎾 رولان غاروس</div>
-        <div class="card-title">ألكاراث يتخطّى ديوكوفيتش في ربع النهائي بفارق طوالع</div>
-        <div class="card-desc">معركة ملحمية على الطين الأحمر دامت خمس ساعات انتهت بتتويج بطل اسبانيا...</div>
-        <div class="card-meta"><span class="card-date">🕐 9 مايو 2026</span></div>
+        <div class="badge" style="background:#edfcf2;color:#15803d;border:1px solid rgba(22,163,74,.15)">🎾 رولان غاروس</div>
+        <div class="card-title">ألكاراث يتخطّى ديوكوفيتش في ربع نهائي ملحمي</div>
+        <div class="card-desc">خمس ساعات من المنافسة على الطين الأحمر...</div>
+        <div class="card-date">🕐 9 مايو 2026</div>
       </div>
     </div>
-
-    <!-- Card 4 -->
     <div class="card">
-      <div class="card-img-placeholder">⭐</div>
+      <div class="card-img" style="background:linear-gradient(135deg,#fffbe8,#fef3c7)">⭐</div>
       <div class="card-body">
-        <div class="card-badge" style="background:rgba(245,158,11,0.12);color:#f59e0b;border:1px solid rgba(245,158,11,0.2)">⭐ UCL</div>
-        <div class="card-title">ريال مدريد يتأهل للنهائي بعد ليلة درامية أمام PSG</div>
-        <div class="card-desc">هدف فينيسيوس جونيور في الدقيقة 93 يُعيد الملكي من بين أنياب الإقصاء...</div>
-        <div class="card-meta"><span class="card-date">🕐 7 مايو 2026</span></div>
+        <div class="badge" style="background:#fffbe8;color:#b45309;border:1px solid rgba(180,83,9,.15)">⭐ UCL</div>
+        <div class="card-title">ريال مدريد يتأهل للنهائي بهدف في الدقيقة 93</div>
+        <div class="card-desc">فينيسيوس جونيور يُعيد الملكي من بين أنياب الإقصاء...</div>
+        <div class="card-date">🕐 7 مايو 2026</div>
       </div>
     </div>
   </div>
 
-  <hr class="sec-line">
+  <hr class="divider">
 
-  <!-- STANDINGS SAMPLE -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <!-- STANDINGS + SIDEBAR -->
+  <div class="standings-wrap">
     <div>
       <div class="sec-head">📊 الترتيب — الدوري الإنجليزي</div>
       <div class="standings">
         <div class="th-row">
-          <div>#</div><div>الفريق</div>
-          <div class="th-col">ل</div><div class="th-col">ف</div>
-          <div class="th-col">خ</div><div class="th-col" style="color:rgba(0,200,255,.8)">نق</div>
+          <div class="tc">#</div><div>الفريق</div>
+          <div class="tc">ل</div><div class="tc">ف</div><div class="tc">خ</div>
+          <div class="tc" style="color:var(--blue)">نق</div>
         </div>
-        <div class="standings-row top">
-          <div class="rank"><span class="first">1</span></div>
-          <div style="font-weight:800;font-size:13px">أرسنال</div>
+        <div class="st-row top">
+          <div class="rank"><span class="f">1</span></div>
+          <div class="team-name">أرسنال</div>
           <div class="col">36</div><div class="col">24</div><div class="col">5</div>
           <div class="pts">78</div>
         </div>
-        <div class="standings-row top">
-          <div class="rank" style="color:#8b5cf6;font-weight:900">2</div>
-          <div style="font-weight:700;font-size:13px">مانشستر سيتي</div>
+        <div class="st-row top">
+          <div class="rank s">2</div>
+          <div class="team-name">مانشستر سيتي</div>
           <div class="col">36</div><div class="col">22</div><div class="col">7</div>
-          <div class="pts" style="color:#8b5cf6">72</div>
+          <div class="pts" style="color:var(--violet)">72</div>
         </div>
-        <div class="standings-row">
-          <div class="rank" style="color:var(--muted)">3</div>
-          <div style="font-weight:700;font-size:13px;color:var(--muted)">ليفربول</div>
+        <div class="st-row">
+          <div class="rank" style="color:var(--faint)">3</div>
+          <div class="team-name s">ليفربول</div>
           <div class="col">36</div><div class="col">20</div><div class="col">8</div>
           <div class="col" style="font-weight:900;font-size:14px;color:var(--text)">67</div>
         </div>
-        <div class="standings-row">
-          <div class="rank" style="color:var(--muted)">4</div>
-          <div style="font-weight:700;font-size:13px;color:var(--muted)">تشيلسي</div>
+        <div class="st-row">
+          <div class="rank" style="color:var(--faint)">4</div>
+          <div class="team-name s">تشيلسي</div>
           <div class="col">36</div><div class="col">18</div><div class="col">9</div>
           <div class="col" style="font-weight:900;font-size:14px;color:var(--text)">62</div>
         </div>
+        <div class="st-row">
+          <div class="rank" style="color:var(--faint)">5</div>
+          <div class="team-name s">توتنهام</div>
+          <div class="col">36</div><div class="col">17</div><div class="col">10</div>
+          <div class="col" style="font-weight:900;font-size:14px;color:var(--text)">58</div>
+        </div>
       </div>
     </div>
-
     <div>
       <div class="sec-head">🔥 الأكثر قراءة</div>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;gap:12px;align-items:center;padding:12px;background:var(--card);border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='rgba(0,200,255,0.25)'" onmouseout="this.style.borderColor='rgba(0,200,255,0.1)'">
-          <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#3b0764,#7c3aed);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">⚽</div>
-          <div><div style="font-size:13px;font-weight:800;line-height:1.4">هالاند يتوج بجائزة أفضل لاعب في الدوري الإنجليزي</div><div style="font-size:11px;color:var(--muted);margin-top:3px">🕐 8 مايو 2026</div></div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center;padding:12px;background:var(--card);border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='rgba(0,200,255,0.25)'" onmouseout="this.style.borderColor='rgba(0,200,255,0.1)'">
-          <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#9a3412,#f97316);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">🇪🇸</div>
-          <div><div style="font-size:13px;font-weight:800;line-height:1.4">برشلونة يُقرّر مستقبل أنتوان غريزمان في ظل عروض مغرية</div><div style="font-size:11px;color:var(--muted);margin-top:3px">🕐 7 مايو 2026</div></div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center;padding:12px;background:var(--card);border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='rgba(0,200,255,0.25)'" onmouseout="this.style.borderColor='rgba(0,200,255,0.1)'">
-          <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#14532d,#16a34a);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">🇸🇦</div>
-          <div><div style="font-size:13px;font-weight:800;line-height:1.4">رونالدو يُمدّد عقده مع النصر حتى 2027 بأرقام قياسية</div><div style="font-size:11px;color:var(--muted);margin-top:3px">🕐 6 مايو 2026</div></div>
-        </div>
+        <div class="sidebar-card"><div class="sidebar-img" style="background:#f0e8ff">⚽</div><div><div class="sidebar-title">هالاند يتوج بجائزة أفضل لاعب في الدوري الإنجليزي للموسم</div><div class="sidebar-date">🕐 8 مايو 2026</div></div></div>
+        <div class="sidebar-card"><div class="sidebar-img" style="background:#fff3e8">🇪🇸</div><div><div class="sidebar-title">برشلونة يُقرّر مستقبل غريزمان في ظل عروض مغرية</div><div class="sidebar-date">🕐 7 مايو 2026</div></div></div>
+        <div class="sidebar-card"><div class="sidebar-img" style="background:#edfcf2">🇸🇦</div><div><div class="sidebar-title">رونالدو يُمدّد عقده مع النصر حتى 2027 بأرقام قياسية</div><div class="sidebar-date">🕐 6 مايو 2026</div></div></div>
+        <div class="sidebar-card"><div class="sidebar-img" style="background:#fff0f0">🏀</div><div><div class="sidebar-title">أنتيتوكومبو يقود باكس ميلووكي للتأهل لنصف النهائي</div><div class="sidebar-date">🕐 5 مايو 2026</div></div></div>
       </div>
     </div>
   </div>
 
 </div>
 
-<footer style="text-align:center;padding:24px;color:rgba(100,150,200,0.4);font-size:12px;border-top:1px solid rgba(0,200,255,0.06);margin-top:40px">
-  نبض الرياضة · Design Preview · NEXUS DARK v1.0
+<footer style="text-align:center;padding:24px;color:var(--faint);font-size:12px;border-top:1px solid var(--border);margin-top:40px">
+  نبض الرياضة · Design Preview · Lumière Épuré v2.0
 </footer>
-
 </body>
 </html>
