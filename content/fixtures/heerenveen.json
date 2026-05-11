@@ -3,38 +3,6 @@
   "teamId": 201,
   "upcoming": [
     {
-      "id": "741267",
-      "date": "2026-05-11T12:30Z",
-      "timestamp": 1778502600,
-      "status": "NS",
-      "statusLong": "Abandoned",
-      "venue": "Abe Lenstra Stadion",
-      "city": "Heerenveen",
-      "home": {
-        "id": "141",
-        "slug": "nac-breda",
-        "name": "ناك بريدا",
-        "logo": "https://media.api-sports.io/football/teams/2318.png",
-        "winner": null
-      },
-      "away": {
-        "id": "146",
-        "slug": "heerenveen",
-        "name": "هيرينفين",
-        "logo": "https://media.api-sports.io/football/teams/201.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Dutch Eredivisie",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "741277",
       "date": "2026-05-17T12:30Z",
       "timestamp": 1779021000,
@@ -68,6 +36,38 @@
     }
   ],
   "past": [
+    {
+      "id": "741267",
+      "date": "2026-05-11T12:30Z",
+      "timestamp": 1778502600,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Abe Lenstra Stadion",
+      "city": "Heerenveen",
+      "home": {
+        "id": "141",
+        "slug": "nac-breda",
+        "name": "ناك بريدا",
+        "logo": "https://media.api-sports.io/football/teams/2318.png",
+        "winner": true
+      },
+      "away": {
+        "id": "146",
+        "slug": "heerenveen",
+        "name": "هيرينفين",
+        "logo": "https://media.api-sports.io/football/teams/201.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "league": {
+        "name": "Dutch Eredivisie",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "741262",
       "date": "2026-05-03T10:15Z",
@@ -197,5 +197,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-11T11:51:55.166Z"
+  "fetchedAt": "2026-05-11T13:45:12.874Z"
 }
