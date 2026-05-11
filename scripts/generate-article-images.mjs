@@ -27,93 +27,158 @@ function safeReadJson(filePath) {
   }
 }
 
-// Extract meaningful visual keywords from article title/description
-function extractVisualKeywords(article) {
-  const text = `${article.title || ""} ${article.description || ""} ${(article.keywords || []).join(" ")}`;
+/* ── Team color palettes ─────────────────────────────────────────────────
+   Used to make images visually distinct per club/team
+   ──────────────────────────────────────────────────────────────────────── */
+const TEAM_PALETTES = {
+  "real-madrid":       { colors: "all-white kit, gold and white stands, royal blue accent accents", crowd: "sea of white and gold scarves" },
+  "barcelona":         { colors: "deep navy blue and crimson red vertical stripes, gold accents", crowd: "blue and red mosaic in the stands" },
+  "liverpool":         { colors: "vibrant red kit, Anfield red stands packed to the rafters", crowd: "swaying red and white scarves, famous Kop end" },
+  "manchester-city":   { colors: "sky blue kit, light blue stands, silver architectural detail", crowd: "sea of sky blue scarves and flags" },
+  "manchester-united": { colors: "deep red kit, Old Trafford red and black stands", crowd: "red and white scarves, united flags waving" },
+  "arsenal":           { colors: "red and white kit, Emirates red and white tiered stands", crowd: "red cannon flags, north london atmosphere" },
+  "chelsea":           { colors: "royal blue kit, Stamford Bridge blue west stand", crowd: "blue flags and scarves, London atmosphere" },
+  "psg":               { colors: "dark navy, red and white hoops, Parc des Princes unique roof", crowd: "navy blue and red ultras pyro display" },
+  "bayern-munich":     { colors: "deep red and white kit, Allianz Arena glowing red exterior", crowd: "vibrant yellow and red tifo, munich skyline" },
+  "juventus":          { colors: "black and white vertical stripes, Allianz Stadium modern design", crowd: "black and white scarves, bianconeri atmosphere" },
+  "atletico-madrid":   { colors: "red and white stripes, Metropolitano iconic stands", crowd: "red and white striped flags, passionate colchoneros" },
+  "borussia-dortmund": { colors: "vivid yellow and black kit, Signal Iduna Park iconic yellow wall", crowd: "massive yellow and black tifo, Sudtribune wall" },
+  "inter-milan":       { colors: "black and blue stripes, San Siro shared stadium", crowd: "black and blue nerazzurri flags" },
+  "ac-milan":          { colors: "red and black stripes, historic San Siro atmosphere", crowd: "red and black rossoneri scarves" },
+  "al-hilal":          { colors: "royal blue kit, modern Riyadh stadium", crowd: "blue and white saudi fans" },
+  "al-nassr":          { colors: "yellow and blue kit, saudi pro league modern stadium", crowd: "yellow and blue al-nassr fans" },
+};
 
-  // Detect transfer/departure
-  if (/رحيل|يغادر|يُودّع|انتقال|صفقة|تعاقد|ينضم/.test(text)) return "transfer";
-  // Detect trophy/title/championship
-  if (/لقب|بطولة|كأس|تتويج|يرفع|الفوز|بطل/.test(text)) return "trophy";
-  // Detect injury
-  if (/إصابة|غياب|يتعافى|يعود/.test(text)) return "injury";
-  // Detect press conference / statement
-  if (/مؤتمر|تصريح|يؤكد|كشف|قال|يرفض/.test(text)) return "statement";
-  // Detect match / game action
-  if (/مباراة|هدف|فاز|تعادل|خسر|نتيجة|الجولة|لقاء/.test(text)) return "match";
-  // Detect training / performance
-  if (/تدريب|استعداد|موسم|أداء|تحليل/.test(text)) return "training";
+/* Map Arabic team names to keys */
+const ARABIC_TO_TEAM = {
+  "ريال مدريد": "real-madrid", "ريال": "real-madrid",
+  "برشلونة": "barcelona", "برشلونه": "barcelona",
+  "ليفربول": "liverpool",
+  "مانشستر سيتي": "manchester-city", "سيتي": "manchester-city",
+  "مانشستر يونايتد": "manchester-united", "يونايتد": "manchester-united",
+  "أرسنال": "arsenal", "ارسنال": "arsenal",
+  "تشيلسي": "chelsea",
+  "باريس": "psg", "سان جيرمان": "psg",
+  "بايرن": "bayern-munich",
+  "يوفنتوس": "juventus",
+  "أتلتيكو": "atletico-madrid",
+  "دورتموند": "borussia-dortmund",
+  "إنتر": "inter-milan", "انتر": "inter-milan",
+  "ميلان": "ac-milan",
+  "الهلال": "al-hilal",
+  "النصر": "al-nassr",
+};
+
+function detectTeam(article) {
+  const text = `${article.title || ""} ${article.description || ""} ${(article.keywords || []).join(" ")} ${article.en_title || ""}`;
+  for (const [arabic, key] of Object.entries(ARABIC_TO_TEAM)) {
+    if (text.includes(arabic)) return key;
+  }
+  // English check
+  const lower = text.toLowerCase();
+  for (const key of Object.keys(TEAM_PALETTES)) {
+    if (lower.includes(key.replace("-", " "))) return key;
+  }
+  return null;
+}
+
+/* ── Visual event type detection ──────────────────────────────────────── */
+function extractEventType(article) {
+  const text = `${article.title || ""} ${article.description || ""} ${article.en_title || ""}`;
+  if (/رحيل|يغادر|انتقال|صفقة|تعاقد|ينضم|transfer|signing|deal|move/i.test(text)) return "transfer";
+  if (/لقب|تتويج|يرفع|بطل|champion|trophy|title|winner|win the/i.test(text))        return "trophy";
+  if (/إصابة|غياب|يتعافى|injury|injured|out for/i.test(text))                       return "injury";
+  if (/نهائي|final|semi.final|quarter/i.test(text))                                 return "final";
+  if (/مؤتمر|تصريح|يؤكد|press conference|statement|confirms/i.test(text))           return "press";
+  if (/هدف|فاز|تعادل|خسر|نتيجة|goal|match|result|score|defeated/i.test(text))      return "match";
+  if (/تدريب|استعداد|training|preparation/i.test(text))                              return "training";
+  if (/إحصاء|سجل|record|stats|ranking|classement/i.test(text))                      return "stats";
   return "general";
 }
 
-// Build a rich, content-aware visual scene description
-function buildVisualScene(sport, league, article) {
-  const context = extractVisualKeywords(article);
-
-  // Sport-specific environments
-  const environments = {
-    "premier-league":    { bg: "iconic english football stadium at night, emerald pitch under floodlights, packed terraces of 60 000 fans, north london or manchester skyline visible", light: "cinematic blue-white stadium floodlights, high contrast, dramatic shadows" },
-    "la-liga":           { bg: "mediterranean football stadium on a bright sunday afternoon, terracotta architecture visible beyond stands, pitch immaculately manicured, sold-out capacity", light: "warm golden hour sunlight cutting across the pitch, long player shadows" },
-    "bundesliga":        { bg: "iconic german football stadium, lower ring packed in vibrant yellow, tifo display visible, city skyline at dusk", light: "stadium floodlights mixed with sunset orange glow" },
-    "serie-a":           { bg: "grand italian football stadium, marble colonnades visible, packed curva stand with scarves, roman architecture detail", light: "late afternoon mediterranean light, warm amber tones" },
-    "champions-league":  { bg: "enormous european football stadium at night, star-shaped spotlights, 80 000 seat capacity full, anthem atmosphere, confetti in the air", light: "dramatic blue UEFA-style lighting, intense spotlights from above" },
-    "saudi-pro-league":  { bg: "ultra-modern middle eastern football stadium, palm trees silhouetted, fans in white thobes, gold architectural accents on facades", light: "desert twilight purple and gold sky, vivid green pitch" },
-    "basketball":        { bg: "iconic NBA-style basketball arena, gleaming hardwood court, 20 000-seat sold-out venue, spotlight-lit court from above, rafter banners", light: "intense cool-white arena spotlights on the court, crowd in dramatic blur" },
-    "tennis":            { bg: "grand slam centre court, red clay or manicured grass, full grandstand, tournament atmosphere, dramatic shadow across baseline", light: "bright afternoon sun, sharp player shadow on court surface" },
-    "padel":             { bg: "professional padel court with panoramic glass walls, premium indoor sports complex, court lit in electric blue-white, modern stadium seating", light: "crisp bright indoor LED lighting, reflections in glass walls" },
-    "futsal":            { bg: "indoor futsal arena, polished wooden floor, compact goals, passionate crowd close to pitch, vibrant colorful stands", light: "overhead industrial stadium lights, bright and even" },
-    "football":          { bg: "football stadium at golden hour, packed stands, perfectly cut pitch, city skyline glowing in background", light: "golden hour sunlight, dramatic long shadows across the pitch" },
-  };
-
-  // Context-specific action layers
-  const actions = {
-    transfer:  "lone athletic figure standing at the edge of the pitch staring into the distance, suitcase silhouette metaphor, emotional farewell composition, shallow depth of field",
-    trophy:    "large golden trophy sitting on the pitch grass, confetti raining from above, celebration atmosphere, dramatic low-angle hero shot",
-    injury:    "medical staff and physiotherapist silhouettes on the pitch, focused and professional, golden hour backlight, empty stadium in background",
-    statement: "press conference podium on pitch, microphones, dramatic spotlight from above on empty chair, anticipation atmosphere",
-    match:     "intense athletic duel, two silhouetted players competing at peak athletic moment, motion blur, crowd energy in background",
-    training:  "lone athlete silhouetted against a goal, dawn light on pitch, precision and focus, wide angle cinematic framing",
-    general:   "sweeping aerial view of packed stadium, bird's eye perspective, geometric patterns of stands and pitch, crowd color mosaic",
-  };
-
-  const sportKey = (league && environments[league]) ? league : (sport && environments[sport] ? sport : "football");
-  const env = environments[sportKey];
-  const action = actions[context] || actions.general;
-
-  return `${env.bg}. Scene: ${action}. Lighting: ${env.light}.`;
-}
-
+/* ── Rich, article-specific prompt builder ───────────────────────────── */
 function buildPrompt(article) {
-  const title = normalizeText(article.title || "");
-  const sport = normalizeText(article.sport || "football");
+  const sport  = normalizeText(article.sport  || "football");
   const league = normalizeText(article.league || "");
-  const scene = buildVisualScene(sport, league, article);
+  const event  = extractEventType(article);
+  const teamKey = detectTeam(article);
+  const team  = teamKey ? TEAM_PALETTES[teamKey] : null;
 
-  // Extract up to 3 content keywords for extra specificity
-  const kw = (article.keywords || []).filter(k => k && k.length > 2).slice(0, 3).join(", ");
+  // Prefer English title for AI clarity, fall back to French, then Arabic
+  const readableTitle = normalizeText(
+    article.en_title || article.fr_title || article.title || ""
+  ).slice(0, 120);
 
-  return `You are generating a professional sports news article header image for an Arabic sports news website.
+  // English keywords from content
+  const kw = (article.keywords || [])
+    .filter(k => k && k.length > 2 && !/^[؀-ۿ]/.test(k))
+    .slice(0, 4).join(", ");
 
-STRICT RULES — never violate:
-- NO text, letters, numbers, captions, watermarks, or UI elements anywhere in the image
-- NO recognizable real player faces or portraits
-- NO team logos, club badges, sponsor marks, jersey numbers, or brand trademarks
-- NO flags used as main subject (background crowd flags are OK)
-- Photorealistic photography style only — no illustration, no cartoon, no painting
-- Horizontal/landscape format (16:9 ratio), suitable for a web article banner
+  /* ── Stadium / arena environments ── */
+  const ENV = {
+    "premier-league":    "iconic english top-flight football stadium at night, floodlit emerald pitch, packed terraces of 60 000 fans, northerly city skyline visible beyond the stands",
+    "la-liga":           "sunlit mediterranean football stadium, sand-coloured architecture, pitch immaculately groomed, sold-out capacity, terracotta stands",
+    "bundesliga":        "german football stadium at dusk, distinctive lower tier, city skyline glowing orange, atmospheric tifo in the stands",
+    "serie-a":           "grand historic italian football stadium, marble arches, packed curva with coloured smoke, roman architecture detail in background",
+    "ligue-1":           "french top-flight football stadium, art-deco main stand, passionate ultras section with tifos, paris skyline at blue hour",
+    "champions-league":  "enormous european football stadium at night, 80 000 seats full, blue-white spotlights, pre-match atmosphere, confetti in the air",
+    "saudi-pro-league":  "futuristic middle-eastern football stadium, palm-tree silhouettes, fans in traditional white dress, gold architectural accents, desert twilight sky",
+    "basketball":        "NBA-style arena with gleaming hardwood court, 20 000-seat sold-out venue, rafter championship banners, intense overhead spotlights",
+    "tennis":            "grand-slam centre court, immaculate red clay or manicured grass, full three-tier grandstand, dramatic shadows across the baseline",
+    "padel":             "professional padel facility, panoramic glass walls, electric blue-white LED lighting, smart spectator seating",
+    "futsal":            "indoor futsal arena, polished timber floor, compact goals, crowd extremely close to the pitch, vivid coloured stands",
+    "football":          "professional football stadium at twilight, stands packed with 50 000 fans, perfectly manicured pitch, city glow on the horizon",
+  };
 
-VISUAL COMPOSITION:
-${scene}
+  /* ── Action scenes by event type ── */
+  const ACTION = {
+    transfer:  "solitary athletic silhouette standing at the tunnel entrance staring towards the empty pitch, soft farewell lighting, shallow depth of field, contemplative mood",
+    trophy:    "gleaming golden trophy on the centre of the pitch, confetti shower, low dramatic hero angle, celebration flares in the background",
+    injury:    "medical and physio team silhouettes in motion across the pitch, golden-hour backlight, empty stadium watching, focused professional atmosphere",
+    final:     "two distinct groups of supporters in a split stadium, intense pre-match atmosphere, teams warming up in silhouette, dramatic lighting raking across the pitch",
+    press:     "empty podium with microphones on the pitch edge, single dramatic overhead spotlight, anticipation and mystery, wide angle",
+    match:     "intense aerial dueling silhouette, two athletic figures leaping at peak of motion, motion blur, roaring crowd in background, ball at apex",
+    training:  "lone athletic figure silhouetted against a goalpost at first light, precision training drills, cinematic wide angle",
+    stats:     "aerial bird's-eye view of pitch geometry, player formations visible as silhouettes, graphic sports journalism composition",
+    general:   "sweeping cinematic aerial view of a packed stadium, crowd colour mosaic, pitch geometry, late-afternoon raking light",
+  };
 
-ARTICLE CONTEXT (for tonal reference only — do NOT add text):
-Topic: "${title.slice(0, 100)}"
-${kw ? `Themes: ${kw}` : ""}
+  const envKey = (league && ENV[league]) ? league : (sport && ENV[sport] ? sport : "football");
+  const environment = ENV[envKey];
+  const action = ACTION[event] || ACTION.general;
 
-QUALITY TARGET:
-- Premium sports journalism photography, like Getty Images or AFP wire photo
-- Emotionally resonant, visually striking, immediately communicates the sport's energy
-- High contrast, rich colors, sharp focus on the main subject with cinematic depth of field
-- The image must feel SPECIFIC to this article's story, not a generic stock photo`.trim();
+  // Team palette override
+  const colorNote = team
+    ? `TEAM VISUAL IDENTITY: fans dressed in ${team.colors}. Crowd detail: ${team.crowd}.`
+    : "";
+
+  return `You are creating a premium editorial sports photography image for a professional Arabic sports news website.
+
+ABSOLUTE RULES (never break):
+• Zero text, letters, numbers, captions, watermarks, scorelines or UI elements
+• No identifiable real player faces or recognizable portraits
+• No club logos, badges, jersey numbers, sponsor branding or trademark symbols
+• No national flags as main subject (background crowd flags are acceptable)
+• Pure photorealistic photography — no illustration, CGI render, painting or cartoon
+• Output must be landscape 16:9 — perfect for a news article banner
+
+SETTING:
+${environment}
+
+EVENT TYPE — "${event}":
+${action}
+
+${colorNote}
+
+ARTICLE TOPIC (visual tone guide only — do NOT render as text):
+"${readableTitle}"
+${kw ? `Keywords: ${kw}` : ""}
+
+TECHNICAL QUALITY:
+• Getty Images / AFP wire photo standard — premium sports journalism
+• Cinematically lit, emotionally resonant, visually striking
+• Rich saturated colours, sharp foreground subject, creamy bokeh crowd background
+• This image must feel 100% specific to this exact article — not a stock photo`.trim();
 }
 
 // ── Gemini Imagen (Google AI) — priorité 1, rapide et moins cher ─────────

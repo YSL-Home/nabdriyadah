@@ -26,10 +26,32 @@ export default function HomePage() {
   });
   const breaking = (recentBreaking.length > 0 ? recentBreaking : sorted).slice(0, 8);
 
-  const featured   = sorted[0] ?? null;
-  const secondary  = sorted.slice(1, 3);
-  const grid       = sorted.slice(3, 9);
-  const sidebar    = sorted.slice(9, 15);
+  // Football toujours en tête — les autres sports en bas de page
+  const football    = sorted.filter((a) => a.sport === "football");
+  const nonFootball = sorted.filter((a) => a.sport !== "football");
+
+  // Featured : meilleur article foot récent, sinon le plus récent toutes catégories
+  const featured = football[0] ?? sorted[0] ?? null;
+
+  // Secondary (2 cards hero) : foot en priorité
+  const poolAfterFeatured = sorted.filter((a) => a !== featured);
+  const footAfter = poolAfterFeatured.filter((a) => a.sport === "football");
+  const secondary = footAfter.length >= 2
+    ? footAfter.slice(0, 2)
+    : [...footAfter, ...poolAfterFeatured.filter((a) => a.sport !== "football")].slice(0, 2);
+
+  // Grid (6 cards) : foot d'abord, puis les autres
+  const alreadyUsed = new Set([featured, ...secondary].filter(Boolean).map((a) => a.slug));
+  const footGrid  = football.filter((a) => !alreadyUsed.has(a.slug));
+  const otherGrid = nonFootball.filter((a) => !alreadyUsed.has(a.slug));
+  const grid      = [...footGrid, ...otherGrid].slice(0, 9);
+
+  // Sidebar : derniers articles quelle que soit la catégorie
+  const gridSlugs = new Set(grid.map((a) => a.slug));
+  const sidebar = sorted
+    .filter((a) => !alreadyUsed.has(a.slug) && !gridSlugs.has(a.slug))
+    .slice(0, 6);
+
   const basketball = sorted.filter((a) => a.sport === "basketball").slice(0, 4);
   const tennis     = sorted.filter((a) => a.sport === "tennis").slice(0, 4);
   const padel      = sorted.filter((a) => a.sport === "padel").slice(0, 4);
