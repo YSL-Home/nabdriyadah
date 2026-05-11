@@ -43,7 +43,8 @@ const IMGS = {
     "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=900&q=80",
   ],
   padel: [
-    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80",
+    "https://images.unsplash.com/photo-1612534847738-b3af9bc31f0c?w=900&q=80",
+    "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=900&q=80",
     "https://images.unsplash.com/photo-1529926706528-db9e5010cd8e?w=900&q=80",
   ],
   futsal: [

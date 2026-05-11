@@ -70,6 +70,11 @@ jobs:
           BREAKING_ONLY: "true"
 
       # Commit sans déclencher de build Cloudflare (le déploiement est géré par full-refresh)
+
+      - name: Audit quotidien (images, traductions, sports)
+        run: node scripts/daily-audit.mjs
+        continue-on-error: true
+
       - name: Commit & push content only
         if: steps.scan.outputs.changed == 'true'
         run: |
@@ -139,6 +144,11 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        continue-on-error: true
+
+
+      - name: Audit quotidien (images, traductions, sports)
+        run: node scripts/daily-audit.mjs
         continue-on-error: true
 
       - name: Commit & push content
