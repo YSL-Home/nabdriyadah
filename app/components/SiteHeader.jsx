@@ -119,24 +119,12 @@ export default function SiteHeader() {
 
         {/* Logo */}
         <Link href={HOME[lang]} style={{ textDecoration: "none", flexShrink: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
-            {/* Icône marque */}
-            <div style={{
-              width: "32px", height: "32px", borderRadius: "9px",
-              background: isDark
-                ? "linear-gradient(135deg, #1a3a7a, #2d1a6e)"
-                : "linear-gradient(135deg, #1a56db, #7c3aed)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              boxShadow: isDark
-                ? "0 2px 10px rgba(30,60,150,0.4)"
-                : "0 2px 10px rgba(26,86,219,0.35)",
-              flexShrink: 0,
-            }}>
-              <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
-                <path d="M4 10 L8 6 L12 10 L16 6" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M4 14 L8 10 L12 14 L16 10" stroke="rgba(255,255,255,0.55)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <img
+              src="/logo-v2.svg"
+              alt={SITE_NAME[lang]}
+              style={{ height: "32px", width: "auto" }}
+            />
             <span style={{
               fontSize: "clamp(15px,3vw,19px)", fontWeight: 900,
               color: nameColor, letterSpacing: "-0.5px", whiteSpace: "nowrap",
@@ -150,8 +138,7 @@ export default function SiteHeader() {
         <nav className="hdr-nav-desktop">
           {links.map((link) => (
             <Link key={link.base} href={`${prefix}${link.base}`} className="hdr-pill">
-              <span style={{ fontSize: "13px" }}>{link.emoji}</span>
-              {link.label}
+              {link.emoji} {link.label}
             </Link>
           ))}
         </nav>
