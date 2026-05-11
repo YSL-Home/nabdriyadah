@@ -1,6 +1,14 @@
 import "./globals.css";
+import { Inter } from "next/font/google";
 import SiteHeader from "./components/SiteHeader";
 import ThemeController from "./components/ThemeController";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata = {
   metadataBase: new URL("https://nabdriyadah.com"),
@@ -44,7 +52,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" className={inter.variable}>
       <head>
         {/* Anti-flash: applique le thème AVANT le premier rendu */}
         <script dangerouslySetInnerHTML={{ __html:
@@ -62,7 +70,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
 
-      <body style={{ margin: 0, fontFamily: "Arial, sans-serif" }}>
+      <body style={{ margin: 0, fontFamily: "var(--font-inter, 'Inter', 'Segoe UI', Arial, sans-serif)" }}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-MHCF745N"
