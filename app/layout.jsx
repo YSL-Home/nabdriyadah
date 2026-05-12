@@ -75,10 +75,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* Google Analytics GA4 — nabdriyadah.com */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B9GHQYQ41N" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5420JXJVQ0" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-B9GHQYQ41N');`
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5420JXJVQ0');`
           }}
         />
       </head>
