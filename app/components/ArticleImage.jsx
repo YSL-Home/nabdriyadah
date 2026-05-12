@@ -1,67 +1,78 @@
 "use client";
 
-// Images Unsplash par ligue / sport — chargement immédiat, pas de fichier local requis
+// Images Unsplash par ligue / sport — AUCUN doublon entre sports
+// Chaque photo n'apparaît QUE dans UNE seule catégorie
 const IMGS = {
+  /* ── FOOTBALL / SOCCER ───────────────────────────────────────────────── */
   "premier-league": [
-    "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=900&q=80",
-    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80",
-    "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&q=80",
+    "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=900&q=80", // Old Trafford / Anfield atmosphere
+    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80", // Soccer ball on pitch
+    "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&q=80", // Football stadium floodlit
   ],
   "la-liga": [
-    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80",
-    "https://images.unsplash.com/photo-1551958219-acbc630e2914?w=900&q=80",
-    "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=900&q=80",
+    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80", // Football match action
+    "https://images.unsplash.com/photo-1551958219-acbc630e2914?w=900&q=80", // Football tackle
+    "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=900&q=80", // Football goalkeeper
   ],
   "bundesliga": [
-    "https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=900&q=80",
-    "https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=900&q=80",
+    "https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=900&q=80", // Football crowd
+    "https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=900&q=80", // Football stadium
   ],
   "serie-a": [
-    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=900&q=80",
-    "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=900&q=80",
+    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=900&q=80", // Football action
+    "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=900&q=80", // Football player
   ],
   "ligue-1": [
-    "https://images.unsplash.com/photo-1552667466-07770ae110d0?w=900&q=80",
-    "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=900&q=80",
+    "https://images.unsplash.com/photo-1552667466-07770ae110d0?w=900&q=80", // Football match
+    "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=900&q=80", // Football pitch
   ],
   "champions-league": [
-    "https://images.unsplash.com/photo-1608831540955-35094d48694a?w=900&q=80",
-    "https://images.unsplash.com/photo-1562552052-d5fa6f3c12ff?w=900&q=80",
+    "https://images.unsplash.com/photo-1608831540955-35094d48694a?w=900&q=80", // Champions League night
+    "https://images.unsplash.com/photo-1562552052-d5fa6f3c12ff?w=900&q=80", // Football trophy atmosphere
   ],
   "saudi-pro-league": [
-    "https://images.unsplash.com/photo-1620472478041-3c7984cc3ef4?w=900&q=80",
-    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80",
-  ],
-  basketball: [
-    "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80",
-    "https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80",
-    "https://images.unsplash.com/photo-1519861531473-9200262188bf?w=900&q=80",
-  ],
-  tennis: [
-    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80",
-    "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=900&q=80",
-    "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=900&q=80",
-  ],
-  padel: [
-    "https://images.unsplash.com/photo-1612534847738-b3af9bc31f0c?w=900&q=80",
-    "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=900&q=80",
-    "https://images.unsplash.com/photo-1529926706528-db9e5010cd8e?w=900&q=80",
-  ],
-  futsal: [
-    "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=900&q=80",
-    "https://images.unsplash.com/photo-1552318965-6e6be7484ada?w=900&q=80",
+    "https://images.unsplash.com/photo-1620472478041-3c7984cc3ef4?w=900&q=80", // Football stadium modern
+    "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80", // Football pitch aerial
   ],
   football: [
-    "https://images.unsplash.com/photo-1552318965-6e6be7484ada?w=900&q=80",
-    "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=900&q=80",
-    "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&q=80",
-    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80",
-    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80",
-    "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80",
-    "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80",
-    "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=900&q=80",
-    "https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=900&q=80",
-    "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=900&q=80",
+    "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=900&q=80", // Football dribble
+    "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=900&q=80", // Soccer player kicking
+    "https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=900&q=80", // Football stadium aerial
+    "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=900&q=80", // Football field
+    "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=900&q=80", // Football boots on grass
+    "https://images.unsplash.com/photo-1540747913346-19212a4b423a?w=900&q=80", // Football header
+  ],
+
+  /* ── BASKETBALL ──────────────────────────────────────────────────────── */
+  basketball: [
+    "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80", // NBA arena court
+    "https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80", // Basketball dunk
+    "https://images.unsplash.com/photo-1519861531473-9200262188bf?w=900&q=80", // Basketball player
+    "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=900&q=80", // Basketball court
+    "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80", // Basketball match
+  ],
+
+  /* ── TENNIS ──────────────────────────────────────────────────────────── */
+  tennis: [
+    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80", // Tennis racket clay
+    "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=900&q=80", // Tennis player serve
+    "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=900&q=80", // Tennis ball court
+    "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=900&q=80", // Grand slam action
+    "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&q=80", // Tennis aerial court
+  ],
+
+  /* ── PADEL ───────────────────────────────────────────────────────────── */
+  padel: [
+    "https://images.unsplash.com/photo-1612534847738-b3af9bc31f0c?w=900&q=80", // Padel glass court
+    "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=900&q=80", // Padel racket
+    "https://images.unsplash.com/photo-1629904888780-8de0c7933561?w=900&q=80", // Padel match
+  ],
+
+  /* ── FUTSAL ──────────────────────────────────────────────────────────── */
+  futsal: [
+    "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=900&q=80", // Indoor football
+    "https://images.unsplash.com/photo-1552318965-6e6be7484ada?w=900&q=80", // Futsal court
+    "https://images.unsplash.com/photo-1624880357913-a8539238245b?w=900&q=80", // Indoor soccer
   ],
 };
 
