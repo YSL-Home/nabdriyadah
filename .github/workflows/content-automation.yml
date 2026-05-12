@@ -158,6 +158,15 @@ jobs:
         run: node scripts/daily-audit.mjs
         continue-on-error: true
 
+      - name: Auto-posting Twitter/X
+        run: node scripts/post-to-twitter.mjs
+        env:
+          TWITTER_API_KEY:      ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET:   ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        continue-on-error: true
+
       - name: Commit & push content
         run: |
           bash scripts/git-safe-push.sh "refresh: $(date '+%d/%m %H:%M')"
