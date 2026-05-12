@@ -306,6 +306,94 @@ async function downloadImage(url, destPath) {
   fs.writeFileSync(destPath, buffer);
 }
 
+// ── Scrape OG image from source article page ───────────────────────────────
+async function scrapeOgImage(url) {
+  if (!url) return null;
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 9000);
+    const res = await fetch(url, {
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1)" },
+      redirect: "follow",
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    if (!res.ok) return null;
+    const html = await res.text();
+    // Try og:image first, then twitter:image
+    const patterns = [
+      /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
+      /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i,
+      /<meta[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i,
+      /<meta[^>]*content=["']([^"']+)["'][^>]*name=["']twitter:image["']/i,
+    ];
+    for (const re of patterns) {
+      const m = html.match(re);
+      if (m && m[1] && m[1].startsWith("http")) return m[1];
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// ── Download image to buffer ───────────────────────────────────────────────
+async function fetchImageBuffer(url) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 12000);
+  const res = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0" },
+    redirect: "follow",
+    signal: ctrl.signal,
+  });
+  clearTimeout(timer);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const ct = res.headers.get("content-type") || "";
+  if (!ct.includes("image")) throw new Error(`Not an image: ${ct}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  if (buf.length < 4000) throw new Error("Image too small or placeholder");
+  return buf;
+}
+
+// ── GPT-Image-1 edit: create visually similar image from source photo ──────
+async function editImageWithGPT(imageBuffer, article) {
+  if (!OPENAI_API_KEY) throw new Error("No OPENAI_API_KEY");
+
+  const sport  = normalizeText(article.sport  || "football");
+  const league = normalizeText(article.league || "");
+  const title  = normalizeText(article.en_title || article.fr_title || article.title || "").slice(0, 100);
+
+  const prompt = [
+    "Create a professional sports editorial photograph visually inspired by the reference image.",
+    "Keep the same sport, same general setting (stadium/court/arena), same atmosphere and lighting mood.",
+    "Make it a completely new photo — different moment, different angle, slight variation in composition.",
+    "STRICT: no text, no logos, no watermarks, no identifiable player faces, no jersey numbers, no club badges.",
+    "Output: photorealistic, premium sports journalism quality, 16:9 landscape banner format.",
+    league ? `Sport context: ${league}` : `Sport: ${sport}`,
+    title  ? `Article topic: "${title}"` : "",
+  ].filter(Boolean).join(" ");
+
+  const formData = new FormData();
+  formData.append("model", "gpt-image-1");
+  formData.append("image[]", new Blob([imageBuffer], { type: "image/jpeg" }), "source.jpg");
+  formData.append("prompt", prompt);
+  formData.append("size", "1536x1024");
+  formData.append("n", "1");
+
+  const res = await fetch("https://api.openai.com/v1/images/edits", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
+    body: formData,
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(`GPT edit error: ${JSON.stringify(data?.error || data).slice(0, 120)}`);
+
+  const b64 = data?.data?.[0]?.b64_json;
+  if (!b64) throw new Error("GPT edit: no image data");
+  return b64;
+}
+
 async function main() {
   if (!HAS_IMAGE_API) {
     console.log("Aucune clé API image (GOOGLE_API_KEY / OPENAI_API_KEY) — génération images ignorée.");
@@ -345,22 +433,58 @@ async function main() {
       continue;
     }
 
-    // Try RSS image URL first (free, no API cost)
-    const rssImageUrl = article.imageUrl;
-    if (rssImageUrl && !FORCE_REGENERATE) {
+    // ── Step 1: find source image (RSS imageUrl → OG scrape) ─────────────
+    const rssImageUrl = article.imageUrl || null;
+    const sourceUrl   = article.sourceUrl || null;
+
+    let sourceImgBuffer = null;
+    let sourceLabel = "";
+
+    // Try RSS image first
+    if (rssImageUrl) {
       try {
-        console.log(`Downloading RSS image: ${slug}`);
-        await downloadImage(rssImageUrl, absoluteImagePath);
-        article.image = publicImagePath;
-        changed = true;
-        console.log(`  Downloaded from RSS: ${fileName}`);
-        continue;
-      } catch (dlErr) {
-        console.log(`  RSS image download failed (${dlErr.message.slice(0, 60)}), falling back to AI...`);
+        console.log(`  Fetching RSS image buffer: ${rssImageUrl.slice(0, 80)}`);
+        sourceImgBuffer = await fetchImageBuffer(rssImageUrl);
+        sourceLabel = "RSS";
+      } catch (e) {
+        console.log(`  RSS buffer failed (${e.message.slice(0, 60)})`);
       }
     }
 
-    // AI generation fallback
+    // Try OG image from source article page if RSS failed
+    if (!sourceImgBuffer && sourceUrl) {
+      try {
+        console.log(`  Scraping OG image from: ${sourceUrl.slice(0, 80)}`);
+        const ogUrl = await scrapeOgImage(sourceUrl);
+        if (ogUrl) {
+          sourceImgBuffer = await fetchImageBuffer(ogUrl);
+          sourceLabel = "OG";
+          console.log(`  OG image found: ${ogUrl.slice(0, 80)}`);
+        } else {
+          console.log(`  No OG image found`);
+        }
+      } catch (e) {
+        console.log(`  OG scrape failed (${e.message.slice(0, 60)})`);
+      }
+    }
+
+    // ── Step 2: clone via GPT edit if we have a source image ─────────────
+    if (sourceImgBuffer && OPENAI_API_KEY) {
+      try {
+        console.log(`Cloning image via GPT edit [${sourceLabel}]: ${slug}`);
+        const b64 = await editImageWithGPT(sourceImgBuffer, article);
+        fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
+        article.image = publicImagePath;
+        changed = true;
+        console.log(`  Cloned (${sourceLabel}): ${fileName}`);
+        await sleep(1000);
+        continue;
+      } catch (editErr) {
+        console.log(`  GPT edit failed (${editErr.message.slice(0, 80)}), falling back to AI generation...`);
+      }
+    }
+
+    // ── Step 3: AI generation fallback (no source image or edit failed) ──
     try {
       console.log(`Generating image: ${slug} (sport: ${article.sport || "football"})`);
       const prompt = buildPrompt(article);

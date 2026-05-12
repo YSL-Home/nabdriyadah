@@ -584,7 +584,8 @@ async function main() {
       fr_description: item.sourceLang === "fr" && !hasArabicTitle
                         ? srcDesc || rewritten.fr_description || null
                         : rewritten.fr_description || null,
-      imageUrl: item.imageUrl || null,
+      sourceUrl:  item.link || item.sourceUrl || null,
+      imageUrl:   item.imageUrl || null,
       image: `/generated/${slug}.png`
     });
   }
