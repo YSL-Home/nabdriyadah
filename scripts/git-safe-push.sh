@@ -15,6 +15,8 @@ git config pull.rebase false
 git config branch.main.rebase false
 
 git add -A
+# Exclure les fichiers workflow — le bot CI n'a pas la permission "workflows"
+git restore --staged .github/ 2>/dev/null || true
 
 # Message du commit (fourni en argument ou auto-généré)
 MSG="${1:-auto: $(date '+%d/%m %H:%M')}"
@@ -79,6 +81,7 @@ for ATTEMPT in 1 2 3; do
 
       # Commiter nos fichiers sur la pointe du remote (sera fast-forward)
       git add -A
+      git restore --staged .github/ 2>/dev/null || true
       if ! git diff --cached --quiet; then
         git commit -m "$MSG"
       fi
