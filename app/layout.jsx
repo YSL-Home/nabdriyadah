@@ -74,6 +74,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MHCF745N');`
           }}
         />
+        {/* Google Analytics GA4 — nabdriyadah.com */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B9GHQYQ41N" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-B9GHQYQ41N');`
+          }}
+        />
       </head>
 
       <body style={{ margin: 0, fontFamily: "var(--font-inter, 'Inter', 'Segoe UI', Arial, sans-serif)" }}>
