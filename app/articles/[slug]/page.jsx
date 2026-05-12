@@ -603,12 +603,33 @@ export default function ArticlePage({ params }) {
                 "description": article.seoDescription || article.description,
                 "url": `https://nabdriyadah.com/articles/${article.slug}/`,
                 "inLanguage": "ar",
-                "publisher": {
+                "datePublished": article.publishedAt || undefined,
+                "dateModified": article.publishedAt || undefined,
+                "articleSection": leagueLabel(article.league, article.sport),
+                "image": article.image?.startsWith("http")
+                  ? article.image
+                  : article.image
+                    ? `https://nabdriyadah.com${article.image}`
+                    : undefined,
+                "author": {
                   "@type": "Organization",
                   "name": "نبض الرياضة",
                   "url": "https://nabdriyadah.com"
                 },
-                "keywords": (article.keywords || []).join(", ")
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "نبض الرياضة",
+                  "url": "https://nabdriyadah.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://nabdriyadah.com/logo-v2.svg"
+                  }
+                },
+                "keywords": (article.keywords || []).join(", "),
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": `https://nabdriyadah.com/articles/${article.slug}/`
+                }
               },
               ...(article.faq && article.faq.length > 0 ? [{
                 "@type": "FAQPage",
