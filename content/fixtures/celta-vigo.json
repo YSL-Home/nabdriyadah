@@ -3,38 +3,6 @@
   "teamId": 538,
   "upcoming": [
     {
-      "id": "748500",
-      "date": "2026-05-12T17:00Z",
-      "timestamp": 1778605200,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Balaidos",
-      "city": "Vigo",
-      "home": {
-        "id": "85",
-        "slug": "celta-vigo",
-        "name": "سيلتا فيغو",
-        "logo": "https://media.api-sports.io/football/teams/538.png",
-        "winner": null
-      },
-      "away": {
-        "id": "1538",
-        "slug": null,
-        "name": "Levante",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748506",
       "date": "2026-05-17T17:00Z",
       "timestamp": 1779037200,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "748500",
+      "date": "2026-05-12T17:00Z",
+      "timestamp": 1778605200,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Balaidos",
+      "city": "Vigo",
+      "home": {
+        "id": "85",
+        "slug": "celta-vigo",
+        "name": "سيلتا فيغو",
+        "logo": "https://media.api-sports.io/football/teams/538.png",
+        "winner": false
+      },
+      "away": {
+        "id": "1538",
+        "slug": null,
+        "name": "Levante",
+        "logo": "",
+        "winner": true
+      },
+      "goals": {
+        "home": 2,
+        "away": 3
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "748487",
       "date": "2026-05-09T16:30Z",
@@ -293,5 +293,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-12T17:23:13.296Z"
+  "fetchedAt": "2026-05-12T19:16:00.921Z"
 }
