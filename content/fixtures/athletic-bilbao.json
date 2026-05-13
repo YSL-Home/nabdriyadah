@@ -3,38 +3,6 @@
   "teamId": 534,
   "upcoming": [
     {
-      "id": "748497",
-      "date": "2026-05-13T17:00Z",
-      "timestamp": 1778691600,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "RCDE Stadium",
-      "city": "Barcelona",
-      "home": {
-        "id": "88",
-        "slug": "espanyol",
-        "name": "إسبانيول",
-        "logo": "https://media.api-sports.io/football/teams/543.png",
-        "winner": null
-      },
-      "away": {
-        "id": "93",
-        "slug": "athletic-bilbao",
-        "name": "أتلتيك بلباو",
-        "logo": "https://media.api-sports.io/football/teams/534.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748506",
       "date": "2026-05-17T17:00Z",
       "timestamp": 1779037200,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "748497",
+      "date": "2026-05-13T17:00Z",
+      "timestamp": 1778691600,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "RCDE Stadium",
+      "city": "Barcelona",
+      "home": {
+        "id": "88",
+        "slug": "espanyol",
+        "name": "إسبانيول",
+        "logo": "https://media.api-sports.io/football/teams/543.png",
+        "winner": true
+      },
+      "away": {
+        "id": "93",
+        "slug": "athletic-bilbao",
+        "name": "أتلتيك بلباو",
+        "logo": "https://media.api-sports.io/football/teams/534.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "748488",
       "date": "2026-05-10T14:15Z",
@@ -293,5 +293,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-13T17:25:40.025Z"
+  "fetchedAt": "2026-05-13T19:15:30.088Z"
 }

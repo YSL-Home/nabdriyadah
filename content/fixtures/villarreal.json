@@ -3,38 +3,6 @@
   "teamId": 533,
   "upcoming": [
     {
-      "id": "748501",
-      "date": "2026-05-13T17:00Z",
-      "timestamp": 1778691600,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Estadio de la Cerámica",
-      "city": "Villarreal",
-      "home": {
-        "id": "102",
-        "slug": "villarreal",
-        "name": "فياريال",
-        "logo": "https://media.api-sports.io/football/teams/533.png",
-        "winner": null
-      },
-      "away": {
-        "id": "243",
-        "slug": "sevilla",
-        "name": "إشبيلية",
-        "logo": "https://media.api-sports.io/football/teams/536.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748512",
       "date": "2026-05-17T17:00Z",
       "timestamp": 1779037200,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "748501",
+      "date": "2026-05-13T17:00Z",
+      "timestamp": 1778691600,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Estadio de la Cerámica",
+      "city": "Villarreal",
+      "home": {
+        "id": "102",
+        "slug": "villarreal",
+        "name": "فياريال",
+        "logo": "https://media.api-sports.io/football/teams/533.png",
+        "winner": false
+      },
+      "away": {
+        "id": "243",
+        "slug": "sevilla",
+        "name": "إشبيلية",
+        "logo": "https://media.api-sports.io/football/teams/536.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 2,
+        "away": 3
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "748490",
       "date": "2026-05-10T12:00Z",
@@ -293,5 +293,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-13T17:25:40.025Z"
+  "fetchedAt": "2026-05-13T19:15:30.088Z"
 }

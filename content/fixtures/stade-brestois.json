@@ -3,38 +3,6 @@
   "teamId": 108,
   "upcoming": [
     {
-      "id": "746665",
-      "date": "2026-05-13T17:00Z",
-      "timestamp": 1778691600,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Stade Francis-Le Blé",
-      "city": "Brest",
-      "home": {
-        "id": "6997",
-        "slug": "stade-brestois",
-        "name": "ستاد برستوا",
-        "logo": "https://media.api-sports.io/football/teams/108.png",
-        "winner": null
-      },
-      "away": {
-        "id": "180",
-        "slug": "strasbourg",
-        "name": "ستراسبورغ",
-        "logo": "https://media.api-sports.io/football/teams/78.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "French Ligue 1",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "746709",
       "date": "2026-05-17T19:00Z",
       "timestamp": 1779044400,
@@ -68,6 +36,38 @@
     }
   ],
   "past": [
+    {
+      "id": "746665",
+      "date": "2026-05-13T17:00Z",
+      "timestamp": 1778691600,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Stade Francis-Le Blé",
+      "city": "Brest",
+      "home": {
+        "id": "6997",
+        "slug": "stade-brestois",
+        "name": "ستاد برستوا",
+        "logo": "https://media.api-sports.io/football/teams/108.png",
+        "winner": false
+      },
+      "away": {
+        "id": "180",
+        "slug": "strasbourg",
+        "name": "ستراسبورغ",
+        "logo": "https://media.api-sports.io/football/teams/78.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "league": {
+        "name": "French Ligue 1",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "746705",
       "date": "2026-05-10T19:00Z",
@@ -229,5 +229,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-13T17:26:11.434Z"
+  "fetchedAt": "2026-05-13T19:16:00.397Z"
 }
