@@ -171,6 +171,40 @@ async function generateVideo(article) {
   return vidPath;
 }
 
+// ── FACEBOOK : post image (fallback sans ffmpeg) ──────────────────────────────
+async function postFacebookImage(article) {
+  const caption = buildCaption(article, "facebook");
+  let imageBuffer, ext;
+  try {
+    ({ buffer: imageBuffer, ext } = await getImageBuffer(article));
+  } catch {
+    // Pas d'image → post texte seul avec lien
+    const res = await fetch(
+      `https://graph.facebook.com/v19.0/${FB_PAGE_ID}/feed`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: caption, access_token: FB_TOKEN }),
+      }
+    );
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(JSON.stringify(data.error || data).slice(0, 200));
+    return data.id;
+  }
+
+  const form = new FormData();
+  form.append("caption", caption);
+  form.append("access_token", FB_TOKEN);
+  form.append("source", new Blob([imageBuffer], { type: `image/${ext}` }), `photo.${ext}`);
+
+  const res = await fetch(
+    `https://graph.facebook.com/v19.0/${FB_PAGE_ID}/photos`,
+    { method: "POST", body: form }
+  );
+  const data = await res.json();
+  if (!res.ok || data.error) throw new Error(JSON.stringify(data.error || data).slice(0, 200));
+  return data.id;
+}
+
 // ── FACEBOOK : upload vidéo + publication ────────────────────────────────────
 async function postFacebook(videoPath, article) {
   const caption = buildCaption(article, "facebook");
@@ -338,9 +372,10 @@ async function main() {
   console.log(`║   FB:${HAS_FB?"✓":"✗"} IG:${HAS_IG?"✓":"✗"} TK:${HAS_TK?"✓":"✗"} CARTOON:${HAS_CARTOON?"✓":"✗"}               ║`);
   console.log("╚══════════════════════════════════════════════════════╝");
 
-  // Vérifier ffmpeg disponible
-  try { execSync("ffmpeg -version", { stdio: "pipe" }); }
-  catch { console.error("ffmpeg non disponible — abandon."); process.exit(1); }
+  // Vérifier ffmpeg disponible (non bloquant — fallback image si absent)
+  let HAS_FFMPEG = false;
+  try { execSync("ffmpeg -version", { stdio: "pipe" }); HAS_FFMPEG = true; }
+  catch { console.log("⚠️  ffmpeg non disponible — mode image uniquement (pas de vidéo)."); }
 
   const articles = JSON.parse(fs.readFileSync(ARTICLES_PATH, "utf-8"));
   let posted = {};
@@ -369,45 +404,63 @@ async function main() {
     console.log(`\n🎬 Article: ${article.slug}`);
     console.log(`   "${(article.title || "").slice(0, 65)}"`);
 
-    // Générer la vidéo une seule fois pour les 3 plateformes
-    // Priorité : cartoon animé → fallback Ken Burns
-    let videoPath = null;
-    try {
-      if (HAS_CARTOON) {
-        console.log("   🎨 Génération vidéo cartoon (Gemini → Leonardo → Kling)...");
-        videoPath = await generateCartoonVideo(article);
-        if (videoPath) console.log("   ✅ Vidéo cartoon générée");
-        else console.log("   ⚠️  Cartoon échoué, fallback Ken Burns...");
+    if (!HAS_FFMPEG) {
+      // ── Mode dégradé : pas de ffmpeg → image + texte sur Facebook uniquement ──
+      console.log("   📸 Mode image (ffmpeg absent) — Facebook uniquement");
+      if (HAS_FB && !p.facebook) {
+        try {
+          const postId = await postFacebookImage(article);
+          p.facebook = { postId, postedAt: new Date().toISOString() };
+          console.log(`   Facebook: ✅ ${postId}`);
+        } catch (err) {
+          console.log(`   Facebook: ❌ ${err.message.slice(0, 120)}`);
+        }
+      } else if (p.facebook) {
+        console.log("   Facebook: ✅ déjà posté");
       }
-      if (!videoPath) {
-        console.log("   ⏳ Génération vidéo Ken Burns (ffmpeg)...");
-        videoPath = await generateVideo(article);
-      }
-      const sizeMB = (fs.statSync(videoPath).size / 1024 / 1024).toFixed(1);
-      console.log(`   ✅ Vidéo prête (${sizeMB} MB)`);
-    } catch (err) {
-      console.log(`   ❌ Génération vidéo échouée: ${err.message.slice(0, 100)}`);
-      continue;
-    }
-
-    for (const platform of platforms) {
-      if (!platform.enabled || p[platform.key]) {
-        if (!platform.enabled) console.log(`   ${platform.name}: ⏭ credentials manquants`);
-        else console.log(`   ${platform.name}: ✅ déjà posté`);
+      if (HAS_IG)  console.log("   Instagram: ⏭ nécessite ffmpeg (vidéo obligatoire)");
+      if (HAS_TK)  console.log("   TikTok: ⏭ nécessite ffmpeg (vidéo obligatoire)");
+    } else {
+      // ── Mode vidéo complet : cartoon animé → Ken Burns ───────────────────────
+      let videoPath = null;
+      try {
+        if (HAS_CARTOON) {
+          console.log("   🎨 Génération vidéo cartoon (Gemini → Leonardo → Kling)...");
+          videoPath = await generateCartoonVideo(article);
+          if (videoPath) console.log("   ✅ Vidéo cartoon générée");
+          else console.log("   ⚠️  Cartoon échoué, fallback Ken Burns...");
+        }
+        if (!videoPath) {
+          console.log("   ⏳ Génération vidéo Ken Burns (ffmpeg)...");
+          videoPath = await generateVideo(article);
+        }
+        const sizeMB = (fs.statSync(videoPath).size / 1024 / 1024).toFixed(1);
+        console.log(`   ✅ Vidéo prête (${sizeMB} MB)`);
+      } catch (err) {
+        console.log(`   ❌ Génération vidéo échouée: ${err.message.slice(0, 100)}`);
+        posted[article.slug] = p;
+        fs.writeFileSync(POSTED_PATH, JSON.stringify(posted, null, 2), "utf-8");
         continue;
       }
-      try {
-        const postId = await platform.fn(videoPath, article);
-        p[platform.key] = { postId, postedAt: new Date().toISOString() };
-        console.log(`   ${platform.name}: ✅ ${postId}`);
-      } catch (err) {
-        console.log(`   ${platform.name}: ❌ ${err.message.slice(0, 120)}`);
-      }
-      await sleep(DELAY_MS);
-    }
 
-    // Nettoyage vidéo tmp
-    try { if (videoPath) fs.unlinkSync(videoPath); } catch {}
+      for (const platform of platforms) {
+        if (!platform.enabled || p[platform.key]) {
+          if (!platform.enabled) console.log(`   ${platform.name}: ⏭ credentials manquants`);
+          else console.log(`   ${platform.name}: ✅ déjà posté`);
+          continue;
+        }
+        try {
+          const postId = await platform.fn(videoPath, article);
+          p[platform.key] = { postId, postedAt: new Date().toISOString() };
+          console.log(`   ${platform.name}: ✅ ${postId}`);
+        } catch (err) {
+          console.log(`   ${platform.name}: ❌ ${err.message.slice(0, 120)}`);
+        }
+        await sleep(DELAY_MS);
+      }
+
+      try { if (videoPath) fs.unlinkSync(videoPath); } catch {}
+    }
 
     posted[article.slug] = p;
     fs.writeFileSync(POSTED_PATH, JSON.stringify(posted, null, 2), "utf-8");
