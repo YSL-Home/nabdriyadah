@@ -3,38 +3,6 @@
   "teamId": 94,
   "upcoming": [
     {
-      "id": "746666",
-      "date": "2026-05-13T19:00Z",
-      "timestamp": 1778698800,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Stade Bollaert-Delelis",
-      "city": "Lens",
-      "home": {
-        "id": "175",
-        "slug": "lens",
-        "name": "لانس",
-        "logo": "https://media.api-sports.io/football/teams/94.png",
-        "winner": null
-      },
-      "away": {
-        "id": "160",
-        "slug": "psg",
-        "name": "باريس سان جيرمان",
-        "logo": "https://media.api-sports.io/football/teams/85.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "French Ligue 1",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "746712",
       "date": "2026-05-17T19:00Z",
       "timestamp": 1779044400,
@@ -68,6 +36,38 @@
     }
   ],
   "past": [
+    {
+      "id": "746666",
+      "date": "2026-05-13T19:00Z",
+      "timestamp": 1778698800,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Stade Bollaert-Delelis",
+      "city": "Lens",
+      "home": {
+        "id": "175",
+        "slug": "lens",
+        "name": "لانس",
+        "logo": "https://media.api-sports.io/football/teams/94.png",
+        "winner": false
+      },
+      "away": {
+        "id": "160",
+        "slug": "psg",
+        "name": "باريس سان جيرمان",
+        "logo": "https://media.api-sports.io/football/teams/85.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "league": {
+        "name": "French Ligue 1",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "746702",
       "date": "2026-05-08T18:45Z",
@@ -229,5 +229,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-13T19:48:11.892Z"
+  "fetchedAt": "2026-05-13T20:58:03.412Z"
 }
