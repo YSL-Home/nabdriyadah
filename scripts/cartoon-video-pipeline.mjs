@@ -132,6 +132,11 @@ export async function generateCartoonVideo(article) {
     fs.mkdirSync(FINAL_OUTPUT_DIR, { recursive: true });
     assembleFinalVideo(animatedPath, concept, finalPath);
 
+    // Mettre à jour l'index statique pour la page /videos/
+    try {
+      execSync(`node "${path.join(ROOT, "scripts", "build-videos-index.mjs")}"`, { stdio: "pipe" });
+    } catch {}
+
     console.log(`✅ Vidéo cartoon prête: ${finalPath}\n`);
     return finalPath;
   } catch (err) {
@@ -152,7 +157,11 @@ export async function batchGenerateCartoonVideos(articles, limit = 5) {
     return !fs.existsSync(finalPath);
   });
 
-  console.log(`📋 ${pending.length} articles sans vidéo cartoon (limite: ${limit})`);
+  // Trier par score viral décroissant — les articles les plus viraux en premier
+  pending.sort((a, b) => (b.viralScore || 0) - (a.viralScore || 0));
+
+  const topScored = pending.filter((a) => a.viralScore > 0).length;
+  console.log(`📋 ${pending.length} articles sans vidéo (${topScored} avec score viral, limite: ${limit})`);
 
   const toProcess = pending.slice(0, limit);
   const results = [];

@@ -1,0 +1,49 @@
+name: 📚 Build Character Library
+
+on:
+  workflow_dispatch:
+  # Se relance automatiquement chaque dimanche pour mettre à jour les nouveaux personnages
+  schedule:
+    - cron: "0 3 * * 0"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Génération bibliothèque personnages cartoon
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Git config
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions@github.com"
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build character library
+        run: node scripts/build-character-library.mjs
+        env:
+          OPENAI_API_KEY:   ${{ secrets.OPENAI_API_KEY }}
+          LEONARDO_API_KEY: ${{ secrets.LEONARDO_API_KEY }}
+
+      - name: Commit bibliothèque
+        run: |
+          git add content/character-library.json public/generated/characters/
+          git diff --cached --quiet && echo "Aucun nouveau personnage" || \
+          git commit -m "chore: mise à jour bibliothèque personnages cartoon [skip deploy]"
+          git push origin main

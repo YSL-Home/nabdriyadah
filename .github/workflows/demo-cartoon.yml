@@ -40,6 +40,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Score viral articles
+        run: node scripts/score-viral-articles.mjs
+        continue-on-error: true
+
       - name: Run cartoon demo pipeline
         run: node scripts/demo-cartoon-pipeline.mjs
         env:
@@ -52,9 +56,12 @@ jobs:
           echo "=== RÉSULTAT DE LA DÉMO ==="
           cat content/demo-cartoon-result.json
 
+      - name: Rebuild videos index
+        run: node scripts/build-videos-index.mjs
+
       - name: Commit et push résultats
         run: |
-          git add public/generated/cartoons/ content/demo-cartoon-result.json
+          git add public/generated/cartoons/ content/demo-cartoon-result.json content/cartoon-videos-index.json
           git diff --cached --quiet && echo "Rien à commiter" || \
           git commit -m "demo: cartoon pipeline - $(date '+%d/%m %H:%M') [skip deploy]"
           git push origin main

@@ -20,6 +20,7 @@ import path from "path";
 import os   from "os";
 import { execSync } from "child_process";
 import { generateCartoonVideo } from "./cartoon-video-pipeline.mjs";
+import { postRecentArticlesToYouTube, HAS_YOUTUBE } from "./post-to-youtube.mjs";
 
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 const POSTED_PATH   = path.join(process.cwd(), "content/social-posted.json");
@@ -410,6 +411,14 @@ async function main() {
 
     posted[article.slug] = p;
     fs.writeFileSync(POSTED_PATH, JSON.stringify(posted, null, 2), "utf-8");
+  }
+
+  // YouTube Shorts — poste les vidéos cartoon déjà générées
+  if (HAS_YOUTUBE) {
+    console.log("\n📺 YouTube Shorts posting...");
+    await postRecentArticlesToYouTube(MAX_POSTS);
+  } else {
+    console.log("\n📺 YouTube: YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN non configurés — ignoré");
   }
 
   console.log("\n✅ Social posting terminé.");
