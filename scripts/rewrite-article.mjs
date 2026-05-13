@@ -498,14 +498,13 @@ async function main() {
     if (!Array.isArray(existingArticles)) existingArticles = [];
   } catch {}
 
-  // Deduplicate existing articles on load (defence against race-condition duplicates)
+  // Construire l'index des titres existants pour éviter les doublons sur les NOUVEAUX articles
+  // Ne jamais supprimer d'articles existants — on lit seulement, on n'écrit pas moins
   const seenExistingTitles = new Set();
-  existingArticles = existingArticles.filter(a => {
+  for (const a of existingArticles) {
     const key = normalizeText(a.title || "").toLowerCase();
-    if (!key || seenExistingTitles.has(key)) return false;
-    seenExistingTitles.add(key);
-    return true;
-  });
+    if (key) seenExistingTitles.add(key);
+  }
   console.log(`Existing articles: ${existingArticles.length}`);
 
   // Build a set of known slugs + fuzzy title keys to avoid duplicates
