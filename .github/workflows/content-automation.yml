@@ -80,6 +80,15 @@ jobs:
         run: |
           bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M') [skip deploy]"
 
+      - name: Notify on failure (Telegram)
+        if: failure() && env.TELEGRAM_BOT_TOKEN != ''
+        run: |
+          MSG="❌ nabdriyadah — Breaking News FAILED%0ARun: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${MSG}" > /dev/null
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+
   # ──────────────────────────────────────────────────────────────────────────
   # JOB 2 : Full Refresh — toutes les heures
   # Génère le contenu + BUILD Next.js + DÉPLOIE sur Cloudflare via wrangler
@@ -203,3 +212,12 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Notify on failure (Telegram)
+        if: failure() && env.TELEGRAM_BOT_TOKEN != ''
+        run: |
+          MSG="❌ nabdriyadah — Full Refresh FAILED%0ARun: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${MSG}" > /dev/null
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
