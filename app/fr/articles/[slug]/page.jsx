@@ -117,13 +117,32 @@ export default function FrArticlePage({ params }) {
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "NewsArticle",
-          "headline": title,
-          "description": description,
-          "datePublished": article.publishedAt,
-          "inLanguage": "fr",
-          "url": `https://nabdriyadah.com/fr/articles/${article.slug}/`,
-          "publisher": { "@type": "Organization", "name": "Sports Pulse" }
+          "@graph": [
+            {
+              "@type": "NewsArticle",
+              "headline": title,
+              "description": description,
+              "url": `https://nabdriyadah.com/fr/articles/${article.slug}/`,
+              "inLanguage": "fr",
+              "datePublished": article.publishedAt || undefined,
+              "dateModified": article.publishedAt || undefined,
+              "articleSection": article.sport || "football",
+              "image": article.image?.startsWith("http") ? article.image : article.image ? `https://nabdriyadah.com${article.image}` : undefined,
+              "keywords": (article.keywords || []).join(", "),
+              "author": { "@type": "Organization", "name": "Sports Pulse", "url": "https://nabdriyadah.com/fr/" },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Sports Pulse",
+                "url": "https://nabdriyadah.com",
+                "logo": { "@type": "ImageObject", "url": "https://nabdriyadah.com/logo-v2.svg" }
+              },
+              "mainEntityOfPage": { "@type": "WebPage", "@id": `https://nabdriyadah.com/fr/articles/${article.slug}/` }
+            },
+            ...(article.faq?.length > 0 ? [{
+              "@type": "FAQPage",
+              "mainEntity": article.faq.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+            }] : [])
+          ]
         })}} />
       </div>
     </main>
