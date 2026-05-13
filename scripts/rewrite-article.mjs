@@ -358,98 +358,98 @@ const ARTICLE_FORMATS = [
   { ar: "خبر عاجل", en: "breaking news", hint: "قدّم الخبر بأسلوب خبر مقتضب ومكثف يركز على المعلومة" },
 ];
 
-async function rewriteArticle(item, index) {
-  const fallback = fallbackArticle(item, index);
+// Prompt arabe seul (sources EN/FR : on réutilise le contenu original)
+function buildArOnlyPrompt(item, format, label, source) {
   const originalTitle = normalizeText(item.originalTitle || item.title || "");
   const originalDescription = normalizeText(item.originalDescription || item.description || "");
-  const sport = item.sport || "football";
-  const label = leagueLabel(item.league || sport);
-  const source = sourceArabic(item.source);
-  const systemPrompt = sportSystemPrompt(sport);
-  const format = ARTICLE_FORMATS[index % ARTICLE_FORMATS.length];
-
-  if (!ANTHROPIC_API_KEY && !OPENAI_API_KEY) return fallback;
-
-  const prompt = `
+  return `
 أنت محرر رياضي في موقع "نبض الرياضة". مهمتك: تحويل هذا الخبر إلى مقال صحفي عربي طويل ومحسَّن للبحث (SEO).
 
-⚡ نوع المقال المطلوب: **${format.ar}** (${format.en})
-تعليمات الأسلوب: ${format.hint}
+⚡ نوع المقال: **${format.ar}** — ${format.hint}
 
---- المعلومات المتاحة ---
-الرياضة/البطولة: ${label}
-المصدر: ${source}
+الرياضة/البطولة: ${label} | المصدر: ${source}
 العنوان الأصلي: ${originalTitle}
 الوصف: ${originalDescription}
 الوسوم: ${(item.topicTags || []).join("، ")}
 
---- قواعد SEO إلزامية ---
-العنوان (title):
-- يجب أن يذكر اسم الفريق أو اللاعب أو الحدث المحدد بشكل صريح
-- بين 45 و 70 حرفاً
-- يبدأ بالمعلومة الأبرز مباشرة (لا يبدأ بـ"أخبار" أو "تقرير")
-- يثير الفضول ويحفز على النقر
+القواعد:
+- العنوان: 45-70 حرفاً، يبدأ بالمعلومة الأبرز، يذكر الفريق/اللاعب صراحةً
+- seoTitle: "[الكيان] — [الخبر] | نبض الرياضة"
+- seoDescription: 145-160 حرفاً بالضبط
+- content: 8-10 فقرات صحفية مفصولة بـ \\n\\n، بدون markdown
+- keywords: 8-10 كلمات عربية
+- faq: 3 أسئلة وأجوبة
+- لا كلمة إنجليزية — الأسماء الأجنبية بالعربية فقط
+- لا حشو ولا تكرار
 
-عنوان السيو (seoTitle):
-- يتضمن الكلمة المفتاحية الرئيسية في أول 60 حرف
-- صيغة: "[الكيان الرياضي] — [الخبر] | نبض الرياضة"
-
-وصف السيو (seoDescription):
-- بين 145 و 160 حرفاً بالضبط
-- يلخص الخبر ويتضمن الكيان الرياضي والفعل والنتيجة
-- يحتوي على دعوة للقراءة ضمنية
-
-المحتوى (content):
-- مقال طويل: 8 إلى 10 فقرات صحفية متدرجة
-- الفقرة 1: الخبر الأبرز والأرقام (الـ lede) — 2-3 جمل مكثفة
-- الفقرة 2: السياق والخلفية التاريخية للحدث
-- الفقرة 3: التفاصيل والمعطيات التقنية أو الإحصائية
-- الفقرة 4-5: تحليل تأثير الخبر على الموسم والمنافسة
-- الفقرة 6: آراء ومواقف (صياغة صحفية حتى بدون اقتباس حرفي)
-- الفقرة 7-8: التوقعات والسيناريوهات المحتملة
-- الفقرة 9: ربط بالمشهد الرياضي العربي والاهتمام الإقليمي
-- الفقرة 10: خاتمة تحريرية مع دعوة للمتابعة
-- افصل الفقرات بـ \\n\\n فقط — بدون عناوين فرعية أو markdown
-
-الكلمات المفتاحية (keywords):
-- 8 إلى 10 كلمات/عبارات عربية
-- تشمل: اسم الكيان + البطولة + الفعل الرياضي + كلمات LSI (مثل: نتائج، انتقالات، تحليل، موسم، ملعب...)
-- لا تكرار بين الكلمات
-
-الأسئلة الشائعة (faq):
-- 3 أسئلة وأجوبة قصيرة مرتبطة بالخبر (لـ schema FAQ)
-- كل سؤال: سؤال عربي + جواب 1-2 جملة
-
---- تحذيرات ---
-- لا كلمة إنجليزية واحدة في المخرجات
-- الأسماء الأجنبية بالحروف العربية فقط (مثال: ريال مدريد، ليونيل ميسي)
-- لا مقدمات عامة ("في إطار" ، "في سياق" لوحدها)
-- لا تكرار بين العنوان والوصف والفقرة الأولى
-- لا تستخدم عبارات الحشو الشائعة مثل "في هذا الإطار" و"تجدر الإشارة" و"وفي هذا الصدد"
-- كل فقرة يجب أن تضيف معلومة جديدة — لا تكرار أفكار بصياغة مختلفة
-- أسلوب جريدة رياضية راقية: مباشر، موجز، غني بالمعطيات الدقيقة
-
-أعد JSON فقط بهذا الشكل الدقيق:
+أعد JSON فقط:
 {
-  "title": "العنوان بالعربية...",
-  "description": "الوصف بالعربية...",
-  "seoTitle": "عنوان السيو بالعربية...",
-  "seoDescription": "وصف السيو بالعربية...",
+  "title": "...", "description": "...", "seoTitle": "...", "seoDescription": "...",
   "content": "فقرة 1\\n\\nفقرة 2\\n\\n...",
-  "keywords": ["...", "...", "..."],
-  "faq": [
-    { "q": "سؤال؟", "a": "جواب." },
-    { "q": "سؤال؟", "a": "جواب." },
-    { "q": "سؤال؟", "a": "جواب." }
-  ],
-  "en_title": "English title (50-70 chars, professional sports journalism style, specific not generic)",
-  "en_description": "English meta description (145-160 chars, SEO-optimized, mention team/player name)",
-  "en_content": "Full English article body: 5 paragraphs of professional sports journalism. Paragraph 1: lead with the key fact. Paragraph 2: context and background. Paragraph 3: analysis and impact. Paragraph 4: reactions and implications. Paragraph 5: outlook. NO Arabic text, NO generic phrases. Write like ESPN or Sky Sports.",
-  "fr_title": "Titre en français (50-70 caractères, style journalistique sportif, précis et accrocheur)",
-  "fr_description": "Description méta en français (145-160 caractères, optimisée SEO, mention équipe/joueur)",
-  "fr_content": "Corps complet de l'article en français: 5 paragraphes de journalisme sportif professionnel. Paragraphe 1: l'essentiel du fait. Paragraphe 2: contexte et historique. Paragraphe 3: analyse et impact. Paragraphe 4: réactions et enjeux. Paragraphe 5: perspectives. PAS de texte arabe, PAS de phrases génériques. Style L'Équipe ou RMC Sport."
+  "keywords": ["..."],
+  "faq": [{"q": "...","a": "..."},{"q": "...","a": "..."},{"q": "...","a": "..."}]
+}`.trim();
 }
-`.trim();
+
+// Prompt complet AR+EN+FR (sources arabes uniquement)
+function buildFullPrompt(item, format, label, source) {
+  const originalTitle = normalizeText(item.originalTitle || item.title || "");
+  const originalDescription = normalizeText(item.originalDescription || item.description || "");
+  return `
+أنت محرر رياضي في موقع "نبض الرياضة". مهمتك: تحويل هذا الخبر إلى مقال صحفي عربي طويل ومحسَّن للبحث (SEO).
+
+⚡ نوع المقال: **${format.ar}** — ${format.hint}
+
+الرياضة/البطولة: ${label} | المصدر: ${source}
+العنوان الأصلي: ${originalTitle}
+الوصف: ${originalDescription}
+الوسوم: ${(item.topicTags || []).join("، ")}
+
+القواعد:
+- العنوان: 45-70 حرفاً، يبدأ بالمعلومة الأبرز، يذكر الفريق/اللاعب صراحةً
+- seoTitle: "[الكيان] — [الخبر] | نبض الرياضة"
+- seoDescription: 145-160 حرفاً بالضبط
+- content: 8-10 فقرات صحفية مفصولة بـ \\n\\n، بدون markdown
+- keywords: 8-10 كلمات عربية
+- faq: 3 أسئلة وأجوبة
+- لا كلمة إنجليزية في الحقول العربية — الأسماء الأجنبية بالعربية
+- لا حشو ولا تكرار
+
+أعد JSON فقط:
+{
+  "title": "...", "description": "...", "seoTitle": "...", "seoDescription": "...",
+  "content": "فقرة 1\\n\\nفقرة 2\\n\\n...",
+  "keywords": ["..."],
+  "faq": [{"q": "...","a": "..."},{"q": "...","a": "..."},{"q": "...","a": "..."}],
+  "en_title": "English title (50-70 chars, specific, sports journalism)",
+  "en_description": "English meta description (145-160 chars, SEO, team/player name)",
+  "en_content": "5 professional sports journalism paragraphs. Lead → context → analysis → reactions → outlook. Style: ESPN/Sky Sports. No Arabic.",
+  "fr_title": "Titre français (50-70 chars, précis, accrocheur)",
+  "fr_description": "Description méta française (145-160 chars, SEO, nom équipe/joueur)",
+  "fr_content": "5 paragraphes journalisme sportif professionnel. Fait → contexte → analyse → réactions → perspectives. Style L'Équipe. Pas d'arabe."
+}`.trim();
+}
+
+async function rewriteArticle(item, index) {
+  const fallback = fallbackArticle(item, index);
+  const originalTitle       = normalizeText(item.originalTitle || item.title || "");
+  const originalDescription = normalizeText(item.originalDescription || item.description || "");
+  const sport       = item.sport || "football";
+  const label       = leagueLabel(item.league || sport);
+  const source      = sourceArabic(item.source);
+  const systemPrompt = sportSystemPrompt(sport);
+  const format      = ARTICLE_FORMATS[index % ARTICLE_FORMATS.length];
+  const srcLang     = (item.sourceLang || "ar").toLowerCase(); // "ar" | "en" | "fr"
+  const hasArabicSrc = /[؀-ۿ]/.test(originalTitle);
+
+  if (!ANTHROPIC_API_KEY && !OPENAI_API_KEY) return fallback;
+
+  // Sources EN/FR → prompt arabe uniquement, on réutilise le contenu original pour EN/FR
+  // Sources AR → prompt complet AR+EN+FR (traduction incluse)
+  const isNonArabicSrc = (srcLang === "en" || srcLang === "fr") && !hasArabicSrc;
+  const prompt = isNonArabicSrc
+    ? buildArOnlyPrompt(item, format, label, source)
+    : buildFullPrompt(item, format, label, source);
 
   const raw = await callLLM(prompt, systemPrompt);
   if (!raw) return fallback;
@@ -577,9 +577,11 @@ async function main() {
     }
     seenExistingTitles.add(rewrittenTitleKey);
 
-    const srcTitle = normalizeText(item.originalTitle || "").slice(0, 100);
-    const srcDesc  = normalizeText(item.originalDescription || "").slice(0, 200);
-    const hasArabicTitle = /[؀-ۿ؀-ۿ]/.test(srcTitle);
+    const srcTitle        = normalizeText(item.originalTitle || "").slice(0, 100);
+    const srcDesc         = normalizeText(item.originalDescription || "").slice(0, 200);
+    const originalDescription = normalizeText(item.originalDescription || item.description || "");
+    const srcLang         = (item.sourceLang || "ar").toLowerCase();
+    const hasArabicTitle  = /[؀-ۿ]/.test(srcTitle);
 
     newArticles.push({
       slug,
@@ -597,19 +599,14 @@ async function main() {
       content: rewritten.content,
       keywords: rewritten.keywords,
       faq: rewritten.faq || [],
-      // Translations: source-title shortcut (free) → LLM result
-      en_title:       item.sourceLang === "en" && !hasArabicTitle
-                        ? srcTitle || rewritten.en_title || null
-                        : rewritten.en_title || null,
-      en_description: item.sourceLang === "en" && !hasArabicTitle
-                        ? srcDesc || rewritten.en_description || null
-                        : rewritten.en_description || null,
-      fr_title:       item.sourceLang === "fr" && !hasArabicTitle
-                        ? srcTitle || rewritten.fr_title || null
-                        : rewritten.fr_title || null,
-      fr_description: item.sourceLang === "fr" && !hasArabicTitle
-                        ? srcDesc || rewritten.fr_description || null
-                        : rewritten.fr_description || null,
+      // Langues : source EN/FR → utiliser le contenu original directement (zéro AI)
+      //           source AR  → utiliser les champs générés par l'IA
+      en_title:       srcLang === "en" && !hasArabicTitle ? srcTitle.slice(0, 120)       : (rewritten.en_title       || null),
+      en_description: srcLang === "en" && !hasArabicTitle ? srcDesc.slice(0, 300)        : (rewritten.en_description || null),
+      en_content:     srcLang === "en" && !hasArabicTitle ? originalDescription.slice(0, 1200) : (rewritten.en_content || null),
+      fr_title:       srcLang === "fr" && !hasArabicTitle ? srcTitle.slice(0, 120)       : (rewritten.fr_title       || null),
+      fr_description: srcLang === "fr" && !hasArabicTitle ? srcDesc.slice(0, 300)        : (rewritten.fr_description || null),
+      fr_content:     srcLang === "fr" && !hasArabicTitle ? originalDescription.slice(0, 1200) : (rewritten.fr_content || null),
       sourceUrl:  item.link || item.sourceUrl || null,
       imageUrl:   item.imageUrl || null,
       image: `/generated/${slug}.png`
