@@ -1,0 +1,60 @@
+name: 🎬 Démo Cartoon Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      notify:
+        description: "Message optionnel"
+        required: false
+        default: "Démo cartoon pipeline"
+
+permissions:
+  contents: write
+
+jobs:
+  demo:
+    name: Génération vidéo cartoon de démo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Git config
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions@github.com"
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install ffmpeg
+        run: sudo apt-get install -y ffmpeg
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run cartoon demo pipeline
+        run: node scripts/demo-cartoon-pipeline.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL:   ${{ secrets.ANTHROPIC_MODEL }}
+          OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Afficher le résultat
+        run: |
+          echo "=== RÉSULTAT DE LA DÉMO ==="
+          cat content/demo-cartoon-result.json
+
+      - name: Commit et push résultats
+        run: |
+          git add public/generated/cartoons/ content/demo-cartoon-result.json
+          git diff --cached --quiet && echo "Rien à commiter" || \
+          git commit -m "demo: cartoon pipeline - $(date '+%d/%m %H:%M') [skip deploy]"
+          git push origin main
