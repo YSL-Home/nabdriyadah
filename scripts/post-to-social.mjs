@@ -19,6 +19,7 @@ import fs   from "fs";
 import path from "path";
 import os   from "os";
 import { execSync } from "child_process";
+import { generateCartoonVideo } from "./cartoon-video-pipeline.mjs";
 
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 const POSTED_PATH   = path.join(process.cwd(), "content/social-posted.json");
@@ -36,6 +37,7 @@ const TK_TOKEN    = process.env.TIKTOK_ACCESS_TOKEN;
 const HAS_FB = !!(FB_PAGE_ID && FB_TOKEN);
 const HAS_IG = !!(IG_USER_ID && FB_TOKEN);
 const HAS_TK = !!TK_TOKEN;
+const HAS_CARTOON = !!(process.env.GEMINI_API_KEY && process.env.LEONARDO_API_KEY && process.env.KLING_ACCESS_KEY && process.env.KLING_SECRET_KEY);
 
 if (!HAS_FB && !HAS_IG && !HAS_TK) {
   console.log("Aucun credential social configuré — posting ignoré.");
@@ -332,7 +334,7 @@ async function postTikTok(videoPath, article) {
 async function main() {
   console.log("\n╔══════════════════════════════════════════════════════╗");
   console.log("║   VIDEO SOCIAL POSTING — نبض الرياضة                ║");
-  console.log(`║   FB:${HAS_FB?"✓":"✗"} IG:${HAS_IG?"✓":"✗"} TK:${HAS_TK?"✓":"✗"}                              ║`);
+  console.log(`║   FB:${HAS_FB?"✓":"✗"} IG:${HAS_IG?"✓":"✗"} TK:${HAS_TK?"✓":"✗"} CARTOON:${HAS_CARTOON?"✓":"✗"}               ║`);
   console.log("╚══════════════════════════════════════════════════════╝");
 
   // Vérifier ffmpeg disponible
@@ -367,12 +369,21 @@ async function main() {
     console.log(`   "${(article.title || "").slice(0, 65)}"`);
 
     // Générer la vidéo une seule fois pour les 3 plateformes
+    // Priorité : cartoon animé → fallback Ken Burns
     let videoPath = null;
     try {
-      console.log("   ⏳ Génération vidéo ffmpeg...");
-      videoPath = await generateVideo(article);
+      if (HAS_CARTOON) {
+        console.log("   🎨 Génération vidéo cartoon (Gemini → Leonardo → Kling)...");
+        videoPath = await generateCartoonVideo(article);
+        if (videoPath) console.log("   ✅ Vidéo cartoon générée");
+        else console.log("   ⚠️  Cartoon échoué, fallback Ken Burns...");
+      }
+      if (!videoPath) {
+        console.log("   ⏳ Génération vidéo Ken Burns (ffmpeg)...");
+        videoPath = await generateVideo(article);
+      }
       const sizeMB = (fs.statSync(videoPath).size / 1024 / 1024).toFixed(1);
-      console.log(`   ✅ Vidéo générée (${sizeMB} MB)`);
+      console.log(`   ✅ Vidéo prête (${sizeMB} MB)`);
     } catch (err) {
       console.log(`   ❌ Génération vidéo échouée: ${err.message.slice(0, 100)}`);
       continue;

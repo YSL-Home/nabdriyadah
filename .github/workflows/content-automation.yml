@@ -165,6 +165,10 @@ jobs:
           FACEBOOK_PAGE_TOKEN: ${{ secrets.FACEBOOK_PAGE_TOKEN }}
           INSTAGRAM_USER_ID:   ${{ secrets.INSTAGRAM_USER_ID }}
           TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          GEMINI_API_KEY:      ${{ secrets.GEMINI_API_KEY }}
+          LEONARDO_API_KEY:    ${{ secrets.LEONARDO_API_KEY }}
+          KLING_ACCESS_KEY:    ${{ secrets.KLING_ACCESS_KEY }}
+          KLING_SECRET_KEY:    ${{ secrets.KLING_SECRET_KEY }}
         continue-on-error: true
 
       - name: Commit & push content
