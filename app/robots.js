@@ -4,6 +4,9 @@ export default function robots() {
       userAgent: "*",
       allow: "/"
     },
-    sitemap: "https://nabdriyadah.com/sitemap.xml"
+    sitemap: [
+      "https://nabdriyadah.com/sitemap.xml",
+      "https://nabdriyadah.com/sitemap-news.xml",
+    ]
   };
 }

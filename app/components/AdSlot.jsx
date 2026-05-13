@@ -3,28 +3,44 @@ import { useEffect, useRef } from "react";
 
 /* ── Publisher ID Google AdSense ─────────────────────
    ca-pub-6870790039775701
-   (non-secret : visible dans le HTML de toute façon)
+   Auto-ads activés via layout.jsx — ce composant gère
+   les unités manuelles quand un slot ID est fourni.
+   Sans slot ID : placeholder invisible (auto-ads injecte).
    ──────────────────────────────────────────────────── */
 const PUB_ID = "ca-pub-6870790039775701";
+
+// Slots AdSense — à remplacer par les IDs réels depuis AdSense Dashboard
+// https://www.google.com/adsense → Annonces → Par unité d'annonce
+export const AD_SLOTS = {
+  leaderboard:  "auto",  // 728×90 header
+  rectangle:    "auto",  // 300×250 sidebar / mid-article
+  responsive:   "auto",  // responsive auto
+};
 
 export default function AdSlot({
   slot = "",
   format = "auto",
   responsive = true,
   minHeight = 90,
+  label,        // utilisé uniquement comme aria-label
   style = {},
 }) {
   const ref = useRef(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!slot || !ref.current) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch {}
-  }, []);
+  }, [slot]);
+
+  // Sans slot ID : espace réservé transparent (auto-ads injecte ses propres unités)
+  if (!slot) {
+    return <div aria-label={label} style={{ minHeight, ...style }} />;
+  }
 
   return (
-    <div style={{ overflow: "hidden", minHeight, textAlign: "center", ...style }}>
+    <div style={{ overflow: "hidden", minHeight, textAlign: "center", ...style }} aria-label={label}>
       <ins
         ref={ref}
         className="adsbygoogle"

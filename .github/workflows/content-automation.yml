@@ -27,8 +27,8 @@ jobs:
     name: Breaking News
     runs-on: ubuntu-latest
     concurrency:
-      group: nabdriyadah-git-push
-      cancel-in-progress: false
+      group: nabdriyadah-breaking
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
@@ -89,7 +89,7 @@ jobs:
     name: Full Content Refresh + Deploy
     runs-on: ubuntu-latest
     concurrency:
-      group: nabdriyadah-git-push
+      group: nabdriyadah-full-refresh
       cancel-in-progress: false
 
     steps:
@@ -155,6 +155,10 @@ jobs:
 
       - name: Score viral articles
         run: node scripts/score-viral-articles.mjs
+        continue-on-error: true
+
+      - name: Generate Google News sitemap
+        run: node scripts/generate-sitemap-news.mjs
         continue-on-error: true
 
 

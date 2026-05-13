@@ -322,6 +322,92 @@ const leagueMap = {
       { name: "بورتلاند تيمبرز", slug: "portland-timbers", logo: "https://media.api-sports.io/football/teams/1601.png" },
       { name: "نيويورك سيتي", slug: "nycfc", logo: "https://media.api-sports.io/football/teams/1603.png" }
     ]
+  },
+
+  // ── Ligues Maghreb / Afrique du Nord ─────────────────────────────────────
+
+  "ligue-pro-dz": {
+    title: "الرابطة المحترفة الجزائرية",
+    shortLabel: "LIGPRO",
+    description: "تابع آخر أخبار الرابطة المحترفة الجزائرية، مولودية الجزائر، اتحاد العاصمة، شبيبة القبائل وأبرز أندية الكرة الجزائرية.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/197.png",
+    theme: {
+      pageBg: "#f0fdf4", heroFrom: "#064e3b", heroTo: "#059669", primary: "#047857",
+      primarySoft: "#d1fae5", border: "#a7f3d0", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["مولودية الجزائر وشبيبة القبائل", "اتحاد العاصمة وأولمبي الشلف", "أخبار المنتخب الجزائري", "نجوم الكرة الجزائرية"],
+    teams: [
+      { name: "مولودية الجزائر", slug: "mc-alger", logo: "https://media.api-sports.io/football/teams/3716.png" },
+      { name: "اتحاد العاصمة", slug: "usm-alger", logo: "https://media.api-sports.io/football/teams/3717.png" },
+      { name: "شبيبة القبائل", slug: "js-kabylie", logo: "https://media.api-sports.io/football/teams/3718.png" },
+      { name: "نصر حسين داي", slug: "nahd", logo: "https://media.api-sports.io/football/teams/3719.png" },
+      { name: "أولمبي الشلف", slug: "ao-chlef", logo: "https://media.api-sports.io/football/teams/3720.png" },
+      { name: "وفاق سطيف", slug: "es-setif", logo: "https://media.api-sports.io/football/teams/3721.png" }
+    ]
+  },
+
+  "prem-egy": {
+    title: "الدوري المصري الممتاز",
+    shortLabel: "EPL-EGY",
+    description: "أحدث أخبار الدوري المصري الممتاز، الأهلي، الزمالك، بيراميدز وأبرز مجريات كرة القدم المصرية.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/233.png",
+    theme: {
+      pageBg: "#fefce8", heroFrom: "#713f12", heroTo: "#ca8a04", primary: "#92400e",
+      primarySoft: "#fef9c3", border: "#fde68a", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["الأهلي والزمالك ديربي القاهرة", "بيراميدز وإنبي", "أخبار المنتخب المصري", "دوري أبطال أفريقيا"],
+    teams: [
+      { name: "الأهلي المصري", slug: "al-ahly-eg", logo: "https://media.api-sports.io/football/teams/3793.png" },
+      { name: "الزمالك", slug: "zamalek", logo: "https://media.api-sports.io/football/teams/3794.png" },
+      { name: "بيراميدز", slug: "pyramids-fc", logo: "https://media.api-sports.io/football/teams/3795.png" },
+      { name: "إنبي", slug: "enppi", logo: "https://media.api-sports.io/football/teams/3796.png" },
+      { name: "المصري", slug: "al-masry", logo: "https://media.api-sports.io/football/teams/3797.png" },
+      { name: "فاركو", slug: "farco-sc", logo: "https://media.api-sports.io/football/teams/3798.png" }
+    ]
+  },
+
+  "botola-ma": {
+    title: "البطولة الاحترافية — المغرب",
+    shortLabel: "BOT-MA",
+    description: "أحدث أخبار البطولة الاحترافية المغربية، الوداد الرياضي، الرجاء الرياضي، الجيش الملكي وأبرز مجريات الموسم.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/200.png",
+    theme: {
+      pageBg: "#fff7ed", heroFrom: "#92400e", heroTo: "#f59e0b", primary: "#d97706",
+      primarySoft: "#fef3c7", border: "#fde68a", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["الوداد والرجاء الكلاسيكو المغربي", "الجيش الملكي وحسنية أكادير", "أخبار المنتخب المغربي", "المشاركة الأفريقية"],
+    teams: [
+      { name: "الوداد الرياضي", slug: "wydad", logo: "https://media.api-sports.io/football/teams/5593.png" },
+      { name: "الرجاء الرياضي", slug: "raja-casablanca", logo: "https://media.api-sports.io/football/teams/2575.png" },
+      { name: "الجيش الملكي", slug: "far-rabat", logo: "https://media.api-sports.io/football/teams/7027.png" },
+      { name: "نهضة بركان", slug: "renaissance-berkane", logo: "https://media.api-sports.io/football/teams/7028.png" },
+      { name: "المغرب التطواني", slug: "moghreb-tetouan", logo: "https://media.api-sports.io/football/teams/7029.png" },
+      { name: "حسنية أكادير", slug: "hassania-agadir", logo: "https://media.api-sports.io/football/teams/7030.png" }
+    ]
+  },
+
+  "ligue-pro-tn": {
+    title: "الرابطة المحترفة التونسية",
+    shortLabel: "LP1-TN",
+    description: "آخر أخبار الرابطة المحترفة التونسية الأولى، الترجي الرياضي، النجم الساحلي، الافريقي وأبرز الأندية التونسية.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/202.png",
+    theme: {
+      pageBg: "#fef2f2", heroFrom: "#7f1d1d", heroTo: "#dc2626", primary: "#b91c1c",
+      primarySoft: "#fee2e2", border: "#fecaca", cardBg: "#ffffff",
+      text: "#111827", subtext: "#4b5563", badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["الترجي والنجم الساحلي", "الافريقي وصفاقس", "أخبار المنتخب التونسي", "دوري أبطال أفريقيا"],
+    teams: [
+      { name: "الترجي الرياضي التونسي", slug: "esperance-tunis", logo: "https://media.api-sports.io/football/teams/3810.png" },
+      { name: "النجم الساحلي", slug: "etoile-sahel", logo: "https://media.api-sports.io/football/teams/3811.png" },
+      { name: "الافريقي", slug: "ca-bizertin", logo: "https://media.api-sports.io/football/teams/3812.png" },
+      { name: "صفاقس كلب سبور", slug: "sfaxien", logo: "https://media.api-sports.io/football/teams/3813.png" },
+      { name: "النادي الصفاقسي", slug: "cs-sfaxien", logo: "https://media.api-sports.io/football/teams/3814.png" },
+      { name: "الملعب التونسي", slug: "stade-tunisien", logo: "https://media.api-sports.io/football/teams/3815.png" }
+    ]
   }
 };
 

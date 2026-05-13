@@ -18,6 +18,30 @@ function normalizeText(value = "") {
   return String(value).replace(/\s+/g, " ").trim();
 }
 
+// Clé de déduplication robuste pour titres arabes
+// Supprime : tashkeel, articles "ال", mots-outils courants, ponctuation
+const AR_STOPWORDS = new Set([
+  "ال","في","من","على","إلى","عن","مع","هذا","هذه","الذي","التي","وقد","كان","قال",
+  "بعد","قبل","أن","لم","لن","لا","ما","كل","هو","هي","هم","نحن","أنا","أنت",
+]);
+function fuzzyKey(title = "") {
+  return String(title)
+    // strip tashkeel (Arabic diacritics)
+    .replace(/[ؐ-ًؚ-ٰٟۖ-ۜ۟-۪ۤۧۨ-ۭ]/g, "")
+    // normalize alef variants → ا
+    .replace(/[أإآٱ]/g, "ا")
+    // normalize teh marbuta → ه
+    .replace(/ة/g, "ه")
+    // lowercase latin
+    .toLowerCase()
+    // remove punctuation
+    .replace(/[^؀-ۿa-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(w => w.length > 1 && !AR_STOPWORDS.has(w))
+    .slice(0, 10)
+    .join(" ");
+}
+
 function removeMarkdownFences(text = "") {
   return String(text).replace(/```json/gi, "").replace(/```/g, "").trim();
 }
@@ -493,23 +517,25 @@ async function main() {
   });
   console.log(`Existing articles: ${existingArticles.length}`);
 
-  // Build a set of known slugs + normalised titles to avoid duplicates
+  // Build a set of known slugs + fuzzy title keys to avoid duplicates
   const existingSlugs = new Set(existingArticles.map((a) => a.slug).filter(Boolean));
-  // Also index by raw news title (to skip already-processed source articles)
   const existingSourceKeys = new Set(
-    existingArticles.map((a) => normalizeText(a.sourceTitle || a.title || "").toLowerCase().slice(0, 80)).filter(Boolean)
+    existingArticles.map((a) => {
+      const raw = normalizeText(a.sourceTitle || a.title || "");
+      return fuzzyKey(raw) || raw.toLowerCase().slice(0, 60);
+    }).filter(Boolean)
   );
 
-  // ── Dedup raw items by title ──────────────────────────────────────────────
+  // ── Dedup raw items — fuzzy Arabic title matching ─────────────────────────
   const unique = [];
   const seenRaw = new Set();
   for (const item of rawItems) {
     const title = normalizeText(item.originalTitle || item.title || "");
     if (!title) continue;
-    const key = title.toLowerCase().slice(0, 80);
+    const key = fuzzyKey(title) || title.toLowerCase().slice(0, 60);
     if (seenRaw.has(key)) continue;
     seenRaw.add(key);
-    // Skip if we already processed this source article
+    // Skip if same event already processed in a previous run
     if (existingSourceKeys.has(key)) continue;
     unique.push(item);
   }
@@ -519,12 +545,12 @@ async function main() {
     process.exit(0);
   }
 
-  // Spread: 14 football + 5 basketball + 5 tennis + 4 padel + 2 futsal per run
-  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 14);
-  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 5);
-  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 5);
-  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 4);
-  const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 2);
+  // Spread: 60 football + 8 basketball + 6 tennis + 6 padel + 4 futsal = ~84/run
+  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 60);
+  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 8);
+  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 6);
+  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 6);
+  const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 4);
   const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems];
 
   console.log(`New items to write: ${selected.length}`);

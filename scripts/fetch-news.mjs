@@ -63,6 +63,20 @@ const SOURCES = [
   // ── Futsal ────────────────────────────────────────────────────
   { name: "Google News Futsal AR",  type: "rss", priority: "arabic",  sport: "futsal", sourceLang: "ar", url: "https://news.google.com/rss/search?q=فوتسال+كرة+قدم+صالات&hl=ar&gl=SA&ceid=SA:ar" },
   { name: "Google News Futsal EN",  type: "rss", priority: "english", sport: "futsal", sourceLang: "en", url: "https://news.google.com/rss/search?q=futsal+FIFA+2025&hl=en&gl=GB&ceid=GB:en" },
+  // ── Algérie ──────────────────────────────────────────────────
+  { name: "Algérie Foot AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=الدوري+الجزائري+كرة+القدم+2025&hl=ar&gl=DZ&ceid=DZ:ar" },
+  { name: "Algérie Transferts AR",  type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=المنتخب+الجزائري+2025&hl=ar&gl=DZ&ceid=DZ:ar" },
+  { name: "Dzfoot AR",              type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=موبيليس+الجزائر+كأس&hl=ar&gl=DZ&ceid=DZ:ar" },
+  // ── Égypte ───────────────────────────────────────────────────
+  { name: "Égypte Foot AR",         type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "prem-egy", url: "https://news.google.com/rss/search?q=الدوري+المصري+الممتاز+2025&hl=ar&gl=EG&ceid=EG:ar" },
+  { name: "Ahly Zamalek AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "prem-egy", url: "https://news.google.com/rss/search?q=الأهلي+الزمالك+2025&hl=ar&gl=EG&ceid=EG:ar" },
+  // ── Maroc ────────────────────────────────────────────────────
+  { name: "Maroc Foot AR",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: "https://news.google.com/rss/search?q=البطولة+الاحترافية+المغربية+2025&hl=ar&gl=MA&ceid=MA:ar" },
+  { name: "Wydad Raja AR",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: "https://news.google.com/rss/search?q=الوداد+الرجاء+الرياضي+2025&hl=ar&gl=MA&ceid=MA:ar" },
+  { name: "Hesport Maroc",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: "https://news.google.com/rss/search?q=كرة+القدم+المغربية+أخبار&hl=ar&gl=MA&ceid=MA:ar" },
+  // ── Tunisie ──────────────────────────────────────────────────
+  { name: "Tunisie Foot AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-tn", url: "https://news.google.com/rss/search?q=الرابطة+المحترفة+التونسية+2025&hl=ar&gl=TN&ceid=TN:ar" },
+  { name: "Espérance Etoile AR",    type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-tn", url: "https://news.google.com/rss/search?q=الترجي+النجم+الساحلي+2025&hl=ar&gl=TN&ceid=TN:ar" },
 ];
 
 function ensureDir(filePath) {
@@ -327,18 +341,19 @@ async function main() {
   const arabicItems = unique.filter((item) => item.sourcePriority === "arabic");
   const fallbackItems = unique.filter((item) => item.sourcePriority !== "arabic");
 
-  // Per-sport caps to guarantee variety: arabic preferred, fallback fills gaps
+  // Per-sport caps — football ~65%, reste 35%
+  // Cible: ~120 articles bruts/run → rewrite en sélectionne 84
   const bySport = (items, sport) => items.filter(i => i.sport === sport);
-  const footballAr  = bySport(arabicItems, "football").slice(0, 12);
+  const footballAr  = bySport(arabicItems, "football").slice(0, 50);
   const basketAr    = bySport(arabicItems, "basketball").slice(0, 6);
-  const tennisAr    = bySport(arabicItems, "tennis").slice(0, 6);
-  const padelAr     = bySport(arabicItems, "padel").slice(0, 5);
-  const futsalAr    = bySport(arabicItems, "futsal").slice(0, 4);
-  const footballFb  = bySport(fallbackItems, "football").slice(0, Math.max(0, 12 - footballAr.length));
+  const tennisAr    = bySport(arabicItems, "tennis").slice(0, 5);
+  const padelAr     = bySport(arabicItems, "padel").slice(0, 4);
+  const futsalAr    = bySport(arabicItems, "futsal").slice(0, 3);
+  const footballFb  = bySport(fallbackItems, "football").slice(0, Math.max(0, 28 - footballAr.length));
   const basketFb    = bySport(fallbackItems, "basketball").slice(0, Math.max(0, 6 - basketAr.length));
-  const tennisFb    = bySport(fallbackItems, "tennis").slice(0, Math.max(0, 6 - tennisAr.length));
-  const padelFb     = bySport(fallbackItems, "padel").slice(0, Math.max(0, 5 - padelAr.length));
-  const futsalFb    = bySport(fallbackItems, "futsal").slice(0, Math.max(0, 4 - futsalAr.length));
+  const tennisFb    = bySport(fallbackItems, "tennis").slice(0, Math.max(0, 5 - tennisAr.length));
+  const padelFb     = bySport(fallbackItems, "padel").slice(0, Math.max(0, 4 - padelAr.length));
+  const futsalFb    = bySport(fallbackItems, "futsal").slice(0, Math.max(0, 3 - futsalAr.length));
   const prioritized = [...footballAr, ...basketAr, ...tennisAr, ...padelAr, ...futsalAr,
                        ...footballFb, ...basketFb, ...tennisFb, ...padelFb, ...futsalFb];
 
