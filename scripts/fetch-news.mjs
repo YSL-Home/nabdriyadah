@@ -2,6 +2,36 @@ import fs from "fs";
 import path from "path";
 import Parser from "rss-parser";
 
+const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
+const DEDUP_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
+
+// Clé de dédup identique à rewrite-article.mjs
+function fuzzyKey(title = "") {
+  const AR_STOP = new Set(["ال","في","من","على","إلى","عن","مع","هذا","هذه","الذي","التي","وقد","كان","قال","بعد","قبل","أن","لم","لن","لا","ما","كل","هو","هي","هم"]);
+  return String(title)
+    .replace(/[ؐ-ًؚ-ٰٟۖ-ۜ۟-۪ۤۧۨ-ۭ]/g, "")
+    .replace(/[أإآٱ]/g, "ا").replace(/ة/g, "ه")
+    .toLowerCase()
+    .replace(/[^؀-ۿa-z0-9\s]/g, " ")
+    .split(/\s+/).filter(w => w.length > 1 && !AR_STOP.has(w))
+    .slice(0, 10).join(" ");
+}
+
+function buildPublishedKeys() {
+  try {
+    const arts = JSON.parse(fs.readFileSync(ARTICLES_PATH, "utf-8"));
+    const cutoff = Date.now() - DEDUP_WINDOW_MS;
+    const keys = new Set();
+    for (const a of arts) {
+      if (new Date(a.publishedAt || 0).getTime() < cutoff) continue;
+      const raw = String(a.sourceTitle || a.title || "").replace(/\s+/g," ").trim();
+      const k = fuzzyKey(raw) || raw.toLowerCase().slice(0, 60);
+      if (k) keys.add(k);
+    }
+    return keys;
+  } catch { return new Set(); }
+}
+
 const parser = new Parser({
   customFields: {
     item: [
@@ -338,8 +368,17 @@ async function main() {
     unique.push(item);
   }
 
-  const arabicItems = unique.filter((item) => item.sourcePriority === "arabic");
-  const fallbackItems = unique.filter((item) => item.sourcePriority !== "arabic");
+  // ── Filtrer articles déjà publiés (fenêtre 3 jours) ─────────────────────
+  const publishedKeys = buildPublishedKeys();
+  const fresh = unique.filter(item => {
+    const raw = String(item.originalTitle || "").replace(/\s+/g," ").trim();
+    const k = fuzzyKey(raw) || raw.toLowerCase().slice(0, 60);
+    return k && !publishedKeys.has(k);
+  });
+  console.log(`Fetched: ${unique.length} items — after dedup vs published: ${fresh.length} fresh`);
+
+  const arabicItems = fresh.filter((item) => item.sourcePriority === "arabic");
+  const fallbackItems = fresh.filter((item) => item.sourcePriority !== "arabic");
 
   // Ligues nord-africaines = tier 2 (10% du football)
   const NA_LEAGUES = new Set(["ligue-pro-dz", "prem-egy", "botola-ma", "ligue-pro-tn"]);
