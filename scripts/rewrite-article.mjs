@@ -107,23 +107,25 @@ function leagueLabel(league = "") {
 }
 
 function sportSystemPrompt(sport = "football") {
+  // ⚠ NE PAS restreindre à l'arabe uniquement — le prompt produit 3 langues (AR + EN + FR)
+  // Les champs "title/description/content" sont en arabe, "en_*" en anglais, "fr_*" en français
   const base = [
-    "تكتب بالعربية الفصحى البسيطة فقط — لا كلمة إنجليزية واحدة في المخرجات.",
-    "أسماء الأندية واللاعبين والمدن تُكتب بالحروف العربية دائماً (مثال: مانشستر سيتي، كريستيانو رونالدو).",
-    "أسلوبك صحفي احترافي، محايد، واضح ومشوق.",
-    "لا تذكر أبداً أسماء مواقع إخبارية أو مصادر خارجية في المتن.",
-    "اكتب المقال كما لو أنه تحقيق صحفي مستقل ومبتكر لموقع نبض الرياضة — بدون أي إشارة للمصدر الأصلي.",
-    "لا تبدأ أي فقرة بـ 'وفي سياق' أو 'وفي إطار' وحدها — ابدأ دائماً بالمعلومة مباشرة."
+    "Tu es journaliste multilingue (arabe, anglais, français) pour نبض الرياضة.",
+    "Les champs arabes (title, description, content) : arabe standard moderne, noms propres translittérés en arabe.",
+    "Les champs en_* : anglais journalistique ESPN/Sky Sports.",
+    "Les champs fr_* : français journalistique L'Équipe/RMC — OBLIGATOIRE, jamais vide.",
+    "Style : professionnel, factuel, accrocheur. Jamais de remplissage générique.",
+    "Output : JSON valide uniquement, sans markdown."
   ].join(" ");
-  const prompts = {
-    football: `أنت محرر رياضي كبير في موقع نبض الرياضة، متخصص في كرة القدم العالمية والعربية. ${base}`,
-    basketball: `أنت محرر رياضي كبير في موقع نبض الرياضة، متخصص في كرة السلة والدوري الأمريكي. ${base}`,
-    tennis: `أنت محرر رياضي كبير في موقع نبض الرياضة، متخصص في بطولات التنس الكبرى. ${base}`,
-    padel: `أنت محرر رياضي كبير في موقع نبض الرياضة، متخصص في رياضة البادل الحديثة. ${base}`,
-    futsal: `أنت محرر رياضي كبير في موقع نبض الرياضة، متخصص في كرة قدم الصالات والفوتسال. ${base}`,
-    mixed: `أنت محرر رياضي كبير في موقع نبض الرياضة. ${base}`
+  const specialties = {
+    football:   "Spécialiste football mondial et arabe.",
+    basketball: "Spécialiste NBA et basketball international.",
+    tennis:     "Spécialiste Grand Chelem et circuit ATP/WTA.",
+    padel:      "Spécialiste World Padel Tour.",
+    futsal:     "Spécialiste futsal FIFA et championnats nationaux.",
+    mixed:      ""
   };
-  return prompts[sport] || prompts.mixed;
+  return `${specialties[sport] || ""} ${base}`.trim();
 }
 
 function sourceArabic(source = "") {
@@ -454,7 +456,12 @@ async function rewriteArticle(item, index) {
     return fallback;
   }
 
-  const title = sanitizeArabic(parsed.title || fallback.title);
+  // Pour le titre : utiliser le fallback si le titre AI est vide ou quasi-entièrement en latin
+  const rawAiTitle = String(parsed.title || "").trim();
+  const arCharsInTitle = (rawAiTitle.match(/[؀-ۿ]/g) || []).length;
+  const title = (rawAiTitle && arCharsInTitle >= 4)
+    ? sanitizeArabic(rawAiTitle) || fallback.title
+    : fallback.title;
   const description = sanitizeArabic(parsed.description || fallback.description);
   const seoTitle = sanitizeArabic(parsed.seoTitle || `${title} | نبض الرياضة`);
   const seoDescription = sanitizeArabic(parsed.seoDescription || description).slice(0, 160);
