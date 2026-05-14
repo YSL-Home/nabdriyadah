@@ -280,7 +280,7 @@ function fallbackArticle(item, index) {
   ];
   const title = titleHint
     ? titleHint.slice(0, 90)
-    : `${fallbackVariants[(index + parseInt(urlHash, 16)) % fallbackVariants.length]} #${urlHash}`.slice(0, 90);
+    : fallbackVariants[(index + parseInt(urlHash, 16)) % fallbackVariants.length].slice(0, 90);
 
   const description = `${typeTemplate.intro(label, titleHint)} متابعة حصرية من نبض الرياضة.`.slice(0, 200);
   const content = [typeTemplate.intro(label, titleHint), ...typeTemplate.body(label)].join("\n\n");
