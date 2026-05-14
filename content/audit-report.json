@@ -1,14 +1,26 @@
 {
-  "date": "2026-05-14T07:29:05.528Z",
-  "total": 82,
+  "date": "2026-05-14T09:30:16.161Z",
+  "total": 84,
   "fixes": [
     {
       "type": "missing_images_detected",
-      "count": 70,
+      "count": 72,
       "action": "will_regenerate_on_next_ci"
     }
   ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "tennis-14mhey",
+      "sport": "tennis",
+      "image": "/generated/tennis-14mhey.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1rd45v",
+      "sport": "tennis",
+      "image": "/generated/tennis-1rd45v.png"
+    },
     {
       "type": "missing_image",
       "slug": "bball-41b84f",
@@ -431,21 +443,21 @@
     },
     {
       "type": "missing_en_title",
-      "count": 48,
+      "count": 50,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 81,
+      "count": 83,
       "action": "needs_llm_backfill"
     }
   ],
   "summary": {
     "fixes_applied": 0,
-    "warnings": 72,
-    "missing_images": 70,
-    "missing_en_title": 48,
-    "missing_fr_title": 81,
+    "warnings": 74,
+    "missing_images": 72,
+    "missing_en_title": 50,
+    "missing_fr_title": 83,
     "sport_mismatches_fixed": 0,
     "duplicates": 0
   }
