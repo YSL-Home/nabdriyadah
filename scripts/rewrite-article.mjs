@@ -256,27 +256,21 @@ function fallbackArticle(item, index) {
   }
   // English titles → no hint (generate fully Arabic title using date variant)
 
-  // Arabic months for varied fallback titles
+  const typeTemplate = pickArticleType(index);
+  const prefix = typeTemplate.titlePrefix(label);
+
+  // Arabic months for varied titles
   const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
   const now = new Date();
   const monthLabel = arabicMonths[now.getMonth()];
   const yearLabel  = now.getFullYear();
 
-  // Variants de titres fallback naturels (sans préfixe générique)
-  const fallbackVariants = [
-    `جديد في ${label}: آخر المستجدات الرياضية`,
-    `${label} — أحداث بارزة في ${monthLabel} ${yearLabel}`,
-    `مستجدات ${label}: تطورات لافتة هذا الأسبوع`,
-    `${label} يُفاجئ الجميع بمستجداته الأخيرة`,
-    `ما يجري في ${label}: أهم أخبار ${monthLabel}`,
-    `${label} — لقطات وأرقام من الجولة الأخيرة`,
-  ];
+  // Titre unique même sans hint arabe : ajoute un hash de l'URL source
+  // pour éviter les collisions de dédup entre articles sans titre arabe
   const urlHash = shortHash(item.url || item.originalTitle || String(Date.now()));
-  const variantIndex = parseInt(urlHash, 36) % fallbackVariants.length;
-
   const title = titleHint
-    ? `${label}: ${titleHint}`.slice(0, 90)
-    : fallbackVariants[variantIndex];
+    ? `${prefix}: ${label} — ${titleHint}`.slice(0, 90)
+    : `${prefix}: ${label} — ${monthLabel} ${yearLabel} #${urlHash}`.slice(0, 90);
 
   const description = `${typeTemplate.intro(label, titleHint)} متابعة حصرية من نبض الرياضة.`.slice(0, 200);
   const content = [typeTemplate.intro(label, titleHint), ...typeTemplate.body(label)].join("\n\n");
@@ -305,8 +299,8 @@ async function callAnthropic(prompt, systemPrompt = null) {
       },
       body: JSON.stringify({
         model: ANTHROPIC_MODEL,
-        max_tokens: 8000,
-        system: systemPrompt || "أنت محرر رياضي متخصص يكتب بالعربية والإنجليزية والفرنسية. الإخراج يكون JSON فقط.",
+        max_tokens: 6000,
+        system: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط.",
         messages: [{ role: "user", content: prompt }]
       })
     });
@@ -383,47 +377,53 @@ function buildPrompt(item, format, label, source, srcLang) {
   const srcLangLabel = srcLang === "en" ? "Anglais" : srcLang === "fr" ? "Français" : "Arabe";
 
   return `
-Tu es journaliste sportif senior pour "نبض الرياضة". À partir de la source brute, écris 3 articles ORIGINAUX (arabe, anglais, français). Style humain, naturel, varié — jamais de templates ni de formules répétitives.
+Tu es rédacteur sportif senior pour "نبض الرياضة". À partir des informations brutes ci-dessous, tu dois produire un article 100% original dans les 3 langues. Tu ne dois JAMAIS copier, paraphraser mot à mot ou reproduire le texte source — réécris entièrement avec ton propre style journalistique.
 
-TYPE : ${format.ar} — ${format.hint}
+⚡ Type d'article : **${format.ar}** (${format.en}) — ${format.hint}
 
-SOURCE (${srcLangLabel}) :
-- Sport : ${label}
-- Titre : ${originalTitle.slice(0, 120)}
-- Résumé : ${originalDescription.slice(0, 180)}
+--- SOURCE BRUTE (langue : ${srcLangLabel}) ---
+Sport / Championnat : ${label}
+Titre original      : ${originalTitle}
+Résumé              : ${originalDescription}
+Tags                : ${(item.topicTags || []).join(", ")}
 
-RÈGLES ABSOLUES :
-1. Titres humains et accrocheurs — JAMAIS de préfixes génériques ("توقعات:", "ملخص:", "تحليل:", "عاجل:" en début de titre)
-2. Chaque langue = article original avec angle différent, pas une traduction
-3. Zéro mot latin/anglais dans les champs arabes (title, description, content)
-4. JSON valide uniquement, sans markdown ni texte avant/après
+--- RÈGLES COMMUNES ---
+- Chaque langue doit être un article ORIGINAL, pas une traduction de l'autre
+- Exploite le fait sportif comme point de départ, développe avec contexte et analyse
+- Aucun copier-coller du titre ou de la description source
+- Pas de contenu générique ni de phrases de remplissage
+- Chaque paragraphe doit apporter une information nouvelle
 
-ARABE :
-- title : 50-75 chars, accroche humaine centrée sur joueur/équipe/fait
-- seoTitle : "فريق/لاعب — حدث | نبض الرياضة"
-- seoDescription : 145-160 chars
-- content : 5 paragraphes \\n\\n, style presse arabe professionnelle
-- keywords : ["mot1","mot2",...] 6-8 mots arabes
-- faq : [{"q":"...","a":"..."}] × 2
+--- VERSION ARABE (obligatoire) ---
+- Rédige en arabe standard moderne, style presse sportive de qualité
+- title : 45-70 caractères, commence par le fait principal, mentionne équipe/joueur
+- seoTitle : "[Entité] — [Fait] | نبض الرياضة"
+- seoDescription : exactement 145-160 caractères
+- content : 8-10 paragraphes séparés par \\n\\n, sans markdown
+- keywords : 8-10 mots-clés arabes variés
+- faq : 3 questions-réponses courtes liées au sujet
+- Zéro mot anglais dans les champs arabes — noms propres en lettres arabes
 
-ANGLAIS (obligatoire — article sera rejeté sans en_title) :
-- en_title : 50-70 chars, specific human headline
-- en_description : 145-160 chars
-- en_content : 3 paragraphs — Lead, Context, Outlook
+--- VERSION ANGLAISE (obligatoire) ---
+- Style ESPN / Sky Sports : direct, factuel, dynamique
+- en_title : 50-70 chars, specific headline
+- en_description : 145-160 chars, SEO, team/player name included
+- en_content : 5 original paragraphs — Lead → Context → Analysis → Reactions → Outlook
 
-FRANÇAIS (obligatoire — article sera rejeté sans fr_title) :
-- fr_title : 50-70 chars, titre accrocheur style L'Équipe
-- fr_description : 145-160 chars
-- fr_content : 3 paragraphes — Fait, Contexte, Perspectives
+--- VERSION FRANÇAISE (obligatoire) ---
+- Style L'Équipe / RMC Sport : incisif, analytique
+- fr_title : 50-70 chars, titre accrocheur et précis
+- fr_description : 145-160 chars, SEO, nom équipe/joueur inclus
+- fr_content : 5 paragraphes originaux — Fait → Contexte → Analyse → Réactions → Perspectives
 
-JSON — les titres courts en premier pour garantir leur présence :
+Retourne UNIQUEMENT un JSON valide (pas de markdown) :
 {
-  "en_title":"...","en_description":"...","fr_title":"...","fr_description":"...",
-  "title":"...","description":"...","seoTitle":"...","seoDescription":"...",
-  "en_content":"Para1\\n\\nPara2\\n\\nPara3",
-  "fr_content":"Para1\\n\\nPara2\\n\\nPara3",
-  "content":"فقرة1\\n\\nفقرة2\\n\\nفقرة3\\n\\nفقرة4\\n\\nفقرة5",
-  "keywords":["..."],"faq":[{"q":"...","a":"..."},{"q":"...","a":"..."}]
+  "title": "...", "description": "...", "seoTitle": "...", "seoDescription": "...",
+  "content": "فقرة 1\\n\\nفقرة 2\\n\\n...",
+  "keywords": ["..."],
+  "faq": [{"q":"...","a":"..."},{"q":"...","a":"..."},{"q":"...","a":"..."}],
+  "en_title": "...", "en_description": "...", "en_content": "Para 1\\n\\nPara 2\\n\\n...",
+  "fr_title": "...", "fr_description": "...", "fr_content": "Para 1\\n\\nPara 2\\n\\n..."
 }`.trim();
 }
 
