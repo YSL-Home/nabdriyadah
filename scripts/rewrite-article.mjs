@@ -532,35 +532,6 @@ async function rewriteArticle(item, index) {
 // No article cap — keep full history forever
 
 async function main() {
-  // ── Auto-refresh raw-news.json si vieux de plus de 55 min ────────────────
-  // Le full-refresh (horaire) ne lance pas fetch-news.mjs — on le fait ici.
-  // Le breaking-news job garde son propre flux (2h freshness filter).
-  if (!process.env.BREAKING_ONLY) {
-    let needsFetch = true;
-    try {
-      const stat = fs.statSync(INPUT_PATH);
-      const ageMin = (Date.now() - stat.mtimeMs) / 60000;
-      if (ageMin < 55) {
-        console.log(`raw-news.json récent (${ageMin.toFixed(0)} min) — pas de re-fetch.`);
-        needsFetch = false;
-      } else {
-        console.log(`raw-news.json vieux de ${ageMin.toFixed(0)} min — lancement fetch-news.mjs...`);
-      }
-    } catch {
-      console.log("raw-news.json absent — lancement fetch-news.mjs...");
-    }
-    if (needsFetch) {
-      try {
-        execFileSync("node", [path.join(process.cwd(), "scripts/fetch-news.mjs")], {
-          stdio: "inherit",
-          timeout: 5 * 60 * 1000, // 5 min max
-        });
-      } catch (e) {
-        console.log("fetch-news.mjs échoué (on continue avec le fichier existant):", e.message?.slice(0, 100));
-      }
-    }
-  }
-
   let rawItems = [];
   try {
     rawItems = JSON.parse(fs.readFileSync(INPUT_PATH, "utf-8"));
