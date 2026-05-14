@@ -38,14 +38,10 @@ export default function sitemap() {
 
   // ── Accueil (3 langues) ───────────────────────────────────────────────────
   const home = [
-    { url: `${BASE}/`,        lastModified: now, changeFrequency: "hourly", priority: 1.0 },
-    { url: `${BASE}/fr/`,     lastModified: now, changeFrequency: "hourly", priority: 0.90 },
-    { url: `${BASE}/en/`,     lastModified: now, changeFrequency: "hourly", priority: 0.90 },
-    { url: `${BASE}/videos/`, lastModified: now, changeFrequency: "daily",  priority: 0.80 },
-    // Pages légales
-    { url: `${BASE}/about/`,   lastModified: now, changeFrequency: "monthly", priority: 0.60 },
-    { url: `${BASE}/contact/`, lastModified: now, changeFrequency: "monthly", priority: 0.55 },
-    { url: `${BASE}/privacy/`, lastModified: now, changeFrequency: "yearly",  priority: 0.40 },
+    { url: `${BASE}/`,     lastModified: now, changeFrequency: "hourly", priority: 1.0 },
+    { url: `${BASE}/fr/`,  lastModified: now, changeFrequency: "hourly", priority: 0.90 },
+    { url: `${BASE}/en/`,  lastModified: now, changeFrequency: "hourly", priority: 0.90 },
+    { url: `${BASE}/videos/`, lastModified: now, changeFrequency: "daily", priority: 0.80 },
   ];
 
   // ── Sports (3 langues) ───────────────────────────────────────────────────

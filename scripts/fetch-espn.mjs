@@ -30,11 +30,6 @@ const ESPN_LEAGUES = [
   { slug: "mls",              espnId: "usa.1"          },
   { slug: "liga-portugal",    espnId: "por.1"          },
   { slug: "champions-league", espnId: "uefa.champions" },
-  // Ligues nord-africaines
-  { slug: "ligue-pro-dz",    espnId: "alg.1"          },
-  { slug: "prem-egy",        espnId: "egy.1"           },
-  { slug: "botola-ma",       espnId: "mar.1"           },
-  { slug: "ligue-pro-tn",    espnId: "tun.1"           },
 ];
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }

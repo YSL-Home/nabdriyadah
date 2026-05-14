@@ -16,11 +16,11 @@ import path from "path";
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 const API_KEY  = process.env.ANTHROPIC_API_KEY;
 const MODEL    = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
-const BATCH    = 20; // articles par appel API (titres/descriptions) — doublé pour rattraper le backlog
-const BATCH_CONTENT = 6; // articles par appel API (corps) — doublé
+const BATCH    = 10; // articles par appel API (titres/descriptions)
+const BATCH_CONTENT = 3; // articles par appel API (corps)
 const DELAY_MS = 800;
 const MAX_CONTENT_CHARS = 700; // tronquer le corps pour limiter les tokens
-const CONTENT_WINDOW_H  = 168; // traduire le corps pour les articles récents < 7 jours (vs 48h avant)
+const CONTENT_WINDOW_H  = 48;  // ne traduire le corps que pour les articles récents
 
 if (!API_KEY) {
   console.log("ANTHROPIC_API_KEY manquant — backfill ignoré.");
