@@ -1,9 +1,7 @@
 name: Breaking News Scanner
 
 on:
-  schedule:
-    - cron: "*/15 * * * *"
-  workflow_dispatch:
+  workflow_dispatch:  # désactivé — doublon de content-automation.yml breaking-news job
 
 permissions:
   contents: write

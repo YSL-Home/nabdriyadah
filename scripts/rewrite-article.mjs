@@ -265,9 +265,12 @@ function fallbackArticle(item, index) {
   const monthLabel = arabicMonths[now.getMonth()];
   const yearLabel  = now.getFullYear();
 
+  // Titre unique même sans hint arabe : ajoute un hash de l'URL source
+  // pour éviter les collisions de dédup entre articles sans titre arabe
+  const urlHash = shortHash(item.url || item.originalTitle || String(Date.now()));
   const title = titleHint
     ? `${prefix}: ${label} — ${titleHint}`.slice(0, 90)
-    : `${prefix}: آخر أخبار ${label} — ${monthLabel} ${yearLabel}`.slice(0, 90);
+    : `${prefix}: ${label} — ${monthLabel} ${yearLabel} #${urlHash}`.slice(0, 90);
 
   const description = `${typeTemplate.intro(label, titleHint)} متابعة حصرية من نبض الرياضة.`.slice(0, 200);
   const content = [typeTemplate.intro(label, titleHint), ...typeTemplate.body(label)].join("\n\n");
@@ -508,13 +511,20 @@ async function main() {
   console.log(`Existing articles: ${existingArticles.length}`);
 
   // Build a set of known slugs + fuzzy title keys to avoid duplicates
+  // ⚠ La fenêtre de dédup source est limitée à 3 jours — évite de bloquer
+  //   éternellement les nouveaux articles sur les mêmes équipes/ligues
+  const DEDUP_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
+  const dedupCutoff = Date.now() - DEDUP_WINDOW_MS;
   const existingSlugs = new Set(existingArticles.map((a) => a.slug).filter(Boolean));
   const existingSourceKeys = new Set(
-    existingArticles.map((a) => {
-      const raw = normalizeText(a.sourceTitle || a.title || "");
-      return fuzzyKey(raw) || raw.toLowerCase().slice(0, 60);
-    }).filter(Boolean)
+    existingArticles
+      .filter(a => new Date(a.publishedAt || 0).getTime() > dedupCutoff)
+      .map((a) => {
+        const raw = normalizeText(a.sourceTitle || a.title || "");
+        return fuzzyKey(raw) || raw.toLowerCase().slice(0, 60);
+      }).filter(Boolean)
   );
+  console.log(`Dedup window: articles < 3 days (${existingSourceKeys.size} source keys indexed)`);
 
   // ── Dedup raw items — fuzzy Arabic title matching ─────────────────────────
   const unique = [];
