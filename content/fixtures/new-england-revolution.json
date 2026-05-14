@@ -3,38 +3,6 @@
   "teamId": 1602,
   "upcoming": [
     {
-      "id": "761617",
-      "date": "2026-05-13T23:30Z",
-      "timestamp": 1778715000,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Gillette Stadium",
-      "city": "Foxborough, Massachusetts",
-      "home": {
-        "id": "189",
-        "slug": "new-england-revolution",
-        "name": "نيو إنغلاند ريفولوشن",
-        "logo": "https://media.api-sports.io/football/teams/1602.png",
-        "winner": null
-      },
-      "away": {
-        "id": "18986",
-        "slug": null,
-        "name": "Nashville SC",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761635",
       "date": "2026-05-16T23:30Z",
       "timestamp": 1778974200,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761617",
+      "date": "2026-05-13T23:30Z",
+      "timestamp": 1778715000,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, Massachusetts",
+      "home": {
+        "id": "189",
+        "slug": "new-england-revolution",
+        "name": "نيو إنغلاند ريفولوشن",
+        "logo": "https://media.api-sports.io/football/teams/1602.png",
+        "winner": false
+      },
+      "away": {
+        "id": "18986",
+        "slug": null,
+        "name": "Nashville SC",
+        "logo": "",
+        "winner": true
+      },
+      "goals": {
+        "home": 0,
+        "away": 3
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761601",
       "date": "2026-05-09T23:30Z",
@@ -325,5 +325,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-14T00:20:59.019Z"
+  "fetchedAt": "2026-05-14T02:40:01.331Z"
 }

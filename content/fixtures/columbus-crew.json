@@ -3,38 +3,6 @@
   "teamId": 1607,
   "upcoming": [
     {
-      "id": "761621",
-      "date": "2026-05-13T23:30Z",
-      "timestamp": 1778715000,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Red Bull Arena",
-      "city": "Harrison, New Jersey",
-      "home": {
-        "id": "190",
-        "slug": null,
-        "name": "Red Bull New York",
-        "logo": "",
-        "winner": null
-      },
-      "away": {
-        "id": "183",
-        "slug": "columbus-crew",
-        "name": "كولومبوس كرو",
-        "logo": "https://media.api-sports.io/football/teams/1607.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761629",
       "date": "2026-05-16T23:30Z",
       "timestamp": 1778974200,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761621",
+      "date": "2026-05-13T23:30Z",
+      "timestamp": 1778715000,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Red Bull Arena",
+      "city": "Harrison, New Jersey",
+      "home": {
+        "id": "190",
+        "slug": null,
+        "name": "Red Bull New York",
+        "logo": "",
+        "winner": true
+      },
+      "away": {
+        "id": "183",
+        "slug": "columbus-crew",
+        "name": "كولومبوس كرو",
+        "logo": "https://media.api-sports.io/football/teams/1607.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 3,
+        "away": 2
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761612",
       "date": "2026-05-10T20:30Z",
@@ -325,5 +325,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-14T00:20:59.019Z"
+  "fetchedAt": "2026-05-14T02:40:01.331Z"
 }

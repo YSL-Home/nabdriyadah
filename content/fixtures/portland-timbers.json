@@ -3,38 +3,6 @@
   "teamId": 1601,
   "upcoming": [
     {
-      "id": "761618",
-      "date": "2026-05-13T23:30Z",
-      "timestamp": 1778715000,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Stade Saputo",
-      "city": "Montreal",
-      "home": {
-        "id": "9720",
-        "slug": null,
-        "name": "CF Montréal",
-        "logo": "",
-        "winner": null
-      },
-      "away": {
-        "id": "9723",
-        "slug": "portland-timbers",
-        "name": "بورتلاند تيمبرز",
-        "logo": "https://media.api-sports.io/football/teams/1601.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761642",
       "date": "2026-05-17T22:00Z",
       "timestamp": 1779055200,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761618",
+      "date": "2026-05-13T23:30Z",
+      "timestamp": 1778715000,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Stade Saputo",
+      "city": "Montreal",
+      "home": {
+        "id": "9720",
+        "slug": null,
+        "name": "CF Montréal",
+        "logo": "",
+        "winner": false
+      },
+      "away": {
+        "id": "9723",
+        "slug": "portland-timbers",
+        "name": "بورتلاند تيمبرز",
+        "logo": "https://media.api-sports.io/football/teams/1601.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761607",
       "date": "2026-05-10T02:30Z",
@@ -293,5 +293,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-14T00:20:59.019Z"
+  "fetchedAt": "2026-05-14T02:40:01.331Z"
 }
