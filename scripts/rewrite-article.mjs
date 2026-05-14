@@ -246,41 +246,73 @@ function pickArticleType(index) {
   return ARTICLE_TYPES[index % ARTICLE_TYPES.length];
 }
 
+/**
+ * Extrait les entités clés d'un titre en anglais/français (noms propres capitalisés)
+ * pour construire un titre de fallback plus pertinent.
+ * Ex: "Liverpool owners face dilemma" → "Liverpool"
+ */
+function extractEntity(rawTitle = "") {
+  // Mots vides à ignorer
+  const stopwords = new Set([
+    "the","a","an","is","are","was","were","to","of","in","on","at","by","for",
+    "with","and","or","but","not","it","its","as","be","been","has","have","had",
+    "will","would","could","should","after","before","over","under","between",
+    "le","la","les","de","du","des","un","une","en","au","aux","et","ou","pour",
+    "sur","dans","avec","par","est","are","pas","qui","que","se","si","ne",
+    "why","how","what","when","where","who","will","can","may","might","do","does","did",
+    "vs","fc","cf","sc","ac","afc",
+  ]);
+  // Extraire les mots capitalisés (noms propres) en excluant les stopwords
+  const words = rawTitle.split(/[\s\-–—\/|:,\.]+/);
+  const entities = words.filter(w =>
+    w.length >= 2 &&
+    /^[A-ZÁÀÂÉÈÊËÎÏÔÙÛÜÇ]/.test(w) &&
+    !stopwords.has(w.toLowerCase())
+  );
+  // Prendre les 2 premières entités au max
+  return entities.slice(0, 2).join(" ").slice(0, 35);
+}
+
 function fallbackArticle(item, index) {
   const sport = item.sport || "football";
   const label = leagueLabel(item.league || sport);
   const rawTitle = normalizeText(item.originalTitle || "");
 
-  // If the original title is in Arabic, use it — NEVER include English words in the Arabic title
-  let titleHint = "";
-  if (rawTitle && isArabic(rawTitle)) {
-    titleHint = rawTitle.slice(0, 60);
-  }
-  // English titles → no hint (generate fully Arabic title using date variant)
-
   const typeTemplate = pickArticleType(index);
-
-  // Arabic months for varied titles
-  const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
-  const now = new Date();
-  const monthLabel = arabicMonths[now.getMonth()];
-  const yearLabel  = now.getFullYear();
-
-  // Titre unique même sans hint arabe : ajoute un hash de l'URL source
   const urlHash = shortHash(item.url || item.originalTitle || String(Date.now()));
 
-  // Titres naturels sans préfixes robotiques
-  const fallbackVariants = [
-    `جديد في ${label}: آخر المستجدات الرياضية`,
-    `${label} — أبرز الأحداث في ${monthLabel} ${yearLabel}`,
-    `مستجدات ${label}: تطورات لافتة هذا الأسبوع`,
-    `${label} يُفاجئ الجميع بمستجداته الأخيرة`,
-    `ما يجري في ${label}: أهم أخبار ${monthLabel}`,
-    `${label} — لقطات وأرقام من الجولة الأخيرة`,
-  ];
-  const title = titleHint
-    ? titleHint.slice(0, 90)
-    : fallbackVariants[(index + parseInt(urlHash, 16)) % fallbackVariants.length].slice(0, 90);
+  let title;
+
+  if (rawTitle && isArabic(rawTitle)) {
+    // Source arabe → utiliser directement le titre
+    title = rawTitle.slice(0, 90);
+  } else if (rawTitle) {
+    // Source EN/FR → extraire les entités clés et construire un titre arabe avec elles
+    const entity = extractEntity(rawTitle);
+    const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+    const monthLabel = arabicMonths[new Date().getMonth()];
+    const entityPart = entity ? `${entity} — ` : `${label} — `;
+    // Templates qui mettent l'entité en avant
+    const variants = [
+      `${entityPart}آخر التطورات والأحداث الرياضية`,
+      `${entityPart}مستجدات بارزة في ${label}`,
+      `${entityPart}ما تحتاج معرفته اليوم`,
+      `${entityPart}تحليل أحدث الأخبار في ${monthLabel}`,
+      `${entityPart}الصورة الكاملة من ملاعب ${label}`,
+      `${entityPart}جديد ولافت في عالم ${label}`,
+    ];
+    title = variants[(index + parseInt(urlHash, 16)) % variants.length].slice(0, 90);
+  } else {
+    // Aucun titre source → fallback générique
+    const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+    const monthLabel = arabicMonths[new Date().getMonth()];
+    const variants = [
+      `${label} — أبرز الأحداث الرياضية`,
+      `مستجدات ${label} هذا الأسبوع`,
+      `${label} — تطورات ${monthLabel}`,
+    ];
+    title = variants[index % variants.length].slice(0, 90);
+  }
 
   const description = `${typeTemplate.intro(label, titleHint)} متابعة حصرية من نبض الرياضة.`.slice(0, 200);
   const content = [typeTemplate.intro(label, titleHint), ...typeTemplate.body(label)].join("\n\n");
@@ -387,10 +419,9 @@ function buildPrompt(item, format, label, source, srcLang) {
   const srcLangLabel = srcLang === "en" ? "Anglais" : srcLang === "fr" ? "Français" : "Arabe";
 
   return `
-Tu es rédacteur sportif senior pour "نبض الرياضة". À partir des informations brutes ci-dessous, tu dois produire un article 100% original dans les 3 langues. Tu ne dois JAMAIS copier, paraphraser mot à mot ou reproduire le texte source — réécris entièrement avec ton propre style journalistique.
+Tu es rédacteur sportif senior pour "نبض الرياضة". À partir des informations brutes ci-dessous, tu dois produire un article 100% original dans les 3 langues.
 
 ⚡ Type d'article : **${format.ar}** (${format.en}) — ${format.hint}
-⚠️ Ce type guide le STYLE uniquement — JAMAIS de préfixes في العناوين مثل توقعات: / ملخص: / عاجل: / تحليل معمّق:
 
 --- SOURCE BRUTE (langue : ${srcLangLabel}) ---
 Sport / Championnat : ${label}
@@ -398,34 +429,34 @@ Titre original      : ${originalTitle}
 Résumé              : ${originalDescription}
 Tags                : ${(item.topicTags || []).join(", ")}
 
---- RÈGLES COMMUNES ---
-- Chaque langue doit être un article ORIGINAL, pas une traduction de l'autre
-- Exploite le fait sportif comme point de départ, développe avec contexte et analyse
-- Aucun copier-coller du titre ou de la description source
-- Pas de contenu générique ni de phrases de remplissage
-- Chaque paragraphe doit apporter une information nouvelle
+🎯 RÈGLE ABSOLUE SUR LES TITRES :
+Les titres (en_title, fr_title, title) DOIVENT être dérivés du sujet ci-dessus.
+Identifie le fait principal : équipe, joueur, événement, résultat — et reformule.
+JAMAIS de titre générique non lié au sujet (ex: "آخر أخبار كرة القدم", "Latest Football News").
+JAMAIS de préfixes : توقعات: / ملخص: / عاجل: / تحليل معمّق: / Breaking: / Résumé:
+Chaque titre doit être UNIQUE et reconnaissable même sans le contexte.
 
 --- VERSION ANGLAISE (obligatoire — à écrire EN PREMIER) ---
 - Style ESPN / Sky Sports : direct, factuel, dynamique
-- en_title : 50-70 chars, specific headline (NO generic phrases)
+- en_title : 50-70 chars, headline précis mentionnant équipe/joueur du sujet
 - en_description : 145-160 chars, SEO, team/player name included
 - en_content : 3 original paragraphs — Lead → Analysis → Outlook
 
 --- VERSION FRANÇAISE (obligatoire — à écrire EN DEUXIÈME) ---
 - Style L'Équipe / RMC Sport : incisif, analytique
-- fr_title : 50-70 chars, titre accrocheur et précis (PAS de phrases génériques)
+- fr_title : 50-70 chars, titre précis mentionnant équipe/joueur du sujet
 - fr_description : 145-160 chars, SEO, nom équipe/joueur inclus
 - fr_content : 3 paragraphes originaux — Fait → Analyse → Perspectives
 
 --- VERSION ARABE (obligatoire — à écrire EN DERNIER) ---
 - Rédige en arabe standard moderne, style presse sportive de qualité
-- title : 45-70 caractères, commence par le fait principal, mentionne équipe/joueur
-- seoTitle : "[Entité] — [Fait] | نبض الرياضة"
+- title : 45-70 caractères, fait principal + équipe/joueur en lettres arabes
+- seoTitle : "[Equipe/Joueur] — [Fait] | نبض الرياضة"
 - seoDescription : exactement 145-160 caractères
 - content : 5 paragraphes séparés par \\n\\n, sans markdown
 - keywords : 8-10 mots-clés arabes variés
 - faq : 2 questions-réponses courtes liées au sujet
-- Zéro mot anglais dans les champs arabes — noms propres en lettres arabes
+- Noms propres translittérés en arabe (ليفربول، ريال مدريد، مبابي...)
 
 ⚠️ ORDRE CRITIQUE : écris les champs EN/FR avant les champs arabes dans le JSON.
 Retourne UNIQUEMENT un JSON valide (pas de markdown) :
