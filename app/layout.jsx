@@ -96,6 +96,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <ThemeController />
         <SiteHeader />
         {children}
+
+        {/* ── Footer ─────────────────────────────────────────────────────── */}
+        <footer style={{
+          background: "var(--bg-card)",
+          borderTop: "1px solid var(--border)",
+          padding: "32px 20px",
+          marginTop: "40px",
+          direction: "rtl"
+        }}>
+          <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontSize: "20px" }}>⚡</span>
+              <span style={{ fontWeight: 800, color: "var(--text-1)", fontSize: "16px" }}>نبض الرياضة</span>
+            </div>
+            <nav style={{ display: "flex", flexWrap: "wrap", gap: "6px 4px", alignItems: "center" }}>
+              {[
+                { href: "/about/",   label: "عن الموقع" },
+                { href: "/contact/", label: "اتصل بنا" },
+                { href: "/privacy/", label: "سياسة الخصوصية" },
+              ].map(({ href, label }) => (
+                <a key={href} href={href} style={{
+                  color: "var(--text-2)", textDecoration: "none", fontSize: "14px",
+                  padding: "6px 14px", borderRadius: "999px",
+                  border: "1px solid var(--border)", transition: "background .15s"
+                }}>
+                  {label}
+                </a>
+              ))}
+            </nav>
+            <p style={{ color: "var(--text-3)", fontSize: "12px", margin: 0 }}>
+              © {new Date().getFullYear()} نبض الرياضة · جميع الحقوق محفوظة
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );
