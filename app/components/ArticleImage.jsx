@@ -35,12 +35,36 @@ const IMGS = {
     "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80", // Football pitch aerial
   ],
   football: [
-    "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=900&q=80", // Football dribble
-    "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=900&q=80", // Soccer player kicking
-    "https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=900&q=80", // Football stadium aerial
-    "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=900&q=80", // Football field
-    "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=900&q=80", // Football boots on grass
-    "https://images.unsplash.com/photo-1540747913346-19212a4b423a?w=900&q=80", // Football header
+    "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=900&q=80",
+    "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=900&q=80",
+    "https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=900&q=80",
+    "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=900&q=80",
+    "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=900&q=80",
+    "https://images.unsplash.com/photo-1540747913346-19212a4b423a?w=900&q=80",
+    "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=900&q=80",
+    "https://images.unsplash.com/photo-1614632537197-38a17061c2bd?w=900&q=80",
+    "https://images.unsplash.com/photo-1600679472829-3044539ce405?w=900&q=80",
+    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80",
+    "https://images.unsplash.com/photo-1565033566441-fb2d6f82d0e5?w=900&q=80",
+    "https://images.unsplash.com/photo-1559057490-c5f8e9e94a60?w=900&q=80",
+    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80",
+    "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&q=80",
+    "https://images.unsplash.com/photo-1542492977-5e6b8e1eb4ad?w=900&q=80",
+    "https://images.unsplash.com/photo-1624880357913-a8539238245b?w=900&q=80",
+    "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80",
+    "https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=900&q=80",
+    "https://images.unsplash.com/photo-1551958219-acbc630e2914?w=900&q=80",
+    "https://images.unsplash.com/photo-1570498839593-e565b39455fc?w=900&q=80",
+    "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80",
+    "https://images.unsplash.com/photo-1624362772770-a4aa0cf3b3f0?w=900&q=80",
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
+    "https://images.unsplash.com/photo-1477281765962-ef34e8bb0967?w=900&q=80",
+    "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=900&q=80",
+    "https://images.unsplash.com/photo-1617360534077-f9432d0a15f1?w=900&q=80",
+    "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80",
+    "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=900&q=80",
+    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=900&q=80",
+    "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=900&q=80",
   ],
 
   /* ── BASKETBALL ──────────────────────────────────────────────────────── */
@@ -94,13 +118,12 @@ function pickUnsplash(league, sport, slug = "") {
 export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, style }) {
   const gradient = GRADIENTS[sport] || GRADIENTS.football;
 
-  // Si src pointe vers /generated/ (non-existant), on ignore et on prend Unsplash directement
-  const isGenerated = typeof src === "string" && src.startsWith("/generated/");
-  const primarySrc = isGenerated
-    ? (imageUrl || pickUnsplash(league, sport, slug))
-    : (src || imageUrl || pickUnsplash(league, sport, slug));
+  // Fallback Unsplash : toujours sport-correct, jamais l'image RSS (peut être mauvais sport)
+  const unsplashFallback = pickUnsplash(league, sport, slug);
 
-  const fallbackSrc = pickUnsplash(league, sport, slug);
+  // Priorité : image générée (si existante) → Unsplash correct par sport
+  // On n'utilise PAS imageUrl comme fallback car la vignette RSS peut être hors-sujet
+  const primarySrc = src || unsplashFallback;
 
   return (
     <div style={{ position: "relative", overflow: "hidden", background: gradient, ...style }}>
@@ -113,7 +136,8 @@ export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, 
           const el = e.currentTarget;
           if (el.dataset.fallback) { el.style.display = "none"; return; }
           el.dataset.fallback = "1";
-          el.src = el.src !== fallbackSrc ? fallbackSrc : "";
+          // Si l'image générée est 404 → Unsplash du bon sport
+          el.src = el.src !== unsplashFallback ? unsplashFallback : "";
           if (!el.src) el.style.display = "none";
         }}
       />
