@@ -1,14 +1,20 @@
 {
-  "date": "2026-05-14T09:46:35.506Z",
-  "total": 82,
+  "date": "2026-05-14T10:37:37.408Z",
+  "total": 83,
   "fixes": [
     {
       "type": "missing_images_detected",
-      "count": 70,
+      "count": 71,
       "action": "will_regenerate_on_next_ci"
     }
   ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "bball-8roucm",
+      "sport": "basketball",
+      "image": "/generated/bball-8roucm.png"
+    },
     {
       "type": "missing_image",
       "slug": "bball-41b84f",
@@ -431,21 +437,21 @@
     },
     {
       "type": "missing_en_title",
-      "count": 48,
+      "count": 49,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 81,
+      "count": 82,
       "action": "needs_llm_backfill"
     }
   ],
   "summary": {
     "fixes_applied": 0,
-    "warnings": 72,
-    "missing_images": 70,
-    "missing_en_title": 48,
-    "missing_fr_title": 81,
+    "warnings": 73,
+    "missing_images": 71,
+    "missing_en_title": 49,
+    "missing_fr_title": 82,
     "sport_mismatches_fixed": 0,
     "duplicates": 0
   }
