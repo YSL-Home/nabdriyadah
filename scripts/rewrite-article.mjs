@@ -314,6 +314,8 @@ function fallbackArticle(item, index) {
     title = variants[index % variants.length].slice(0, 90);
   }
 
+  // titleHint pour les templates de description : le titre arabe source si disponible, sinon vide
+  const titleHint = (rawTitle && isArabic(rawTitle)) ? rawTitle.slice(0, 60) : "";
   const description = `${typeTemplate.intro(label, titleHint)} متابعة حصرية من نبض الرياضة.`.slice(0, 200);
   const content = [typeTemplate.intro(label, titleHint), ...typeTemplate.body(label)].join("\n\n");
 
