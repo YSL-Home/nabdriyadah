@@ -301,7 +301,8 @@ function fallbackArticle(item, index) {
       `${entityPart}الصورة الكاملة من ملاعب ${label}`,
       `${entityPart}جديد ولافت في عالم ${label}`,
     ];
-    title = variants[(index + parseInt(urlHash, 16)) % variants.length].slice(0, 90);
+    const hashNum = parseInt(urlHash.replace(/[^0-9a-f]/gi, "").slice(0, 8) || "0", 16) || 0;
+    title = variants[(index + hashNum) % variants.length].slice(0, 90);
   } else {
     // Aucun titre source → fallback générique
     const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
