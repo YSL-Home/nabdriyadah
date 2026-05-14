@@ -596,12 +596,13 @@ async function main() {
     process.exit(0);
   }
 
-  // Spread: 60 football + 8 basketball + 6 tennis + 6 padel + 4 futsal = ~84/run
-  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 60);
-  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 8);
-  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 6);
-  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 6);
-  const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 4);
+  // Spread: 80 football + 6 basketball + 3 tennis + 3 padel + 2 futsal = ~94/run
+  // Cible distribution : football ~75%, basket ~8%, tennis ~5%, autres ~5%
+  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 80);
+  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 6);
+  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 3);
+  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 3);
+  const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 2);
   const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems];
 
   console.log(`New items to write: ${selected.length}`);

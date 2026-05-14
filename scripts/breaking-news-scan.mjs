@@ -16,13 +16,24 @@ const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.js
 const FLAG_FILE   = "/tmp/breaking_changed";
 
 const BREAKING_SOURCES = [
-  { url: "https://www.bbc.com/sport/football/rss.xml",          name: "BBC Sport",    sport: "football", priority: 10 },
-  { url: "https://www.btolat.com/rss",                          name: "Btolat",       sport: "football", priority: 9  },
-  { url: "https://www.kooora.com/?rss",                         name: "Kooora",       sport: "football", priority: 8  },
-  { url: "https://hesport.com/feed",                            name: "Hesport",      sport: "football", priority: 7  },
-  { url: "https://news.google.com/rss/search?q=football+arabic&hl=ar&gl=AR&ceid=AR:ar", name: "Google News Football", sport: "football", priority: 6 },
-  { url: "https://news.google.com/rss/search?q=NBA+basketball&hl=ar&gl=AR&ceid=AR:ar", name: "Google News Basketball", sport: "basketball", priority: 5 },
-  { url: "https://news.google.com/rss/search?q=tennis&hl=ar&gl=AR&ceid=AR:ar",         name: "Google News Tennis",     sport: "tennis",     priority: 5 },
+  // ── Football — sources prioritaires (arabes + anglais) ───────────────────
+  { url: "https://www.bbc.com/sport/football/rss.xml",                                   name: "BBC Sport",          sport: "football", priority: 10 },
+  { url: "https://www.btolat.com/rss",                                                   name: "Btolat",             sport: "football", priority: 10 },
+  { url: "https://www.kooora.com/?rss",                                                  name: "Kooora",             sport: "football", priority: 9  },
+  { url: "https://hesport.com/feed",                                                     name: "Hesport",            sport: "football", priority: 9  },
+  { url: "https://www.yallakora.com/rss/football",                                       name: "Yalla Kora",         sport: "football", priority: 8  },
+  { url: "https://www.filgoal.com/rss",                                                  name: "FilGoal",            sport: "football", priority: 8  },
+  { url: "https://www.goal.com/ar/rss/news",                                             name: "Goal Arabic",        sport: "football", priority: 7  },
+  { url: "https://www.skysports.com/rss/12040",                                          name: "Sky Sports Football",sport: "football", priority: 7  },
+  { url: "https://feeds.bbci.co.uk/sport/football/rss.xml",                              name: "BBC Sport Alt",      sport: "football", priority: 6  },
+  { url: "https://news.google.com/rss/search?q=كرة+القدم+دوري&hl=ar&gl=AR&ceid=AR:ar",  name: "GNews Foot AR",      sport: "football", priority: 6  },
+  { url: "https://news.google.com/rss/search?q=Champions+League+football&hl=ar&gl=AR&ceid=AR:ar", name: "GNews UCL", sport: "football", priority: 6 },
+  { url: "https://news.google.com/rss/search?q=Premier+League+football&hl=ar&gl=AR&ceid=AR:ar",   name: "GNews PL",  sport: "football", priority: 5 },
+  { url: "https://news.google.com/rss/search?q=La+Liga+football&hl=ar&gl=AR&ceid=AR:ar",          name: "GNews Liga",sport: "football", priority: 5 },
+  // ── Basket — limité ──────────────────────────────────────────────────────
+  { url: "https://news.google.com/rss/search?q=NBA+basketball&hl=ar&gl=AR&ceid=AR:ar",  name: "GNews NBA",          sport: "basketball",priority: 4  },
+  // ── Tennis — limité ──────────────────────────────────────────────────────
+  { url: "https://news.google.com/rss/search?q=tennis&hl=ar&gl=AR&ceid=AR:ar",          name: "GNews Tennis",       sport: "tennis",   priority: 3  },
 ];
 
 const parser = new Parser({ timeout: 8000 });
