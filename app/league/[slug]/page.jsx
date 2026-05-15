@@ -584,8 +584,14 @@ function getLeagueStandings(leagueSlug) {
     // Path traversal guard
     if (!standingsPath.startsWith(base + path.sep) && standingsPath !== base) return { type: "football", data: [] };
     const data = JSON.parse(fs.readFileSync(standingsPath, "utf-8"));
-    if (data.type === "tennis-rankings" || data.type === "padel-rankings") {
-      return { type: data.type, data: data.rankings || [] };
+    if (data.type === "padel-rankings") {
+      // Padel: men + women separate arrays
+      const men   = data.men   || data.rankings?.filter(p => p.gender === "M") || [];
+      const women = data.women || data.rankings?.filter(p => p.gender === "F") || [];
+      return { type: "padel-rankings", data: men, men, women };
+    }
+    if (data.type === "tennis-rankings") {
+      return { type: "tennis-rankings", data: data.rankings || [] };
     }
     if (data.type === "basketball" && data.standings && data.standings.length > 0) {
       return { type: "basketball", data: data.standings };
@@ -634,11 +640,12 @@ export default function LeaguePage({ params }) {
   const featuredArticle = leagueArticles[0] || null;
 
   // Standings data
-  const { type: standingsType, data: standings } = getLeagueStandings(params.slug);
+  const { type: standingsType, data: standings, men: padelMen = [], women: padelWomen = [] } = getLeagueStandings(params.slug);
   const hasLiveStandings = standings.length > 0 && (standings[0].points > 0 || standings[0].won > 0);
   const top10 = standings.slice(0, 10);
   const rest = standings.slice(10);
   const isBasketball = standingsType === "basketball";
+  const isPadel = standingsType === "padel-rankings";
   const gridCols = isBasketball ? "36px 1fr 40px 40px 40px 50px 44px" : "36px 1fr 40px 40px 40px 40px 44px";
 
   return (
@@ -797,22 +804,21 @@ export default function LeaguePage({ params }) {
 
         <AdSlot label="مساحة إعلانية أعلى صفحة البطولة" minHeight={90} style={{ marginBottom: 24 }} />
 
-        {/* ── RANKINGS (Tennis / Padel) ── */}
-        {(standingsType === "tennis-rankings" || standingsType === "padel-rankings") && standings.length > 0 && (
+        {/* ── RANKINGS Tennis ── */}
+        {standingsType === "tennis-rankings" && standings.length > 0 && (
           <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "24px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", marginBottom: "24px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
               <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>تصنيف اللاعبين</span>
             </div>
-            {/* Header */}
-            <div style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 70px", gap: "4px", padding: "8px 12px", background: theme.primarySoft, borderRadius: "12px", marginBottom: "6px", fontSize: "12px", fontWeight: 700, color: theme.primary }}>
+            <div style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 80px", gap: "4px", padding: "8px 12px", background: theme.primarySoft, borderRadius: "12px", marginBottom: "6px", fontSize: "12px", fontWeight: 700, color: theme.primary }}>
               <span style={{ textAlign: "center" }}>#</span>
               <span>اللاعب</span>
               <span style={{ textAlign: "center" }}>البلد</span>
               <span style={{ textAlign: "center" }}>النقاط</span>
             </div>
             {standings.slice(0, 20).map((player, i) => (
-              <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 70px", gap: "4px", padding: "10px 12px", borderRadius: "12px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "4px" }}>
+              <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 80px", gap: "4px", padding: "10px 12px", borderRadius: "12px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "4px" }}>
                 <span style={{ textAlign: "center", fontWeight: 800, width: "24px", height: "24px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#6b7280", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", fontSize: "13px" }}>{player.rank || i + 1}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   {player.flag && <img src={player.flag} alt="" style={{ width: "22px", height: "16px", objectFit: "cover", borderRadius: "3px" }} />}
@@ -823,6 +829,58 @@ export default function LeaguePage({ params }) {
               </div>
             ))}
           </section>
+        )}
+
+        {/* ── RANKINGS Padel — Hommes + Femmes séparés ── */}
+        {isPadel && (padelMen.length > 0 || padelWomen.length > 0) && (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "24px" }}>
+            {/* Hommes */}
+            {padelMen.length > 0 && (
+              <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "22px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                  <div style={{ width: "5px", height: "26px", borderRadius: "999px", background: theme.primary }} />
+                  <span style={{ color: theme.primary, fontSize: "17px", fontWeight: 800 }}>🎾 رجال — Top {padelMen.length}</span>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "7px 10px", background: theme.primarySoft, borderRadius: "10px", marginBottom: "5px", fontSize: "11px", fontWeight: 700, color: theme.primary }}>
+                  <span style={{ textAlign: "center" }}>#</span>
+                  <span>اللاعب</span>
+                  <span style={{ textAlign: "center" }}>🌍</span>
+                  <span style={{ textAlign: "center" }}>نقاط</span>
+                </div>
+                {padelMen.map((player, i) => (
+                  <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px" }}>
+                    <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
+                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
+                    <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
+                    <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
+                  </div>
+                ))}
+              </section>
+            )}
+            {/* Femmes */}
+            {padelWomen.length > 0 && (
+              <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "22px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                  <div style={{ width: "5px", height: "26px", borderRadius: "999px", background: theme.primary }} />
+                  <span style={{ color: theme.primary, fontSize: "17px", fontWeight: 800 }}>🎾 سيدات — Top {padelWomen.length}</span>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "7px 10px", background: theme.primarySoft, borderRadius: "10px", marginBottom: "5px", fontSize: "11px", fontWeight: 700, color: theme.primary }}>
+                  <span style={{ textAlign: "center" }}>#</span>
+                  <span>اللاعبة</span>
+                  <span style={{ textAlign: "center" }}>🌍</span>
+                  <span style={{ textAlign: "center" }}>نقاط</span>
+                </div>
+                {padelWomen.map((player, i) => (
+                  <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px" }}>
+                    <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
+                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
+                    <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
+                    <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
+                  </div>
+                ))}
+              </section>
+            )}
+          </div>
         )}
 
         {/* ── STANDINGS TABLE (Football / Basketball) ── */}
