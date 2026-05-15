@@ -53,7 +53,10 @@ const sportConfig = {
     primarySoft: "#fff7ed",
     border: "#fed7aa",
     pageBg: "#fff7ed",
-    highlights: ["أخبار الـ NBA", "أبرز اللاعبين", "نتائج المباريات", "انتقالات كرة السلة"]
+    highlights: ["أخبار الـ NBA", "أبرز اللاعبين", "نتائج المباريات", "انتقالات كرة السلة"],
+    leagues: [
+      { slug: "nba", title: "دوري كرة السلة الأمريكي — NBA", country: "USA", color: "#c2410c", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png", logoBg: "#431407" },
+    ]
   },
   tennis: {
     title: "التنس",
@@ -66,7 +69,11 @@ const sportConfig = {
     primarySoft: "#f0fdf4",
     border: "#bbf7d0",
     pageBg: "#f0fdf4",
-    highlights: ["غراند سلام", "أبرز اللاعبين", "بطولة ويمبلدون", "رولان غاروس"]
+    highlights: ["غراند سلام", "أبرز اللاعبين", "بطولة ويمبلدون", "رولان غاروس"],
+    leagues: [
+      { slug: "atp", title: "بطولة ATP للرجال", country: "International", color: "#15803d", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/atp.png", logoBg: "#052e16" },
+      { slug: "wta", title: "بطولة WTA للسيدات", country: "International", color: "#a21caf", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/wta.png", logoBg: "#4a044e" },
+    ]
   },
   padel: {
     title: "البادل",
@@ -79,7 +86,10 @@ const sportConfig = {
     primarySoft: "#eff6ff",
     border: "#bfdbfe",
     pageBg: "#eff6ff",
-    highlights: ["World Padel Tour", "بطولات البادل", "أبرز اللاعبين", "تطور الرياضة"]
+    highlights: ["World Padel Tour", "بطولات البادل", "أبرز اللاعبين", "تطور الرياضة"],
+    leagues: [
+      { slug: "padel-premier", title: "Premier Padel — البطولة العالمية", country: "International", color: "#7c3aed", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/200px-Premier_Padel_logo.svg.png", logoBg: "#2e1065" },
+    ]
   },
   futsal: {
     title: "كرة قدم الصالات",
@@ -92,7 +102,42 @@ const sportConfig = {
     primarySoft: "#f5f3ff",
     border: "#ddd6fe",
     pageBg: "#f5f3ff",
-    highlights: ["فوتسال إندور", "بطولات الصالات", "أبرز الأندية", "نتائج المباريات"]
+    highlights: ["فوتسال إندور", "بطولات الصالات", "أبرز الأندية", "نتائج المباريات"],
+    leagues: [
+      { slug: "futsal-monde", title: "كأس العالم للصالات", country: "FIFA", color: "#0f766e", logo: "https://media.api-sports.io/football/leagues/1.png", logoBg: "#042f2e" },
+    ]
+  },
+  f1: {
+    title: "الفورمولا 1",
+    slug: "f1",
+    description: "تابع أحدث أخبار سباقات الفورمولا 1، ترتيب السائقين، نتائج الجائزة الكبرى وأبرز الفرق.",
+    icon: "🏎️",
+    colorFrom: "#7f1d1d",
+    colorTo: "#dc2626",
+    primary: "#dc2626",
+    primarySoft: "#fee2e2",
+    border: "#fecaca",
+    pageBg: "#fff1f2",
+    highlights: ["ترتيب السائقين", "نتائج الجائزة الكبرى", "ريد بول وفيراري", "ماكس فيرستابن"],
+    leagues: [
+      { slug: "f1", title: "بطولة العالم F1", country: "FIA", color: "#dc2626", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/f1.png", logoBg: "#7f1d1d" },
+    ]
+  },
+  golf: {
+    title: "الغولف",
+    slug: "golf",
+    description: "أخبار الغولف العالمي، تصنيف لاعبي PGA Tour، نتائج الماسترز وأبرز البطولات.",
+    icon: "⛳",
+    colorFrom: "#052e16",
+    colorTo: "#16a34a",
+    primary: "#16a34a",
+    primarySoft: "#dcfce7",
+    border: "#bbf7d0",
+    pageBg: "#f0fdf4",
+    highlights: ["PGA Tour", "التصنيف العالمي", "بطولة الماسترز", "سكوتي شيفلر"],
+    leagues: [
+      { slug: "pga-tour", title: "PGA Tour", country: "USA", color: "#16a34a", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/pga.png", logoBg: "#052e16" },
+    ]
   }
 };
 
@@ -263,6 +308,28 @@ export default function SportPage({ params }) {
         </section>
 
         <AdSlot label="مساحة إعلانية أعلى الصفحة" minHeight={90} style={{ marginBottom: 24 }} />
+
+        {/* Leagues / Competitions for this sport */}
+        {sport.leagues && sport.leagues.length > 0 && (
+          <section style={{ marginBottom: "28px" }}>
+            <h2 style={{ margin: "0 0 16px 0", fontSize: "26px", fontWeight: 800, color: "#111827" }}>البطولات والمسابقات</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "16px" }}>
+              {sport.leagues.map((league) => (
+                <Link key={league.slug} href={`/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                  <div style={{ background: "white", border: `1px solid #e5e7eb`, borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", borderTop: `4px solid ${league.color}` }}>
+                    <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: league.logoBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "8px" }}>
+                      <img src={league.logo} alt={league.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    </div>
+                    <div>
+                      <div style={{ color: league.color, fontSize: "11px", fontWeight: 700, marginBottom: "3px" }}>{league.country}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{league.title}</div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {sportArticles.length === 0 ? (
           <section style={{ background: "white", borderRadius: "28px", padding: "40px", border: `1px solid ${sport.border}`, textAlign: "center" }}>

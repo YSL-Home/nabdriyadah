@@ -63,11 +63,13 @@ function ui(key, lang) { return UI[key]?.[lang] || UI[key]?.ar || key; }
 
 /* ── Sport categories config ────────────────────────── */
 const SPORT_CATS = [
-  { key: "football",   emoji: "⚽", label: { ar: "كرة القدم", fr: "Football",   en: "Football"   }, color: "#2563eb", href: "/sport/football/"   },
-  { key: "basketball", emoji: "🏀", label: { ar: "كرة السلة", fr: "Basketball", en: "Basketball" }, color: "#c2410c", href: "/sport/basketball/" },
-  { key: "tennis",     emoji: "🎾", label: { ar: "التنس",     fr: "Tennis",     en: "Tennis"     }, color: "#15803d", href: "/sport/tennis/"     },
-  { key: "padel",      emoji: "🏸", label: { ar: "البادل",    fr: "Padel",      en: "Padel"      }, color: "#7c3aed", href: "/sport/padel/"      },
-  { key: "futsal",     emoji: "🥅", label: { ar: "الصالات",   fr: "Futsal",     en: "Futsal"     }, color: "#0f766e", href: "/sport/futsal/"     },
+  { key: "football",   emoji: "⚽",  label: { ar: "كرة القدم", fr: "Football",   en: "Football"   }, color: "#2563eb", href: "/sport/football/"   },
+  { key: "basketball", emoji: "🏀",  label: { ar: "كرة السلة", fr: "Basketball", en: "Basketball" }, color: "#c2410c", href: "/sport/basketball/" },
+  { key: "tennis",     emoji: "🎾",  label: { ar: "التنس",     fr: "Tennis",     en: "Tennis"     }, color: "#15803d", href: "/sport/tennis/"     },
+  { key: "padel",      emoji: "🏸",  label: { ar: "البادل",    fr: "Padel",      en: "Padel"      }, color: "#7c3aed", href: "/sport/padel/"      },
+  { key: "futsal",     emoji: "🥅",  label: { ar: "الصالات",   fr: "Futsal",     en: "Futsal"     }, color: "#0f766e", href: "/sport/futsal/"     },
+  { key: "f1",         emoji: "🏎️", label: { ar: "فورمولا 1", fr: "Formule 1",  en: "Formula 1"  }, color: "#dc2626", href: "/sport/f1/"         },
+  { key: "golf",       emoji: "⛳",  label: { ar: "الغولف",    fr: "Golf",       en: "Golf"       }, color: "#16a34a", href: "/sport/golf/"       },
 ];
 
 /* ── Date formatting ────────────────────────────────── */

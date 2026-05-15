@@ -26,14 +26,44 @@ const globalCompetitions = [
 ];
 
 const leagueTitles = {
-  "premier-league":    { en: "Premier League",     fr: "Premier League"     },
-  "la-liga":           { en: "La Liga",            fr: "La Liga"            },
-  "bundesliga":        { en: "Bundesliga",         fr: "Bundesliga"         },
-  "serie-a":           { en: "Serie A",            fr: "Serie A"            },
-  "ligue-1":           { en: "Ligue 1",            fr: "Ligue 1"            },
-  "champions-league":  { en: "Champions League",  fr: "Ligue des Champions" },
-  "saudi-pro-league":  { en: "Saudi Pro League",  fr: "Saudi Pro League"   },
-  "eredivisie":        { en: "Eredivisie",         fr: "Eredivisie"         },
+  "premier-league":    { en: "Premier League",       fr: "Premier League"          },
+  "la-liga":           { en: "La Liga",              fr: "La Liga"                 },
+  "bundesliga":        { en: "Bundesliga",           fr: "Bundesliga"              },
+  "serie-a":           { en: "Serie A",              fr: "Serie A"                 },
+  "ligue-1":           { en: "Ligue 1",              fr: "Ligue 1"                 },
+  "champions-league":  { en: "Champions League",    fr: "Ligue des Champions"     },
+  "saudi-pro-league":  { en: "Saudi Pro League",    fr: "Saudi Pro League"        },
+  "eredivisie":        { en: "Eredivisie",           fr: "Eredivisie"              },
+  "nba":               { en: "NBA",                  fr: "NBA"                     },
+  "atp":               { en: "ATP Tour",             fr: "ATP Tour"                },
+  "wta":               { en: "WTA Tour",             fr: "WTA Tour"                },
+  "padel-premier":     { en: "Premier Padel",        fr: "Premier Padel"           },
+  "futsal-monde":      { en: "FIFA Futsal World Cup",fr: "Coupe du Monde Futsal"   },
+  "f1":                { en: "Formula 1",            fr: "Formule 1"               },
+  "pga-tour":          { en: "PGA Tour",             fr: "PGA Tour"                },
+};
+
+// Leagues per non-football sport
+const sportLeagues = {
+  basketball: [
+    { slug: "nba", country: "USA", fr: "États-Unis", color: "#c2410c", border: "#fed7aa", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png", logoBg: "#431407" },
+  ],
+  tennis: [
+    { slug: "atp", country: "International", fr: "International", color: "#15803d", border: "#bbf7d0", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/atp.png", logoBg: "#052e16" },
+    { slug: "wta", country: "International", fr: "International", color: "#a21caf", border: "#f0abfc", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/wta.png", logoBg: "#4a044e" },
+  ],
+  padel: [
+    { slug: "padel-premier", country: "International", fr: "International", color: "#7c3aed", border: "#ddd6fe", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/200px-Premier_Padel_logo.svg.png", logoBg: "#2e1065" },
+  ],
+  futsal: [
+    { slug: "futsal-monde", country: "FIFA", fr: "FIFA", color: "#0f766e", border: "#99f6e4", logo: "https://media.api-sports.io/football/leagues/1.png", logoBg: "#042f2e" },
+  ],
+  f1: [
+    { slug: "f1", country: "FIA", fr: "FIA", color: "#dc2626", border: "#fecaca", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/f1.png", logoBg: "#7f1d1d" },
+  ],
+  golf: [
+    { slug: "pga-tour", country: "USA", fr: "États-Unis", color: "#16a34a", border: "#bbf7d0", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/pga.png", logoBg: "#052e16" },
+  ],
 };
 
 const sportConfig = {
@@ -141,6 +171,44 @@ const sportConfig = {
       highlights: ["Football indoor", "Tournois futsal", "Meilleurs clubs", "Résultats"],
     },
   },
+  f1: {
+    icon: "🏎️",
+    colorFrom: "#7f1d1d",
+    colorTo: "#dc2626",
+    primary: "#dc2626",
+    primarySoft: "#fee2e2",
+    border: "#fecaca",
+    pageBg: "#fff1f2",
+    en: {
+      title: "Formula 1",
+      description: "Full Formula 1 coverage — race results, driver standings, team news and Grand Prix updates.",
+      highlights: ["Driver standings", "Grand Prix results", "Red Bull & Ferrari", "Max Verstappen"],
+    },
+    fr: {
+      title: "Formule 1",
+      description: "Toute l'actualité de la Formule 1 — résultats de courses, classements pilotes et infos écuries.",
+      highlights: ["Classement pilotes", "Résultats Grand Prix", "Red Bull & Ferrari", "Max Verstappen"],
+    },
+  },
+  golf: {
+    icon: "⛳",
+    colorFrom: "#052e16",
+    colorTo: "#16a34a",
+    primary: "#16a34a",
+    primarySoft: "#dcfce7",
+    border: "#bbf7d0",
+    pageBg: "#f0fdf4",
+    en: {
+      title: "Golf",
+      description: "Golf news, PGA Tour rankings, Masters results and top players worldwide.",
+      highlights: ["PGA Tour", "World rankings", "Masters & Majors", "Scottie Scheffler"],
+    },
+    fr: {
+      title: "Golf",
+      description: "Actualités golf, classements PGA Tour, résultats des Majors et meilleurs joueurs.",
+      highlights: ["PGA Tour", "Classement mondial", "Masters & Majors", "Scottie Scheffler"],
+    },
+  },
 };
 
 export default function LocalizedSportPage({ slug, lang }) {
@@ -196,6 +264,30 @@ export default function LocalizedSportPage({ slug, lang }) {
             </div>
           </div>
         </section>
+
+        {/* Non-football sports: Leagues */}
+        {!cfg.isFootball && sportLeagues[slug] && sportLeagues[slug].length > 0 && (
+          <section style={{ marginBottom: "28px" }}>
+            <h2 style={{ margin: "0 0 16px 0", fontSize: "26px", fontWeight: 800, color: "#111827" }}>
+              {lang === "fr" ? "Compétitions" : lang === "en" ? "Competitions" : "البطولات والمسابقات"}
+            </h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "16px" }}>
+              {sportLeagues[slug].map((league) => (
+                <Link key={league.slug} href={`${prefix}/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                  <div style={{ background: "white", border: `1px solid #e5e7eb`, borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", borderTop: `4px solid ${league.color}` }}>
+                    <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: league.logoBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "8px" }}>
+                      <img src={league.logo} alt={leagueTitles[league.slug]?.[lang] || league.slug} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    </div>
+                    <div>
+                      <div style={{ color: league.color, fontSize: "11px", fontWeight: 700, marginBottom: "3px" }}>{lang === "fr" ? (league.fr || league.country) : league.country}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{leagueTitles[league.slug]?.[lang] || leagueTitles[league.slug]?.en || league.slug}</div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Football: Leagues + Competitions */}
         {cfg.isFootball && (
