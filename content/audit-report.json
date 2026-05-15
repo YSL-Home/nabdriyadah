@@ -1,16 +1,178 @@
 {
-  "date": "2026-05-15T22:31:27.499Z",
-  "total": 525,
-  "fixes": [],
+  "date": "2026-05-15T22:51:23.156Z",
+  "total": 540,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 15,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-o8p210",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-o8p210",
+      "value": "US PGA Championship round two tee-times"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-jim9i1",
+      "value": "Aston Villa secure Champions League spot with win over Liver"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-mxmvqy",
+      "value": "Guardiola insists he has 'one more year' on Man City deal"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1e61hc",
+      "value": "Man charged after referee Beaton and family put under police"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-1fk3y8-1778885236374",
+      "value": "Sinner equals Djokovic record to progress in Rome"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-d4e1uk-1778885236238",
+      "value": "Murray brought into Draper coaching team"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "liga-t1423d-1778885234734",
+      "value": "What Went Wrong in Real Madrid’s 2025-26 Trophyless Season -"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "liga-1kc0jy-1778885234080",
+      "value": "How many British players have won La Liga? - DAZN"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "liga-j9un1s-1778885235128",
+      "value": "Every UEFA Champions League Player of the Match - UEFA.com"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "liga-1n9ho6-1778885234988",
+      "value": "Real Madrid v City: Kick-off time, team news and TV informat"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-gj72jk-1778885235758",
+      "value": "Predicting how the top of the NBA’s Western Conference will "
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-1gvcif-1778885235882",
+      "value": "2025 NBA playoff bracket, scores: Thunder take down Pacers i"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-o8p210",
+      "sport": "golf",
+      "image": "/generated/ft-o8p210.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-12eqtc",
+      "sport": "football",
+      "image": "/generated/ft-12eqtc.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-jim9i1",
+      "sport": "football",
+      "image": "/generated/ft-jim9i1.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-mxmvqy",
+      "sport": "football",
+      "image": "/generated/ft-mxmvqy.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-jmnmdh",
+      "sport": "tennis",
+      "image": "/generated/tennis-jmnmdh.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-kt78uc",
+      "sport": "football",
+      "image": "/generated/ft-kt78uc.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1e61hc",
+      "sport": "football",
+      "image": "/generated/ft-1e61hc.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1fk3y8-1778885236374",
+      "sport": "tennis",
+      "image": "/generated/tennis-1fk3y8-1778885236374.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-d4e1uk-1778885236238",
+      "sport": "tennis",
+      "image": "/generated/tennis-d4e1uk-1778885236238.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "liga-t1423d-1778885234734",
+      "sport": "football",
+      "image": "/generated/liga-t1423d-1778885234734.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "liga-1kc0jy-1778885234080",
+      "sport": "football",
+      "image": "/generated/liga-1kc0jy-1778885234080.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "liga-j9un1s-1778885235128",
+      "sport": "football",
+      "image": "/generated/liga-j9un1s-1778885235128.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "liga-1n9ho6-1778885234988",
+      "sport": "football",
+      "image": "/generated/liga-1n9ho6-1778885234988.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-gj72jk-1778885235758",
+      "sport": "basketball",
+      "image": "/generated/bball-gj72jk-1778885235758.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-1gvcif-1778885235882",
+      "sport": "basketball",
+      "image": "/generated/bball-1gvcif-1778885235882.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 173,
+      "count": 176,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 524,
+      "count": 539,
       "action": "needs_llm_backfill"
     },
     {
@@ -69,20 +231,28 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "tennis-1fk3y8-1778878558467",
+          "duplicate_of": "tennis-1fk3y8-1778885236374"
+        },
+        {
           "slug": "tennis-1fk3y8",
-          "duplicate_of": "tennis-1fk3y8-1778878558467"
+          "duplicate_of": "tennis-1fk3y8-1778885236374"
+        },
+        {
+          "slug": "tennis-d4e1uk-1778882003707",
+          "duplicate_of": "tennis-d4e1uk-1778885236238"
         },
         {
           "slug": "tennis-d4e1uk-1778879911463",
-          "duplicate_of": "tennis-d4e1uk-1778882003707"
+          "duplicate_of": "tennis-d4e1uk-1778885236238"
         },
         {
           "slug": "tennis-d4e1uk-1778862341212",
-          "duplicate_of": "tennis-d4e1uk-1778882003707"
+          "duplicate_of": "tennis-d4e1uk-1778885236238"
         },
         {
           "slug": "tennis-d4e1uk",
-          "duplicate_of": "tennis-d4e1uk-1778882003707"
+          "duplicate_of": "tennis-d4e1uk-1778885236238"
         },
         {
           "slug": "tennis-k2qrrk-1778858070753",
@@ -177,6 +347,10 @@
           "duplicate_of": "ft-15x0v0-1778837322641"
         },
         {
+          "slug": "liga-t1423d",
+          "duplicate_of": "liga-t1423d-1778885234734"
+        },
+        {
           "slug": "tennis-5errfd-1778776651598",
           "duplicate_of": "tennis-5errfd-1778837325846"
         },
@@ -235,6 +409,10 @@
         {
           "slug": "ft-106o70",
           "duplicate_of": "ft-1jhsvm-1778772546140"
+        },
+        {
+          "slug": "liga-1kc0jy",
+          "duplicate_of": "liga-1kc0jy-1778885234080"
         },
         {
           "slug": "tennis-81wj5u-1778776651932",
@@ -725,6 +903,10 @@
           "duplicate_of": "tennis-11wv6r-1778856182229"
         },
         {
+          "slug": "liga-j9un1s",
+          "duplicate_of": "liga-j9un1s-1778885235128"
+        },
+        {
           "slug": "ucl-1pjhzc-1778862338270",
           "duplicate_of": "ucl-1pjhzc-1778882000286"
         },
@@ -805,6 +987,14 @@
           "duplicate_of": "padel-m48y9s-1778843588359"
         },
         {
+          "slug": "liga-1n9ho6",
+          "duplicate_of": "liga-1n9ho6-1778885234988"
+        },
+        {
+          "slug": "bball-gj72jk",
+          "duplicate_of": "bball-gj72jk-1778885235758"
+        },
+        {
           "slug": "bball-1nffxl-1778856181154",
           "duplicate_of": "bball-1nffxl-1778882002391"
         },
@@ -817,12 +1007,16 @@
           "duplicate_of": "bball-1nffxl-1778882002391"
         },
         {
+          "slug": "bball-1gvcif-1778872790159",
+          "duplicate_of": "bball-1gvcif-1778885235882"
+        },
+        {
           "slug": "bball-1gvcif-1778856181749",
-          "duplicate_of": "bball-1gvcif-1778872790159"
+          "duplicate_of": "bball-1gvcif-1778885235882"
         },
         {
           "slug": "bball-1gvcif",
-          "duplicate_of": "bball-1gvcif-1778872790159"
+          "duplicate_of": "bball-1gvcif-1778885235882"
         },
         {
           "slug": "bball-2aij86-1778879910674",
@@ -844,12 +1038,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 173,
-    "missing_fr_title": 524,
-    "sport_mismatches_fixed": 0,
-    "duplicates": 206
+    "fixes_applied": 13,
+    "warnings": 18,
+    "missing_images": 15,
+    "missing_en_title": 176,
+    "missing_fr_title": 539,
+    "sport_mismatches_fixed": 1,
+    "duplicates": 214
   }
 }
