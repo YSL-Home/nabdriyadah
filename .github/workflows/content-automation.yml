@@ -157,6 +157,10 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         continue-on-error: true
 
+      - name: Audit images (mismatch sport / fichiers manquants)
+        run: node scripts/audit-images.mjs
+        continue-on-error: true
+
       - name: Generate images
         run: node scripts/generate-images.mjs
         env:

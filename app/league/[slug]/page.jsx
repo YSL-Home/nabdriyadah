@@ -408,6 +408,133 @@ const leagueMap = {
       { name: "النادي الصفاقسي", slug: "cs-sfaxien", logo: "https://media.api-sports.io/football/teams/3814.png" },
       { name: "الملعب التونسي", slug: "stade-tunisien", logo: "https://media.api-sports.io/football/teams/3815.png" }
     ]
+  },
+
+  // ── NBA Basketball ──────────────────────────────────────────────────────
+  "nba": {
+    title: "دوري كرة السلة الأمريكي — NBA",
+    shortLabel: "NBA",
+    type: "basketball",
+    description: "تابع أحدث أخبار دوري كرة السلة الأمريكي NBA، أبرز الأندية واللاعبين والنتائج.",
+    leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",
+    theme: {
+      pageBg: "#fff7ed",
+      heroFrom: "#431407",
+      heroTo: "#c2410c",
+      primary: "#c2410c",
+      primarySoft: "#ffedd5",
+      border: "#fed7aa",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["بوسطن سيلتيكس", "لوس أنجلوس ليكرز", "مباريات الـ NBA", "نجوم الدوري"],
+    teams: [
+      { name: "بوسطن سيلتيكس", slug: "boston-celtics", logo: "https://a.espncdn.com/i/teamlogos/nba/500/bos.png" },
+      { name: "لوس أنجلوس ليكرز", slug: "los-angeles-lakers", logo: "https://a.espncdn.com/i/teamlogos/nba/500/lal.png" },
+      { name: "غولدن ستيت واريورز", slug: "golden-state-warriors", logo: "https://a.espncdn.com/i/teamlogos/nba/500/gs.png" },
+      { name: "ميامي هيت", slug: "miami-heat", logo: "https://a.espncdn.com/i/teamlogos/nba/500/mia.png" },
+      { name: "شيكاغو بولز", slug: "chicago-bulls", logo: "https://a.espncdn.com/i/teamlogos/nba/500/chi.png" },
+      { name: "دالاس مافيريكس", slug: "dallas-mavericks", logo: "https://a.espncdn.com/i/teamlogos/nba/500/dal.png" }
+    ]
+  },
+
+  // ── Tennis ATP ──────────────────────────────────────────────────────────
+  "atp": {
+    title: "بطولة ATP للرجال — التنس",
+    shortLabel: "ATP",
+    type: "tennis-rankings",
+    description: "تابع أحدث أخبار التنس وتصنيف لاعبي ATP، ألكاراز، سينر وأبرز بطولات غراند سلام.",
+    leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/atp.png",
+    theme: {
+      pageBg: "#f0fdf4",
+      heroFrom: "#052e16",
+      heroTo: "#15803d",
+      primary: "#15803d",
+      primarySoft: "#dcfce7",
+      border: "#bbf7d0",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["ويمبلدون ورولان غاروس", "كارلوس ألكاراز", "يانيك سينر", "تصنيف ATP العالمي"],
+    teams: []
+  },
+
+  // ── Tennis WTA ──────────────────────────────────────────────────────────
+  "wta": {
+    title: "بطولة WTA للسيدات — التنس",
+    shortLabel: "WTA",
+    type: "tennis-rankings",
+    description: "تابع أحدث أخبار تنس السيدات وتصنيف لاعبات WTA، إيغا شفيونتيك وأبرز بطولات الغراند سلام.",
+    leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/wta.png",
+    theme: {
+      pageBg: "#fdf4ff",
+      heroFrom: "#4a044e",
+      heroTo: "#a21caf",
+      primary: "#a21caf",
+      primarySoft: "#fae8ff",
+      border: "#f0abfc",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["إيغا شفيونتيك", "أريناسابالينكا", "كوكو غوف", "تصنيف WTA العالمي"],
+    teams: []
+  },
+
+  // ── Padel ────────────────────────────────────────────────────────────────
+  "padel-premier": {
+    title: "Premier Padel — البطولة العالمية",
+    shortLabel: "PADEL",
+    type: "padel-rankings",
+    description: "تابع أخبار البريمير بادل، تصنيف اللاعبين وأبرز البطولات العالمية للبادل.",
+    leagueLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/200px-Premier_Padel_logo.svg.png",
+    theme: {
+      pageBg: "#f5f3ff",
+      heroFrom: "#2e1065",
+      heroTo: "#7c3aed",
+      primary: "#7c3aed",
+      primarySoft: "#ede9fe",
+      border: "#ddd6fe",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["أرتورو كويلو", "خوان ليبرون", "جيما تريا", "البطولة العالمية"],
+    teams: []
+  },
+
+  // ── Futsal ───────────────────────────────────────────────────────────────
+  "futsal-monde": {
+    title: "كأس العالم لكرة القدم الصالات — FIFA",
+    shortLabel: "FUTSAL",
+    type: "football",
+    description: "تابع أخبار كأس العالم لكرة القدم الصالات، المنتخبات المشاركة والنتائج.",
+    leagueLogo: "https://media.api-sports.io/football/leagues/1.png",
+    theme: {
+      pageBg: "#f0fdfa",
+      heroFrom: "#042f2e",
+      heroTo: "#0f766e",
+      primary: "#0f766e",
+      primarySoft: "#ccfbf1",
+      border: "#99f6e4",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["كأس العالم للصالات", "FIFA Futsal", "المنتخبات العالمية", "الكرة الخماسية"],
+    teams: []
   }
 };
 
@@ -455,10 +582,16 @@ function getLeagueStandings(leagueSlug) {
     const base = path.join(process.cwd(), "content/standings");
     const standingsPath = path.join(base, `${leagueSlug}.json`);
     // Path traversal guard
-    if (!standingsPath.startsWith(base + path.sep) && standingsPath !== base) return [];
+    if (!standingsPath.startsWith(base + path.sep) && standingsPath !== base) return { type: "football", data: [] };
     const data = JSON.parse(fs.readFileSync(standingsPath, "utf-8"));
+    if (data.type === "tennis-rankings" || data.type === "padel-rankings") {
+      return { type: data.type, data: data.rankings || [] };
+    }
+    if (data.type === "basketball" && data.standings && data.standings.length > 0) {
+      return { type: "basketball", data: data.standings };
+    }
     if (data.standings && data.standings.length > 0) {
-      return data.standings;
+      return { type: data.type || "football", data: data.standings };
     }
   } catch {}
 
@@ -479,7 +612,7 @@ function getLeagueStandings(leagueSlug) {
       gd: 0,
       points: 0
     }));
-  return leagueTeams;
+  return { type: "football", data: leagueTeams };
 }
 
 export default function LeaguePage({ params }) {
@@ -501,10 +634,12 @@ export default function LeaguePage({ params }) {
   const featuredArticle = leagueArticles[0] || null;
 
   // Standings data
-  const standings = getLeagueStandings(params.slug);
-  const hasLiveStandings = standings.length > 0 && standings[0].points > 0;
+  const { type: standingsType, data: standings } = getLeagueStandings(params.slug);
+  const hasLiveStandings = standings.length > 0 && (standings[0].points > 0 || standings[0].won > 0);
   const top10 = standings.slice(0, 10);
   const rest = standings.slice(10);
+  const isBasketball = standingsType === "basketball";
+  const gridCols = isBasketball ? "36px 1fr 40px 40px 40px 50px 44px" : "36px 1fr 40px 40px 40px 40px 44px";
 
   return (
     <main
@@ -662,8 +797,36 @@ export default function LeaguePage({ params }) {
 
         <AdSlot label="مساحة إعلانية أعلى صفحة البطولة" minHeight={90} style={{ marginBottom: 24 }} />
 
-        {/* ── STANDINGS TABLE ── */}
-        {standings.length > 0 && (
+        {/* ── RANKINGS (Tennis / Padel) ── */}
+        {(standingsType === "tennis-rankings" || standingsType === "padel-rankings") && standings.length > 0 && (
+          <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "24px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", marginBottom: "24px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
+              <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>تصنيف اللاعبين</span>
+            </div>
+            {/* Header */}
+            <div style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 70px", gap: "4px", padding: "8px 12px", background: theme.primarySoft, borderRadius: "12px", marginBottom: "6px", fontSize: "12px", fontWeight: 700, color: theme.primary }}>
+              <span style={{ textAlign: "center" }}>#</span>
+              <span>اللاعب</span>
+              <span style={{ textAlign: "center" }}>البلد</span>
+              <span style={{ textAlign: "center" }}>النقاط</span>
+            </div>
+            {standings.slice(0, 20).map((player, i) => (
+              <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 70px", gap: "4px", padding: "10px 12px", borderRadius: "12px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "4px" }}>
+                <span style={{ textAlign: "center", fontWeight: 800, width: "24px", height: "24px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#6b7280", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", fontSize: "13px" }}>{player.rank || i + 1}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  {player.flag && <img src={player.flag} alt="" style={{ width: "22px", height: "16px", objectFit: "cover", borderRadius: "3px" }} />}
+                  <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{player.name}</span>
+                </div>
+                <span style={{ textAlign: "center", fontSize: "12px", color: "#6b7280", fontWeight: 600 }}>{player.country || "—"}</span>
+                <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: theme.primary }}>{player.points?.toLocaleString() || "—"}</span>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {/* ── STANDINGS TABLE (Football / Basketball) ── */}
+        {(standingsType === "football" || standingsType === "basketball") && standings.length > 0 && (
           <section
             style={{
               background: theme.cardBg,
@@ -695,7 +858,7 @@ export default function LeaguePage({ params }) {
             {/* Table header */}
             <div style={{
               display: "grid",
-              gridTemplateColumns: "36px 1fr 40px 40px 40px 40px 44px",
+              gridTemplateColumns: gridCols,
               gap: "4px",
               padding: "8px 12px",
               background: theme.primarySoft,
@@ -705,13 +868,27 @@ export default function LeaguePage({ params }) {
               fontWeight: 700,
               color: theme.primary
             }}>
-              <span style={{ textAlign: "center" }}>#</span>
-              <span>الفريق</span>
-              <span style={{ textAlign: "center" }}>ل</span>
-              <span style={{ textAlign: "center" }}>ف</span>
-              <span style={{ textAlign: "center" }}>ت</span>
-              <span style={{ textAlign: "center" }}>خ</span>
-              <span style={{ textAlign: "center", fontWeight: 800 }}>نق</span>
+              {isBasketball ? (
+                <>
+                  <span style={{ textAlign: "center" }}>#</span>
+                  <span>الفريق</span>
+                  <span style={{ textAlign: "center" }}>ل</span>
+                  <span style={{ textAlign: "center" }}>ف</span>
+                  <span style={{ textAlign: "center" }}>خ</span>
+                  <span style={{ textAlign: "center" }}>%</span>
+                  <span style={{ textAlign: "center", fontWeight: 800 }}>ف</span>
+                </>
+              ) : (
+                <>
+                  <span style={{ textAlign: "center" }}>#</span>
+                  <span>الفريق</span>
+                  <span style={{ textAlign: "center" }}>ل</span>
+                  <span style={{ textAlign: "center" }}>ف</span>
+                  <span style={{ textAlign: "center" }}>ت</span>
+                  <span style={{ textAlign: "center" }}>خ</span>
+                  <span style={{ textAlign: "center", fontWeight: 800 }}>نق</span>
+                </>
+              )}
             </div>
 
             {/* Top 10 rows */}
@@ -724,7 +901,7 @@ export default function LeaguePage({ params }) {
                 >
                   <div style={{
                     display: "grid",
-                    gridTemplateColumns: "36px 1fr 40px 40px 40px 40px 44px",
+                    gridTemplateColumns: gridCols,
                     gap: "4px",
                     padding: "10px 12px",
                     borderRadius: "12px",
@@ -738,7 +915,6 @@ export default function LeaguePage({ params }) {
                       textAlign: "center",
                       fontWeight: 800,
                       fontSize: "14px",
-                      color: i < 3 ? theme.primary : "#6b7280",
                       width: "24px",
                       height: "24px",
                       borderRadius: "50%",
@@ -762,11 +938,23 @@ export default function LeaguePage({ params }) {
                         {team.name}
                       </span>
                     </div>
-                    <span style={{ textAlign: "center", fontSize: "13px", color: "#6b7280" }}>{team.played ?? "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "13px", color: "#16a34a", fontWeight: 700 }}>{team.won ?? "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "13px", color: "#ca8a04" }}>{team.drawn ?? "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "13px", color: "#dc2626" }}>{team.lost ?? "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "15px", fontWeight: 900, color: theme.primary }}>{team.points ?? "—"}</span>
+                    {isBasketball ? (
+                      <>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#6b7280" }}>{team.played ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#16a34a", fontWeight: 700 }}>{team.won ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#dc2626" }}>{team.lost ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#ca8a04" }}>{team.pct !== undefined ? (team.pct * 100).toFixed(1) + "%" : "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "15px", fontWeight: 900, color: theme.primary }}>{team.won ?? "—"}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#6b7280" }}>{team.played ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#16a34a", fontWeight: 700 }}>{team.won ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#ca8a04" }}>{team.drawn ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "13px", color: "#dc2626" }}>{team.lost ?? "—"}</span>
+                        <span style={{ textAlign: "center", fontSize: "15px", fontWeight: 900, color: theme.primary }}>{team.points ?? "—"}</span>
+                      </>
+                    )}
                   </div>
                 </Link>
               ))}
@@ -799,7 +987,7 @@ export default function LeaguePage({ params }) {
                     >
                       <div style={{
                         display: "grid",
-                        gridTemplateColumns: "36px 1fr 40px 40px 40px 40px 44px",
+                        gridTemplateColumns: gridCols,
                         gap: "4px",
                         padding: "10px 12px",
                         borderRadius: "12px",
@@ -811,11 +999,23 @@ export default function LeaguePage({ params }) {
                           <img src={team.logo} alt={team.name} style={{ width: "26px", height: "26px", objectFit: "contain", flexShrink: 0 }} />
                           <span style={{ fontSize: "13px", fontWeight: 600, color: "#374151", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{team.name}</span>
                         </div>
-                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.played ?? "—"}</span>
-                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.won ?? "—"}</span>
-                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.drawn ?? "—"}</span>
-                        <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.lost ?? "—"}</span>
-                        <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: "#374151" }}>{team.points ?? "—"}</span>
+                        {isBasketball ? (
+                          <>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.played ?? "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.won ?? "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.lost ?? "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.pct !== undefined ? (team.pct * 100).toFixed(1) + "%" : "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: "#374151" }}>{team.won ?? "—"}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.played ?? "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.won ?? "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.drawn ?? "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "12px", color: "#9ca3af" }}>{team.lost ?? "—"}</span>
+                            <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: "#374151" }}>{team.points ?? "—"}</span>
+                          </>
+                        )}
                       </div>
                     </Link>
                   ))}

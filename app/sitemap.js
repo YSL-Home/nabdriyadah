@@ -23,6 +23,11 @@ const LEAGUES = [
   { slug: "ligue-pro-tn",       priority: 0.72 },
   { slug: "liga-portugal",      priority: 0.70 },
   { slug: "mls",                priority: 0.68 },
+  { slug: "nba",                priority: 0.82 },
+  { slug: "atp",                priority: 0.80 },
+  { slug: "wta",                priority: 0.78 },
+  { slug: "padel-premier",      priority: 0.72 },
+  { slug: "futsal-monde",       priority: 0.68 },
 ];
 
 const SPORTS = [

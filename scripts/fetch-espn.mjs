@@ -30,6 +30,18 @@ const ESPN_LEAGUES = [
   { slug: "mls",              espnId: "usa.1"          },
   { slug: "liga-portugal",    espnId: "por.1"          },
   { slug: "champions-league", espnId: "uefa.champions" },
+  { slug: "futsal-monde",    espnId: "fifa.futsal"     },
+];
+
+// ── Basketball leagues ─────────────────────────────────────────────────────────
+const ESPN_BASKETBALL_LEAGUES = [
+  { slug: "nba", espnId: "nba" },
+];
+
+// ── Tennis tours ───────────────────────────────────────────────────────────────
+const ESPN_TENNIS_TOURS = [
+  { slug: "atp", espnId: "atp" },
+  { slug: "wta", espnId: "wta" },
 ];
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -523,6 +535,181 @@ async function fetchFixtures(league) {
   return Object.keys(buckets).length;
 }
 
+// ── Basketball Standings ──────────────────────────────────────────────────────
+
+async function fetchBasketballStandings(league) {
+  const url = `https://site.api.espn.com/apis/v2/sports/basketball/${league.espnId}/standings`;
+  const data = await espnGet(url);
+
+  let entries = data.standings?.entries || data.children?.[0]?.standings?.entries || [];
+  if (!entries.length && data.children) {
+    for (const child of data.children) {
+      const childEntries = child.standings?.entries || [];
+      if (childEntries.length) { entries = [...entries, ...childEntries]; }
+    }
+  }
+
+  if (!entries.length) {
+    console.warn(`  ⚠ No standings entries for ${league.slug}`);
+    return;
+  }
+
+  const standings = entries.map((entry, idx) => {
+    const team  = entry.team || {};
+    const stats = {};
+    for (const s of (entry.stats || [])) stats[s.name] = s.value ?? 0;
+
+    const teamSlug = team.slug || "";
+    const logo     = team.logos?.[0]?.href || "";
+    const name     = team.displayName || team.name || "";
+
+    return {
+      rank:   Math.round(stats.rank ?? stats.rankorder ?? (idx + 1)),
+      slug:   teamSlug,
+      name,
+      logo,
+      played: Math.round(stats.gamesPlayed ?? 0),
+      won:    Math.round(stats.wins   ?? 0),
+      lost:   Math.round(stats.losses ?? 0),
+      pct:    parseFloat((stats.winPercent ?? 0).toFixed(3)),
+    };
+  }).filter(e => e.name);
+
+  standings.sort((a, b) => a.rank - b.rank);
+
+  fs.writeFileSync(
+    path.join(STANDINGS_DIR, `${league.slug}.json`),
+    JSON.stringify({ standings, slug: league.slug, type: "basketball", fetchedAt: new Date().toISOString() }, null, 2)
+  );
+  console.log(`  ✓ Basketball standings ${league.slug}: ${standings.length} teams`);
+}
+
+// ── Basketball Fixtures ───────────────────────────────────────────────────────
+
+async function fetchBasketballFixtures(league) {
+  const now    = new Date();
+  const allEvt = new Map();
+  let   leagueName = league.slug;
+
+  const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/${league.espnId}/scoreboard`;
+  try {
+    const data = await espnGet(`${baseUrl}?limit=100`);
+    leagueName = data.leagues?.[0]?.name || leagueName;
+    for (const ev of data.events || []) {
+      const p = parseEvent(ev, leagueName);
+      if (p) allEvt.set(p.id, p);
+    }
+    console.log(`  ↳ Undated scoreboard: ${data.events?.length ?? 0} events`);
+  } catch (e) {
+    console.warn(`  ⚠ Undated scoreboard failed: ${e.message}`);
+  }
+
+  const days = [];
+  for (let i = -30; i <= 30; i++) {
+    const d = new Date(now);
+    d.setDate(d.getDate() + i);
+    days.push(yyyymmdd(d));
+  }
+
+  let dateHits = 0;
+  for (const dateStr of days) {
+    await sleep(120);
+    try {
+      const data = await espnGet(`${baseUrl}?dates=${dateStr}&limit=100`);
+      const lName = data.leagues?.[0]?.name || leagueName;
+      const evts  = data.events || [];
+      for (const ev of evts) {
+        const p = parseEvent(ev, lName);
+        if (p && !allEvt.has(p.id)) { allEvt.set(p.id, p); }
+      }
+      if (evts.length > 0) dateHits++;
+    } catch {
+      // skip
+    }
+  }
+  console.log(`  ↳ Date queries: ${dateHits}/${days.length} days, total events: ${allEvt.size}`);
+
+  // Distribute by team slug (NBA teams not in teamsData — accept all)
+  const buckets = {};
+  for (const fix of allEvt.values()) {
+    for (const side of ["home", "away"]) {
+      const slug = fix[side]?.slug;
+      if (!slug) continue;
+
+      if (!buckets[slug]) {
+        const fp = path.join(FIXTURES_DIR, `${slug}.json`);
+        try {
+          const existing = JSON.parse(fs.readFileSync(fp, "utf-8"));
+          buckets[slug] = {
+            slug,
+            teamId: existing.teamId || 0,
+            byId: new Map([
+              ...(existing.past     || []).map(f => [f.id, f]),
+              ...(existing.upcoming || []).map(f => [f.id, f]),
+            ]),
+          };
+        } catch {
+          buckets[slug] = { slug, teamId: 0, byId: new Map() };
+        }
+      }
+      buckets[slug].byId.set(fix.id, fix);
+    }
+  }
+
+  const nowISO = new Date().toISOString();
+  const nowTs  = Date.now() / 1000;
+
+  for (const [slug, bucket] of Object.entries(buckets)) {
+    const all      = [...bucket.byId.values()];
+    const upcoming = all.filter(f => !f.completed && f.timestamp > nowTs - 3600)
+                        .sort((a, b) => a.timestamp - b.timestamp)
+                        .slice(0, 20);
+    const past     = all.filter(f => f.completed)
+                        .sort((a, b) => b.timestamp - a.timestamp)
+                        .slice(0, 20);
+    fs.writeFileSync(
+      path.join(FIXTURES_DIR, `${slug}.json`),
+      JSON.stringify({ slug, teamId: bucket.teamId, upcoming, past, fetchedAt: nowISO }, null, 2)
+    );
+  }
+
+  console.log(`  ✓ Basketball fixtures ${league.slug}: updated ${Object.keys(buckets).length} team files`);
+}
+
+// ── Tennis Rankings ───────────────────────────────────────────────────────────
+
+async function fetchTennisRankings(tour) {
+  const url = `https://site.api.espn.com/apis/v2/sports/tennis/${tour.espnId}/rankings`;
+  const data = await espnGet(url);
+
+  const rawRankings = data.rankings?.[0]?.athletes || data.data?.rankings?.[0]?.athletes || [];
+
+  if (!rawRankings.length) {
+    console.warn(`  ⚠ No rankings entries for ${tour.slug}`);
+    return;
+  }
+
+  const rankings = rawRankings.map((item, idx) => {
+    const athlete = item.athlete || item;
+    return {
+      rank:    item.ranking ?? (idx + 1),
+      slug:    athlete.slug || athlete.id?.toString() || `player-${idx + 1}`,
+      name:    athlete.displayName || athlete.fullName || "",
+      country: athlete.nationality || athlete.flag?.alt || "",
+      flag:    athlete.flag?.href || "",
+      points:  item.points ?? 0,
+    };
+  }).filter(e => e.name);
+
+  rankings.sort((a, b) => a.rank - b.rank);
+
+  fs.writeFileSync(
+    path.join(STANDINGS_DIR, `${tour.slug}.json`),
+    JSON.stringify({ rankings, slug: tour.slug, type: "tennis-rankings", fetchedAt: new Date().toISOString() }, null, 2)
+  );
+  console.log(`  ✓ Tennis rankings ${tour.slug}: ${rankings.length} players`);
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -549,6 +736,22 @@ async function main() {
       console.warn(`  ✗ Fixtures: ${e.message}`);
     }
     await sleep(800);
+  }
+
+  // ── Basketball ─────────────────────────────────────────────────────────────
+  for (const league of ESPN_BASKETBALL_LEAGUES) {
+    console.log(`\n🏀 ${league.slug}`);
+    try { await fetchBasketballStandings(league); } catch (e) { console.warn(`  ✗ Basketball standings: ${e.message}`); }
+    await sleep(600);
+    try { await fetchBasketballFixtures(league); } catch (e) { console.warn(`  ✗ Basketball fixtures: ${e.message}`); }
+    await sleep(800);
+  }
+
+  // ── Tennis ─────────────────────────────────────────────────────────────────
+  for (const tour of ESPN_TENNIS_TOURS) {
+    console.log(`\n🎾 ${tour.slug}`);
+    try { await fetchTennisRankings(tour); } catch (e) { console.warn(`  ✗ Tennis rankings: ${e.message}`); }
+    await sleep(600);
   }
 
   console.log("\n✅ ESPN fetch complete");
