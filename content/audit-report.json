@@ -1,14 +1,45 @@
 {
-  "date": "2026-05-15T10:16:48.923Z",
-  "total": 306,
+  "date": "2026-05-15T11:10:11.508Z",
+  "total": 311,
   "fixes": [
     {
       "type": "missing_images_detected",
-      "count": 294,
+      "count": 299,
       "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-gct5n",
+      "value": "Why Newcastle's history makers are breaking up"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-15ovps",
+      "value": "Play-off final tickets on sale despite Spygate uncertainty"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1sj3o5",
+      "value": "Coleman to end 17-year Everton playing career"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1ecl6d",
+      "value": "The making of the £60K bargain who became an Everton legend"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1ehdfj",
+      "value": "Three more VAR errors confirmed by Premier League panel"
     }
   ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-gct5n",
+      "sport": "football",
+      "image": "/generated/ft-gct5n.png"
+    },
     {
       "type": "missing_image",
       "slug": "ft-jjcji",
@@ -266,6 +297,30 @@
       "slug": "ft-aaf0xz",
       "sport": "football",
       "image": "/generated/ft-aaf0xz.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-15ovps",
+      "sport": "football",
+      "image": "/generated/ft-15ovps.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1sj3o5",
+      "sport": "football",
+      "image": "/generated/ft-1sj3o5.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1ecl6d",
+      "sport": "football",
+      "image": "/generated/ft-1ecl6d.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1ehdfj",
+      "sport": "football",
+      "image": "/generated/ft-1ehdfj.png"
     },
     {
       "type": "missing_image",
@@ -1780,7 +1835,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 305,
+      "count": 310,
       "action": "needs_llm_backfill"
     },
     {
@@ -2254,11 +2309,11 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 297,
-    "missing_images": 294,
+    "fixes_applied": 5,
+    "warnings": 302,
+    "missing_images": 299,
     "missing_en_title": 111,
-    "missing_fr_title": 305,
+    "missing_fr_title": 310,
     "sport_mismatches_fixed": 0,
     "duplicates": 116
   }
