@@ -1,16 +1,128 @@
 {
-  "date": "2026-05-15T23:07:52.449Z",
-  "total": 530,
-  "fixes": [],
+  "date": "2026-05-15T23:14:04.167Z",
+  "total": 540,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 10,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-o8p210",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1mzn6p",
+      "value": "'We crumbled' - another loss, another unwanted record for le"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-o8p210",
+      "value": "US PGA Championship round two tee-times"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-jim9i1",
+      "value": "Aston Villa secure Champions League spot with win over Liver"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-mxmvqy",
+      "value": "Guardiola insists he has 'one more year' on Man City deal"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-1fk3y8-1778886594296",
+      "value": "Sinner equals Djokovic record to progress in Rome"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-d4e1uk-1778886594159",
+      "value": "Murray brought into Draper coaching team"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "futsal-17mazl-1778886595090",
+      "value": "À Marseille, le succès fou du padel remplacera-t-il le futsa"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-zowv26",
+      "value": "NBA playoffs results and takeaways: Thunder earn trip to NBA"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1mzn6p",
+      "sport": "football",
+      "image": "/generated/ft-1mzn6p.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-o8p210",
+      "sport": "golf",
+      "image": "/generated/ft-o8p210.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-12eqtc",
+      "sport": "football",
+      "image": "/generated/ft-12eqtc.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-jim9i1",
+      "sport": "football",
+      "image": "/generated/ft-jim9i1.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-mxmvqy",
+      "sport": "football",
+      "image": "/generated/ft-mxmvqy.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-jmnmdh",
+      "sport": "tennis",
+      "image": "/generated/tennis-jmnmdh.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1fk3y8-1778886594296",
+      "sport": "tennis",
+      "image": "/generated/tennis-1fk3y8-1778886594296.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-d4e1uk-1778886594159",
+      "sport": "tennis",
+      "image": "/generated/tennis-d4e1uk-1778886594159.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "futsal-17mazl-1778886595090",
+      "sport": "futsal",
+      "image": "/generated/futsal-17mazl-1778886595090.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-zowv26",
+      "sport": "basketball",
+      "image": "/generated/bball-zowv26.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 175,
+      "count": 177,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 529,
+      "count": 539,
       "action": "needs_llm_backfill"
     },
     {
@@ -69,20 +181,28 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "tennis-1fk3y8-1778878558467",
+          "duplicate_of": "tennis-1fk3y8-1778886594296"
+        },
+        {
           "slug": "tennis-1fk3y8",
-          "duplicate_of": "tennis-1fk3y8-1778878558467"
+          "duplicate_of": "tennis-1fk3y8-1778886594296"
+        },
+        {
+          "slug": "tennis-d4e1uk-1778882003707",
+          "duplicate_of": "tennis-d4e1uk-1778886594159"
         },
         {
           "slug": "tennis-d4e1uk-1778879911463",
-          "duplicate_of": "tennis-d4e1uk-1778882003707"
+          "duplicate_of": "tennis-d4e1uk-1778886594159"
         },
         {
           "slug": "tennis-d4e1uk-1778862341212",
-          "duplicate_of": "tennis-d4e1uk-1778882003707"
+          "duplicate_of": "tennis-d4e1uk-1778886594159"
         },
         {
           "slug": "tennis-d4e1uk",
-          "duplicate_of": "tennis-d4e1uk-1778882003707"
+          "duplicate_of": "tennis-d4e1uk-1778886594159"
         },
         {
           "slug": "tennis-k2qrrk-1778858070753",
@@ -793,24 +913,28 @@
           "duplicate_of": "bball-t1nlm2-1778872789837"
         },
         {
+          "slug": "futsal-17mazl",
+          "duplicate_of": "futsal-17mazl-1778886595090"
+        },
+        {
           "slug": "futsal-pw1ktd-1778878559111",
-          "duplicate_of": "futsal-17mazl"
+          "duplicate_of": "futsal-17mazl-1778886595090"
         },
         {
           "slug": "futsal-pw1ktd-1778858071814",
-          "duplicate_of": "futsal-17mazl"
+          "duplicate_of": "futsal-17mazl-1778886595090"
         },
         {
           "slug": "futsal-pw1ktd-1778856182916",
-          "duplicate_of": "futsal-17mazl"
+          "duplicate_of": "futsal-17mazl-1778886595090"
         },
         {
           "slug": "futsal-pw1ktd-1778843588733",
-          "duplicate_of": "futsal-17mazl"
+          "duplicate_of": "futsal-17mazl-1778886595090"
         },
         {
           "slug": "futsal-pw1ktd",
-          "duplicate_of": "futsal-17mazl"
+          "duplicate_of": "futsal-17mazl-1778886595090"
         },
         {
           "slug": "padel-m48y9s-1778839662727",
@@ -856,12 +980,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 175,
-    "missing_fr_title": 529,
-    "sport_mismatches_fixed": 0,
-    "duplicates": 209
+    "fixes_applied": 9,
+    "warnings": 13,
+    "missing_images": 10,
+    "missing_en_title": 177,
+    "missing_fr_title": 539,
+    "sport_mismatches_fixed": 1,
+    "duplicates": 212
   }
 }
