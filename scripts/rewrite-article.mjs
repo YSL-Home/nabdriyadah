@@ -532,6 +532,21 @@ async function rewriteArticle(item, index) {
 // No article cap — keep full history forever
 
 async function main() {
+  // ── Toujours rafraîchir raw-news.json en full-refresh ─────────────────────
+  // git reset --hard remet le mtime à now → fiabiliser par mtime impossible.
+  // fetch-news filtre lui-même les déjà-publiés → ne retourne que du nouveau.
+  if (process.env.BREAKING_ONLY !== "true") {
+    console.log("Full-refresh — lancement fetch-news.mjs...");
+    try {
+      execFileSync("node", [path.join(process.cwd(), "scripts/fetch-news.mjs")], {
+        stdio: "inherit",
+        timeout: 5 * 60 * 1000,
+      });
+    } catch (e) {
+      console.log("fetch-news.mjs échoué, on continue avec raw-news existant:", e.message?.slice(0, 80));
+    }
+  }
+
   let rawItems = [];
   try {
     rawItems = JSON.parse(fs.readFileSync(INPUT_PATH, "utf-8"));
