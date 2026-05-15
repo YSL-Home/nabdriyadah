@@ -707,8 +707,9 @@ async function fetchTennisRankings(tour) {
       rank:    item.current ?? (idx + 1),
       slug:    athlete.id?.toString() || `player-${idx + 1}`,
       name:    athlete.displayName || "",
-      country: athlete.flag?.alt || "",
-      flag:    athlete.flag?.href || "",
+      // ESPN tennis: flag is a string URL, country in flagAltText / citizenshipCountry
+      country: athlete.flagAltText || athlete.citizenshipCountry || (typeof athlete.flag === "string" ? "" : athlete.flag?.alt || ""),
+      flag:    typeof athlete.flag === "string" ? athlete.flag : (athlete.flag?.href || ""),
       points:  item.points ?? 0,
     };
   }).filter(e => e.name);
@@ -747,11 +748,11 @@ async function fetchF1Standings(series) {
       country: athlete.flag?.alt || athlete.nationality || "",
       flag: athlete.flag?.href || "",
       team: entry.team?.displayName || stats.team || "",
-      points: Math.round(stats.points ?? 0),
+      points: Math.round(stats.championshipPts ?? stats.points ?? 0),
     };
   }).filter(e => e.name);
 
-  standings.sort((a, b) => a.rank - b.rank);
+  standings.sort((a, b) => (b.points - a.points) || (a.rank - b.rank));
   fs.writeFileSync(
     path.join(STANDINGS_DIR, `${series.slug}.json`),
     JSON.stringify({ rankings: standings, slug: series.slug, type: "f1-rankings", fetchedAt: new Date().toISOString() }, null, 2)

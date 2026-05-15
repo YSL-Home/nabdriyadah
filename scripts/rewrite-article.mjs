@@ -767,4 +767,7 @@ Return ONLY valid JSON:
   }
 }
 
-main();
+main().catch(e => {
+  console.error("rewrite-article fatal error (non-blocking):", e.message || e);
+  process.exit(0);  // exit 0 so CI continues to build + deploy
+});
