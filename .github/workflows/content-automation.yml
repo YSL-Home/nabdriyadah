@@ -83,10 +83,10 @@ jobs:
       - name: Notify on failure (Telegram)
         if: failure() && env.TELEGRAM_BOT_TOKEN != ''
         run: |
+          MSG=$(printf "❌ nabdriyadah — Breaking News FAILED\nRun: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}")
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d "chat_id=${TELEGRAM_CHAT_ID}" \
-            --data-urlencode "text=❌ nabdriyadah — Breaking News FAILED
-Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+            --data-urlencode "text=${MSG}" || true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -218,10 +218,10 @@ Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id 
       - name: Notify on failure (Telegram)
         if: failure() && env.TELEGRAM_BOT_TOKEN != ''
         run: |
+          MSG=$(printf "❌ nabdriyadah — Full Refresh FAILED\nRun: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}")
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d "chat_id=${TELEGRAM_CHAT_ID}" \
-            --data-urlencode "text=❌ nabdriyadah — Full Refresh FAILED
-Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+            --data-urlencode "text=${MSG}" || true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
