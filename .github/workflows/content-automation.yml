@@ -99,6 +99,8 @@ jobs:
   full-refresh:
     name: Full Content Refresh + Deploy
     runs-on: ubuntu-latest
+    env:
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
     concurrency:
       group: nabdriyadah-full-refresh
       cancel-in-progress: false
@@ -128,6 +130,7 @@ jobs:
 
       - name: Rewrite articles
         run: node scripts/rewrite-article.mjs
+        continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_MODEL:   ${{ secrets.ANTHROPIC_MODEL }}
@@ -176,7 +179,6 @@ jobs:
         run: node scripts/generate-sitemap-news.mjs
         continue-on-error: true
 
-
       - name: Audit quotidien (images, traductions, sports)
         run: node scripts/daily-audit.mjs
         continue-on-error: true
@@ -217,7 +219,6 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
 
       - name: Notify on failure (Telegram)
         if: failure() && env.TELEGRAM_BOT_TOKEN != ''
