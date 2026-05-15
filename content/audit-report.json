@@ -1,24 +1,28 @@
 {
-  "date": "2026-05-15T17:21:46.935Z",
-  "total": 445,
+  "date": "2026-05-15T17:42:17.649Z",
+  "total": 452,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 147,
+      "count": 148,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 444,
+      "count": 451,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
         {
+          "slug": "ft-1j1m1d",
+          "duplicate_of": "ft-1s13ei"
+        },
+        {
           "slug": "ft-yw5lwd",
-          "duplicate_of": "ft-1j1m1d"
+          "duplicate_of": "ft-1s13ei"
         },
         {
           "slug": "liga-15kt82",
@@ -30,7 +34,7 @@
         },
         {
           "slug": "ft-16xaf9",
-          "duplicate_of": "ft-1j1m1d"
+          "duplicate_of": "ft-1s13ei"
         },
         {
           "slug": "tennis-d4e1uk",
@@ -233,12 +237,16 @@
           "duplicate_of": "ft-1s65da-1778837323554"
         },
         {
+          "slug": "ucl-19d6r4-1778862339258",
+          "duplicate_of": "ucl-19d6r4-1778866116720"
+        },
+        {
           "slug": "ucl-xn5p3x-1778858067331",
           "duplicate_of": "ucl-xn5p3x-1778864907420"
         },
         {
           "slug": "ucl-19d6r4-1778858068646",
-          "duplicate_of": "ucl-19d6r4-1778862339258"
+          "duplicate_of": "ucl-19d6r4-1778866116720"
         },
         {
           "slug": "ucl-xn5p3x-1778856176751",
@@ -246,7 +254,11 @@
         },
         {
           "slug": "ucl-19d6r4-1778848344181",
-          "duplicate_of": "ucl-19d6r4-1778862339258"
+          "duplicate_of": "ucl-19d6r4-1778866116720"
+        },
+        {
+          "slug": "ucl-ggo265-1778848344467",
+          "duplicate_of": "ucl-ggo265-1778866117013"
         },
         {
           "slug": "ucl-xn5p3x-1778846879130",
@@ -258,11 +270,11 @@
         },
         {
           "slug": "ucl-19d6r4",
-          "duplicate_of": "ucl-19d6r4-1778862339258"
+          "duplicate_of": "ucl-19d6r4-1778866116720"
         },
         {
           "slug": "ucl-ggo265",
-          "duplicate_of": "ucl-ggo265-1778848344467"
+          "duplicate_of": "ucl-ggo265-1778866117013"
         },
         {
           "slug": "bball-1hhao9-1778846883041",
@@ -719,9 +731,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 147,
-    "missing_fr_title": 444,
+    "missing_en_title": 148,
+    "missing_fr_title": 451,
     "sport_mismatches_fixed": 0,
-    "duplicates": 174
+    "duplicates": 177
   }
 }
