@@ -17,8 +17,6 @@ const NAV = {
     { emoji: "🎾", label: "التنس",     base: "/sport/tennis/" },
     { emoji: "🏸", label: "البادل",    base: "/sport/padel/" },
     { emoji: "🥅", label: "الصالات",   base: "/sport/futsal/" },
-    { emoji: "🏎️", label: "فورمولا 1", base: "/sport/f1/" },
-    { emoji: "⛳", label: "الغولف",    base: "/sport/golf/" },
   ],
   fr: [
     { emoji: "⚽", label: "Football",   base: "/sport/football/" },
@@ -26,8 +24,6 @@ const NAV = {
     { emoji: "🎾", label: "Tennis",     base: "/sport/tennis/" },
     { emoji: "🏸", label: "Padel",      base: "/sport/padel/" },
     { emoji: "🥅", label: "Futsal",     base: "/sport/futsal/" },
-    { emoji: "🏎️", label: "Formule 1", base: "/sport/f1/" },
-    { emoji: "⛳", label: "Golf",       base: "/sport/golf/" },
   ],
   en: [
     { emoji: "⚽", label: "Football",   base: "/sport/football/" },
@@ -35,8 +31,6 @@ const NAV = {
     { emoji: "🎾", label: "Tennis",     base: "/sport/tennis/" },
     { emoji: "🏸", label: "Padel",      base: "/sport/padel/" },
     { emoji: "🥅", label: "Futsal",     base: "/sport/futsal/" },
-    { emoji: "🏎️", label: "Formula 1", base: "/sport/f1/" },
-    { emoji: "⛳", label: "Golf",       base: "/sport/golf/" },
   ],
 };
 
