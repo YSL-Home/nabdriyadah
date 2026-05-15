@@ -44,6 +44,16 @@ const ESPN_TENNIS_TOURS = [
   { slug: "wta", espnId: "wta" },
 ];
 
+// ── F1 series ──────────────────────────────────────────────────────────────────
+const ESPN_F1_SERIES = [
+  { slug: "f1", espnId: "f1" },
+];
+
+// ── Golf tours ─────────────────────────────────────────────────────────────────
+const ESPN_GOLF_TOURS = [
+  { slug: "pga-tour", espnId: "pga" },
+];
+
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function espnGet(url) {
@@ -679,23 +689,25 @@ async function fetchBasketballFixtures(league) {
 // ── Tennis Rankings ───────────────────────────────────────────────────────────
 
 async function fetchTennisRankings(tour) {
-  const url = `https://site.api.espn.com/apis/v2/sports/tennis/${tour.espnId}/rankings`;
+  // ESPN tennis: site/v2 returns rankings[0].ranks[] (not .athletes[])
+  const url = `https://site.api.espn.com/apis/site/v2/sports/tennis/${tour.espnId}/rankings`;
   const data = await espnGet(url);
 
-  const rawRankings = data.rankings?.[0]?.athletes || data.data?.rankings?.[0]?.athletes || [];
+  // Structure: data.rankings[0].ranks[{ current, previous, points, athlete }]
+  const rawRankings = data.rankings?.[0]?.ranks || [];
 
   if (!rawRankings.length) {
     console.warn(`  ⚠ No rankings entries for ${tour.slug}`);
     return;
   }
 
-  const rankings = rawRankings.map((item, idx) => {
-    const athlete = item.athlete || item;
+  const rankings = rawRankings.slice(0, 100).map((item, idx) => {
+    const athlete = item.athlete || {};
     return {
-      rank:    item.ranking ?? (idx + 1),
-      slug:    athlete.slug || athlete.id?.toString() || `player-${idx + 1}`,
-      name:    athlete.displayName || athlete.fullName || "",
-      country: athlete.nationality || athlete.flag?.alt || "",
+      rank:    item.current ?? (idx + 1),
+      slug:    athlete.id?.toString() || `player-${idx + 1}`,
+      name:    athlete.displayName || "",
+      country: athlete.flag?.alt || "",
       flag:    athlete.flag?.href || "",
       points:  item.points ?? 0,
     };
@@ -708,6 +720,75 @@ async function fetchTennisRankings(tour) {
     JSON.stringify({ rankings, slug: tour.slug, type: "tennis-rankings", fetchedAt: new Date().toISOString() }, null, 2)
   );
   console.log(`  ✓ Tennis rankings ${tour.slug}: ${rankings.length} players`);
+}
+
+// ── F1 Driver Standings ───────────────────────────────────────────────────────
+
+async function fetchF1Standings(series) {
+  const url = `https://site.api.espn.com/apis/v2/sports/racing/${series.espnId}/standings`;
+  const data = await espnGet(url);
+  let entries = data.standings?.entries || data.children?.[0]?.standings?.entries || [];
+  if (!entries.length && data.children) {
+    for (const child of data.children) {
+      entries = child.standings?.entries || [];
+      if (entries.length) break;
+    }
+  }
+  if (!entries.length) { console.warn(`  ⚠ No F1 standings for ${series.slug}`); return; }
+
+  const standings = entries.map((entry, idx) => {
+    const athlete = entry.athlete || entry.team || {};
+    const stats = {};
+    for (const s of (entry.stats || [])) stats[s.name] = s.value ?? 0;
+    return {
+      rank: Math.round(stats.rank ?? stats.rankorder ?? (idx + 1)),
+      slug: athlete.slug || (athlete.displayName || "").toLowerCase().replace(/\s+/g, "-"),
+      name: athlete.displayName || athlete.name || "",
+      country: athlete.flag?.alt || athlete.nationality || "",
+      flag: athlete.flag?.href || "",
+      team: entry.team?.displayName || stats.team || "",
+      points: Math.round(stats.points ?? 0),
+    };
+  }).filter(e => e.name);
+
+  standings.sort((a, b) => a.rank - b.rank);
+  fs.writeFileSync(
+    path.join(STANDINGS_DIR, `${series.slug}.json`),
+    JSON.stringify({ rankings: standings, slug: series.slug, type: "f1-rankings", fetchedAt: new Date().toISOString() }, null, 2)
+  );
+  console.log(`  ✓ F1 Standings ${series.slug}: ${standings.length} drivers`);
+}
+
+// ── Golf PGA Rankings ─────────────────────────────────────────────────────────
+
+async function fetchGolfRankings(tour) {
+  const url = `https://site.api.espn.com/apis/v2/sports/golf/${tour.espnId}/rankings`;
+  const data = await espnGet(url);
+  const rankingGroups = data.rankings || [];
+  let athletes = [];
+  for (const group of rankingGroups) {
+    athletes = group.athletes || [];
+    if (athletes.length) break;
+  }
+  if (!athletes.length) { console.warn(`  ⚠ No golf rankings for ${tour.slug}`); return; }
+
+  const rankings = athletes.slice(0, 50).map((entry, idx) => {
+    const athlete = entry.athlete || {};
+    return {
+      rank: entry.ranking ?? (idx + 1),
+      slug: athlete.slug || (athlete.displayName || "").toLowerCase().replace(/\s+/g, "-"),
+      name: athlete.displayName || "",
+      country: athlete.flag?.alt || athlete.nationality || "",
+      flag: athlete.flag?.href || "",
+      points: entry.points ?? entry.rankingPoints ?? 0,
+    };
+  }).filter(e => e.name);
+
+  fs.writeFileSync(
+    path.join(STANDINGS_DIR, `${tour.slug}.json`),
+    JSON.stringify({ rankings, slug: tour.slug, type: "golf-rankings", fetchedAt: new Date().toISOString() }, null, 2)
+  );
+  console.log(`  ✓ Golf Rankings ${tour.slug}: ${rankings.length} players`);
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -751,6 +832,20 @@ async function main() {
   for (const tour of ESPN_TENNIS_TOURS) {
     console.log(`\n🎾 ${tour.slug}`);
     try { await fetchTennisRankings(tour); } catch (e) { console.warn(`  ✗ Tennis rankings: ${e.message}`); }
+    await sleep(600);
+  }
+
+  // ── F1 ─────────────────────────────────────────────────────────────────────
+  for (const series of ESPN_F1_SERIES) {
+    console.log(`\n🏎️  ${series.slug}`);
+    try { await fetchF1Standings(series); } catch (e) { console.warn(`  ✗ F1 Standings: ${e.message}`); }
+    await sleep(600);
+  }
+
+  // ── Golf ───────────────────────────────────────────────────────────────────
+  for (const tour of ESPN_GOLF_TOURS) {
+    console.log(`\n⛳  ${tour.slug}`);
+    try { await fetchGolfRankings(tour); } catch (e) { console.warn(`  ✗ Golf Rankings: ${e.message}`); }
     await sleep(600);
   }
 

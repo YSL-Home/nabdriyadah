@@ -28,6 +28,8 @@ const LEAGUES = [
   { slug: "wta",                priority: 0.78 },
   { slug: "padel-premier",      priority: 0.72 },
   { slug: "futsal-monde",       priority: 0.68 },
+  { slug: "f1",                 priority: 0.80 },
+  { slug: "pga-tour",           priority: 0.72 },
 ];
 
 const SPORTS = [
@@ -36,6 +38,8 @@ const SPORTS = [
   { slug: "tennis",     priority: 0.80 },
   { slug: "padel",      priority: 0.75 },
   { slug: "futsal",     priority: 0.70 },
+  { slug: "f1",         priority: 0.80 },
+  { slug: "golf",       priority: 0.72 },
 ];
 
 export default function sitemap() {

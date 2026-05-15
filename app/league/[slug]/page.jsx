@@ -415,6 +415,7 @@ const leagueMap = {
     title: "دوري كرة السلة الأمريكي — NBA",
     shortLabel: "NBA",
     type: "basketball",
+    sport: "basketball",
     description: "تابع أحدث أخبار دوري كرة السلة الأمريكي NBA، أبرز الأندية واللاعبين والنتائج.",
     leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",
     theme: {
@@ -446,6 +447,7 @@ const leagueMap = {
     title: "بطولة ATP للرجال — التنس",
     shortLabel: "ATP",
     type: "tennis-rankings",
+    sport: "tennis",
     description: "تابع أحدث أخبار التنس وتصنيف لاعبي ATP، ألكاراز، سينر وأبرز بطولات غراند سلام.",
     leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/atp.png",
     theme: {
@@ -470,6 +472,7 @@ const leagueMap = {
     title: "بطولة WTA للسيدات — التنس",
     shortLabel: "WTA",
     type: "tennis-rankings",
+    sport: "tennis",
     description: "تابع أحدث أخبار تنس السيدات وتصنيف لاعبات WTA، إيغا شفيونتيك وأبرز بطولات الغراند سلام.",
     leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/wta.png",
     theme: {
@@ -494,6 +497,7 @@ const leagueMap = {
     title: "Premier Padel — البطولة العالمية",
     shortLabel: "PADEL",
     type: "padel-rankings",
+    sport: "padel",
     description: "تابع أخبار البريمير بادل، تصنيف اللاعبين وأبرز البطولات العالمية للبادل.",
     leagueLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/200px-Premier_Padel_logo.svg.png",
     theme: {
@@ -518,6 +522,7 @@ const leagueMap = {
     title: "كأس العالم لكرة القدم الصالات — FIFA",
     shortLabel: "FUTSAL",
     type: "football",
+    sport: "futsal",
     description: "تابع أخبار كأس العالم لكرة القدم الصالات، المنتخبات المشاركة والنتائج.",
     leagueLogo: "https://media.api-sports.io/football/leagues/1.png",
     theme: {
@@ -534,6 +539,56 @@ const leagueMap = {
       badgeText: "#ffffff"
     },
     highlights: ["كأس العالم للصالات", "FIFA Futsal", "المنتخبات العالمية", "الكرة الخماسية"],
+    teams: []
+  },
+
+  // ── F1 — Formule 1 ──────────────────────────────────────────────────────
+  "f1": {
+    title: "الفورمولا 1 — بطولة العالم",
+    shortLabel: "F1",
+    type: "f1-rankings",
+    sport: "f1",
+    description: "تابع أحدث أخبار سباقات الفورمولا 1، ترتيب السائقين، نتائج الجائزة الكبرى وأبرز الفرق.",
+    leagueLogo: "https://media.api-sports.io/formula-1/leagues/1.png",
+    theme: {
+      pageBg: "#fff1f2",
+      heroFrom: "#7f1d1d",
+      heroTo: "#dc2626",
+      primary: "#dc2626",
+      primarySoft: "#fee2e2",
+      border: "#fecaca",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["ماكس فيرستابن", "لويس هاميلتون", "الجائزة الكبرى", "Red Bull وFerrari"],
+    teams: []
+  },
+
+  // ── Golf ────────────────────────────────────────────────────────────────
+  "pga-tour": {
+    title: "بطولة PGA Tour — الغولف",
+    shortLabel: "PGA",
+    type: "golf-rankings",
+    sport: "golf",
+    description: "تابع أخبار الغولف، تصنيف لاعبي PGA Tour، نتائج الماسترز وأبرز البطولات العالمية.",
+    leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/pga.png",
+    theme: {
+      pageBg: "#f0fdf4",
+      heroFrom: "#052e16",
+      heroTo: "#16a34a",
+      primary: "#16a34a",
+      primarySoft: "#dcfce7",
+      border: "#bbf7d0",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["روري ماكلروي", "شيفلر ونيكلسون", "بطولة الماسترز", "تصنيف OWGR العالمي"],
     teams: []
   }
 };
@@ -590,8 +645,8 @@ function getLeagueStandings(leagueSlug) {
       const women = data.women || data.rankings?.filter(p => p.gender === "F") || [];
       return { type: "padel-rankings", data: men, men, women };
     }
-    if (data.type === "tennis-rankings") {
-      return { type: "tennis-rankings", data: data.rankings || [] };
+    if (data.type === "tennis-rankings" || data.type === "f1-rankings" || data.type === "golf-rankings") {
+      return { type: data.type, data: data.rankings || [] };
     }
     if (data.type === "basketball" && data.standings && data.standings.length > 0) {
       return { type: "basketball", data: data.standings };
@@ -632,8 +687,16 @@ export default function LeaguePage({ params }) {
   // All articles for this league, sorted newest first — no artificial limit
   const leagueArticles = (() => {
     const sorted = (arr) => arr.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
+    // 1. Correspondance exacte de ligue
     const specific = articles.filter(a => a.slug && a.league === params.slug);
     if (specific.length >= 3) return sorted(specific);
+    // 2. Correspondance par sport (fallback pour nba→basketball, atp→tennis, etc.)
+    const leagueSport = league.sport;
+    if (leagueSport && leagueSport !== "football") {
+      const bySport = articles.filter(a => a.slug && a.sport === leagueSport);
+      if (bySport.length > 0) return sorted([...specific, ...bySport].filter((a, i, arr) => arr.findIndex(b => b.slug === a.slug) === i));
+    }
+    // 3. Fallback foot/mixed
     const fallback = articles.filter(a => a.slug && (a.league === "mixed" || a.sport === "football") && a.league !== params.slug);
     return sorted([...specific, ...fallback]);
   })();
@@ -804,12 +867,14 @@ export default function LeaguePage({ params }) {
 
         <AdSlot label="مساحة إعلانية أعلى صفحة البطولة" minHeight={90} style={{ marginBottom: 24 }} />
 
-        {/* ── RANKINGS Tennis ── */}
-        {standingsType === "tennis-rankings" && standings.length > 0 && (
+        {/* ── RANKINGS Tennis / F1 / Golf ── */}
+        {(standingsType === "tennis-rankings" || standingsType === "f1-rankings" || standingsType === "golf-rankings") && standings.length > 0 && (
           <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "24px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", marginBottom: "24px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
-              <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>تصنيف اللاعبين</span>
+              <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>
+                  {standingsType === "f1-rankings" ? "ترتيب السائقين" : standingsType === "golf-rankings" ? "تصنيف اللاعبين — الغولف" : "تصنيف اللاعبين"}
+                </span>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 80px", gap: "4px", padding: "8px 12px", background: theme.primarySoft, borderRadius: "12px", marginBottom: "6px", fontSize: "12px", fontWeight: 700, color: theme.primary }}>
               <span style={{ textAlign: "center" }}>#</span>

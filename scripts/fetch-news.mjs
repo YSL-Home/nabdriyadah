@@ -93,6 +93,15 @@ const SOURCES = [
   // ── Futsal ────────────────────────────────────────────────────
   { name: "Google News Futsal AR",  type: "rss", priority: "arabic",  sport: "futsal", sourceLang: "ar", url: "https://news.google.com/rss/search?q=فوتسال+كرة+قدم+صالات&hl=ar&gl=SA&ceid=SA:ar" },
   { name: "Google News Futsal EN",  type: "rss", priority: "english", sport: "futsal", sourceLang: "en", url: "https://news.google.com/rss/search?q=futsal+FIFA+2025&hl=en&gl=GB&ceid=GB:en" },
+  // ── F1 — Formule 1 ─────────────────────────────────────────────────────────
+  { name: "F1 AR",              type: "rss", priority: "arabic",  sport: "f1",   sourceLang: "ar", url: "https://news.google.com/rss/search?q=الفورمولا+واحد+F1+سباق&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "F1 EN BBC",          type: "rss", priority: "english", sport: "f1",   sourceLang: "en", url: "https://feeds.bbci.co.uk/sport/formula1/rss.xml" },
+  { name: "F1 EN Google",       type: "rss", priority: "english", sport: "f1",   sourceLang: "en", url: "https://news.google.com/rss/search?q=Formula+1+F1+2025+race&hl=en&gl=GB&ceid=GB:en" },
+  { name: "F1 FR",              type: "rss", priority: "french",  sport: "f1",   sourceLang: "fr", url: "https://news.google.com/rss/search?q=Formule+1+Grand+Prix+2025&hl=fr&gl=FR&ceid=FR:fr" },
+  // ── Golf ────────────────────────────────────────────────────────────────────
+  { name: "Golf AR",            type: "rss", priority: "arabic",  sport: "golf", sourceLang: "ar", url: "https://news.google.com/rss/search?q=غولف+بطولة+ماسترز+PGA&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "Golf EN BBC",        type: "rss", priority: "english", sport: "golf", sourceLang: "en", url: "https://feeds.bbci.co.uk/sport/golf/rss.xml" },
+  { name: "Golf EN Google",     type: "rss", priority: "english", sport: "golf", sourceLang: "en", url: "https://news.google.com/rss/search?q=PGA+Tour+golf+2025&hl=en&gl=US&ceid=US:en" },
   // ── Algérie ──────────────────────────────────────────────────
   { name: "Algérie Foot AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=الدوري+الجزائري+كرة+القدم+2025&hl=ar&gl=DZ&ceid=DZ:ar" },
   { name: "Algérie Transferts AR",  type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=المنتخب+الجزائري+2025&hl=ar&gl=DZ&ceid=DZ:ar" },

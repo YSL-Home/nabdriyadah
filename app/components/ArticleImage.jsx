@@ -74,6 +74,24 @@ const IMGS = {
     "https://images.unsplash.com/photo-1552318965-6e6be7484ada?w=900&q=80", // Futsal court
     "https://images.unsplash.com/photo-1624880357913-a8539238245b?w=900&q=80", // Indoor soccer
   ],
+
+  /* ── F1 / FORMULA 1 ─────────────────────────────────────────────────────── */
+  f1: [
+    "https://images.unsplash.com/photo-1541348263662-e068662d82af?w=900&q=80", // F1 car racing
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80", // Racing circuit
+    "https://images.unsplash.com/photo-1593814681464-eef5af2b0628?w=900&q=80", // F1 pit stop
+    "https://images.unsplash.com/photo-1579134752408-c7d4a0e8462c?w=900&q=80", // Racing start
+    "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=80", // Motorsport action
+  ],
+
+  /* ── GOLF ───────────────────────────────────────────────────────────────── */
+  golf: [
+    "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=900&q=80", // Golf course aerial
+    "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80", // Golf swing
+    "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=900&q=80", // Golf green
+    "https://images.unsplash.com/photo-1542435503-956c469947f6?w=900&q=80", // Golf ball hole
+    "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=900&q=80", // Golf tournament
+  ],
 };
 
 const GRADIENTS = {
@@ -82,6 +100,8 @@ const GRADIENTS = {
   tennis:     "linear-gradient(135deg, #052e16 0%, #15803d 100%)",
   padel:      "linear-gradient(135deg, #2e1065 0%, #7c3aed 100%)",
   futsal:     "linear-gradient(135deg, #042f2e 0%, #0f766e 100%)",
+  f1:         "linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%)",
+  golf:       "linear-gradient(135deg, #052e16 0%, #15803d 100%)",
 };
 
 // Choisit une image Unsplash stable basée sur le slug (pas aléatoire à chaque render)
