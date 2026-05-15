@@ -3,38 +3,6 @@
   "teamId": 0,
   "upcoming": [
     {
-      "id": "748503",
-      "date": "2026-05-14T19:30Z",
-      "timestamp": 1778787000,
-      "status": "NS",
-      "statusLong": "Scheduled",
-      "venue": "Santiago Bernabéu",
-      "city": "Madrid",
-      "home": {
-        "id": "86",
-        "slug": "real-madrid",
-        "name": "ريال مدريد",
-        "logo": "https://media.api-sports.io/football/teams/541.png",
-        "winner": null
-      },
-      "away": {
-        "id": "92",
-        "slug": null,
-        "name": "Real Oviedo",
-        "logo": "",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "Spanish LALIGA",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "748504",
       "date": "2026-05-17T17:00Z",
       "timestamp": 1779037200,
@@ -100,6 +68,38 @@
     }
   ],
   "past": [
+    {
+      "id": "748503",
+      "date": "2026-05-14T19:30Z",
+      "timestamp": 1778787000,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Santiago Bernabéu",
+      "city": "Madrid",
+      "home": {
+        "id": "86",
+        "slug": "real-madrid",
+        "name": "ريال مدريد",
+        "logo": "https://media.api-sports.io/football/teams/541.png",
+        "winner": true
+      },
+      "away": {
+        "id": "92",
+        "slug": null,
+        "name": "Real Oviedo",
+        "logo": "",
+        "winner": false
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "league": {
+        "name": "Spanish LALIGA",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "748484",
       "date": "2026-05-10T19:00Z",
@@ -357,5 +357,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-14T16:41:24.170Z"
+  "fetchedAt": "2026-05-15T09:32:50.642Z"
 }
