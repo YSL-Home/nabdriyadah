@@ -1,25 +1,25 @@
 {
-  "date": "2026-05-16T21:31:52.921Z",
-  "total": 696,
+  "date": "2026-05-16T21:43:46.771Z",
+  "total": 697,
   "fixes": [
     {
       "type": "missing_images_detected",
-      "count": 5,
+      "count": 6,
       "action": "will_regenerate_on_next_ci"
     },
     {
-      "type": "sport_mismatch_fixed",
-      "slug": "ft-8q6pwj",
-      "was": "golf",
-      "fixed_to": "football"
-    },
-    {
       "type": "en_title_from_source",
-      "slug": "ft-8q6pwj",
-      "value": "Watch: McIlroy 'proud' as 66 boosts US PGA bid"
+      "slug": "ft-11ct90",
+      "value": "No trophy in turbulent season but Alonso arrival offers Chel"
     }
   ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-11ct90",
+      "sport": "football",
+      "image": "/generated/ft-11ct90.png"
+    },
     {
       "type": "missing_image",
       "slug": "tennis-um2l4z",
@@ -41,7 +41,7 @@
     {
       "type": "missing_image",
       "slug": "ft-8q6pwj",
-      "sport": "golf",
+      "sport": "football",
       "image": "/generated/ft-8q6pwj.png"
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 695,
+      "count": 696,
       "action": "needs_llm_backfill"
     },
     {
@@ -1207,12 +1207,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 2,
-    "warnings": 8,
-    "missing_images": 5,
+    "fixes_applied": 1,
+    "warnings": 9,
+    "missing_images": 6,
     "missing_en_title": 266,
-    "missing_fr_title": 695,
-    "sport_mismatches_fixed": 1,
+    "missing_fr_title": 696,
+    "sport_mismatches_fixed": 0,
     "duplicates": 285
   }
 }
