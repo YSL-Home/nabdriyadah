@@ -1,64 +1,16 @@
 {
-  "date": "2026-05-16T22:41:30.473Z",
-  "total": 707,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 7,
-      "action": "will_regenerate_on_next_ci"
-    }
-  ],
+  "date": "2026-05-16T23:04:51.682Z",
+  "total": 705,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-4pzdep",
-      "sport": "football",
-      "image": "/generated/ft-4pzdep.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1snx5w",
-      "sport": "football",
-      "image": "/generated/ft-1snx5w.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-11ct90",
-      "sport": "football",
-      "image": "/generated/ft-11ct90.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-um2l4z",
-      "sport": "tennis",
-      "image": "/generated/tennis-um2l4z.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-1q5qk8",
-      "sport": "tennis",
-      "image": "/generated/tennis-1q5qk8.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-2y2a69",
-      "sport": "tennis",
-      "image": "/generated/tennis-2y2a69.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-8q6pwj",
-      "sport": "football",
-      "image": "/generated/ft-8q6pwj.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 268,
+      "count": 265,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 706,
+      "count": 704,
       "action": "needs_llm_backfill"
     },
     {
@@ -155,6 +107,10 @@
         {
           "slug": "ft-duajtb",
           "duplicate_of": "ft-10nkx1"
+        },
+        {
+          "slug": "bball-1c7gtu",
+          "duplicate_of": "bball-ft15xr"
         },
         {
           "slug": "ft-cmsv50",
@@ -273,8 +229,12 @@
           "duplicate_of": "tennis-10nnlw-1778967010616"
         },
         {
+          "slug": "ucl-1nyz57-1778961930708",
+          "duplicate_of": "ucl-1nyz57-1778968611641"
+        },
+        {
           "slug": "ucl-1nyz57-1778960395977",
-          "duplicate_of": "ucl-1nyz57-1778961930708"
+          "duplicate_of": "ucl-1nyz57-1778968611641"
         },
         {
           "slug": "ucl-1dca30-1778941509963",
@@ -290,7 +250,7 @@
         },
         {
           "slug": "ucl-1nyz57",
-          "duplicate_of": "ucl-1nyz57-1778961930708"
+          "duplicate_of": "ucl-1nyz57-1778968611641"
         },
         {
           "slug": "ucl-1dca30",
@@ -1237,11 +1197,11 @@
   ],
   "summary": {
     "fixes_applied": 0,
-    "warnings": 10,
-    "missing_images": 7,
-    "missing_en_title": 268,
-    "missing_fr_title": 706,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 265,
+    "missing_fr_title": 704,
     "sport_mismatches_fixed": 0,
-    "duplicates": 292
+    "duplicates": 294
   }
 }
