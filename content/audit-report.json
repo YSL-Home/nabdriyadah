@@ -1,16 +1,73 @@
 {
-  "date": "2026-05-16T08:44:25.698Z",
-  "total": 588,
-  "fixes": [],
+  "date": "2026-05-16T09:24:48.028Z",
+  "total": 594,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 6,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ucl-1dca30-1778923241990",
+      "value": "2025 Women's Under-17 EURO semi-final preview: Germany vs Sp"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-1fk3y8-1778923246787",
+      "value": "Sinner equals Djokovic record to progress in Rome"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "liga-1nhe5e-1778923245201",
+      "value": "Barcelona vs. Real Madrid: Head-to-head record and past meet"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1cnfc7",
+      "sport": "football",
+      "image": "/generated/ft-1cnfc7.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1ya7t4",
+      "sport": "tennis",
+      "image": "/generated/tennis-1ya7t4.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-rxpoez",
+      "sport": "football",
+      "image": "/generated/ft-rxpoez.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1dca30-1778923241990",
+      "sport": "football",
+      "image": "/generated/ucl-1dca30-1778923241990.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1fk3y8-1778923246787",
+      "sport": "tennis",
+      "image": "/generated/tennis-1fk3y8-1778923246787.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "liga-1nhe5e-1778923245201",
+      "sport": "football",
+      "image": "/generated/liga-1nhe5e-1778923245201.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 194,
+      "count": 197,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 587,
+      "count": 593,
       "action": "needs_llm_backfill"
     },
     {
@@ -69,12 +126,20 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "ucl-1dca30",
+          "duplicate_of": "ucl-1dca30-1778923241990"
+        },
+        {
+          "slug": "tennis-1fk3y8-1778904331438",
+          "duplicate_of": "tennis-1fk3y8-1778923246787"
+        },
+        {
           "slug": "tennis-1fk3y8-1778878558467",
-          "duplicate_of": "tennis-1fk3y8-1778904331438"
+          "duplicate_of": "tennis-1fk3y8-1778923246787"
         },
         {
           "slug": "tennis-1fk3y8",
-          "duplicate_of": "tennis-1fk3y8-1778904331438"
+          "duplicate_of": "tennis-1fk3y8-1778923246787"
         },
         {
           "slug": "tennis-d4e1uk-1778882003707",
@@ -473,8 +538,12 @@
           "duplicate_of": "ft-6vskwn-1778775453079"
         },
         {
+          "slug": "liga-1nhe5e-1778888961828",
+          "duplicate_of": "liga-1nhe5e-1778923245201"
+        },
+        {
           "slug": "liga-1nhe5e",
-          "duplicate_of": "liga-1nhe5e-1778888961828"
+          "duplicate_of": "liga-1nhe5e-1778923245201"
         },
         {
           "slug": "ft-1dpkp7-1778775453386",
@@ -944,12 +1013,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 194,
-    "missing_fr_title": 587,
+    "fixes_applied": 3,
+    "warnings": 9,
+    "missing_images": 6,
+    "missing_en_title": 197,
+    "missing_fr_title": 593,
     "sport_mismatches_fixed": 0,
-    "duplicates": 231
+    "duplicates": 234
   }
 }
