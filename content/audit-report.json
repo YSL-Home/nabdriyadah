@@ -1,8 +1,42 @@
 {
-  "date": "2026-05-16T00:26:22.842Z",
-  "total": 539,
-  "fixes": [],
+  "date": "2026-05-16T02:00:41.424Z",
+  "total": 541,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 2,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-1gvwys",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1gvwys",
+      "value": "Will problem solvers continue to flourish at testing US PGA?"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ucl-1u6p65-1778896607660",
+      "value": "Referee teams for 2026 UEFA club competition finals announce"
+    }
+  ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-1gvwys",
+      "sport": "golf",
+      "image": "/generated/ft-1gvwys.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1u6p65-1778896607660",
+      "sport": "football",
+      "image": "/generated/ucl-1u6p65-1778896607660.png"
+    },
     {
       "type": "missing_en_title",
       "count": 179,
@@ -10,7 +44,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 538,
+      "count": 540,
       "action": "needs_llm_backfill"
     },
     {
@@ -209,20 +243,24 @@
           "duplicate_of": "ft-1jhsvm-1778772546140"
         },
         {
+          "slug": "ucl-1u6p65-1778886853464",
+          "duplicate_of": "ucl-1u6p65-1778896607660"
+        },
+        {
           "slug": "ucl-1u6p65-1778858069273",
-          "duplicate_of": "ucl-1u6p65-1778886853464"
+          "duplicate_of": "ucl-1u6p65-1778896607660"
         },
         {
           "slug": "ucl-1u6p65-1778856179995",
-          "duplicate_of": "ucl-1u6p65-1778886853464"
+          "duplicate_of": "ucl-1u6p65-1778896607660"
         },
         {
           "slug": "ucl-1u6p65-1778848344959",
-          "duplicate_of": "ucl-1u6p65-1778886853464"
+          "duplicate_of": "ucl-1u6p65-1778896607660"
         },
         {
           "slug": "ucl-1u6p65",
-          "duplicate_of": "ucl-1u6p65-1778886853464"
+          "duplicate_of": "ucl-1u6p65-1778896607660"
         },
         {
           "slug": "ft-106o70-1778772546823",
@@ -864,12 +902,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
+    "fixes_applied": 3,
+    "warnings": 5,
+    "missing_images": 2,
     "missing_en_title": 179,
-    "missing_fr_title": 538,
-    "sport_mismatches_fixed": 0,
-    "duplicates": 211
+    "missing_fr_title": 540,
+    "sport_mismatches_fixed": 1,
+    "duplicates": 212
   }
 }
