@@ -1,16 +1,63 @@
 {
-  "date": "2026-05-16T21:11:09.873Z",
-  "total": 691,
-  "fixes": [],
+  "date": "2026-05-16T21:31:52.921Z",
+  "total": 696,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-8q6pwj",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-8q6pwj",
+      "value": "Watch: McIlroy 'proud' as 66 boosts US PGA bid"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "tennis-um2l4z",
+      "sport": "tennis",
+      "image": "/generated/tennis-um2l4z.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1q5qk8",
+      "sport": "tennis",
+      "image": "/generated/tennis-1q5qk8.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-2y2a69",
+      "sport": "tennis",
+      "image": "/generated/tennis-2y2a69.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-8q6pwj",
+      "sport": "golf",
+      "image": "/generated/ft-8q6pwj.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-c5zdlj",
+      "sport": "football",
+      "image": "/generated/ft-c5zdlj.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 262,
+      "count": 266,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 690,
+      "count": 695,
       "action": "needs_llm_backfill"
     },
     {
@@ -1160,12 +1207,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 262,
-    "missing_fr_title": 690,
-    "sport_mismatches_fixed": 0,
+    "fixes_applied": 2,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 266,
+    "missing_fr_title": 695,
+    "sport_mismatches_fixed": 1,
     "duplicates": 285
   }
 }
