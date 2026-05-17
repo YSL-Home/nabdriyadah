@@ -1,16 +1,106 @@
 {
-  "date": "2026-05-17T22:42:40.012Z",
-  "total": 826,
-  "fixes": [],
+  "date": "2026-05-17T22:49:06.304Z",
+  "total": 833,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 9,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1qlid0",
+      "value": "Match of the Day"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1nu9dn",
+      "value": "Fans fury as West Ham on brink of drop - how have they got h"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "liga-bz277t",
+      "value": "How to watch today's Sevilla vs Real Madrid LaLiga game: Liv"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-o75364-1779057779961",
+      "value": "Listen: 5 Live Sport - The Making of Jannik Sinner"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ucl-mcqzub-1779057776270",
+      "value": "Watch Bukayo Saka's Arsenal semi-final winner - UEFA.com"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-1k4c5a-1779057781617",
+      "value": "Heineken® 0.0 signs global partnership with Premier Padel, m"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1qlid0",
+      "sport": "football",
+      "image": "/generated/ft-1qlid0.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-eabaq5",
+      "sport": "football",
+      "image": "/generated/ft-eabaq5.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1paca3",
+      "sport": "football",
+      "image": "/generated/ft-1paca3.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1c2n4a",
+      "sport": "football",
+      "image": "/generated/ft-1c2n4a.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1nu9dn",
+      "sport": "football",
+      "image": "/generated/ft-1nu9dn.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "liga-bz277t",
+      "sport": "football",
+      "image": "/generated/liga-bz277t.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-o75364-1779057779961",
+      "sport": "tennis",
+      "image": "/generated/tennis-o75364-1779057779961.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-mcqzub-1779057776270",
+      "sport": "football",
+      "image": "/generated/ucl-mcqzub-1779057776270.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-1k4c5a-1779057781617",
+      "sport": "padel",
+      "image": "/generated/padel-1k4c5a-1779057781617.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 360,
+      "count": 363,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 825,
+      "count": 832,
       "action": "needs_llm_backfill"
     },
     {
@@ -341,24 +431,32 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "tennis-o75364-1779048082104",
+          "duplicate_of": "tennis-o75364-1779057779961"
+        },
+        {
           "slug": "tennis-o75364",
-          "duplicate_of": "tennis-o75364-1779048082104"
+          "duplicate_of": "tennis-o75364-1779057779961"
+        },
+        {
+          "slug": "ucl-mcqzub-1779054950971",
+          "duplicate_of": "ucl-mcqzub-1779057776270"
         },
         {
           "slug": "ucl-mcqzub-1779032515077",
-          "duplicate_of": "ucl-mcqzub-1779054950971"
+          "duplicate_of": "ucl-mcqzub-1779057776270"
         },
         {
           "slug": "ucl-mcqzub-1779027999921",
-          "duplicate_of": "ucl-mcqzub-1779054950971"
+          "duplicate_of": "ucl-mcqzub-1779057776270"
         },
         {
           "slug": "ucl-mcqzub-1779024327579",
-          "duplicate_of": "ucl-mcqzub-1779054950971"
+          "duplicate_of": "ucl-mcqzub-1779057776270"
         },
         {
           "slug": "ucl-mcqzub",
-          "duplicate_of": "ucl-mcqzub-1779054950971"
+          "duplicate_of": "ucl-mcqzub-1779057776270"
         },
         {
           "slug": "tennis-rsyxt2-1779005625955",
@@ -1317,6 +1415,10 @@
           "duplicate_of": "futsal-1nqaf8-1778967011491"
         },
         {
+          "slug": "padel-1k4c5a",
+          "duplicate_of": "padel-1k4c5a-1779057781617"
+        },
+        {
           "slug": "bball-1t7m5a-1778955318250",
           "duplicate_of": "bball-1t7m5a-1778967010155"
         },
@@ -1376,12 +1478,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 360,
-    "missing_fr_title": 825,
+    "fixes_applied": 6,
+    "warnings": 12,
+    "missing_images": 9,
+    "missing_en_title": 363,
+    "missing_fr_title": 832,
     "sport_mismatches_fixed": 0,
-    "duplicates": 339
+    "duplicates": 342
   }
 }
