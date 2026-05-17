@@ -1,16 +1,72 @@
 {
-  "date": "2026-05-17T17:30:57.719Z",
-  "total": 798,
-  "fixes": [],
+  "date": "2026-05-17T17:57:14.262Z",
+  "total": 803,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1e0mm3",
+      "value": "Third place secured - what challenges are ahead for Carrick?"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-6hcssw",
+      "value": "Is O'Neill the long-term answer for Celtic?"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-rsyxt2-1779040139034",
+      "value": "Italian Open match delayed by cup final fireworks"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-19cqc9-1779040139196",
+      "value": "Confident Swiatek rediscovers ruthless best in Rome"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1e0mm3",
+      "sport": "football",
+      "image": "/generated/ft-1e0mm3.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1roakd",
+      "sport": "tennis",
+      "image": "/generated/tennis-1roakd.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-6hcssw",
+      "sport": "football",
+      "image": "/generated/ft-6hcssw.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-rsyxt2-1779040139034",
+      "sport": "tennis",
+      "image": "/generated/tennis-rsyxt2-1779040139034.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-19cqc9-1779040139196",
+      "sport": "tennis",
+      "image": "/generated/tennis-19cqc9-1779040139196.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 345,
+      "count": 346,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 797,
+      "count": 802,
       "action": "needs_llm_backfill"
     },
     {
@@ -345,12 +401,16 @@
           "duplicate_of": "ucl-mcqzub-1779032515077"
         },
         {
+          "slug": "tennis-rsyxt2-1779037989915",
+          "duplicate_of": "tennis-rsyxt2-1779040139034"
+        },
+        {
           "slug": "tennis-rsyxt2-1779005625955",
-          "duplicate_of": "tennis-rsyxt2-1779037989915"
+          "duplicate_of": "tennis-rsyxt2-1779040139034"
         },
         {
           "slug": "tennis-rsyxt2",
-          "duplicate_of": "tennis-rsyxt2-1779037989915"
+          "duplicate_of": "tennis-rsyxt2-1779040139034"
         },
         {
           "slug": "liga-d37fqz-1778946718764",
@@ -365,16 +425,20 @@
           "duplicate_of": "ucl-1dl76u-1779018848717"
         },
         {
+          "slug": "tennis-19cqc9-1778967010305",
+          "duplicate_of": "tennis-19cqc9-1779040139196"
+        },
+        {
           "slug": "tennis-19cqc9-1778944421986",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1779040139196"
         },
         {
           "slug": "tennis-19cqc9-1778940287780",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1779040139196"
         },
         {
           "slug": "tennis-19cqc9",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1779040139196"
         },
         {
           "slug": "tennis-10nnlw-1778923537129",
@@ -1356,12 +1420,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 345,
-    "missing_fr_title": 797,
+    "fixes_applied": 4,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 346,
+    "missing_fr_title": 802,
     "sport_mismatches_fixed": 0,
-    "duplicates": 334
+    "duplicates": 336
   }
 }
