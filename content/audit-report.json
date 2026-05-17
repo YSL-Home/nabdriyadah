@@ -1,8 +1,80 @@
 {
-  "date": "2026-05-17T08:27:30.620Z",
-  "total": 730,
-  "fixes": [],
+  "date": "2026-05-17T09:28:14.153Z",
+  "total": 736,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 6,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-c9pdvz",
+      "value": "'We share same ambition' - Alonso named Chelsea's third boss"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-vpcwts",
+      "value": "The Alonso dream is over - but Salah's outburst keeps heat o"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-11ct90",
+      "value": "No trophy in turbulent season but Alonso arrival offers Chel"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-rsyxt2-1779009607604",
+      "value": "Italian Open match delayed by cup final fireworks"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-19cqc9-1779009607789",
+      "value": "Confident Swiatek rediscovers ruthless best in Rome"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-2ubazm-1779009608412",
+      "value": "This is the 2026 Premier Padel calendar - Red Bull"
+    }
+  ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-c9pdvz",
+      "sport": "football",
+      "image": "/generated/ft-c9pdvz.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-vpcwts",
+      "sport": "football",
+      "image": "/generated/ft-vpcwts.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-11ct90",
+      "sport": "football",
+      "image": "/generated/ft-11ct90.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-rsyxt2-1779009607604",
+      "sport": "tennis",
+      "image": "/generated/tennis-rsyxt2-1779009607604.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-19cqc9-1779009607789",
+      "sport": "tennis",
+      "image": "/generated/tennis-19cqc9-1779009607789.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-2ubazm-1779009608412",
+      "sport": "padel",
+      "image": "/generated/padel-2ubazm-1779009608412.png"
+    },
     {
       "type": "missing_en_title",
       "count": 286,
@@ -10,7 +82,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 729,
+      "count": 735,
       "action": "needs_llm_backfill"
     },
     {
@@ -205,24 +277,32 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "tennis-rsyxt2-1779005625955",
+          "duplicate_of": "tennis-rsyxt2-1779009607604"
+        },
+        {
           "slug": "tennis-rsyxt2",
-          "duplicate_of": "tennis-rsyxt2-1779005625955"
+          "duplicate_of": "tennis-rsyxt2-1779009607604"
         },
         {
           "slug": "liga-d37fqz-1778946718764",
           "duplicate_of": "liga-d37fqz-1778950127130"
         },
         {
+          "slug": "tennis-19cqc9-1778967010305",
+          "duplicate_of": "tennis-19cqc9-1779009607789"
+        },
+        {
           "slug": "tennis-19cqc9-1778944421986",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1779009607789"
         },
         {
           "slug": "tennis-19cqc9-1778940287780",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1779009607789"
         },
         {
           "slug": "tennis-19cqc9",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1779009607789"
         },
         {
           "slug": "tennis-10nnlw-1778923537129",
@@ -1133,8 +1213,12 @@
           "duplicate_of": "liga-12ulcr-1778913365953"
         },
         {
+          "slug": "padel-2ubazm-1778997182716",
+          "duplicate_of": "padel-2ubazm-1779009608412"
+        },
+        {
           "slug": "padel-2ubazm",
-          "duplicate_of": "padel-2ubazm-1778997182716"
+          "duplicate_of": "padel-2ubazm-1779009608412"
         },
         {
           "slug": "padel-m48y9s-1778839662727",
@@ -1204,12 +1288,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
+    "fixes_applied": 6,
+    "warnings": 9,
+    "missing_images": 6,
     "missing_en_title": 286,
-    "missing_fr_title": 729,
+    "missing_fr_title": 735,
     "sport_mismatches_fixed": 0,
-    "duplicates": 296
+    "duplicates": 299
   }
 }
