@@ -1,64 +1,8 @@
 {
-  "date": "2026-05-17T13:02:44.277Z",
-  "total": 766,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 5,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-pkntgp",
-      "value": "Earps close to WSL return as PSG exit nears"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "tennis-rsyxt2-1779022518806",
-      "value": "Italian Open match delayed by cup final fireworks"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ucl-1dl76u-1779022514894",
-      "value": "Best games of the 2025/26 Women's Champions League knockout "
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "padel-2ubazm-1779022519489",
-      "value": "This is the 2026 Premier Padel calendar - Red Bull"
-    }
-  ],
+  "date": "2026-05-17T13:18:47.590Z",
+  "total": 762,
+  "fixes": [],
   "warnings": [
-    {
-      "type": "missing_image",
-      "slug": "tennis-tc53v7",
-      "sport": "tennis",
-      "image": "/generated/tennis-tc53v7.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-pkntgp",
-      "sport": "football",
-      "image": "/generated/ft-pkntgp.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-rsyxt2-1779022518806",
-      "sport": "tennis",
-      "image": "/generated/tennis-rsyxt2-1779022518806.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ucl-1dl76u-1779022514894",
-      "sport": "football",
-      "image": "/generated/ucl-1dl76u-1779022514894.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "padel-2ubazm-1779022519489",
-      "sport": "padel",
-      "image": "/generated/padel-2ubazm-1779022519489.png"
-    },
     {
       "type": "missing_en_title",
       "count": 315,
@@ -66,15 +10,19 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 765,
+      "count": 761,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
         {
+          "slug": "epl-14smmp",
+          "duplicate_of": "epl-1pknxw"
+        },
+        {
           "slug": "epl-1thh3m",
-          "duplicate_of": "epl-14smmp"
+          "duplicate_of": "epl-1pknxw"
         },
         {
           "slug": "ft-17qezy",
@@ -138,7 +86,7 @@
         },
         {
           "slug": "epl-1yl1yi",
-          "duplicate_of": "epl-14smmp"
+          "duplicate_of": "epl-1pknxw"
         },
         {
           "slug": "ft-18a6gp",
@@ -329,28 +277,20 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
-          "slug": "tennis-rsyxt2-1779005625955",
-          "duplicate_of": "tennis-rsyxt2-1779022518806"
-        },
-        {
           "slug": "tennis-rsyxt2",
-          "duplicate_of": "tennis-rsyxt2-1779022518806"
+          "duplicate_of": "tennis-rsyxt2-1779005625955"
         },
         {
           "slug": "liga-d37fqz-1778946718764",
           "duplicate_of": "liga-d37fqz-1778950127130"
         },
         {
-          "slug": "ucl-1dl76u-1779018848717",
-          "duplicate_of": "ucl-1dl76u-1779022514894"
-        },
-        {
           "slug": "ucl-1dl76u-1779013346702",
-          "duplicate_of": "ucl-1dl76u-1779022514894"
+          "duplicate_of": "ucl-1dl76u-1779018848717"
         },
         {
           "slug": "ucl-1dl76u",
-          "duplicate_of": "ucl-1dl76u-1779022514894"
+          "duplicate_of": "ucl-1dl76u-1779018848717"
         },
         {
           "slug": "tennis-19cqc9-1778944421986",
@@ -1273,12 +1213,8 @@
           "duplicate_of": "liga-12ulcr-1778913365953"
         },
         {
-          "slug": "padel-2ubazm-1778997182716",
-          "duplicate_of": "padel-2ubazm-1779022519489"
-        },
-        {
           "slug": "padel-2ubazm",
-          "duplicate_of": "padel-2ubazm-1779022519489"
+          "duplicate_of": "padel-2ubazm-1778997182716"
         },
         {
           "slug": "padel-m48y9s-1778839662727",
@@ -1348,12 +1284,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 4,
-    "warnings": 8,
-    "missing_images": 5,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
     "missing_en_title": 315,
-    "missing_fr_title": 765,
+    "missing_fr_title": 761,
     "sport_mismatches_fixed": 0,
-    "duplicates": 318
+    "duplicates": 316
   }
 }
