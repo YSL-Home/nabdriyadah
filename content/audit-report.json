@@ -1,16 +1,72 @@
 {
-  "date": "2026-05-17T09:40:58.537Z",
-  "total": 733,
-  "fixes": [],
+  "date": "2026-05-17T10:24:30.071Z",
+  "total": 738,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-c9pdvz",
+      "value": "'We share same ambition' - Alonso named Chelsea's third boss"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-vpcwts",
+      "value": "The Alonso dream is over - but Salah's outburst keeps heat o"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-11ct90",
+      "value": "No trophy in turbulent season but Alonso arrival offers Chel"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-rsyxt2-1779013053452",
+      "value": "Italian Open match delayed by cup final fireworks"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "tennis-w1990h",
+      "sport": "tennis",
+      "image": "/generated/tennis-w1990h.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-c9pdvz",
+      "sport": "football",
+      "image": "/generated/ft-c9pdvz.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-vpcwts",
+      "sport": "football",
+      "image": "/generated/ft-vpcwts.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-11ct90",
+      "sport": "football",
+      "image": "/generated/ft-11ct90.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-rsyxt2-1779013053452",
+      "sport": "tennis",
+      "image": "/generated/tennis-rsyxt2-1779013053452.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 289,
+      "count": 290,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 732,
+      "count": 737,
       "action": "needs_llm_backfill"
     },
     {
@@ -205,8 +261,12 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "tennis-rsyxt2-1779005625955",
+          "duplicate_of": "tennis-rsyxt2-1779013053452"
+        },
+        {
           "slug": "tennis-rsyxt2",
-          "duplicate_of": "tennis-rsyxt2-1779005625955"
+          "duplicate_of": "tennis-rsyxt2-1779013053452"
         },
         {
           "slug": "liga-d37fqz-1778946718764",
@@ -1204,12 +1264,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 289,
-    "missing_fr_title": 732,
+    "fixes_applied": 4,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 290,
+    "missing_fr_title": 737,
     "sport_mismatches_fixed": 0,
-    "duplicates": 296
+    "duplicates": 297
   }
 }
