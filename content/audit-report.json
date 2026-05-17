@@ -1,8 +1,75 @@
 {
-  "date": "2026-05-17T00:04:08.854Z",
-  "total": 706,
-  "fixes": [],
+  "date": "2026-05-17T00:16:25.549Z",
+  "total": 711,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-9vx7v3",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-9vx7v3",
+      "value": "Smalley leads as stars jostle on US PGA 'moving day'"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-19cqc9-1778976631666",
+      "value": "Confident Swiatek rediscovers ruthless best in Rome"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-10nnlw-1778976631979",
+      "value": "Raducanu to make return with wildcard in Strasbourg"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "futsal-17mazl-1778976632644",
+      "value": "À Marseille, le succès fou du padel remplacera-t-il le futsa"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-1t7m5a-1778976631503",
+      "value": "WNBA 2025 Playoffs Bracket - WNBA"
+    }
+  ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-9vx7v3",
+      "sport": "golf",
+      "image": "/generated/ft-9vx7v3.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-19cqc9-1778976631666",
+      "sport": "tennis",
+      "image": "/generated/tennis-19cqc9-1778976631666.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-10nnlw-1778976631979",
+      "sport": "tennis",
+      "image": "/generated/tennis-10nnlw-1778976631979.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "futsal-17mazl-1778976632644",
+      "sport": "futsal",
+      "image": "/generated/futsal-17mazl-1778976632644.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-1t7m5a-1778976631503",
+      "sport": "basketball",
+      "image": "/generated/bball-1t7m5a-1778976631503.png"
+    },
     {
       "type": "missing_en_title",
       "count": 266,
@@ -10,7 +77,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 705,
+      "count": 710,
       "action": "needs_llm_backfill"
     },
     {
@@ -209,24 +276,32 @@
           "duplicate_of": "liga-d37fqz-1778950127130"
         },
         {
+          "slug": "tennis-19cqc9-1778967010305",
+          "duplicate_of": "tennis-19cqc9-1778976631666"
+        },
+        {
           "slug": "tennis-19cqc9-1778944421986",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1778976631666"
         },
         {
           "slug": "tennis-19cqc9-1778940287780",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1778976631666"
         },
         {
           "slug": "tennis-19cqc9",
-          "duplicate_of": "tennis-19cqc9-1778967010305"
+          "duplicate_of": "tennis-19cqc9-1778976631666"
+        },
+        {
+          "slug": "tennis-10nnlw-1778967010616",
+          "duplicate_of": "tennis-10nnlw-1778976631979"
         },
         {
           "slug": "tennis-10nnlw-1778923537129",
-          "duplicate_of": "tennis-10nnlw-1778967010616"
+          "duplicate_of": "tennis-10nnlw-1778976631979"
         },
         {
           "slug": "tennis-10nnlw",
-          "duplicate_of": "tennis-10nnlw-1778967010616"
+          "duplicate_of": "tennis-10nnlw-1778976631979"
         },
         {
           "slug": "ucl-1nyz57-1778961930708",
@@ -1097,32 +1172,36 @@
           "duplicate_of": "bball-t1nlm2-1778920290328"
         },
         {
+          "slug": "futsal-17mazl-1778967011342",
+          "duplicate_of": "futsal-17mazl-1778976632644"
+        },
+        {
           "slug": "futsal-17mazl-1778904332484",
-          "duplicate_of": "futsal-17mazl-1778967011342"
+          "duplicate_of": "futsal-17mazl-1778976632644"
         },
         {
           "slug": "futsal-17mazl",
-          "duplicate_of": "futsal-17mazl-1778967011342"
+          "duplicate_of": "futsal-17mazl-1778976632644"
         },
         {
           "slug": "futsal-pw1ktd-1778878559111",
-          "duplicate_of": "futsal-17mazl-1778967011342"
+          "duplicate_of": "futsal-17mazl-1778976632644"
         },
         {
           "slug": "futsal-pw1ktd-1778858071814",
-          "duplicate_of": "futsal-17mazl-1778967011342"
+          "duplicate_of": "futsal-17mazl-1778976632644"
         },
         {
           "slug": "futsal-pw1ktd-1778856182916",
-          "duplicate_of": "futsal-17mazl-1778967011342"
+          "duplicate_of": "futsal-17mazl-1778976632644"
         },
         {
           "slug": "futsal-pw1ktd-1778843588733",
-          "duplicate_of": "futsal-17mazl-1778967011342"
+          "duplicate_of": "futsal-17mazl-1778976632644"
         },
         {
           "slug": "futsal-pw1ktd",
-          "duplicate_of": "futsal-17mazl-1778967011342"
+          "duplicate_of": "futsal-17mazl-1778976632644"
         },
         {
           "slug": "liga-12ulcr",
@@ -1137,12 +1216,16 @@
           "duplicate_of": "futsal-1nqaf8-1778967011491"
         },
         {
+          "slug": "bball-1t7m5a-1778967010155",
+          "duplicate_of": "bball-1t7m5a-1778976631503"
+        },
+        {
           "slug": "bball-1t7m5a-1778955318250",
-          "duplicate_of": "bball-1t7m5a-1778967010155"
+          "duplicate_of": "bball-1t7m5a-1778976631503"
         },
         {
           "slug": "bball-1t7m5a",
-          "duplicate_of": "bball-1t7m5a-1778967010155"
+          "duplicate_of": "bball-1t7m5a-1778976631503"
         },
         {
           "slug": "bball-1nffxl-1778882002391",
@@ -1196,12 +1279,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
+    "fixes_applied": 6,
+    "warnings": 8,
+    "missing_images": 5,
     "missing_en_title": 266,
-    "missing_fr_title": 705,
-    "sport_mismatches_fixed": 0,
-    "duplicates": 294
+    "missing_fr_title": 710,
+    "sport_mismatches_fixed": 1,
+    "duplicates": 298
   }
 }
