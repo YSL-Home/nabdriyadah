@@ -1,16 +1,56 @@
 {
-  "date": "2026-05-17T11:07:22.491Z",
-  "total": 748,
-  "fixes": [],
+  "date": "2026-05-17T12:01:52.100Z",
+  "total": 752,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 4,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-pkntgp",
+      "value": "Earps close to WSL return as PSG exit nears"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-2ubazm-1779018855666",
+      "value": "This is the 2026 Premier Padel calendar - Red Bull"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-pkntgp",
+      "sport": "football",
+      "image": "/generated/ft-pkntgp.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-vcge29",
+      "sport": "football",
+      "image": "/generated/ft-vcge29.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-w1990h",
+      "sport": "tennis",
+      "image": "/generated/tennis-w1990h.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-2ubazm-1779018855666",
+      "sport": "padel",
+      "image": "/generated/padel-2ubazm-1779018855666.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 303,
+      "count": 305,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 747,
+      "count": 751,
       "action": "needs_llm_backfill"
     },
     {
@@ -1177,8 +1217,12 @@
           "duplicate_of": "liga-12ulcr-1778913365953"
         },
         {
+          "slug": "padel-2ubazm-1778997182716",
+          "duplicate_of": "padel-2ubazm-1779018855666"
+        },
+        {
           "slug": "padel-2ubazm",
-          "duplicate_of": "padel-2ubazm-1778997182716"
+          "duplicate_of": "padel-2ubazm-1779018855666"
         },
         {
           "slug": "padel-m48y9s-1778839662727",
@@ -1248,12 +1292,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 303,
-    "missing_fr_title": 747,
+    "fixes_applied": 2,
+    "warnings": 7,
+    "missing_images": 4,
+    "missing_en_title": 305,
+    "missing_fr_title": 751,
     "sport_mismatches_fixed": 0,
-    "duplicates": 307
+    "duplicates": 308
   }
 }
