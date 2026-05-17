@@ -1,16 +1,72 @@
 {
-  "date": "2026-05-17T10:36:46.908Z",
-  "total": 739,
-  "fixes": [],
+  "date": "2026-05-17T10:52:47.614Z",
+  "total": 744,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-c9pdvz",
+      "value": "'We share same ambition' - Alonso named Chelsea's third boss"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ucl-1dl76u-1779014824010",
+      "value": "Best games of the 2025/26 Women's Champions League knockout "
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-47e3q2-1779014825868",
+      "value": "SoFi Play-In Tournament history - NBA"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-2ubazm-1779014827078",
+      "value": "This is the 2026 Premier Padel calendar - Red Bull"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "tennis-w1990h",
+      "sport": "tennis",
+      "image": "/generated/tennis-w1990h.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-c9pdvz",
+      "sport": "football",
+      "image": "/generated/ft-c9pdvz.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1dl76u-1779014824010",
+      "sport": "football",
+      "image": "/generated/ucl-1dl76u-1779014824010.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-47e3q2-1779014825868",
+      "sport": "basketball",
+      "image": "/generated/bball-47e3q2-1779014825868.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-2ubazm-1779014827078",
+      "sport": "padel",
+      "image": "/generated/padel-2ubazm-1779014827078.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 294,
+      "count": 295,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 738,
+      "count": 743,
       "action": "needs_llm_backfill"
     },
     {
@@ -233,8 +289,12 @@
           "duplicate_of": "liga-d37fqz-1778950127130"
         },
         {
+          "slug": "ucl-1dl76u-1779013346702",
+          "duplicate_of": "ucl-1dl76u-1779014824010"
+        },
+        {
           "slug": "ucl-1dl76u",
-          "duplicate_of": "ucl-1dl76u-1779013346702"
+          "duplicate_of": "ucl-1dl76u-1779014824010"
         },
         {
           "slug": "tennis-19cqc9-1778944421986",
@@ -1073,16 +1133,20 @@
           "duplicate_of": "ucl-9hk21i-1778855044219"
         },
         {
+          "slug": "bball-47e3q2-1778967009983",
+          "duplicate_of": "bball-47e3q2-1779014825868"
+        },
+        {
           "slug": "bball-47e3q2-1778930373784",
-          "duplicate_of": "bball-47e3q2-1778967009983"
+          "duplicate_of": "bball-47e3q2-1779014825868"
         },
         {
           "slug": "bball-47e3q2-1778882003274",
-          "duplicate_of": "bball-47e3q2-1778967009983"
+          "duplicate_of": "bball-47e3q2-1779014825868"
         },
         {
           "slug": "bball-47e3q2",
-          "duplicate_of": "bball-47e3q2-1778967009983"
+          "duplicate_of": "bball-47e3q2-1779014825868"
         },
         {
           "slug": "bball-uka77z-1778920290194",
@@ -1157,8 +1221,12 @@
           "duplicate_of": "liga-12ulcr-1778913365953"
         },
         {
+          "slug": "padel-2ubazm-1778997182716",
+          "duplicate_of": "padel-2ubazm-1779014827078"
+        },
+        {
           "slug": "padel-2ubazm",
-          "duplicate_of": "padel-2ubazm-1778997182716"
+          "duplicate_of": "padel-2ubazm-1779014827078"
         },
         {
           "slug": "padel-m48y9s-1778839662727",
@@ -1228,12 +1296,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 294,
-    "missing_fr_title": 738,
+    "fixes_applied": 4,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 295,
+    "missing_fr_title": 743,
     "sport_mismatches_fixed": 0,
-    "duplicates": 302
+    "duplicates": 305
   }
 }
