@@ -1,16 +1,28 @@
 {
-  "date": "2026-05-17T07:48:34.866Z",
-  "total": 724,
-  "fixes": [],
+  "date": "2026-05-17T08:14:15.965Z",
+  "total": 725,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 1,
+      "action": "will_regenerate_on_next_ci"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-gjtg3f",
+      "sport": "football",
+      "image": "/generated/ft-gjtg3f.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 281,
+      "count": 282,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 723,
+      "count": 724,
       "action": "needs_llm_backfill"
     },
     {
@@ -1201,10 +1213,10 @@
   ],
   "summary": {
     "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 281,
-    "missing_fr_title": 723,
+    "warnings": 4,
+    "missing_images": 1,
+    "missing_en_title": 282,
+    "missing_fr_title": 724,
     "sport_mismatches_fixed": 0,
     "duplicates": 295
   }
