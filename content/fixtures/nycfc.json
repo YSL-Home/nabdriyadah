@@ -3,38 +3,6 @@
   "teamId": 1603,
   "upcoming": [
     {
-      "id": "761633",
-      "date": "2026-05-16T23:30Z",
-      "timestamp": 1778974200,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Red Bull Arena",
-      "city": "Harrison, New Jersey",
-      "home": {
-        "id": "190",
-        "slug": null,
-        "name": "Red Bull New York",
-        "logo": "",
-        "winner": null
-      },
-      "away": {
-        "id": "17606",
-        "slug": "nycfc",
-        "name": "نيويورك سيتي",
-        "logo": "https://media.api-sports.io/football/teams/1603.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761649",
       "date": "2026-05-24T00:30Z",
       "timestamp": 1779582600,
@@ -68,6 +36,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761633",
+      "date": "2026-05-16T23:30Z",
+      "timestamp": 1778974200,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Red Bull Arena",
+      "city": "Harrison, New Jersey",
+      "home": {
+        "id": "190",
+        "slug": null,
+        "name": "Red Bull New York",
+        "logo": "",
+        "winner": false
+      },
+      "away": {
+        "id": "17606",
+        "slug": "nycfc",
+        "name": "نيويورك سيتي",
+        "logo": "https://media.api-sports.io/football/teams/1603.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761615",
       "date": "2026-05-13T23:15Z",
@@ -325,5 +325,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-17T00:24:32.970Z"
+  "fetchedAt": "2026-05-17T02:14:50.980Z"
 }

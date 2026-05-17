@@ -3,38 +3,6 @@
   "teamId": 1608,
   "upcoming": [
     {
-      "id": "761629",
-      "date": "2026-05-16T23:30Z",
-      "timestamp": 1778974200,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Subaru Park",
-      "city": "Chester, Pennsylvania",
-      "home": {
-        "id": "10739",
-        "slug": "philadelphia-union",
-        "name": "فيلادلفيا يونيون",
-        "logo": "https://media.api-sports.io/football/teams/1608.png",
-        "winner": null
-      },
-      "away": {
-        "id": "183",
-        "slug": "columbus-crew",
-        "name": "كولومبوس كرو",
-        "logo": "https://media.api-sports.io/football/teams/1607.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761657",
       "date": "2026-05-24T23:00Z",
       "timestamp": 1779663600,
@@ -68,6 +36,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761629",
+      "date": "2026-05-16T23:30Z",
+      "timestamp": 1778974200,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Subaru Park",
+      "city": "Chester, Pennsylvania",
+      "home": {
+        "id": "10739",
+        "slug": "philadelphia-union",
+        "name": "فيلادلفيا يونيون",
+        "logo": "https://media.api-sports.io/football/teams/1608.png",
+        "winner": false
+      },
+      "away": {
+        "id": "183",
+        "slug": "columbus-crew",
+        "name": "كولومبوس كرو",
+        "logo": "https://media.api-sports.io/football/teams/1607.png",
+        "winner": false
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761616",
       "date": "2026-05-13T23:30Z",
@@ -325,5 +325,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-17T00:24:32.970Z"
+  "fetchedAt": "2026-05-17T02:14:50.980Z"
 }
