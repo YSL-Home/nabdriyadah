@@ -1,107 +1,25 @@
 {
-  "date": "2026-05-17T20:07:16.752Z",
-  "total": 817,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 10,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1ho5vs",
-      "value": "Neymar furious as he is wrongly substituted"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-lxa3in",
-      "value": "Michael Jackson and Spider-Man – Premier League celebrations"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-9nrlnz",
-      "value": "'I haven't decided yet' - Silva on Fulham future"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "padel-1k4c5a",
-      "value": "Heineken® 0.0 signs global partnership with Premier Padel, m"
-    }
-  ],
+  "date": "2026-05-17T20:20:36.781Z",
+  "total": 816,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "tennis-xv11ls",
-      "sport": "tennis",
-      "image": "/generated/tennis-xv11ls.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-104afc",
-      "sport": "football",
-      "image": "/generated/ft-104afc.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1ho5vs",
-      "sport": "football",
-      "image": "/generated/ft-1ho5vs.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-lxa3in",
-      "sport": "football",
-      "image": "/generated/ft-lxa3in.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1liuub",
-      "sport": "football",
-      "image": "/generated/ft-1liuub.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-9nrlnz",
-      "sport": "football",
-      "image": "/generated/ft-9nrlnz.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-1t0quy",
-      "sport": "tennis",
-      "image": "/generated/tennis-1t0quy.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-ui9cko",
-      "sport": "football",
-      "image": "/generated/ft-ui9cko.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-xd90en",
-      "sport": "tennis",
-      "image": "/generated/tennis-xd90en.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "padel-1k4c5a",
-      "sport": "padel",
-      "image": "/generated/padel-1k4c5a.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 354,
+      "count": 355,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 816,
+      "count": 815,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "liga-1ft8xw",
+          "duplicate_of": "liga-137flx"
+        },
         {
           "slug": "ft-1spxc0",
           "duplicate_of": "ft-153hou"
@@ -417,6 +335,10 @@
         {
           "slug": "epl-fal0dx",
           "duplicate_of": "epl-hxmk9b"
+        },
+        {
+          "slug": "tennis-o75364",
+          "duplicate_of": "tennis-o75364-1779048082104"
         },
         {
           "slug": "ucl-mcqzub-1779027999921",
@@ -1446,12 +1368,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 4,
-    "warnings": 13,
-    "missing_images": 10,
-    "missing_en_title": 354,
-    "missing_fr_title": 816,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 355,
+    "missing_fr_title": 815,
     "sport_mismatches_fixed": 0,
-    "duplicates": 335
+    "duplicates": 337
   }
 }
