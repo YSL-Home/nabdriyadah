@@ -3,38 +3,6 @@
   "teamId": 1600,
   "upcoming": [
     {
-      "id": "761638",
-      "date": "2026-05-17T01:15Z",
-      "timestamp": 1778980500,
-      "status": "LIVE",
-      "statusLong": "First Half",
-      "venue": "Lumen Field",
-      "city": "Seattle, Washington",
-      "home": {
-        "id": "9726",
-        "slug": "seattle-sounders",
-        "name": "سياتل ساوندرز",
-        "logo": "https://media.api-sports.io/football/teams/1600.png",
-        "winner": null
-      },
-      "away": {
-        "id": "187",
-        "slug": "la-galaxy",
-        "name": "لوس أنجلوس غالاكسي",
-        "logo": "https://media.api-sports.io/football/teams/1598.png",
-        "winner": null
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "league": {
-        "name": "MLS",
-        "round": ""
-      },
-      "completed": false
-    },
-    {
       "id": "761658",
       "date": "2026-05-25T01:00Z",
       "timestamp": 1779670800,
@@ -68,6 +36,38 @@
     }
   ],
   "past": [
+    {
+      "id": "761638",
+      "date": "2026-05-17T01:15Z",
+      "timestamp": 1778980500,
+      "status": "FT",
+      "statusLong": "Full Time",
+      "venue": "Lumen Field",
+      "city": "Seattle, Washington",
+      "home": {
+        "id": "9726",
+        "slug": "seattle-sounders",
+        "name": "سياتل ساوندرز",
+        "logo": "https://media.api-sports.io/football/teams/1600.png",
+        "winner": false
+      },
+      "away": {
+        "id": "187",
+        "slug": "la-galaxy",
+        "name": "لوس أنجلوس غالاكسي",
+        "logo": "https://media.api-sports.io/football/teams/1598.png",
+        "winner": true
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "league": {
+        "name": "MLS",
+        "round": ""
+      },
+      "completed": true
+    },
     {
       "id": "761626",
       "date": "2026-05-14T01:30Z",
@@ -261,5 +261,5 @@
       "completed": true
     }
   ],
-  "fetchedAt": "2026-05-17T02:14:50.980Z"
+  "fetchedAt": "2026-05-17T04:47:36.709Z"
 }
