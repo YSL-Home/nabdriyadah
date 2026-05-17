@@ -1,100 +1,84 @@
 {
-  "date": "2026-05-17T12:01:52.100Z",
-  "total": 752,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 4,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-pkntgp",
-      "value": "Earps close to WSL return as PSG exit nears"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "padel-2ubazm-1779018855666",
-      "value": "This is the 2026 Premier Padel calendar - Red Bull"
-    }
-  ],
+  "date": "2026-05-17T12:14:41.074Z",
+  "total": 758,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-pkntgp",
-      "sport": "football",
-      "image": "/generated/ft-pkntgp.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-vcge29",
-      "sport": "football",
-      "image": "/generated/ft-vcge29.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-w1990h",
-      "sport": "tennis",
-      "image": "/generated/tennis-w1990h.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "padel-2ubazm-1779018855666",
-      "sport": "padel",
-      "image": "/generated/padel-2ubazm-1779018855666.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 305,
+      "count": 312,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 751,
+      "count": 757,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
         {
+          "slug": "ft-17qezy",
+          "duplicate_of": "ft-dn8nnn"
+        },
+        {
+          "slug": "ft-7j5vpn",
+          "duplicate_of": "ft-9ij8ga"
+        },
+        {
+          "slug": "ft-uk6rr3",
+          "duplicate_of": "ft-k8oa2n"
+        },
+        {
+          "slug": "ft-1e3c5h",
+          "duplicate_of": "ft-1h9k4h"
+        },
+        {
+          "slug": "ft-1jus52",
+          "duplicate_of": "ft-kqylo1"
+        },
+        {
           "slug": "ft-1l2hw8",
-          "duplicate_of": "ft-17qezy"
+          "duplicate_of": "ft-dn8nnn"
         },
         {
           "slug": "ft-2ix772",
-          "duplicate_of": "ft-7j5vpn"
+          "duplicate_of": "ft-9ij8ga"
         },
         {
           "slug": "ft-u6uylf",
-          "duplicate_of": "ft-uk6rr3"
+          "duplicate_of": "ft-k8oa2n"
         },
         {
           "slug": "ft-nzt6uf",
-          "duplicate_of": "ft-1e3c5h"
+          "duplicate_of": "ft-1h9k4h"
         },
         {
           "slug": "ft-bgpmc5",
-          "duplicate_of": "ft-1jus52"
+          "duplicate_of": "ft-kqylo1"
         },
         {
           "slug": "ft-ywnb1",
-          "duplicate_of": "ft-17qezy"
+          "duplicate_of": "ft-dn8nnn"
         },
         {
           "slug": "ft-1kutkf",
-          "duplicate_of": "ft-7j5vpn"
+          "duplicate_of": "ft-9ij8ga"
         },
         {
           "slug": "ft-in9ybl",
-          "duplicate_of": "ft-uk6rr3"
+          "duplicate_of": "ft-k8oa2n"
         },
         {
           "slug": "ft-1wn4f3",
-          "duplicate_of": "ft-1e3c5h"
+          "duplicate_of": "ft-1h9k4h"
         },
         {
           "slug": "ft-1peldj",
-          "duplicate_of": "ft-1jus52"
+          "duplicate_of": "ft-kqylo1"
+        },
+        {
+          "slug": "epl-1yl1yi",
+          "duplicate_of": "epl-1thh3m"
         },
         {
           "slug": "ft-18a6gp",
@@ -293,8 +277,12 @@
           "duplicate_of": "liga-d37fqz-1778950127130"
         },
         {
+          "slug": "ucl-1dl76u-1779013346702",
+          "duplicate_of": "ucl-1dl76u-1779018848717"
+        },
+        {
           "slug": "ucl-1dl76u",
-          "duplicate_of": "ucl-1dl76u-1779013346702"
+          "duplicate_of": "ucl-1dl76u-1779018848717"
         },
         {
           "slug": "tennis-19cqc9-1778944421986",
@@ -1217,12 +1205,8 @@
           "duplicate_of": "liga-12ulcr-1778913365953"
         },
         {
-          "slug": "padel-2ubazm-1778997182716",
-          "duplicate_of": "padel-2ubazm-1779018855666"
-        },
-        {
           "slug": "padel-2ubazm",
-          "duplicate_of": "padel-2ubazm-1779018855666"
+          "duplicate_of": "padel-2ubazm-1778997182716"
         },
         {
           "slug": "padel-m48y9s-1778839662727",
@@ -1292,12 +1276,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 2,
-    "warnings": 7,
-    "missing_images": 4,
-    "missing_en_title": 305,
-    "missing_fr_title": 751,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 312,
+    "missing_fr_title": 757,
     "sport_mismatches_fixed": 0,
-    "duplicates": 308
+    "duplicates": 314
   }
 }
