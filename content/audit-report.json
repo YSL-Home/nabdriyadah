@@ -1,16 +1,101 @@
 {
-  "date": "2026-05-18T12:40:26.841Z",
-  "total": 890,
-  "fixes": [],
+  "date": "2026-05-18T13:30:56.432Z",
+  "total": 899,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 9,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-av484u-1779110552970",
+      "value": "Raducanu reunited full-time with coach from US Open win"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ucl-xese6p-1779110551264",
+      "value": "2025/26 Europa League: Meet the finalists - UEFA.com"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-o75364-1779110553099",
+      "value": "Listen: 5 Live Sport - The Making of Jannik Sinner"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-2ubazm-1779110553574",
+      "value": "This is the 2026 Premier Padel calendar - Red Bull"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-1k4c5a-1779110553703",
+      "value": "Heineken® 0.0 signs global partnership with Premier Padel, m"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-n1srge",
+      "sport": "football",
+      "image": "/generated/ft-n1srge.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-oyv785",
+      "sport": "football",
+      "image": "/generated/ft-oyv785.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-xpq8oe",
+      "sport": "football",
+      "image": "/generated/ft-xpq8oe.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1c8hqz",
+      "sport": "football",
+      "image": "/generated/ft-1c8hqz.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-av484u-1779110552970",
+      "sport": "tennis",
+      "image": "/generated/tennis-av484u-1779110552970.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-xese6p-1779110551264",
+      "sport": "football",
+      "image": "/generated/ucl-xese6p-1779110551264.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-o75364-1779110553099",
+      "sport": "tennis",
+      "image": "/generated/tennis-o75364-1779110553099.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-2ubazm-1779110553574",
+      "sport": "padel",
+      "image": "/generated/padel-2ubazm-1779110553574.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-1k4c5a-1779110553703",
+      "sport": "padel",
+      "image": "/generated/padel-1k4c5a-1779110553703.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 395,
+      "count": 399,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 889,
+      "count": 898,
       "action": "needs_llm_backfill"
     },
     {
@@ -329,6 +414,10 @@
           "duplicate_of": "liga-14s9av"
         },
         {
+          "slug": "tennis-av484u",
+          "duplicate_of": "tennis-av484u-1779110552970"
+        },
+        {
           "slug": "ft-1bddls",
           "duplicate_of": "ft-1qbopo"
         },
@@ -343,6 +432,10 @@
         {
           "slug": "epl-fal0dx",
           "duplicate_of": "epl-hxmk9b"
+        },
+        {
+          "slug": "ucl-xese6p-1779110551264",
+          "duplicate_of": "ucl-xese6p"
         },
         {
           "slug": "ucl-xese6p-1779106290405",
@@ -385,20 +478,24 @@
           "duplicate_of": "tennis-1jigmn-1779106293475"
         },
         {
+          "slug": "tennis-o75364-1779106293206",
+          "duplicate_of": "tennis-o75364-1779110553099"
+        },
+        {
           "slug": "tennis-o75364-1779102107656",
-          "duplicate_of": "tennis-o75364-1779106293206"
+          "duplicate_of": "tennis-o75364-1779110553099"
         },
         {
           "slug": "tennis-o75364-1779093776205",
-          "duplicate_of": "tennis-o75364-1779106293206"
+          "duplicate_of": "tennis-o75364-1779110553099"
         },
         {
           "slug": "tennis-o75364-1779048082104",
-          "duplicate_of": "tennis-o75364-1779106293206"
+          "duplicate_of": "tennis-o75364-1779110553099"
         },
         {
           "slug": "tennis-o75364",
-          "duplicate_of": "tennis-o75364-1779106293206"
+          "duplicate_of": "tennis-o75364-1779110553099"
         },
         {
           "slug": "ucl-mcqzub-1779032515077",
@@ -1373,12 +1470,16 @@
           "duplicate_of": "liga-12ulcr-1778913365953"
         },
         {
+          "slug": "padel-2ubazm-1779093776801",
+          "duplicate_of": "padel-2ubazm-1779110553574"
+        },
+        {
           "slug": "padel-2ubazm-1778997182716",
-          "duplicate_of": "padel-2ubazm-1779093776801"
+          "duplicate_of": "padel-2ubazm-1779110553574"
         },
         {
           "slug": "padel-2ubazm",
-          "duplicate_of": "padel-2ubazm-1779093776801"
+          "duplicate_of": "padel-2ubazm-1779110553574"
         },
         {
           "slug": "padel-m48y9s-1778839662727",
@@ -1389,12 +1490,16 @@
           "duplicate_of": "futsal-1nqaf8-1778967011491"
         },
         {
+          "slug": "padel-1k4c5a-1779102108183",
+          "duplicate_of": "padel-1k4c5a-1779110553703"
+        },
+        {
           "slug": "padel-1k4c5a-1779093776972",
-          "duplicate_of": "padel-1k4c5a-1779102108183"
+          "duplicate_of": "padel-1k4c5a-1779110553703"
         },
         {
           "slug": "padel-1k4c5a",
-          "duplicate_of": "padel-1k4c5a-1779102108183"
+          "duplicate_of": "padel-1k4c5a-1779110553703"
         },
         {
           "slug": "bball-1t7m5a-1778955318250",
@@ -1460,12 +1565,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 395,
-    "missing_fr_title": 889,
+    "fixes_applied": 5,
+    "warnings": 12,
+    "missing_images": 9,
+    "missing_en_title": 399,
+    "missing_fr_title": 898,
     "sport_mismatches_fixed": 0,
-    "duplicates": 360
+    "duplicates": 365
   }
 }
