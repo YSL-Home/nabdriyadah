@@ -8,6 +8,21 @@ import AdSlot from "../../components/AdSlot";
 import ArticleImage from "../../components/ArticleImage";
 import ArticleFiltersClient from "../../components/ArticleFiltersClient";
 
+function loadJsonSafe(filePath) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  } catch {
+    return null;
+  }
+}
+
+function fmtDateAr(isoDate) {
+  if (!isoDate) return "";
+  try {
+    return new Date(isoDate).toLocaleDateString("ar-SA-u-nu-latn", { day: "numeric", month: "long", year: "numeric" });
+  } catch { return isoDate; }
+}
+
 const leagueMap = {
   "premier-league": {
     title: "الدوري الإنجليزي الممتاز",
@@ -702,6 +717,18 @@ export default function LeaguePage({ params }) {
   })();
   const featuredArticle = leagueArticles[0] || null;
 
+  // F1 Calendar data
+  const f1CalendarData = params.slug === "f1"
+    ? loadJsonSafe(path.join(process.cwd(), "content/fixtures/f1-calendar.json"))
+    : null;
+  const f1Events = f1CalendarData?.events || [];
+
+  // Tennis Grand Slam calendar data
+  const tennisCalendarData = (params.slug === "atp" || params.slug === "wta")
+    ? loadJsonSafe(path.join(process.cwd(), "content/fixtures/tennis-calendar.json"))
+    : null;
+  const grandSlams = tennisCalendarData?.grandslams || [];
+
   // Standings data
   const { type: standingsType, data: standings, men: padelMen = [], women: padelWomen = [] } = getLeagueStandings(params.slug);
   const hasLiveStandings = standings.length > 0 && (standings[0].points > 0 || standings[0].won > 0);
@@ -893,6 +920,99 @@ export default function LeaguePage({ params }) {
                 <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: theme.primary }}>{player.points?.toLocaleString() || "—"}</span>
               </div>
             ))}
+          </section>
+        )}
+
+        {/* ── CALENDRIER F1 ── */}
+        {params.slug === "f1" && f1Events.length > 0 && (
+          <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "24px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", marginBottom: "24px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
+              <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>تقويم الجائزة الكبرى 2026</span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "32px 1fr 120px 100px 90px", gap: "4px", padding: "8px 12px", background: theme.primarySoft, borderRadius: "12px", marginBottom: "6px", fontSize: "12px", fontWeight: 700, color: theme.primary }}>
+              <span style={{ textAlign: "center" }}>#</span>
+              <span>الجائزة الكبرى</span>
+              <span style={{ textAlign: "center" }}>الحلبة</span>
+              <span style={{ textAlign: "center" }}>التاريخ</span>
+              <span style={{ textAlign: "center" }}>الحالة</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              {f1Events.map((event, i) => {
+                const isCompleted = event.status === "completed";
+                const isNext = !isCompleted && f1Events.findIndex(e => e.status !== "completed") === i;
+                return (
+                  <div key={event.id} style={{
+                    display: "grid",
+                    gridTemplateColumns: "32px 1fr 120px 100px 90px",
+                    gap: "4px",
+                    padding: "10px 12px",
+                    borderRadius: "12px",
+                    alignItems: "center",
+                    background: isNext ? theme.primarySoft : "transparent",
+                    border: `1px solid ${isNext ? theme.border : "transparent"}`
+                  }}>
+                    <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", color: isCompleted ? "#9ca3af" : (isNext ? theme.primary : "#6b7280") }}>{i + 1}</span>
+                    <div style={{ minWidth: 0 }}>
+                      <span style={{ fontSize: "14px", fontWeight: 700, color: isCompleted ? "#6b7280" : "#111827", overflow: "hidden", textOverflow: "ellipsis", display: "block", whiteSpace: "nowrap" }}>{event.name}</span>
+                      <span style={{ fontSize: "11px", color: "#9ca3af" }}>{event.location}</span>
+                    </div>
+                    <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{event.venue}</span>
+                    <span style={{ textAlign: "center", fontSize: "12px", color: "#374151" }}>{fmtDateAr(event.date)}</span>
+                    <span style={{ textAlign: "center", fontSize: "11px", fontWeight: 700, padding: "3px 8px", borderRadius: "999px", background: isCompleted ? "#f3f4f6" : (isNext ? theme.primary : theme.primarySoft), color: isCompleted ? "#6b7280" : (isNext ? "white" : theme.primary) }}>
+                      {isCompleted ? "انتهى" : "قادم"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* ── GRANDS CHELEMS Tennis ── */}
+        {(params.slug === "atp" || params.slug === "wta") && grandSlams.length > 0 && (
+          <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "24px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", marginBottom: "24px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
+              <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>بطولات غراند سلام 2026</span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 80px 100px 100px 80px", gap: "4px", padding: "8px 12px", background: theme.primarySoft, borderRadius: "12px", marginBottom: "6px", fontSize: "12px", fontWeight: 700, color: theme.primary }}>
+              <span>البطولة</span>
+              <span style={{ textAlign: "center" }}>السطح</span>
+              <span style={{ textAlign: "center" }}>تاريخ البداية</span>
+              <span style={{ textAlign: "center" }}>تاريخ النهاية</span>
+              <span style={{ textAlign: "center" }}>الحالة</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              {grandSlams.map((slam, i) => {
+                const isCompleted = slam.status === "completed";
+                const surfaceColors = { Hard: "#3b82f6", Clay: "#f97316", Grass: "#16a34a" };
+                const surfaceColor = surfaceColors[slam.surface] || "#6b7280";
+                return (
+                  <div key={slam.name} style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 80px 100px 100px 80px",
+                    gap: "4px",
+                    padding: "12px",
+                    borderRadius: "12px",
+                    alignItems: "center",
+                    background: isCompleted ? "transparent" : theme.primarySoft,
+                    border: `1px solid ${isCompleted ? "transparent" : theme.border}`
+                  }}>
+                    <div style={{ minWidth: 0 }}>
+                      <span style={{ fontSize: "15px", fontWeight: 800, color: isCompleted ? "#6b7280" : "#111827", display: "block" }}>{slam.nameAr}</span>
+                      <span style={{ fontSize: "11px", color: "#9ca3af" }}>{slam.location}</span>
+                    </div>
+                    <span style={{ textAlign: "center", fontSize: "12px", fontWeight: 700, padding: "3px 8px", borderRadius: "999px", background: surfaceColor + "22", color: surfaceColor }}>{slam.surfaceAr}</span>
+                    <span style={{ textAlign: "center", fontSize: "12px", color: "#374151" }}>{fmtDateAr(slam.date)}</span>
+                    <span style={{ textAlign: "center", fontSize: "12px", color: "#374151" }}>{fmtDateAr(slam.endDate)}</span>
+                    <span style={{ textAlign: "center", fontSize: "11px", fontWeight: 700, padding: "3px 8px", borderRadius: "999px", background: isCompleted ? "#f3f4f6" : theme.primary, color: isCompleted ? "#6b7280" : "white" }}>
+                      {isCompleted ? "انتهى" : "قادم"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </section>
         )}
 

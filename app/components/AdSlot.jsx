@@ -2,12 +2,13 @@
 import { useEffect, useRef } from "react";
 
 /* ── Publisher ID Google AdSense ─────────────────────
-   ca-pub-6870790039775701
+   Configurable via env var NEXT_PUBLIC_ADSENSE_ID.
+   Fallback sur la valeur hardcodée si la var n'est pas définie.
    Auto-ads activés via layout.jsx — ce composant gère
    les unités manuelles quand un slot ID est fourni.
    Sans slot ID : placeholder invisible (auto-ads injecte).
    ──────────────────────────────────────────────────── */
-const PUB_ID = "ca-pub-6870790039775701";
+const PUB_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || "ca-pub-6870790039775701";
 
 // Slots AdSense — à remplacer par les IDs réels depuis AdSense Dashboard
 // https://www.google.com/adsense → Annonces → Par unité d'annonce

@@ -792,6 +792,79 @@ async function fetchGolfRankings(tour) {
   console.log(`  ✓ Golf Rankings ${tour.slug}: ${rankings.length} players`);
 }
 
+// ── F1 Calendar ──────────────────────────────────────────────────────────────
+
+async function fetchF1Calendar() {
+  const url = "https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard";
+  const data = await espnGet(url);
+
+  const calendarRaw = data.leagues?.[0]?.calendar || [];
+  if (!calendarRaw.length) {
+    console.warn("  ⚠ No F1 calendar entries found");
+    return;
+  }
+
+  const now = new Date();
+
+  // Map GP names to Arabic
+  const gpNameAr = {
+    "Australian Grand Prix": "الجائزة الكبرى للأسترالية",
+    "Chinese Grand Prix": "الجائزة الكبرى للصين",
+    "Japanese Grand Prix": "الجائزة الكبرى لليابان",
+    "Bahrain Grand Prix": "الجائزة الكبرى للبحرين",
+    "Saudi Arabian Grand Prix": "الجائزة الكبرى للسعودية",
+    "Miami Grand Prix": "الجائزة الكبرى لميامي",
+    "Canadian Grand Prix": "الجائزة الكبرى لكندا",
+    "Monaco Grand Prix": "الجائزة الكبرى لموناكو",
+    "Spanish Grand Prix": "الجائزة الكبرى لإسبانيا",
+    "Austrian Grand Prix": "الجائزة الكبرى للنمسا",
+    "British Grand Prix": "الجائزة الكبرى لبريطانيا",
+    "Belgian Grand Prix": "الجائزة الكبرى لبلجيكا",
+    "Hungarian Grand Prix": "الجائزة الكبرى للمجر",
+    "Dutch Grand Prix": "الجائزة الكبرى لهولندا",
+    "Italian Grand Prix": "الجائزة الكبرى لإيطاليا",
+    "Azerbaijan Grand Prix": "الجائزة الكبرى لأذربيجان",
+    "Singapore Grand Prix": "الجائزة الكبرى لسنغافورة",
+    "United States Grand Prix": "الجائزة الكبرى للولايات المتحدة",
+    "Mexico City Grand Prix": "الجائزة الكبرى للمكسيك",
+    "São Paulo Grand Prix": "الجائزة الكبرى للبرازيل",
+    "Las Vegas Grand Prix": "الجائزة الكبرى للاس فيغاس",
+    "Qatar Grand Prix": "الجائزة الكبرى لقطر",
+    "Abu Dhabi Grand Prix": "الجائزة الكبرى لأبوظبي",
+  };
+
+  const events = calendarRaw.map((entry, idx) => {
+    const rawLabel = entry.label || "";
+    // Strip sponsor prefix: "Qatar Airways Australian Grand Prix" → "Australian Grand Prix"
+    const nameMatch = rawLabel.match(/(\b\w[\w\s]*Grand Prix)/);
+    const cleanName = nameMatch ? nameMatch[1].trim() : rawLabel;
+    const nameAr = gpNameAr[cleanName] || rawLabel;
+
+    const endDate = new Date(entry.endDate || entry.startDate);
+    const isCompleted = endDate < now;
+
+    // Extract event ID from $ref URL
+    const refUrl = entry.event?.$ref || "";
+    const idMatch = refUrl.match(/events\/(\d+)/);
+    const id = idMatch ? idMatch[1] : `f1-${idx + 1}`;
+
+    return {
+      id,
+      name: nameAr,
+      shortName: cleanName.replace(" Grand Prix", "").trim().substring(0, 6).toUpperCase(),
+      date: entry.endDate || entry.startDate,
+      venue: "",
+      location: "",
+      status: isCompleted ? "completed" : "upcoming",
+      result: "",
+    };
+  });
+
+  const outputPath = path.join(FIXTURES_DIR, "f1-calendar.json");
+  fs.writeFileSync(outputPath, JSON.stringify({ events, fetchedAt: new Date().toISOString() }, null, 2));
+  console.log(`  ✓ F1 Calendar: ${events.length} GPs saved`);
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -840,6 +913,8 @@ async function main() {
   for (const series of ESPN_F1_SERIES) {
     console.log(`\n🏎️  ${series.slug}`);
     try { await fetchF1Standings(series); } catch (e) { console.warn(`  ✗ F1 Standings: ${e.message}`); }
+    await sleep(600);
+    try { await fetchF1Calendar(); } catch (e) { console.warn(`  ✗ F1 Calendar: ${e.message}`); }
     await sleep(600);
   }
 

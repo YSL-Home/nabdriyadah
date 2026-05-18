@@ -59,11 +59,13 @@ export default function RootLayout({ children }) {
           `(function(){var h=new Date().getHours(),night=h<6||h>=20;var dark=night||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&!night===false);if(dark){document.documentElement.setAttribute('data-theme','dark');}})();`
         }} />
         {/* Google AdSense — auto-ads activés sur tout le site */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6870790039775701"
-          crossOrigin="anonymous"
-        />
+        {(process.env.NEXT_PUBLIC_ADSENSE_ID || "ca-pub-6870790039775701") && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID || "ca-pub-6870790039775701"}`}
+            crossOrigin="anonymous"
+          />
+        )}
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
