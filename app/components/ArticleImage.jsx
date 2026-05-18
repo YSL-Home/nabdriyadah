@@ -114,13 +114,10 @@ function pickUnsplash(league, sport, slug = "") {
 export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, style }) {
   const gradient = GRADIENTS[sport] || GRADIENTS.football;
 
-  // Si src pointe vers /generated/ (non-existant), on ignore et on prend Unsplash directement
-  const isGenerated = typeof src === "string" && src.startsWith("/generated/");
-  const primarySrc = isGenerated
-    ? (imageUrl || pickUnsplash(league, sport, slug))
-    : (src || imageUrl || pickUnsplash(league, sport, slug));
-
-  const fallbackSrc = pickUnsplash(league, sport, slug);
+  // Priorité : image générée (/generated/slug.png) → imageUrl RSS → Unsplash
+  // Si l'image générée n'existe pas encore, onError la remplace automatiquement par Unsplash
+  const primarySrc = src || imageUrl || pickUnsplash(league, sport, slug);
+  const fallbackSrc = imageUrl || pickUnsplash(league, sport, slug);
 
   return (
     <div style={{ position: "relative", overflow: "hidden", background: gradient, ...style }}>
@@ -133,7 +130,9 @@ export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, 
           const el = e.currentTarget;
           if (el.dataset.fallback) { el.style.display = "none"; return; }
           el.dataset.fallback = "1";
-          el.src = el.src !== fallbackSrc ? fallbackSrc : "";
+          // 1er fallback : imageUrl RSS ou Unsplash
+          const next = el.src !== fallbackSrc ? fallbackSrc : pickUnsplash(league, sport, slug);
+          el.src = next || "";
           if (!el.src) el.style.display = "none";
         }}
       />

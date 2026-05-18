@@ -5,6 +5,8 @@ import path from "path";
 const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY;   // Gemini Imagen — priorité 1
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY;   // GPT            — priorité 2
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
+// Max images générées par run CI (évite timeout et coût excessif)
+const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "25", 10);
 
 const HAS_IMAGE_API = !!(GOOGLE_API_KEY || OPENAI_API_KEY);
 
@@ -306,21 +308,57 @@ async function downloadImage(url, destPath) {
   fs.writeFileSync(destPath, buffer);
 }
 
+// ── Résoudre les URLs Google News en URL directe de l'article ───────────────
+async function resolveGoogleNewsUrl(url) {
+  if (!url || !url.includes("news.google.com")) return url;
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15",
+        "Accept": "text/html,application/xhtml+xml",
+      },
+      redirect: "follow",
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    // L'URL finale après redirections est l'article réel
+    const finalUrl = res.url;
+    if (finalUrl && !finalUrl.includes("news.google.com")) return finalUrl;
+    // Essayer d'extraire depuis le HTML si la redirection JS
+    const html = await res.text();
+    const m = html.match(/href=["'](https?:\/\/(?!news\.google)[^"']+)["']/);
+    if (m) return m[1];
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 // ── Scrape OG image from source article page ───────────────────────────────
 async function scrapeOgImage(url) {
   if (!url) return null;
   try {
+    // Résoudre les redirections Google News
+    const resolvedUrl = await resolveGoogleNewsUrl(url);
+    if (!resolvedUrl) return null;
+
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 9000);
-    const res = await fetch(url, {
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1)" },
+    const res = await fetch(resolvedUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1)",
+        "Accept": "text/html,application/xhtml+xml",
+      },
       redirect: "follow",
       signal: ctrl.signal,
     });
     clearTimeout(timer);
     if (!res.ok) return null;
     const html = await res.text();
-    // Try og:image first, then twitter:image
+    // Try og:image first, then twitter:image, then first large <img>
     const patterns = [
       /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
       /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i,
@@ -411,8 +449,23 @@ async function main() {
   ensureDir(OUTPUT_DIR);
 
   let changed = false;
+  let generated = 0;
 
-  for (const article of articles) {
+  // Trier : articles sans image générée en premier (priorité aux nouveaux articles)
+  const sorted = [...articles].sort((a, b) => {
+    const aHas = a.image && a.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${a.slug}.png`));
+    const bHas = b.image && b.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${b.slug}.png`));
+    if (aHas && !bHas) return 1;
+    if (!aHas && bHas) return -1;
+    return 0;
+  });
+
+  for (const article of sorted) {
+    if (generated >= MAX_PER_RUN) {
+      console.log(`Limite atteinte (${MAX_PER_RUN} images/run). Arrêt.`);
+      break;
+    }
+
     const slug = normalizeText(article.slug || "");
     if (!slug) continue;
 
@@ -420,16 +473,16 @@ async function main() {
     const absoluteImagePath = path.join(OUTPUT_DIR, fileName);
     const publicImagePath = `/generated/${fileName}`;
 
-    // Skip if image already exists and is not Unsplash / not forced
+    // Skip si image déjà générée (fichier PNG existe) et non forcé
     const alreadyGenerated = fs.existsSync(absoluteImagePath);
     const isUnsplash = (article.image || "").includes("unsplash.com");
 
     if (!FORCE_REGENERATE && alreadyGenerated && !isUnsplash) {
+      // Mettre à jour le chemin dans l'article si besoin
       if (article.image !== publicImagePath) {
         article.image = publicImagePath;
         changed = true;
       }
-      console.log(`Image exists: ${slug}`);
       continue;
     }
 
@@ -474,9 +527,12 @@ async function main() {
         console.log(`Cloning image via GPT edit [${sourceLabel}]: ${slug}`);
         const b64 = await editImageWithGPT(sourceImgBuffer, article);
         fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
-        article.image = publicImagePath;
+        // Mettre à jour dans la liste originale (articles), pas sorted
+        const orig = articles.find(a => a.slug === slug);
+        if (orig) orig.image = publicImagePath;
         changed = true;
-        console.log(`  Cloned (${sourceLabel}): ${fileName}`);
+        generated++;
+        console.log(`  ✓ Cloned (${sourceLabel}): ${fileName} [${generated}/${MAX_PER_RUN}]`);
         await sleep(1000);
         continue;
       } catch (editErr) {
@@ -490,9 +546,11 @@ async function main() {
       const prompt = buildPrompt(article);
       const base64 = await generateImageBase64(prompt);
       fs.writeFileSync(absoluteImagePath, Buffer.from(base64, "base64"));
-      article.image = publicImagePath;
+      const orig = articles.find(a => a.slug === slug);
+      if (orig) orig.image = publicImagePath;
       changed = true;
-      console.log(`  Generated: ${fileName}`);
+      generated++;
+      console.log(`  ✓ Generated: ${fileName} [${generated}/${MAX_PER_RUN}]`);
       await sleep(1500);
     } catch (error) {
       console.log(`  Image failed for ${slug}: ${error.message}`);
