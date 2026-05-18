@@ -127,39 +127,20 @@ function buildPrompt(article) {
     "tennis":            "grand-slam centre court, immaculate red clay or manicured grass, full three-tier grandstand, dramatic shadows across the baseline",
     "padel":             "professional padel facility, panoramic glass walls, electric blue-white LED lighting, smart spectator seating",
     "futsal":            "indoor futsal arena, polished timber floor, compact goals, crowd extremely close to the pitch, vivid coloured stands",
-    "f1":                "Formula 1 racing circuit, high-speed asphalt straight, colourful pit lane, grandstands packed with spectators waving national flags, dramatic sky above the circuit",
-    "golf":              "championship golf course, lush manicured fairway stretching into the distance, pristine putting green, tournament gallery of spectators, golden afternoon light",
     "football":          "professional football stadium at twilight, stands packed with 50 000 fans, perfectly manicured pitch, city glow on the horizon",
   };
 
-  /* ── Action scenes by event type — overridden for F1 and golf ── */
-  const isF1   = sport === "f1";
-  const isGolf = sport === "golf";
-
+  /* ── Action scenes by event type ── */
   const ACTION = {
-    transfer:  isF1   ? "racing driver silhouette in full helmet and fireproof suit standing beside a Formula 1 car in the pit lane, dramatic team garage lighting"
-               : isGolf ? "golfer silhouette walking the fairway with caddy at sunset, golf bag over shoulder, long shadows on the grass"
-               : "solitary athletic silhouette standing at the tunnel entrance staring towards the empty pitch, soft farewell lighting, shallow depth of field, contemplative mood",
-    trophy:    isF1   ? "Formula 1 podium celebration, three drivers on the podium, champagne spray, chequered flag waving, crowd cheering in background"
-               : isGolf ? "golfer holding aloft a gleaming silver trophy on the 18th green, confetti, crowd applause, blue sky"
-               : "gleaming golden trophy on the centre of the pitch, confetti shower, low dramatic hero angle, celebration flares in the background",
-    injury:    "medical team silhouettes in motion, golden-hour backlight, focused professional atmosphere",
-    final:     isF1   ? "Formula 1 race start, multiple cars lined up on the grid, dramatic low angle, starting lights above, tension in the air"
-               : isGolf ? "final hole at a major championship, golfer lining up a crucial putt, hushed gallery watching, dramatic late-afternoon light"
-               : "two distinct groups of supporters in a split stadium, intense pre-match atmosphere, teams warming up in silhouette, dramatic lighting raking across the pitch",
-    press:     "empty podium with microphones, single dramatic overhead spotlight, anticipation and mystery, wide angle",
-    match:     isF1   ? "Formula 1 car cornering at speed, extreme lean angle, sparks flying, motion blur on background grandstands"
-               : isGolf ? "golfer mid-swing at impact, perfect form, ball launching from the tee, lush fairway stretching ahead"
-               : "intense aerial dueling silhouette, two athletic figures leaping at peak of motion, motion blur, roaring crowd in background, ball at apex",
-    training:  isF1   ? "Formula 1 car on an empty circuit early morning, tyre smoke from warm-up, cinematic wide angle, engineer silhouette on pit wall"
-               : isGolf ? "lone golfer practising iron shots on the driving range at dawn, perfect form, crisp morning light"
-               : "lone athletic figure silhouetted against a goalpost at first light, precision training drills, cinematic wide angle",
-    stats:     isF1   ? "aerial bird's-eye view of a Formula 1 circuit, cars at racing speed, circuit geometry visible, pit lane active"
-               : isGolf ? "aerial bird's-eye view of a championship golf course, fairway geometry, bunkers, water hazards, tournament gallery"
-               : "aerial bird's-eye view of pitch geometry, player formations visible as silhouettes, graphic sports journalism composition",
-    general:   isF1   ? "sweeping cinematic aerial view of a Formula 1 circuit packed with fans, colourful grandstands, race in progress, dramatic sky"
-               : isGolf ? "sweeping panoramic view of a championship golf course, rolling fairways, natural landscape, dramatic sunset light"
-               : "sweeping cinematic aerial view of a packed stadium, crowd colour mosaic, pitch geometry, late-afternoon raking light",
+    transfer:  "solitary athletic silhouette standing at the tunnel entrance staring towards the empty pitch, soft farewell lighting, shallow depth of field, contemplative mood",
+    trophy:    "gleaming golden trophy on the centre of the pitch, confetti shower, low dramatic hero angle, celebration flares in the background",
+    injury:    "medical and physio team silhouettes in motion across the pitch, golden-hour backlight, empty stadium watching, focused professional atmosphere",
+    final:     "two distinct groups of supporters in a split stadium, intense pre-match atmosphere, teams warming up in silhouette, dramatic lighting raking across the pitch",
+    press:     "empty podium with microphones on the pitch edge, single dramatic overhead spotlight, anticipation and mystery, wide angle",
+    match:     "intense aerial dueling silhouette, two athletic figures leaping at peak of motion, motion blur, roaring crowd in background, ball at apex",
+    training:  "lone athletic figure silhouetted against a goalpost at first light, precision training drills, cinematic wide angle",
+    stats:     "aerial bird's-eye view of pitch geometry, player formations visible as silhouettes, graphic sports journalism composition",
+    general:   "sweeping cinematic aerial view of a packed stadium, crowd colour mosaic, pitch geometry, late-afternoon raking light",
   };
 
   const envKey = (league && ENV[league]) ? league : (sport && ENV[sport] ? sport : "football");

@@ -53,11 +53,7 @@ const sportConfig = {
     primarySoft: "#fff7ed",
     border: "#fed7aa",
     pageBg: "#fff7ed",
-    highlights: ["أخبار الـ NBA", "أبرز اللاعبين", "نتائج المباريات", "انتقالات كرة السلة"],
-    leagues: [
-      { slug: "nba",        title: "NBA",                           color: "#c2410c", logoBg: "#431407", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",        country: "أمريكا" },
-      { slug: "euroleague", title: "EuroLeague",                    color: "#c2410c", logoBg: "#431407", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/euroleague.png", country: "أوروبا" }
-    ]
+    highlights: ["أخبار الـ NBA", "أبرز اللاعبين", "نتائج المباريات", "انتقالات كرة السلة"]
   },
   tennis: {
     title: "التنس",
@@ -140,36 +136,9 @@ export default function SportPage({ params }) {
   const featuredArticle = sportArticles[0] || null;
   const restArticles = sportArticles.slice(1);
 
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": sport.title,
-    "description": sport.description,
-    "url": `https://nabdriyadah.com/sport/${params.slug}/`,
-    "inLanguage": "ar",
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "الرئيسية",
-          "item": "https://nabdriyadah.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": sport.title,
-          "item": `https://nabdriyadah.com/sport/${params.slug}/`
-        }
-      ]
-    }
-  };
-
   if (sport.isFootball) {
     return (
       <main style={{ minHeight: "100vh", background: sport.pageBg, padding: "28px 20px 52px", direction: "rtl" }}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
         <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
 
           {/* Football Hero */}
@@ -251,7 +220,6 @@ export default function SportPage({ params }) {
 
   return (
     <main style={{ minHeight: "100vh", background: sport.pageBg, padding: "28px 20px 52px", direction: "rtl" }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
       <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
 
         {/* Hero */}
@@ -295,28 +263,6 @@ export default function SportPage({ params }) {
         </section>
 
         <AdSlot label="مساحة إعلانية أعلى الصفحة" minHeight={90} style={{ marginBottom: 24 }} />
-
-        {/* Ligues basketball (NBA + EuroLeague) */}
-        {sport.leagues && sport.leagues.length > 0 && (
-          <section style={{ marginBottom: "28px" }}>
-            <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>البطولات الكبرى</h2>
-            <div className="g4">
-              {sport.leagues.map((league) => (
-                <Link key={league.slug} href={`/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: "white", border: "1px solid #e5e7eb", borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", borderTop: `4px solid ${league.color}` }}>
-                    <div style={{ width: "56px", height: "56px", borderRadius: "14px", background: league.logoBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "8px" }}>
-                      <img src={league.logo} alt={league.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                    </div>
-                    <div>
-                      <div style={{ color: league.color, fontSize: "11px", fontWeight: 700, marginBottom: "3px" }}>{league.country}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{league.title}</div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
 
         {sportArticles.length === 0 ? (
           <section style={{ background: "white", borderRadius: "28px", padding: "40px", border: `1px solid ${sport.border}`, textAlign: "center" }}>

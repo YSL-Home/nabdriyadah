@@ -16,13 +16,11 @@ import path from "path";
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 const API_KEY  = process.env.ANTHROPIC_API_KEY;
 const MODEL    = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
-const BATCH    = 30; // articles par appel API (titres/descriptions)
-const BATCH_CONTENT = 8; // articles par appel API (corps)
+const BATCH    = 10; // articles par appel API (titres/descriptions)
+const BATCH_CONTENT = 3; // articles par appel API (corps)
 const DELAY_MS = 800;
 const MAX_CONTENT_CHARS = 700; // tronquer le corps pour limiter les tokens
 const CONTENT_WINDOW_H  = 48;  // ne traduire le corps que pour les articles récents
-const MAX_TITLE_ARTICLES   = 150; // cap CI : max articles de titres par run
-const MAX_CONTENT_ARTICLES =  40; // cap CI : max articles de corps par run
 
 if (!API_KEY) {
   console.log("ANTHROPIC_API_KEY manquant — backfill ignoré.");
@@ -141,39 +139,22 @@ async function main() {
   const articles = JSON.parse(fs.readFileSync(ARTICLES_PATH, "utf-8"));
 
   // Articles needing at least one title/description translation
-  // Prioritise recent articles first, then older ones without en_title
-  const needsTranslationAll = articles
-    .filter(a =>
-      !a.en_title || !a.fr_title ||
-      (a.description && (!a.en_description || !a.fr_description))
-    )
-    .sort((a, b) => {
-      const da = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-      const db = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-      return db - da;
-    });
-  // Apply CI cap
-  const needsTranslation = needsTranslationAll.slice(0, MAX_TITLE_ARTICLES);
+  const needsTranslation = articles.filter(a =>
+    !a.en_title || !a.fr_title ||
+    (a.description && (!a.en_description || !a.fr_description))
+  );
 
-  // Articles needing content translation (récents < 48h en priorité, mais aussi tous ceux sans en_content)
+  // Articles needing content translation (récents < 48h seulement)
   const cutoff = Date.now() - CONTENT_WINDOW_H * 3_600_000;
-  const needsContentAll = articles
-    .filter(a => a.content?.trim() && (!a.en_content || !a.fr_content))
-    .sort((a, b) => {
-      // Récents en premier
-      const aRecent = new Date(a.publishedAt || 0).getTime() > cutoff ? 1 : 0;
-      const bRecent = new Date(b.publishedAt || 0).getTime() > cutoff ? 1 : 0;
-      if (bRecent !== aRecent) return bRecent - aRecent;
-      const da = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-      const db = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-      return db - da;
-    });
-  // Apply CI cap
-  const needsContent = needsContentAll.slice(0, MAX_CONTENT_ARTICLES);
+  const needsContent = articles.filter(a =>
+    a.content?.trim() &&
+    (!a.en_content || !a.fr_content) &&
+    new Date(a.publishedAt || 0).getTime() > cutoff
+  );
 
   console.log(`📰 Total articles    : ${articles.length}`);
-  console.log(`🌍 Titres à traduire : ${needsTranslationAll.length} (cap: ${MAX_TITLE_ARTICLES}, ce run: ${needsTranslation.length})`);
-  console.log(`📖 Corps à traduire  : ${needsContentAll.length} (cap: ${MAX_CONTENT_ARTICLES}, ce run: ${needsContent.length})`);
+  console.log(`🌍 Titres à traduire : ${needsTranslation.length}`);
+  console.log(`📖 Corps à traduire  : ${needsContent.length} (< ${CONTENT_WINDOW_H}h)`);
   console.log(`📦 Batch titres      : ${BATCH} | Batch corps: ${BATCH_CONTENT}`);
   console.log(`🤖 Modèle            : ${MODEL}`);
   console.log("───────────────────────────────────────────────────────");
@@ -221,7 +202,7 @@ async function main() {
 
   // ── Pass 2 : corps d'article (articles récents seulement) ────────────────
   if (needsContent.length > 0) {
-    console.log("\n▶ PASSE 2 — Corps d'articles (récents prioritaires, puis anciens sans traduction)");
+    console.log("\n▶ PASSE 2 — Corps d'articles (récents < 48h)");
     for (let i = 0; i < needsContent.length; i += BATCH_CONTENT) {
       const batch = needsContent.slice(i, i + BATCH_CONTENT);
       const batchNum = Math.floor(i / BATCH_CONTENT) + 1;

@@ -77,16 +77,6 @@ export default function TennisPlayerPage({ params }) {
     .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
     .slice(0, 6);
 
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": player.name,
-    "alternateName": player.nameAr,
-    "nationality": player.countryAr || player.country,
-    "url": `https://nabdriyadah.com/player/tennis/${player.slug}/`,
-    "description": `لاعب التنس ${player.nameAr}، المركز ${player.rank} في تصنيف ${tour} العالمي بـ ${player.points?.toLocaleString()} نقطة.`
-  };
-
   return (
     <main
       style={{
@@ -96,10 +86,6 @@ export default function TennisPlayerPage({ params }) {
         direction: "rtl"
       }}
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-      />
       {/* Hero */}
       <section
         style={{

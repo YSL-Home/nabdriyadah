@@ -40,8 +40,9 @@ export default function EnArticlePage({ params }) {
 
   const title       = article.en_title       || article.sourceTitle || article.title;
   const description = article.en_description || article.description;
-  // Only show English body when truly available — never fall back to Arabic content
+  // Prefer English body; fall back to Arabic content with a notice
   const hasEnContent = Boolean(article.en_content?.trim());
+  const bodyText     = hasEnContent ? article.en_content : article.content;
 
   const leagueHref = article.league && article.league !== "mixed"
     ? `/en/league/${article.league}/` : "/en/";
@@ -78,27 +79,16 @@ export default function EnArticlePage({ params }) {
           background: "var(--bg-card)", borderRadius: "20px", padding: "32px",
           border: "1px solid var(--border)", boxShadow: "var(--shadow)"
         }}>
-          {hasEnContent ? (
-            <ArticleBody text={article.en_content} dir="ltr" />
-          ) : (
+          {!hasEnContent && (
             <div style={{
-              textAlign: "center", padding: "40px 20px",
-              color: "var(--text-2)", fontSize: "16px", lineHeight: 1.8
+              background: "var(--accent-soft)", border: "1px solid var(--accent)", borderRadius: "12px",
+              padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "var(--accent)", fontWeight: 600
             }}>
-              <div style={{ fontSize: "40px", marginBottom: "16px" }}>🔄</div>
-              <p style={{ fontWeight: 700, color: "var(--text-1)", marginBottom: "10px", fontSize: "18px" }}>
-                Full English article coming soon.
-              </p>
-              <p style={{ marginBottom: "16px" }}>
-                Our team is currently translating this article. Check back shortly for the full English version.
-              </p>
-              {description && (
-                <p style={{ fontSize: "15px", fontStyle: "italic", color: "var(--text-2)", maxWidth: "600px", margin: "0 auto" }}>
-                  {description}
-                </p>
-              )}
+              📖 English translation coming soon — title &amp; summary above are translated
             </div>
           )}
+
+          <ArticleBody text={bodyText} dir={hasEnContent ? "ltr" : "rtl"} />
 
           {/* Source */}
           {article.source && (

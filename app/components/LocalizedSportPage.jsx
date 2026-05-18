@@ -36,11 +36,6 @@ const leagueTitles = {
   "eredivisie":        { en: "Eredivisie",         fr: "Eredivisie"         },
 };
 
-const basketballLeagues = [
-  { slug: "nba",        title: "NBA",        color: "#c2410c", logoBg: "#431407", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",        country: "USA",    fr: "États-Unis" },
-  { slug: "euroleague", title: "EuroLeague", color: "#c2410c", logoBg: "#431407", logo: "https://a.espncdn.com/i/teamlogos/leagues/500/euroleague.png", country: "Europe", fr: "Europe" },
-];
-
 const sportConfig = {
   football: {
     icon: "⚽",
@@ -241,30 +236,6 @@ export default function LocalizedSportPage({ slug, lang }) {
               </div>
             </section>
           </>
-        )}
-
-        {/* Basketball: Leagues (NBA + EuroLeague) */}
-        {slug === "basketball" && (
-          <section style={{ marginBottom: "28px" }}>
-            <h2 style={{ margin: "0 0 16px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>
-              {lang === "fr" ? "Compétitions majeures" : lang === "en" ? "Major Competitions" : "البطولات الكبرى"}
-            </h2>
-            <div className="g4">
-              {basketballLeagues.map((league) => (
-                <Link key={league.slug} href={`${prefix}/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: "white", border: "1px solid #e5e7eb", borderRadius: "22px", padding: "18px 16px", display: "flex", alignItems: "center", gap: "12px", boxShadow: "0 6px 20px rgba(0,0,0,0.06)", borderTop: `4px solid ${league.color}` }}>
-                    <div style={{ width: "56px", height: "56px", borderRadius: "14px", background: league.logoBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden", padding: "8px" }}>
-                      <img src={league.logo} alt={league.title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                    </div>
-                    <div>
-                      <div style={{ color: league.color, fontSize: "11px", fontWeight: 700, marginBottom: "3px" }}>{lang === "fr" ? league.fr : league.country}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.4 }}>{league.title}</div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
         )}
 
         <AdSlot label={lang === "fr" ? "Publicité" : "Advertisement"} minHeight={90} style={{ marginBottom: 24 }} />

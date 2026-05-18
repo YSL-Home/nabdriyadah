@@ -3,30 +3,6 @@ import tennisTop20Raw from "../content/players/tennis-top20.json";
 import fs from "fs";
 import path from "path";
 
-// Build golf player slugs
-function loadGolfSlugs() {
-  try {
-    const p = path.join(process.cwd(), "content/players/golf-top30.json");
-    const d = JSON.parse(fs.readFileSync(p, "utf-8"));
-    return (d.rankings || []).map((r) => r.slug).filter(Boolean);
-  } catch {
-    return [];
-  }
-}
-const golfSlugs = loadGolfSlugs();
-
-// Build padel player slugs
-function loadPadelSlugs() {
-  try {
-    const p = path.join(process.cwd(), "content/players/padel-top40.json");
-    const d = JSON.parse(fs.readFileSync(p, "utf-8"));
-    return [...(d.men || []), ...(d.women || [])].map((r) => r.slug).filter(Boolean);
-  } catch {
-    return [];
-  }
-}
-const padelSlugs = loadPadelSlugs();
-
 const BASE = "https://nabdriyadah.com";
 
 const LEAGUES = [
@@ -51,7 +27,6 @@ const LEAGUES = [
   { slug: "liga-portugal",      priority: 0.70 },
   { slug: "mls",                priority: 0.68 },
   { slug: "nba",                priority: 0.82 },
-  { slug: "euroleague",         priority: 0.75 },
   { slug: "atp",                priority: 0.80 },
   { slug: "wta",                priority: 0.78 },
   { slug: "padel-premier",      priority: 0.72 },
@@ -145,21 +120,5 @@ export default function sitemap() {
     priority: 0.65
   }));
 
-  // ── Golf players ──────────────────────────────────────────────────────────────
-  const golfPlayerUrls = golfSlugs.map((slug) => ({
-    url: `${BASE}/player/golf/${slug}/`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.58
-  }));
-
-  // ── Padel players ─────────────────────────────────────────────────────────────
-  const padelPlayerUrls = padelSlugs.map((slug) => ({
-    url: `${BASE}/player/padel/${slug}/`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.55
-  }));
-
-  return [...home, ...sportUrls, ...leagueUrls, ...articleUrls, ...tennisPlayerUrls, ...f1DriverUrls, ...golfPlayerUrls, ...padelPlayerUrls];
+  return [...home, ...sportUrls, ...leagueUrls, ...articleUrls, ...tennisPlayerUrls, ...f1DriverUrls];
 }

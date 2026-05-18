@@ -45,65 +45,52 @@ const IMGS = {
 
   /* ── BASKETBALL ──────────────────────────────────────────────────────── */
   basketball: [
-    "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80", // NBA arena court overhead
-    "https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80", // Basketball dunk action
-    "https://images.unsplash.com/photo-1519861531473-9200262188bf?w=900&q=80", // Basketball player orange ball
-    "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80", // NBA match crowd
-    "https://images.unsplash.com/photo-1608245449230-4ac19066d2d0?w=900&q=80", // Basketball court lines
-    "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?w=900&q=80", // Basketball hoop closeup
-    "https://images.unsplash.com/photo-1569227997603-33b9191f0b32?w=900&q=80", // Basketball game defense
+    "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80", // NBA arena court
+    "https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80", // Basketball dunk
+    "https://images.unsplash.com/photo-1519861531473-9200262188bf?w=900&q=80", // Basketball player
+    "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=900&q=80", // Basketball court
+    "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80", // Basketball match
   ],
 
   /* ── TENNIS ──────────────────────────────────────────────────────────── */
   tennis: [
-    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80", // Tennis racket on clay court
+    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80", // Tennis racket clay
     "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=900&q=80", // Tennis player serve
-    "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=900&q=80", // Yellow tennis ball on court
-    "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=900&q=80", // Grand slam match action
-    "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&q=80", // Tennis court aerial view
-    "https://images.unsplash.com/photo-1543209392-e29e4f0f5718?w=900&q=80", // Grass court Wimbledon style
-    "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=80", // Tennis doubles play
+    "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=900&q=80", // Tennis ball court
+    "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=900&q=80", // Grand slam action
+    "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&q=80", // Tennis aerial court
   ],
 
   /* ── PADEL ───────────────────────────────────────────────────────────── */
   padel: [
-    "https://images.unsplash.com/photo-1612534847738-b3af9bc31f0c?w=900&q=80", // Padel panoramic glass court
-    "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=900&q=80", // Padel racket close-up
-    "https://images.unsplash.com/photo-1629904888780-8de0c7933561?w=900&q=80", // Padel match action
-    "https://images.unsplash.com/photo-1613483187530-47c239bea8e5?w=900&q=80", // Indoor padel court LED lighting
-    "https://images.unsplash.com/photo-1637166887163-9abf34e5f2d5?w=900&q=80", // Padel ball and racket
-    "https://images.unsplash.com/photo-1614974121916-81c2f0e04e58?w=900&q=80", // Padel players smash
+    "https://images.unsplash.com/photo-1612534847738-b3af9bc31f0c?w=900&q=80", // Padel glass court
+    "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=900&q=80", // Padel racket
+    "https://images.unsplash.com/photo-1629904888780-8de0c7933561?w=900&q=80", // Padel match
   ],
 
   /* ── FUTSAL ──────────────────────────────────────────────────────────── */
   futsal: [
-    "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=900&q=80", // Indoor football hall
-    "https://images.unsplash.com/photo-1552318965-6e6be7484ada?w=900&q=80", // Futsal court overhead
-    "https://images.unsplash.com/photo-1624880357913-a8539238245b?w=900&q=80", // Indoor soccer players
-    "https://images.unsplash.com/photo-1569802483988-60d56a6f8892?w=900&q=80", // Futsal goal action
-    "https://images.unsplash.com/photo-1578165109989-4de6b28d96cc?w=900&q=80", // Indoor sports hall
+    "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=900&q=80", // Indoor football
+    "https://images.unsplash.com/photo-1552318965-6e6be7484ada?w=900&q=80", // Futsal court
+    "https://images.unsplash.com/photo-1624880357913-a8539238245b?w=900&q=80", // Indoor soccer
   ],
 
   /* ── F1 / FORMULA 1 ─────────────────────────────────────────────────────── */
   f1: [
-    "https://images.unsplash.com/photo-1541348263662-e068662d82af?w=900&q=80", // F1 car racing at speed
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80", // F1 racing circuit aerial
-    "https://images.unsplash.com/photo-1593814681464-eef5af2b0628?w=900&q=80", // F1 pit stop mechanics
-    "https://images.unsplash.com/photo-1579134752408-c7d4a0e8462c?w=900&q=80", // F1 race start grid
-    "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=900&q=80", // Racing car cockpit helmet
-    "https://images.unsplash.com/photo-1619067990685-63de48ecf693?w=900&q=80", // F1 car on track close-up
-    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=900&q=80", // Motorsport racing blur
+    "https://images.unsplash.com/photo-1541348263662-e068662d82af?w=900&q=80", // F1 car racing
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80", // Racing circuit
+    "https://images.unsplash.com/photo-1593814681464-eef5af2b0628?w=900&q=80", // F1 pit stop
+    "https://images.unsplash.com/photo-1579134752408-c7d4a0e8462c?w=900&q=80", // Racing start
+    "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=80", // Motorsport action
   ],
 
   /* ── GOLF ───────────────────────────────────────────────────────────────── */
   golf: [
-    "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=900&q=80", // Golf tournament players
-    "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80", // Golf swing follow-through
-    "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=900&q=80", // Golf green and hole
-    "https://images.unsplash.com/photo-1542435503-956c469947f6?w=900&q=80", // Golf ball near hole
-    "https://images.unsplash.com/photo-1632134638948-4c2f0c59f4c0?w=900&q=80", // Golf fairway panoramic
-    "https://images.unsplash.com/photo-1592919505780-303950717480?w=900&q=80", // Golf player on course
-    "https://images.unsplash.com/photo-1530028828-5e3e-4bd4-b7cc-ee0c85e29a32?w=900&q=80", // Golf club sunset
+    "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=900&q=80", // Golf course aerial
+    "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80", // Golf swing
+    "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=900&q=80", // Golf green
+    "https://images.unsplash.com/photo-1542435503-956c469947f6?w=900&q=80", // Golf ball hole
+    "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=900&q=80", // Golf tournament
   ],
 };
 
