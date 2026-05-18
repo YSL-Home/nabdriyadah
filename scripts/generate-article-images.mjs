@@ -5,8 +5,6 @@ import path from "path";
 const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY;   // Gemini Imagen — priorité 1
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY;   // GPT            — priorité 2
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
-// Max images générées par run CI (évite timeout et coût excessif)
-const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "25", 10);
 
 const HAS_IMAGE_API = !!(GOOGLE_API_KEY || OPENAI_API_KEY);
 
@@ -245,40 +243,21 @@ async function tryDallE3(prompt) {
       prompt: truncated,
       n: 1,
       size: "1792x1024",
-      quality: "standard"
-      // response_format retiré — paramètre invalide dans les versions récentes de l'API
+      quality: "standard",
+      response_format: "b64_json"
     })
   });
 
   const data = await response.json();
   if (!response.ok) throw new Error(`dall-e-3 error: ${JSON.stringify(data?.error || data)}`);
 
-  // Récupérer soit b64_json soit url
   const b64 = data?.data?.[0]?.b64_json;
-  if (b64) return b64;
-
-  // Fallback: télécharger depuis l'URL retournée
-  const imgUrl = data?.data?.[0]?.url;
-  if (imgUrl) {
-    const buf = await fetchImageBuffer(imgUrl);
-    return buf.toString("base64");
-  }
-
-  throw new Error("dall-e-3: no image data returned");
-}
-
-// ── Détection d'erreurs fatales (billing, auth) → inutile de continuer ────
-function isFatalApiError(message) {
-  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated/i.test(message);
+  if (!b64) throw new Error("dall-e-3: no image data returned");
+  return b64;
 }
 
 // ── Orchestrateur : Gemini → GPT-Image-1 → DALL-E-3 ─────────────────────
-// Retourne null si toutes les APIs sont en erreur fatale (billing/auth)
-let _apisFatal = false;
-
 async function generateImageBase64(prompt) {
-  if (_apisFatal) return null;
-
   // 1. Gemini (le moins cher, souvent gratuit dans la free tier)
   if (GOOGLE_API_KEY) {
     try {
@@ -297,31 +276,13 @@ async function generateImageBase64(prompt) {
       return b64;
     } catch (e) {
       console.log(`    gpt-image-1 failed: ${e.message.slice(0, 80)}`);
-      if (isFatalApiError(e.message)) {
-        // 3. Tenter DALL-E-3 une fois avant de déclarer fatal
-        try {
-          const b64 = await tryDallE3(prompt);
-          console.log("    ✓ dall-e-3");
-          return b64;
-        } catch (e3) {
-          if (isFatalApiError(e3.message)) {
-            console.log("  ⛔ Erreur fatale billing/auth détectée — arrêt de la génération.");
-            _apisFatal = true;
-          }
-          throw new Error(`All image APIs failed. Last: ${e3.message.slice(0, 80)}`);
-        }
-      }
     }
-    // 3. DALL-E-3 (fallback GPT normal)
+    // 3. DALL-E-3 (fallback GPT)
     try {
       const b64 = await tryDallE3(prompt);
       console.log("    ✓ dall-e-3");
       return b64;
     } catch (e) {
-      if (isFatalApiError(e.message)) {
-        console.log("  ⛔ Erreur fatale billing/auth détectée — arrêt de la génération.");
-        _apisFatal = true;
-      }
       throw new Error(`All image APIs failed. Last: ${e.message.slice(0, 80)}`);
     }
   }
@@ -345,57 +306,21 @@ async function downloadImage(url, destPath) {
   fs.writeFileSync(destPath, buffer);
 }
 
-// ── Résoudre les URLs Google News en URL directe de l'article ───────────────
-async function resolveGoogleNewsUrl(url) {
-  if (!url || !url.includes("news.google.com")) return url;
-  try {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 8000);
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15",
-        "Accept": "text/html,application/xhtml+xml",
-      },
-      redirect: "follow",
-      signal: ctrl.signal,
-    });
-    clearTimeout(timer);
-    // L'URL finale après redirections est l'article réel
-    const finalUrl = res.url;
-    if (finalUrl && !finalUrl.includes("news.google.com")) return finalUrl;
-    // Essayer d'extraire depuis le HTML si la redirection JS
-    const html = await res.text();
-    const m = html.match(/href=["'](https?:\/\/(?!news\.google)[^"']+)["']/);
-    if (m) return m[1];
-    return null;
-  } catch {
-    return null;
-  }
-}
-
 // ── Scrape OG image from source article page ───────────────────────────────
 async function scrapeOgImage(url) {
   if (!url) return null;
   try {
-    // Résoudre les redirections Google News
-    const resolvedUrl = await resolveGoogleNewsUrl(url);
-    if (!resolvedUrl) return null;
-
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 9000);
-    const res = await fetch(resolvedUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1)",
-        "Accept": "text/html,application/xhtml+xml",
-      },
+    const res = await fetch(url, {
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1)" },
       redirect: "follow",
       signal: ctrl.signal,
     });
     clearTimeout(timer);
     if (!res.ok) return null;
     const html = await res.text();
-    // Try og:image first, then twitter:image, then first large <img>
+    // Try og:image first, then twitter:image
     const patterns = [
       /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
       /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i,
@@ -486,23 +411,8 @@ async function main() {
   ensureDir(OUTPUT_DIR);
 
   let changed = false;
-  let generated = 0;
 
-  // Trier : articles sans image générée en premier (priorité aux nouveaux articles)
-  const sorted = [...articles].sort((a, b) => {
-    const aHas = a.image && a.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${a.slug}.png`));
-    const bHas = b.image && b.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${b.slug}.png`));
-    if (aHas && !bHas) return 1;
-    if (!aHas && bHas) return -1;
-    return 0;
-  });
-
-  for (const article of sorted) {
-    if (generated >= MAX_PER_RUN) {
-      console.log(`Limite atteinte (${MAX_PER_RUN} images/run). Arrêt.`);
-      break;
-    }
-
+  for (const article of articles) {
     const slug = normalizeText(article.slug || "");
     if (!slug) continue;
 
@@ -510,16 +420,16 @@ async function main() {
     const absoluteImagePath = path.join(OUTPUT_DIR, fileName);
     const publicImagePath = `/generated/${fileName}`;
 
-    // Skip si image déjà générée (fichier PNG existe) et non forcé
+    // Skip if image already exists and is not Unsplash / not forced
     const alreadyGenerated = fs.existsSync(absoluteImagePath);
     const isUnsplash = (article.image || "").includes("unsplash.com");
 
     if (!FORCE_REGENERATE && alreadyGenerated && !isUnsplash) {
-      // Mettre à jour le chemin dans l'article si besoin
       if (article.image !== publicImagePath) {
         article.image = publicImagePath;
         changed = true;
       }
+      console.log(`Image exists: ${slug}`);
       continue;
     }
 
@@ -558,54 +468,34 @@ async function main() {
       }
     }
 
-    // Arrêt immédiat si toutes les APIs sont en erreur fatale
-    if (_apisFatal) {
-      console.log("  ⛔ APIs indisponibles (billing/auth) — génération abandonnée pour ce run.");
-      break;
-    }
-
-    // ── Step 2: clone via GPT edit si on a une image source et que l'API n'est pas fatale ──
-    if (sourceImgBuffer && OPENAI_API_KEY && !_apisFatal) {
+    // ── Step 2: clone via GPT edit if we have a source image ─────────────
+    if (sourceImgBuffer && OPENAI_API_KEY) {
       try {
         console.log(`Cloning image via GPT edit [${sourceLabel}]: ${slug}`);
         const b64 = await editImageWithGPT(sourceImgBuffer, article);
         fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
-        const orig = articles.find(a => a.slug === slug);
-        if (orig) orig.image = publicImagePath;
+        article.image = publicImagePath;
         changed = true;
-        generated++;
-        console.log(`  ✓ Cloned (${sourceLabel}): ${fileName} [${generated}/${MAX_PER_RUN}]`);
-        await sleep(800);
+        console.log(`  Cloned (${sourceLabel}): ${fileName}`);
+        await sleep(1000);
         continue;
       } catch (editErr) {
-        const msg = editErr.message;
-        if (isFatalApiError(msg)) {
-          console.log("  ⛔ Billing/auth fatal sur GPT edit — arrêt.");
-          _apisFatal = true;
-          break;
-        }
-        console.log(`  GPT edit failed (${msg.slice(0, 80)}), falling back to AI generation...`);
+        console.log(`  GPT edit failed (${editErr.message.slice(0, 80)}), falling back to AI generation...`);
       }
     }
 
-    if (_apisFatal) break;
-
-    // ── Step 3: AI generation fallback (pas d'image source ou edit échoué) ──
+    // ── Step 3: AI generation fallback (no source image or edit failed) ──
     try {
       console.log(`Generating image: ${slug} (sport: ${article.sport || "football"})`);
       const prompt = buildPrompt(article);
       const base64 = await generateImageBase64(prompt);
-      if (!base64) { console.log(`  Skipped (APIs fatales): ${slug}`); break; }
       fs.writeFileSync(absoluteImagePath, Buffer.from(base64, "base64"));
-      const orig = articles.find(a => a.slug === slug);
-      if (orig) orig.image = publicImagePath;
+      article.image = publicImagePath;
       changed = true;
-      generated++;
-      console.log(`  ✓ Generated: ${fileName} [${generated}/${MAX_PER_RUN}]`);
-      await sleep(1200);
+      console.log(`  Generated: ${fileName}`);
+      await sleep(1500);
     } catch (error) {
-      console.log(`  Image failed for ${slug}: ${error.message.slice(0, 100)}`);
-      if (_apisFatal) break;
+      console.log(`  Image failed for ${slug}: ${error.message}`);
     }
   }
 
