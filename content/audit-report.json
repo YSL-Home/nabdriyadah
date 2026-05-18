@@ -1,40 +1,16 @@
 {
-  "date": "2026-05-18T11:03:50.448Z",
-  "total": 867,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 3,
-      "action": "will_regenerate_on_next_ci"
-    }
-  ],
+  "date": "2026-05-18T11:24:07.679Z",
+  "total": 883,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-1xmgqg",
-      "sport": "football",
-      "image": "/generated/ft-1xmgqg.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-9ui96b",
-      "sport": "football",
-      "image": "/generated/ft-9ui96b.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-uz6saf",
-      "sport": "football",
-      "image": "/generated/ft-uz6saf.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 382,
+      "count": 392,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 866,
+      "count": 882,
       "action": "needs_llm_backfill"
     },
     {
@@ -385,20 +361,28 @@
           "duplicate_of": "bball-1eivj2-1779079775285"
         },
         {
+          "slug": "tennis-1jigmn-1779093776333",
+          "duplicate_of": "tennis-1jigmn-1779102107787"
+        },
+        {
           "slug": "tennis-1jigmn-1779058149317",
-          "duplicate_of": "tennis-1jigmn-1779093776333"
+          "duplicate_of": "tennis-1jigmn-1779102107787"
         },
         {
           "slug": "tennis-1jigmn",
-          "duplicate_of": "tennis-1jigmn-1779093776333"
+          "duplicate_of": "tennis-1jigmn-1779102107787"
+        },
+        {
+          "slug": "tennis-o75364-1779093776205",
+          "duplicate_of": "tennis-o75364-1779102107656"
         },
         {
           "slug": "tennis-o75364-1779048082104",
-          "duplicate_of": "tennis-o75364-1779093776205"
+          "duplicate_of": "tennis-o75364-1779102107656"
         },
         {
           "slug": "tennis-o75364",
-          "duplicate_of": "tennis-o75364-1779093776205"
+          "duplicate_of": "tennis-o75364-1779102107656"
         },
         {
           "slug": "ucl-mcqzub-1779032515077",
@@ -1281,16 +1265,20 @@
           "duplicate_of": "ucl-9hk21i-1778855044219"
         },
         {
+          "slug": "bball-47e3q2-1778967009983",
+          "duplicate_of": "bball-47e3q2-1779102107376"
+        },
+        {
           "slug": "bball-47e3q2-1778930373784",
-          "duplicate_of": "bball-47e3q2-1778967009983"
+          "duplicate_of": "bball-47e3q2-1779102107376"
         },
         {
           "slug": "bball-47e3q2-1778882003274",
-          "duplicate_of": "bball-47e3q2-1778967009983"
+          "duplicate_of": "bball-47e3q2-1779102107376"
         },
         {
           "slug": "bball-47e3q2",
-          "duplicate_of": "bball-47e3q2-1778967009983"
+          "duplicate_of": "bball-47e3q2-1779102107376"
         },
         {
           "slug": "bball-1ai6zr",
@@ -1385,8 +1373,12 @@
           "duplicate_of": "futsal-1nqaf8-1778967011491"
         },
         {
+          "slug": "padel-1k4c5a-1779093776972",
+          "duplicate_of": "padel-1k4c5a-1779102108183"
+        },
+        {
           "slug": "padel-1k4c5a",
-          "duplicate_of": "padel-1k4c5a-1779093776972"
+          "duplicate_of": "padel-1k4c5a-1779102108183"
         },
         {
           "slug": "bball-1t7m5a-1778955318250",
@@ -1413,16 +1405,20 @@
           "duplicate_of": "bball-1nffxl-1778920290058"
         },
         {
+          "slug": "bball-1gvcif-1778904330779",
+          "duplicate_of": "bball-1gvcif-1779102107093"
+        },
+        {
           "slug": "bball-1gvcif-1778872790159",
-          "duplicate_of": "bball-1gvcif-1778904330779"
+          "duplicate_of": "bball-1gvcif-1779102107093"
         },
         {
           "slug": "bball-1gvcif-1778856181749",
-          "duplicate_of": "bball-1gvcif-1778904330779"
+          "duplicate_of": "bball-1gvcif-1779102107093"
         },
         {
           "slug": "bball-1gvcif",
-          "duplicate_of": "bball-1gvcif-1778904330779"
+          "duplicate_of": "bball-1gvcif-1779102107093"
         },
         {
           "slug": "bball-2aij86-1778882002694",
@@ -1449,11 +1445,11 @@
   ],
   "summary": {
     "fixes_applied": 0,
-    "warnings": 6,
-    "missing_images": 3,
-    "missing_en_title": 382,
-    "missing_fr_title": 866,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 392,
+    "missing_fr_title": 882,
     "sport_mismatches_fixed": 0,
-    "duplicates": 351
+    "duplicates": 356
   }
 }
