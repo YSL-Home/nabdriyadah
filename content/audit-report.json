@@ -1,45 +1,16 @@
 {
-  "date": "2026-05-18T19:23:43.171Z",
-  "total": 957,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 3,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1r24yo",
-      "value": "PGMO admits handball error on Man Utd goal v Forest"
-    }
-  ],
+  "date": "2026-05-18T19:31:11.075Z",
+  "total": 966,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-idp7x5",
-      "sport": "football",
-      "image": "/generated/ft-idp7x5.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1r24yo",
-      "sport": "football",
-      "image": "/generated/ft-1r24yo.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-78l2zt",
-      "sport": "football",
-      "image": "/generated/ft-78l2zt.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 431,
+      "count": 439,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 956,
+      "count": 965,
       "action": "needs_llm_backfill"
     },
     {
@@ -48,6 +19,14 @@
         {
           "slug": "ft-1pf9gs",
           "duplicate_of": "ft-cgkq93"
+        },
+        {
+          "slug": "epl-1w0sok",
+          "duplicate_of": "epl-13jmz5"
+        },
+        {
+          "slug": "ft-1qme2d",
+          "duplicate_of": "ft-efccin"
         },
         {
           "slug": "liga-1fre7q",
@@ -342,8 +321,12 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "tennis-gx1mpb",
+          "duplicate_of": "tennis-gx1mpb-1779132513600"
+        },
+        {
           "slug": "tennis-1mh90u",
-          "duplicate_of": "tennis-gx1mpb"
+          "duplicate_of": "tennis-gx1mpb-1779132513600"
         },
         {
           "slug": "ft-1s13ei",
@@ -1386,6 +1369,10 @@
           "duplicate_of": "bball-47e3q2-1779117689316"
         },
         {
+          "slug": "bball-1ai6zr-1779132512693",
+          "duplicate_of": "bball-e0rnnt-1778856181013"
+        },
+        {
           "slug": "bball-1ai6zr-1779116939880",
           "duplicate_of": "bball-e0rnnt-1778856181013"
         },
@@ -1577,12 +1564,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 1,
-    "warnings": 6,
-    "missing_images": 3,
-    "missing_en_title": 431,
-    "missing_fr_title": 956,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 439,
+    "missing_fr_title": 965,
     "sport_mismatches_fixed": 0,
-    "duplicates": 382
+    "duplicates": 386
   }
 }
