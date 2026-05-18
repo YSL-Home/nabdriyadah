@@ -1,16 +1,56 @@
 {
-  "date": "2026-05-18T21:08:46.456Z",
-  "total": 971,
-  "fixes": [],
+  "date": "2026-05-18T21:22:11.141Z",
+  "total": 975,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 4,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-dqhzc3",
+      "value": "Man City's Shaw wins WSL Player of the Season"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-2ubazm-1779139330258",
+      "value": "This is the 2026 Premier Padel calendar - Red Bull"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-b1go7n",
+      "sport": "football",
+      "image": "/generated/ft-b1go7n.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-dqhzc3",
+      "sport": "football",
+      "image": "/generated/ft-dqhzc3.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-6tp3ra",
+      "sport": "football",
+      "image": "/generated/ft-6tp3ra.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-2ubazm-1779139330258",
+      "sport": "padel",
+      "image": "/generated/padel-2ubazm-1779139330258.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 442,
+      "count": 444,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 970,
+      "count": 974,
       "action": "needs_llm_backfill"
     },
     {
@@ -1576,11 +1616,11 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 442,
-    "missing_fr_title": 970,
+    "fixes_applied": 2,
+    "warnings": 7,
+    "missing_images": 4,
+    "missing_en_title": 444,
+    "missing_fr_title": 974,
     "sport_mismatches_fixed": 0,
     "duplicates": 389
   }
