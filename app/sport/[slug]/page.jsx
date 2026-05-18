@@ -93,6 +93,32 @@ const sportConfig = {
     border: "#ddd6fe",
     pageBg: "#f5f3ff",
     highlights: ["فوتسال إندور", "بطولات الصالات", "أبرز الأندية", "نتائج المباريات"]
+  },
+  f1: {
+    title: "فورمولا 1",
+    slug: "f1",
+    description: "تابع أحدث أخبار الفورمولا 1، نتائج السباقات، ترتيب البطولة وأبرز الفرق والسائقين.",
+    icon: "🏎️",
+    colorFrom: "#b91c1c",
+    colorTo: "#dc2626",
+    primary: "#dc2626",
+    primarySoft: "#fef2f2",
+    border: "#fecaca",
+    pageBg: "#fef2f2",
+    highlights: ["نتائج السباقات", "ترتيب البطولة", "أبرز السائقين", "أخبار الفرق"]
+  },
+  golf: {
+    title: "الغولف",
+    slug: "golf",
+    description: "أحدث أخبار الغولف العالمي، أبرز البطولات واللاعبين ونتائج المنافسات الكبرى.",
+    icon: "⛳",
+    colorFrom: "#15803d",
+    colorTo: "#16a34a",
+    primary: "#16a34a",
+    primarySoft: "#f0fdf4",
+    border: "#bbf7d0",
+    pageBg: "#f0fdf4",
+    highlights: ["بطولات الماجور", "أبرز اللاعبين", "ترتيب العالمي", "الجولة العالمية"]
   }
 };
 
@@ -114,7 +140,8 @@ export function generateMetadata({ params }) {
       url: `https://nabdriyadah.com/sport/${params.slug}/`,
       siteName: "نبض الرياضة",
       locale: "ar_AR",
-      type: "website"
+      type: "website",
+      images: [{ url: "https://nabdriyadah.com/og-default.jpg", width: 1200, height: 630, alt: sport.title }]
     }
   };
 }

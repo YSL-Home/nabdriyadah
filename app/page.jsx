@@ -5,7 +5,10 @@ import HomepageClient from "./components/HomepageClient";
 export const metadata = {
   title: "نبض الرياضة — أخبار الرياضة العربية والعالمية",
   description: "تابع أحدث أخبار كرة القدم، كرة السلة، التنس، البادل والرياضات الأخرى مع تغطية يومية وتحليلات خاصة.",
-  alternates: { canonical: "https://nabdriyadah.com/" }
+  alternates: { canonical: "https://nabdriyadah.com/" },
+  openGraph: {
+    images: [{ url: "https://nabdriyadah.com/og-default.jpg", width: 1200, height: 630, alt: "نبض الرياضة" }]
+  }
 };
 
 function sortByDate(items) {
