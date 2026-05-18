@@ -717,6 +717,12 @@ export default function LeaguePage({ params }) {
   })();
   const featuredArticle = leagueArticles[0] || null;
 
+  // NBA Schedule data
+  const nbaScheduleData = params.slug === "nba"
+    ? loadJsonSafe(path.join(process.cwd(), "content/fixtures/nba-schedule.json"))
+    : null;
+  const nbaGames = nbaScheduleData?.games?.slice(0, 8) || [];
+
   // F1 Calendar data
   const f1CalendarData = params.slug === "f1"
     ? loadJsonSafe(path.join(process.cwd(), "content/fixtures/f1-calendar.json"))
@@ -909,17 +915,33 @@ export default function LeaguePage({ params }) {
               <span style={{ textAlign: "center" }}>البلد</span>
               <span style={{ textAlign: "center" }}>النقاط</span>
             </div>
-            {standings.slice(0, 20).map((player, i) => (
-              <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 80px", gap: "4px", padding: "10px 12px", borderRadius: "12px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "4px" }}>
-                <span style={{ textAlign: "center", fontWeight: 800, width: "24px", height: "24px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#6b7280", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", fontSize: "13px" }}>{player.rank || i + 1}</span>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  {player.flag && <img src={player.flag} alt="" style={{ width: "22px", height: "16px", objectFit: "cover", borderRadius: "3px" }} />}
-                  <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{player.name}</span>
+            {standings.slice(0, 20).map((player, i) => {
+              // Build player page href for tennis (ATP/WTA) and F1
+              let playerHref = null;
+              if (standingsType === "f1-rankings" && player.slug) {
+                playerHref = `/player/f1/${player.slug}/`;
+              } else if (standingsType === "tennis-rankings") {
+                // Convert player name to slug (e.g. "Jannik Sinner" → "jannik-sinner")
+                const nameSlug = player.name
+                  ? player.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+                  : null;
+                if (nameSlug) playerHref = `/player/tennis/${nameSlug}/`;
+              }
+              const rowContent = (
+                <div style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 80px", gap: "4px", padding: "10px 12px", borderRadius: "12px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "4px", cursor: playerHref ? "pointer" : "default" }}>
+                  <span style={{ textAlign: "center", fontWeight: 800, width: "24px", height: "24px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#6b7280", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", fontSize: "13px" }}>{player.rank || i + 1}</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    {player.flag && <img src={player.flag} alt="" style={{ width: "22px", height: "16px", objectFit: "cover", borderRadius: "3px" }} />}
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{player.name}</span>
+                  </div>
+                  <span style={{ textAlign: "center", fontSize: "12px", color: "#6b7280", fontWeight: 600 }}>{player.country || "—"}</span>
+                  <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: theme.primary }}>{player.points?.toLocaleString() || "—"}</span>
                 </div>
-                <span style={{ textAlign: "center", fontSize: "12px", color: "#6b7280", fontWeight: 600 }}>{player.country || "—"}</span>
-                <span style={{ textAlign: "center", fontSize: "14px", fontWeight: 800, color: theme.primary }}>{player.points?.toLocaleString() || "—"}</span>
-              </div>
-            ))}
+              );
+              return playerHref
+                ? <Link key={player.slug || i} href={playerHref} style={{ textDecoration: "none", color: "inherit" }}>{rowContent}</Link>
+                : <div key={player.slug || i}>{rowContent}</div>;
+            })}
           </section>
         )}
 
@@ -1425,6 +1447,69 @@ export default function LeaguePage({ params }) {
             </div>
           </div>
         </section>
+
+        {/* ── MATCHS NBA (schedule) ── */}
+        {params.slug === "nba" && nbaGames.length > 0 && (
+          <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "24px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", marginBottom: "24px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
+              <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>مباريات قادمة / نتائج</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              {nbaGames.map((game) => {
+                const isCompleted = game.status === "completed";
+                const gameDate = game.date ? new Date(game.date).toLocaleDateString("ar-SA-u-nu-latn", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "—";
+                return (
+                  <div key={game.id} style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr auto 90px", gap: "8px", alignItems: "center", padding: "12px 16px", borderRadius: "14px", background: isCompleted ? "#f9fafb" : theme.primarySoft, border: `1px solid ${isCompleted ? "#e5e7eb" : theme.border}` }}>
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", textAlign: "right" }}>{game.homeTeam}</span>
+                    <span style={{ fontSize: "16px", fontWeight: 900, color: isCompleted ? theme.primary : "#9ca3af", padding: "4px 10px", background: isCompleted ? theme.primarySoft : "white", borderRadius: "8px", textAlign: "center", minWidth: "70px" }}>
+                      {isCompleted ? `${game.homeScore} — ${game.awayScore}` : "VS"}
+                    </span>
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", textAlign: "left" }}>{game.awayTeam}</span>
+                    <span style={{ fontSize: "11px", color: "#6b7280", textAlign: "center", whiteSpace: "nowrap" }}>{gameDate}</span>
+                    <span style={{ textAlign: "center", fontSize: "11px", fontWeight: 700, padding: "3px 10px", borderRadius: "999px", background: isCompleted ? "#f3f4f6" : theme.primary, color: isCompleted ? "#6b7280" : "white" }}>
+                      {isCompleted ? "انتهى" : "قادم"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* ── ÉQUIPES VEDETTES NBA avec W/L ── */}
+        {params.slug === "nba" && league.teams && league.teams.length > 0 && (() => {
+          // Build a W/L lookup from NBA standings
+          const nbaWL = {};
+          for (const t of standings) {
+            nbaWL[t.name] = { won: t.won, lost: t.lost };
+          }
+          return (
+            <section style={{ background: theme.cardBg, borderRadius: "28px", padding: "24px", border: `1px solid ${theme.border}`, boxShadow: "0 12px 30px rgba(0,0,0,0.05)", marginBottom: "24px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+                <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: theme.primary }} />
+                <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>الأندية المميزة</span>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "14px" }}>
+                {league.teams.map((team) => {
+                  const wl = Object.entries(nbaWL).find(([name]) => name.includes(team.name.split(" ")[0]) || team.name.includes(name.split(" ").pop()));
+                  const stats = wl ? wl[1] : null;
+                  return (
+                    <div key={team.slug} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", padding: "20px 16px", background: theme.primarySoft, borderRadius: "18px", border: `1px solid ${theme.border}`, textAlign: "center" }}>
+                      <img src={team.logo} alt={team.name} style={{ width: "52px", height: "52px", objectFit: "contain" }} />
+                      <span style={{ fontSize: "14px", fontWeight: 800, color: "#111827", lineHeight: 1.3 }}>{team.name}</span>
+                      {stats && (
+                        <span style={{ fontSize: "13px", fontWeight: 700, color: theme.primary, background: "white", padding: "3px 12px", borderRadius: "999px", border: `1px solid ${theme.border}` }}>
+                          {stats.won}ف — {stats.lost}خ
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })()}
 
         <AdSlot label="مساحة إعلانية وسط صفحة البطولة" minHeight={120} style={{ marginBottom: 24 }} />
 

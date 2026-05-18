@@ -1,4 +1,7 @@
 import articles from "../content/articles/seo-articles.json";
+import tennisTop20Raw from "../content/players/tennis-top20.json";
+import fs from "fs";
+import path from "path";
 
 const BASE = "https://nabdriyadah.com";
 
@@ -42,6 +45,24 @@ const SPORTS = [
   { slug: "golf",       priority: 0.72 },
 ];
 
+// Build tennis player slugs
+const tennisSlugs = [
+  ...(tennisTop20Raw.atp || []),
+  ...(tennisTop20Raw.wta || [])
+].map((p) => ({ slug: p.slug, tour: p.tour }));
+
+// Build F1 driver slugs
+function loadF1Slugs() {
+  try {
+    const p = path.join(process.cwd(), "content/standings/f1.json");
+    const d = JSON.parse(fs.readFileSync(p, "utf-8"));
+    return (d.rankings || []).map((r) => r.slug).filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+const f1Slugs = loadF1Slugs();
+
 export default function sitemap() {
   const now = new Date();
 
@@ -83,5 +104,21 @@ export default function sitemap() {
     return urls;
   });
 
-  return [...home, ...sportUrls, ...leagueUrls, ...articleUrls];
+  // ── Tennis players ──────────────────────────────────────────────────────────
+  const tennisPlayerUrls = tennisSlugs.map(({ slug }) => ({
+    url: `${BASE}/player/tennis/${slug}/`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.60
+  }));
+
+  // ── F1 drivers ──────────────────────────────────────────────────────────────
+  const f1DriverUrls = f1Slugs.map((slug) => ({
+    url: `${BASE}/player/f1/${slug}/`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.65
+  }));
+
+  return [...home, ...sportUrls, ...leagueUrls, ...articleUrls, ...tennisPlayerUrls, ...f1DriverUrls];
 }

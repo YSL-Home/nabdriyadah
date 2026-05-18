@@ -865,6 +865,88 @@ async function fetchF1Calendar() {
   console.log(`  ✓ F1 Calendar: ${events.length} GPs saved`);
 }
 
+// ── NBA Schedule ──────────────────────────────────────────────────────────────
+
+async function fetchNBASchedule() {
+  const url = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard";
+  const data = await espnGet(`${url}?limit=100`);
+
+  const events = data.events || [];
+  const now = new Date();
+  const nowTs = Date.now() / 1000;
+
+  // Also query ±8 days for more games
+  const extraGames = new Map();
+  for (const e of events) {
+    const comp = e.competitions?.[0];
+    if (!comp) continue;
+    const competitors = comp.competitors || [];
+    const home = competitors.find(c => c.homeAway === "home");
+    const away = competitors.find(c => c.homeAway === "away");
+    if (!home || !away) continue;
+    const statusType = comp.status?.type || {};
+    const completed = statusType.completed || false;
+    extraGames.set(e.id, {
+      id: e.id,
+      date: e.date,
+      homeTeam: home.team?.displayName || home.team?.shortDisplayName || "",
+      awayTeam: away.team?.displayName || away.team?.shortDisplayName || "",
+      homeScore: completed ? (parseInt(home.score, 10) || null) : null,
+      awayScore: completed ? (parseInt(away.score, 10) || null) : null,
+      status: completed ? "completed" : "scheduled"
+    });
+  }
+
+  // Query a few extra days
+  const days = [];
+  for (let i = -8; i <= 8; i++) {
+    const d = new Date(now);
+    d.setDate(d.getDate() + i);
+    days.push(yyyymmdd(d));
+  }
+  for (const dateStr of days) {
+    await sleep(100);
+    try {
+      const d2 = await espnGet(`${url}?dates=${dateStr}&limit=50`);
+      for (const e of d2.events || []) {
+        if (extraGames.has(e.id)) continue;
+        const comp = e.competitions?.[0];
+        if (!comp) continue;
+        const competitors = comp.competitors || [];
+        const home = competitors.find(c => c.homeAway === "home");
+        const away = competitors.find(c => c.homeAway === "away");
+        if (!home || !away) continue;
+        const statusType = comp.status?.type || {};
+        const completed = statusType.completed || false;
+        extraGames.set(e.id, {
+          id: e.id,
+          date: e.date,
+          homeTeam: home.team?.displayName || home.team?.shortDisplayName || "",
+          awayTeam: away.team?.displayName || away.team?.shortDisplayName || "",
+          homeScore: completed ? (parseInt(home.score, 10) || null) : null,
+          awayScore: completed ? (parseInt(away.score, 10) || null) : null,
+          status: completed ? "completed" : "scheduled"
+        });
+      }
+    } catch { /* skip */ }
+  }
+
+  const allGames = [...extraGames.values()];
+
+  // Sort: completed desc, then scheduled asc — keep 8 most relevant
+  const completed = allGames.filter(g => g.status === "completed")
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 4);
+  const scheduled = allGames.filter(g => g.status === "scheduled")
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .slice(0, 4);
+  const games = [...completed.reverse(), ...scheduled].slice(0, 8);
+
+  const outputPath = path.join(FIXTURES_DIR, "nba-schedule.json");
+  fs.writeFileSync(outputPath, JSON.stringify({ games, fetchedAt: new Date().toISOString() }, null, 2));
+  console.log(`  ✓ NBA Schedule: ${games.length} games saved`);
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -900,6 +982,8 @@ async function main() {
     await sleep(600);
     try { await fetchBasketballFixtures(league); } catch (e) { console.warn(`  ✗ Basketball fixtures: ${e.message}`); }
     await sleep(800);
+    try { await fetchNBASchedule(); } catch (e) { console.warn(`  ✗ NBA Schedule: ${e.message}`); }
+    await sleep(600);
   }
 
   // ── Tennis ─────────────────────────────────────────────────────────────────
