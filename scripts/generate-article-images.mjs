@@ -5,6 +5,8 @@ import path from "path";
 const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY;   // Gemini Imagen — priorité 1
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY;   // GPT            — priorité 2
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
+// Max images générées par run CI (évite timeout et coût excessif)
+const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "25", 10);
 
 const HAS_IMAGE_API = !!(GOOGLE_API_KEY || OPENAI_API_KEY);
 
@@ -204,6 +206,45 @@ async function tryGeminiImagen(prompt) {
   return b64;
 }
 
+// ── Gemini 2.0 Flash — édition image (image → image similaire) ────────────
+async function tryGeminiEdit(imageBuffer, article) {
+  if (!GOOGLE_API_KEY) throw new Error("No GOOGLE_API_KEY");
+  const sport  = normalizeText(article.sport  || "football");
+  const league = normalizeText(article.league || "");
+  const title  = normalizeText(article.en_title || article.fr_title || article.title || "").slice(0, 100);
+  const prompt = [
+    "Create a professional sports editorial photograph visually inspired by the reference image.",
+    "Keep the same sport, setting, atmosphere and lighting mood.",
+    "Make it a completely new photo — different moment, different angle, slight variation in composition.",
+    "STRICT: no text, no logos, no watermarks, no identifiable player faces, no jersey numbers, no club badges.",
+    "Output: photorealistic, premium sports journalism quality, 16:9 landscape banner format.",
+    league ? `Sport context: ${league}` : `Sport: ${sport}`,
+    title  ? `Article topic: "${title}"` : "",
+  ].filter(Boolean).join(" ");
+
+  const b64img = imageBuffer.toString("base64");
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${GOOGLE_API_KEY}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [
+          { text: prompt },
+          { inline_data: { mime_type: "image/jpeg", data: b64img } }
+        ]}],
+        generationConfig: { responseModalities: ["IMAGE", "TEXT"] }
+      })
+    }
+  );
+  const data = await response.json();
+  if (!response.ok) throw new Error(`Gemini edit error: ${JSON.stringify(data?.error || data).slice(0, 120)}`);
+  for (const part of (data?.candidates?.[0]?.content?.parts || [])) {
+    if (part.inline_data?.data) return part.inline_data.data;
+  }
+  throw new Error("Gemini edit: no image data in response");
+}
+
 // ── GPT-Image-1 ───────────────────────────────────────────────────────────
 async function tryGptImage1(prompt) {
   const response = await fetch("https://api.openai.com/v1/images/generations", {
@@ -243,8 +284,8 @@ async function tryDallE3(prompt) {
       prompt: truncated,
       n: 1,
       size: "1792x1024",
-      quality: "standard",
-      response_format: "b64_json"
+      quality: "standard"
+      // response_format supprimé — invalide dans les versions récentes de l'API
     })
   });
 
@@ -252,13 +293,25 @@ async function tryDallE3(prompt) {
   if (!response.ok) throw new Error(`dall-e-3 error: ${JSON.stringify(data?.error || data)}`);
 
   const b64 = data?.data?.[0]?.b64_json;
-  if (!b64) throw new Error("dall-e-3: no image data returned");
-  return b64;
+  if (b64) return b64;
+  // Fallback : télécharger depuis l'URL si pas de b64
+  const imgUrl = data?.data?.[0]?.url;
+  if (imgUrl) return (await fetchImageBuffer(imgUrl)).toString("base64");
+  throw new Error("dall-e-3: no image data returned");
 }
 
-// ── Orchestrateur : Gemini → GPT-Image-1 → DALL-E-3 ─────────────────────
+// ── Détection erreurs fatales (billing/auth) — inutile de continuer ───────
+function isFatalApiError(msg) {
+  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated/i.test(msg);
+}
+
+// ── Orchestrateur — Gemini prioritaire, GPT en fallback ──────────────────
+let _apisFatal = false;
+
 async function generateImageBase64(prompt) {
-  // 1. Gemini (le moins cher, souvent gratuit dans la free tier)
+  if (_apisFatal) return null;
+
+  // 1. Gemini Imagen (priorité — gratuit / moins cher)
   if (GOOGLE_API_KEY) {
     try {
       const b64 = await tryGeminiImagen(prompt);
@@ -268,7 +321,7 @@ async function generateImageBase64(prompt) {
       console.log(`    Gemini failed: ${e.message.slice(0, 80)}`);
     }
   }
-  // 2. GPT-Image-1
+  // 2. GPT-Image-1 (fallback)
   if (OPENAI_API_KEY) {
     try {
       const b64 = await tryGptImage1(prompt);
@@ -276,14 +329,29 @@ async function generateImageBase64(prompt) {
       return b64;
     } catch (e) {
       console.log(`    gpt-image-1 failed: ${e.message.slice(0, 80)}`);
+      if (isFatalApiError(e.message)) {
+        // Tenter DALL-E-3 une seule fois avant de déclarer fatal
+        try {
+          const b64 = await tryDallE3(prompt);
+          console.log("    ✓ dall-e-3");
+          return b64;
+        } catch (e3) {
+          if (isFatalApiError(e3.message)) {
+            console.log("  ⛔ Billing/auth fatal — génération stoppée.");
+            _apisFatal = true;
+          }
+          throw new Error(`All APIs failed. Last: ${e3.message.slice(0, 80)}`);
+        }
+      }
     }
-    // 3. DALL-E-3 (fallback GPT)
+    // 3. DALL-E-3 (fallback GPT normal)
     try {
       const b64 = await tryDallE3(prompt);
       console.log("    ✓ dall-e-3");
       return b64;
     } catch (e) {
-      throw new Error(`All image APIs failed. Last: ${e.message.slice(0, 80)}`);
+      if (isFatalApiError(e.message)) { _apisFatal = true; }
+      throw new Error(`All APIs failed. Last: ${e.message.slice(0, 80)}`);
     }
   }
   throw new Error("No image API key configured");
@@ -411,8 +479,22 @@ async function main() {
   ensureDir(OUTPUT_DIR);
 
   let changed = false;
+  let generated = 0;
 
-  for (const article of articles) {
+  // Trier : articles sans image générée en premier (nouveaux articles prioritaires)
+  const sorted = [...articles].sort((a, b) => {
+    const aHas = a.image && a.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${a.slug}.png`));
+    const bHas = b.image && b.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${b.slug}.png`));
+    return (aHas ? 1 : 0) - (bHas ? 1 : 0);
+  });
+
+  for (const article of sorted) {
+    if (generated >= MAX_PER_RUN || _apisFatal) {
+      if (_apisFatal) console.log("  ⛔ APIs indisponibles — génération abandonnée.");
+      else console.log(`Limite atteinte (${MAX_PER_RUN} images/run). Arrêt.`);
+      break;
+    }
+
     const slug = normalizeText(article.slug || "");
     if (!slug) continue;
 
@@ -420,38 +502,31 @@ async function main() {
     const absoluteImagePath = path.join(OUTPUT_DIR, fileName);
     const publicImagePath = `/generated/${fileName}`;
 
-    // Skip if image already exists and is not Unsplash / not forced
+    // Skip si image déjà générée (fichier PNG existe) et non forcé
     const alreadyGenerated = fs.existsSync(absoluteImagePath);
     const isUnsplash = (article.image || "").includes("unsplash.com");
 
     if (!FORCE_REGENERATE && alreadyGenerated && !isUnsplash) {
-      if (article.image !== publicImagePath) {
-        article.image = publicImagePath;
-        changed = true;
-      }
-      console.log(`Image exists: ${slug}`);
+      if (article.image !== publicImagePath) { article.image = publicImagePath; changed = true; }
       continue;
     }
 
-    // ── Step 1: find source image (RSS imageUrl → OG scrape) ─────────────
+    // ── Step 1: récupérer l'image source (RSS imageUrl → OG scrape) ──────
     const rssImageUrl = article.imageUrl || null;
     const sourceUrl   = article.sourceUrl || null;
-
     let sourceImgBuffer = null;
     let sourceLabel = "";
 
-    // Try RSS image first
     if (rssImageUrl) {
       try {
-        console.log(`  Fetching RSS image buffer: ${rssImageUrl.slice(0, 80)}`);
+        console.log(`  Fetching RSS image: ${rssImageUrl.slice(0, 80)}`);
         sourceImgBuffer = await fetchImageBuffer(rssImageUrl);
         sourceLabel = "RSS";
       } catch (e) {
-        console.log(`  RSS buffer failed (${e.message.slice(0, 60)})`);
+        console.log(`  RSS failed (${e.message.slice(0, 60)})`);
       }
     }
 
-    // Try OG image from source article page if RSS failed
     if (!sourceImgBuffer && sourceUrl) {
       try {
         console.log(`  Scraping OG image from: ${sourceUrl.slice(0, 80)}`);
@@ -459,7 +534,7 @@ async function main() {
         if (ogUrl) {
           sourceImgBuffer = await fetchImageBuffer(ogUrl);
           sourceLabel = "OG";
-          console.log(`  OG image found: ${ogUrl.slice(0, 80)}`);
+          console.log(`  OG found: ${ogUrl.slice(0, 80)}`);
         } else {
           console.log(`  No OG image found`);
         }
@@ -468,34 +543,59 @@ async function main() {
       }
     }
 
-    // ── Step 2: clone via GPT edit if we have a source image ─────────────
-    if (sourceImgBuffer && OPENAI_API_KEY) {
-      try {
-        console.log(`Cloning image via GPT edit [${sourceLabel}]: ${slug}`);
-        const b64 = await editImageWithGPT(sourceImgBuffer, article);
-        fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
-        article.image = publicImagePath;
-        changed = true;
-        console.log(`  Cloned (${sourceLabel}): ${fileName}`);
-        await sleep(1000);
-        continue;
-      } catch (editErr) {
-        console.log(`  GPT edit failed (${editErr.message.slice(0, 80)}), falling back to AI generation...`);
+    // ── Step 2: clonage — Gemini prioritaire, GPT en fallback ────────────
+    if (sourceImgBuffer && !_apisFatal) {
+      let cloned = false;
+
+      // 2a. Gemini 2.0 Flash edit (priorité 1)
+      if (GOOGLE_API_KEY) {
+        try {
+          console.log(`  Cloning via Gemini [${sourceLabel}]: ${slug}`);
+          const b64 = await tryGeminiEdit(sourceImgBuffer, article);
+          fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
+          articles.find(a => a.slug === slug).image = publicImagePath;
+          changed = true; generated++; cloned = true;
+          console.log(`  ✓ Gemini clone: ${fileName} [${generated}/${MAX_PER_RUN}]`);
+          await sleep(600);
+        } catch (e) {
+          console.log(`  Gemini edit failed (${e.message.slice(0, 80)})`);
+        }
       }
+
+      // 2b. GPT edit (fallback)
+      if (!cloned && OPENAI_API_KEY && !_apisFatal) {
+        try {
+          console.log(`  Cloning via GPT [${sourceLabel}]: ${slug}`);
+          const b64 = await editImageWithGPT(sourceImgBuffer, article);
+          fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
+          articles.find(a => a.slug === slug).image = publicImagePath;
+          changed = true; generated++; cloned = true;
+          console.log(`  ✓ GPT clone: ${fileName} [${generated}/${MAX_PER_RUN}]`);
+          await sleep(800);
+        } catch (editErr) {
+          if (isFatalApiError(editErr.message)) { _apisFatal = true; break; }
+          console.log(`  GPT edit failed (${editErr.message.slice(0, 80)})`);
+        }
+      }
+
+      if (cloned) continue;
     }
 
-    // ── Step 3: AI generation fallback (no source image or edit failed) ──
+    if (_apisFatal) break;
+
+    // ── Step 3: génération IA pure (pas d'image source ou clone échoué) ──
     try {
-      console.log(`Generating image: ${slug} (sport: ${article.sport || "football"})`);
-      const prompt = buildPrompt(article);
-      const base64 = await generateImageBase64(prompt);
+      console.log(`  Generating: ${slug} (${article.sport || "football"})`);
+      const base64 = await generateImageBase64(buildPrompt(article));
+      if (!base64) { console.log(`  Skipped (APIs fatales): ${slug}`); break; }
       fs.writeFileSync(absoluteImagePath, Buffer.from(base64, "base64"));
-      article.image = publicImagePath;
-      changed = true;
-      console.log(`  Generated: ${fileName}`);
-      await sleep(1500);
+      articles.find(a => a.slug === slug).image = publicImagePath;
+      changed = true; generated++;
+      console.log(`  ✓ Generated: ${fileName} [${generated}/${MAX_PER_RUN}]`);
+      await sleep(1200);
     } catch (error) {
-      console.log(`  Image failed for ${slug}: ${error.message}`);
+      console.log(`  Failed ${slug}: ${error.message.slice(0, 100)}`);
+      if (_apisFatal) break;
     }
   }
 
