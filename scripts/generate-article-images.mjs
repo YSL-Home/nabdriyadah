@@ -245,21 +245,40 @@ async function tryDallE3(prompt) {
       prompt: truncated,
       n: 1,
       size: "1792x1024",
-      quality: "standard",
-      response_format: "b64_json"
+      quality: "standard"
+      // response_format retiré — paramètre invalide dans les versions récentes de l'API
     })
   });
 
   const data = await response.json();
   if (!response.ok) throw new Error(`dall-e-3 error: ${JSON.stringify(data?.error || data)}`);
 
+  // Récupérer soit b64_json soit url
   const b64 = data?.data?.[0]?.b64_json;
-  if (!b64) throw new Error("dall-e-3: no image data returned");
-  return b64;
+  if (b64) return b64;
+
+  // Fallback: télécharger depuis l'URL retournée
+  const imgUrl = data?.data?.[0]?.url;
+  if (imgUrl) {
+    const buf = await fetchImageBuffer(imgUrl);
+    return buf.toString("base64");
+  }
+
+  throw new Error("dall-e-3: no image data returned");
+}
+
+// ── Détection d'erreurs fatales (billing, auth) → inutile de continuer ────
+function isFatalApiError(message) {
+  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated/i.test(message);
 }
 
 // ── Orchestrateur : Gemini → GPT-Image-1 → DALL-E-3 ─────────────────────
+// Retourne null si toutes les APIs sont en erreur fatale (billing/auth)
+let _apisFatal = false;
+
 async function generateImageBase64(prompt) {
+  if (_apisFatal) return null;
+
   // 1. Gemini (le moins cher, souvent gratuit dans la free tier)
   if (GOOGLE_API_KEY) {
     try {
@@ -278,13 +297,31 @@ async function generateImageBase64(prompt) {
       return b64;
     } catch (e) {
       console.log(`    gpt-image-1 failed: ${e.message.slice(0, 80)}`);
+      if (isFatalApiError(e.message)) {
+        // 3. Tenter DALL-E-3 une fois avant de déclarer fatal
+        try {
+          const b64 = await tryDallE3(prompt);
+          console.log("    ✓ dall-e-3");
+          return b64;
+        } catch (e3) {
+          if (isFatalApiError(e3.message)) {
+            console.log("  ⛔ Erreur fatale billing/auth détectée — arrêt de la génération.");
+            _apisFatal = true;
+          }
+          throw new Error(`All image APIs failed. Last: ${e3.message.slice(0, 80)}`);
+        }
+      }
     }
-    // 3. DALL-E-3 (fallback GPT)
+    // 3. DALL-E-3 (fallback GPT normal)
     try {
       const b64 = await tryDallE3(prompt);
       console.log("    ✓ dall-e-3");
       return b64;
     } catch (e) {
+      if (isFatalApiError(e.message)) {
+        console.log("  ⛔ Erreur fatale billing/auth détectée — arrêt de la génération.");
+        _apisFatal = true;
+      }
       throw new Error(`All image APIs failed. Last: ${e.message.slice(0, 80)}`);
     }
   }
@@ -521,39 +558,54 @@ async function main() {
       }
     }
 
-    // ── Step 2: clone via GPT edit if we have a source image ─────────────
-    if (sourceImgBuffer && OPENAI_API_KEY) {
+    // Arrêt immédiat si toutes les APIs sont en erreur fatale
+    if (_apisFatal) {
+      console.log("  ⛔ APIs indisponibles (billing/auth) — génération abandonnée pour ce run.");
+      break;
+    }
+
+    // ── Step 2: clone via GPT edit si on a une image source et que l'API n'est pas fatale ──
+    if (sourceImgBuffer && OPENAI_API_KEY && !_apisFatal) {
       try {
         console.log(`Cloning image via GPT edit [${sourceLabel}]: ${slug}`);
         const b64 = await editImageWithGPT(sourceImgBuffer, article);
         fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
-        // Mettre à jour dans la liste originale (articles), pas sorted
         const orig = articles.find(a => a.slug === slug);
         if (orig) orig.image = publicImagePath;
         changed = true;
         generated++;
         console.log(`  ✓ Cloned (${sourceLabel}): ${fileName} [${generated}/${MAX_PER_RUN}]`);
-        await sleep(1000);
+        await sleep(800);
         continue;
       } catch (editErr) {
-        console.log(`  GPT edit failed (${editErr.message.slice(0, 80)}), falling back to AI generation...`);
+        const msg = editErr.message;
+        if (isFatalApiError(msg)) {
+          console.log("  ⛔ Billing/auth fatal sur GPT edit — arrêt.");
+          _apisFatal = true;
+          break;
+        }
+        console.log(`  GPT edit failed (${msg.slice(0, 80)}), falling back to AI generation...`);
       }
     }
 
-    // ── Step 3: AI generation fallback (no source image or edit failed) ──
+    if (_apisFatal) break;
+
+    // ── Step 3: AI generation fallback (pas d'image source ou edit échoué) ──
     try {
       console.log(`Generating image: ${slug} (sport: ${article.sport || "football"})`);
       const prompt = buildPrompt(article);
       const base64 = await generateImageBase64(prompt);
+      if (!base64) { console.log(`  Skipped (APIs fatales): ${slug}`); break; }
       fs.writeFileSync(absoluteImagePath, Buffer.from(base64, "base64"));
       const orig = articles.find(a => a.slug === slug);
       if (orig) orig.image = publicImagePath;
       changed = true;
       generated++;
       console.log(`  ✓ Generated: ${fileName} [${generated}/${MAX_PER_RUN}]`);
-      await sleep(1500);
+      await sleep(1200);
     } catch (error) {
-      console.log(`  Image failed for ${slug}: ${error.message}`);
+      console.log(`  Image failed for ${slug}: ${error.message.slice(0, 100)}`);
+      if (_apisFatal) break;
     }
   }
 
