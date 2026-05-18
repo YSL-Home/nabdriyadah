@@ -1,16 +1,67 @@
 {
-  "date": "2026-05-18T15:53:59.340Z",
-  "total": 938,
-  "fixes": [],
+  "date": "2026-05-18T15:56:43.834Z",
+  "total": 943,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1mj5nt",
+      "value": "Europe 'best way' to end Bournemouth stay - Iraola"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ucl-xese6p-1779119798463",
+      "value": "2025/26 Europa League: Meet the finalists - UEFA.com"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ucl-1kck0z-1779119798786",
+      "value": "Meet the UEFA Conference League finalists - UEFA.com"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1mj5nt",
+      "sport": "football",
+      "image": "/generated/ft-1mj5nt.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-18yzr3",
+      "sport": "football",
+      "image": "/generated/ft-18yzr3.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-amjgx2",
+      "sport": "football",
+      "image": "/generated/ft-amjgx2.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-xese6p-1779119798463",
+      "sport": "football",
+      "image": "/generated/ucl-xese6p-1779119798463.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1kck0z-1779119798786",
+      "sport": "football",
+      "image": "/generated/ucl-1kck0z-1779119798786.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 418,
+      "count": 420,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 937,
+      "count": 942,
       "action": "needs_llm_backfill"
     },
     {
@@ -359,6 +410,14 @@
         {
           "slug": "epl-fal0dx",
           "duplicate_of": "epl-hxmk9b"
+        },
+        {
+          "slug": "ucl-xese6p-1779119798463",
+          "duplicate_of": "ucl-xese6p"
+        },
+        {
+          "slug": "ucl-1kck0z-1779119798786",
+          "duplicate_of": "ucl-1kck0z"
         },
         {
           "slug": "ucl-1kck0z-1779117687885",
@@ -1536,12 +1595,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 418,
-    "missing_fr_title": 937,
+    "fixes_applied": 3,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 420,
+    "missing_fr_title": 942,
     "sport_mismatches_fixed": 0,
-    "duplicates": 379
+    "duplicates": 381
   }
 }
