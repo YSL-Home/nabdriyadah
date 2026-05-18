@@ -1,39 +1,16 @@
 {
-  "date": "2026-05-18T15:45:31.117Z",
-  "total": 933,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 2,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ucl-1kck0z-1779119127385",
-      "value": "Meet the UEFA Conference League finalists - UEFA.com"
-    }
-  ],
+  "date": "2026-05-18T15:53:59.340Z",
+  "total": 938,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-amjgx2",
-      "sport": "football",
-      "image": "/generated/ft-amjgx2.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ucl-1kck0z-1779119127385",
-      "sport": "football",
-      "image": "/generated/ucl-1kck0z-1779119127385.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 417,
+      "count": 418,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 932,
+      "count": 937,
       "action": "needs_llm_backfill"
     },
     {
@@ -348,6 +325,10 @@
           "duplicate_of": "ft-1r0qjo"
         },
         {
+          "slug": "bball-jux29s",
+          "duplicate_of": "bball-jux29s-1779119403806"
+        },
+        {
           "slug": "liga-15kt82",
           "duplicate_of": "liga-14s9av"
         },
@@ -378,10 +359,6 @@
         {
           "slug": "epl-fal0dx",
           "duplicate_of": "epl-hxmk9b"
-        },
-        {
-          "slug": "ucl-1kck0z-1779119127385",
-          "duplicate_of": "ucl-1kck0z"
         },
         {
           "slug": "ucl-1kck0z-1779117687885",
@@ -1559,11 +1536,11 @@
     }
   ],
   "summary": {
-    "fixes_applied": 1,
-    "warnings": 5,
-    "missing_images": 2,
-    "missing_en_title": 417,
-    "missing_fr_title": 932,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 418,
+    "missing_fr_title": 937,
     "sport_mismatches_fixed": 0,
     "duplicates": 379
   }
