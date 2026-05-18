@@ -1,16 +1,73 @@
 {
-  "date": "2026-05-18T21:30:06.804Z",
-  "total": 981,
-  "fixes": [],
+  "date": "2026-05-18T22:32:17.665Z",
+  "total": 987,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 6,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-13b1bw",
+      "value": "Neymar included in Brazil's 26-man World Cup squad"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-xkxvep",
+      "value": "Big motivation if people want Spurs down - De Zerbi"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1w19u0",
+      "value": "Guardiola's legacy of genius will echo through all ages for "
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-h2rs13",
+      "sport": "football",
+      "image": "/generated/ft-h2rs13.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-13b1bw",
+      "sport": "football",
+      "image": "/generated/ft-13b1bw.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-bg6s65",
+      "sport": "football",
+      "image": "/generated/ft-bg6s65.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-xkxvep",
+      "sport": "football",
+      "image": "/generated/ft-xkxvep.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1w19u0",
+      "sport": "football",
+      "image": "/generated/ft-1w19u0.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-b1go7n",
+      "sport": "football",
+      "image": "/generated/ft-b1go7n.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 447,
+      "count": 450,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 980,
+      "count": 986,
       "action": "needs_llm_backfill"
     },
     {
@@ -1596,11 +1653,11 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 447,
-    "missing_fr_title": 980,
+    "fixes_applied": 3,
+    "warnings": 9,
+    "missing_images": 6,
+    "missing_en_title": 450,
+    "missing_fr_title": 986,
     "sport_mismatches_fixed": 0,
     "duplicates": 394
   }
