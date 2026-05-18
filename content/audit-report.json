@@ -1,48 +1,8 @@
 {
-  "date": "2026-05-18T21:01:52.691Z",
-  "total": 972,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 4,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-dqhzc3",
-      "value": "Man City's Shaw wins WSL Player of the Season"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ucl-1kck0z-1779138103496",
-      "value": "Meet the UEFA Conference League finalists - UEFA.com"
-    }
-  ],
+  "date": "2026-05-18T21:08:46.456Z",
+  "total": 971,
+  "fixes": [],
   "warnings": [
-    {
-      "type": "missing_image",
-      "slug": "ft-1tffhq",
-      "sport": "football",
-      "image": "/generated/ft-1tffhq.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-dqhzc3",
-      "sport": "football",
-      "image": "/generated/ft-dqhzc3.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-6tp3ra",
-      "sport": "football",
-      "image": "/generated/ft-6tp3ra.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ucl-1kck0z-1779138103496",
-      "sport": "football",
-      "image": "/generated/ucl-1kck0z-1779138103496.png"
-    },
     {
       "type": "missing_en_title",
       "count": 442,
@@ -50,7 +10,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 971,
+      "count": 970,
       "action": "needs_llm_backfill"
     },
     {
@@ -67,6 +27,10 @@
         {
           "slug": "ft-1qme2d",
           "duplicate_of": "ft-efccin"
+        },
+        {
+          "slug": "epl-g5507g",
+          "duplicate_of": "epl-drefus"
         },
         {
           "slug": "liga-1fre7q",
@@ -361,16 +325,20 @@
           "duplicate_of": "epl-hxmk9b"
         },
         {
+          "slug": "tennis-gx1mpb-1779134686808",
+          "duplicate_of": "tennis-gx1mpb-1779138378810"
+        },
+        {
           "slug": "tennis-gx1mpb-1779132513600",
-          "duplicate_of": "tennis-gx1mpb-1779134686808"
+          "duplicate_of": "tennis-gx1mpb-1779138378810"
         },
         {
           "slug": "tennis-gx1mpb",
-          "duplicate_of": "tennis-gx1mpb-1779134686808"
+          "duplicate_of": "tennis-gx1mpb-1779138378810"
         },
         {
           "slug": "tennis-1mh90u",
-          "duplicate_of": "tennis-gx1mpb-1779134686808"
+          "duplicate_of": "tennis-gx1mpb-1779138378810"
         },
         {
           "slug": "ft-1s13ei",
@@ -419,10 +387,6 @@
         {
           "slug": "epl-fal0dx",
           "duplicate_of": "epl-hxmk9b"
-        },
-        {
-          "slug": "ucl-1kck0z-1779138103496",
-          "duplicate_of": "ucl-1kck0z"
         },
         {
           "slug": "ucl-xese6p-1779119798463",
@@ -1612,12 +1576,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 2,
-    "warnings": 7,
-    "missing_images": 4,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
     "missing_en_title": 442,
-    "missing_fr_title": 971,
+    "missing_fr_title": 970,
     "sport_mismatches_fixed": 0,
-    "duplicates": 388
+    "duplicates": 389
   }
 }
