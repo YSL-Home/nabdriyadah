@@ -40,9 +40,8 @@ export default function FrArticlePage({ params }) {
 
   const title       = article.fr_title       || article.sourceTitle || article.title;
   const description = article.fr_description || article.description;
-  // Préférer le corps en français ; sinon afficher l'arabe avec une notice
+  // Afficher uniquement le corps en français quand disponible — jamais de repli sur l'arabe
   const hasFrContent = Boolean(article.fr_content?.trim());
-  const bodyText     = hasFrContent ? article.fr_content : article.content;
 
   const leagueHref = article.league && article.league !== "mixed"
     ? `/fr/league/${article.league}/` : "/fr/";
@@ -79,16 +78,27 @@ export default function FrArticlePage({ params }) {
           background: "var(--bg-card)", borderRadius: "20px", padding: "32px",
           border: "1px solid var(--border)", boxShadow: "var(--shadow)"
         }}>
-          {!hasFrContent && (
+          {hasFrContent ? (
+            <ArticleBody text={article.fr_content} dir="ltr" />
+          ) : (
             <div style={{
-              background: "var(--accent-soft)", border: "1px solid var(--accent)", borderRadius: "12px",
-              padding: "14px 18px", marginBottom: "24px", fontSize: "14px", color: "var(--accent)", fontWeight: 600
+              textAlign: "center", padding: "40px 20px",
+              color: "var(--text-2)", fontSize: "16px", lineHeight: 1.8
             }}>
-              📖 Traduction française en cours — le titre et le résumé sont traduits ci-dessus
+              <div style={{ fontSize: "40px", marginBottom: "16px" }}>🔄</div>
+              <p style={{ fontWeight: 700, color: "var(--text-1)", marginBottom: "10px", fontSize: "18px" }}>
+                Article complet en français bientôt disponible.
+              </p>
+              <p style={{ marginBottom: "16px" }}>
+                Notre équipe est en train de traduire cet article. Revenez prochainement pour la version complète en français.
+              </p>
+              {description && (
+                <p style={{ fontSize: "15px", fontStyle: "italic", color: "var(--text-2)", maxWidth: "600px", margin: "0 auto" }}>
+                  {description}
+                </p>
+              )}
             </div>
           )}
-
-          <ArticleBody text={bodyText} dir={hasFrContent ? "ltr" : "rtl"} />
 
           {/* Source */}
           {article.source && (
