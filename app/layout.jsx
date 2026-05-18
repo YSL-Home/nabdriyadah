@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Anti-flash: CLAIR par défaut — sombre seulement 20h–6h ou préférence système */}
         <script dangerouslySetInnerHTML={{ __html:
-          `(function(){var h=new Date().getHours(),night=h<6||h>=20;var dark=night||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(dark){document.documentElement.setAttribute('data-theme','dark');}})();`
+          `(function(){var h=new Date().getHours(),night=h<6||h>=20;var dark=night||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&!night===false);if(dark){document.documentElement.setAttribute('data-theme','dark');}})();`
         }} />
         {/* Google AdSense — auto-ads activés sur tout le site */}
         {(process.env.NEXT_PUBLIC_ADSENSE_ID || "ca-pub-6870790039775701") && (
