@@ -114,12 +114,12 @@ function pickUnsplash(league, sport, slug = "") {
 export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, style }) {
   const gradient = GRADIENTS[sport] || GRADIENTS.football;
 
-  // Si src pointe vers /generated/ (non-existant), on ignore et on prend Unsplash directement
-  const isGenerated = typeof src === "string" && src.startsWith("/generated/");
-  const primarySrc = isGenerated
-    ? (imageUrl || pickUnsplash(league, sport, slug))
-    : (src || imageUrl || pickUnsplash(league, sport, slug));
-
+  // Priorité d'affichage :
+  // 1. Image générée /generated/slug.png (unique par article, basée sur la source)
+  // 2. Unsplash sport-spécifique (toujours pertinent, jamais hors-sujet)
+  // imageUrl (RSS) n'est PAS utilisé pour l'affichage — peut pointer vers n'importe quelle image
+  // (ex: BBC envoie des thumbnails 240px hors-sujet pour des articles basketball → golf)
+  const primarySrc = (src && !src.includes("unsplash")) ? src : pickUnsplash(league, sport, slug);
   const fallbackSrc = pickUnsplash(league, sport, slug);
 
   return (
@@ -133,7 +133,7 @@ export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, 
           const el = e.currentTarget;
           if (el.dataset.fallback) { el.style.display = "none"; return; }
           el.dataset.fallback = "1";
-          el.src = el.src !== fallbackSrc ? fallbackSrc : "";
+          el.src = fallbackSrc;
           if (!el.src) el.style.display = "none";
         }}
       />

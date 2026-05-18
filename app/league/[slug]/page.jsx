@@ -943,14 +943,15 @@ export default function LeaguePage({ params }) {
             {standings.slice(0, 20).map((player, i) => {
               // Build player page href for tennis (ATP/WTA) and F1
               let playerHref = null;
+              const toSlug = (n) => n ? n.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : null;
               if (standingsType === "f1-rankings" && player.slug) {
                 playerHref = `/player/f1/${player.slug}/`;
               } else if (standingsType === "tennis-rankings") {
-                // Convert player name to slug (e.g. "Jannik Sinner" → "jannik-sinner")
-                const nameSlug = player.name
-                  ? player.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
-                  : null;
-                if (nameSlug) playerHref = `/player/tennis/${nameSlug}/`;
+                const s = player.slug || toSlug(player.name);
+                if (s) playerHref = `/player/tennis/${s}/`;
+              } else if (standingsType === "golf-rankings") {
+                const s = player.slug || toSlug(player.name);
+                if (s) playerHref = `/player/golf/${s}/`;
               }
               const rowContent = (
                 <div style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 80px", gap: "4px", padding: "10px 12px", borderRadius: "12px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "4px", cursor: playerHref ? "pointer" : "default" }}>
@@ -1079,14 +1080,18 @@ export default function LeaguePage({ params }) {
                   <span style={{ textAlign: "center" }}>🌍</span>
                   <span style={{ textAlign: "center" }}>نقاط</span>
                 </div>
-                {padelMen.map((player, i) => (
-                  <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px" }}>
-                    <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
-                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
-                    <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
-                  </div>
-                ))}
+                {padelMen.map((player, i) => {
+                  const ps = player.slug || (player.name ? player.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") : null);
+                  const row = (
+                    <div style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px", cursor: ps ? "pointer" : "default" }}>
+                      <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
+                      <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
+                      <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
+                    </div>
+                  );
+                  return ps ? <Link key={ps+i} href={`/player/padel/${ps}/`} style={{ textDecoration: "none", color: "inherit" }}>{row}</Link> : <div key={i}>{row}</div>;
+                })}
               </section>
             )}
             {/* Femmes */}
@@ -1102,14 +1107,18 @@ export default function LeaguePage({ params }) {
                   <span style={{ textAlign: "center" }}>🌍</span>
                   <span style={{ textAlign: "center" }}>نقاط</span>
                 </div>
-                {padelWomen.map((player, i) => (
-                  <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px" }}>
-                    <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
-                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
-                    <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
-                  </div>
-                ))}
+                {padelWomen.map((player, i) => {
+                  const ps = player.slug || (player.name ? player.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") : null);
+                  const row = (
+                    <div style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px", cursor: ps ? "pointer" : "default" }}>
+                      <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
+                      <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
+                      <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
+                    </div>
+                  );
+                  return ps ? <Link key={ps+i} href={`/player/padel/${ps}/`} style={{ textDecoration: "none", color: "inherit" }}>{row}</Link> : <div key={i}>{row}</div>;
+                })}
               </section>
             )}
           </div>
