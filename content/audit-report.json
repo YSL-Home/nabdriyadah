@@ -1,16 +1,67 @@
 {
-  "date": "2026-05-18T17:31:52.503Z",
-  "total": 952,
-  "fixes": [],
+  "date": "2026-05-18T18:07:12.600Z",
+  "total": 957,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-18aid5",
+      "value": "Clarke's key questions for Scotland World Cup squad"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-311v49",
+      "value": "Leeds promise bans over homophobic chants"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1r24yo",
+      "value": "PGMO admits handball error on Man Utd goal v Forest"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-18aid5",
+      "sport": "football",
+      "image": "/generated/ft-18aid5.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-311v49",
+      "sport": "football",
+      "image": "/generated/ft-311v49.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-12uobm",
+      "sport": "football",
+      "image": "/generated/ft-12uobm.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1r24yo",
+      "sport": "football",
+      "image": "/generated/ft-1r24yo.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-fxissq",
+      "sport": "football",
+      "image": "/generated/ft-fxissq.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 427,
+      "count": 429,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 951,
+      "count": 956,
       "action": "needs_llm_backfill"
     },
     {
@@ -1544,11 +1595,11 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 427,
-    "missing_fr_title": 951,
+    "fixes_applied": 3,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 429,
+    "missing_fr_title": 956,
     "sport_mismatches_fixed": 0,
     "duplicates": 381
   }
