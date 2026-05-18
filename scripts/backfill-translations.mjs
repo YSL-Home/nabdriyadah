@@ -191,7 +191,14 @@ async function main() {
           if (updated) { totalFixed++; changed = true; console.log(`  ✓ ${t.slug} — EN: ${t.en_title?.slice(0, 50) || "—"}`); }
         }
       } catch (err) {
-        console.log(`  ⚠ Batch ${batchNum} échoué: ${err.message.slice(0, 100)}`);
+        const msg = err.message || "";
+        console.log(`  ⚠ Batch ${batchNum} échoué: ${msg.slice(0, 120)}`);
+        // Arrêt immédiat si erreur fatale (crédit insuffisant, clé invalide, compte désactivé)
+        if (/credit|invalid.*key|deactivated|permission|Your cre/i.test(msg)) {
+          console.log("  ⛔ Erreur fatale Anthropic — arrêt immédiat du backfill.");
+          if (changed) fs.writeFileSync(ARTICLES_PATH, JSON.stringify(articles, null, 2), "utf-8");
+          process.exit(0);
+        }
       }
 
       if (i + BATCH < needsTranslation.length) await sleep(DELAY_MS);
@@ -224,7 +231,13 @@ async function main() {
           if (updated) { totalFixed++; changed = true; console.log(`  ✓ Corps ${t.slug} — EN/FR OK`); }
         }
       } catch (err) {
-        console.log(`  ⚠ Batch corps ${batchNum} échoué: ${err.message.slice(0, 100)}`);
+        const msg = err.message || "";
+        console.log(`  ⚠ Batch corps ${batchNum} échoué: ${msg.slice(0, 120)}`);
+        if (/credit|invalid.*key|deactivated|permission|Your cre/i.test(msg)) {
+          console.log("  ⛔ Erreur fatale Anthropic — arrêt immédiat.");
+          if (changed) fs.writeFileSync(ARTICLES_PATH, JSON.stringify(articles, null, 2), "utf-8");
+          process.exit(0);
+        }
       }
 
       if (i + BATCH_CONTENT < needsContent.length) await sleep(DELAY_MS * 2);
