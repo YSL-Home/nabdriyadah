@@ -1,16 +1,73 @@
 {
-  "date": "2026-05-18T13:52:45.177Z",
-  "total": 902,
-  "fixes": [],
+  "date": "2026-05-18T14:39:22.649Z",
+  "total": 908,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 6,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-av484u-1779114449483",
+      "value": "Raducanu reunited full-time with coach from US Open win"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-oyj2sr-1779114448734",
+      "value": "NBA playoffs 2026: 10 lessons from strange Round 1, impact o"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-1ai6zr-1779114448903",
+      "value": "2026 NBA playoff bracket, schedule: Cavaliers oust Pistons, "
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-11r1m6",
+      "sport": "football",
+      "image": "/generated/ft-11r1m6.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-n1srge",
+      "sport": "football",
+      "image": "/generated/ft-n1srge.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-oyv785",
+      "sport": "football",
+      "image": "/generated/ft-oyv785.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-av484u-1779114449483",
+      "sport": "tennis",
+      "image": "/generated/tennis-av484u-1779114449483.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-oyj2sr-1779114448734",
+      "sport": "basketball",
+      "image": "/generated/bball-oyj2sr-1779114448734.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-1ai6zr-1779114448903",
+      "sport": "basketball",
+      "image": "/generated/bball-1ai6zr-1779114448903.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 402,
+      "count": 405,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 901,
+      "count": 907,
       "action": "needs_llm_backfill"
     },
     {
@@ -329,8 +386,12 @@
           "duplicate_of": "liga-14s9av"
         },
         {
+          "slug": "tennis-av484u-1779110853870",
+          "duplicate_of": "tennis-av484u-1779114449483"
+        },
+        {
           "slug": "tennis-av484u",
-          "duplicate_of": "tennis-av484u-1779110853870"
+          "duplicate_of": "tennis-av484u-1779114449483"
         },
         {
           "slug": "ft-1bddls",
@@ -1273,6 +1334,10 @@
           "duplicate_of": "ucl-1pjhzc-1778885504707"
         },
         {
+          "slug": "bball-oyj2sr",
+          "duplicate_of": "bball-oyj2sr-1779114448734"
+        },
+        {
           "slug": "ucl-9hk21i-1778848343219",
           "duplicate_of": "ucl-9hk21i-1778855044219"
         },
@@ -1303,6 +1368,10 @@
         {
           "slug": "bball-47e3q2",
           "duplicate_of": "bball-47e3q2-1779102107376"
+        },
+        {
+          "slug": "bball-1ai6zr-1779114448903",
+          "duplicate_of": "bball-e0rnnt-1778856181013"
         },
         {
           "slug": "bball-1ai6zr-1779110852879",
@@ -1472,12 +1541,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 402,
-    "missing_fr_title": 901,
+    "fixes_applied": 3,
+    "warnings": 9,
+    "missing_images": 6,
+    "missing_en_title": 405,
+    "missing_fr_title": 907,
     "sport_mismatches_fixed": 0,
-    "duplicates": 363
+    "duplicates": 366
   }
 }
