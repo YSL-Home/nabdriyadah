@@ -19,6 +19,30 @@ const footballLeagues = [
   { slug: "eredivisie",     title: "الدوري الهولندي",          country: "هولندا",   color: "#b91c1c", border: "#fecaca", logo: `${CDN}/88.png`,  logoBg: "#991b1b" }
 ];
 
+// Leagues / compétitions par sport (non-football)
+const sportLeagues = {
+  basketball: [
+    { slug: "nba",        title: "NBA — الدوري الأمريكي",            logo: "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",         color: "#c2410c" },
+    { slug: "euroleague", title: "يورو ليغ — كرة السلة الأوروبية",  logo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/06/EuroLeague_Basketball_logo.svg/200px-EuroLeague_Basketball_logo.svg.png", color: "#b45309" },
+  ],
+  tennis: [
+    { slug: "atp", title: "ATP — ترتيب الرجال",  logo: "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/ATP_Tour_logo.svg/200px-ATP_Tour_logo.svg.png", color: "#1d4ed8" },
+    { slug: "wta", title: "WTA — ترتيب السيدات", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/WTA_logo_2010.svg/200px-WTA_logo_2010.svg.png", color: "#7c3aed" },
+  ],
+  padel: [
+    { slug: "padel-premier", title: "Premier Padel — الترتيب العالمي", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/200px-Premier_Padel_logo.svg.png", color: "#7c3aed" },
+  ],
+  futsal: [
+    { slug: "futsal-monde", title: "كأس العالم للصالات — FIFA", logo: "https://media.api-sports.io/football/leagues/1.png", color: "#0f766e" },
+  ],
+  f1: [
+    { slug: "f1", title: "فورمولا 1 — بطولة العالم", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/200px-F1.svg.png", color: "#dc2626" },
+  ],
+  golf: [
+    { slug: "pga-tour", title: "PGA Tour — الترتيب العالمي", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/PGA_Tour_logo.svg/200px-PGA_Tour_logo.svg.png", color: "#16a34a" },
+  ],
+};
+
 const globalCompetitions = [
   { slug: "world-cup",           title: "كأس العالم",         country: "FIFA",  color: "#818cf8", border: "#ddd6fe", logo: `${CDN}/1.png`,  logoBg: "#003087" },
   { slug: "euro",                title: "يورو",               country: "UEFA",  color: "#60a5fa", border: "#bfdbfe", logo: `${CDN}/4.png`,  logoBg: "#001b6e" },
@@ -263,6 +287,40 @@ export default function SportPage({ params }) {
         </section>
 
         <AdSlot label="مساحة إعلانية أعلى الصفحة" minHeight={90} style={{ marginBottom: 24 }} />
+
+        {/* ── Grille des leagues / classements pour les sports non-football ── */}
+        {sportLeagues[params.slug] && (
+          <section style={{ marginBottom: "36px" }}>
+            <h2 style={{ margin: "0 0 18px 0", fontSize: "28px", fontWeight: 800, color: "#111827" }}>البطولات والتصنيفات</h2>
+            <div className="g4">
+              {sportLeagues[params.slug].map((league) => (
+                <Link key={league.slug} href={`/league/${league.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                  <div style={{
+                    background: "white",
+                    border: `1px solid ${sport.border}`,
+                    borderTop: `4px solid ${league.color}`,
+                    borderRadius: "22px",
+                    padding: "20px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
+                    cursor: "pointer",
+                    transition: "box-shadow .2s"
+                  }}>
+                    <img src={league.logo} alt={league.title} width={52} height={52}
+                      style={{ objectFit: "contain", flexShrink: 0, borderRadius: "8px" }}
+                      onError={e => { e.currentTarget.style.display = "none"; }} />
+                    <div>
+                      <div style={{ fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.3 }}>{league.title}</div>
+                      <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>عرض الجدول والترتيب ←</div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {sportArticles.length === 0 ? (
           <section style={{ background: "white", borderRadius: "28px", padding: "40px", border: `1px solid ${sport.border}`, textAlign: "center" }}>

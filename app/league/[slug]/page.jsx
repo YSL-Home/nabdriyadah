@@ -457,6 +457,31 @@ const leagueMap = {
     ]
   },
 
+  // ── EuroLeague Basketball ───────────────────────────────────────────────
+  "euroleague": {
+    title: "يورو ليغ — كرة السلة الأوروبية",
+    shortLabel: "EL",
+    type: "basketball",
+    sport: "basketball",
+    description: "تابع أحدث أخبار يورو ليغ لكرة السلة الأوروبية، ريال مدريد وأولمبياكوس وأبرز الأندية.",
+    leagueLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/06/EuroLeague_Basketball_logo.svg/200px-EuroLeague_Basketball_logo.svg.png",
+    theme: {
+      pageBg: "#fff7ed", heroFrom: "#431407", heroTo: "#b45309",
+      primary: "#b45309", primarySoft: "#fef3c7", border: "#fde68a",
+      cardBg: "#ffffff", text: "#111827", subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)", badgeText: "#ffffff"
+    },
+    highlights: ["ريال مدريد", "أولمبياكوس", "باناثينايكوس", "أندية أوروبا الكبرى"],
+    teams: [
+      { name: "ريال مدريد",      slug: "real-madrid-basket",   logo: "https://a.espncdn.com/i/teamlogos/euroleague/500/mad.png" },
+      { name: "أولمبياكوس",      slug: "olympiacos",           logo: "https://a.espncdn.com/i/teamlogos/euroleague/500/oly.png" },
+      { name: "باناثينايكوس",    slug: "panathinaikos",        logo: "https://a.espncdn.com/i/teamlogos/euroleague/500/pan.png" },
+      { name: "ماكابي تل أبيب",  slug: "maccabi-tel-aviv",     logo: "https://a.espncdn.com/i/teamlogos/euroleague/500/mac.png" },
+      { name: "فينيكس ميلان",    slug: "ea7-milan",            logo: "https://a.espncdn.com/i/teamlogos/euroleague/500/mil.png" },
+      { name: "CSKA موسكو",       slug: "cska-moscow",          logo: "https://a.espncdn.com/i/teamlogos/euroleague/500/csk.png" },
+    ]
+  },
+
   // ── Tennis ATP ──────────────────────────────────────────────────────────
   "atp": {
     title: "بطولة ATP للرجال — التنس",
