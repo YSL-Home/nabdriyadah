@@ -252,6 +252,16 @@ export default function F1DriverPage({ params }) {
     .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
     .slice(0, 6);
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": driver.name,
+    "alternateName": nameAr,
+    "nationality": countryAr || driver.country,
+    "url": `https://nabdriyadah.com/player/f1/${driver.slug}/`,
+    "description": `سائق الفورمولا 1 ${nameAr}، المركز ${driver.rank} في بطولة العالم F1 2026 مع فريق ${teamAr}.`
+  };
+
   return (
     <main
       style={{
@@ -261,6 +271,10 @@ export default function F1DriverPage({ params }) {
         direction: "rtl"
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       {/* Hero */}
       <section
         style={{

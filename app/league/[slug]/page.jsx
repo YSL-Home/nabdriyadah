@@ -582,6 +582,31 @@ const leagueMap = {
     teams: []
   },
 
+  // ── EuroLeague Basketball ───────────────────────────────────────────────
+  "euroleague": {
+    title: "دوري أبطال أوروبا للسلة — EuroLeague",
+    shortLabel: "EL",
+    type: "basketball",
+    sport: "basketball",
+    description: "تابع أخبار يورو ليغ لكرة السلة، أبرز الأندية واللاعبين والنتائج.",
+    leagueLogo: "https://a.espncdn.com/i/teamlogos/leagues/500/euroleague.png",
+    theme: {
+      pageBg: "#fff7ed",
+      heroFrom: "#431407",
+      heroTo: "#c2410c",
+      primary: "#c2410c",
+      primarySoft: "#ffedd5",
+      border: "#fed7aa",
+      cardBg: "#ffffff",
+      text: "#111827",
+      subtext: "#4b5563",
+      badgeBg: "rgba(255,255,255,0.16)",
+      badgeText: "#ffffff"
+    },
+    highlights: ["ريال مدريد", "أولمبياكوس", "الأندية الأوروبية"],
+    teams: []
+  },
+
   // ── Golf ────────────────────────────────────────────────────────────────
   "pga-tour": {
     title: "بطولة PGA Tour — الغولف",
@@ -916,7 +941,7 @@ export default function LeaguePage({ params }) {
               <span style={{ textAlign: "center" }}>النقاط</span>
             </div>
             {standings.slice(0, 20).map((player, i) => {
-              // Build player page href for tennis (ATP/WTA) and F1
+              // Build player page href for tennis (ATP/WTA), F1 and Golf
               let playerHref = null;
               if (standingsType === "f1-rankings" && player.slug) {
                 playerHref = `/player/f1/${player.slug}/`;
@@ -926,6 +951,8 @@ export default function LeaguePage({ params }) {
                   ? player.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
                   : null;
                 if (nameSlug) playerHref = `/player/tennis/${nameSlug}/`;
+              } else if (standingsType === "golf-rankings" && player.slug) {
+                playerHref = `/player/golf/${player.slug}/`;
               }
               const rowContent = (
                 <div style={{ display: "grid", gridTemplateColumns: "36px 1fr 60px 80px", gap: "4px", padding: "10px 12px", borderRadius: "12px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "4px", cursor: playerHref ? "pointer" : "default" }}>
@@ -1054,14 +1081,19 @@ export default function LeaguePage({ params }) {
                   <span style={{ textAlign: "center" }}>🌍</span>
                   <span style={{ textAlign: "center" }}>نقاط</span>
                 </div>
-                {padelMen.map((player, i) => (
-                  <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px" }}>
-                    <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
-                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
-                    <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
-                  </div>
-                ))}
+                {padelMen.map((player, i) => {
+                  const rowContent = (
+                    <div style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px", cursor: player.slug ? "pointer" : "default" }}>
+                      <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
+                      <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
+                      <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
+                    </div>
+                  );
+                  return player.slug
+                    ? <Link key={player.slug || i} href={`/player/padel/${player.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>{rowContent}</Link>
+                    : <div key={player.slug || i}>{rowContent}</div>;
+                })}
               </section>
             )}
             {/* Femmes */}
@@ -1077,14 +1109,19 @@ export default function LeaguePage({ params }) {
                   <span style={{ textAlign: "center" }}>🌍</span>
                   <span style={{ textAlign: "center" }}>نقاط</span>
                 </div>
-                {padelWomen.map((player, i) => (
-                  <div key={player.slug || i} style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px" }}>
-                    <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
-                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
-                    <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
-                    <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
-                  </div>
-                ))}
+                {padelWomen.map((player, i) => {
+                  const rowContent = (
+                    <div style={{ display: "grid", gridTemplateColumns: "28px 1fr 44px 60px", gap: "4px", padding: "9px 10px", borderRadius: "10px", alignItems: "center", background: i < 3 ? theme.primarySoft : "transparent", border: `1px solid ${i < 3 ? theme.border : "transparent"}`, marginBottom: "3px", cursor: player.slug ? "pointer" : "default" }}>
+                      <span style={{ textAlign: "center", fontWeight: 800, fontSize: "13px", width: "22px", height: "22px", borderRadius: "50%", background: i === 0 ? theme.primary : "transparent", color: i === 0 ? "white" : i < 3 ? theme.primary : "#9ca3af", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{player.rank || i + 1}</span>
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{player.name}</span>
+                      <span style={{ textAlign: "center", fontSize: "11px", color: "#6b7280", fontWeight: 600, background: "#f3f4f6", borderRadius: "6px", padding: "2px 4px" }}>{player.country || "—"}</span>
+                      <span style={{ textAlign: "center", fontSize: "13px", fontWeight: 800, color: theme.primary }}>{(player.points / 1000).toFixed(0)}k</span>
+                    </div>
+                  );
+                  return player.slug
+                    ? <Link key={player.slug || i} href={`/player/padel/${player.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>{rowContent}</Link>
+                    : <div key={player.slug || i}>{rowContent}</div>;
+                })}
               </section>
             )}
           </div>
@@ -1512,6 +1549,24 @@ export default function LeaguePage({ params }) {
         })()}
 
         <AdSlot label="مساحة إعلانية وسط صفحة البطولة" minHeight={120} style={{ marginBottom: 24 }} />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SportsOrganization",
+              "name": league.title,
+              "description": league.description,
+              "url": `https://nabdriyadah.com/league/${params.slug}/`,
+              "sport": league.sport || "football",
+              "logo": {
+                "@type": "ImageObject",
+                "url": league.leagueLogo
+              }
+            })
+          }}
+        />
 
         {leagueArticles.length === 0 ? (
           <section

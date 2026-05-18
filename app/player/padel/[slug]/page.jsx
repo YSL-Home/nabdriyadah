@@ -4,37 +4,37 @@ import fs from "fs";
 import path from "path";
 import articles from "../../../../content/articles/seo-articles.json";
 
-function loadTennisTop20() {
+function loadPadelTop40() {
   try {
-    const p = path.join(process.cwd(), "content/players/tennis-top20.json");
+    const p = path.join(process.cwd(), "content/players/padel-top40.json");
     const d = JSON.parse(fs.readFileSync(p, "utf-8"));
-    return [...(d.atp || []), ...(d.wta || [])];
+    return [...(d.men || []), ...(d.women || [])];
   } catch {
     return [];
   }
 }
 
 export function generateStaticParams() {
-  const players = loadTennisTop20();
+  const players = loadPadelTop40();
   return players.map((p) => ({ slug: p.slug }));
 }
 
 export function generateMetadata({ params }) {
-  const players = loadTennisTop20();
+  const players = loadPadelTop40();
   const player = players.find((p) => p.slug === params.slug);
   if (!player) return { title: "لاعب غير موجود" };
 
-  const tour = player.tour === "wta" ? "WTA" : "ATP";
+  const genderLabel = player.gender === "F" ? "سيدات" : "رجال";
   return {
-    title: `${player.nameAr} — المركز ${player.rank} ${tour} | نبض الرياضة`,
-    description: `صفحة اللاعب ${player.nameAr}، المركز ${player.rank} في تصنيف ${tour} العالمي بـ ${player.points?.toLocaleString()} نقطة.`,
+    title: `${player.nameAr} — المركز ${player.rank} Premier Padel ${genderLabel} | نبض الرياضة`,
+    description: `صفحة لاعب البادل ${player.nameAr}، المركز ${player.rank} في تصنيف Premier Padel ${genderLabel} بـ ${player.points?.toLocaleString()} نقطة.`,
     alternates: {
-      canonical: `https://nabdriyadah.com/player/tennis/${params.slug}/`
+      canonical: `https://nabdriyadah.com/player/padel/${params.slug}/`
     },
     openGraph: {
-      title: `${player.nameAr} — ${tour}`,
-      description: `تصنيف ${player.nameAr} في بطولة ${tour}`,
-      url: `https://nabdriyadah.com/player/tennis/${params.slug}/`,
+      title: `${player.nameAr} — البادل`,
+      description: `تصنيف ${player.nameAr} في Premier Padel`,
+      url: `https://nabdriyadah.com/player/padel/${params.slug}/`,
       siteName: "نبض الرياضة",
       locale: "ar_AR",
       type: "profile"
@@ -42,38 +42,28 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function TennisPlayerPage({ params }) {
-  const players = loadTennisTop20();
+export default function PadelPlayerPage({ params }) {
+  const players = loadPadelTop40();
   const player = players.find((p) => p.slug === params.slug);
 
   if (!player) {
     notFound();
   }
 
-  const isWTA = player.tour === "wta";
-  const tour = isWTA ? "WTA" : "ATP";
+  const isWoman = player.gender === "F";
+  const genderLabel = isWoman ? "سيدات" : "رجال";
 
-  const theme = isWTA
-    ? {
-        heroFrom: "#4a044e",
-        heroTo: "#a21caf",
-        primary: "#a21caf",
-        primarySoft: "#fae8ff",
-        border: "#f0abfc",
-        pageBg: "#fdf4ff"
-      }
-    : {
-        heroFrom: "#052e16",
-        heroTo: "#15803d",
-        primary: "#15803d",
-        primarySoft: "#dcfce7",
-        border: "#bbf7d0",
-        pageBg: "#f0fdf4"
-      };
+  const theme = {
+    heroFrom: "#2e1065",
+    heroTo: "#7c3aed",
+    primary: "#7c3aed",
+    primarySoft: "#ede9fe",
+    border: "#ddd6fe",
+    pageBg: "#f5f3ff"
+  };
 
-  // Articles tennis liés
   const relatedArticles = articles
-    .filter((a) => a.slug && a.sport === "tennis")
+    .filter((a) => a.slug && a.sport === "padel")
     .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
     .slice(0, 6);
 
@@ -83,8 +73,8 @@ export default function TennisPlayerPage({ params }) {
     "name": player.name,
     "alternateName": player.nameAr,
     "nationality": player.countryAr || player.country,
-    "url": `https://nabdriyadah.com/player/tennis/${player.slug}/`,
-    "description": `لاعب التنس ${player.nameAr}، المركز ${player.rank} في تصنيف ${tour} العالمي بـ ${player.points?.toLocaleString()} نقطة.`
+    "url": `https://nabdriyadah.com/player/padel/${player.slug}/`,
+    "description": `لاعب البادل ${player.nameAr}، المركز ${player.rank} في تصنيف Premier Padel ${genderLabel} بـ ${player.points?.toLocaleString()} نقطة.`
   };
 
   return (
@@ -100,6 +90,7 @@ export default function TennisPlayerPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
+
       {/* Hero */}
       <section
         style={{
@@ -123,7 +114,7 @@ export default function TennisPlayerPage({ params }) {
         />
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <Link
-            href={`/league/${player.tour}/`}
+            href="/league/padel-premier/"
             style={{
               display: "inline-block",
               color: "white",
@@ -134,7 +125,7 @@ export default function TennisPlayerPage({ params }) {
               marginBottom: "20px"
             }}
           >
-            ← العودة إلى تصنيف {tour}
+            ← العودة إلى تصنيف Premier Padel
           </Link>
 
           <div style={{ display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
@@ -154,7 +145,7 @@ export default function TennisPlayerPage({ params }) {
               }}
             >
               <span style={{ fontSize: "28px", fontWeight: 900, lineHeight: 1 }}>{player.rank}</span>
-              <span style={{ fontSize: "11px", opacity: 0.85, fontWeight: 600 }}>{tour}</span>
+              <span style={{ fontSize: "11px", opacity: 0.85, fontWeight: 600 }}>PADEL</span>
             </div>
 
             <div style={{ flex: 1, minWidth: 0 }}>
@@ -170,7 +161,7 @@ export default function TennisPlayerPage({ params }) {
                   marginBottom: "12px"
                 }}
               >
-                {tour} — {isWTA ? "سيدات" : "رجال"}
+                Premier Padel — {genderLabel}
               </div>
               <h1
                 style={{
@@ -209,9 +200,9 @@ export default function TennisPlayerPage({ params }) {
         >
           {[
             { label: "التصنيف العالمي", value: `#${player.rank}`, color: theme.primary },
-            { label: "النقاط", value: player.points?.toLocaleString() || "—", color: "#374151" },
+            { label: "نقاط Premier Padel", value: player.points?.toLocaleString() || "—", color: "#374151" },
             { label: "الجنسية", value: player.countryAr || player.country, color: "#374151" },
-            { label: "الجولة", value: tour, color: theme.primary }
+            { label: "الفئة", value: genderLabel, color: theme.primary }
           ].map((stat, i) => (
             <div
               key={i}
@@ -241,72 +232,7 @@ export default function TennisPlayerPage({ params }) {
           ))}
         </section>
 
-        {/* Palmarès Grand Chelems */}
-        {player.grandSlams && player.grandSlams.length > 0 && (
-          <section
-            style={{
-              background: "white",
-              borderRadius: "24px",
-              padding: "24px",
-              border: `1px solid ${theme.border}`,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-              marginBottom: "24px"
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
-              <div
-                style={{
-                  width: "5px",
-                  height: "26px",
-                  borderRadius: "999px",
-                  background: theme.primary
-                }}
-              />
-              <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>
-                ألقاب غراند سلام ({player.grandSlams.length})
-              </span>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {player.grandSlams.map((slam, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "14px",
-                    padding: "14px 16px",
-                    background: theme.primarySoft,
-                    borderRadius: "14px",
-                    border: `1px solid ${theme.border}`
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "50%",
-                      background: theme.primary,
-                      color: "white",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "14px",
-                      fontWeight: 800,
-                      flexShrink: 0
-                    }}
-                  >
-                    {i + 1}
-                  </div>
-                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827" }}>
-                    {slam.nameAr}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Infos drapeau */}
+        {/* Profil */}
         <section
           style={{
             background: "white",
@@ -332,9 +258,9 @@ export default function TennisPlayerPage({ params }) {
               { label: "الاسم الكامل", value: player.name },
               { label: "الاسم بالعربية", value: player.nameAr },
               { label: "الجنسية", value: player.countryAr || player.country },
-              { label: "التصنيف الحالي", value: `#${player.rank} ${tour}` },
-              { label: "النقاط الحالية", value: player.points?.toLocaleString() || "—" },
-              { label: "الجولة", value: tour === "ATP" ? "ATP Tour (رجال)" : "WTA Tour (سيدات)" }
+              { label: "التصنيف الحالي", value: `#${player.rank} Premier Padel` },
+              { label: "النقاط", value: player.points?.toLocaleString() || "—" },
+              { label: "الفئة", value: `Premier Padel (${genderLabel})` }
             ].map((item, i) => (
               <div
                 key={i}
@@ -362,7 +288,7 @@ export default function TennisPlayerPage({ params }) {
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
               <div style={{ width: "5px", height: "26px", borderRadius: "999px", background: theme.primary }} />
               <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>
-                أحدث أخبار التنس
+                أحدث أخبار البادل
               </span>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
@@ -378,8 +304,7 @@ export default function TennisPlayerPage({ params }) {
                       borderRadius: "18px",
                       overflow: "hidden",
                       border: `1px solid ${theme.border}`,
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.04)",
-                      transition: "transform 0.15s"
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.04)"
                     }}
                   >
                     <div style={{ padding: "18px" }}>
@@ -395,7 +320,7 @@ export default function TennisPlayerPage({ params }) {
                           marginBottom: "10px"
                         }}
                       >
-                        تنس
+                        بادل
                       </div>
                       <h3
                         style={{
