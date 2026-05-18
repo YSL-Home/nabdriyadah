@@ -109,14 +109,40 @@ const sportConfig = {
     title: "كرة قدم الصالات",
     slug: "futsal",
     description: "أحدث أخبار كرة قدم الصالات، بطولات الفوتسال ونتائج المباريات.",
-    icon: "⚽",
-    colorFrom: "#7c3aed",
-    colorTo: "#9333ea",
-    primary: "#7c3aed",
-    primarySoft: "#f5f3ff",
-    border: "#ddd6fe",
-    pageBg: "#f5f3ff",
+    icon: "🥅",
+    colorFrom: "#0f766e",
+    colorTo: "#14b8a6",
+    primary: "#0f766e",
+    primarySoft: "#f0fdfa",
+    border: "#99f6e4",
+    pageBg: "#f0fdfa",
     highlights: ["فوتسال إندور", "بطولات الصالات", "أبرز الأندية", "نتائج المباريات"]
+  },
+  f1: {
+    title: "فورمولا 1",
+    slug: "f1",
+    description: "تغطية شاملة لسباقات الفورمولا 1، ترتيب السائقين والفرق وجدول السباقات.",
+    icon: "🏎️",
+    colorFrom: "#7f1d1d",
+    colorTo: "#dc2626",
+    primary: "#dc2626",
+    primarySoft: "#fef2f2",
+    border: "#fecaca",
+    pageBg: "#fef2f2",
+    highlights: ["ترتيب السائقين", "جدول السباقات", "أبرز الفرق", "نتائج الجولات"]
+  },
+  golf: {
+    title: "الغولف",
+    slug: "golf",
+    description: "أحدث أخبار الغولف العالمي، تصنيف اللاعبين، PGA Tour وأبرز البطولات.",
+    icon: "⛳",
+    colorFrom: "#052e16",
+    colorTo: "#16a34a",
+    primary: "#16a34a",
+    primarySoft: "#f0fdf4",
+    border: "#bbf7d0",
+    pageBg: "#f0fdf4",
+    highlights: ["PGA Tour", "تصنيف اللاعبين", "بطولات الغراند سلام", "أبرز المحترفين"]
   }
 };
 

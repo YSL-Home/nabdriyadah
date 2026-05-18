@@ -115,12 +115,12 @@ export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, 
   const gradient = GRADIENTS[sport] || GRADIENTS.football;
 
   // Priorité d'affichage :
-  // 1. Image générée /generated/slug.png (unique par article, basée sur la source)
-  // 2. Unsplash sport-spécifique (toujours pertinent, jamais hors-sujet)
-  // imageUrl (RSS) n'est PAS utilisé pour l'affichage — peut pointer vers n'importe quelle image
-  // (ex: BBC envoie des thumbnails 240px hors-sujet pour des articles basketball → golf)
-  const primarySrc = (src && !src.includes("unsplash")) ? src : pickUnsplash(league, sport, slug);
-  const fallbackSrc = pickUnsplash(league, sport, slug);
+  // 1. Image générée /generated/slug.png → unique par article
+  // 2. imageUrl → image source de l'article original (RSS/scrape)
+  // 3. Unsplash sport-spécifique → dernier recours garanti pertinent
+  const isGenerated = typeof src === "string" && src.startsWith("/generated/");
+  const primarySrc = isGenerated ? src : (src || imageUrl || pickUnsplash(league, sport, slug));
+  const fallbackSrc = imageUrl || pickUnsplash(league, sport, slug);
 
   return (
     <div style={{ position: "relative", overflow: "hidden", background: gradient, ...style }}>
@@ -131,7 +131,12 @@ export default function ArticleImage({ src, imageUrl, alt, sport, league, slug, 
         loading="lazy"
         onError={e => {
           const el = e.currentTarget;
-          if (el.dataset.fallback) { el.style.display = "none"; return; }
+          if (el.dataset.fallback === "2") { el.style.display = "none"; return; }
+          if (el.dataset.fallback === "1") {
+            el.dataset.fallback = "2";
+            el.src = pickUnsplash(league, sport, slug);
+            return;
+          }
           el.dataset.fallback = "1";
           el.src = fallbackSrc;
           if (!el.src) el.style.display = "none";
