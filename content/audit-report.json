@@ -1,59 +1,8 @@
 {
-  "date": "2026-05-18T18:07:12.600Z",
-  "total": 957,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 5,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-18aid5",
-      "value": "Clarke's key questions for Scotland World Cup squad"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-311v49",
-      "value": "Leeds promise bans over homophobic chants"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1r24yo",
-      "value": "PGMO admits handball error on Man Utd goal v Forest"
-    }
-  ],
+  "date": "2026-05-18T18:13:28.085Z",
+  "total": 954,
+  "fixes": [],
   "warnings": [
-    {
-      "type": "missing_image",
-      "slug": "ft-18aid5",
-      "sport": "football",
-      "image": "/generated/ft-18aid5.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-311v49",
-      "sport": "football",
-      "image": "/generated/ft-311v49.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-12uobm",
-      "sport": "football",
-      "image": "/generated/ft-12uobm.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1r24yo",
-      "sport": "football",
-      "image": "/generated/ft-1r24yo.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-fxissq",
-      "sport": "football",
-      "image": "/generated/ft-fxissq.png"
-    },
     {
       "type": "missing_en_title",
       "count": 429,
@@ -61,12 +10,16 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 956,
+      "count": 953,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ft-1pf9gs",
+          "duplicate_of": "ft-cgkq93"
+        },
         {
           "slug": "liga-1fre7q",
           "duplicate_of": "liga-10wqao"
@@ -1595,12 +1548,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 3,
-    "warnings": 8,
-    "missing_images": 5,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
     "missing_en_title": 429,
-    "missing_fr_title": 956,
+    "missing_fr_title": 953,
     "sport_mismatches_fixed": 0,
-    "duplicates": 381
+    "duplicates": 382
   }
 }
