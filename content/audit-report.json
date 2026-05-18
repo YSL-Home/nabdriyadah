@@ -1,53 +1,8 @@
 {
-  "date": "2026-05-17T23:52:52.166Z",
-  "total": 834,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 3,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "sport_mismatch_fixed",
-      "slug": "ft-mtste",
-      "was": "golf",
-      "fixed_to": "football"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-tjchwb",
-      "value": "Footballer in mass train attack reveals he was stabbed seven"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-mtste",
-      "value": "Two gloves, one major - England's Rai wins US PGA title"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "tennis-o75364-1779061647571",
-      "value": "Listen: 5 Live Sport - The Making of Jannik Sinner"
-    }
-  ],
+  "date": "2026-05-18T00:08:35.725Z",
+  "total": 831,
+  "fixes": [],
   "warnings": [
-    {
-      "type": "missing_image",
-      "slug": "ft-tjchwb",
-      "sport": "football",
-      "image": "/generated/ft-tjchwb.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-mtste",
-      "sport": "golf",
-      "image": "/generated/ft-mtste.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-o75364-1779061647571",
-      "sport": "tennis",
-      "image": "/generated/tennis-o75364-1779061647571.png"
-    },
     {
       "type": "missing_en_title",
       "count": 362,
@@ -55,7 +10,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 833,
+      "count": 830,
       "action": "needs_llm_backfill"
     },
     {
@@ -390,12 +345,8 @@
           "duplicate_of": "tennis-1jigmn-1779058149317"
         },
         {
-          "slug": "tennis-o75364-1779048082104",
-          "duplicate_of": "tennis-o75364-1779061647571"
-        },
-        {
           "slug": "tennis-o75364",
-          "duplicate_of": "tennis-o75364-1779061647571"
+          "duplicate_of": "tennis-o75364-1779048082104"
         },
         {
           "slug": "ucl-mcqzub-1779032515077",
@@ -1433,12 +1384,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 4,
-    "warnings": 6,
-    "missing_images": 3,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
     "missing_en_title": 362,
-    "missing_fr_title": 833,
-    "sport_mismatches_fixed": 1,
-    "duplicates": 342
+    "missing_fr_title": 830,
+    "sport_mismatches_fixed": 0,
+    "duplicates": 341
   }
 }
