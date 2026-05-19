@@ -1,49 +1,330 @@
 {
   "men": [
-    { "rank": 1,  "slug": "arturo-coello",       "name": "Arturo Coello",       "country": "ESP", "points": 90000 },
-    { "rank": 2,  "slug": "alejandro-galan",      "name": "Alejandro Galán",     "country": "ESP", "points": 85000 },
-    { "rank": 3,  "slug": "juan-lebron",          "name": "Juan Lebrón",         "country": "ESP", "points": 80000 },
-    { "rank": 4,  "slug": "paquito-navarro",      "name": "Paquito Navarro",     "country": "ESP", "points": 72000 },
-    { "rank": 5,  "slug": "agustin-tapia",        "name": "Agustín Tapia",       "country": "ARG", "points": 68000 },
-    { "rank": 6,  "slug": "federico-chingotto",   "name": "Federico Chingotto",  "country": "ARG", "points": 64000 },
-    { "rank": 7,  "slug": "momo-gonzalez",        "name": "Momo González",       "country": "ARG", "points": 60000 },
-    { "rank": 8,  "slug": "jon-sanz",             "name": "Jon Sanz",            "country": "ESP", "points": 56000 },
-    { "rank": 9,  "slug": "fede-stupaczuk",       "name": "Fede Stupaczuk",      "country": "ARG", "points": 52000 },
-    { "rank": 10, "slug": "javi-leal",            "name": "Javi Leal",           "country": "ESP", "points": 48000 },
-    { "rank": 11, "slug": "sanyo-gutierrez",      "name": "Sanyo Gutiérrez",     "country": "ARG", "points": 44000 },
-    { "rank": 12, "slug": "maxi-sanchez",         "name": "Maxi Sánchez",        "country": "ARG", "points": 41000 },
-    { "rank": 13, "slug": "pablo-lima",           "name": "Pablo Lima",          "country": "BRA", "points": 38000 },
-    { "rank": 14, "slug": "alex-ruiz",            "name": "Álex Ruiz",           "country": "ESP", "points": 35000 },
-    { "rank": 15, "slug": "gonzalo-alfonso",      "name": "Gonzalo Alfonso",     "country": "ARG", "points": 32000 },
-    { "rank": 16, "slug": "basti-nerone",         "name": "Basti Nerone",        "country": "ARG", "points": 30000 },
-    { "rank": 17, "slug": "miguel-lamperti",      "name": "Miguel Lamperti",     "country": "ARG", "points": 28000 },
-    { "rank": 18, "slug": "lucas-campagnolo",     "name": "Lucas Campagnolo",    "country": "ARG", "points": 26000 },
-    { "rank": 19, "slug": "javier-garrido",       "name": "Javier Garrido",      "country": "ESP", "points": 24000 },
-    { "rank": 20, "slug": "nicolas-capra",        "name": "Nicolás Capra",       "country": "ARG", "points": 22000 }
+    {
+      "rank": 1,
+      "slug": "arturo-coello",
+      "name": "Arturo Coello",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 21180
+    },
+    {
+      "rank": 1,
+      "slug": "agustin-tapia",
+      "name": "Agustin Tapia",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 21180
+    },
+    {
+      "rank": 3,
+      "slug": "alejandro-galan",
+      "name": "Alejandro Galan",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 18820
+    },
+    {
+      "rank": 3,
+      "slug": "federico-chingotto",
+      "name": "Federico Chingotto",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 18820
+    },
+    {
+      "rank": 5,
+      "slug": "juan-lebron",
+      "name": "Juan Lebron",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 7665
+    },
+    {
+      "rank": 6,
+      "slug": "franco-stupaczuk",
+      "name": "Franco Stupaczuk",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 7170
+    },
+    {
+      "rank": 7,
+      "slug": "miguel-yanguas",
+      "name": "Miguel Yanguas",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 6750
+    },
+    {
+      "rank": 8,
+      "slug": "leandro-augsburger",
+      "name": "Leandro Augsburger",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 6475
+    },
+    {
+      "rank": 9,
+      "slug": "francisco-navarro",
+      "name": "Francisco Navarro",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 6430
+    },
+    {
+      "rank": 10,
+      "slug": "jorge-nieto",
+      "name": "Jorge Nieto",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 5985
+    },
+    {
+      "rank": 11,
+      "slug": "jon-sanz",
+      "name": "Jon Sanz",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 5350
+    },
+    {
+      "rank": 12,
+      "slug": "francisco-guerrero",
+      "name": "Francisco Guerrero",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 5115
+    },
+    {
+      "rank": 13,
+      "slug": "martin-di-nenno",
+      "name": "Martin Di Nenno",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 4990
+    },
+    {
+      "rank": 14,
+      "slug": "lucas-bergamini",
+      "name": "Lucas Bergamini",
+      "country": "BRA",
+      "flag": "https://flagcdn.com/w40/br.png",
+      "points": 4590
+    },
+    {
+      "rank": 15,
+      "slug": "jeronimo-gonzalez",
+      "name": "Jeronimo Gonzalez",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 4320
+    },
+    {
+      "rank": 16,
+      "slug": "javier-leal",
+      "name": "Javier Leal",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 3740
+    },
+    {
+      "rank": 17,
+      "slug": "eduardo-alonso",
+      "name": "Eduardo Alonso",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 3425
+    },
+    {
+      "rank": 18,
+      "slug": "juan-tello",
+      "name": "Juan Tello",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 3105
+    },
+    {
+      "rank": 19,
+      "slug": "javier-garrido",
+      "name": "Javier Garrido",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 2715
+    },
+    {
+      "rank": 20,
+      "slug": "javier-garcia",
+      "name": "Javier Garcia",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 2615
+    }
   ],
   "women": [
-    { "rank": 1,  "slug": "gemma-triay",          "name": "Gemma Triay",         "country": "ESP", "points": 88000 },
-    { "rank": 2,  "slug": "alejandra-salazar",    "name": "Alejandra Salazar",   "country": "ESP", "points": 82000 },
-    { "rank": 3,  "slug": "ari-sanchez",          "name": "Ari Sánchez",         "country": "ESP", "points": 78000 },
-    { "rank": 4,  "slug": "paula-josemaria",      "name": "Paula Josemaría",     "country": "ESP", "points": 70000 },
-    { "rank": 5,  "slug": "delfi-brea",           "name": "Delfi Brea",          "country": "ARG", "points": 65000 },
-    { "rank": 6,  "slug": "claudia-jensen",       "name": "Claudia Jensen",      "country": "ESP", "points": 60000 },
-    { "rank": 7,  "slug": "marta-marrero",        "name": "Marta Marrero",       "country": "ESP", "points": 56000 },
-    { "rank": 8,  "slug": "virginia-riera",       "name": "Virginia Riera",      "country": "ESP", "points": 52000 },
-    { "rank": 9,  "slug": "veronica-virseda",     "name": "Verónica Virseda",    "country": "ESP", "points": 48000 },
-    { "rank": 10, "slug": "lucia-sainz",          "name": "Lucía Sainz",         "country": "ESP", "points": 44000 },
-    { "rank": 11, "slug": "tamara-icardo",        "name": "Tamara Icardo",       "country": "ESP", "points": 40000 },
-    { "rank": 12, "slug": "nuria-villanueva",     "name": "Nuria Villanueva",    "country": "ESP", "points": 36000 },
-    { "rank": 13, "slug": "sofia-araujo",         "name": "Sofía Araújo",        "country": "ARG", "points": 32000 },
-    { "rank": 14, "slug": "carolina-orsi",        "name": "Carolina Orsi",       "country": "ARG", "points": 28000 },
-    { "rank": 15, "slug": "cecilia-reiter",       "name": "Cecilia Reiter",      "country": "ARG", "points": 25000 },
-    { "rank": 16, "slug": "bea-gonzalez",         "name": "Bea González",        "country": "ESP", "points": 22000 },
-    { "rank": 17, "slug": "lorena-alonso",        "name": "Lorena Alonso",       "country": "ESP", "points": 20000 },
-    { "rank": 18, "slug": "inés-mestre",          "name": "Inés Mestre",         "country": "ESP", "points": 18000 },
-    { "rank": 19, "slug": "patricia-llaguno",     "name": "Patricia Llaguno",    "country": "ESP", "points": 16000 },
-    { "rank": 20, "slug": "alix-collombon",       "name": "Alix Collombon",      "country": "FRA", "points": 14000 }
+    {
+      "rank": 1,
+      "slug": "gemma-triay-pons",
+      "name": "Gemma Triay Pons",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 18260
+    },
+    {
+      "rank": 1,
+      "slug": "delfina-brea-senesi",
+      "name": "Delfina Brea Senesi",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 18260
+    },
+    {
+      "rank": 3,
+      "slug": "beatriz-gonzalez-fernandez",
+      "name": "Beatriz Gonzalez Fernandez",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 15700
+    },
+    {
+      "rank": 4,
+      "slug": "paula-josemaria-martin",
+      "name": "Paula Josemaria Martin",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 15540
+    },
+    {
+      "rank": 5,
+      "slug": "ariana-sanchez-fallada",
+      "name": "Ariana Sanchez Fallada",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 13820
+    },
+    {
+      "rank": 6,
+      "slug": "claudia-fernandez-sanchez",
+      "name": "Claudia Fernandez Sanchez",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 12980
+    },
+    {
+      "rank": 7,
+      "slug": "andrea-ustero-prieto",
+      "name": "Andrea Ustero Prieto",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 7760
+    },
+    {
+      "rank": 8,
+      "slug": "sofia-araujo",
+      "name": "Sofia Araujo",
+      "country": "POR",
+      "flag": "https://flagcdn.com/w40/pt.png",
+      "points": 7120
+    },
+    {
+      "rank": 9,
+      "slug": "tamara-icardo-alcorisa",
+      "name": "Tamara Icardo Alcorisa",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 6390
+    },
+    {
+      "rank": 10,
+      "slug": "marta-ortega-gallego",
+      "name": "Marta Ortega Gallego",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 6030
+    },
+    {
+      "rank": 11,
+      "slug": "claudia-jensen",
+      "name": "Claudia Jensen",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 5745
+    },
+    {
+      "rank": 12,
+      "slug": "martina-calvo-santamaria",
+      "name": "Martina Calvo Santamaria",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 5165
+    },
+    {
+      "rank": 13,
+      "slug": "alejandra-salazar-bengoechea",
+      "name": "Alejandra Salazar Bengoechea",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 5110
+    },
+    {
+      "rank": 14,
+      "slug": "alejandra-alonso-de-villa",
+      "name": "Alejandra Alonso De Villa",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 4980
+    },
+    {
+      "rank": 15,
+      "slug": "marina-guinart-espana",
+      "name": "Marina Guinart España",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 4220
+    },
+    {
+      "rank": 16,
+      "slug": "veronica-virseda",
+      "name": "Veronica Virseda",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 4100
+    },
+    {
+      "rank": 17,
+      "slug": "beatriz-caldera-sanchez",
+      "name": "Beatriz Caldera Sanchez",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 3715
+    },
+    {
+      "rank": 17,
+      "slug": "carmen-goenaga-garcia",
+      "name": "Carmen Goenaga Garcia",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 3715
+    },
+    {
+      "rank": 19,
+      "slug": "aranzazu-osoro-ulrich",
+      "name": "Aranzazu Osoro Ulrich",
+      "country": "ARG",
+      "flag": "https://flagcdn.com/w40/ar.png",
+      "points": 3620
+    },
+    {
+      "rank": 20,
+      "slug": "victoria-iglesias-segador",
+      "name": "Victoria Iglesias Segador",
+      "country": "ESP",
+      "flag": "https://flagcdn.com/w40/es.png",
+      "points": 3465
+    }
   ],
   "slug": "padel-premier",
   "type": "padel-rankings",
-  "fetchedAt": "2025-05-15T00:00:00.000Z"
+  "source": "FIP — padelfip.com",
+  "fetchedAt": "2026-05-19T09:37:48.459Z"
 }

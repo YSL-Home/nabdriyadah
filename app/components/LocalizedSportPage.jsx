@@ -1,7 +1,10 @@
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
 import articles from "../../content/articles/seo-articles.json";
 import AdSlot from "./AdSlot";
 import ArticleImage from "./ArticleImage";
+import SportRankings from "./SportRankings";
 import { getT } from "../../lib/i18n";
 
 const CDN = "https://media.api-sports.io/football/leagues";
@@ -167,6 +170,20 @@ export default function LocalizedSportPage({ slug, lang }) {
   const leagueLabel = (l) => leagueTitles[l.slug]?.[lang] || leagueTitles[l.slug]?.en || l.slug;
   const countryLabel = (l) => lang === "fr" ? (l.fr || l.country) : l.country;
 
+  // Standings data (read server-side from JSON files)
+  const readStandings = (file) => {
+    try { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/standings", file), "utf-8")); } catch { return null; }
+  };
+  const STANDINGS_MAP = {
+    tennis:     () => { const atp=readStandings("atp.json"); const wta=readStandings("wta.json"); return { data:atp?.rankings||[], data2:wta?.rankings||[], accentColor:"#15803d", accentColor2:"#7c3aed", titlePrimary: lang==="fr"?"ATP — Hommes":"ATP — Men", titleSecondary: lang==="fr"?"WTA — Femmes":"WTA — Women", sourceUrl:"https://www.atptour.com/en/rankings/singles", sourceLabel:"ATP Tour", sourceUrl2:"https://www.wtatennis.com/rankings/singles", sourceLabel2:"WTA Tour" }; },
+    padel:      () => { const d=readStandings("padel-premier.json"); return { data:d?.men||[], data2:d?.women||[], accentColor:"#2563eb", accentColor2:"#7c3aed", titlePrimary: lang==="fr"?"FIP — Hommes":"FIP — Men", titleSecondary: lang==="fr"?"FIP — Femmes":"FIP — Women", sourceUrl:"https://www.padelfip.com/ranking-male/", sourceLabel:"FIP", sourceUrl2:"https://www.padelfip.com/ranking-female/", sourceLabel2:"FIP" }; },
+    basketball: () => { const d=readStandings("nba.json"); return { data:d?.standings||[], accentColor:"#c2410c", titlePrimary: lang==="fr"?"NBA — Classement":"NBA — Standings", sourceUrl:"https://www.nba.com/standings", sourceLabel:"NBA" }; },
+    f1:         () => { const d=readStandings("f1.json"); return { data:d?.rankings||[], accentColor:"#dc2626", titlePrimary: lang==="fr"?"F1 — Pilotes":"F1 — Drivers", sourceUrl:"https://www.formula1.com/en/results.html", sourceLabel:"F1" }; },
+    golf:       () => { const d=readStandings("pga-tour.json"); return { data:d?.rankings||[], accentColor:"#16a34a", titlePrimary: lang==="fr"?"PGA Tour — Classement":"PGA Tour — Rankings", sourceUrl:"https://www.owgr.com/ranking", sourceLabel:"OWGR" }; },
+    football:   () => { const d=readStandings("premier-league.json"); return { data:d?.standings||[], accentColor:"#1d4ed8", titlePrimary: lang==="fr"?"Premier League — Classement":"Premier League — Standings", sourceUrl:"https://www.premierleague.com/tables", sourceLabel:"PL" }; },
+  };
+  const standingsProps = STANDINGS_MAP[slug]?.() || null;
+
   return (
     <main style={{ minHeight: "100vh", background: cfg.pageBg, padding: "28px 20px 52px", direction: dir }}>
       <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
@@ -239,6 +256,16 @@ export default function LocalizedSportPage({ slug, lang }) {
         )}
 
         <AdSlot label={lang === "fr" ? "Publicité" : "Advertisement"} minHeight={90} style={{ marginBottom: 24 }} />
+
+        {/* ── Classement / Rankings ── */}
+        {standingsProps && standingsProps.data?.length > 0 && (
+          <section style={{ marginBottom: "28px" }}>
+            <h2 style={{ margin: "0 0 14px 0", fontSize: "24px", fontWeight: 800, color: "#111827" }}>
+              {lang === "fr" ? "Classement" : "Rankings"}
+            </h2>
+            <SportRankings sport={slug} lang={lang} {...standingsProps} />
+          </section>
+        )}
 
         {/* Articles */}
         {sportArticles.length > 0 && (

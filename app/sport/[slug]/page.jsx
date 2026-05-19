@@ -1,9 +1,12 @@
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 import AdSlot from "../../components/AdSlot";
 import ArticleImage from "../../components/ArticleImage";
 import ArticleFiltersClient from "../../components/ArticleFiltersClient";
+import SportRankings from "../../components/SportRankings";
 
 // Logos fiables depuis le CDN API-Football (même source que la page live)
 const CDN = "https://media.api-sports.io/football/leagues";
@@ -175,6 +178,55 @@ function fmtDate(iso) {
   catch { return ""; }
 }
 
+// Lit les données de classement pour un sport donné (Server-side)
+function getStandingsProps(slug) {
+  const read = (file) => {
+    try { return JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/standings", file), "utf-8")); }
+    catch { return null; }
+  };
+  const STANDING_CONFIG = {
+    tennis: () => {
+      const atp = read("atp.json"); const wta = read("wta.json");
+      return { data: atp?.rankings||[], data2: wta?.rankings||[], accentColor:"#15803d", accentColor2:"#7c3aed",
+        titlePrimary:"ATP — ترتيب الرجال", titleSecondary:"WTA — ترتيب السيدات",
+        sourceUrl:"https://www.atptour.com/en/rankings/singles", sourceLabel:"ATP Tour",
+        sourceUrl2:"https://www.wtatennis.com/rankings/singles", sourceLabel2:"WTA Tour" };
+    },
+    padel: () => {
+      const d = read("padel-premier.json");
+      return { data: d?.men||[], data2: d?.women||[], accentColor:"#2563eb", accentColor2:"#7c3aed",
+        titlePrimary:"FIP — ترتيب الرجال", titleSecondary:"FIP — ترتيب السيدات",
+        sourceUrl:"https://www.padelfip.com/ranking-male/", sourceLabel:"FIP",
+        sourceUrl2:"https://www.padelfip.com/ranking-female/", sourceLabel2:"FIP" };
+    },
+    basketball: () => {
+      const d = read("nba.json");
+      return { data: d?.standings||[], accentColor:"#c2410c",
+        titlePrimary:"NBA — الترتيب العام",
+        sourceUrl:"https://www.nba.com/standings", sourceLabel:"NBA" };
+    },
+    f1: () => {
+      const d = read("f1.json");
+      return { data: d?.rankings||[], accentColor:"#dc2626",
+        titlePrimary:"فورمولا 1 — ترتيب السائقين",
+        sourceUrl:"https://www.formula1.com/en/results.html", sourceLabel:"F1" };
+    },
+    golf: () => {
+      const d = read("pga-tour.json");
+      return { data: d?.rankings||[], accentColor:"#16a34a",
+        titlePrimary:"PGA Tour — التصنيف العالمي",
+        sourceUrl:"https://www.owgr.com/ranking", sourceLabel:"OWGR" };
+    },
+    football: () => {
+      const d = read("premier-league.json");
+      return { data: d?.standings||[], accentColor:"#1d4ed8",
+        titlePrimary:"الدوري الإنجليزي — الترتيب",
+        sourceUrl:"https://www.premierleague.com/tables", sourceLabel:"Premier League" };
+    },
+  };
+  return STANDING_CONFIG[slug]?.() || null;
+}
+
 export default function SportPage({ params }) {
   const sport = sportConfig[params.slug];
   if (!sport) notFound();
@@ -185,6 +237,7 @@ export default function SportPage({ params }) {
 
   const featuredArticle = sportArticles[0] || null;
   const restArticles = sportArticles.slice(1);
+  const standingsProps = getStandingsProps(params.slug);
 
   if (sport.isFootball) {
     return (
@@ -250,6 +303,14 @@ export default function SportPage({ params }) {
 
           <AdSlot label="مساحة إعلانية" minHeight={90} style={{ marginBottom: 24 }} />
 
+          {/* ── Classement Premier League ── */}
+          {standingsProps && standingsProps.data?.length > 0 && (
+            <section style={{ marginBottom: "28px" }}>
+              <h2 style={{ margin: "0 0 16px 0", fontSize: "26px", fontWeight: 800, color: "#111827" }}>الترتيب</h2>
+              <SportRankings sport={params.slug} lang="ar" {...standingsProps} />
+            </section>
+          )}
+
           {/* Football articles */}
           {sportArticles.length > 0 && (
             <section>
@@ -313,6 +374,14 @@ export default function SportPage({ params }) {
         </section>
 
         <AdSlot label="مساحة إعلانية أعلى الصفحة" minHeight={90} style={{ marginBottom: 24 }} />
+
+        {/* ── Classement inline ── */}
+        {standingsProps && standingsProps.data?.length > 0 && (
+          <section style={{ marginBottom: "28px" }}>
+            <h2 style={{ margin: "0 0 14px 0", fontSize: "26px", fontWeight: 800, color: "#111827" }}>الترتيب والتصنيف</h2>
+            <SportRankings sport={params.slug} lang="ar" {...standingsProps} />
+          </section>
+        )}
 
         {/* ── Grille des leagues / classements pour les sports non-football ── */}
         {sportLeagues[params.slug] && (
