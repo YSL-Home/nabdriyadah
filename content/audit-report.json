@@ -1,19 +1,35 @@
 {
-  "date": "2026-05-19T12:51:40.372Z",
-  "total": 1032,
+  "date": "2026-05-19T14:25:07.623Z",
+  "total": 1035,
   "fixes": [
     {
       "type": "missing_images_detected",
-      "count": 5,
+      "count": 8,
       "action": "will_regenerate_on_next_ci"
     },
     {
       "type": "en_title_from_source",
-      "slug": "bball-16iuyf-1779195097282",
-      "value": "How the Thunder built a drama-free potential dynas..."
+      "slug": "ft-1bcvuc",
+      "value": "Ronaldo in Portugal squad for record sixth World Cup"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-gx1mpb-1779200706343",
+      "value": "'Disgraceful' vandalism of Eastbourne courts"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-av484u-1779200706074",
+      "value": "Raducanu reunited full-time with coach from US Open win"
     }
   ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-1bcvuc",
+      "sport": "football",
+      "image": "/generated/ft-1bcvuc.png"
+    },
     {
       "type": "missing_image",
       "slug": "tennis-1upzku",
@@ -45,13 +61,25 @@
       "image": "/generated/bball-16iuyf-1779195097282.png"
     },
     {
+      "type": "missing_image",
+      "slug": "tennis-gx1mpb-1779200706343",
+      "sport": "tennis",
+      "image": "/generated/tennis-gx1mpb-1779200706343.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-av484u-1779200706074",
+      "sport": "tennis",
+      "image": "/generated/tennis-av484u-1779200706074.png"
+    },
+    {
       "type": "missing_en_title",
       "count": 479,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1031,
+      "count": 1034,
       "action": "needs_llm_backfill"
     },
     {
@@ -390,24 +418,28 @@
           "duplicate_of": "bball-z7ckyy-1779139603508"
         },
         {
+          "slug": "tennis-gx1mpb-1779187001512",
+          "duplicate_of": "tennis-gx1mpb-1779200706343"
+        },
+        {
           "slug": "tennis-gx1mpb-1779138378810",
-          "duplicate_of": "tennis-gx1mpb-1779187001512"
+          "duplicate_of": "tennis-gx1mpb-1779200706343"
         },
         {
           "slug": "tennis-gx1mpb-1779134686808",
-          "duplicate_of": "tennis-gx1mpb-1779187001512"
+          "duplicate_of": "tennis-gx1mpb-1779200706343"
         },
         {
           "slug": "tennis-gx1mpb-1779132513600",
-          "duplicate_of": "tennis-gx1mpb-1779187001512"
+          "duplicate_of": "tennis-gx1mpb-1779200706343"
         },
         {
           "slug": "tennis-gx1mpb",
-          "duplicate_of": "tennis-gx1mpb-1779187001512"
+          "duplicate_of": "tennis-gx1mpb-1779200706343"
         },
         {
           "slug": "tennis-1mh90u",
-          "duplicate_of": "tennis-gx1mpb-1779187001512"
+          "duplicate_of": "tennis-gx1mpb-1779200706343"
         },
         {
           "slug": "ft-1s13ei",
@@ -434,20 +466,24 @@
           "duplicate_of": "bball-quwck0-1779139603986"
         },
         {
+          "slug": "tennis-av484u-1779187000848",
+          "duplicate_of": "tennis-av484u-1779200706074"
+        },
+        {
           "slug": "tennis-av484u-1779117689472",
-          "duplicate_of": "tennis-av484u-1779187000848"
+          "duplicate_of": "tennis-av484u-1779200706074"
         },
         {
           "slug": "tennis-av484u-1779114739037",
-          "duplicate_of": "tennis-av484u-1779187000848"
+          "duplicate_of": "tennis-av484u-1779200706074"
         },
         {
           "slug": "tennis-av484u-1779110853870",
-          "duplicate_of": "tennis-av484u-1779187000848"
+          "duplicate_of": "tennis-av484u-1779200706074"
         },
         {
           "slug": "tennis-av484u",
-          "duplicate_of": "tennis-av484u-1779187000848"
+          "duplicate_of": "tennis-av484u-1779200706074"
         },
         {
           "slug": "ft-1bddls",
@@ -1685,12 +1721,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 1,
-    "warnings": 8,
-    "missing_images": 5,
+    "fixes_applied": 3,
+    "warnings": 11,
+    "missing_images": 8,
     "missing_en_title": 479,
-    "missing_fr_title": 1031,
+    "missing_fr_title": 1034,
     "sport_mismatches_fixed": 0,
-    "duplicates": 406
+    "duplicates": 408
   }
 }
