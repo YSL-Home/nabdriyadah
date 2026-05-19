@@ -1,16 +1,57 @@
 {
-  "date": "2026-05-19T12:15:12.887Z",
-  "total": 1027,
-  "fixes": [],
+  "date": "2026-05-19T12:51:40.372Z",
+  "total": 1032,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-16iuyf-1779195097282",
+      "value": "How the Thunder built a drama-free potential dynas..."
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "tennis-1upzku",
+      "sport": "tennis",
+      "image": "/generated/tennis-1upzku.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-65d8pg",
+      "sport": "basketball",
+      "image": "/generated/bball-65d8pg.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-yjefnx",
+      "sport": "football",
+      "image": "/generated/ft-yjefnx.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-noio42",
+      "sport": "football",
+      "image": "/generated/ft-noio42.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-16iuyf-1779195097282",
+      "sport": "basketball",
+      "image": "/generated/bball-16iuyf-1779195097282.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 475,
+      "count": 479,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1026,
+      "count": 1031,
       "action": "needs_llm_backfill"
     },
     {
@@ -467,6 +508,10 @@
         {
           "slug": "bball-1eivj2",
           "duplicate_of": "bball-1eivj2-1779079775285"
+        },
+        {
+          "slug": "bball-16iuyf",
+          "duplicate_of": "bball-16iuyf-1779195097282"
         },
         {
           "slug": "tennis-1jigmn-1779106293475",
@@ -1640,12 +1685,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 475,
-    "missing_fr_title": 1026,
+    "fixes_applied": 1,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 479,
+    "missing_fr_title": 1031,
     "sport_mismatches_fixed": 0,
-    "duplicates": 405
+    "duplicates": 406
   }
 }
