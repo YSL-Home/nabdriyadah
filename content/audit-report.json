@@ -1,16 +1,72 @@
 {
-  "date": "2026-05-19T23:01:02.839Z",
-  "total": 1117,
-  "fixes": [],
+  "date": "2026-05-19T23:54:03.522Z",
+  "total": 1122,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-rnib9y",
+      "value": "The crucial split-second call that could deny Spurs safety"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-htj3ux",
+      "value": "Title despair & Guardiola going - 24 hours of pain for Man C"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1buftl",
+      "value": "Twenty-two years in the making - how Arsenal celebrated titl"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "tennis-elup7z-1779234839926",
+      "value": "Svitolina upsets Gauff to win Italian Open thriller"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-rnib9y",
+      "sport": "football",
+      "image": "/generated/ft-rnib9y.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-htj3ux",
+      "sport": "football",
+      "image": "/generated/ft-htj3ux.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1buftl",
+      "sport": "football",
+      "image": "/generated/ft-1buftl.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-gdwoue",
+      "sport": "football",
+      "image": "/generated/ft-gdwoue.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-elup7z-1779234839926",
+      "sport": "tennis",
+      "image": "/generated/tennis-elup7z-1779234839926.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 544,
+      "count": 545,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1116,
+      "count": 1121,
       "action": "needs_llm_backfill"
     },
     {
@@ -285,8 +341,12 @@
           "duplicate_of": "bball-1bbmsd"
         },
         {
+          "slug": "tennis-elup7z-1779221709062",
+          "duplicate_of": "tennis-elup7z-1779234839926"
+        },
+        {
           "slug": "tennis-elup7z",
-          "duplicate_of": "tennis-elup7z-1779221709062"
+          "duplicate_of": "tennis-elup7z-1779234839926"
         },
         {
           "slug": "ft-18a6gp",
@@ -1764,12 +1824,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 544,
-    "missing_fr_title": 1116,
+    "fixes_applied": 4,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 545,
+    "missing_fr_title": 1121,
     "sport_mismatches_fixed": 0,
-    "duplicates": 436
+    "duplicates": 437
   }
 }
