@@ -1,8 +1,42 @@
 {
-  "date": "2026-05-19T06:48:08.118Z",
-  "total": 1000,
-  "fixes": [],
+  "date": "2026-05-19T09:25:00.724Z",
+  "total": 1002,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 2,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-1enukv",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1enukv",
+      "value": "Former champion McDowell qualifies for US Open"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-rxbytq-1779182698237",
+      "value": "Timberwolves vs Nuggets Playoff Series: West Semifinals Sche"
+    }
+  ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-1enukv",
+      "sport": "golf",
+      "image": "/generated/ft-1enukv.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-rxbytq-1779182698237",
+      "sport": "basketball",
+      "image": "/generated/bball-rxbytq-1779182698237.png"
+    },
     {
       "type": "missing_en_title",
       "count": 458,
@@ -10,7 +44,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 999,
+      "count": 1001,
       "action": "needs_llm_backfill"
     },
     {
@@ -317,8 +351,12 @@
           "duplicate_of": "ft-y3x709"
         },
         {
+          "slug": "bball-rxbytq-1779173082653",
+          "duplicate_of": "bball-rxbytq-1779182698237"
+        },
+        {
           "slug": "bball-rxbytq",
-          "duplicate_of": "bball-rxbytq-1779173082653"
+          "duplicate_of": "bball-rxbytq-1779182698237"
         },
         {
           "slug": "ucl-p378fy",
@@ -1620,12 +1658,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
+    "fixes_applied": 3,
+    "warnings": 5,
+    "missing_images": 2,
     "missing_en_title": 458,
-    "missing_fr_title": 999,
-    "sport_mismatches_fixed": 0,
-    "duplicates": 400
+    "missing_fr_title": 1001,
+    "sport_mismatches_fixed": 1,
+    "duplicates": 401
   }
 }
