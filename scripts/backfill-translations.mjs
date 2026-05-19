@@ -40,7 +40,7 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function normalizeText(v = "") { return String(v).replace(/\s+/g, " ").trim(); }
 
 function isFatalError(msg = "") {
-  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated|API_KEY_INVALID|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|daily.*limit/i.test(msg);
+  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated|API_KEY_INVALID|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|daily.*limit|credit balance is too low|Your credit balance|balance is too low|PERMISSION_DENIED|API key.*leaked|reported as leaked/i.test(msg);
 }
 function isRateLimit(msg = "") {
   return /429|rate.*limit|RESOURCE_EXHAUSTED/i.test(msg);
