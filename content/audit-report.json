@@ -1,61 +1,11 @@
 {
-  "date": "2026-05-19T18:18:21.195Z",
+  "date": "2026-05-19T18:25:59.256Z",
   "total": 1091,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 4,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1jtc51",
-      "value": "Southampton expelled from play-offs for spying"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1fg0e3",
-      "value": "Women's coach given lifetime ban for secret filming"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-19jhu2",
-      "value": "Guardiola is Ferguson of his generation - Rooney"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "bball-nt3kab-1779214697888",
-      "value": "2026 NBA playoff bracket, schedule: Victor Wembanyama leads "
-    }
-  ],
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-1jtc51",
-      "sport": "football",
-      "image": "/generated/ft-1jtc51.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1fg0e3",
-      "sport": "football",
-      "image": "/generated/ft-1fg0e3.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-19jhu2",
-      "sport": "football",
-      "image": "/generated/ft-19jhu2.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "bball-nt3kab-1779214697888",
-      "sport": "basketball",
-      "image": "/generated/bball-nt3kab-1779214697888.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 522,
+      "count": 526,
       "action": "needs_llm_backfill"
     },
     {
@@ -113,6 +63,18 @@
         {
           "slug": "ft-1676wo",
           "duplicate_of": "ft-7xmy6f"
+        },
+        {
+          "slug": "ft-2n708f",
+          "duplicate_of": "ft-b3j5dh"
+        },
+        {
+          "slug": "ft-1g0ag8",
+          "duplicate_of": "ft-19c4ev"
+        },
+        {
+          "slug": "ft-830ah0",
+          "duplicate_of": "ft-1stswx"
         },
         {
           "slug": "ft-1o99pd",
@@ -1563,10 +1525,6 @@
           "duplicate_of": "bball-47e3q2-1779117689316"
         },
         {
-          "slug": "bball-nt3kab-1779214697888",
-          "duplicate_of": "bball-e0rnnt-1778856181013"
-        },
-        {
           "slug": "bball-nt3kab-1779208505967",
           "duplicate_of": "bball-e0rnnt-1778856181013"
         },
@@ -1786,12 +1744,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 4,
-    "warnings": 7,
-    "missing_images": 4,
-    "missing_en_title": 522,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 526,
     "missing_fr_title": 1090,
     "sport_mismatches_fixed": 0,
-    "duplicates": 429
+    "duplicates": 431
   }
 }
