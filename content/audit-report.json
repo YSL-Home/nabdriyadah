@@ -1,16 +1,78 @@
 {
-  "date": "2026-05-19T19:00:17.742Z",
-  "total": 1092,
-  "fixes": [],
+  "date": "2026-05-19T20:10:14.086Z",
+  "total": 1097,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 5,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-we8hgx",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1jtc51",
+      "value": "Southampton expelled from play-offs for spying"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-we8hgx",
+      "value": "Golfer Penge to take break for health reasons"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-rxbytq-1779221411748",
+      "value": "Timberwolves vs Nuggets Playoff Series: West Semifinals Sche"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "bball-nt3kab-1779221411880",
+      "value": "2026 NBA playoff bracket, schedule: Victor Wembanyama leads "
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1srj1y",
+      "sport": "football",
+      "image": "/generated/ft-1srj1y.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1jtc51",
+      "sport": "football",
+      "image": "/generated/ft-1jtc51.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-we8hgx",
+      "sport": "golf",
+      "image": "/generated/ft-we8hgx.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-rxbytq-1779221411748",
+      "sport": "basketball",
+      "image": "/generated/bball-rxbytq-1779221411748.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "bball-nt3kab-1779221411880",
+      "sport": "basketball",
+      "image": "/generated/bball-nt3kab-1779221411880.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 527,
+      "count": 528,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1091,
+      "count": 1096,
       "action": "needs_llm_backfill"
     },
     {
@@ -405,8 +467,12 @@
           "duplicate_of": "ft-y3x709"
         },
         {
+          "slug": "bball-rxbytq-1779173082653",
+          "duplicate_of": "bball-rxbytq-1779221411748"
+        },
+        {
           "slug": "bball-rxbytq",
-          "duplicate_of": "bball-rxbytq-1779173082653"
+          "duplicate_of": "bball-rxbytq-1779221411748"
         },
         {
           "slug": "ucl-p378fy",
@@ -1529,6 +1595,10 @@
           "duplicate_of": "bball-47e3q2-1779117689316"
         },
         {
+          "slug": "bball-nt3kab-1779221411880",
+          "duplicate_of": "bball-e0rnnt-1778856181013"
+        },
+        {
           "slug": "bball-nt3kab-1779208505967",
           "duplicate_of": "bball-e0rnnt-1778856181013"
         },
@@ -1748,12 +1818,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 527,
-    "missing_fr_title": 1091,
-    "sport_mismatches_fixed": 0,
-    "duplicates": 432
+    "fixes_applied": 5,
+    "warnings": 8,
+    "missing_images": 5,
+    "missing_en_title": 528,
+    "missing_fr_title": 1096,
+    "sport_mismatches_fixed": 1,
+    "duplicates": 434
   }
 }
