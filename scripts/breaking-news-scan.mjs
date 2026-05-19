@@ -111,7 +111,7 @@ async function main() {
     try {
       const published = JSON.parse(fs.readFileSync(ARTICLES_PATH, "utf-8"));
       const sports = new Set(published.map(a => a.sport));
-      const required = ["basketball", "tennis", "padel", "futsal"];
+      const required = ["basketball", "tennis", "padel", "futsal", "f1", "golf"];
       const missing = required.filter(s => !sports.has(s));
       if (missing.length > 0) {
         console.log(`Sports manquants dans les articles publiés: ${missing.join(", ")} — lancement fetch + rebuild...`);

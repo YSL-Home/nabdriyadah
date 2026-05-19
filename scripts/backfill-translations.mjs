@@ -40,10 +40,10 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function normalizeText(v = "") { return String(v).replace(/\s+/g, " ").trim(); }
 
 function isFatalError(msg = "") {
-  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated|API_KEY_INVALID/i.test(msg);
+  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated|API_KEY_INVALID|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|daily.*limit/i.test(msg);
 }
 function isRateLimit(msg = "") {
-  return /429|quota|rate.*limit|RESOURCE_EXHAUSTED/i.test(msg);
+  return /429|rate.*limit|RESOURCE_EXHAUSTED/i.test(msg);
 }
 
 // ── Appel Gemini avec retry sur 429 ──────────────────────────────────────────
@@ -65,11 +65,18 @@ async function callGemini(systemPrompt, userPrompt, maxTokens = 4096) {
       return data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
     }
     const err = await res.text();
-    if (res.status === 429 && attempt < 3) {
-      const waitMs = 20000 * attempt; // 20s, 40s
-      console.log(`  ↩ Gemini 429 — attente ${waitMs/1000}s (tentative ${attempt}/3)…`);
-      await sleep(waitMs);
-      continue;
+    if (res.status === 429) {
+      // Quota journalier épuisé → fatal, pas de retry
+      if (/exceeded your current quota|You exceeded|QUOTA_EXCEEDED|daily.*limit/i.test(err)) {
+        throw new Error(`Gemini quota fatal: ${err.slice(0, 200)}`);
+      }
+      // Rate limit temporaire → retry avec backoff
+      if (attempt < 3) {
+        const waitMs = 20000 * attempt; // 20s, 40s
+        console.log(`  ↩ Gemini 429 — attente ${waitMs/1000}s (tentative ${attempt}/3)…`);
+        await sleep(waitMs);
+        continue;
+      }
     }
     throw new Error(`Gemini API ${res.status}: ${err.slice(0, 200)}`);
   }
@@ -222,10 +229,12 @@ async function main() {
   const bySlug = Object.fromEntries(articles.map(a => [a.slug, a]));
 
   // ── Pass 1 : titres + descriptions ────────────────────────────────────────────
+  const noApiLeft = () => (_geminiDead || !GOOGLE_API_KEY) && (_anthropicDead || !ANTHROPIC_API_KEY);
+
   if (needsTranslation.length > 0) {
     console.log("\n▶ PASSE 1 — Titres & Descriptions");
     for (let i = 0; i < needsTranslation.length; i += BATCH) {
-      if (_geminiDead && _anthropicDead) break;
+      if (noApiLeft()) break;
 
       const batch = needsTranslation.slice(i, i + BATCH);
       const batchNum  = Math.floor(i / BATCH) + 1;
@@ -247,7 +256,7 @@ async function main() {
       } catch (err) {
         const msg = err.message || "";
         console.log(`  ⚠ Batch ${batchNum} échoué: ${msg.slice(0, 120)}`);
-        if (_geminiDead && _anthropicDead) {
+        if (noApiLeft()) {
           console.log("  ⛔ Toutes les APIs fatales — arrêt immédiat.");
           break;
         }
@@ -260,10 +269,10 @@ async function main() {
   }
 
   // ── Pass 2 : corps d'article ─────────────────────────────────────────────────
-  if (needsContent.length > 0 && !(_geminiDead && _anthropicDead)) {
+  if (needsContent.length > 0 && !noApiLeft()) {
     console.log("\n▶ PASSE 2 — Corps d'articles (récents < 48h)");
     for (let i = 0; i < needsContent.length; i += BATCH_CONTENT) {
-      if (_geminiDead && _anthropicDead) break;
+      if (noApiLeft()) break;
 
       const batch = needsContent.slice(i, i + BATCH_CONTENT);
       const batchNum    = Math.floor(i / BATCH_CONTENT) + 1;
