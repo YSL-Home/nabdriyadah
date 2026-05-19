@@ -16,7 +16,7 @@ import path from "path";
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 
 // ── Clés API ──────────────────────────────────────────────────────────────────
-const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "AIzaSyB_Necvwa5qhgBT8Q6EbLlkuGPcSCXsVNQ";
+const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 
 // Modèles

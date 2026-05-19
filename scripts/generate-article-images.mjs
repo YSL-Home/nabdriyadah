@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 // Clés API disponibles — ordre de priorité coût croissant
-const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY || "AIzaSyB_Necvwa5qhgBT8Q6EbLlkuGPcSCXsVNQ";  // Gemini Imagen — priorité 1
+const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY || "";  // Gemini Imagen — priorité 1
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY;   // GPT            — priorité 2
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
 // Max images générées par run CI (évite timeout et coût excessif)
