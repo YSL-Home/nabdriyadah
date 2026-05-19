@@ -1,62 +1,11 @@
 {
-  "date": "2026-05-19T16:44:51.095Z",
+  "date": "2026-05-19T16:52:01.763Z",
   "total": 1087,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 5,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1fg0e3",
-      "value": "Women's coach given lifetime ban for secret filming"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1rlohi",
-      "value": "Stewart's remarkable rise from Scottish semi-pro to World Cu"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "bball-nt3kab-1779209088691",
-      "value": "2026 NBA playoff bracket, schedule: Victor Wembanyama leads "
-    }
-  ],
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-1fg0e3",
-      "sport": "football",
-      "image": "/generated/ft-1fg0e3.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1rlohi",
-      "sport": "football",
-      "image": "/generated/ft-1rlohi.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-1kqb9m",
-      "sport": "tennis",
-      "image": "/generated/tennis-1kqb9m.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-2ehkpd",
-      "sport": "football",
-      "image": "/generated/ft-2ehkpd.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "bball-nt3kab-1779209088691",
-      "sport": "basketball",
-      "image": "/generated/bball-nt3kab-1779209088691.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 519,
+      "count": 522,
       "action": "needs_llm_backfill"
     },
     {
@@ -67,6 +16,14 @@
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ft-1cymsj",
+          "duplicate_of": "ft-zkjvhl"
+        },
+        {
+          "slug": "ft-o9er0p",
+          "duplicate_of": "ft-eafqzw"
+        },
         {
           "slug": "ft-sxk4i4",
           "duplicate_of": "ft-ojw9ng"
@@ -81,11 +38,11 @@
         },
         {
           "slug": "ft-1s60er",
-          "duplicate_of": "ft-1cymsj"
+          "duplicate_of": "ft-zkjvhl"
         },
         {
           "slug": "ft-12r7u3",
-          "duplicate_of": "ft-o9er0p"
+          "duplicate_of": "ft-eafqzw"
         },
         {
           "slug": "ft-wp7bcs",
@@ -93,11 +50,11 @@
         },
         {
           "slug": "ft-1hv6cq",
-          "duplicate_of": "ft-1cymsj"
+          "duplicate_of": "ft-zkjvhl"
         },
         {
           "slug": "ft-q1fv5c",
-          "duplicate_of": "ft-o9er0p"
+          "duplicate_of": "ft-eafqzw"
         },
         {
           "slug": "ft-d5forx",
@@ -121,11 +78,11 @@
         },
         {
           "slug": "ft-ijhkjd",
-          "duplicate_of": "ft-1cymsj"
+          "duplicate_of": "ft-zkjvhl"
         },
         {
           "slug": "ft-91u2id",
-          "duplicate_of": "ft-o9er0p"
+          "duplicate_of": "ft-eafqzw"
         },
         {
           "slug": "epl-1tfww7",
@@ -1556,10 +1513,6 @@
           "duplicate_of": "bball-47e3q2-1779117689316"
         },
         {
-          "slug": "bball-nt3kab-1779209088691",
-          "duplicate_of": "bball-e0rnnt-1778856181013"
-        },
-        {
           "slug": "bball-nt3kab-1779208505967",
           "duplicate_of": "bball-e0rnnt-1778856181013"
         },
@@ -1779,12 +1732,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 3,
-    "warnings": 8,
-    "missing_images": 5,
-    "missing_en_title": 519,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 522,
     "missing_fr_title": 1086,
     "sport_mismatches_fixed": 0,
-    "duplicates": 427
+    "duplicates": 428
   }
 }
