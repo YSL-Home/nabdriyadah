@@ -1,69 +1,60 @@
 {
-  "date": "2026-05-19T16:15:42.294Z",
-  "total": 1070,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 3,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-192d4f",
-      "value": "No Stone Cold Steve Clarke, but there was - at least - a sto"
-    }
-  ],
+  "date": "2026-05-19T16:24:24.339Z",
+  "total": 1073,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-3lozxx",
-      "sport": "football",
-      "image": "/generated/ft-3lozxx.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-10qlw4",
-      "sport": "football",
-      "image": "/generated/ft-10qlw4.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-192d4f",
-      "sport": "football",
-      "image": "/generated/ft-192d4f.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 507,
+      "count": 510,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1069,
+      "count": 1072,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
         {
+          "slug": "ft-wp7bcs",
+          "duplicate_of": "ft-c7ap25"
+        },
+        {
+          "slug": "ft-1hv6cq",
+          "duplicate_of": "ft-1s60er"
+        },
+        {
+          "slug": "ft-q1fv5c",
+          "duplicate_of": "ft-12r7u3"
+        },
+        {
+          "slug": "ft-d5forx",
+          "duplicate_of": "ft-sxk4i4"
+        },
+        {
+          "slug": "ft-1676wo",
+          "duplicate_of": "ft-1k450y"
+        },
+        {
           "slug": "ft-1o99pd",
-          "duplicate_of": "ft-d5forx"
+          "duplicate_of": "ft-sxk4i4"
         },
         {
           "slug": "ft-uilv5y",
-          "duplicate_of": "ft-1676wo"
+          "duplicate_of": "ft-1k450y"
         },
         {
           "slug": "ft-16rbhr",
-          "duplicate_of": "ft-wp7bcs"
+          "duplicate_of": "ft-c7ap25"
         },
         {
           "slug": "ft-ijhkjd",
-          "duplicate_of": "ft-1hv6cq"
+          "duplicate_of": "ft-1s60er"
         },
         {
           "slug": "ft-91u2id",
-          "duplicate_of": "ft-q1fv5c"
+          "duplicate_of": "ft-12r7u3"
         },
         {
           "slug": "epl-1tfww7",
@@ -1709,12 +1700,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 1,
-    "warnings": 6,
-    "missing_images": 3,
-    "missing_en_title": 507,
-    "missing_fr_title": 1069,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 510,
+    "missing_fr_title": 1072,
     "sport_mismatches_fixed": 0,
-    "duplicates": 415
+    "duplicates": 420
   }
 }
