@@ -69,7 +69,9 @@ function getTitle(a, lang) {
     return null; // filtered out for non-Arabic pages
   }
   if (lang === "fr") {
+    // Priorité : titre FR → titre EN → sourceTitle non-arabe → masqué
     if (a.fr_title) return a.fr_title;
+    if (a.en_title) return a.en_title;               // fallback EN (mieux que RSS brut ou arabe)
     if (a.sourceTitle && !hasArabic(a.sourceTitle)) return a.sourceTitle;
     return null;
   }
@@ -77,7 +79,7 @@ function getTitle(a, lang) {
 }
 function getDesc(a, lang) {
   if (lang === "en") return a.en_description || (!hasArabic(a.description) ? a.description : "") || "";
-  if (lang === "fr") return a.fr_description || (!hasArabic(a.description) ? a.description : "") || "";
+  if (lang === "fr") return a.fr_description || a.en_description || (!hasArabic(a.description) ? a.description : "") || "";
   return a.description;
 }
 
