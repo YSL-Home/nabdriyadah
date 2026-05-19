@@ -1,61 +1,16 @@
 {
-  "date": "2026-05-19T20:24:07.672Z",
-  "total": 1103,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 4,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1jtc51",
-      "value": "Southampton expelled from play-offs for spying"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "tennis-elup7z-1779222244831",
-      "value": "Svitolina upsets Gauff to win Italian Open thriller"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "bball-nt3kab-1779222244009",
-      "value": "2026 NBA playoff bracket, schedule: Victor Wembanyama leads "
-    }
-  ],
+  "date": "2026-05-19T20:32:16.102Z",
+  "total": 1099,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-1srj1y",
-      "sport": "football",
-      "image": "/generated/ft-1srj1y.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-1jtc51",
-      "sport": "football",
-      "image": "/generated/ft-1jtc51.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-elup7z-1779222244831",
-      "sport": "tennis",
-      "image": "/generated/tennis-elup7z-1779222244831.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "bball-nt3kab-1779222244009",
-      "sport": "basketball",
-      "image": "/generated/bball-nt3kab-1779222244009.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 533,
+      "count": 532,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1102,
+      "count": 1098,
       "action": "needs_llm_backfill"
     },
     {
@@ -322,12 +277,8 @@
           "duplicate_of": "bball-1bbmsd"
         },
         {
-          "slug": "tennis-elup7z-1779221709062",
-          "duplicate_of": "tennis-elup7z-1779222244831"
-        },
-        {
           "slug": "tennis-elup7z",
-          "duplicate_of": "tennis-elup7z-1779222244831"
+          "duplicate_of": "tennis-elup7z-1779221709062"
         },
         {
           "slug": "ft-18a6gp",
@@ -1586,10 +1537,6 @@
           "duplicate_of": "bball-47e3q2-1779117689316"
         },
         {
-          "slug": "bball-nt3kab-1779222244009",
-          "duplicate_of": "bball-e0rnnt-1778856181013"
-        },
-        {
           "slug": "bball-nt3kab-1779208505967",
           "duplicate_of": "bball-e0rnnt-1778856181013"
         },
@@ -1809,12 +1756,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 3,
-    "warnings": 7,
-    "missing_images": 4,
-    "missing_en_title": 533,
-    "missing_fr_title": 1102,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 532,
+    "missing_fr_title": 1098,
     "sport_mismatches_fixed": 0,
-    "duplicates": 436
+    "duplicates": 434
   }
 }
