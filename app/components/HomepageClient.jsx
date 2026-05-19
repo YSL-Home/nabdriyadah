@@ -53,7 +53,7 @@ const UI = {
   seeAll:       { ar: "عرض الكل ←",      fr: "Voir tout →",          en: "See all →"          },
   basketball:   { ar: "🏀 كرة السلة",    fr: "🏀 Basketball",        en: "🏀 Basketball"       },
   tennis:       { ar: "🎾 التنس",         fr: "🎾 Tennis",            en: "🎾 Tennis"           },
-  padel:        { ar: "🏸 البادل",        fr: "🏸 Padel",             en: "🏸 Padel"            },
+  padel:        { ar: "البادل",           fr: "Padel",                en: "Padel"               },
   articles:     { ar: "مقال",            fr: "article",              en: "article"            },
   sports:       { ar: "رياضة",           fr: "sport",                en: "sport"              },
   competitions: { ar: "بطولة",           fr: "compétition",          en: "competition"        },
@@ -63,11 +63,16 @@ function ui(key, lang) { return UI[key]?.[lang] || UI[key]?.ar || key; }
 
 /* ── Sport categories config ────────────────────────── */
 const SPORT_CATS = [
-  { key: "football",   emoji: "⚽", label: { ar: "كرة القدم", fr: "Football",   en: "Football"   }, color: "#2563eb", href: "/sport/football/"   },
-  { key: "basketball", emoji: "🏀", label: { ar: "كرة السلة", fr: "Basketball", en: "Basketball" }, color: "#c2410c", href: "/sport/basketball/" },
-  { key: "tennis",     emoji: "🎾", label: { ar: "التنس",     fr: "Tennis",     en: "Tennis"     }, color: "#15803d", href: "/sport/tennis/"     },
-  { key: "padel",      emoji: "🏸", label: { ar: "البادل",    fr: "Padel",      en: "Padel"      }, color: "#7c3aed", href: "/sport/padel/"      },
-  { key: "futsal",     emoji: "🥅", label: { ar: "الصالات",   fr: "Futsal",     en: "Futsal"     }, color: "#0f766e", href: "/sport/futsal/"     },
+  { key: "football",   emoji: "⚽",  label: { ar: "كرة القدم", fr: "Football",   en: "Football"   }, color: "#2563eb", href: "/sport/football/"   },
+  { key: "basketball", emoji: "🏀",  label: { ar: "كرة السلة", fr: "Basketball", en: "Basketball" }, color: "#c2410c", href: "/sport/basketball/" },
+  { key: "tennis",     emoji: "🎾",  label: { ar: "التنس",     fr: "Tennis",     en: "Tennis"     }, color: "#15803d", href: "/sport/tennis/"     },
+  { key: "padel",      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/80px-Premier_Padel_logo.svg.png",
+                             label: { ar: "البادل",    fr: "Padel",      en: "Padel"      }, color: "#2563eb", href: "/sport/padel/"      },
+  { key: "f1",         logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/80px-F1.svg.png",
+                             label: { ar: "فورمولا 1",  fr: "Formule 1",  en: "Formula 1"  }, color: "#dc2626", href: "/sport/f1/"         },
+  { key: "golf",       logo: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/PGA_Tour_logo.svg/80px-PGA_Tour_logo.svg.png",
+                             label: { ar: "الغولف",    fr: "Golf",       en: "Golf"       }, color: "#16a34a", href: "/sport/golf/"       },
+  { key: "futsal",     emoji: "🥅",  label: { ar: "الصالات",   fr: "Futsal",     en: "Futsal"     }, color: "#7c3aed", href: "/sport/futsal/"     },
 ];
 
 /* ── Date formatting ────────────────────────────────── */
@@ -133,7 +138,10 @@ function SportCategoriesBar({ lang, prefix, sportCounts }) {
           const count = sportCounts?.[s.key] || 0;
           return (
             <Link key={s.key} href={`${prefix}${s.href}`} className="sport-cat-pill">
-              <span style={{ fontSize: "18px", lineHeight: 1 }}>{s.emoji}</span>
+              {s.logo
+                ? <img src={s.logo} alt="" width={22} height={22} style={{ objectFit: "contain", flexShrink: 0 }} />
+                : <span style={{ fontSize: "18px", lineHeight: 1 }}>{s.emoji}</span>
+              }
               <span style={{ fontWeight: 800, color: s.color, fontSize: "13px" }}>
                 {s.label[lang] || s.label.ar}
               </span>
@@ -158,7 +166,7 @@ function SportCategoriesBar({ lang, prefix, sportCounts }) {
 function StatsStrip({ totalArticles, lang }) {
   const stats = [
     { value: totalArticles, label: ui("articles", lang), icon: "📰" },
-    { value: 5,             label: ui("sports", lang),   icon: "🏅" },
+    { value: 7,             label: ui("sports", lang),   icon: "🏅" },
     { value: 13,            label: ui("competitions", lang), icon: "🏆" },
   ];
   return (

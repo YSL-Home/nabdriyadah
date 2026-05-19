@@ -107,7 +107,8 @@ const sportConfig = {
     },
   },
   padel: {
-    icon: "🏸",
+    icon: "🎾",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/320px-Premier_Padel_logo.svg.png",
     colorFrom: "#1d4ed8",
     colorTo: "#2563eb",
     primary: "#2563eb",
@@ -116,17 +117,17 @@ const sportConfig = {
     pageBg: "#eff6ff",
     en: {
       title: "Padel",
-      description: "World padel news, major tournaments, top players and latest updates.",
-      highlights: ["World Padel Tour", "Tournaments", "Top players", "Sport evolution"],
+      description: "World padel news, Premier Padel, FIP rankings, top players and latest updates.",
+      highlights: ["Premier Padel", "FIP World Ranking", "Top players", "Sport evolution"],
     },
     fr: {
       title: "Padel",
-      description: "Actualités du padel mondial, grandes compétitions, meilleurs joueurs et dernières infos.",
-      highlights: ["World Padel Tour", "Tournois", "Meilleurs joueurs", "Évolution du sport"],
+      description: "Actualités du padel mondial, Premier Padel, classement FIP, meilleurs joueurs.",
+      highlights: ["Premier Padel", "Classement FIP", "Meilleurs joueurs", "Évolution du sport"],
     },
   },
   futsal: {
-    icon: "⚽",
+    icon: "🥅",
     colorFrom: "#7c3aed",
     colorTo: "#9333ea",
     primary: "#7c3aed",
@@ -144,7 +145,66 @@ const sportConfig = {
       highlights: ["Football indoor", "Tournois futsal", "Meilleurs clubs", "Résultats"],
     },
   },
+  f1: {
+    icon: "🏎️",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/320px-F1.svg.png",
+    colorFrom: "#7f1d1d",
+    colorTo: "#dc2626",
+    primary: "#dc2626",
+    primarySoft: "#fef2f2",
+    border: "#fecaca",
+    pageBg: "#fef2f2",
+    en: {
+      title: "Formula 1",
+      description: "Full coverage of Formula 1: drivers standings, team rankings, race calendar and results.",
+      highlights: ["Drivers standings", "Race calendar", "Top teams", "Race results"],
+      back: "← Home",
+    },
+    fr: {
+      title: "Formule 1",
+      description: "Toute l'actualité de la Formule 1 : classement pilotes, équipes, calendrier et résultats.",
+      highlights: ["Classement pilotes", "Calendrier", "Meilleures écuries", "Résultats"],
+      back: "← Accueil",
+    },
+  },
+  golf: {
+    icon: "⛳",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/PGA_Tour_logo.svg/320px-PGA_Tour_logo.svg.png",
+    colorFrom: "#052e16",
+    colorTo: "#16a34a",
+    primary: "#16a34a",
+    primarySoft: "#f0fdf4",
+    border: "#bbf7d0",
+    pageBg: "#f0fdf4",
+    en: {
+      title: "Golf",
+      description: "World golf news, PGA Tour, OWGR world rankings, majors and top players.",
+      highlights: ["PGA Tour", "World Rankings", "Major Championships", "Top players"],
+      back: "← Home",
+    },
+    fr: {
+      title: "Golf",
+      description: "Actualités du golf mondial, PGA Tour, classement OWGR, Majeurs et grands joueurs.",
+      highlights: ["PGA Tour", "Classement mondial", "Tournois Majeurs", "Meilleurs joueurs"],
+      back: "← Accueil",
+    },
+  },
 };
+
+function SportIcon({ cfg, size = 64 }) {
+  if (cfg.logo) {
+    return (
+      <img
+        src={cfg.logo}
+        alt=""
+        width={size}
+        height={size}
+        style={{ objectFit: "contain", filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.25))", flexShrink: 0 }}
+      />
+    );
+  }
+  return <span style={{ fontSize: `${size}px`, lineHeight: 1 }}>{cfg.icon}</span>;
+}
 
 export default function LocalizedSportPage({ slug, lang }) {
   const cfg = sportConfig[slug];
@@ -202,7 +262,7 @@ export default function LocalizedSportPage({ slug, lang }) {
               {backLabel}
             </Link>
             <div style={{ display: "flex", alignItems: "center", gap: "18px", marginBottom: "14px" }}>
-              <span style={{ fontSize: "64px" }}>{cfg.icon}</span>
+              <SportIcon cfg={cfg} size={64} />
               <h1 style={{ margin: 0, fontSize: "clamp(32px,5vw,56px)", fontWeight: 900 }}>{lc.title}</h1>
             </div>
             <p style={{ margin: "0 0 20px 0", maxWidth: "800px", fontSize: "20px", lineHeight: 1.9, opacity: 0.95 }}>{lc.description}</p>
