@@ -1,16 +1,73 @@
 {
-  "date": "2026-05-19T06:05:46.372Z",
-  "total": 999,
-  "fixes": [],
+  "date": "2026-05-19T06:39:46.264Z",
+  "total": 1003,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 4,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-1ymj95",
+      "was": "golf",
+      "fixed_to": "football"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-1qmtzt",
+      "was": "f1",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1ymj95",
+      "value": "Higgo splits with caddie after missing tee time and US PGA c"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1qmtzt",
+      "value": "Why don't drivers enter other series like Verstappen? F1 Q&A"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1l1u1a",
+      "value": "D-Day in Spygate case: What's at stake and what could happen"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1ymj95",
+      "sport": "golf",
+      "image": "/generated/ft-1ymj95.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-ei604z",
+      "sport": "football",
+      "image": "/generated/ft-ei604z.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1qmtzt",
+      "sport": "f1",
+      "image": "/generated/ft-1qmtzt.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1l1u1a",
+      "sport": "football",
+      "image": "/generated/ft-1l1u1a.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 458,
+      "count": 459,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 998,
+      "count": 1002,
       "action": "needs_llm_backfill"
     },
     {
@@ -1616,12 +1673,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 458,
-    "missing_fr_title": 998,
-    "sport_mismatches_fixed": 0,
+    "fixes_applied": 5,
+    "warnings": 7,
+    "missing_images": 4,
+    "missing_en_title": 459,
+    "missing_fr_title": 1002,
+    "sport_mismatches_fixed": 2,
     "duplicates": 399
   }
 }
