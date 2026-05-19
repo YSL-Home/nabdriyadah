@@ -335,8 +335,7 @@ export default function SportPage({ params }) {
                     transition: "box-shadow .2s"
                   }}>
                     <img src={league.logo} alt={league.title} width={52} height={52}
-                      style={{ objectFit: "contain", flexShrink: 0, borderRadius: "8px" }}
-                      onError={e => { e.currentTarget.style.display = "none"; }} />
+                      style={{ objectFit: "contain", flexShrink: 0, borderRadius: "8px" }} />
                     <div>
                       <div style={{ fontSize: "15px", fontWeight: 800, color: "#111827", lineHeight: 1.3 }}>{league.title}</div>
                       <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>عرض الجدول والترتيب ←</div>
@@ -373,4 +372,3 @@ export default function SportPage({ params }) {
       </div>
     </main>
   );
-}

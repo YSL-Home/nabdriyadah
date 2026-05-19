@@ -83,6 +83,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5420JXJVQ0');`
           }}
         />
+        {/* Protection DevTools — dissuasion inspection source */}
+        <script dangerouslySetInnerHTML={{ __html: `
+(function(){
+  // Désactiver le clic droit
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; });
+  // Bloquer F12, Ctrl+Shift+I/J/U, Ctrl+U
+  document.addEventListener('keydown', function(e){
+    if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'||e.key==='C'))||(e.ctrlKey&&e.key==='U')||(e.metaKey&&e.altKey&&(e.key==='I'||e.key==='J'))){
+      e.preventDefault(); return false;
+    }
+  });
+})();
+        `}} />
       </head>
 
       <body style={{ margin: 0, fontFamily: "var(--font-inter, 'Inter', 'Segoe UI', Arial, sans-serif)" }}>

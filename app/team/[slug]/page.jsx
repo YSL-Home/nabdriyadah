@@ -408,7 +408,7 @@ export default function TeamPage({ params }) {
                             src={opponent?.logo}
                             alt={opponent?.name}
                             style={{ width: "28px", height: "28px", objectFit: "contain" }}
-                            onError={(e) => { e.target.style.display = "none"; }}
+                            
                           />
                           <span style={{ fontSize: "16px", fontWeight: 800, color: "#111827" }}>
                             {isHome ? `${team.name} ضد ${opponent?.name}` : `${opponent?.name} ضد ${team.name}`}
@@ -508,7 +508,7 @@ export default function TeamPage({ params }) {
                       {/* Home team */}
                       <div style={{ display: "flex", alignItems: "center", gap: "6px", justifyContent: "flex-end" }}>
                         <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", textAlign: "left" }}>{m.home?.name}</span>
-                        <img src={m.home?.logo} alt="" style={{ width: "22px", height: "22px", objectFit: "contain" }} onError={(e) => { e.target.style.display = "none"; }} />
+                        <img src={m.home?.logo} alt="" style={{ width: "22px", height: "22px", objectFit: "contain" }}  />
                       </div>
 
                       {/* Score */}
@@ -523,7 +523,7 @@ export default function TeamPage({ params }) {
 
                       {/* Away team */}
                       <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                        <img src={m.away?.logo} alt="" style={{ width: "22px", height: "22px", objectFit: "contain" }} onError={(e) => { e.target.style.display = "none"; }} />
+                        <img src={m.away?.logo} alt="" style={{ width: "22px", height: "22px", objectFit: "contain" }}  />
                         <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{m.away?.name}</span>
                       </div>
                     </div>

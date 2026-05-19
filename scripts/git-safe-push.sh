@@ -17,6 +17,10 @@ git config branch.main.rebase false
 git add -A
 # Exclure les fichiers workflow — le bot CI n'a pas la permission "workflows"
 git restore --staged .github/ 2>/dev/null || true
+# Exclure les fichiers source JSX/JS de l'app — seuls les fichiers content/ doivent être commités par le CI
+git restore --staged app/ 2>/dev/null || true
+git restore --staged scripts/ 2>/dev/null || true
+git restore --staged next.config.mjs package.json tsconfig.json 2>/dev/null || true
 
 # Message du commit (fourni en argument ou auto-généré)
 MSG="${1:-auto: $(date '+%d/%m %H:%M')}"
@@ -52,7 +56,8 @@ for ATTEMPT in 1 2 3; do
     echo "⚡ Attempt $ATTEMPT: remote is $BEHIND commit(s) ahead — reset + reapply …"
 
     # Lister les fichiers que NOUS avons modifiés par rapport au remote
-    CHANGED_FILES=$(git diff --name-only origin/main HEAD 2>/dev/null || true)
+    # Exclure app/, scripts/ et configs — le CI ne doit commiter que les fichiers générés (content/, public/)
+    CHANGED_FILES=$(git diff --name-only origin/main HEAD 2>/dev/null | grep -v '^app/' | grep -v '^scripts/' | grep -v '^\.github/' | grep -v '^next\.config\|^package\|^tsconfig\|^tailwind\|^postcss' || true)
 
     if [ -n "$CHANGED_FILES" ]; then
       # Sauvegarder nos fichiers dans un répertoire temporaire
@@ -82,6 +87,9 @@ for ATTEMPT in 1 2 3; do
       # Commiter nos fichiers sur la pointe du remote (sera fast-forward)
       git add -A
       git restore --staged .github/ 2>/dev/null || true
+      git restore --staged app/ 2>/dev/null || true
+      git restore --staged scripts/ 2>/dev/null || true
+      git restore --staged next.config.mjs package.json tsconfig.json 2>/dev/null || true
       if ! git diff --cached --quiet; then
         git commit -m "$MSG"
       fi
