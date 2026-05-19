@@ -1,95 +1,80 @@
 {
-  "date": "2026-05-19T16:30:56.120Z",
-  "total": 1077,
-  "fixes": [
-    {
-      "type": "missing_images_detected",
-      "count": 4,
-      "action": "will_regenerate_on_next_ci"
-    },
-    {
-      "type": "en_title_from_source",
-      "slug": "ft-1rlohi",
-      "value": "Stewart's remarkable rise from Scottish semi-pro to World Cu"
-    }
-  ],
+  "date": "2026-05-19T16:37:51.143Z",
+  "total": 1082,
+  "fixes": [],
   "warnings": [
     {
-      "type": "missing_image",
-      "slug": "ft-1rlohi",
-      "sport": "football",
-      "image": "/generated/ft-1rlohi.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "tennis-1kqb9m",
-      "sport": "tennis",
-      "image": "/generated/tennis-1kqb9m.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-2ehkpd",
-      "sport": "football",
-      "image": "/generated/ft-2ehkpd.png"
-    },
-    {
-      "type": "missing_image",
-      "slug": "ft-10qlw4",
-      "sport": "football",
-      "image": "/generated/ft-10qlw4.png"
-    },
-    {
       "type": "missing_en_title",
-      "count": 513,
+      "count": 517,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1076,
+      "count": 1081,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
         {
+          "slug": "ft-sxk4i4",
+          "duplicate_of": "ft-ojw9ng"
+        },
+        {
+          "slug": "ft-1k450y",
+          "duplicate_of": "ft-7xmy6f"
+        },
+        {
+          "slug": "ft-c7ap25",
+          "duplicate_of": "ft-1k5j3n"
+        },
+        {
+          "slug": "ft-1s60er",
+          "duplicate_of": "ft-1cymsj"
+        },
+        {
+          "slug": "ft-12r7u3",
+          "duplicate_of": "ft-o9er0p"
+        },
+        {
           "slug": "ft-wp7bcs",
-          "duplicate_of": "ft-c7ap25"
+          "duplicate_of": "ft-1k5j3n"
         },
         {
           "slug": "ft-1hv6cq",
-          "duplicate_of": "ft-1s60er"
+          "duplicate_of": "ft-1cymsj"
         },
         {
           "slug": "ft-q1fv5c",
-          "duplicate_of": "ft-12r7u3"
+          "duplicate_of": "ft-o9er0p"
         },
         {
           "slug": "ft-d5forx",
-          "duplicate_of": "ft-sxk4i4"
+          "duplicate_of": "ft-ojw9ng"
         },
         {
           "slug": "ft-1676wo",
-          "duplicate_of": "ft-1k450y"
+          "duplicate_of": "ft-7xmy6f"
         },
         {
           "slug": "ft-1o99pd",
-          "duplicate_of": "ft-sxk4i4"
+          "duplicate_of": "ft-ojw9ng"
         },
         {
           "slug": "ft-uilv5y",
-          "duplicate_of": "ft-1k450y"
+          "duplicate_of": "ft-7xmy6f"
         },
         {
           "slug": "ft-16rbhr",
-          "duplicate_of": "ft-c7ap25"
+          "duplicate_of": "ft-1k5j3n"
         },
         {
           "slug": "ft-ijhkjd",
-          "duplicate_of": "ft-1s60er"
+          "duplicate_of": "ft-1cymsj"
         },
         {
           "slug": "ft-91u2id",
-          "duplicate_of": "ft-12r7u3"
+          "duplicate_of": "ft-o9er0p"
         },
         {
           "slug": "epl-1tfww7",
@@ -1520,6 +1505,10 @@
           "duplicate_of": "bball-47e3q2-1779117689316"
         },
         {
+          "slug": "bball-nt3kab-1779208505967",
+          "duplicate_of": "bball-e0rnnt-1778856181013"
+        },
+        {
           "slug": "bball-nt3kab-1779202105422",
           "duplicate_of": "bball-e0rnnt-1778856181013"
         },
@@ -1735,12 +1724,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 1,
-    "warnings": 7,
-    "missing_images": 4,
-    "missing_en_title": 513,
-    "missing_fr_title": 1076,
+    "fixes_applied": 0,
+    "warnings": 3,
+    "missing_images": 0,
+    "missing_en_title": 517,
+    "missing_fr_title": 1081,
     "sport_mismatches_fixed": 0,
-    "duplicates": 420
+    "duplicates": 426
   }
 }
