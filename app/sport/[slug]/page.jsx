@@ -99,14 +99,15 @@ const sportConfig = {
     title: "البادل",
     slug: "padel",
     description: "أخبار رياضة البادل العالمية، أبرز البطولات واللاعبين والمستجدات.",
-    icon: "🏸",
+    icon: "🎾",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/320px-Premier_Padel_logo.svg.png",
     colorFrom: "#1d4ed8",
     colorTo: "#2563eb",
     primary: "#2563eb",
     primarySoft: "#eff6ff",
     border: "#bfdbfe",
     pageBg: "#eff6ff",
-    highlights: ["World Padel Tour", "بطولات البادل", "أبرز اللاعبين", "تطور الرياضة"]
+    highlights: ["Premier Padel", "FIP World Ranking", "أبرز اللاعبين", "تطور الرياضة"]
   },
   futsal: {
     title: "كرة قدم الصالات",
@@ -126,6 +127,7 @@ const sportConfig = {
     slug: "f1",
     description: "تغطية شاملة لسباقات الفورمولا 1، ترتيب السائقين والفرق وجدول السباقات.",
     icon: "🏎️",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/320px-F1.svg.png",
     colorFrom: "#7f1d1d",
     colorTo: "#dc2626",
     primary: "#dc2626",
@@ -139,15 +141,32 @@ const sportConfig = {
     slug: "golf",
     description: "أحدث أخبار الغولف العالمي، تصنيف اللاعبين، PGA Tour وأبرز البطولات.",
     icon: "⛳",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/PGA_Tour_logo.svg/320px-PGA_Tour_logo.svg.png",
     colorFrom: "#052e16",
     colorTo: "#16a34a",
     primary: "#16a34a",
     primarySoft: "#f0fdf4",
     border: "#bbf7d0",
     pageBg: "#f0fdf4",
-    highlights: ["PGA Tour", "تصنيف اللاعبين", "بطولات الغراند سلام", "أبرز المحترفين"]
+    highlights: ["PGA Tour", "OWGR World Ranking", "بطولات الماجور", "أبرز المحترفين"]
   }
 };
+
+// Affiche le logo officiel si disponible, sinon l'emoji
+function SportIcon({ sport, size = 64 }) {
+  if (sport.logo) {
+    return (
+      <img
+        src={sport.logo}
+        alt={sport.title}
+        width={size}
+        height={size}
+        style={{ objectFit: "contain", filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.25))", flexShrink: 0 }}
+      />
+    );
+  }
+  return <span style={{ fontSize: `${size}px`, lineHeight: 1 }}>{sport.icon}</span>;
+}
 
 export function generateStaticParams() {
   return Object.keys(sportConfig).map((slug) => ({ slug }));
@@ -251,7 +270,7 @@ export default function SportPage({ params }) {
             <div style={{ position: "relative" }}>
               <Link href="/" style={{ display: "inline-block", textDecoration: "none", color: "white", fontWeight: 700, fontSize: "14px", opacity: 0.9, marginBottom: "16px" }}>← الرئيسية</Link>
               <div style={{ display: "flex", alignItems: "center", gap: "18px", marginBottom: "14px" }}>
-                <span style={{ fontSize: "64px" }}>{sport.icon}</span>
+                <SportIcon sport={sport} size={64} />
                 <h1 className="th1" style={{ margin: 0 }}>{sport.title}</h1>
               </div>
               <p style={{ margin: "0 0 20px 0", maxWidth: "800px", fontSize: "20px", lineHeight: 1.9, opacity: 0.95 }}>{sport.description}</p>
@@ -355,7 +374,7 @@ export default function SportPage({ params }) {
             </Link>
 
             <div style={{ display: "flex", alignItems: "center", gap: "18px", marginBottom: "16px" }}>
-              <span style={{ fontSize: "64px" }}>{sport.icon}</span>
+              <SportIcon sport={sport} size={64} />
               <h1 className="th1" style={{ margin: 0 }}>{sport.title}</h1>
             </div>
 
@@ -418,7 +437,7 @@ export default function SportPage({ params }) {
 
         {sportArticles.length === 0 ? (
           <section style={{ background: "white", borderRadius: "28px", padding: "40px", border: `1px solid ${sport.border}`, textAlign: "center" }}>
-            <div style={{ fontSize: "48px", marginBottom: "16px" }}>{sport.icon}</div>
+            <div style={{ marginBottom: "16px", display: "flex", justifyContent: "center" }}><SportIcon sport={sport} size={48} /></div>
             <h2 style={{ margin: "0 0 12px 0", fontSize: "28px", fontWeight: 800 }}>محتوى قيد الإنشاء</h2>
             <p style={{ color: "#6b7280", fontSize: "18px", lineHeight: 1.9, maxWidth: "500px", margin: "0 auto" }}>
               يتم تجميع مواد {sport.title} تلقائياً. ستظهر المقالات فور اكتمال أول دورة تحديث للمحتوى.
