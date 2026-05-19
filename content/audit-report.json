@@ -1,8 +1,42 @@
 {
-  "date": "2026-05-19T02:23:21.994Z",
-  "total": 997,
-  "fixes": [],
+  "date": "2026-05-19T05:57:21.009Z",
+  "total": 999,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 2,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "sport_mismatch_fixed",
+      "slug": "ft-1qmtzt",
+      "was": "f1",
+      "fixed_to": "football"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1qmtzt",
+      "value": "Why don't drivers enter other series like Verstappen? F1 Q&A"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1l1u1a",
+      "value": "D-Day in Spygate case: What's at stake and what could happen"
+    }
+  ],
   "warnings": [
+    {
+      "type": "missing_image",
+      "slug": "ft-1qmtzt",
+      "sport": "f1",
+      "image": "/generated/ft-1qmtzt.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1l1u1a",
+      "sport": "football",
+      "image": "/generated/ft-1l1u1a.png"
+    },
     {
       "type": "missing_en_title",
       "count": 456,
@@ -10,7 +44,7 @@
     },
     {
       "type": "missing_fr_title",
-      "count": 996,
+      "count": 998,
       "action": "needs_llm_backfill"
     },
     {
@@ -1616,12 +1650,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
+    "fixes_applied": 3,
+    "warnings": 5,
+    "missing_images": 2,
     "missing_en_title": 456,
-    "missing_fr_title": 996,
-    "sport_mismatches_fixed": 0,
+    "missing_fr_title": 998,
+    "sport_mismatches_fixed": 1,
     "duplicates": 399
   }
 }
