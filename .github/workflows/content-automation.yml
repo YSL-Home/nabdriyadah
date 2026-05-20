@@ -149,6 +149,15 @@ jobs:
           ANTHROPIC_MODEL:   ${{ secrets.ANTHROPIC_MODEL }}
         continue-on-error: true
 
+      - name: Upgrade articles courts (AdSense qualité)
+        run: node scripts/upgrade-short-articles.mjs
+        env:
+          GOOGLE_API_KEY:    ${{ secrets.GOOGLE_API_KEY }}
+          GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
+        continue-on-error: true
+
       - name: Fetch ESPN data (standings + fixtures)
         run: node scripts/fetch-espn.mjs
         continue-on-error: true
