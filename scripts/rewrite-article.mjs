@@ -339,9 +339,17 @@ function fallbackArticle(item, index) {
   };
 }
 
+// ── Flags fail-fast : évite de répéter des appels sur des APIs épuisées ──
+let _anthropicDead = false;
+let _openAIDead    = false;
+
+function isFatalMsg(msg = "") {
+  return /credit balance is too low|Your credit balance|balance is too low|insufficient_quota|invalid_api_key|account.*deactivated|billing hard limit|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|API_KEY_INVALID|reported as leaked|API key.*leaked/i.test(msg);
+}
+
 // ── Anthropic Claude (priorité — moins cher) ─────────────────────────────
 async function callAnthropic(prompt, systemPrompt = null) {
-  if (!ANTHROPIC_API_KEY) return null;
+  if (!ANTHROPIC_API_KEY || _anthropicDead) return null;
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -359,7 +367,13 @@ async function callAnthropic(prompt, systemPrompt = null) {
     });
     const data = await response.json();
     if (!response.ok) {
-      console.log("Anthropic error:", data?.error?.message || JSON.stringify(data).slice(0, 120));
+      const msg = data?.error?.message || JSON.stringify(data);
+      if (isFatalMsg(msg)) {
+        console.log("  ⛔ Anthropic fatal — désactivé pour ce run.");
+        _anthropicDead = true;
+      } else {
+        console.log("Anthropic error:", msg.slice(0, 120));
+      }
       return null;
     }
     return data?.content?.[0]?.text || null;
@@ -371,13 +385,13 @@ async function callAnthropic(prompt, systemPrompt = null) {
 
 // ── OpenAI GPT (fallback si Anthropic indisponible) ───────────────────────
 async function callOpenAI(prompt, systemPrompt = null) {
-  if (!OPENAI_API_KEY) return null;
+  if (!OPENAI_API_KEY || _openAIDead) return null;
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: { Authorization: `Bearer ${OPENAI_API_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "gpt-4o-mini",  // mini = 15× moins cher que gpt-4o
+        model: "gpt-4o-mini",
         temperature: 0.4,
         messages: [
           { role: "system", content: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط." },
@@ -387,7 +401,16 @@ async function callOpenAI(prompt, systemPrompt = null) {
       })
     });
     const data = await response.json();
-    if (!response.ok) { console.log("OpenAI error:", JSON.stringify(data?.error || data).slice(0, 120)); return null; }
+    if (!response.ok) {
+      const msg = JSON.stringify(data?.error || data);
+      if (isFatalMsg(msg)) {
+        console.log("  ⛔ OpenAI fatal — désactivé pour ce run.");
+        _openAIDead = true;
+      } else {
+        console.log("OpenAI error:", msg.slice(0, 120));
+      }
+      return null;
+    }
     return data?.choices?.[0]?.message?.content || null;
   } catch (error) {
     console.log("OpenAI request failed:", error.message);
@@ -395,8 +418,11 @@ async function callOpenAI(prompt, systemPrompt = null) {
   }
 }
 
-// ── Sélecteur : Anthropic d'abord, sinon OpenAI ───────────────────────────
+// ── Sélecteur avec fail-fast global ──────────────────────────────────────
+function noLLMLeft() { return (_anthropicDead || !ANTHROPIC_API_KEY) && (_openAIDead || !OPENAI_API_KEY); }
+
 async function callLLM(prompt, systemPrompt = null) {
+  if (noLLMLeft()) return null;
   const result = await callAnthropic(prompt, systemPrompt);
   if (result) return result;
   return await callOpenAI(prompt, systemPrompt);
@@ -631,6 +657,9 @@ async function main() {
   const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems, ...f1Items, ...golfItems];
 
   console.log(`New items to write: ${selected.length}`);
+  if (noLLMLeft()) {
+    console.log("⚠ Toutes les APIs LLM sont épuisées — articles en fallback uniquement.");
+  }
 
   const newArticles = [];
 
@@ -709,9 +738,10 @@ async function main() {
     // Pass 2: LLM translation for remaining (max 60/run to stay within CI timeout)
     const needsTranslation = merged.filter(a => !a.en_title || !a.fr_title);
     const toTranslate = needsTranslation.slice(0, 60);
-    if (toTranslate.length > 0) {
+    if (toTranslate.length > 0 && !noLLMLeft()) {
       console.log(`\n🌍 LLM backfill: ${toTranslate.length} articles need EN/FR translation...`);
       for (const article of toTranslate) {
+        if (noLLMLeft()) break; // stop early if all APIs dead
         try {
           const prompt = `You are a professional sports translator. Translate this Arabic sports article into English and French.
 

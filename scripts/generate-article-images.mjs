@@ -300,27 +300,38 @@ async function tryDallE3(prompt) {
   throw new Error("dall-e-3: no image data returned");
 }
 
-// ── Détection erreurs fatales (billing/auth) — inutile de continuer ───────
+// ── Détection erreurs fatales (billing/auth/model manquant) ──────────────
 function isFatalApiError(msg) {
-  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated/i.test(msg);
+  return /billing hard limit|insufficient_quota|invalid_api_key|account.*deactivated|"code":404|models\/.*is not found|model.*not found|not found.*model/i.test(msg);
 }
 
-// ── Orchestrateur — Gemini prioritaire, GPT en fallback ──────────────────
-let _apisFatal = false;
+// ── Flags fail-fast — évite de réessayer un modèle mort ──────────────────
+let _apisFatal        = false;
+let _geminiImagenDead = false;
+let _geminiEditDead   = false;
+let _openAIDead       = false;
 
 async function generateImageBase64(prompt) {
   if (_apisFatal) return null;
 
   // 1. Gemini Imagen (priorité — gratuit / moins cher)
-  if (GOOGLE_API_KEY) {
+  if (GOOGLE_API_KEY && !_geminiImagenDead) {
     try {
       const b64 = await tryGeminiImagen(prompt);
       console.log("    ✓ Gemini Imagen");
       return b64;
     } catch (e) {
       console.log(`    Gemini failed: ${e.message.slice(0, 80)}`);
+      // 404 = modèle indisponible pour ce compte → fatal pour ce run
+      if (isFatalApiError(e.message)) {
+        console.log("  ⛔ Gemini Imagen indisponible (404/quota) — désactivé.");
+        _geminiImagenDead = true;
+      }
     }
   }
+
+  if (_openAIDead) return null;
+
   // 2. GPT-Image-1 (fallback)
   if (OPENAI_API_KEY) {
     try {
@@ -337,24 +348,27 @@ async function generateImageBase64(prompt) {
           return b64;
         } catch (e3) {
           if (isFatalApiError(e3.message)) {
-            console.log("  ⛔ Billing/auth fatal — génération stoppée.");
+            console.log("  ⛔ OpenAI billing/auth fatal — génération stoppée.");
+            _openAIDead = true;
             _apisFatal = true;
           }
-          throw new Error(`All APIs failed. Last: ${e3.message.slice(0, 80)}`);
+          return null;
         }
       }
     }
     // 3. DALL-E-3 (fallback GPT normal)
-    try {
-      const b64 = await tryDallE3(prompt);
-      console.log("    ✓ dall-e-3");
-      return b64;
-    } catch (e) {
-      if (isFatalApiError(e.message)) { _apisFatal = true; }
-      throw new Error(`All APIs failed. Last: ${e.message.slice(0, 80)}`);
+    if (!_openAIDead) {
+      try {
+        const b64 = await tryDallE3(prompt);
+        console.log("    ✓ dall-e-3");
+        return b64;
+      } catch (e) {
+        if (isFatalApiError(e.message)) { _openAIDead = true; _apisFatal = true; }
+        return null;
+      }
     }
   }
-  throw new Error("No image API key configured");
+  return null;
 }
 
 async function sleep(ms) {
@@ -548,7 +562,7 @@ async function main() {
       let cloned = false;
 
       // 2a. Gemini 2.0 Flash edit (priorité 1)
-      if (GOOGLE_API_KEY) {
+      if (GOOGLE_API_KEY && !_geminiEditDead) {
         try {
           console.log(`  Cloning via Gemini [${sourceLabel}]: ${slug}`);
           const b64 = await tryGeminiEdit(sourceImgBuffer, article);
@@ -559,11 +573,15 @@ async function main() {
           await sleep(600);
         } catch (e) {
           console.log(`  Gemini edit failed (${e.message.slice(0, 80)})`);
+          if (isFatalApiError(e.message)) {
+            console.log("  ⛔ Gemini edit indisponible (404) — désactivé.");
+            _geminiEditDead = true;
+          }
         }
       }
 
       // 2b. GPT edit (fallback)
-      if (!cloned && OPENAI_API_KEY && !_apisFatal) {
+      if (!cloned && OPENAI_API_KEY && !_openAIDead && !_apisFatal) {
         try {
           console.log(`  Cloning via GPT [${sourceLabel}]: ${slug}`);
           const b64 = await editImageWithGPT(sourceImgBuffer, article);
@@ -573,7 +591,7 @@ async function main() {
           console.log(`  ✓ GPT clone: ${fileName} [${generated}/${MAX_PER_RUN}]`);
           await sleep(800);
         } catch (editErr) {
-          if (isFatalApiError(editErr.message)) { _apisFatal = true; break; }
+          if (isFatalApiError(editErr.message)) { _openAIDead = true; _apisFatal = true; break; }
           console.log(`  GPT edit failed (${editErr.message.slice(0, 80)})`);
         }
       }

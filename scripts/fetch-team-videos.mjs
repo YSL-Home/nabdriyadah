@@ -22,31 +22,43 @@ const VIDEOS_PER_TEAM = 12;
 
 // Multiple search queries per team to get diverse content
 // Arabic queries get Arabic highlight channels, English ones get international channels
+const CURRENT_YEAR = new Date().getFullYear(); // dynamique — 2026, 2027...
+
 function buildQueries(teamName, teamSlug) {
   return [
-    `ملخص ${teamName} 2025 beIN Sports`,   // Arabic: beIN Sports highlights
-    `ملخص ${teamName} 2025`,              // Arabic: "highlights [team] 2025"
-    `${teamName} highlights 2025`,         // English highlights
-    `${teamName} match recap 2025`,        // English recap
-    `أهداف ${teamName}`,                   // Arabic: "goals [team]"
-    `${teamName} goals compilation`,       // Goals compilation
-    `${teamName} résumé match 2025`,       // French (for Moroccan/French teams)
-    `ملخص مباراة ${teamName} بين سبورت`,  // Arabic: beIN Sports specific
+    `ملخص ${teamName} ${CURRENT_YEAR} beIN Sports`,  // Arabic: beIN Sports highlights
+    `ملخص مباراة ${teamName} ${CURRENT_YEAR}`,       // Arabic: "match summary [team]"
+    `${teamName} highlights ${CURRENT_YEAR}`,         // English highlights
+    `${teamName} match recap ${CURRENT_YEAR}`,        // English recap
+    `أهداف ${teamName} ${CURRENT_YEAR}`,              // Arabic: "goals [team]"
+    `${teamName} résumé match ${CURRENT_YEAR}`,       // French (for Moroccan/French teams)
+    `ملخص مباراة ${teamName} بين سبورت`,             // Arabic: beIN Sports specific
+    `${teamName} full match highlights`,              // Full match (no year filter)
   ];
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-async function searchYouTube(query, maxResults = 5) {
+// publishedAfter = 14 jours en arrière (format RFC 3339)
+function getPublishedAfter(days = 14) {
+  const d = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+  return d.toISOString();
+}
+
+async function searchYouTube(query, maxResults = 5, recentOnly = false) {
   const params = new URLSearchParams({
     part: "id,snippet",
     q: query,
     type: "video",
     maxResults: String(maxResults),
     videoDuration: "medium",       // 4–20 min: good for highlights
-    order: "relevance",
+    order: recentOnly ? "date" : "relevance",
     key: GOOGLE_API_KEY
   });
+  // Pour les résumés récents, filtrer sur les 30 derniers jours
+  if (recentOnly) {
+    params.set("publishedAfter", getPublishedAfter(30));
+  }
   const res = await fetch(`${YT_SEARCH}?${params}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
@@ -97,10 +109,13 @@ async function getTeamVideos(slug, teamName) {
   const collected = new Set();
   const results = [];
 
-  for (const query of queries) {
+  for (let qi = 0; qi < queries.length; qi++) {
+    const query = queries[qi];
     if (results.length >= VIDEOS_PER_TEAM * 2) break; // enough candidates
+    // Les 2 premières requêtes utilisent "recentOnly=true" pour prioriser les derniers résumés
+    const recentOnly = qi < 2;
     try {
-      const ids = await searchYouTube(query, 5);
+      const ids = await searchYouTube(query, 5, recentOnly);
       for (const id of ids) {
         if (!collected.has(id)) {
           collected.add(id);
