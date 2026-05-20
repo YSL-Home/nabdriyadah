@@ -1,16 +1,61 @@
 {
-  "date": "2026-05-20T06:46:17.733Z",
-  "total": 1134,
-  "fixes": [],
+  "date": "2026-05-20T08:06:06.326Z",
+  "total": 1138,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 4,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1wm14u",
+      "value": "Arsenal players celebrate title at Emirates at 5am"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-12q6ph",
+      "value": "A just or harsh punishment? Reaction to Southampton expulsio"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "padel-ztk8o8-1779264364997",
+      "value": "35th FIP General Assembly Concludes in Acapulco: 14 New Nati"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-1wm14u",
+      "sport": "football",
+      "image": "/generated/ft-1wm14u.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-csrin8",
+      "sport": "football",
+      "image": "/generated/ft-csrin8.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-12q6ph",
+      "sport": "football",
+      "image": "/generated/ft-12q6ph.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "padel-ztk8o8-1779264364997",
+      "sport": "padel",
+      "image": "/generated/padel-ztk8o8-1779264364997.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 548,
+      "count": 549,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1133,
+      "count": 1137,
       "action": "needs_llm_backfill"
     },
     {
@@ -1705,6 +1750,10 @@
           "duplicate_of": "futsal-1nqaf8-1778967011491"
         },
         {
+          "slug": "padel-ztk8o8-1779235909913",
+          "duplicate_of": "padel-ztk8o8-1779264364997"
+        },
+        {
           "slug": "padel-1k4c5a-1779117690323",
           "duplicate_of": "padel-1k4c5a-1779187002102"
         },
@@ -1788,12 +1837,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 548,
-    "missing_fr_title": 1133,
+    "fixes_applied": 3,
+    "warnings": 7,
+    "missing_images": 4,
+    "missing_en_title": 549,
+    "missing_fr_title": 1137,
     "sport_mismatches_fixed": 0,
-    "duplicates": 442
+    "duplicates": 443
   }
 }
