@@ -157,9 +157,21 @@ async function main() {
   let updated = 0;
   let quotaHit = false;
 
-  console.log(`\n🎬 Fetching YouTube videos for ${slugs.length} teams (${VIDEOS_PER_TEAM} per team)...\n`);
+  // Ne requêter que les équipes dont les vidéos ont plus de 23h — évite 9 min de CI inutiles
+  const FRESHNESS_MS = 23 * 3600 * 1000;
+  const stale = slugs.filter(s => {
+    const ts = teams[s]?.videosUpdatedAt;
+    return !ts || (Date.now() - new Date(ts).getTime() > FRESHNESS_MS);
+  });
 
-  for (const slug of slugs) {
+  console.log(`\n🎬 Fetch YouTube videos — ${stale.length}/${slugs.length} équipes à mettre à jour...\n`);
+
+  if (stale.length === 0) {
+    console.log("✅ Toutes les équipes sont à jour (< 23h). Rien à faire.");
+    process.exit(0);
+  }
+
+  for (const slug of stale) {
     if (quotaHit) break;
 
     const team = teams[slug];
@@ -168,7 +180,6 @@ async function main() {
     const ids = await getTeamVideos(slug, team.name);
 
     if (ids === null) {
-      // Quota hit — stop and save what we have
       quotaHit = true;
       console.log("quota — stopping");
       break;
@@ -176,9 +187,12 @@ async function main() {
 
     if (ids.length > 0) {
       team.videos = ids;
+      team.videosUpdatedAt = new Date().toISOString(); // marquer comme à jour
       updated++;
       console.log(`✓ ${ids.length} videos [${ids.slice(0, 2).join(", ")}...]`);
     } else {
+      // Marquer quand même pour ne pas re-requêter dans l'heure
+      team.videosUpdatedAt = new Date().toISOString();
       console.log(`— no results (keeping existing ${team.videos?.length || 0})`);
     }
 
@@ -186,7 +200,7 @@ async function main() {
   }
 
   fs.writeFileSync(TEAMS_PATH, JSON.stringify(teams, null, 2));
-  console.log(`\n✅ Updated ${updated}/${slugs.length} teams with real YouTube videos`);
+  console.log(`\n✅ Updated ${updated}/${stale.length} teams with real YouTube videos`);
   if (quotaHit) {
     console.log("⚠ Quota reached — run again tomorrow to continue remaining teams");
   }

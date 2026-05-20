@@ -10,8 +10,10 @@ const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY  || "";
 const HF_API_KEY      = process.env.HF_API_KEY      || ""; // Hugging Face — gratuit sur hf.co
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY  || "";
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
-// Pollinations est 100% gratuit — 50/run pour couvrir le stock rapidement
-const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "50", 10);
+// 20/run × 24 runs = 480 images/jour — budget temps ~6 min max
+const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "20", 10);
+// Budget temps global : arrêt propre après N minutes (évite timeout CI)
+const MAX_RUNTIME_MS = parseInt(process.env.MAX_IMAGE_RUNTIME_MS || String(6 * 60 * 1000), 10);
 
 // Pollinations ne nécessite aucune clé — toujours disponible
 const HAS_IMAGE_API = true;
@@ -378,7 +380,7 @@ async function tryPollinations(fluxPrompt) {
   const url = `https://image.pollinations.ai/prompt/${encoded}?model=flux&width=1536&height=1024&nologo=true&enhance=false&seed=${seed}`;
 
   const ctrl = new AbortController();
-  const timeout = setTimeout(() => ctrl.abort(), 90000); // 90s max
+  const timeout = setTimeout(() => ctrl.abort(), 22000); // 22s max (évite blocage CI)
   try {
     const res = await fetch(url, {
       signal: ctrl.signal,
@@ -627,8 +629,12 @@ async function editImageWithGPT(imageBuffer, article) {
 }
 
 async function main() {
+  const RUN_START = Date.now();
+  const isOverBudget = () => Date.now() - RUN_START > MAX_RUNTIME_MS;
+
   // Pollinations est toujours disponible (pas de clé requise)
   console.log(`Image API: ${GOOGLE_API_KEY ? "Gemini ✓" : "Gemini ✗"} | Pollinations ✓ (gratuit) | ${HF_API_KEY ? "HuggingFace ✓" : "HF ✗"} | ${OPENAI_API_KEY ? "GPT ✓" : "GPT ✗"}`);
+  console.log(`Budget temps: ${MAX_RUNTIME_MS / 60000} min | MAX_PER_RUN: ${MAX_PER_RUN}`);
 
   const articles = safeReadJson(ARTICLES_PATH);
 
@@ -650,8 +656,9 @@ async function main() {
   });
 
   for (const article of sorted) {
-    if (generated >= MAX_PER_RUN || _apisFatal) {
+    if (generated >= MAX_PER_RUN || _apisFatal || isOverBudget()) {
       if (_apisFatal) console.log("  ⛔ APIs indisponibles — génération abandonnée.");
+      else if (isOverBudget()) console.log(`⏱ Budget temps atteint (${MAX_RUNTIME_MS / 60000} min). Arrêt propre.`);
       else console.log(`Limite atteinte (${MAX_PER_RUN} images/run). Arrêt.`);
       break;
     }

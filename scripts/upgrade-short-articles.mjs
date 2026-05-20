@@ -27,9 +27,9 @@ const GROQ_MODEL      = "llama-3.3-70b-versatile";
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 
 // ── Paramètres ────────────────────────────────────────────────────────────
-const MAX_PER_RUN       = 15;    // articles par run (Gemini 15 RPM)
+const MAX_PER_RUN       = 8;     // 8/run × 24h = 192/jour — budget ~2 min max
 const MIN_AR_WORDS      = 400;   // en dessous = article "court" à upgrader
-const DELAY_MS          = 5000;  // 5s entre appels (respect free tier)
+const DELAY_MS          = 3500;  // 3.5s entre appels (Gemini free tier OK)
 const RECENT_DAYS       = 14;    // priorité aux articles < 14 jours
 
 if (!GOOGLE_API_KEY && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {
