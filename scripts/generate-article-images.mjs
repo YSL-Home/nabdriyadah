@@ -1,14 +1,20 @@
 import fs from "fs";
 import path from "path";
 
-// Clés API disponibles — ordre de priorité coût croissant
-const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY || "";  // Gemini Imagen — priorité 1
-const OPENAI_API_KEY  = process.env.OPENAI_API_KEY;   // GPT            — priorité 2
+// ── Clés API images — ordre de priorité coût croissant ────────────────────
+// 1. Gemini Imagen       — Gratuit (si dispo sur compte)
+// 2. Pollinations.ai     — 100% GRATUIT, sans clé, FLUX
+// 3. Hugging Face FLUX   — Gratuit (clé HF libre)
+// 4. GPT-Image / DALL-E  — Payant (fallback final)
+const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY  || "";
+const HF_API_KEY      = process.env.HF_API_KEY      || ""; // Hugging Face — gratuit sur hf.co
+const OPENAI_API_KEY  = process.env.OPENAI_API_KEY  || "";
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
 // Max images générées par run CI (évite timeout et coût excessif)
 const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "25", 10);
 
-const HAS_IMAGE_API = !!(GOOGLE_API_KEY || OPENAI_API_KEY);
+// Pollinations ne nécessite aucune clé — toujours disponible
+const HAS_IMAGE_API = true;
 
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 const OUTPUT_DIR = path.join(process.cwd(), "public/generated");
@@ -183,6 +189,54 @@ TECHNICAL QUALITY:
 • This image must feel 100% specific to this exact article — not a stock photo`.trim();
 }
 
+/**
+ * Prompt court et direct pour FLUX (Pollinations / Hugging Face).
+ * FLUX fonctionne mieux avec une description visuelle concise, pas d'instructions.
+ */
+function buildFluxPrompt(article) {
+  const sport   = normalizeText(article.sport  || "football");
+  const league  = normalizeText(article.league || "");
+  const event   = extractEventType(article);
+  const teamKey = detectTeam(article);
+  const team    = teamKey ? TEAM_PALETTES[teamKey] : null;
+
+  const SPORT_SCENE = {
+    "premier-league":   "professional football stadium at night, floodlit pitch, packed crowd",
+    "la-liga":          "sunlit football stadium, mediterranean atmosphere, sold-out stands",
+    "bundesliga":       "german football stadium at dusk, atmospheric tifo, city skyline",
+    "serie-a":          "historic italian football stadium, passionate ultras, marble architecture",
+    "ligue-1":          "french football stadium, ultras section with tifos, city lights",
+    "champions-league": "massive european football stadium at night, 80000 fans, blue spotlights",
+    "saudi-pro-league": "futuristic middle-eastern stadium, palm trees, desert twilight",
+    "basketball":       "NBA arena, gleaming hardwood court, rafter banners, overhead spotlights",
+    "tennis":           "grand slam centre court, red clay, packed grandstand, dramatic shadows",
+    "padel":            "professional padel court, glass walls, LED lighting, modern arena",
+    "futsal":           "indoor futsal arena, polished floor, compact goals, vibrant stands",
+    "football":         "professional football stadium, packed stands, manicured pitch, twilight",
+    "f1":               "Formula 1 circuit, racing cars on track, pit lane, grandstands packed",
+    "golf":             "golf course, green fairway, rolling hills, dramatic sky, tournament flags",
+  };
+
+  const EVENT_ACTION = {
+    transfer:  "silhouette of athlete at tunnel entrance, farewell lighting, contemplative mood",
+    trophy:    "gleaming golden trophy, confetti shower, celebration, dramatic hero angle",
+    injury:    "medical team on pitch, golden-hour backlight, focused professional atmosphere",
+    final:     "two supporter groups in stadium, pre-match atmosphere, intense atmosphere",
+    press:     "empty podium with microphones, single spotlight, anticipation",
+    match:     "two athletes in intense aerial duel, motion blur, roaring crowd behind",
+    training:  "athlete silhouetted against goalpost at first light, training drills",
+    stats:     "aerial bird's-eye view of pitch, player formations as silhouettes",
+    general:   "cinematic aerial view of packed stadium, crowd colour mosaic, raking light",
+  };
+
+  const sceneKey = (league && SPORT_SCENE[league]) ? league : (SPORT_SCENE[sport] ? sport : "football");
+  const scene  = SPORT_SCENE[sceneKey];
+  const action = EVENT_ACTION[event] || EVENT_ACTION.general;
+  const colors = team ? `, fans in ${team.colors}` : "";
+
+  return `photorealistic sports editorial photography, ${scene}${colors}, ${action}, no text no logos no faces, Getty Images quality, cinematic lighting, 16:9 wide landscape`;
+}
+
 // ── Gemini Imagen (Google AI) — priorité 1, rapide et moins cher ─────────
 async function tryGeminiImagen(prompt) {
   if (!GOOGLE_API_KEY) throw new Error("No GOOGLE_API_KEY");
@@ -310,19 +364,95 @@ let _apisFatal        = false;
 let _geminiImagenDead = false;
 let _geminiEditDead   = false;
 let _openAIDead       = false;
+let _pollinationsDead = false;
+let _hfDead           = false;
 
-async function generateImageBase64(prompt) {
-  if (_apisFatal) return null;
+// ── Pollinations.ai — 100% GRATUIT, sans clé, FLUX 1.1 ───────────────────
+// Endpoint public, commercial allowed. Pas de compte requis.
+// Prend un prompt FLUX court (buildFluxPrompt) — pas le prompt GPT long
+async function tryPollinations(fluxPrompt) {
+  if (_pollinationsDead) throw new Error("Pollinations désactivé");
+  const safe = fluxPrompt.replace(/\s+/g, " ").trim().slice(0, 400);
+  const encoded = encodeURIComponent(safe);
+  const seed = Math.floor(Math.random() * 999999);
+  const url = `https://image.pollinations.ai/prompt/${encoded}?model=flux&width=1536&height=1024&nologo=true&enhance=false&seed=${seed}`;
 
-  // 1. Gemini Imagen (priorité — gratuit / moins cher)
+  const ctrl = new AbortController();
+  const timeout = setTimeout(() => ctrl.abort(), 90000); // 90s max
+  try {
+    const res = await fetch(url, {
+      signal: ctrl.signal,
+      headers: { "User-Agent": "nabdriyadah-sports/1.0" }
+    });
+    clearTimeout(timeout);
+    if (!res.ok) {
+      if (res.status >= 500) throw new Error(`Pollinations ${res.status}`);
+      if (res.status === 429) throw new Error("Pollinations rate limit");
+      _pollinationsDead = true;
+      throw new Error(`Pollinations fatal ${res.status}`);
+    }
+    const ct = res.headers.get("content-type") || "";
+    if (!ct.includes("image")) throw new Error(`Not an image: ${ct}`);
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (buf.length < 15000) throw new Error("Image trop petite (probablement erreur)");
+    return buf.toString("base64");
+  } catch (e) {
+    clearTimeout(timeout);
+    throw e;
+  }
+}
+
+// ── Hugging Face Inference API — GRATUIT avec clé HF (hf.co) ─────────────
+// Modèle : FLUX.1-schnell (rapide, haute qualité, libre de droits)
+// Clé gratuite : https://huggingface.co/settings/tokens
+const HF_MODEL = "black-forest-labs/FLUX.1-schnell";
+async function tryHuggingFace(fluxPrompt) {
+  if (!HF_API_KEY || _hfDead) throw new Error("HF non configuré");
+  const condensed = fluxPrompt.replace(/\s+/g, " ").trim().slice(0, 500);
+  const res = await fetch(
+    `https://api-inference.huggingface.co/models/${HF_MODEL}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${HF_API_KEY}`,
+        "Content-Type": "application/json",
+        "X-Use-Cache": "false"
+      },
+      body: JSON.stringify({
+        inputs: condensed,
+        parameters: { width: 1344, height: 768, num_inference_steps: 4, guidance_scale: 0 }
+      })
+    }
+  );
+  if (!res.ok) {
+    const err = await res.text().catch(() => String(res.status));
+    if (/loading|currently loading/i.test(err)) throw new Error("HF model loading (retry)");
+    if (isFatalApiError(err) || res.status === 401 || res.status === 403) {
+      _hfDead = true; throw new Error(`HF fatal: ${err.slice(0, 80)}`);
+    }
+    throw new Error(`HF error ${res.status}: ${err.slice(0, 80)}`);
+  }
+  const ct = res.headers.get("content-type") || "";
+  if (!ct.includes("image")) throw new Error(`HF: Not an image (${ct})`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  if (buf.length < 10000) throw new Error("HF: Image trop petite");
+  return buf.toString("base64");
+}
+
+async function generateImageBase64(prompt, article) {
+  // Construit le prompt FLUX court pour Pollinations / HF
+  const fluxPrompt = article ? buildFluxPrompt(article) : prompt.slice(0, 300);
+
+  // Ordre : Gemini Imagen → Pollinations (free) → HF FLUX (free) → GPT → DALL-E
+
+  // 1. Gemini Imagen (gratuit si dispo sur le compte)
   if (GOOGLE_API_KEY && !_geminiImagenDead) {
     try {
       const b64 = await tryGeminiImagen(prompt);
       console.log("    ✓ Gemini Imagen");
       return b64;
     } catch (e) {
-      console.log(`    Gemini failed: ${e.message.slice(0, 80)}`);
-      // 404 = modèle indisponible pour ce compte → fatal pour ce run
+      console.log(`    Gemini Imagen: ${e.message.slice(0, 80)}`);
       if (isFatalApiError(e.message)) {
         console.log("  ⛔ Gemini Imagen indisponible (404/quota) — désactivé.");
         _geminiImagenDead = true;
@@ -330,45 +460,65 @@ async function generateImageBase64(prompt) {
     }
   }
 
-  if (_openAIDead) return null;
+  // 2. Pollinations.ai — 100% gratuit, sans clé, FLUX
+  if (!_pollinationsDead) {
+    try {
+      const b64 = await tryPollinations(fluxPrompt);
+      console.log("    ✓ Pollinations FLUX");
+      return b64;
+    } catch (e) {
+      console.log(`    Pollinations: ${e.message.slice(0, 80)}`);
+      // Pollinations peut être lent — pas fatal sauf flag explicitement mis
+    }
+  }
 
-  // 2. GPT-Image-1 (fallback)
-  if (OPENAI_API_KEY) {
+  // 3. Hugging Face FLUX.1-schnell (gratuit avec clé HF)
+  if (HF_API_KEY && !_hfDead) {
+    try {
+      const b64 = await tryHuggingFace(fluxPrompt);
+      console.log("    ✓ HuggingFace FLUX.1-schnell");
+      return b64;
+    } catch (e) {
+      console.log(`    HuggingFace: ${e.message.slice(0, 80)}`);
+    }
+  }
+
+  // 4. GPT-Image-1 (payant — fallback si crédits dispo)
+  if (OPENAI_API_KEY && !_openAIDead) {
     try {
       const b64 = await tryGptImage1(prompt);
       console.log("    ✓ gpt-image-1");
       return b64;
     } catch (e) {
-      console.log(`    gpt-image-1 failed: ${e.message.slice(0, 80)}`);
+      console.log(`    gpt-image-1: ${e.message.slice(0, 80)}`);
       if (isFatalApiError(e.message)) {
-        // Tenter DALL-E-3 une seule fois avant de déclarer fatal
+        _openAIDead = true;
+        // Essai DALL-E-3 unique
         try {
           const b64 = await tryDallE3(prompt);
           console.log("    ✓ dall-e-3");
           return b64;
         } catch (e3) {
           if (isFatalApiError(e3.message)) {
-            console.log("  ⛔ OpenAI billing/auth fatal — génération stoppée.");
-            _openAIDead = true;
+            console.log("  ⛔ OpenAI billing fatal — désactivé.");
             _apisFatal = true;
           }
-          return null;
         }
       }
     }
-    // 3. DALL-E-3 (fallback GPT normal)
-    if (!_openAIDead) {
+    // DALL-E-3 fallback normal
+    if (!_openAIDead && !_apisFatal) {
       try {
         const b64 = await tryDallE3(prompt);
         console.log("    ✓ dall-e-3");
         return b64;
       } catch (e) {
-        if (isFatalApiError(e.message)) { _openAIDead = true; _apisFatal = true; }
-        return null;
+        if (isFatalApiError(e.message)) { _openAIDead = true; }
       }
     }
   }
-  return null;
+
+  return null; // toutes les APIs ont échoué
 }
 
 async function sleep(ms) {
@@ -477,11 +627,8 @@ async function editImageWithGPT(imageBuffer, article) {
 }
 
 async function main() {
-  if (!HAS_IMAGE_API) {
-    console.log("Aucune clé API image (GOOGLE_API_KEY / OPENAI_API_KEY) — génération images ignorée.");
-    process.exit(0);
-  }
-  console.log(`Image API: ${GOOGLE_API_KEY ? "Gemini ✓" : ""}${OPENAI_API_KEY ? " GPT ✓" : ""}`);
+  // Pollinations est toujours disponible (pas de clé requise)
+  console.log(`Image API: ${GOOGLE_API_KEY ? "Gemini ✓" : "Gemini ✗"} | Pollinations ✓ (gratuit) | ${HF_API_KEY ? "HuggingFace ✓" : "HF ✗"} | ${OPENAI_API_KEY ? "GPT ✓" : "GPT ✗"}`);
 
   const articles = safeReadJson(ARTICLES_PATH);
 

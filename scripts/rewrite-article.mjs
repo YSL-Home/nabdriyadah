@@ -2,10 +2,19 @@ import fs from "fs";
 import path from "path";
 import { execFileSync } from "child_process";
 
-// Priorité coût : Anthropic Claude (moins cher) → OpenAI GPT (fallback)
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const ANTHROPIC_MODEL   = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
-const OPENAI_API_KEY    = process.env.OPENAI_API_KEY;
+// ── Clés API (ordre de priorité : gratuit en premier) ─────────────────────
+// 1. Gemini 2.0 Flash  — GRATUIT  (1500 req/jour, déjà actif)
+// 2. Groq Llama 3.3 70B — GRATUIT  (500K tokens/jour, clé libre)
+// 3. Anthropic Claude   — Payant   (fallback si crédits dispo)
+// 4. OpenAI GPT-4o-mini — Payant   (dernier recours)
+const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
+const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
+const ANTHROPIC_MODEL   = process.env.ANTHROPIC_MODEL   || "claude-haiku-4-5";
+const OPENAI_API_KEY    = process.env.OPENAI_API_KEY    || "";
+
+const GEMINI_MODEL = "gemini-2.0-flash";
+const GROQ_MODEL   = "llama-3.3-70b-versatile"; // meilleur modèle Groq gratuit
 
 const INPUT_PATH = path.join(process.cwd(), "content/raw-news.json");
 const OUTPUT_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
@@ -339,28 +348,103 @@ function fallbackArticle(item, index) {
   };
 }
 
-// ── Flags fail-fast : évite de répéter des appels sur des APIs épuisées ──
+// ── Flags fail-fast ───────────────────────────────────────────────────────
+let _geminiDead    = false;
+let _groqDead      = false;
 let _anthropicDead = false;
 let _openAIDead    = false;
 
 function isFatalMsg(msg = "") {
-  return /credit balance is too low|Your credit balance|balance is too low|insufficient_quota|invalid_api_key|account.*deactivated|billing hard limit|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|API_KEY_INVALID|reported as leaked|API key.*leaked/i.test(msg);
+  return /credit balance is too low|Your credit balance|balance is too low|insufficient_quota|invalid_api_key|account.*deactivated|billing hard limit|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|API_KEY_INVALID|reported as leaked|API key.*leaked|PERMISSION_DENIED/i.test(msg);
+}
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── 1. Gemini 2.0 Flash — GRATUIT (priorité maximale) ────────────────────
+async function callGemini(prompt, systemPrompt = null) {
+  if (!GOOGLE_API_KEY || _geminiDead) return null;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GOOGLE_API_KEY}`;
+  const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
+          generationConfig: { maxOutputTokens: 8192, temperature: 0.35 }
+        })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return data?.candidates?.[0]?.content?.parts?.[0]?.text || null;
+      }
+      const err = await res.text();
+      if (res.status === 429) {
+        if (/exceeded your current quota|QUOTA_EXCEEDED|daily.*limit/i.test(err)) {
+          console.log("  ⛔ Gemini quota fatal — désactivé.");
+          _geminiDead = true; return null;
+        }
+        if (attempt < 2) { await sleep(20000); continue; }
+      }
+      if (isFatalMsg(err)) { _geminiDead = true; return null; }
+      console.log(`Gemini error ${res.status}: ${err.slice(0, 80)}`);
+      return null;
+    } catch (e) { console.log("Gemini request failed:", e.message?.slice(0, 60)); return null; }
+  }
+  return null;
 }
 
-// ── Anthropic Claude (priorité — moins cher) ─────────────────────────────
+// ── 2. Groq Llama 3.3 70B — GRATUIT (500K tokens/jour) ───────────────────
+async function callGroq(prompt, systemPrompt = null) {
+  if (!GROQ_API_KEY || _groqDead) return null;
+  try {
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: GROQ_MODEL,
+        temperature: 0.35,
+        max_tokens: 7000,
+        messages: [
+          ...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []),
+          { role: "user", content: prompt }
+        ]
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      const msg = JSON.stringify(data?.error || data);
+      // Rate limit = temporaire, pas fatal
+      if (/rate_limit_exceeded/i.test(msg)) {
+        console.log("  ↩ Groq rate limit (temporaire)");
+        await sleep(10000);
+        // 1 retry
+        const res2 = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ model: GROQ_MODEL, temperature: 0.35, max_tokens: 7000,
+            messages: [...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []), { role: "user", content: prompt }] })
+        });
+        const d2 = await res2.json();
+        if (res2.ok) return d2?.choices?.[0]?.message?.content || null;
+      }
+      if (isFatalMsg(msg)) { console.log("  ⛔ Groq fatal — désactivé."); _groqDead = true; }
+      else console.log("Groq error:", msg.slice(0, 100));
+      return null;
+    }
+    return data?.choices?.[0]?.message?.content || null;
+  } catch (e) { console.log("Groq request failed:", e.message?.slice(0, 60)); return null; }
+}
+
+// ── 3. Anthropic Claude (payant — fallback si crédits dispo) ─────────────
 async function callAnthropic(prompt, systemPrompt = null) {
   if (!ANTHROPIC_API_KEY || _anthropicDead) return null;
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
-      headers: {
-        "x-api-key": ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json"
-      },
+      headers: { "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
       body: JSON.stringify({
-        model: ANTHROPIC_MODEL,
-        max_tokens: 8000,
+        model: ANTHROPIC_MODEL, max_tokens: 8000,
         system: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط.",
         messages: [{ role: "user", content: prompt }]
       })
@@ -368,22 +452,15 @@ async function callAnthropic(prompt, systemPrompt = null) {
     const data = await response.json();
     if (!response.ok) {
       const msg = data?.error?.message || JSON.stringify(data);
-      if (isFatalMsg(msg)) {
-        console.log("  ⛔ Anthropic fatal — désactivé pour ce run.");
-        _anthropicDead = true;
-      } else {
-        console.log("Anthropic error:", msg.slice(0, 120));
-      }
+      if (isFatalMsg(msg)) { console.log("  ⛔ Anthropic fatal — désactivé."); _anthropicDead = true; }
+      else console.log("Anthropic error:", msg.slice(0, 120));
       return null;
     }
     return data?.content?.[0]?.text || null;
-  } catch (error) {
-    console.log("Anthropic request failed:", error.message);
-    return null;
-  }
+  } catch (e) { console.log("Anthropic request failed:", e.message); return null; }
 }
 
-// ── OpenAI GPT (fallback si Anthropic indisponible) ───────────────────────
+// ── 4. OpenAI GPT-4o-mini (payant — dernier recours) ────────────────────
 async function callOpenAI(prompt, systemPrompt = null) {
   if (!OPENAI_API_KEY || _openAIDead) return null;
   try {
@@ -391,8 +468,7 @@ async function callOpenAI(prompt, systemPrompt = null) {
       method: "POST",
       headers: { Authorization: `Bearer ${OPENAI_API_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
-        temperature: 0.4,
+        model: "gpt-4o-mini", temperature: 0.4,
         messages: [
           { role: "system", content: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط." },
           { role: "user", content: prompt }
@@ -403,28 +479,27 @@ async function callOpenAI(prompt, systemPrompt = null) {
     const data = await response.json();
     if (!response.ok) {
       const msg = JSON.stringify(data?.error || data);
-      if (isFatalMsg(msg)) {
-        console.log("  ⛔ OpenAI fatal — désactivé pour ce run.");
-        _openAIDead = true;
-      } else {
-        console.log("OpenAI error:", msg.slice(0, 120));
-      }
+      if (isFatalMsg(msg)) { console.log("  ⛔ OpenAI fatal — désactivé."); _openAIDead = true; }
+      else console.log("OpenAI error:", msg.slice(0, 120));
       return null;
     }
     return data?.choices?.[0]?.message?.content || null;
-  } catch (error) {
-    console.log("OpenAI request failed:", error.message);
-    return null;
-  }
+  } catch (e) { console.log("OpenAI request failed:", e.message); return null; }
 }
 
-// ── Sélecteur avec fail-fast global ──────────────────────────────────────
-function noLLMLeft() { return (_anthropicDead || !ANTHROPIC_API_KEY) && (_openAIDead || !OPENAI_API_KEY); }
+// ── Sélecteur : Gemini → Groq → Anthropic → OpenAI ───────────────────────
+function noLLMLeft() {
+  return (_geminiDead    || !GOOGLE_API_KEY)    &&
+         (_groqDead      || !GROQ_API_KEY)      &&
+         (_anthropicDead || !ANTHROPIC_API_KEY) &&
+         (_openAIDead    || !OPENAI_API_KEY);
+}
 
 async function callLLM(prompt, systemPrompt = null) {
   if (noLLMLeft()) return null;
-  const result = await callAnthropic(prompt, systemPrompt);
-  if (result) return result;
+  const r1 = await callGemini(prompt, systemPrompt);    if (r1) return r1;
+  const r2 = await callGroq(prompt, systemPrompt);      if (r2) return r2;
+  const r3 = await callAnthropic(prompt, systemPrompt); if (r3) return r3;
   return await callOpenAI(prompt, systemPrompt);
 }
 
