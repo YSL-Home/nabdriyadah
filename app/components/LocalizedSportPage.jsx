@@ -215,15 +215,36 @@ export default function LocalizedSportPage({ slug, lang }) {
   const prefix = lang === "ar" ? "" : `/${lang}`;
   const lc = cfg[lang] || cfg.en;
 
+  const hasArabic = (str) => /[؀-ۿ]/.test(str || "");
+  const getArticleTitle = (a) => {
+    if (lang === "en") {
+      if (a.en_title) return a.en_title;
+      if (a.sourceTitle && !hasArabic(a.sourceTitle)) return a.sourceTitle;
+      return null;
+    }
+    if (lang === "fr") {
+      if (a.fr_title) return a.fr_title;
+      if (a.en_title) return a.en_title;
+      if (a.sourceTitle && !hasArabic(a.sourceTitle)) return a.sourceTitle;
+      return null;
+    }
+    return a.title;
+  };
+
   const sportArticles = articles
     .filter(a => a.slug && (a.sport === slug || (slug === "football" && (!a.sport || a.sport === "football"))))
+    .filter(a => lang === "ar" || getArticleTitle(a) !== null)
     .slice(0, 8);
 
   const featuredArticle = sportArticles[0] || null;
   const restArticles    = sportArticles.slice(1);
 
-  const articleTitle = (a) => lang === "en" ? (a.en_title || a.title) : lang === "fr" ? (a.fr_title || a.title) : a.title;
-  const articleDesc  = (a) => lang === "en" ? (a.en_description || a.description) : lang === "fr" ? (a.fr_description || a.description) : a.description;
+  const articleTitle = (a) => getArticleTitle(a) || a.title;
+  const articleDesc  = (a) => {
+    if (lang === "en") return a.en_description || (!hasArabic(a.description) ? a.description : "") || "";
+    if (lang === "fr") return a.fr_description || a.en_description || (!hasArabic(a.description) ? a.description : "") || "";
+    return a.description;
+  };
   const articleHref  = (a) => `${prefix}/articles/${a.slug}/`;
 
   const backLabel   = lc.back || (lang === "fr" ? "← Accueil" : "← Home");

@@ -11,23 +11,33 @@ function sortByDate(items) {
   });
 }
 
+function hasTranslation(a, lang) {
+  if (lang === "ar") return true;
+  if (lang === "en") return !!(a.en_title || (a.sourceTitle && !/[؀-ۿ]/.test(a.sourceTitle)));
+  if (lang === "fr") return !!(a.fr_title || a.en_title || (a.sourceTitle && !/[؀-ۿ]/.test(a.sourceTitle)));
+  return true;
+}
+
 export default function LocalizedHomePage({ lang = "ar" }) {
   const tr = getT(lang);
   const prefix = lang === "ar" ? "" : `/${lang}`;
   const sorted = sortByDate(articles);
 
-  const recentBreaking = sorted.filter((a) => {
+  // Pour EN/FR : on ne garde que les articles qui ont une traduction disponible
+  const translated = lang === "ar" ? sorted : sorted.filter((a) => hasTranslation(a, lang));
+
+  const recentBreaking = translated.filter((a) => {
     if (!a.publishedAt) return false;
     return Date.now() - new Date(a.publishedAt).getTime() < 24 * 60 * 60 * 1000;
   });
-  const breaking  = (recentBreaking.length > 0 ? recentBreaking : sorted).slice(0, 8);
-  const featured  = sorted[0] ?? null;
-  const secondary = sorted.slice(1, 3);
-  const grid      = sorted.slice(3, 9);
-  const sidebar   = sorted.slice(9, 15);
-  const basketball = sorted.filter((a) => a.sport === "basketball").slice(0, 4);
-  const tennis     = sorted.filter((a) => a.sport === "tennis").slice(0, 4);
-  const padel      = sorted.filter((a) => a.sport === "padel").slice(0, 4);
+  const breaking  = (recentBreaking.length > 0 ? recentBreaking : translated).slice(0, 8);
+  const featured  = translated[0] ?? null;
+  const secondary = translated.slice(1, 3);
+  const grid      = translated.slice(3, 9);
+  const sidebar   = translated.slice(9, 15);
+  const basketball = translated.filter((a) => a.sport === "basketball").slice(0, 4);
+  const tennis     = translated.filter((a) => a.sport === "tennis").slice(0, 4);
+  const padel      = translated.filter((a) => a.sport === "padel").slice(0, 4);
 
   const isRTL = lang === "ar";
 

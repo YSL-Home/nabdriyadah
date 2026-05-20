@@ -5,14 +5,24 @@ import ArticleImage from "./ArticleImage";
 import AdSlot from "./AdSlot";
 
 /* ── Language helpers ───────────────────────────────── */
+function hasArabic(str) { return /[؀-ۿ]/.test(str || ""); }
 function getTitle(a, lang) {
-  if (lang === "en") return a.en_title || a.sourceTitle || a.title;
-  if (lang === "fr") return a.fr_title || a.sourceTitle || a.title;
+  if (lang === "en") {
+    if (a.en_title) return a.en_title;
+    if (a.sourceTitle && !hasArabic(a.sourceTitle)) return a.sourceTitle;
+    return null;
+  }
+  if (lang === "fr") {
+    if (a.fr_title) return a.fr_title;
+    if (a.en_title) return a.en_title;
+    if (a.sourceTitle && !hasArabic(a.sourceTitle)) return a.sourceTitle;
+    return null;
+  }
   return a.title;
 }
 function getDesc(a, lang) {
-  if (lang === "en") return a.en_description || a.description;
-  if (lang === "fr") return a.fr_description || a.description;
+  if (lang === "en") return a.en_description || (!hasArabic(a.description) ? a.description : "") || "";
+  if (lang === "fr") return a.fr_description || a.en_description || (!hasArabic(a.description) ? a.description : "") || "";
   return a.description;
 }
 function articleHref(slug, prefix) {
