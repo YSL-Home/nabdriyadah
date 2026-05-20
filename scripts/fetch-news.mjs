@@ -5,6 +5,8 @@ import Parser from "rss-parser";
 const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
 const DEDUP_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
 
+const CURRENT_YEAR = new Date().getFullYear(); // dynamique — 2026, 2027...
+
 // Clé de dédup identique à rewrite-article.mjs
 function fuzzyKey(title = "") {
   const AR_STOP = new Set(["ال","في","من","على","إلى","عن","مع","هذا","هذه","الذي","التي","وقد","كان","قال","بعد","قبل","أن","لم","لن","لا","ما","كل","هو","هي","هم"]);
@@ -54,68 +56,68 @@ const SOURCES = [
   { name: "Filgoal",            type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", url: "https://www.filgoal.com/rss/" },
   { name: "Kass",               type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", url: "https://www.kass.com.qa/rss" },
   // ── Champions League (Arabic + English) ──────────────────────
-  { name: "UCL AR",             type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "champions-league", url: "https://news.google.com/rss/search?q=دوري+أبطال+أوروبا+2025&hl=ar&gl=SA&ceid=SA:ar" },
+  { name: "UCL AR",             type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "champions-league", url: `https://news.google.com/rss/search?q=دوري+أبطال+أوروبا+${CURRENT_YEAR}&hl=ar&gl=SA&ceid=SA:ar` },
   { name: "UCL Semi AR",        type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "champions-league", url: "https://news.google.com/rss/search?q=نصف+نهائي+أبطال+أوروبا&hl=ar&gl=SA&ceid=SA:ar" },
-  { name: "UCL EN",             type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "champions-league", url: "https://news.google.com/rss/search?q=Champions+League+semi-final+2025&hl=en&gl=GB&ceid=GB:en" },
-  { name: "UCL Final EN",       type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "champions-league", url: "https://news.google.com/rss/search?q=UEFA+Champions+League+2025+final&hl=en&gl=GB&ceid=GB:en" },
+  { name: "UCL EN",             type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "champions-league", url: `https://news.google.com/rss/search?q=Champions+League+semi-final+${CURRENT_YEAR}&hl=en&gl=GB&ceid=GB:en` },
+  { name: "UCL Final EN",       type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "champions-league", url: `https://news.google.com/rss/search?q=UEFA+Champions+League+${CURRENT_YEAR}+final&hl=en&gl=GB&ceid=GB:en` },
   // ── Real Madrid ───────────────────────────────────────────────
-  { name: "Real Madrid AR",     type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "la-liga", url: "https://news.google.com/rss/search?q=ريال+مدريد+2025&hl=ar&gl=SA&ceid=SA:ar" },
-  { name: "Real Madrid EN",     type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "la-liga", url: "https://news.google.com/rss/search?q=Real+Madrid+2025+news&hl=en&gl=GB&ceid=GB:en" },
+  { name: "Real Madrid AR",     type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "la-liga", url: `https://news.google.com/rss/search?q=ريال+مدريد+${CURRENT_YEAR}&hl=ar&gl=SA&ceid=SA:ar` },
+  { name: "Real Madrid EN",     type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "la-liga", url: `https://news.google.com/rss/search?q=Real+Madrid+${CURRENT_YEAR}+news&hl=en&gl=GB&ceid=GB:en` },
   // ── Premier League ────────────────────────────────────────────
-  { name: "PL AR",              type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "premier-league", url: "https://news.google.com/rss/search?q=الدوري+الإنجليزي+الممتاز+2025&hl=ar&gl=SA&ceid=SA:ar" },
-  { name: "PL EN",              type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "premier-league", url: "https://news.google.com/rss/search?q=Premier+League+2025+news&hl=en&gl=GB&ceid=GB:en" },
+  { name: "PL AR",              type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "premier-league", url: `https://news.google.com/rss/search?q=الدوري+الإنجليزي+الممتاز+${CURRENT_YEAR}&hl=ar&gl=SA&ceid=SA:ar` },
+  { name: "PL EN",              type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "premier-league", url: `https://news.google.com/rss/search?q=Premier+League+${CURRENT_YEAR}+news&hl=en&gl=GB&ceid=GB:en` },
   { name: "BBC Football",       type: "rss",  priority: "english",  sport: "football", sourceLang: "en", url: "https://feeds.bbci.co.uk/sport/football/rss.xml" },
   { name: "Sky Sports Football",type: "rss",  priority: "english",  sport: "football", sourceLang: "en", url: "https://news.google.com/rss/search?q=site:skysports.com+football&hl=en&gl=GB&ceid=GB:en" },
   // ── La Liga ───────────────────────────────────────────────────
-  { name: "La Liga AR",         type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "la-liga", url: "https://news.google.com/rss/search?q=الدوري+الإسباني+برشلونة+2025&hl=ar&gl=SA&ceid=SA:ar" },
-  { name: "La Liga EN",         type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "la-liga", url: "https://news.google.com/rss/search?q=La+Liga+Barcelona+2025&hl=en&gl=GB&ceid=GB:en" },
+  { name: "La Liga AR",         type: "rss",  priority: "arabic",   sport: "football", sourceLang: "ar", league: "la-liga", url: `https://news.google.com/rss/search?q=الدوري+الإسباني+برشلونة+${CURRENT_YEAR}&hl=ar&gl=SA&ceid=SA:ar` },
+  { name: "La Liga EN",         type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "la-liga", url: `https://news.google.com/rss/search?q=La+Liga+Barcelona+${CURRENT_YEAR}&hl=en&gl=GB&ceid=GB:en` },
   // ── Bundesliga / Serie A / Ligue 1 ───────────────────────────
-  { name: "Bundesliga EN",      type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "bundesliga", url: "https://news.google.com/rss/search?q=Bundesliga+Bayern+Munich+2025&hl=en&gl=GB&ceid=GB:en" },
-  { name: "Serie A EN",         type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "serie-a", url: "https://news.google.com/rss/search?q=Serie+A+Juventus+Milan+2025&hl=en&gl=GB&ceid=GB:en" },
-  { name: "Ligue 1 FR",         type: "rss",  priority: "french",   sport: "football", sourceLang: "fr", league: "ligue-1", url: "https://news.google.com/rss/search?q=Ligue+1+PSG+2025&hl=fr&gl=FR&ceid=FR:fr" },
-  { name: "L'Equipe FR",        type: "rss",  priority: "french",   sport: "football", sourceLang: "fr", url: "https://news.google.com/rss/search?q=football+actualité+2025&hl=fr&gl=FR&ceid=FR:fr" },
+  { name: "Bundesliga EN",      type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "bundesliga", url: `https://news.google.com/rss/search?q=Bundesliga+Bayern+Munich+${CURRENT_YEAR}&hl=en&gl=GB&ceid=GB:en` },
+  { name: "Serie A EN",         type: "rss",  priority: "english",  sport: "football", sourceLang: "en", league: "serie-a", url: `https://news.google.com/rss/search?q=Serie+A+Juventus+Milan+${CURRENT_YEAR}&hl=en&gl=GB&ceid=GB:en` },
+  { name: "Ligue 1 FR",         type: "rss",  priority: "french",   sport: "football", sourceLang: "fr", league: "ligue-1", url: `https://news.google.com/rss/search?q=Ligue+1+PSG+${CURRENT_YEAR}&hl=fr&gl=FR&ceid=FR:fr` },
+  { name: "L'Equipe FR",        type: "rss",  priority: "french",   sport: "football", sourceLang: "fr", url: `https://news.google.com/rss/search?q=football+actualité+${CURRENT_YEAR}&hl=fr&gl=FR&ceid=FR:fr` },
   // ── Google News Football Arabic ───────────────────────────────
   { name: "Google News Football AR", type: "rss", priority: "arabic", sport: "football", sourceLang: "ar", url: "https://news.google.com/rss/search?q=كرة+القدم+أخبار&hl=ar&gl=SA&ceid=SA:ar" },
-  { name: "Google News Football AR2",type: "rss", priority: "arabic", sport: "football", sourceLang: "ar", url: "https://news.google.com/rss/search?q=كرة+القدم+مباراة+نتائج+2025&hl=ar&gl=MA&ceid=MA:ar" },
+  { name: "Google News Football AR2",type: "rss", priority: "arabic", sport: "football", sourceLang: "ar", url: `https://news.google.com/rss/search?q=كرة+القدم+مباراة+نتائج+${CURRENT_YEAR}&hl=ar&gl=MA&ceid=MA:ar` },
   // ── Basketball ────────────────────────────────────────────────
   { name: "Google News Basketball AR", type: "rss", priority: "arabic",  sport: "basketball", sourceLang: "ar", url: "https://news.google.com/rss/search?q=كرة+السلة+NBA&hl=ar&gl=SA&ceid=SA:ar" },
   { name: "ESPN NBA RSS",              type: "rss", priority: "english", sport: "basketball", sourceLang: "en", url: "https://www.espn.com/espn/rss/nba/news" },
-  { name: "Google News NBA EN",        type: "rss", priority: "english", sport: "basketball", sourceLang: "en", url: "https://news.google.com/rss/search?q=NBA+playoffs+2025+results&hl=en&gl=US&ceid=US:en" },
+  { name: "Google News NBA EN",        type: "rss", priority: "english", sport: "basketball", sourceLang: "en", url: `https://news.google.com/rss/search?q=NBA+playoffs+${CURRENT_YEAR}+results&hl=en&gl=US&ceid=US:en` },
   { name: "BBC Basketball",            type: "rss", priority: "english", sport: "basketball", sourceLang: "en", url: "https://feeds.bbci.co.uk/sport/basketball/rss.xml" },
   // ── Tennis ────────────────────────────────────────────────────
   { name: "Google News Tennis AR",  type: "rss", priority: "arabic",  sport: "tennis", sourceLang: "ar", url: "https://news.google.com/rss/search?q=تنس+ATP+WTA+بطولة&hl=ar&gl=SA&ceid=SA:ar" },
   { name: "BBC Sport Tennis",       type: "rss", priority: "english", sport: "tennis", sourceLang: "en", url: "https://feeds.bbci.co.uk/sport/tennis/rss.xml" },
-  { name: "Roland Garros EN",       type: "rss", priority: "english", sport: "tennis", sourceLang: "en", url: "https://news.google.com/rss/search?q=Roland+Garros+2025+tennis&hl=en&gl=GB&ceid=GB:en" },
+  { name: "Roland Garros EN",       type: "rss", priority: "english", sport: "tennis", sourceLang: "en", url: `https://news.google.com/rss/search?q=Roland+Garros+${CURRENT_YEAR}+tennis&hl=en&gl=GB&ceid=GB:en` },
   // ── Padel ─────────────────────────────────────────────────────
   { name: "Google News Padel AR",   type: "rss", priority: "arabic",  sport: "padel", sourceLang: "ar", url: "https://news.google.com/rss/search?q=البادل+بادل+رياضة&hl=ar&gl=SA&ceid=SA:ar" },
-  { name: "Google News Padel EN",   type: "rss", priority: "english", sport: "padel", sourceLang: "en", url: "https://news.google.com/rss/search?q=Premier+Padel+World+Padel+Tour+2025&hl=en&gl=GB&ceid=GB:en" },
-  { name: "Padel FR",               type: "rss", priority: "french",  sport: "padel", sourceLang: "fr", url: "https://news.google.com/rss/search?q=padel+sport+2025&hl=fr&gl=FR&ceid=FR:fr" },
+  { name: "Google News Padel EN",   type: "rss", priority: "english", sport: "padel", sourceLang: "en", url: `https://news.google.com/rss/search?q=Premier+Padel+World+Padel+Tour+${CURRENT_YEAR}&hl=en&gl=GB&ceid=GB:en` },
+  { name: "Padel FR",               type: "rss", priority: "french",  sport: "padel", sourceLang: "fr", url: `https://news.google.com/rss/search?q=padel+sport+${CURRENT_YEAR}&hl=fr&gl=FR&ceid=FR:fr` },
   // ── Futsal ────────────────────────────────────────────────────
   { name: "Google News Futsal AR",  type: "rss", priority: "arabic",  sport: "futsal", sourceLang: "ar", url: "https://news.google.com/rss/search?q=فوتسال+كرة+قدم+صالات&hl=ar&gl=SA&ceid=SA:ar" },
-  { name: "Google News Futsal EN",  type: "rss", priority: "english", sport: "futsal", sourceLang: "en", url: "https://news.google.com/rss/search?q=futsal+FIFA+2025&hl=en&gl=GB&ceid=GB:en" },
+  { name: "Google News Futsal EN",  type: "rss", priority: "english", sport: "futsal", sourceLang: "en", url: `https://news.google.com/rss/search?q=futsal+FIFA+${CURRENT_YEAR}&hl=en&gl=GB&ceid=GB:en` },
   // ── F1 — Formule 1 ─────────────────────────────────────────────────────────
   { name: "F1 AR",              type: "rss", priority: "arabic",  sport: "f1",   sourceLang: "ar", url: "https://news.google.com/rss/search?q=الفورمولا+واحد+F1+سباق&hl=ar&gl=SA&ceid=SA:ar" },
   { name: "F1 EN BBC",          type: "rss", priority: "english", sport: "f1",   sourceLang: "en", url: "https://feeds.bbci.co.uk/sport/formula1/rss.xml" },
-  { name: "F1 EN Google",       type: "rss", priority: "english", sport: "f1",   sourceLang: "en", url: "https://news.google.com/rss/search?q=Formula+1+F1+2025+race&hl=en&gl=GB&ceid=GB:en" },
-  { name: "F1 FR",              type: "rss", priority: "french",  sport: "f1",   sourceLang: "fr", url: "https://news.google.com/rss/search?q=Formule+1+Grand+Prix+2025&hl=fr&gl=FR&ceid=FR:fr" },
+  { name: "F1 EN Google",       type: "rss", priority: "english", sport: "f1",   sourceLang: "en", url: `https://news.google.com/rss/search?q=Formula+1+F1+${CURRENT_YEAR}+race&hl=en&gl=GB&ceid=GB:en` },
+  { name: "F1 FR",              type: "rss", priority: "french",  sport: "f1",   sourceLang: "fr", url: `https://news.google.com/rss/search?q=Formule+1+Grand+Prix+${CURRENT_YEAR}&hl=fr&gl=FR&ceid=FR:fr` },
   // ── Golf ────────────────────────────────────────────────────────────────────
   { name: "Golf AR",            type: "rss", priority: "arabic",  sport: "golf", sourceLang: "ar", url: "https://news.google.com/rss/search?q=غولف+بطولة+ماسترز+PGA&hl=ar&gl=SA&ceid=SA:ar" },
   { name: "Golf EN BBC",        type: "rss", priority: "english", sport: "golf", sourceLang: "en", url: "https://feeds.bbci.co.uk/sport/golf/rss.xml" },
-  { name: "Golf EN Google",     type: "rss", priority: "english", sport: "golf", sourceLang: "en", url: "https://news.google.com/rss/search?q=PGA+Tour+golf+2025&hl=en&gl=US&ceid=US:en" },
+  { name: "Golf EN Google",     type: "rss", priority: "english", sport: "golf", sourceLang: "en", url: `https://news.google.com/rss/search?q=PGA+Tour+golf+${CURRENT_YEAR}&hl=en&gl=US&ceid=US:en` },
   // ── Algérie ──────────────────────────────────────────────────
-  { name: "Algérie Foot AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=الدوري+الجزائري+كرة+القدم+2025&hl=ar&gl=DZ&ceid=DZ:ar" },
-  { name: "Algérie Transferts AR",  type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=المنتخب+الجزائري+2025&hl=ar&gl=DZ&ceid=DZ:ar" },
+  { name: "Algérie Foot AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: `https://news.google.com/rss/search?q=الدوري+الجزائري+كرة+القدم+${CURRENT_YEAR}&hl=ar&gl=DZ&ceid=DZ:ar` },
+  { name: "Algérie Transferts AR",  type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: `https://news.google.com/rss/search?q=المنتخب+الجزائري+${CURRENT_YEAR}&hl=ar&gl=DZ&ceid=DZ:ar` },
   { name: "Dzfoot AR",              type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-dz", url: "https://news.google.com/rss/search?q=موبيليس+الجزائر+كأس&hl=ar&gl=DZ&ceid=DZ:ar" },
   // ── Égypte ───────────────────────────────────────────────────
-  { name: "Égypte Foot AR",         type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "prem-egy", url: "https://news.google.com/rss/search?q=الدوري+المصري+الممتاز+2025&hl=ar&gl=EG&ceid=EG:ar" },
-  { name: "Ahly Zamalek AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "prem-egy", url: "https://news.google.com/rss/search?q=الأهلي+الزمالك+2025&hl=ar&gl=EG&ceid=EG:ar" },
+  { name: "Égypte Foot AR",         type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "prem-egy", url: `https://news.google.com/rss/search?q=الدوري+المصري+الممتاز+${CURRENT_YEAR}&hl=ar&gl=EG&ceid=EG:ar` },
+  { name: "Ahly Zamalek AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "prem-egy", url: `https://news.google.com/rss/search?q=الأهلي+الزمالك+${CURRENT_YEAR}&hl=ar&gl=EG&ceid=EG:ar` },
   // ── Maroc ────────────────────────────────────────────────────
-  { name: "Maroc Foot AR",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: "https://news.google.com/rss/search?q=البطولة+الاحترافية+المغربية+2025&hl=ar&gl=MA&ceid=MA:ar" },
-  { name: "Wydad Raja AR",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: "https://news.google.com/rss/search?q=الوداد+الرجاء+الرياضي+2025&hl=ar&gl=MA&ceid=MA:ar" },
+  { name: "Maroc Foot AR",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: `https://news.google.com/rss/search?q=البطولة+الاحترافية+المغربية+${CURRENT_YEAR}&hl=ar&gl=MA&ceid=MA:ar` },
+  { name: "Wydad Raja AR",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: `https://news.google.com/rss/search?q=الوداد+الرجاء+الرياضي+${CURRENT_YEAR}&hl=ar&gl=MA&ceid=MA:ar` },
   { name: "Hesport Maroc",          type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "botola-ma", url: "https://news.google.com/rss/search?q=كرة+القدم+المغربية+أخبار&hl=ar&gl=MA&ceid=MA:ar" },
   // ── Tunisie ──────────────────────────────────────────────────
-  { name: "Tunisie Foot AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-tn", url: "https://news.google.com/rss/search?q=الرابطة+المحترفة+التونسية+2025&hl=ar&gl=TN&ceid=TN:ar" },
-  { name: "Espérance Etoile AR",    type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-tn", url: "https://news.google.com/rss/search?q=الترجي+النجم+الساحلي+2025&hl=ar&gl=TN&ceid=TN:ar" },
+  { name: "Tunisie Foot AR",        type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-tn", url: `https://news.google.com/rss/search?q=الرابطة+المحترفة+التونسية+${CURRENT_YEAR}&hl=ar&gl=TN&ceid=TN:ar` },
+  { name: "Espérance Etoile AR",    type: "rss", priority: "arabic",  sport: "football", sourceLang: "ar", league: "ligue-pro-tn", url: `https://news.google.com/rss/search?q=الترجي+النجم+الساحلي+${CURRENT_YEAR}&hl=ar&gl=TN&ceid=TN:ar` },
 ];
 
 function ensureDir(filePath) {
