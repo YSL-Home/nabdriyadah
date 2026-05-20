@@ -36,10 +36,10 @@ const BREAKING_SOURCES = [
   { url: "https://news.google.com/rss/search?q=tennis&hl=ar&gl=AR&ceid=AR:ar",          name: "GNews Tennis",       sport: "tennis",   priority: 3  },
   // ── F1 ───────────────────────────────────────────────────────────────────
   { url: "https://feeds.bbci.co.uk/sport/formula1/rss.xml",                              name: "BBC F1",             sport: "f1",       priority: 7  },
-  { url: "https://news.google.com/rss/search?q=Formula+1+F1+race+2025&hl=ar&gl=AR&ceid=AR:ar", name: "GNews F1 AR",   sport: "f1",       priority: 6  },
+  { url: `https://news.google.com/rss/search?q=Formula+1+F1+race+${new Date().getFullYear()}&hl=ar&gl=AR&ceid=AR:ar`, name: "GNews F1 AR",   sport: "f1",       priority: 6  },
   // ── Golf ─────────────────────────────────────────────────────────────────
   { url: "https://feeds.bbci.co.uk/sport/golf/rss.xml",                                  name: "BBC Golf",           sport: "golf",     priority: 5  },
-  { url: "https://news.google.com/rss/search?q=golf+PGA+tournament+2025&hl=ar&gl=AR&ceid=AR:ar", name: "GNews Golf AR", sport: "golf",   priority: 4  },
+  { url: `https://news.google.com/rss/search?q=golf+PGA+tournament+${new Date().getFullYear()}&hl=ar&gl=AR&ceid=AR:ar`, name: "GNews Golf AR", sport: "golf",   priority: 4  },
 ];
 
 const parser = new Parser({ timeout: 8000 });
