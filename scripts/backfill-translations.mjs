@@ -23,13 +23,14 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 const GEMINI_MODEL    = "gemini-2.0-flash";
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 
-// Paramètres
-const BATCH             = 10;   // articles par appel (titres/descriptions)
-const BATCH_CONTENT     = 3;    // articles par appel (corps)
+// Paramètres — calibrés pour Gemini free tier (1500 RPD, 15 RPM)
+// 24 runs/jour × ~4 req/run = ~96 req/jour (<<1500 RPD)
+const BATCH             = 15;   // articles par appel (titres/descriptions)
+const BATCH_CONTENT     = 5;    // articles par appel (corps)
 const DELAY_MS          = 5000; // 5s entre chaque appel (Gemini free tier: 15 RPM)
-const MAX_CONTENT_CHARS = 700;
-const CONTENT_WINDOW_H  = 48;
-const MAX_TITLE_ARTICLES = 100; // cap raisonnable pour free tier (1500 RPD / nb_batches)
+const MAX_CONTENT_CHARS = 1200;
+const CONTENT_WINDOW_H  = 6;    // seulement les 6 dernières heures pour les corps
+const MAX_TITLE_ARTICLES = 20;  // max 20 articles/run → 2 batches max
 
 if (!GOOGLE_API_KEY && !ANTHROPIC_API_KEY) {
   console.log("Aucune clé API disponible — backfill ignoré.");
@@ -183,11 +184,13 @@ async function translateContentBatch(items) {
     ].join("\n");
   }).join("\n\n");
 
-  const systemPrompt = `You are a sports journalist translator.
-Given Arabic sports article titles and body text (truncated), write a natural translated version of the body in both English and French.
+  const systemPrompt = `You are a senior sports journalist translator (ESPN/L'Équipe level).
+Given Arabic sports article titles and body text (truncated), write a substantive translated version in both English and French.
 Return ONLY a valid JSON array — no markdown, no code blocks, no extra text.
 Each element: { "slug": string, "en_content": string, "fr_content": string }
-Write 2-3 coherent journalistic paragraphs per language. Do not invent facts beyond what is given.`;
+Each language: MINIMUM 4 paragraphs, each 70-100 words. Total 350-500 words per language.
+Structure: Lead (key fact) → Background (context) → Analysis (implications) → Outlook (what's next).
+No generic filler. Every sentence must add value. Do not invent facts beyond what is given.`;
 
   const userPrompt = `Translate the following Arabic sports article bodies:\n\n${list}`;
   const raw = await callLLM(systemPrompt, userPrompt, 7000);

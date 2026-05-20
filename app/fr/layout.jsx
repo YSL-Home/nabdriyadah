@@ -16,10 +16,13 @@ export const metadata = {
   }
 };
 
+import SiteFooter from "../components/SiteFooter";
+
 export default function FrLayout({ children }) {
   return (
     <div lang="fr" dir="ltr">
       {children}
+      <SiteFooter lang="fr" />
     </div>
   );
 }

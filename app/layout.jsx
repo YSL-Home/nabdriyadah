@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import SiteHeader from "./components/SiteHeader";
+import SiteFooter from "./components/SiteFooter";
 import ThemeController from "./components/ThemeController";
 
 const inter = Inter({
@@ -111,6 +112,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <ThemeController />
         <SiteHeader />
         {children}
+        <SiteFooter lang="ar" />
       </body>
     </html>
   );

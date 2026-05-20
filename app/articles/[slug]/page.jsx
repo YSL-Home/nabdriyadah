@@ -60,6 +60,20 @@ const leagueBranding = {
     teams: [],
     theme: { bg: "#f5f3ff", primary: "#7c3aed", primarySoft: "#ede9fe", border: "#ddd6fe", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
   },
+  f1: {
+    title: "الفورمولا 1",
+    href: "/sport/f1/",
+    leagueLogo: "/logos/f1.svg",
+    teams: [],
+    theme: { bg: "#fff1f2", primary: "#dc2626", primarySoft: "#fee2e2", border: "#fecaca", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
+  },
+  golf: {
+    title: "الغولف",
+    href: "/sport/golf/",
+    leagueLogo: "/logos/golf.svg",
+    teams: [],
+    theme: { bg: "#f0fdf4", primary: "#16a34a", primarySoft: "#dcfce7", border: "#bbf7d0", text: "#111827", subtext: "#4b5563", surface: "#ffffff" }
+  },
   mixed: {
     title: "كرة القدم",
     href: "/",
@@ -131,6 +145,8 @@ function leagueLabel(league, sport) {
   if (sport === "tennis") return "التنس";
   if (sport === "padel") return "البادل";
   if (sport === "futsal") return "كرة قدم الصالات";
+  if (sport === "f1") return "الفورمولا 1";
+  if (sport === "golf") return "الغولف";
   return "كرة القدم";
 }
 
@@ -141,6 +157,8 @@ function sportHref(league, sport) {
   if (sport === "tennis") return "/sport/tennis/";
   if (sport === "padel") return "/sport/padel/";
   if (sport === "futsal") return "/sport/futsal/";
+  if (sport === "f1") return "/sport/f1/";
+  if (sport === "golf") return "/sport/golf/";
   return "/";
 }
 
