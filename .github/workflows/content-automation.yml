@@ -2,7 +2,7 @@ name: Nabdriyadah Content Automation
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/8 * * * *"
     - cron: "0 * * * *"
   workflow_dispatch:
     inputs:
@@ -72,10 +72,6 @@ jobs:
           BREAKING_ONLY: "true"
 
       # Commit sans déclencher de build Cloudflare (le déploiement est géré par full-refresh)
-
-      - name: Audit quotidien (images, traductions, sports)
-        run: node scripts/daily-audit.mjs
-        continue-on-error: true
 
       - name: Commit & push content only
         if: steps.scan.outputs.changed == 'true'

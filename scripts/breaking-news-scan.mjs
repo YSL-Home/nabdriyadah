@@ -77,34 +77,39 @@ async function main() {
 
   const safeUrl = (url) => url.replace(/[^\x00-\x7F]/g, (c) => encodeURIComponent(c));
 
-  for (const source of BREAKING_SOURCES) {
-    try {
-      const feed = await parser.parseURL(safeUrl(source.url));
-      const items = (feed.items || []).slice(0, 5); // seulement les 5 derniers
-      for (const item of items) {
-        const title = String(item.title || "").trim();
-        const key = normalizeTitle(title);
-        if (!key || existingTitles.has(key) || rawTitles.has(key)) continue;
+  // ── Scan PARALLÈLE (était séquentiel : 19 × 8s = 2.5 min, maintenant ~8s) ──
+  const scanResults = await Promise.allSettled(
+    BREAKING_SOURCES.map(source =>
+      parser.parseURL(safeUrl(source.url))
+        .then(feed => ({ source, items: (feed.items || []).slice(0, 5) }))
+        .catch(e => { console.log(`Scan ${source.name} failed: ${e.message?.slice(0, 60)}`); return null; })
+    )
+  );
 
-        // Vérifie fraîcheur (< 2h)
-        const pub = item.pubDate ? new Date(item.pubDate) : null;
-        if (pub && Date.now() - pub.getTime() > 2 * 60 * 60 * 1000) continue;
+  for (const result of scanResults) {
+    if (result.status !== "fulfilled" || !result.value) continue;
+    const { source, items } = result.value;
+    for (const item of items) {
+      const title = String(item.title || "").trim();
+      const key = normalizeTitle(title);
+      if (!key || existingTitles.has(key) || rawTitles.has(key)) continue;
 
-        newItems.push({
-          originalTitle: title,
-          originalDescription: String(item.contentSnippet || item.description || "").trim().slice(0, 500),
-          link: item.link || source.url,
-          source: source.name,
-          sourcePriority: source.priority + 5, // priorité haute = breaking
-          sport: source.sport,
-          league: source.sport === "football" ? "mixed" : source.sport,
-          topicTags: ["عاجل", "أخبار رياضية"],
-          publishedAt: pub ? pub.toISOString() : new Date().toISOString(),
-          isBreaking: true,
-        });
-      }
-    } catch (e) {
-      console.log(`Scan ${source.name} failed: ${e.message}`);
+      // Vérifie fraîcheur (< 2h)
+      const pub = item.pubDate ? new Date(item.pubDate) : null;
+      if (pub && Date.now() - pub.getTime() > 2 * 60 * 60 * 1000) continue;
+
+      newItems.push({
+        originalTitle: title,
+        originalDescription: String(item.contentSnippet || item.description || "").trim().slice(0, 500),
+        link: item.link || source.url,
+        source: source.name,
+        sourcePriority: source.priority + 5,
+        sport: source.sport,
+        league: source.sport === "football" ? "mixed" : source.sport,
+        topicTags: ["عاجل", "أخبار رياضية"],
+        publishedAt: pub ? pub.toISOString() : new Date().toISOString(),
+        isBreaking: true,
+      });
     }
   }
 
