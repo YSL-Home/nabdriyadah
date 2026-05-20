@@ -120,5 +120,18 @@ export default function sitemap() {
     priority: 0.65
   }));
 
-  return [...home, ...sportUrls, ...leagueUrls, ...articleUrls, ...tennisPlayerUrls, ...f1DriverUrls];
+  // ── Pages statiques (About / Contact / Privacy) ────────────────────────
+  const staticPages = [
+    { url: `${BASE}/about/`,   lastModified: now, changeFrequency: "monthly", priority: 0.60 },
+    { url: `${BASE}/contact/`, lastModified: now, changeFrequency: "monthly", priority: 0.55 },
+    { url: `${BASE}/privacy/`, lastModified: now, changeFrequency: "monthly", priority: 0.50 },
+    { url: `${BASE}/fr/about/`,   lastModified: now, changeFrequency: "monthly", priority: 0.55 },
+    { url: `${BASE}/fr/contact/`, lastModified: now, changeFrequency: "monthly", priority: 0.50 },
+    { url: `${BASE}/fr/privacy/`, lastModified: now, changeFrequency: "monthly", priority: 0.45 },
+    { url: `${BASE}/en/about/`,   lastModified: now, changeFrequency: "monthly", priority: 0.55 },
+    { url: `${BASE}/en/contact/`, lastModified: now, changeFrequency: "monthly", priority: 0.50 },
+    { url: `${BASE}/en/privacy/`, lastModified: now, changeFrequency: "monthly", priority: 0.45 },
+  ];
+
+  return [...home, ...staticPages, ...sportUrls, ...leagueUrls, ...articleUrls, ...tennisPlayerUrls, ...f1DriverUrls];
 }

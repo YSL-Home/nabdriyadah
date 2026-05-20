@@ -46,6 +46,8 @@ const LIVE       = { ar: "مباشر", fr: "Direct", en: "Live" };
 const LIVE_HREF  = { ar: "/live/", fr: "/fr/live/", en: "/en/live/" };
 const DARK_LABEL = { ar: "ليل", fr: "Nuit", en: "Night" };
 const LIGHT_LABEL= { ar: "نهار", fr: "Jour", en: "Day" };
+const ABOUT_LABEL= { ar: "عن الموقع", fr: "À propos", en: "About" };
+const ABOUT_HREF = { ar: "/about/", fr: "/fr/about/", en: "/en/about/" };
 
 export default function SiteHeader() {
   const pathname = usePathname() || "/";
@@ -158,6 +160,20 @@ export default function SiteHeader() {
             title={isDark ? DARK_LABEL[lang] : LIGHT_LABEL[lang]}>
             {isDark ? `🌙 ${DARK_LABEL[lang]}` : `☀️ ${LIGHT_LABEL[lang]}`}
           </span>
+
+          {/* Lien About — requis AdSense */}
+          <Link href={ABOUT_HREF[lang]} style={{
+            textDecoration: "none",
+            fontSize: "13px",
+            color: isDark ? "rgba(200,210,240,0.7)" : "rgba(30,50,100,0.55)",
+            padding: "4px 8px",
+            borderRadius: "6px",
+            transition: "color 0.15s",
+          }}
+            className="hdr-about-link"
+          >
+            {ABOUT_LABEL[lang]}
+          </Link>
 
           {/* Badge LIVE */}
           <Link href={LIVE_HREF[lang]} style={{ textDecoration: "none" }}>

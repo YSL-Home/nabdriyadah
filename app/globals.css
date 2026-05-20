@@ -163,6 +163,10 @@ html[data-theme="dark"] .hdr-pill:hover {
   color: var(--accent);
 }
 
+.hdr-about-link { display: inline-block; }
+.hdr-about-link:hover { color: var(--accent) !important; }
+@media (max-width: 640px) { .hdr-about-link { display: none; } }
+
 .live-badge {
   display: inline-flex; align-items: center; gap: 6px;
   background: #fff0f0; color: #c81e1e;

@@ -10,8 +10,8 @@ const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY  || "";
 const HF_API_KEY      = process.env.HF_API_KEY      || ""; // Hugging Face — gratuit sur hf.co
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY  || "";
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
-// Max images générées par run CI (évite timeout et coût excessif)
-const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "25", 10);
+// Pollinations est 100% gratuit — 50/run pour couvrir le stock rapidement
+const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "50", 10);
 
 // Pollinations ne nécessite aucune clé — toujours disponible
 const HAS_IMAGE_API = true;
