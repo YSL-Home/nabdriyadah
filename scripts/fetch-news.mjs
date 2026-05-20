@@ -258,9 +258,14 @@ function slugFromTitle(title = "", index = 0) {
   return cleaned || `news-${index + 1}`;
 }
 
+// Encode non-ASCII characters (Arabic) in URLs without double-encoding
+function safeUrl(url) {
+  return url.replace(/[^\x00-\x7F]/g, (c) => encodeURIComponent(c));
+}
+
 async function fetchRss(source) {
   try {
-    const feed = await parser.parseURL(source.url);
+    const feed = await parser.parseURL(safeUrl(source.url));
 
     return (feed.items || []).slice(0, 16).map((item, index) => {
       const title = normalizeText(item.title || "");

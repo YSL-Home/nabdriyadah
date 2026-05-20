@@ -108,7 +108,7 @@ const sportConfig = {
   },
   padel: {
     icon: "🎾",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Premier_Padel_logo.svg/320px-Premier_Padel_logo.svg.png",
+    logo: "/logos/padel.svg",
     colorFrom: "#1d4ed8",
     colorTo: "#2563eb",
     primary: "#2563eb",
@@ -147,7 +147,7 @@ const sportConfig = {
   },
   f1: {
     icon: "🏎️",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/320px-F1.svg.png",
+    logo: "/logos/f1.svg",
     colorFrom: "#7f1d1d",
     colorTo: "#dc2626",
     primary: "#dc2626",
@@ -169,7 +169,7 @@ const sportConfig = {
   },
   golf: {
     icon: "⛳",
-    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/PGA_Tour_logo.svg/320px-PGA_Tour_logo.svg.png",
+    logo: "/logos/golf.svg",
     colorFrom: "#052e16",
     colorTo: "#16a34a",
     primary: "#16a34a",

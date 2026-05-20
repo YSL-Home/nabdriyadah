@@ -75,9 +75,11 @@ async function main() {
 
   const newItems = [];
 
+  const safeUrl = (url) => url.replace(/[^\x00-\x7F]/g, (c) => encodeURIComponent(c));
+
   for (const source of BREAKING_SOURCES) {
     try {
-      const feed = await parser.parseURL(source.url);
+      const feed = await parser.parseURL(safeUrl(source.url));
       const items = (feed.items || []).slice(0, 5); // seulement les 5 derniers
       for (const item of items) {
         const title = String(item.title || "").trim();
