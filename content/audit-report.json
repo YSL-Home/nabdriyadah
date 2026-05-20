@@ -1,16 +1,122 @@
 {
-  "date": "2026-05-20T10:25:28.357Z",
-  "total": 1208,
-  "fixes": [],
+  "date": "2026-05-20T11:19:58.745Z",
+  "total": 1223,
+  "fixes": [
+    {
+      "type": "missing_images_detected",
+      "count": 15,
+      "action": "will_regenerate_on_next_ci"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-19bwdw",
+      "value": "Saka calls out critics as players celebrate title at Emirate"
+    },
+    {
+      "type": "en_title_from_source",
+      "slug": "ft-1u4j5t",
+      "value": "What tactics might Alonso use at Chelsea?"
+    }
+  ],
   "warnings": [
     {
+      "type": "missing_image",
+      "slug": "ft-19bwdw",
+      "sport": "football",
+      "image": "/generated/ft-19bwdw.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1u4j5t",
+      "sport": "football",
+      "image": "/generated/ft-1u4j5t.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "tennis-1nw2dz",
+      "sport": "tennis",
+      "image": "/generated/tennis-1nw2dz.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-6qtr7k",
+      "sport": "football",
+      "image": "/generated/ft-6qtr7k.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1iyi37",
+      "sport": "football",
+      "image": "/generated/ft-1iyi37.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-7503a3-1779275997559",
+      "sport": "football",
+      "image": "/generated/ucl-7503a3-1779275997559.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1il24d-1779275997560",
+      "sport": "football",
+      "image": "/generated/ft-1il24d-1779275997560.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ft-1t6xnj-1779275997561",
+      "sport": "football",
+      "image": "/generated/ft-1t6xnj-1779275997561.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1ydy1w-1779275997558",
+      "sport": "football",
+      "image": "/generated/ucl-1ydy1w-1779275997558.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-rvdny2-1779275997559",
+      "sport": "football",
+      "image": "/generated/ucl-rvdny2-1779275997559.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1bmn0x-1779275997560",
+      "sport": "football",
+      "image": "/generated/ucl-1bmn0x-1779275997560.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-bpuja7-1779275997558",
+      "sport": "football",
+      "image": "/generated/ucl-bpuja7-1779275997558.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1us7if-1779275997560",
+      "sport": "football",
+      "image": "/generated/ucl-1us7if-1779275997560.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-5si5di-1779275997559",
+      "sport": "football",
+      "image": "/generated/ucl-5si5di-1779275997559.png"
+    },
+    {
+      "type": "missing_image",
+      "slug": "ucl-1nc97t-1779275997559",
+      "sport": "football",
+      "image": "/generated/ucl-1nc97t-1779275997559.png"
+    },
+    {
       "type": "missing_en_title",
-      "count": 622,
+      "count": 635,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1207,
+      "count": 1222,
       "action": "needs_llm_backfill"
     },
     {
@@ -297,8 +403,12 @@
           "duplicate_of": "bball-1bbmsd"
         },
         {
+          "slug": "ucl-7503a3-1779272564205",
+          "duplicate_of": "ucl-7503a3-1779275997559"
+        },
+        {
           "slug": "ucl-7503a3",
-          "duplicate_of": "ucl-7503a3-1779272564205"
+          "duplicate_of": "ucl-7503a3-1779275997559"
         },
         {
           "slug": "tennis-elup7z",
@@ -313,8 +423,12 @@
           "duplicate_of": "ft-ll24x2"
         },
         {
+          "slug": "ft-1il24d-1779272564206",
+          "duplicate_of": "ft-1il24d-1779275997560"
+        },
+        {
           "slug": "ft-1il24d",
-          "duplicate_of": "ft-1il24d-1779272564206"
+          "duplicate_of": "ft-1il24d-1779275997560"
         },
         {
           "slug": "ft-1jgnsh",
@@ -753,8 +867,12 @@
           "duplicate_of": "ucl-1dca30-1778944419251"
         },
         {
+          "slug": "ft-1t6xnj-1779272564206",
+          "duplicate_of": "ft-1t6xnj-1779275997561"
+        },
+        {
           "slug": "ft-1t6xnj",
-          "duplicate_of": "ft-1t6xnj-1779272564206"
+          "duplicate_of": "ft-1t6xnj-1779275997561"
         },
         {
           "slug": "tennis-1fk3y8-1778904331438",
@@ -1497,12 +1615,28 @@
           "duplicate_of": "tennis-11wv6r-1778856182229"
         },
         {
+          "slug": "ucl-1ydy1w-1779272564204",
+          "duplicate_of": "ucl-1ydy1w-1779275997558"
+        },
+        {
+          "slug": "ucl-rvdny2-1779272564204",
+          "duplicate_of": "ucl-rvdny2-1779275997559"
+        },
+        {
+          "slug": "ucl-1bmn0x",
+          "duplicate_of": "ucl-1bmn0x-1779275997560"
+        },
+        {
           "slug": "ucl-1ydy1w",
-          "duplicate_of": "ucl-1ydy1w-1779272564204"
+          "duplicate_of": "ucl-1ydy1w-1779275997558"
+        },
+        {
+          "slug": "ucl-bpuja7-1779272564204",
+          "duplicate_of": "ucl-bpuja7-1779275997558"
         },
         {
           "slug": "ucl-bpuja7",
-          "duplicate_of": "ucl-bpuja7-1779272564204"
+          "duplicate_of": "ucl-bpuja7-1779275997558"
         },
         {
           "slug": "liga-j9un1s",
@@ -1575,6 +1709,10 @@
         {
           "slug": "ucl-9hk21i",
           "duplicate_of": "ucl-9hk21i-1778855044219"
+        },
+        {
+          "slug": "ucl-1us7if",
+          "duplicate_of": "ucl-1us7if-1779275997560"
         },
         {
           "slug": "bball-47e3q2-1779102107376",
@@ -1705,12 +1843,20 @@
           "duplicate_of": "futsal-pw1ktd-1779117690521"
         },
         {
+          "slug": "ucl-5si5di-1779272564204",
+          "duplicate_of": "ucl-5si5di-1779275997559"
+        },
+        {
           "slug": "ucl-5si5di",
-          "duplicate_of": "ucl-5si5di-1779272564204"
+          "duplicate_of": "ucl-5si5di-1779275997559"
+        },
+        {
+          "slug": "ucl-1nc97t-1779272564204",
+          "duplicate_of": "ucl-1nc97t-1779275997559"
         },
         {
           "slug": "ucl-1nc97t",
-          "duplicate_of": "ucl-1nc97t-1779272564204"
+          "duplicate_of": "ucl-1nc97t-1779275997559"
         },
         {
           "slug": "liga-12ulcr",
@@ -1828,12 +1974,12 @@
     }
   ],
   "summary": {
-    "fixes_applied": 0,
-    "warnings": 3,
-    "missing_images": 0,
-    "missing_en_title": 622,
-    "missing_fr_title": 1207,
+    "fixes_applied": 2,
+    "warnings": 18,
+    "missing_images": 15,
+    "missing_en_title": 635,
+    "missing_fr_title": 1222,
     "sport_mismatches_fixed": 0,
-    "duplicates": 452
+    "duplicates": 462
   }
 }
