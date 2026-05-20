@@ -43,7 +43,7 @@ jobs:
 
       - name: Commit bibliothèque
         run: |
-          git add content/character-library.json public/generated/characters/
+          git add content/character-library.json public/generated/characters/ 2>/dev/null || true
           git diff --cached --quiet && echo "Aucun nouveau personnage" || \
           git commit -m "chore: mise à jour bibliothèque personnages cartoon [skip deploy]"
           git push origin main
