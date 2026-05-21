@@ -594,7 +594,7 @@ async function rewriteArticle(item, index) {
   const srcLang     = (item.sourceLang || "ar").toLowerCase(); // "ar" | "en" | "fr"
   const hasArabicSrc = /[؀-ۿ]/.test(originalTitle);
 
-  if (!ANTHROPIC_API_KEY && !OPENAI_API_KEY) return fallback;
+  if (!GOOGLE_API_KEY && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) return fallback;
 
   // Prompt unique — toutes les sources passent par le même flux.
   // L'IA réécrit 100% original dans les 3 langues (AR + EN + FR).

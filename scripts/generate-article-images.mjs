@@ -10,10 +10,10 @@ const GOOGLE_API_KEY  = process.env.GOOGLE_API_KEY  || "";
 const HF_API_KEY      = process.env.HF_API_KEY      || ""; // Hugging Face — gratuit sur hf.co
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY  || "";
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
-// 20/run × 24 runs = 480 images/jour — budget temps ~6 min max
+// 20/run × 24 runs = 480 images/jour
 const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "20", 10);
-// Budget temps global : arrêt propre après N minutes (évite timeout CI)
-const MAX_RUNTIME_MS = parseInt(process.env.MAX_IMAGE_RUNTIME_MS || String(6 * 60 * 1000), 10);
+// Budget temps : 10 min (Pollinations ~22s × 20 = 440s)
+const MAX_RUNTIME_MS = parseInt(process.env.MAX_IMAGE_RUNTIME_MS || String(10 * 60 * 1000), 10);
 
 // Pollinations ne nécessite aucune clé — toujours disponible
 const HAS_IMAGE_API = true;
@@ -676,6 +676,16 @@ async function main() {
 
     if (!FORCE_REGENERATE && alreadyGenerated && !isUnsplash) {
       if (article.image !== publicImagePath) { article.image = publicImagePath; changed = true; }
+      continue;
+    }
+
+    // ── Fallback rapide : utiliser imageUrl RSS directement si pas d'image ──
+    // Evite de consommer du quota API pour des articles qui ont déjà une image source
+    if (!FORCE_REGENERATE && !alreadyGenerated && article.imageUrl && !article.image) {
+      article.image = article.imageUrl;
+      changed = true;
+      generated++;
+      console.log(`  ✓ RSS direct: ${slug} → ${article.imageUrl.slice(0, 60)}`);
       continue;
     }
 
