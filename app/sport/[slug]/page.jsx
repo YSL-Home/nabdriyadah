@@ -348,8 +348,34 @@ export default function SportPage({ params }) {
     );
   }
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": sport.title,
+    "description": sport.description,
+    "url": `https://nabdriyadah.com/sport/${params.slug}/`,
+    "inLanguage": "ar",
+    "publisher": {
+      "@type": "Organization",
+      "name": "نبض الرياضة",
+      "url": "https://nabdriyadah.com",
+      "logo": { "@type": "ImageObject", "url": "https://nabdriyadah.com/logo-v2.svg" }
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": sportArticles.length,
+      "itemListElement": sportArticles.slice(0, 10).map((a, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "url": `https://nabdriyadah.com/articles/${a.slug}/`,
+        "name": a.title
+      }))
+    }
+  };
+
   return (
     <main style={{ minHeight: "100vh", background: sport.pageBg, padding: "28px 20px 52px", direction: "rtl" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
       <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
 
         {/* Hero */}

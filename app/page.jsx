@@ -69,8 +69,46 @@ export default function HomePage() {
     futsal:     sorted.filter((a) => a.sport === "futsal").length,
   };
 
+  const schemaOrg = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://nabdriyadah.com/#website",
+        "url": "https://nabdriyadah.com/",
+        "name": "نبض الرياضة",
+        "description": "موقع عربي للأخبار الرياضية — كرة القدم، كرة السلة، التنس، البادل، فورمولا 1 والغولف",
+        "inLanguage": "ar",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://nabdriyadah.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://nabdriyadah.com/#organization",
+        "name": "نبض الرياضة",
+        "url": "https://nabdriyadah.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://nabdriyadah.com/logo-v2.svg",
+          "width": 200,
+          "height": 60
+        },
+        "sameAs": [],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "contact@nabdriyadah.com"
+        }
+      }
+    ]
+  };
+
   return (
     <div style={{ background: "var(--bg-page)", minHeight: "100vh", direction: "rtl" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }} />
 
       {/* Bandeau عاجل — toujours visible */}
       <BreakingTicker items={breaking} />

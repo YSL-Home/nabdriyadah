@@ -769,6 +769,25 @@ export default function LeaguePage({ params }) {
   const isPadel = standingsType === "padel-rankings";
   const gridCols = isBasketball ? "36px 1fr 40px 40px 40px 50px 44px" : "36px 1fr 40px 40px 40px 40px 44px";
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": league.title,
+    "description": league.description,
+    "url": `https://nabdriyadah.com/league/${params.slug}/`,
+    "inLanguage": "ar",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": leagueArticles.length,
+      "itemListElement": leagueArticles.slice(0, 10).map((a, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "url": `https://nabdriyadah.com/articles/${a.slug}/`,
+        "name": a.title
+      }))
+    }
+  };
+
   return (
     <main
       style={{
@@ -778,6 +797,7 @@ export default function LeaguePage({ params }) {
         direction: "rtl"
       }}
     >
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
       <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
         <section
           style={{
