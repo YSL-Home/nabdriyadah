@@ -3,12 +3,15 @@ import fs from "fs";
 import path from "path";
 import articles from "../../../content/articles/seo-articles.json";
 import playerPhotos from "../../../content/player-photos.json";
+import playersRegistry from "../../../content/players-registry.json";
 import ArticleImage from "../../components/ArticleImage";
 import AdSlot from "../../components/AdSlot";
 import PlayerAvatar from "../../components/PlayerAvatar";
 import FixturesSection from "../../components/FixturesSection";
 import VideoSection from "../../components/VideoSection";
 import teamsDataRaw from "../../../content/teams-data.json";
+
+const registryKeys = new Set(Object.keys(playersRegistry));
 
 const teamsData = teamsDataRaw;
 
@@ -237,22 +240,24 @@ export default function TeamPage({ params }) {
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>أبرز اللاعبين الحاليين</h2>
             </div>
             <div className="g2" style={{ gap: "10px" }}>
-              {players.map((player, i) => (
-                <Link key={i} href={`/player/${params.slug}--player--${i}/`} style={{ textDecoration: "none" }}>
+              {players.map((player, i) => {
+                const pKey = `${params.slug}--player--${i}`;
+                const inner = (
                   <div style={{
                     background: accentSoft, border: `1px solid ${accentMid}`,
                     borderRadius: "16px", padding: "12px 14px",
                     display: "flex", alignItems: "center", gap: "10px",
-                    cursor: "pointer", transition: "box-shadow 0.15s"
+                    cursor: registryKeys.has(pKey) ? "pointer" : "default",
+                    transition: "box-shadow 0.15s"
                   }}>
-                    <PlayerAvatar
-                      src={playerPhotos[`${params.slug}/player/${i}`] || null}
-                      name={player} size={46} accent={team.accent}
-                    />
+                    <PlayerAvatar src={playerPhotos[`${params.slug}/player/${i}`] || null} name={player} size={46} accent={team.accent} />
                     <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{player}</span>
                   </div>
-                </Link>
-              ))}
+                );
+                return registryKeys.has(pKey)
+                  ? <Link key={i} href={`/player/${pKey}/`} style={{ textDecoration: "none" }}>{inner}</Link>
+                  : <div key={i}>{inner}</div>;
+              })}
             </div>
           </div>
 
@@ -263,12 +268,14 @@ export default function TeamPage({ params }) {
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>أساطير النادي</h2>
             </div>
             <div className="g2" style={{ gap: "10px" }}>
-              {legends.map((legend, i) => (
-                <Link key={i} href={`/player/${params.slug}--legend--${i}/`} style={{ textDecoration: "none" }}>
+              {legends.map((legend, i) => {
+                const lKey = `${params.slug}--legend--${i}`;
+                const inner = (
                   <div style={{
                     background: accentSoft, border: `1px solid ${accentMid}`,
                     borderRadius: "16px", padding: "12px 14px",
-                    display: "flex", alignItems: "center", gap: "10px", cursor: "pointer"
+                    display: "flex", alignItems: "center", gap: "10px",
+                    cursor: registryKeys.has(lKey) ? "pointer" : "default"
                   }}>
                     <PlayerAvatar
                       src={playerPhotos[`${params.slug}/legend/${i}`] || null}
@@ -276,8 +283,11 @@ export default function TeamPage({ params }) {
                     />
                     <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{legend}</span>
                   </div>
-                </Link>
-              ))}
+                );
+                return registryKeys.has(lKey)
+                  ? <Link key={i} href={`/player/${lKey}/`} style={{ textDecoration: "none" }}>{inner}</Link>
+                  : <div key={i}>{inner}</div>;
+              })}
             </div>
           </div>
         </section>
@@ -290,17 +300,18 @@ export default function TeamPage({ params }) {
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800 }}>الجهاز الفني</h2>
             </div>
             <div className="g4" style={{ gap: "12px" }}>
-              {staff.map((s, i) => (
-                <Link key={i} href={`/player/${params.slug}--staff--${i}/`} style={{ textDecoration: "none" }}>
-                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
-                    <PlayerAvatar
-                      src={playerPhotos[`${params.slug}/staff/${i}`] || null}
-                      name={s} size={42} accent={team.accent}
-                    />
+              {staff.map((s, i) => {
+                const sKey = `${params.slug}--staff--${i}`;
+                const inner = (
+                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px", cursor: registryKeys.has(sKey) ? "pointer" : "default" }}>
+                    <PlayerAvatar src={playerPhotos[`${params.slug}/staff/${i}`] || null} name={s} size={42} accent={team.accent} />
                     <div style={{ fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.35 }}>{s}</div>
                   </div>
-                </Link>
-              ))}
+                );
+                return registryKeys.has(sKey)
+                  ? <Link key={i} href={`/player/${sKey}/`} style={{ textDecoration: "none" }}>{inner}</Link>
+                  : <div key={i}>{inner}</div>;
+              })}
             </div>
           </section>
         )}

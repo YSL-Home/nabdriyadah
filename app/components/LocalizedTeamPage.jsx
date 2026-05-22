@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import articles from "../../content/articles/seo-articles.json";
 import playerPhotos from "../../content/player-photos.json";
+import playersRegistry from "../../content/players-registry.json";
 import ArticleImage from "./ArticleImage";
 import AdSlot from "./AdSlot";
 import PlayerAvatar from "./PlayerAvatar";
@@ -10,6 +11,8 @@ import FixturesSection from "./FixturesSection";
 import VideoSection from "./VideoSection";
 import teamsDataRaw from "../../content/teams-data.json";
 import { getT } from "../../lib/i18n";
+
+const registryKeys = new Set(Object.keys(playersRegistry));
 
 function safeArray(v) { return Array.isArray(v) ? v : []; }
 
@@ -202,14 +205,18 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>{tr.teamPlayers}</h2>
             </div>
             <div className="g2" style={{ gap: "10px" }}>
-              {players.map((player, i) => (
-                <Link key={i} href={`${prefix}/player/${slug}--player--${i}/`} style={{ textDecoration: "none" }}>
-                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "12px 14px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
+              {players.map((player, i) => {
+                const pKey = `${slug}--player--${i}`;
+                const inner = (
+                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "12px 14px", display: "flex", alignItems: "center", gap: "10px", cursor: registryKeys.has(pKey) ? "pointer" : "default" }}>
                     <PlayerAvatar src={playerPhotos[`${slug}/player/${i}`] || null} name={player} size={46} accent={team.accent} />
                     <span style={{ fontSize: "14px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.3 }}>{player}</span>
                   </div>
-                </Link>
-              ))}
+                );
+                return registryKeys.has(pKey)
+                  ? <Link key={i} href={`${prefix}/player/${pKey}/`} style={{ textDecoration: "none" }}>{inner}</Link>
+                  : <div key={i}>{inner}</div>;
+              })}
             </div>
           </div>
 
@@ -219,14 +226,18 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
               <h2 style={{ margin: 0, fontSize: "26px", fontWeight: 800, color: "var(--text-1)" }}>{tr.teamLegends}</h2>
             </div>
             <div className="g2" style={{ gap: "10px" }}>
-              {legends.map((legend, i) => (
-                <Link key={i} href={`${prefix}/player/${slug}--legend--${i}/`} style={{ textDecoration: "none" }}>
-                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "12px 14px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
+              {legends.map((legend, i) => {
+                const lKey = `${slug}--legend--${i}`;
+                const inner = (
+                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "12px 14px", display: "flex", alignItems: "center", gap: "10px", cursor: registryKeys.has(lKey) ? "pointer" : "default" }}>
                     <PlayerAvatar src={playerPhotos[`${slug}/legend/${i}`] || null} name={legend} size={46} accent={team.accent} />
                     <span style={{ fontSize: "14px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.3 }}>{legend}</span>
                   </div>
-                </Link>
-              ))}
+                );
+                return registryKeys.has(lKey)
+                  ? <Link key={i} href={`${prefix}/player/${lKey}/`} style={{ textDecoration: "none" }}>{inner}</Link>
+                  : <div key={i}>{inner}</div>;
+              })}
             </div>
           </div>
         </section>
@@ -241,14 +252,18 @@ export default function LocalizedTeamPage({ slug, lang = "ar" }) {
               </h2>
             </div>
             <div className="g4" style={{ gap: "12px" }}>
-              {staff.map((s, i) => (
-                <Link key={i} href={`${prefix}/player/${slug}--staff--${i}/`} style={{ textDecoration: "none" }}>
-                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
+              {staff.map((s, i) => {
+                const sKey = `${slug}--staff--${i}`;
+                const inner = (
+                  <div style={{ background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "16px", padding: "14px 16px", display: "flex", alignItems: "center", gap: "10px", cursor: registryKeys.has(sKey) ? "pointer" : "default" }}>
                     <PlayerAvatar src={playerPhotos[`${slug}/staff/${i}`] || null} name={s} size={42} accent={team.accent} />
                     <div style={{ fontSize: "14px", fontWeight: 700, color: "var(--text-1)", lineHeight: 1.35 }}>{s}</div>
                   </div>
-                </Link>
-              ))}
+                );
+                return registryKeys.has(sKey)
+                  ? <Link key={i} href={`${prefix}/player/${sKey}/`} style={{ textDecoration: "none" }}>{inner}</Link>
+                  : <div key={i}>{inner}</div>;
+              })}
             </div>
           </section>
         )}
