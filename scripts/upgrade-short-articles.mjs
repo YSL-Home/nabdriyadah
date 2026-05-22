@@ -44,7 +44,7 @@ function arabicWordCount(text = "") {
 }
 
 function isFatal(msg = "") {
-  return /credit balance is too low|Your credit balance|balance is too low|insufficient_quota|invalid_api_key|account.*deactivated|billing hard limit|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|API_KEY_INVALID|PERMISSION_DENIED|reported as leaked|API key.*leaked/i.test(msg);
+  return /credit balance is too low|Your credit balance|balance is too low|insufficient_quota|invalid_api_key|account.*deactivated|billing hard limit|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|API_KEY_INVALID|PERMISSION_DENIED|reported as leaked|API key.*leaked|API_NOT_ENABLED|SERVICE_DISABLED|does not have permission|requests to this API.*been blocked|KEY_INVALID/i.test(msg);
 }
 
 // ── Flags fail-fast ───────────────────────────────────────────────────────
@@ -85,9 +85,10 @@ async function callGemini(prompt) {
         }
         if (attempt < 2) { await sleep(20000); continue; }
       }
-      if (isFatal(err)) { _geminiDead = true; return null; }
+      if (isFatal(err)) { console.log(`  ⛔ Gemini fatal (${res.status}): ${err.slice(0, 120)}`); _geminiDead = true; return null; }
+      console.log(`  Gemini error ${res.status}: ${err.slice(0, 120)}`);
       return null;
-    } catch { return null; }
+    } catch (e) { console.log("  Gemini request failed:", e.message?.slice(0, 60)); return null; }
   }
   return null;
 }
@@ -210,20 +211,28 @@ ${existing ? "المحتوى الموجود (مختصر): " + existing : ""}
 }
 
 // ── Parsing de la réponse LLM ──────────────────────────────────────────────
+function repairJsonNewlines(s) {
+  return s.replace(/"(?:[^"\\]|\\.)*"/g, m =>
+    m.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+  );
+}
+
 function parseResponse(raw = "") {
-  // Remove markdown code blocks if present
   const clean = raw.replace(/^```(?:json)?\s*/m, "").replace(/\s*```$/m, "").trim();
-  // Extract JSON object
   const match = clean.match(/\{[\s\S]*\}/);
   if (!match) return null;
-  try {
-    const parsed = JSON.parse(match[0]);
-    if (!parsed.content || typeof parsed.content !== "string") return null;
-    return {
-      content: parsed.content.trim(),
-      faq: Array.isArray(parsed.faq) ? parsed.faq.slice(0, 3) : []
-    };
-  } catch { return null; }
+  let parsed = null;
+  // Try 1: direct parse
+  try { parsed = JSON.parse(match[0]); } catch {}
+  // Try 2: repair newlines then parse
+  if (!parsed) {
+    try { parsed = JSON.parse(repairJsonNewlines(match[0])); } catch {}
+  }
+  if (!parsed || !parsed.content || typeof parsed.content !== "string") return null;
+  return {
+    content: parsed.content.trim(),
+    faq: Array.isArray(parsed.faq) ? parsed.faq.slice(0, 3) : []
+  };
 }
 
 // ── Main ───────────────────────────────────────────────────────────────────

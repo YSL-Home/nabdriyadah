@@ -55,18 +55,25 @@ function removeMarkdownFences(text = "") {
   return String(text).replace(/```json/gi, "").replace(/```/g, "").trim();
 }
 
+function repairJsonNewlines(s) {
+  // Fix unescaped newlines/tabs inside JSON string values (common LLM output issue)
+  return s.replace(/"(?:[^"\\]|\\.)*"/g, m =>
+    m.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+  );
+}
+
 function extractJson(text = "") {
   const cleaned = removeMarkdownFences(text);
-  try {
-    return JSON.parse(cleaned);
-  } catch {}
+  // Try 1: direct parse
+  try { return JSON.parse(cleaned); } catch {}
+  // Try 2: extract { ... } block
   const match = cleaned.match(/\{[\s\S]*\}/);
   if (!match) return null;
-  try {
-    return JSON.parse(match[0]);
-  } catch {
-    return null;
-  }
+  // Try 3: direct parse of extracted block
+  try { return JSON.parse(match[0]); } catch {}
+  // Try 4: repair unescaped newlines then parse
+  try { return JSON.parse(repairJsonNewlines(match[0])); } catch {}
+  return null;
 }
 
 function sanitizeArabic(text = "") {
@@ -355,7 +362,7 @@ let _anthropicDead = false;
 let _openAIDead    = false;
 
 function isFatalMsg(msg = "") {
-  return /credit balance is too low|Your credit balance|balance is too low|insufficient_quota|invalid_api_key|account.*deactivated|billing hard limit|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|API_KEY_INVALID|reported as leaked|API key.*leaked|PERMISSION_DENIED/i.test(msg);
+  return /credit balance is too low|Your credit balance|balance is too low|insufficient_quota|invalid_api_key|account.*deactivated|billing hard limit|exceeded your current quota|You exceeded.*quota|QUOTA_EXCEEDED|API_KEY_INVALID|reported as leaked|API key.*leaked|PERMISSION_DENIED|API_NOT_ENABLED|SERVICE_DISABLED|requests to this API.*been blocked|does not have permission|ACCESS_TOKEN_SCOPE_INSUFFICIENT|KEY_INVALID/i.test(msg);
 }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -386,8 +393,8 @@ async function callGemini(prompt, systemPrompt = null) {
         }
         if (attempt < 2) { await sleep(20000); continue; }
       }
-      if (isFatalMsg(err)) { _geminiDead = true; return null; }
-      console.log(`Gemini error ${res.status}: ${err.slice(0, 80)}`);
+      if (isFatalMsg(err)) { console.log(`  ⛔ Gemini fatal (${res.status}): ${err.slice(0, 120)}`); _geminiDead = true; return null; }
+      console.log(`Gemini error ${res.status}: ${err.slice(0, 120)}`);
       return null;
     } catch (e) { console.log("Gemini request failed:", e.message?.slice(0, 60)); return null; }
   }
@@ -720,18 +727,21 @@ async function main() {
     process.exit(0);
   }
 
-  // Spread: 80 football + 6 basketball + 3 tennis + 3 padel + 2 futsal + 4 f1 + 3 golf = ~101/run
-  // Cible distribution : football ~75%, basket ~8%, tennis ~5%, autres ~5%
-  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 80);
-  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 6);
-  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 3);
-  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 3);
-  const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 2);
-  const f1Items       = unique.filter((i) => i.sport === "f1").slice(0, 4);
-  const golfItems     = unique.filter((i) => i.sport === "golf").slice(0, 3);
-  const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems, ...f1Items, ...golfItems];
+  // Cap per-run to respect rate limits (Gemini: 15 RPM, Groq: ~4 RPM effective)
+  // Full refresh runs every hour → 20 articles/run × 24 runs = 480 articles/day max
+  const MAX_PER_RUN = 20;
+  const LLM_DELAY_MS = 4000; // 4s between calls = ~15 calls/min (Gemini limit)
 
-  console.log(`New items to write: ${selected.length}`);
+  // Spread: priority to recent/diverse sports within cap
+  const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 12);
+  const basketItems   = unique.filter((i) => i.sport === "basketball").slice(0, 3);
+  const tennisItems   = unique.filter((i) => i.sport === "tennis").slice(0, 2);
+  const padelItems    = unique.filter((i) => i.sport === "padel").slice(0, 1);
+  const futsalItems   = unique.filter((i) => i.sport === "futsal").slice(0, 1);
+  const f1Items       = unique.filter((i) => i.sport === "f1").slice(0, 1);
+  const selected = [...footballItems, ...basketItems, ...tennisItems, ...padelItems, ...futsalItems, ...f1Items].slice(0, MAX_PER_RUN);
+
+  console.log(`New items to write: ${selected.length} (cap: ${MAX_PER_RUN})`);
   if (noLLMLeft()) {
     console.log("⚠ Toutes les APIs LLM sont épuisées — articles en fallback uniquement.");
   }
@@ -744,6 +754,8 @@ async function main() {
     console.log(`[${i + 1}/${selected.length}] ${item.sport || "football"}: ${label.slice(0, 65)}`);
 
     const rewritten = await rewriteArticle(item, i);
+    // Rate limit respect — pause between LLM calls (not after last item)
+    if (i < selected.length - 1 && !noLLMLeft()) await sleep(LLM_DELAY_MS);
 
     // Build slug — ensure uniqueness vs existing
     let slug = buildSlug(item, i);
