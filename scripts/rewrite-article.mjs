@@ -10,7 +10,9 @@ import { execFileSync } from "child_process";
 // 3. Anthropic Claude    — Payant   (fallback si crédits dispo)
 // 4. OpenAI GPT-4o-mini  — Payant   (dernier recours)
 const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
-const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || ""; // 2ème compte Gemini optionnel
+const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || "";
+const GOOGLE_API_KEY_3  = process.env.GOOGLE_API_KEY_3  || "";
+const GOOGLE_API_KEY_4  = process.env.GOOGLE_API_KEY_4  || "";
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 const ANTHROPIC_MODEL   = process.env.ANTHROPIC_MODEL   || "claude-haiku-4-5";
@@ -363,7 +365,9 @@ function fallbackArticle(item, index) {
 
 // ── Flags fail-fast ───────────────────────────────────────────────────────
 let _geminiDead    = false;
-let _gemini2Dead   = false; // 2ème clé Gemini
+let _gemini2Dead   = false;
+let _gemini3Dead   = false;
+let _gemini4Dead   = false;
 let _groqDead      = false; // 70B
 let _groq8bDead    = false; // 8B fallback
 let _anthropicDead = false;
@@ -409,16 +413,10 @@ async function _callGeminiWithKey(apiKey, deadFlag, setDead, prompt, systemPromp
   return null;
 }
 
-// ── 1a. Gemini — clé principale ──────────────────────────────────────────
-async function callGemini(prompt, systemPrompt = null) {
-  return _callGeminiWithKey(GOOGLE_API_KEY, _geminiDead, () => { _geminiDead = true; }, prompt, systemPrompt);
-}
-
-// ── 1b. Gemini — 2ème clé (compte Google différent, +1500 req/jour) ─────
-async function callGemini2(prompt, systemPrompt = null) {
-  if (!GOOGLE_API_KEY_2) return null;
-  return _callGeminiWithKey(GOOGLE_API_KEY_2, _gemini2Dead, () => { _gemini2Dead = true; }, prompt, systemPrompt);
-}
+async function callGemini(prompt, sp = null)  { return _callGeminiWithKey(GOOGLE_API_KEY,   _geminiDead,  () => { _geminiDead  = true; }, prompt, sp); }
+async function callGemini2(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_2, _gemini2Dead, () => { _gemini2Dead = true; }, prompt, sp); }
+async function callGemini3(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_3, _gemini3Dead, () => { _gemini3Dead = true; }, prompt, sp); }
+async function callGemini4(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_4, _gemini4Dead, () => { _gemini4Dead = true; }, prompt, sp); }
 
 // ── Helper Groq générique (réutilisé pour 70B et 8B) ─────────────────────
 async function _callGroqModel(model, deadFlag, setDead, maxTok, prompt, systemPrompt) {
@@ -523,6 +521,8 @@ async function callOpenAI(prompt, systemPrompt = null) {
 function noLLMLeft() {
   return (_geminiDead    || !GOOGLE_API_KEY)    &&
          (_gemini2Dead   || !GOOGLE_API_KEY_2)  &&
+         (_gemini3Dead   || !GOOGLE_API_KEY_3)  &&
+         (_gemini4Dead   || !GOOGLE_API_KEY_4)  &&
          (_groqDead      || !GROQ_API_KEY)      &&
          (_groq8bDead    || !GROQ_API_KEY)      &&
          (_anthropicDead || !ANTHROPIC_API_KEY) &&
@@ -531,11 +531,13 @@ function noLLMLeft() {
 
 async function callLLM(prompt, systemPrompt = null) {
   if (noLLMLeft()) return null;
-  const r1 = await callGemini(prompt, systemPrompt);    if (r1) return r1;
-  const r1b= await callGemini2(prompt, systemPrompt);   if (r1b) return r1b;
-  const r2 = await callGroq(prompt, systemPrompt);      if (r2) return r2;
-  const r2b= await callGroq8b(prompt, systemPrompt);    if (r2b) return r2b;
-  const r3 = await callAnthropic(prompt, systemPrompt); if (r3) return r3;
+  const r1  = await callGemini(prompt, systemPrompt);   if (r1)  return r1;
+  const r1b = await callGemini2(prompt, systemPrompt);  if (r1b) return r1b;
+  const r1c = await callGemini3(prompt, systemPrompt);  if (r1c) return r1c;
+  const r1d = await callGemini4(prompt, systemPrompt);  if (r1d) return r1d;
+  const r2  = await callGroq(prompt, systemPrompt);     if (r2)  return r2;
+  const r2b = await callGroq8b(prompt, systemPrompt);   if (r2b) return r2b;
+  const r3  = await callAnthropic(prompt, systemPrompt);if (r3)  return r3;
   return await callOpenAI(prompt, systemPrompt);
 }
 

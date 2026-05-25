@@ -7,6 +7,8 @@ import fs from "fs";
 
 const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
 const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || "";
+const GOOGLE_API_KEY_3  = process.env.GOOGLE_API_KEY_3  || "";
+const GOOGLE_API_KEY_4  = process.env.GOOGLE_API_KEY_4  || "";
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 
@@ -103,11 +105,11 @@ async function testAnthropic() {
   }
 }
 
-async function testGemini2() {
-  if (!GOOGLE_API_KEY_2) { console.log("GOOGLE_API_KEY_2: ❌ absent (optionnel)"); return false; }
-  console.log(`GOOGLE_API_KEY_2: ${GOOGLE_API_KEY_2.slice(0,8)}... (${GOOGLE_API_KEY_2.length} chars)`);
+async function testGeminiKey(key, label) {
+  if (!key) { console.log(`${label}: ❌ absent (optionnel)`); return false; }
+  console.log(`${label}: ${key.slice(0,8)}... (${key.length} chars)`);
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GOOGLE_API_KEY_2}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
     const res = await fetch(url, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: TEST_PROMPT }] }], generationConfig: { maxOutputTokens: 200, temperature: 0 } })
@@ -116,18 +118,27 @@ async function testGemini2() {
     if (res.ok) {
       const data = JSON.parse(text);
       const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "(vide)";
-      console.log(`Gemini KEY_2       : ✅ OK — réponse: ${reply.slice(0, 80)}`);
+      console.log(`${label}: ✅ OK — ${reply.slice(0, 60)}`);
       return true;
     }
-    console.log(`Gemini KEY_2       : ❌ HTTP ${res.status} — ${text.slice(0, 120)}`);
+    console.log(`${label}: ❌ HTTP ${res.status} — ${text.slice(0, 100)}`);
     return false;
-  } catch (e) { console.log(`Gemini KEY_2       : ❌ ${e.message}`); return false; }
+  } catch (e) { console.log(`${label}: ❌ ${e.message}`); return false; }
 }
 
 console.log("=== Test LLM APIs — nabdriyadah ===\n");
-const [g, g2, gr, a] = await Promise.all([testGemini(), testGemini2(), testGroq(), testAnthropic()]);
-console.log(`\nRésumé : Gemini1=${g?"✅":"❌"} | Gemini2=${g2?"✅":"❌"} | Groq=${gr?"✅":"❌"} | Anthropic=${a?"✅":"❌"}`);
-if (!g && !g2 && !gr && !a) {
+const [g, g2, g3, g4, gr, a] = await Promise.all([
+  testGemini(),
+  testGeminiKey(GOOGLE_API_KEY_2, "Gemini KEY_2    "),
+  testGeminiKey(GOOGLE_API_KEY_3, "Gemini KEY_3    "),
+  testGeminiKey(GOOGLE_API_KEY_4, "Gemini KEY_4    "),
+  testGroq(),
+  testAnthropic()
+]);
+const geminiCount = [g, g2, g3, g4].filter(Boolean).length;
+console.log(`\nRésumé : Gemini=${geminiCount}/4 ✅ | Groq=${gr?"✅":"❌"} | Anthropic=${a?"✅":"❌"}`);
+console.log(`Capacité Gemini : ${geminiCount * 1500} req/jour`);
+if (!g && !g2 && !g3 && !g4 && !gr && !a) {
   console.log("⛔ AUCUNE API LLM disponible — tous les articles seront en fallback !");
   process.exit(1);
 }

@@ -68,6 +68,8 @@ jobs:
           ANTHROPIC_MODEL:   ${{ secrets.ANTHROPIC_MODEL }}
           GOOGLE_API_KEY:    ${{ secrets.GOOGLE_API_KEY }}
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
+          GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
+          GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
           OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
           BREAKING_ONLY: "true"
@@ -136,6 +138,8 @@ jobs:
           ANTHROPIC_MODEL:   ${{ secrets.ANTHROPIC_MODEL }}
           GOOGLE_API_KEY:    ${{ secrets.GOOGLE_API_KEY }}
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
+          GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
+          GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
 
       - name: Rewrite articles
@@ -146,6 +150,8 @@ jobs:
           ANTHROPIC_MODEL:   ${{ secrets.ANTHROPIC_MODEL }}
           GOOGLE_API_KEY:    ${{ secrets.GOOGLE_API_KEY }}
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
+          GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
+          GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
           OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
 
@@ -162,6 +168,8 @@ jobs:
         env:
           GOOGLE_API_KEY:    ${{ secrets.GOOGLE_API_KEY }}
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
+          GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
+          GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
