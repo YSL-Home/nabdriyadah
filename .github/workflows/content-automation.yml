@@ -70,6 +70,8 @@ jobs:
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
           GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
           GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
+          GOOGLE_API_KEY_5:  ${{ secrets.GOOGLE_API_KEY_5 }}
+          GOOGLE_API_KEY_6:  ${{ secrets.GOOGLE_API_KEY_6 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
           OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
           BREAKING_ONLY: "true"
@@ -140,6 +142,8 @@ jobs:
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
           GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
           GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
+          GOOGLE_API_KEY_5:  ${{ secrets.GOOGLE_API_KEY_5 }}
+          GOOGLE_API_KEY_6:  ${{ secrets.GOOGLE_API_KEY_6 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
 
       - name: Rewrite articles
@@ -152,6 +156,8 @@ jobs:
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
           GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
           GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
+          GOOGLE_API_KEY_5:  ${{ secrets.GOOGLE_API_KEY_5 }}
+          GOOGLE_API_KEY_6:  ${{ secrets.GOOGLE_API_KEY_6 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
           OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
 
@@ -159,6 +165,11 @@ jobs:
         run: node scripts/backfill-translations.mjs
         env:
           GOOGLE_API_KEY:    ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
+          GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
+          GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
+          GOOGLE_API_KEY_5:  ${{ secrets.GOOGLE_API_KEY_5 }}
+          GOOGLE_API_KEY_6:  ${{ secrets.GOOGLE_API_KEY_6 }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_MODEL:   ${{ secrets.ANTHROPIC_MODEL }}
         continue-on-error: true
@@ -170,6 +181,8 @@ jobs:
           GOOGLE_API_KEY_2:  ${{ secrets.GOOGLE_API_KEY_2 }}
           GOOGLE_API_KEY_3:  ${{ secrets.GOOGLE_API_KEY_3 }}
           GOOGLE_API_KEY_4:  ${{ secrets.GOOGLE_API_KEY_4 }}
+          GOOGLE_API_KEY_5:  ${{ secrets.GOOGLE_API_KEY_5 }}
+          GOOGLE_API_KEY_6:  ${{ secrets.GOOGLE_API_KEY_6 }}
           GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}

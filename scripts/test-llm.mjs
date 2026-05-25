@@ -9,6 +9,8 @@ const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
 const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || "";
 const GOOGLE_API_KEY_3  = process.env.GOOGLE_API_KEY_3  || "";
 const GOOGLE_API_KEY_4  = process.env.GOOGLE_API_KEY_4  || "";
+const GOOGLE_API_KEY_5  = process.env.GOOGLE_API_KEY_5  || "";
+const GOOGLE_API_KEY_6  = process.env.GOOGLE_API_KEY_6  || "";
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 
@@ -127,18 +129,20 @@ async function testGeminiKey(key, label) {
 }
 
 console.log("=== Test LLM APIs — nabdriyadah ===\n");
-const [g, g2, g3, g4, gr, a] = await Promise.all([
+const [g, g2, g3, g4, g5, g6, gr, a] = await Promise.all([
   testGemini(),
   testGeminiKey(GOOGLE_API_KEY_2, "Gemini KEY_2    "),
   testGeminiKey(GOOGLE_API_KEY_3, "Gemini KEY_3    "),
   testGeminiKey(GOOGLE_API_KEY_4, "Gemini KEY_4    "),
+  testGeminiKey(GOOGLE_API_KEY_5, "Gemini KEY_5    "),
+  testGeminiKey(GOOGLE_API_KEY_6, "Gemini KEY_6    "),
   testGroq(),
   testAnthropic()
 ]);
-const geminiCount = [g, g2, g3, g4].filter(Boolean).length;
-console.log(`\nRésumé : Gemini=${geminiCount}/4 ✅ | Groq=${gr?"✅":"❌"} | Anthropic=${a?"✅":"❌"}`);
+const geminiCount = [g, g2, g3, g4, g5, g6].filter(Boolean).length;
+console.log(`\nRésumé : Gemini=${geminiCount}/6 ✅ | Groq=${gr?"✅":"❌"} | Anthropic=${a?"✅":"❌"}`);
 console.log(`Capacité Gemini : ${geminiCount * 1500} req/jour`);
-if (!g && !g2 && !g3 && !g4 && !gr && !a) {
+if (!g && !g2 && !g3 && !g4 && !g5 && !g6 && !gr && !a) {
   console.log("⛔ AUCUNE API LLM disponible — tous les articles seront en fallback !");
   process.exit(1);
 }

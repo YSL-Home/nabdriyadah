@@ -21,6 +21,8 @@ const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
 const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || "";
 const GOOGLE_API_KEY_3  = process.env.GOOGLE_API_KEY_3  || "";
 const GOOGLE_API_KEY_4  = process.env.GOOGLE_API_KEY_4  || "";
+const GOOGLE_API_KEY_5  = process.env.GOOGLE_API_KEY_5  || "";
+const GOOGLE_API_KEY_6  = process.env.GOOGLE_API_KEY_6  || "";
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 const OPENAI_API_KEY    = process.env.OPENAI_API_KEY    || "";
@@ -36,7 +38,7 @@ const MIN_AR_WORDS      = 400;   // en dessous = article "court" à upgrader
 const DELAY_MS          = 12000; // 12s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
 const RECENT_DAYS       = 14;    // priorité aux articles < 14 jours
 
-if (!GOOGLE_API_KEY && !GOOGLE_API_KEY_2 && !GOOGLE_API_KEY_3 && !GOOGLE_API_KEY_4 && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {
+if (!GOOGLE_API_KEY && !GOOGLE_API_KEY_2 && !GOOGLE_API_KEY_3 && !GOOGLE_API_KEY_4 && !GOOGLE_API_KEY_5 && !GOOGLE_API_KEY_6 && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {
   console.log("Aucune clé API — upgrade ignoré.");
   process.exit(0);
 }
@@ -56,6 +58,8 @@ let _geminiDead    = false;
 let _gemini2Dead   = false;
 let _gemini3Dead   = false;
 let _gemini4Dead   = false;
+let _gemini5Dead   = false;
+let _gemini6Dead   = false;
 let _groqDead      = false; // 70B
 let _groq8bDead    = false; // 8B
 let _anthropicDead = false;
@@ -66,6 +70,8 @@ function noApiLeft() {
          (_gemini2Dead   || !GOOGLE_API_KEY_2)  &&
          (_gemini3Dead   || !GOOGLE_API_KEY_3)  &&
          (_gemini4Dead   || !GOOGLE_API_KEY_4)  &&
+         (_gemini5Dead   || !GOOGLE_API_KEY_5)  &&
+         (_gemini6Dead   || !GOOGLE_API_KEY_6)  &&
          (_groqDead      || !GROQ_API_KEY)      &&
          (_groq8bDead    || !GROQ_API_KEY)      &&
          (_anthropicDead || !ANTHROPIC_API_KEY) &&
@@ -102,6 +108,8 @@ async function callGemini(prompt)  { return _callGeminiKey(GOOGLE_API_KEY,   _ge
 async function callGemini2(prompt) { return _callGeminiKey(GOOGLE_API_KEY_2, _gemini2Dead, () => { _gemini2Dead = true; }, prompt); }
 async function callGemini3(prompt) { return _callGeminiKey(GOOGLE_API_KEY_3, _gemini3Dead, () => { _gemini3Dead = true; }, prompt); }
 async function callGemini4(prompt) { return _callGeminiKey(GOOGLE_API_KEY_4, _gemini4Dead, () => { _gemini4Dead = true; }, prompt); }
+async function callGemini5(prompt) { return _callGeminiKey(GOOGLE_API_KEY_5, _gemini5Dead, () => { _gemini5Dead = true; }, prompt); }
+async function callGemini6(prompt) { return _callGeminiKey(GOOGLE_API_KEY_6, _gemini6Dead, () => { _gemini6Dead = true; }, prompt); }
 
 async function _callGroqModel(model, deadFlag, setDead, prompt) {
   if (!GROQ_API_KEY || deadFlag) return null;
@@ -177,6 +185,8 @@ async function callLLM(prompt) {
   const r1b = await callGemini2(prompt);  if (r1b) return r1b;
   const r1c = await callGemini3(prompt);  if (r1c) return r1c;
   const r1d = await callGemini4(prompt);  if (r1d) return r1d;
+  const r1e = await callGemini5(prompt);  if (r1e) return r1e;
+  const r1f = await callGemini6(prompt);  if (r1f) return r1f;
   const r2  = await callGroq(prompt);     if (r2)  return r2;
   const r2b = await callGroq8b(prompt);   if (r2b) return r2b;
   if (ANTHROPIC_API_KEY && !_anthropicDead) {

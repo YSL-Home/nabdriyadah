@@ -13,6 +13,8 @@ const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
 const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || "";
 const GOOGLE_API_KEY_3  = process.env.GOOGLE_API_KEY_3  || "";
 const GOOGLE_API_KEY_4  = process.env.GOOGLE_API_KEY_4  || "";
+const GOOGLE_API_KEY_5  = process.env.GOOGLE_API_KEY_5  || "";
+const GOOGLE_API_KEY_6  = process.env.GOOGLE_API_KEY_6  || "";
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 const ANTHROPIC_MODEL   = process.env.ANTHROPIC_MODEL   || "claude-haiku-4-5";
@@ -368,6 +370,8 @@ let _geminiDead    = false;
 let _gemini2Dead   = false;
 let _gemini3Dead   = false;
 let _gemini4Dead   = false;
+let _gemini5Dead   = false;
+let _gemini6Dead   = false;
 let _groqDead      = false; // 70B
 let _groq8bDead    = false; // 8B fallback
 let _anthropicDead = false;
@@ -417,6 +421,8 @@ async function callGemini(prompt, sp = null)  { return _callGeminiWithKey(GOOGLE
 async function callGemini2(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_2, _gemini2Dead, () => { _gemini2Dead = true; }, prompt, sp); }
 async function callGemini3(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_3, _gemini3Dead, () => { _gemini3Dead = true; }, prompt, sp); }
 async function callGemini4(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_4, _gemini4Dead, () => { _gemini4Dead = true; }, prompt, sp); }
+async function callGemini5(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_5, _gemini5Dead, () => { _gemini5Dead = true; }, prompt, sp); }
+async function callGemini6(prompt, sp = null) { return _callGeminiWithKey(GOOGLE_API_KEY_6, _gemini6Dead, () => { _gemini6Dead = true; }, prompt, sp); }
 
 // ── Helper Groq générique (réutilisé pour 70B et 8B) ─────────────────────
 async function _callGroqModel(model, deadFlag, setDead, maxTok, prompt, systemPrompt) {
@@ -523,6 +529,8 @@ function noLLMLeft() {
          (_gemini2Dead   || !GOOGLE_API_KEY_2)  &&
          (_gemini3Dead   || !GOOGLE_API_KEY_3)  &&
          (_gemini4Dead   || !GOOGLE_API_KEY_4)  &&
+         (_gemini5Dead   || !GOOGLE_API_KEY_5)  &&
+         (_gemini6Dead   || !GOOGLE_API_KEY_6)  &&
          (_groqDead      || !GROQ_API_KEY)      &&
          (_groq8bDead    || !GROQ_API_KEY)      &&
          (_anthropicDead || !ANTHROPIC_API_KEY) &&
@@ -535,6 +543,8 @@ async function callLLM(prompt, systemPrompt = null) {
   const r1b = await callGemini2(prompt, systemPrompt);  if (r1b) return r1b;
   const r1c = await callGemini3(prompt, systemPrompt);  if (r1c) return r1c;
   const r1d = await callGemini4(prompt, systemPrompt);  if (r1d) return r1d;
+  const r1e = await callGemini5(prompt, systemPrompt);  if (r1e) return r1e;
+  const r1f = await callGemini6(prompt, systemPrompt);  if (r1f) return r1f;
   const r2  = await callGroq(prompt, systemPrompt);     if (r2)  return r2;
   const r2b = await callGroq8b(prompt, systemPrompt);   if (r2b) return r2b;
   const r3  = await callAnthropic(prompt, systemPrompt);if (r3)  return r3;
