@@ -33,7 +33,7 @@ const GROQ_MODEL_8B   = "llama-3.1-8b-instant";      // 131072 TPM — fallback 
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 
 // ── Paramètres ────────────────────────────────────────────────────────────
-const MAX_PER_RUN       = 15;    // 15/run × ~12 runs/jour = 180/jour
+const MAX_PER_RUN       = 60;    // 60/run × 24 runs/jour = 1440/jour → backlog 2446 en ~2 jours
 const MIN_AR_WORDS      = 400;   // en dessous = article "court" à upgrader
 const DELAY_MS          = 12000; // 12s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
 const RECENT_DAYS       = 14;    // priorité aux articles < 14 jours
