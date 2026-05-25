@@ -89,7 +89,7 @@ async function _callGeminiKey(apiKey, deadFlag, setDead, prompt) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 4096, temperature: 0.35 }
+          generationConfig: { maxOutputTokens: 2048, temperature: 0.35 }
         })
       });
       if (res.ok) { const d = await res.json(); return d?.candidates?.[0]?.content?.parts?.[0]?.text || null; }
@@ -148,7 +148,7 @@ async function callAnthropic(prompt) {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
       body: JSON.stringify({
-        model: ANTHROPIC_MODEL, max_tokens: 8000,
+        model: ANTHROPIC_MODEL, max_tokens: 2500,
         messages: [{ role: "user", content: prompt }]
       })
     });
@@ -167,7 +167,7 @@ async function callOpenAI(prompt) {
       method: "POST",
       headers: { Authorization: `Bearer ${OPENAI_API_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "gpt-4o-mini", max_tokens: 8000, temperature: 0.35,
+        model: "gpt-4o-mini", max_tokens: 2500, temperature: 0.35,
         messages: [{ role: "user", content: prompt }]
       })
     });

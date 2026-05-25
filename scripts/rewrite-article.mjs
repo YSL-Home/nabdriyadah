@@ -133,25 +133,16 @@ function leagueLabel(league = "") {
 }
 
 function sportSystemPrompt(sport = "football") {
-  // ⚠ NE PAS restreindre à l'arabe uniquement — le prompt produit 3 langues (AR + EN + FR)
-  // Les champs "title/description/content" sont en arabe, "en_*" en anglais, "fr_*" en français
-  const base = [
-    "Tu es journaliste multilingue (arabe, anglais, français) pour نبض الرياضة.",
-    "Les champs arabes (title, description, content) : arabe standard moderne, noms propres translittérés en arabe.",
-    "Les champs en_* : anglais journalistique ESPN/Sky Sports.",
-    "Les champs fr_* : français journalistique L'Équipe/RMC — OBLIGATOIRE, jamais vide.",
-    "Style : professionnel, factuel, accrocheur. Jamais de remplissage générique.",
-    "Output : JSON valide uniquement, sans markdown."
-  ].join(" ");
   const specialties = {
-    football:   "Spécialiste football mondial et arabe.",
-    basketball: "Spécialiste NBA et basketball international.",
-    tennis:     "Spécialiste Grand Chelem et circuit ATP/WTA.",
-    padel:      "Spécialiste World Padel Tour.",
-    futsal:     "Spécialiste futsal FIFA et championnats nationaux.",
+    football:   "متخصص كرة القدم العالمية والعربية.",
+    basketball: "متخصص NBA وكرة السلة الدولية.",
+    tennis:     "متخصص بطولات الغراند سلام وجولة ATP/WTA.",
+    padel:      "متخصص World Padel Tour.",
+    futsal:     "متخصص كرة القدم الصالات.",
     mixed:      ""
   };
-  return `${specialties[sport] || ""} ${base}`.trim();
+  const sp = specialties[sport] || "";
+  return `${sp} أنت محرر رياضي متمرس. اكتب بالعربية الفصحى فقط. أسلوب صحفي احترافي. JSON صالح فقط بدون ماركداون.`.trim();
 }
 
 function sourceArabic(source = "") {
@@ -394,7 +385,7 @@ async function _callGeminiWithKey(apiKey, deadFlag, setDead, prompt, systemPromp
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
-          generationConfig: { maxOutputTokens: 4096, temperature: 0.35 }
+          generationConfig: { maxOutputTokens: 2048, temperature: 0.35 }
         })
       });
       if (res.ok) {
@@ -480,8 +471,8 @@ async function callAnthropic(prompt, systemPrompt = null) {
       method: "POST",
       headers: { "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
       body: JSON.stringify({
-        model: ANTHROPIC_MODEL, max_tokens: 8000,
-        system: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط.",
+        model: ANTHROPIC_MODEL, max_tokens: 2500,
+        system: systemPrompt || "أنت محرر رياضي. اكتب بالعربية الفصحى. JSON فقط.",
         messages: [{ role: "user", content: prompt }]
       })
     });
@@ -506,10 +497,10 @@ async function callOpenAI(prompt, systemPrompt = null) {
       body: JSON.stringify({
         model: "gpt-4o-mini", temperature: 0.4,
         messages: [
-          { role: "system", content: systemPrompt || "أنت محرر رياضي عربي متخصص. اكتب بالعربية الفصحى البسيطة فقط." },
+          { role: "system", content: systemPrompt || "أنت محرر رياضي. اكتب بالعربية الفصحى. JSON فقط." },
           { role: "user", content: prompt }
         ],
-        max_tokens: 8000
+        max_tokens: 2500
       })
     });
     const data = await response.json();
