@@ -11,9 +11,9 @@ const HF_API_KEY      = process.env.HF_API_KEY      || ""; // Hugging Face — g
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY  || "";
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
 // 20/run × 24 runs = 480 images/jour
-const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "25", 10);
-// Budget temps : 20 min (Pollinations ~40s × 25 = 1000s max, typiquement 20-25s chacune)
-const MAX_RUNTIME_MS = parseInt(process.env.MAX_IMAGE_RUNTIME_MS || String(20 * 60 * 1000), 10);
+const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "50", 10);
+// Budget temps : 35 min (Pollinations ~40s × 50 = 2000s max, typiquement 20-25s chacune)
+const MAX_RUNTIME_MS = parseInt(process.env.MAX_IMAGE_RUNTIME_MS || String(35 * 60 * 1000), 10);
 
 // Pollinations ne nécessite aucune clé — toujours disponible
 const HAS_IMAGE_API = true;
