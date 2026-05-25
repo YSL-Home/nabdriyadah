@@ -608,13 +608,21 @@ async function rewriteArticle(item, index) {
   const prompt = buildPrompt(item, format, label, source, srcLang);
 
   const raw = await callLLM(prompt, systemPrompt);
-  if (!raw) return fallback;
+  if (!raw) {
+    console.log(`  ⚠ LLM returned null for article ${index + 1} — all APIs failed, using fallback.`);
+    return fallback;
+  }
+  console.log(`  ✓ LLM raw response: ${raw.length} chars`);
 
   const parsed = extractJson(raw);
   if (!parsed) {
-    console.log(`  JSON parse failed for article ${index + 1}, using fallback.`);
+    console.log(`  ✗ JSON parse failed — raw (first 300): ${raw.slice(0, 300).replace(/\n/g, "↵")}`);
     return fallback;
   }
+
+  // Diagnostic: log content length before sanitization
+  const rawContentLen = (parsed.content || "").split(/\s+/).filter(Boolean).length;
+  console.log(`  ✓ JSON ok — content: ${rawContentLen}w, en: ${(parsed.en_content||"").split(/\s+/).filter(Boolean).length}w`);
 
   // Pour le titre : utiliser le fallback si le titre AI est vide ou quasi-entièrement en latin
   const rawAiTitle = String(parsed.title || "").trim();
@@ -630,6 +638,11 @@ async function rewriteArticle(item, index) {
   const faq = Array.isArray(parsed.faq)
     ? parsed.faq.slice(0, 3).map((f) => ({ q: sanitizeArabic(f.q || ""), a: sanitizeArabic(f.a || "") })).filter((f) => f.q && f.a)
     : [];
+
+  const finalWords = (content || "").split(/\s+/).filter(Boolean).length;
+  if (finalWords < 200) {
+    console.log(`  ⚠ Content after sanitize: only ${finalWords}w — checking raw content: "${(parsed.content||"").slice(0,200).replace(/\n/g,"↵")}"`);
+  }
 
   if (!title || !description || !content) return fallback;
 
