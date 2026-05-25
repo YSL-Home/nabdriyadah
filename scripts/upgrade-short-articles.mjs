@@ -18,21 +18,23 @@ const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.js
 
 // ── Clés API ──────────────────────────────────────────────────────────────
 const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
+const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || ""; // 2ème compte Gemini
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 const OPENAI_API_KEY    = process.env.OPENAI_API_KEY    || "";
 
 const GEMINI_MODEL    = "gemini-2.0-flash";
-const GROQ_MODEL      = "llama-3.3-70b-versatile";
+const GROQ_MODEL_70B  = "llama-3.3-70b-versatile";  // 6000 TPM
+const GROQ_MODEL_8B   = "llama-3.1-8b-instant";      // 131072 TPM — fallback rapide
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 
 // ── Paramètres ────────────────────────────────────────────────────────────
-const MAX_PER_RUN       = 15;    // 15/run × ~12 runs/jour = 180/jour — budget ~3 min max
+const MAX_PER_RUN       = 15;    // 15/run × ~12 runs/jour = 180/jour
 const MIN_AR_WORDS      = 400;   // en dessous = article "court" à upgrader
-const DELAY_MS          = 3500;  // 3.5s entre appels (Gemini free tier OK)
+const DELAY_MS          = 12000; // 12s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
 const RECENT_DAYS       = 14;    // priorité aux articles < 14 jours
 
-if (!GOOGLE_API_KEY && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {
+if (!GOOGLE_API_KEY && !GOOGLE_API_KEY_2 && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {
   console.log("Aucune clé API — upgrade ignoré.");
   process.exit(0);
 }
@@ -49,20 +51,25 @@ function isFatal(msg = "") {
 
 // ── Flags fail-fast ───────────────────────────────────────────────────────
 let _geminiDead    = false;
-let _groqDead      = false;
+let _gemini2Dead   = false;
+let _groqDead      = false; // 70B
+let _groq8bDead    = false; // 8B
 let _anthropicDead = false;
 let _openAIDead    = false;
 
 function noApiLeft() {
   return (_geminiDead    || !GOOGLE_API_KEY)    &&
+         (_gemini2Dead   || !GOOGLE_API_KEY_2)  &&
          (_groqDead      || !GROQ_API_KEY)      &&
+         (_groq8bDead    || !GROQ_API_KEY)      &&
          (_anthropicDead || !ANTHROPIC_API_KEY) &&
          (_openAIDead    || !OPENAI_API_KEY);
 }
 
 // ── Appels API ────────────────────────────────────────────────────────────
-async function callGemini(prompt) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GOOGLE_API_KEY}`;
+async function _callGeminiKey(apiKey, deadFlag, setDead, prompt) {
+  if (!apiKey || deadFlag) return null;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const res = await fetch(url, {
@@ -70,49 +77,54 @@ async function callGemini(prompt) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 8192, temperature: 0.35 }
+          generationConfig: { maxOutputTokens: 4096, temperature: 0.35 }
         })
       });
-      if (res.ok) {
-        const d = await res.json();
-        return d?.candidates?.[0]?.content?.parts?.[0]?.text || null;
-      }
+      if (res.ok) { const d = await res.json(); return d?.candidates?.[0]?.content?.parts?.[0]?.text || null; }
       const err = await res.text();
       if (res.status === 429) {
-        if (/exceeded your current quota|QUOTA_EXCEEDED|daily.*limit/i.test(err)) {
-          console.log("  ⛔ Gemini quota journalier épuisé.");
-          _geminiDead = true; return null;
-        }
+        if (/exceeded your current quota|QUOTA_EXCEEDED|daily.*limit/i.test(err)) { console.log("  ⛔ Gemini quota épuisé."); setDead(); return null; }
         if (attempt < 2) { await sleep(20000); continue; }
       }
-      if (isFatal(err)) { console.log(`  ⛔ Gemini fatal (${res.status}): ${err.slice(0, 120)}`); _geminiDead = true; return null; }
-      console.log(`  Gemini error ${res.status}: ${err.slice(0, 120)}`);
+      if (isFatal(err)) { setDead(); return null; }
       return null;
-    } catch (e) { console.log("  Gemini request failed:", e.message?.slice(0, 60)); return null; }
+    } catch { return null; }
   }
   return null;
 }
+async function callGemini(prompt)  { return _callGeminiKey(GOOGLE_API_KEY,   _geminiDead,  () => { _geminiDead  = true; }, prompt); }
+async function callGemini2(prompt) { return _callGeminiKey(GOOGLE_API_KEY_2, _gemini2Dead, () => { _gemini2Dead = true; }, prompt); }
 
-async function callGroq(prompt) {
+async function _callGroqModel(model, deadFlag, setDead, prompt) {
+  if (!GROQ_API_KEY || deadFlag) return null;
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: GROQ_MODEL,
-        temperature: 0.35,
-        max_tokens: 7000,
-        messages: [{ role: "user", content: prompt }]
-      })
+      body: JSON.stringify({ model, temperature: 0.35, max_tokens: 2500, messages: [{ role: "user", content: prompt }] })
     });
     const d = await res.json();
     if (!res.ok) {
-      if (isFatal(d?.error?.message || "")) { _groqDead = true; }
+      const msg = JSON.stringify(d?.error || d);
+      if (/rate_limit_exceeded/i.test(msg)) {
+        console.log(`  ↩ Groq ${model} rate limit — attente 30s...`);
+        await sleep(30000);
+        const r2 = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ model, temperature: 0.35, max_tokens: 2500, messages: [{ role: "user", content: prompt }] })
+        });
+        const d2 = await r2.json();
+        if (r2.ok) return d2?.choices?.[0]?.message?.content || null;
+      }
+      if (isFatal(msg)) { setDead(); }
       return null;
     }
     return d?.choices?.[0]?.message?.content || null;
   } catch { return null; }
 }
+async function callGroq(prompt)   { return _callGroqModel(GROQ_MODEL_70B, _groqDead,   () => { _groqDead   = true; }, prompt); }
+async function callGroq8b(prompt) { return _callGroqModel(GROQ_MODEL_8B,  _groq8bDead, () => { _groq8bDead = true; }, prompt); }
 
 async function callAnthropic(prompt) {
   try {
@@ -153,21 +165,15 @@ async function callOpenAI(prompt) {
 }
 
 async function callLLM(prompt) {
-  if (GOOGLE_API_KEY && !_geminiDead) {
-    const r = await callGemini(prompt);
-    if (r) return r;
-  }
-  if (GROQ_API_KEY && !_groqDead) {
-    const r = await callGroq(prompt);
-    if (r) return r;
-  }
+  const r1 = await callGemini(prompt);    if (r1) return r1;
+  const r1b= await callGemini2(prompt);   if (r1b) return r1b;
+  const r2 = await callGroq(prompt);      if (r2) return r2;
+  const r2b= await callGroq8b(prompt);    if (r2b) return r2b;
   if (ANTHROPIC_API_KEY && !_anthropicDead) {
-    const r = await callAnthropic(prompt);
-    if (r) return r;
+    const r = await callAnthropic(prompt); if (r) return r;
   }
   if (OPENAI_API_KEY && !_openAIDead) {
-    const r = await callOpenAI(prompt);
-    if (r) return r;
+    const r = await callOpenAI(prompt); if (r) return r;
   }
   return null;
 }

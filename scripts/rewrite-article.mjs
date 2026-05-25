@@ -3,18 +3,23 @@ import path from "path";
 import { execFileSync } from "child_process";
 
 // ── Clés API (ordre de priorité : gratuit en premier) ─────────────────────
-// 1. Gemini 2.0 Flash  — GRATUIT  (1500 req/jour, déjà actif)
-// 2. Groq Llama 3.3 70B — GRATUIT  (500K tokens/jour, clé libre)
-// 3. Anthropic Claude   — Payant   (fallback si crédits dispo)
-// 4. OpenAI GPT-4o-mini — Payant   (dernier recours)
+// 1. Gemini 2.0 Flash    — GRATUIT  (1500 req/jour par clé)
+// 1b. GOOGLE_API_KEY_2   — 2ème compte Gemini optionnel (+1500 req/jour)
+// 2. Groq Llama 3.3 70B  — GRATUIT  (6000 TPM, 14400 RPD)
+// 2b. Groq Llama 3.1 8B  — GRATUIT  (131072 TPM — fallback ultra-rapide)
+// 3. Anthropic Claude    — Payant   (fallback si crédits dispo)
+// 4. OpenAI GPT-4o-mini  — Payant   (dernier recours)
 const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
+const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || ""; // 2ème compte Gemini optionnel
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 const ANTHROPIC_MODEL   = process.env.ANTHROPIC_MODEL   || "claude-haiku-4-5";
 const OPENAI_API_KEY    = process.env.OPENAI_API_KEY    || "";
 
-const GEMINI_MODEL = "gemini-2.0-flash";
-const GROQ_MODEL   = "llama-3.3-70b-versatile"; // meilleur modèle Groq gratuit
+const GEMINI_MODEL   = "gemini-2.0-flash";
+const GROQ_MODEL_70B = "llama-3.3-70b-versatile";   // qualité max, 6000 TPM
+const GROQ_MODEL_8B  = "llama-3.1-8b-instant";       // ultra-rapide, 131072 TPM
+const GROQ_MODEL     = GROQ_MODEL_70B;
 
 const INPUT_PATH = path.join(process.cwd(), "content/raw-news.json");
 const OUTPUT_PATH = path.join(process.cwd(), "content/articles/seo-articles.json");
@@ -358,7 +363,9 @@ function fallbackArticle(item, index) {
 
 // ── Flags fail-fast ───────────────────────────────────────────────────────
 let _geminiDead    = false;
-let _groqDead      = false;
+let _gemini2Dead   = false; // 2ème clé Gemini
+let _groqDead      = false; // 70B
+let _groq8bDead    = false; // 8B fallback
 let _anthropicDead = false;
 let _openAIDead    = false;
 
@@ -367,10 +374,10 @@ function isFatalMsg(msg = "") {
 }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ── 1. Gemini 2.0 Flash — GRATUIT (priorité maximale) ────────────────────
-async function callGemini(prompt, systemPrompt = null) {
-  if (!GOOGLE_API_KEY || _geminiDead) return null;
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GOOGLE_API_KEY}`;
+// ── Helper Gemini générique (réutilisé pour clé 1 et clé 2) ─────────────
+async function _callGeminiWithKey(apiKey, deadFlag, setDead, prompt, systemPrompt) {
+  if (!apiKey || deadFlag) return null;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
   const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
@@ -379,7 +386,7 @@ async function callGemini(prompt, systemPrompt = null) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
-          generationConfig: { maxOutputTokens: 8192, temperature: 0.35 }
+          generationConfig: { maxOutputTokens: 4096, temperature: 0.35 }
         })
       });
       if (res.ok) {
@@ -389,12 +396,12 @@ async function callGemini(prompt, systemPrompt = null) {
       const err = await res.text();
       if (res.status === 429) {
         if (/exceeded your current quota|QUOTA_EXCEEDED|daily.*limit/i.test(err)) {
-          console.log("  ⛔ Gemini quota fatal — désactivé.");
-          _geminiDead = true; return null;
+          console.log(`  ⛔ Gemini quota épuisé — désactivé.`);
+          setDead(); return null;
         }
         if (attempt < 2) { await sleep(20000); continue; }
       }
-      if (isFatalMsg(err)) { console.log(`  ⛔ Gemini fatal (${res.status}): ${err.slice(0, 120)}`); _geminiDead = true; return null; }
+      if (isFatalMsg(err)) { console.log(`  ⛔ Gemini fatal (${res.status}): ${err.slice(0, 120)}`); setDead(); return null; }
       console.log(`Gemini error ${res.status}: ${err.slice(0, 120)}`);
       return null;
     } catch (e) { console.log("Gemini request failed:", e.message?.slice(0, 60)); return null; }
@@ -402,17 +409,26 @@ async function callGemini(prompt, systemPrompt = null) {
   return null;
 }
 
-// ── 2. Groq Llama 3.3 70B — GRATUIT (500K tokens/jour) ───────────────────
-async function callGroq(prompt, systemPrompt = null) {
-  if (!GROQ_API_KEY || _groqDead) return null;
+// ── 1a. Gemini — clé principale ──────────────────────────────────────────
+async function callGemini(prompt, systemPrompt = null) {
+  return _callGeminiWithKey(GOOGLE_API_KEY, _geminiDead, () => { _geminiDead = true; }, prompt, systemPrompt);
+}
+
+// ── 1b. Gemini — 2ème clé (compte Google différent, +1500 req/jour) ─────
+async function callGemini2(prompt, systemPrompt = null) {
+  if (!GOOGLE_API_KEY_2) return null;
+  return _callGeminiWithKey(GOOGLE_API_KEY_2, _gemini2Dead, () => { _gemini2Dead = true; }, prompt, systemPrompt);
+}
+
+// ── Helper Groq générique (réutilisé pour 70B et 8B) ─────────────────────
+async function _callGroqModel(model, deadFlag, setDead, maxTok, prompt, systemPrompt) {
+  if (!GROQ_API_KEY || deadFlag) return null;
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: GROQ_MODEL,
-        temperature: 0.35,
-        max_tokens: 2500, // Arabe uniquement — ~800 tokens output, 2500 = large marge
+        model, temperature: 0.35, max_tokens: maxTok,
         messages: [
           ...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []),
           { role: "user", content: prompt }
@@ -422,26 +438,34 @@ async function callGroq(prompt, systemPrompt = null) {
     const data = await res.json();
     if (!res.ok) {
       const msg = JSON.stringify(data?.error || data);
-      // Rate limit = temporaire, pas fatal
       if (/rate_limit_exceeded/i.test(msg)) {
-        console.log("  ↩ Groq TPM rate limit — attente 30s...");
-        await sleep(30000); // 30s = laisse le bucket TPM se recharger
-        // 1 retry
+        console.log(`  ↩ Groq ${model} rate limit — attente 30s...`);
+        await sleep(30000);
         const res2 = await fetch("https://api.groq.com/openai/v1/chat/completions", {
           method: "POST",
           headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ model: GROQ_MODEL, temperature: 0.35, max_tokens: 4000,
+          body: JSON.stringify({ model, temperature: 0.35, max_tokens: maxTok,
             messages: [...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []), { role: "user", content: prompt }] })
         });
         const d2 = await res2.json();
         if (res2.ok) return d2?.choices?.[0]?.message?.content || null;
       }
-      if (isFatalMsg(msg)) { console.log("  ⛔ Groq fatal — désactivé."); _groqDead = true; }
-      else console.log("Groq error:", msg.slice(0, 100));
+      if (isFatalMsg(msg)) { console.log(`  ⛔ Groq ${model} fatal — désactivé.`); setDead(); }
+      else console.log(`Groq ${model} error:`, msg.slice(0, 100));
       return null;
     }
     return data?.choices?.[0]?.message?.content || null;
-  } catch (e) { console.log("Groq request failed:", e.message?.slice(0, 60)); return null; }
+  } catch (e) { console.log(`Groq ${model} request failed:`, e.message?.slice(0, 60)); return null; }
+}
+
+// ── 2a. Groq Llama 3.3 70B (qualité max, 6000 TPM) ───────────────────────
+async function callGroq(prompt, systemPrompt = null) {
+  return _callGroqModel(GROQ_MODEL_70B, _groqDead, () => { _groqDead = true; }, 2500, prompt, systemPrompt);
+}
+
+// ── 2b. Groq Llama 3.1 8B (ultra-rapide, 131072 TPM — fallback TPM) ──────
+async function callGroq8b(prompt, systemPrompt = null) {
+  return _callGroqModel(GROQ_MODEL_8B, _groq8bDead, () => { _groq8bDead = true; }, 2500, prompt, systemPrompt);
 }
 
 // ── 3. Anthropic Claude (payant — fallback si crédits dispo) ─────────────
@@ -495,10 +519,12 @@ async function callOpenAI(prompt, systemPrompt = null) {
   } catch (e) { console.log("OpenAI request failed:", e.message); return null; }
 }
 
-// ── Sélecteur : Gemini → Groq → Anthropic → OpenAI ───────────────────────
+// ── Sélecteur : Gemini1 → Gemini2 → Groq70B → Groq8B → Anthropic → OpenAI
 function noLLMLeft() {
   return (_geminiDead    || !GOOGLE_API_KEY)    &&
+         (_gemini2Dead   || !GOOGLE_API_KEY_2)  &&
          (_groqDead      || !GROQ_API_KEY)      &&
+         (_groq8bDead    || !GROQ_API_KEY)      &&
          (_anthropicDead || !ANTHROPIC_API_KEY) &&
          (_openAIDead    || !OPENAI_API_KEY);
 }
@@ -506,7 +532,9 @@ function noLLMLeft() {
 async function callLLM(prompt, systemPrompt = null) {
   if (noLLMLeft()) return null;
   const r1 = await callGemini(prompt, systemPrompt);    if (r1) return r1;
+  const r1b= await callGemini2(prompt, systemPrompt);   if (r1b) return r1b;
   const r2 = await callGroq(prompt, systemPrompt);      if (r2) return r2;
+  const r2b= await callGroq8b(prompt, systemPrompt);    if (r2b) return r2b;
   const r3 = await callAnthropic(prompt, systemPrompt); if (r3) return r3;
   return await callOpenAI(prompt, systemPrompt);
 }

@@ -6,6 +6,7 @@
 import fs from "fs";
 
 const GOOGLE_API_KEY    = process.env.GOOGLE_API_KEY    || "";
+const GOOGLE_API_KEY_2  = process.env.GOOGLE_API_KEY_2  || "";
 const GROQ_API_KEY      = process.env.GROQ_API_KEY      || "";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || "";
 
@@ -102,10 +103,31 @@ async function testAnthropic() {
   }
 }
 
+async function testGemini2() {
+  if (!GOOGLE_API_KEY_2) { console.log("GOOGLE_API_KEY_2: ❌ absent (optionnel)"); return false; }
+  console.log(`GOOGLE_API_KEY_2: ${GOOGLE_API_KEY_2.slice(0,8)}... (${GOOGLE_API_KEY_2.length} chars)`);
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GOOGLE_API_KEY_2}`;
+    const res = await fetch(url, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: TEST_PROMPT }] }], generationConfig: { maxOutputTokens: 200, temperature: 0 } })
+    });
+    const text = await res.text();
+    if (res.ok) {
+      const data = JSON.parse(text);
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "(vide)";
+      console.log(`Gemini KEY_2       : ✅ OK — réponse: ${reply.slice(0, 80)}`);
+      return true;
+    }
+    console.log(`Gemini KEY_2       : ❌ HTTP ${res.status} — ${text.slice(0, 120)}`);
+    return false;
+  } catch (e) { console.log(`Gemini KEY_2       : ❌ ${e.message}`); return false; }
+}
+
 console.log("=== Test LLM APIs — nabdriyadah ===\n");
-const [g, gr, a] = await Promise.all([testGemini(), testGroq(), testAnthropic()]);
-console.log(`\nRésumé : Gemini=${g?"✅":"❌"} | Groq=${gr?"✅":"❌"} | Anthropic=${a?"✅":"❌"}`);
-if (!g && !gr && !a) {
+const [g, g2, gr, a] = await Promise.all([testGemini(), testGemini2(), testGroq(), testAnthropic()]);
+console.log(`\nRésumé : Gemini1=${g?"✅":"❌"} | Gemini2=${g2?"✅":"❌"} | Groq=${gr?"✅":"❌"} | Anthropic=${a?"✅":"❌"}`);
+if (!g && !g2 && !gr && !a) {
   console.log("⛔ AUCUNE API LLM disponible — tous les articles seront en fallback !");
   process.exit(1);
 }
