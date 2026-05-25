@@ -57,4 +57,5 @@ jobs:
 
       - name: Commit & push
         if: steps.scan.outputs.changed == 'true'
-        run: bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
+        run: |
+          bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M')"
