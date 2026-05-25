@@ -11,9 +11,9 @@ const HF_API_KEY      = process.env.HF_API_KEY      || ""; // Hugging Face — g
 const OPENAI_API_KEY  = process.env.OPENAI_API_KEY  || "";
 const FORCE_REGENERATE = process.env.FORCE_REGENERATE_IMAGES === "true";
 // 20/run × 24 runs = 480 images/jour
-const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "20", 10);
-// Budget temps : 10 min (Pollinations ~22s × 20 = 440s)
-const MAX_RUNTIME_MS = parseInt(process.env.MAX_IMAGE_RUNTIME_MS || String(10 * 60 * 1000), 10);
+const MAX_PER_RUN = parseInt(process.env.MAX_IMAGES_PER_RUN || "25", 10);
+// Budget temps : 20 min (Pollinations ~40s × 25 = 1000s max, typiquement 20-25s chacune)
+const MAX_RUNTIME_MS = parseInt(process.env.MAX_IMAGE_RUNTIME_MS || String(20 * 60 * 1000), 10);
 
 // Pollinations ne nécessite aucune clé — toujours disponible
 const HAS_IMAGE_API = true;
@@ -372,15 +372,17 @@ let _hfDead           = false;
 // ── Pollinations.ai — 100% GRATUIT, sans clé, FLUX 1.1 ───────────────────
 // Endpoint public, commercial allowed. Pas de compte requis.
 // Prend un prompt FLUX court (buildFluxPrompt) — pas le prompt GPT long
-async function tryPollinations(fluxPrompt) {
+async function tryPollinations(fluxPrompt, attempt = 1) {
   if (_pollinationsDead) throw new Error("Pollinations désactivé");
   const safe = fluxPrompt.replace(/\s+/g, " ").trim().slice(0, 400);
   const encoded = encodeURIComponent(safe);
   const seed = Math.floor(Math.random() * 999999);
-  const url = `https://image.pollinations.ai/prompt/${encoded}?model=flux&width=1536&height=1024&nologo=true&enhance=false&seed=${seed}`;
+  // Résolution réduite 912×608 — génération ~2× plus rapide (vs 1536×1024)
+  const url = `https://image.pollinations.ai/prompt/${encoded}?model=flux&width=912&height=608&nologo=true&enhance=false&seed=${seed}`;
 
   const ctrl = new AbortController();
-  const timeout = setTimeout(() => ctrl.abort(), 22000); // 22s max (évite blocage CI)
+  const timeoutMs = 40000; // 40s (image 912×608 génère en ~15-30s)
+  const timeout = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
     const res = await fetch(url, {
       signal: ctrl.signal,
@@ -388,18 +390,38 @@ async function tryPollinations(fluxPrompt) {
     });
     clearTimeout(timeout);
     if (!res.ok) {
-      if (res.status >= 500) throw new Error(`Pollinations ${res.status}`);
-      if (res.status === 429) throw new Error("Pollinations rate limit");
+      if (res.status >= 500) {
+        // Retry once on server error
+        if (attempt < 2) {
+          await new Promise(r => setTimeout(r, 5000));
+          return tryPollinations(fluxPrompt, 2);
+        }
+        throw new Error(`Pollinations ${res.status}`);
+      }
+      if (res.status === 429) {
+        // Rate limit — retry after 10s
+        if (attempt < 2) {
+          await new Promise(r => setTimeout(r, 10000));
+          return tryPollinations(fluxPrompt, 2);
+        }
+        throw new Error("Pollinations rate limit");
+      }
       _pollinationsDead = true;
       throw new Error(`Pollinations fatal ${res.status}`);
     }
     const ct = res.headers.get("content-type") || "";
     if (!ct.includes("image")) throw new Error(`Not an image: ${ct}`);
     const buf = Buffer.from(await res.arrayBuffer());
-    if (buf.length < 15000) throw new Error("Image trop petite (probablement erreur)");
+    if (buf.length < 10000) throw new Error("Image trop petite (probablement erreur)");
     return buf.toString("base64");
   } catch (e) {
     clearTimeout(timeout);
+    // Retry once on network timeout
+    if (e.name === "AbortError" && attempt < 2) {
+      console.log("    Pollinations timeout — retry...");
+      await new Promise(r => setTimeout(r, 3000));
+      return tryPollinations(fluxPrompt, 2);
+    }
     throw e;
   }
 }
@@ -679,45 +701,36 @@ async function main() {
       continue;
     }
 
-    // ── Fallback rapide : utiliser imageUrl RSS directement si pas d'image ──
-    // Evite de consommer du quota API pour des articles qui ont déjà une image source
-    if (!FORCE_REGENERATE && !alreadyGenerated && article.imageUrl && !article.image) {
-      article.image = article.imageUrl;
-      changed = true;
-      generated++;
-      console.log(`  ✓ RSS direct: ${slug} → ${article.imageUrl.slice(0, 60)}`);
-      continue;
-    }
-
-    // ── Step 1: récupérer l'image source (RSS imageUrl → OG scrape) ──────
-    const rssImageUrl = article.imageUrl || null;
-    const sourceUrl   = article.sourceUrl || null;
+    // ── Raccourci : si pas d'API payante disponible, skip RSS/clone → Pollinations direct ──
+    // Évite de perdre 5-10s par article à chercher des images RSS qui ne servent à rien
+    const hasCloneApi = (GOOGLE_API_KEY && !_geminiEditDead) || (OPENAI_API_KEY && !_openAIDead);
     let sourceImgBuffer = null;
     let sourceLabel = "";
 
-    if (rssImageUrl) {
-      try {
-        console.log(`  Fetching RSS image: ${rssImageUrl.slice(0, 80)}`);
-        sourceImgBuffer = await fetchImageBuffer(rssImageUrl);
-        sourceLabel = "RSS";
-      } catch (e) {
-        console.log(`  RSS failed (${e.message.slice(0, 60)})`);
-      }
-    }
+    if (hasCloneApi) {
+      // ── Step 1: récupérer l'image source (RSS imageUrl → OG scrape) ──────
+      const rssImageUrl = article.imageUrl || null;
+      const sourceUrl   = article.sourceUrl || null;
 
-    if (!sourceImgBuffer && sourceUrl) {
-      try {
-        console.log(`  Scraping OG image from: ${sourceUrl.slice(0, 80)}`);
-        const ogUrl = await scrapeOgImage(sourceUrl);
-        if (ogUrl) {
-          sourceImgBuffer = await fetchImageBuffer(ogUrl);
-          sourceLabel = "OG";
-          console.log(`  OG found: ${ogUrl.slice(0, 80)}`);
-        } else {
-          console.log(`  No OG image found`);
+      if (rssImageUrl) {
+        try {
+          sourceImgBuffer = await fetchImageBuffer(rssImageUrl);
+          sourceLabel = "RSS";
+        } catch (e) {
+          // silent — on passe au clone quand même
         }
-      } catch (e) {
-        console.log(`  OG scrape failed (${e.message.slice(0, 60)})`);
+      }
+
+      if (!sourceImgBuffer && sourceUrl) {
+        try {
+          const ogUrl = await scrapeOgImage(sourceUrl);
+          if (ogUrl) {
+            sourceImgBuffer = await fetchImageBuffer(ogUrl);
+            sourceLabel = "OG";
+          }
+        } catch {
+          // silent
+        }
       }
     }
 
