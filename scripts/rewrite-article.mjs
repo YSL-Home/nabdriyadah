@@ -412,7 +412,7 @@ async function callGroq(prompt, systemPrompt = null) {
       body: JSON.stringify({
         model: GROQ_MODEL,
         temperature: 0.35,
-        max_tokens: 7000,
+        max_tokens: 2500, // Arabe uniquement — ~800 tokens output, 2500 = large marge
         messages: [
           ...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []),
           { role: "user", content: prompt }
@@ -424,13 +424,13 @@ async function callGroq(prompt, systemPrompt = null) {
       const msg = JSON.stringify(data?.error || data);
       // Rate limit = temporaire, pas fatal
       if (/rate_limit_exceeded/i.test(msg)) {
-        console.log("  ↩ Groq rate limit (temporaire)");
-        await sleep(10000);
+        console.log("  ↩ Groq TPM rate limit — attente 30s...");
+        await sleep(30000); // 30s = laisse le bucket TPM se recharger
         // 1 retry
         const res2 = await fetch("https://api.groq.com/openai/v1/chat/completions", {
           method: "POST",
           headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ model: GROQ_MODEL, temperature: 0.35, max_tokens: 7000,
+          body: JSON.stringify({ model: GROQ_MODEL, temperature: 0.35, max_tokens: 4000,
             messages: [...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []), { role: "user", content: prompt }] })
         });
         const d2 = await res2.json();
@@ -534,59 +534,45 @@ const ARTICLE_FORMATS = [
 function buildPrompt(item, format, label, source, srcLang) {
   const originalTitle       = normalizeText(item.originalTitle || item.title || "");
   const originalDescription = normalizeText(item.originalDescription || item.description || "");
-
-  // Indication de la langue source pour aider l'IA à comprendre le contexte
   const srcLangLabel = srcLang === "en" ? "Anglais" : srcLang === "fr" ? "Français" : "Arabe";
 
-  return `
-Tu es rédacteur sportif senior pour "نبض الرياضة". À partir des informations brutes ci-dessous, tu dois produire un article 100% original dans les 3 langues.
+  // Prompt arabe uniquement — réduit les tokens de 2500 → ~800 par appel
+  // EN/FR générés séparément par backfill-translations.mjs
+  return `أنت محرر رياضي متمرس لموقع "نبض الرياضة". اكتب مقالاً رياضياً احترافياً بالعربية الفصحى.
 
-⚡ Type d'article : **${format.ar}** (${format.en}) — ${format.hint}
+⚡ نوع المقال: ${format.ar} — ${format.hint}
 
---- SOURCE BRUTE (langue : ${srcLangLabel}) ---
-Sport / Championnat : ${label}
-Titre original      : ${originalTitle}
-Résumé              : ${originalDescription}
-Tags                : ${(item.topicTags || []).join(", ")}
+--- المصدر (${srcLangLabel}) ---
+الرياضة / البطولة: ${label}
+العنوان الأصلي: ${originalTitle}
+الملخص: ${originalDescription}
+الوسوم: ${(item.topicTags || []).join("، ")}
 
-🎯 RÈGLE ABSOLUE SUR LES TITRES :
-Les titres (en_title, fr_title, title) DOIVENT être dérivés du sujet ci-dessus.
-Identifie le fait principal : équipe, joueur, événement, résultat — et reformule.
-JAMAIS de titre générique non lié au sujet (ex: "آخر أخبار كرة القدم", "Latest Football News").
-JAMAIS de préfixes : توقعات: / ملخص: / عاجل: / تحليل معمّق: / Breaking: / Résumé:
-Chaque titre doit être UNIQUE et reconnaissable même sans le contexte.
+📌 قواعد العنوان:
+- اذكر الفريق أو اللاعب أو الحدث الأساسي بوضوح
+- لا عناوين عامة مثل "آخر أخبار كرة القدم" أو "أخبار رياضية"
+- لا بادئات: عاجل / تحليل / ملخص
+- العنوان: 45-70 حرفاً
 
---- VERSION ANGLAISE (obligatoire — à écrire EN PREMIER) ---
-- Style ESPN / Sky Sports : direct, factuel, dynamique
-- en_title : 50-70 chars, headline précis mentionnant équipe/joueur du sujet
-- en_description : 145-160 chars, SEO, team/player name included
-- en_content : MINIMUM 5 substantive paragraphs, each 80-120 words — Lead → Context → Analysis → Expert View → Outlook. Total: 500+ words. NO generic filler.
+متطلبات المقال:
+- content: 7 فقرات على الأقل، مفصولة بـ \\n\\n، بدون ماركداون
+- كل فقرة: 80-130 كلمة عربية
+- المجموع: 600-800 كلمة
+- البنية: مقدمة → خلفية → تفاصيل → تحليل → أرقام → آراء → خلاصة
+- أسلوب: صحفي تحليلي على مستوى الجزيرة الرياضية / بي بي سي عربي
+- الأسماء الأجنبية تُعرَّب: ليفربول، ريال مدريد، مبابي...
+- keywords: 8-10 كلمات مفتاحية عربية
+- faq: 3 أسئلة وأجوبة مفيدة (كل جواب 40-60 كلمة)
 
---- VERSION FRANÇAISE (obligatoire — à écrire EN DEUXIÈME) ---
-- Style L'Équipe / RMC Sport : incisif, analytique
-- fr_title : 50-70 chars, titre précis mentionnant équipe/joueur du sujet
-- fr_description : 145-160 chars, SEO, nom équipe/joueur inclus
-- fr_content : MINIMUM 5 paragraphes substantiels, chacun 80-120 mots — Fait → Contexte → Analyse → Point expert → Perspectives. Total : 500+ mots. PAS de remplissage générique.
-
---- VERSION ARABE (obligatoire — à écrire EN DERNIER) ---
-- Rédige en arabe standard moderne, style presse sportive de qualité
-- title : 45-70 caractères, fait principal + équipe/joueur en lettres arabes
-- seoTitle : "[Equipe/Joueur] — [Fait] | نبض الرياضة"
-- seoDescription : exactement 145-160 caractères
-- content : MINIMUM 7 paragraphes longs séparés par \\n\\n, sans markdown. Chaque paragraphe : 80-130 mots. Total : 600-800 mots. Structure : مقدمة → خلفية → تفاصيل → تحليل → أرقام وإحصاءات → آراء الخبراء → خلاصة وتوقعات. INTERDIT : paragraphes vides ou phrases génériques.
-- keywords : 8-10 mots-clés arabes variés
-- faq : 3 questions-réponses détaillées liées au sujet (chaque réponse : 40-60 mots minimum)
-- Noms propres translittérés en arabe (ليفربول، ريال مدريد، مبابي...)
-
-⚠️ ORDRE CRITIQUE : écris les champs EN/FR avant les champs arabes dans le JSON.
-Retourne UNIQUEMENT un JSON valide (pas de markdown) :
+أعد JSON صالح فقط (بدون ماركداون):
 {
-  "en_title": "...", "en_description": "...", "en_content": "Para 1\\n\\nPara 2\\n\\nPara 3",
-  "fr_title": "...", "fr_description": "...", "fr_content": "Para 1\\n\\nPara 2\\n\\nPara 3",
-  "title": "...", "description": "...", "seoTitle": "...", "seoDescription": "...",
-  "content": "فقرة 1\\n\\nفقرة 2\\n\\nفقرة 3\\n\\nفقرة 4\\n\\nفقرة 5",
+  "title": "...",
+  "description": "وصف SEO 145-160 حرفاً",
+  "seoTitle": "[فريق/لاعب] — [حدث] | نبض الرياضة",
+  "seoDescription": "...",
+  "content": "فقرة 1\\n\\nفقرة 2\\n\\nفقرة 3\\n\\nفقرة 4\\n\\nفقرة 5\\n\\nفقرة 6\\n\\nفقرة 7",
   "keywords": ["..."],
-  "faq": [{"q":"...","a":"..."},{"q":"...","a":"..."}]
+  "faq": [{"q":"...","a":"..."},{"q":"...","a":"..."},{"q":"...","a":"..."}]
 }`.trim();
 }
 
@@ -647,6 +633,8 @@ async function rewriteArticle(item, index) {
 
   if (!title || !description || !content) return fallback;
 
+  // EN/FR : si présents dans la réponse (Gemini peut les générer), on les garde.
+  // Sinon null → backfill-translations.mjs les générera séparément.
   const en_title       = (parsed.en_title       || "").trim().slice(0, 100) || null;
   const en_description = (parsed.en_description || "").trim().slice(0, 200) || null;
   const fr_title       = (parsed.fr_title       || "").trim().slice(0, 100) || null;
@@ -744,7 +732,9 @@ async function main() {
   // Cap per-run to respect rate limits (Gemini: 15 RPM, Groq: ~4 RPM effective)
   // Full refresh runs every hour → 20 articles/run × 24 runs = 480 articles/day max
   const MAX_PER_RUN = 20;
-  const LLM_DELAY_MS = 4000; // 4s between calls = ~15 calls/min (Gemini limit)
+  // 12s entre appels — respecte la TPM Groq (6000 TPM / ~800 tokens/appel = 7.5 req/min → 8s mini)
+  // 12s de marge = sécurisé. 20 articles × 12s = 4 min max.
+  const LLM_DELAY_MS = 12000;
 
   // Spread: priority to recent/diverse sports within cap
   const footballItems = unique.filter((i) => !i.sport || i.sport === "football").slice(0, 12);
