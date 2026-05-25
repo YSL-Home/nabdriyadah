@@ -84,10 +84,11 @@ function sanitizeArabic(text = "") {
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
-    const latinCount = (trimmed.match(/[A-Za-z]/g) || []).length;
     const arabicCount = (trimmed.match(/[\u0600-\u06FF]/g) || []).length;
-    if (latinCount > 0 && arabicCount === 0) continue;
-    if (latinCount > arabicCount && latinCount > 4) continue;
+    // Garder toute ligne contenant au moins 1 caract\u00E8re arabe
+    // (les noms propres latins \u2014 "Champions League", "UEFA", etc. \u2014 sont normaux dans un texte arabe)
+    // Supprimer uniquement les lignes 100% latines (pas de caract\u00E8re arabe du tout)
+    if (arabicCount === 0) continue;
     kept.push(trimmed);
   }
   return kept.join("\n\n").replace(/\n{3,}/g, "\n\n").replace(/[ ]{2,}/g, " ").trim();
