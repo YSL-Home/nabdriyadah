@@ -1,26 +1,35 @@
 {
-  "date": "2026-05-26T14:34:20.065Z",
-  "total": 19,
+  "date": "2026-05-26T17:56:46.998Z",
+  "total": 36,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 1,
+      "count": 9,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 1,
+      "count": 9,
       "action": "needs_llm_backfill"
+    },
+    {
+      "type": "duplicate_articles",
+      "items": [
+        {
+          "slug": "tennis-14nijs",
+          "duplicate_of": "tennis-14nijs-1779814818492"
+        }
+      ]
     }
   ],
   "summary": {
     "fixes_applied": 0,
-    "warnings": 2,
+    "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 1,
-    "missing_fr_title": 1,
+    "missing_en_title": 9,
+    "missing_fr_title": 9,
     "sport_mismatches_fixed": 0,
-    "duplicates": 0
+    "duplicates": 1
   }
 }
