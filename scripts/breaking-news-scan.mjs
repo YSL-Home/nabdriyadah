@@ -98,10 +98,19 @@ async function main() {
       const pub = item.pubDate ? new Date(item.pubDate) : null;
       if (pub && Date.now() - pub.getTime() > 2 * 60 * 60 * 1000) continue;
 
+      // Extraire l'image depuis le flux RSS
+      const imageUrl = item.enclosure?.url
+        || item["media:content"]?.url
+        || item.media?.content?.url
+        || item.image?.url
+        || (() => { const m = String(item.content || item["content:encoded"] || item.description || "").match(/<img[^>]+src=["']([^"']+)["']/i); return m?.[1] || null; })()
+        || null;
+
       newItems.push({
         originalTitle: title,
         originalDescription: String(item.contentSnippet || item.description || "").trim().slice(0, 500),
         link: item.link || source.url,
+        imageUrl: imageUrl,
         source: source.name,
         sourcePriority: source.priority + 5,
         sport: source.sport,

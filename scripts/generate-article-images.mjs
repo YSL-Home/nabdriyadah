@@ -701,35 +701,23 @@ async function main() {
       continue;
     }
 
-    // ── Step 1: image source directe (RSS imageUrl → OG scrape) ────────────
-    // Priorité absolue : télécharger l'image originale de l'article source, sans AI edit
+    // ── Step 1: URL image source directe (RSS → OG scrape) — sans téléchargement ──
+    // Priorité absolue : utiliser l'URL de l'image originale directement
     const rssImageUrl = article.imageUrl || null;
     const sourceUrl   = article.sourceUrl || null;
-    let sourceImgBuffer = null;
+    let directImageUrl = rssImageUrl || null;
 
-    if (rssImageUrl) {
+    if (!directImageUrl && sourceUrl) {
       try {
-        sourceImgBuffer = await fetchImageBuffer(rssImageUrl);
-        console.log(`  ✓ Source directe (RSS): ${slug}`);
+        directImageUrl = await scrapeOgImage(sourceUrl);
       } catch { /* silent */ }
     }
 
-    if (!sourceImgBuffer && sourceUrl) {
-      try {
-        const ogUrl = await scrapeOgImage(sourceUrl);
-        if (ogUrl) {
-          sourceImgBuffer = await fetchImageBuffer(ogUrl);
-          console.log(`  ✓ Source directe (OG): ${slug}`);
-        }
-      } catch { /* silent */ }
-    }
-
-    // Image source trouvée → sauvegarder directement sans AI
-    if (sourceImgBuffer) {
-      fs.writeFileSync(absoluteImagePath, sourceImgBuffer);
-      articles.find(a => a.slug === slug).image = publicImagePath;
-      changed = true; generated++;
-      console.log(`  ✓ Direct copy: ${fileName} [${generated}/${MAX_PER_RUN}]`);
+    // URL trouvée → stocker directement sans download ni stockage local
+    if (directImageUrl) {
+      const art = articles.find(a => a.slug === slug);
+      if (art) { art.image = directImageUrl; changed = true; generated++; }
+      console.log(`  ✓ URL source: ${slug} [${generated}/${MAX_PER_RUN}]`);
       continue;
     }
 
