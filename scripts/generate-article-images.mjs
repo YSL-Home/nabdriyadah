@@ -701,79 +701,36 @@ async function main() {
       continue;
     }
 
-    // ── Raccourci : si pas d'API payante disponible, skip RSS/clone → Pollinations direct ──
-    // Évite de perdre 5-10s par article à chercher des images RSS qui ne servent à rien
-    const hasCloneApi = (GOOGLE_API_KEY && !_geminiEditDead) || (OPENAI_API_KEY && !_openAIDead);
+    // ── Step 1: image source directe (RSS imageUrl → OG scrape) ────────────
+    // Priorité absolue : télécharger l'image originale de l'article source, sans AI edit
+    const rssImageUrl = article.imageUrl || null;
+    const sourceUrl   = article.sourceUrl || null;
     let sourceImgBuffer = null;
-    let sourceLabel = "";
 
-    if (hasCloneApi) {
-      // ── Step 1: récupérer l'image source (RSS imageUrl → OG scrape) ──────
-      const rssImageUrl = article.imageUrl || null;
-      const sourceUrl   = article.sourceUrl || null;
-
-      if (rssImageUrl) {
-        try {
-          sourceImgBuffer = await fetchImageBuffer(rssImageUrl);
-          sourceLabel = "RSS";
-        } catch (e) {
-          // silent — on passe au clone quand même
-        }
-      }
-
-      if (!sourceImgBuffer && sourceUrl) {
-        try {
-          const ogUrl = await scrapeOgImage(sourceUrl);
-          if (ogUrl) {
-            sourceImgBuffer = await fetchImageBuffer(ogUrl);
-            sourceLabel = "OG";
-          }
-        } catch {
-          // silent
-        }
-      }
+    if (rssImageUrl) {
+      try {
+        sourceImgBuffer = await fetchImageBuffer(rssImageUrl);
+        console.log(`  ✓ Source directe (RSS): ${slug}`);
+      } catch { /* silent */ }
     }
 
-    // ── Step 2: clonage — Gemini prioritaire, GPT en fallback ────────────
-    if (sourceImgBuffer && !_apisFatal) {
-      let cloned = false;
-
-      // 2a. Gemini 2.0 Flash edit (priorité 1)
-      if (GOOGLE_API_KEY && !_geminiEditDead) {
-        try {
-          console.log(`  Cloning via Gemini [${sourceLabel}]: ${slug}`);
-          const b64 = await tryGeminiEdit(sourceImgBuffer, article);
-          fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
-          articles.find(a => a.slug === slug).image = publicImagePath;
-          changed = true; generated++; cloned = true;
-          console.log(`  ✓ Gemini clone: ${fileName} [${generated}/${MAX_PER_RUN}]`);
-          await sleep(600);
-        } catch (e) {
-          console.log(`  Gemini edit failed (${e.message.slice(0, 80)})`);
-          if (isFatalApiError(e.message)) {
-            console.log("  ⛔ Gemini edit indisponible (404) — désactivé.");
-            _geminiEditDead = true;
-          }
+    if (!sourceImgBuffer && sourceUrl) {
+      try {
+        const ogUrl = await scrapeOgImage(sourceUrl);
+        if (ogUrl) {
+          sourceImgBuffer = await fetchImageBuffer(ogUrl);
+          console.log(`  ✓ Source directe (OG): ${slug}`);
         }
-      }
+      } catch { /* silent */ }
+    }
 
-      // 2b. GPT edit (fallback)
-      if (!cloned && OPENAI_API_KEY && !_openAIDead && !_apisFatal) {
-        try {
-          console.log(`  Cloning via GPT [${sourceLabel}]: ${slug}`);
-          const b64 = await editImageWithGPT(sourceImgBuffer, article);
-          fs.writeFileSync(absoluteImagePath, Buffer.from(b64, "base64"));
-          articles.find(a => a.slug === slug).image = publicImagePath;
-          changed = true; generated++; cloned = true;
-          console.log(`  ✓ GPT clone: ${fileName} [${generated}/${MAX_PER_RUN}]`);
-          await sleep(800);
-        } catch (editErr) {
-          if (isFatalApiError(editErr.message)) { _openAIDead = true; _apisFatal = true; break; }
-          console.log(`  GPT edit failed (${editErr.message.slice(0, 80)})`);
-        }
-      }
-
-      if (cloned) continue;
+    // Image source trouvée → sauvegarder directement sans AI
+    if (sourceImgBuffer) {
+      fs.writeFileSync(absoluteImagePath, sourceImgBuffer);
+      articles.find(a => a.slug === slug).image = publicImagePath;
+      changed = true; generated++;
+      console.log(`  ✓ Direct copy: ${fileName} [${generated}/${MAX_PER_RUN}]`);
+      continue;
     }
 
     if (_apisFatal) break;
