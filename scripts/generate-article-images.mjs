@@ -701,19 +701,27 @@ async function main() {
       continue;
     }
 
-    // ── Step 1: URL image source directe (RSS → OG scrape) — sans téléchargement ──
-    // Priorité absolue : utiliser l'URL de l'image originale directement
-    const rssImageUrl = article.imageUrl || null;
+    // ── Step 1: URL image source directe — sources propres uniquement ──────
+    // Blacklist : sites arabes avec watermark (kooora, btolat, hesport, etc.)
+    const BLACKLISTED_DOMAINS = [
+      "kooora.com","btolat.com","hesport.com","yallakora.com",
+      "filgoal.com","goal.com","koooora.com","masr-sport.com",
+      "dot-sport.com","kingfut.com","elfan.net","newsarabia.net"
+    ];
+    const isBlacklisted = (url) => url && BLACKLISTED_DOMAINS.some(d => url.includes(d));
+
+    const rssImageUrl = !isBlacklisted(article.imageUrl) ? (article.imageUrl || null) : null;
     const sourceUrl   = article.sourceUrl || null;
     let directImageUrl = rssImageUrl || null;
 
-    if (!directImageUrl && sourceUrl) {
+    if (!directImageUrl && sourceUrl && !isBlacklisted(sourceUrl)) {
       try {
-        directImageUrl = await scrapeOgImage(sourceUrl);
+        const og = await scrapeOgImage(sourceUrl);
+        if (!isBlacklisted(og)) directImageUrl = og;
       } catch { /* silent */ }
     }
 
-    // URL trouvée → stocker directement sans download ni stockage local
+    // URL propre trouvée → stocker directement
     if (directImageUrl) {
       const art = articles.find(a => a.slug === slug);
       if (art) { art.image = directImageUrl; changed = true; generated++; }
