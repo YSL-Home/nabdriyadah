@@ -5,6 +5,7 @@ import ArticleImage from "../../../components/ArticleImage";
 import AdSlot from "../../../components/AdSlot";
 
 export function generateStaticParams() {
+  if (!articles.length) return [{ slug: "_placeholder" }];
   return articles.filter(a => a.slug).map(a => ({ slug: a.slug }));
 }
 

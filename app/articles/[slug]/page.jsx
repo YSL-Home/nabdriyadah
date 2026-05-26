@@ -84,9 +84,8 @@ const leagueBranding = {
 };
 
 export function generateStaticParams() {
-  return articles.map((article) => ({
-    slug: article.slug
-  }));
+  if (!articles.length) return [{ slug: "_placeholder" }];
+  return articles.map((article) => ({ slug: article.slug }));
 }
 
 export function generateMetadata({ params }) {
