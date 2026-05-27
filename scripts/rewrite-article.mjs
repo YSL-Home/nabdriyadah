@@ -90,14 +90,16 @@ function sanitizeArabic(text = "") {
   value = removeMarkdownFences(value).replace(/\r/g, "");
   const lines = value.split("\n");
   const kept = [];
+  const seen = new Set();
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
     const arabicCount = (trimmed.match(/[\u0600-\u06FF]/g) || []).length;
-    // Garder toute ligne contenant au moins 1 caract\u00E8re arabe
-    // (les noms propres latins \u2014 "Champions League", "UEFA", etc. \u2014 sont normaux dans un texte arabe)
-    // Supprimer uniquement les lignes 100% latines (pas de caract\u00E8re arabe du tout)
     if (arabicCount === 0) continue;
+    // D\u00E9duplication : cl\u00E9 = premiers 40 chars normalis\u00E9s
+    const key = trimmed.replace(/\s+/g, " ").slice(0, 40);
+    if (seen.has(key)) continue;
+    seen.add(key);
     kept.push(trimmed);
   }
   return kept.join("\n\n").replace(/\n{3,}/g, "\n\n").replace(/[ ]{2,}/g, " ").trim();
@@ -585,15 +587,16 @@ function buildPrompt(item, format, label, source, srcLang) {
 - لا بادئات: عاجل / تحليل / ملخص
 - العنوان: 45-70 حرفاً
 
-متطلبات المقال:
-- content: 7 فقرات على الأقل، مفصولة بـ \\n\\n، بدون ماركداون
-- كل فقرة: 80-130 كلمة عربية
-- المجموع: 600-800 كلمة
-- البنية: مقدمة → خلفية → تفاصيل → تحليل → أرقام → آراء → خلاصة
-- أسلوب: صحفي تحليلي على مستوى الجزيرة الرياضية / بي بي سي عربي
-- الأسماء الأجنبية تُعرَّب: ليفربول، ريال مدريد، مبابي...
-- keywords: 8-10 كلمات مفتاحية عربية
-- faq: 3 أسئلة وأجوبة مفيدة (كل جواب 40-60 كلمة)
+⚠️ قواعد صارمة للمحتوى:
+- اكتب 7 فقرات مختلفة تماماً — لا تكرار لأي جملة أو فكرة
+- كل فقرة: جملة افتتاحية + 4-5 جمل تحليلية = 90-120 كلمة
+- المجموع الإجمالي: لا يقل عن 650 كلمة عربية
+- البنية: [1]مقدمة الخبر [2]السياق التاريخي [3]تفاصيل الحدث [4]تحليل تكتيكي [5]أرقام وإحصاءات [6]ردود فعل وتوقعات [7]خلاصة وأثر مستقبلي
+- أسلوب: صحفي تحليلي (الجزيرة / بي بي سي عربي)
+- لا ماركداون، لا نقاط، فقرات نثرية فحسب
+- الأسماء الأجنبية تُعرَّب: ليفربول، ريال مدريد، مبابي
+- keywords: 8-10 كلمات مفتاحية
+- faq: 3 أسئلة وأجوبة (كل جواب 50-70 كلمة)
 
 أعد JSON صالح فقط (بدون ماركداون):
 {
@@ -601,7 +604,7 @@ function buildPrompt(item, format, label, source, srcLang) {
   "description": "وصف SEO 145-160 حرفاً",
   "seoTitle": "[فريق/لاعب] — [حدث] | نبض الرياضة",
   "seoDescription": "...",
-  "content": "فقرة 1\\n\\nفقرة 2\\n\\nفقرة 3\\n\\nفقرة 4\\n\\nفقرة 5\\n\\nفقرة 6\\n\\nفقرة 7",
+  "content": "فقرة1 كاملة طويلة هنا\\n\\nفقرة2 كاملة طويلة هنا\\n\\nفقرة3\\n\\nفقرة4\\n\\nفقرة5\\n\\nفقرة6\\n\\nفقرة7",
   "keywords": ["..."],
   "faq": [{"q":"...","a":"..."},{"q":"...","a":"..."},{"q":"...","a":"..."}]
 }`.trim();
