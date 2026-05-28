@@ -23,13 +23,18 @@ const FOOTER_LINKS = {
           { label: "الدوري الإنجليزي", href: "/league/premier-league/" },
           { label: "الدوري الإسباني", href: "/league/la-liga/" },
           { label: "دوري أبطال أوروبا", href: "/league/champions-league/" },
+          { label: "البوندسليغا", href: "/league/bundesliga/" },
+          { label: "الدوري الإيطالي", href: "/league/serie-a/" },
+          { label: "الدوري السعودي", href: "/league/saudi-pro-league/" },
+          { label: "الدوري المصري", href: "/league/prem-egy/" },
+          { label: "البطولة المغربية", href: "/league/botola/" },
           { label: "NBA", href: "/sport/basketball/" },
-          { label: "ATP / WTA", href: "/sport/tennis/" },
         ]
       },
       {
         title: "الموقع",
         links: [
+          { label: "جميع المقالات", href: "/articles/" },
           { label: "من نحن", href: "/about/" },
           { label: "اتصل بنا", href: "/contact/" },
           { label: "سياسة الخصوصية", href: "/privacy/" },
@@ -56,8 +61,23 @@ const FOOTER_LINKS = {
         ]
       },
       {
+        title: "Leagues",
+        links: [
+          { label: "Premier League", href: "/league/premier-league/" },
+          { label: "La Liga", href: "/league/la-liga/" },
+          { label: "Champions League", href: "/league/champions-league/" },
+          { label: "Bundesliga", href: "/league/bundesliga/" },
+          { label: "Serie A", href: "/league/serie-a/" },
+          { label: "Saudi Pro League", href: "/league/saudi-pro-league/" },
+          { label: "Egyptian Premier League", href: "/league/prem-egy/" },
+          { label: "Botola Pro", href: "/league/botola/" },
+          { label: "NBA", href: "/sport/basketball/" },
+        ]
+      },
+      {
         title: "Site",
         links: [
+          { label: "All Articles", href: "/articles/" },
           { label: "About", href: "/about/" },
           { label: "Contact", href: "/contact/" },
           { label: "Privacy Policy", href: "/privacy/" },
@@ -84,8 +104,23 @@ const FOOTER_LINKS = {
         ]
       },
       {
+        title: "Ligues",
+        links: [
+          { label: "Premier League", href: "/league/premier-league/" },
+          { label: "Liga", href: "/league/la-liga/" },
+          { label: "Ligue des Champions", href: "/league/champions-league/" },
+          { label: "Bundesliga", href: "/league/bundesliga/" },
+          { label: "Serie A", href: "/league/serie-a/" },
+          { label: "Championnat d'Arabie Saoudite", href: "/league/saudi-pro-league/" },
+          { label: "Championnat d'Égypte", href: "/league/prem-egy/" },
+          { label: "Botola Pro", href: "/league/botola/" },
+          { label: "NBA", href: "/sport/basketball/" },
+        ]
+      },
+      {
         title: "Site",
         links: [
+          { label: "Tous les articles", href: "/articles/" },
           { label: "À propos", href: "/about/" },
           { label: "Contact", href: "/contact/" },
           { label: "Politique de confidentialité", href: "/privacy/" },

@@ -1,4 +1,5 @@
 import articles from "../content/articles/seo-articles.json";
+import viralScoresRaw from "../content/viral-scores.json";
 import BreakingTicker from "./components/BreakingTicker";
 import HomepageClient from "./components/HomepageClient";
 
@@ -69,6 +70,12 @@ export default function HomePage() {
     futsal:     sorted.filter((a) => a.sport === "futsal").length,
   };
 
+  const trending = [...viralScoresRaw]
+    .sort((a, b) => (b.viralScore || 0) - (a.viralScore || 0))
+    .slice(0, 5)
+    .map(v => articles.find(a => a.slug === v.slug))
+    .filter(Boolean);
+
   const schemaOrg = {
     "@context": "https://schema.org",
     "@graph": [
@@ -125,6 +132,7 @@ export default function HomePage() {
           padel={padel}
           sportCounts={sportCounts}
           totalArticles={sorted.length}
+          trending={trending}
         />
       </div>
     </div>

@@ -209,6 +209,17 @@ export default function ArticlePage({ params }) {
         direction: "rtl"
       }}
     >
+      {/* Breadcrumb */}
+      <nav aria-label="breadcrumb" style={{ maxWidth: "1320px", margin: "0 auto 16px", fontSize: 13, color: "var(--text-2)" }}>
+        <Link href="/" style={{ color: "var(--text-2)", textDecoration: "none" }}>الرئيسية</Link>
+        <span style={{ margin: "0 6px" }}>›</span>
+        <Link href={sportHref(article.league, article.sport)} style={{ color: "var(--text-2)", textDecoration: "none" }}>
+          {leagueLabel(article.league, article.sport)}
+        </Link>
+        <span style={{ margin: "0 6px" }}>›</span>
+        <span style={{ color: "var(--text-1)", fontWeight: 600 }}>{article.title?.slice(0, 50)}</span>
+      </nav>
+
       <div style={{ maxWidth: "1320px", margin: "0 auto" }}>
         <div className="article-layout">
           <aside className="article-sidebar" style={{ display: "grid", gap: "22px" }}>
@@ -649,6 +660,14 @@ export default function ArticlePage({ params }) {
                   "@type": "WebPage",
                   "@id": `https://nabdriyadah.com/articles/${article.slug}/`
                 }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://nabdriyadah.com/" },
+                  { "@type": "ListItem", "position": 2, "name": leagueLabel(article.league, article.sport), "item": `https://nabdriyadah.com${sportHref(article.league, article.sport)}` },
+                  { "@type": "ListItem", "position": 3, "name": article.title }
+                ]
               },
               ...(article.faq && article.faq.length > 0 ? [{
                 "@type": "FAQPage",

@@ -206,6 +206,7 @@ export default function HomepageClient({
   basketball, tennis, padel,
   sportCounts, totalArticles = 0,
   lang = "ar", prefix = "",
+  trending = [],
 }) {
   const isRTL = lang === "ar";
   const dir   = isRTL ? "rtl" : "ltr";
@@ -358,6 +359,22 @@ export default function HomepageClient({
           accent="#7c3aed"
           lang={lang} prefix={prefix}
         />
+      )}
+
+      {trending.length > 0 && (
+        <section style={{ marginTop: 48, borderTop: "2px solid var(--accent)", paddingTop: 24 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 16, color: "var(--accent)" }}>
+            🔥 الأكثر تداولاً
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {trending.map((a, i) => (
+              <a key={a.slug} href={`/articles/${a.slug}/`} style={{ display: "flex", gap: 12, alignItems: "center", textDecoration: "none", color: "inherit", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
+                <span style={{ fontSize: 24, fontWeight: 900, color: "var(--accent)", minWidth: 32 }}>{i+1}</span>
+                <span style={{ fontSize: 14, fontWeight: 600, lineHeight: 1.4 }}>{a.title}</span>
+              </a>
+            ))}
+          </div>
+        </section>
       )}
     </div>
   );
