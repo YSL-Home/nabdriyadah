@@ -26,7 +26,7 @@ export function generateMetadata({ params }) {
         "x-default": `https://nabdriyadah.com/articles/${params.slug}/`,
       }
     },
-    openGraph: { title, description: desc?.slice(0, 160), type: "article" },
+    openGraph: { title, description: desc?.slice(0, 160), type: "article", images: a.imageUrl ? [{ url: a.imageUrl, width: 1200, height: 630, alt: title }] : [] },
   };
 }
 

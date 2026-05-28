@@ -1,5 +1,7 @@
 "use client";
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
+
+const ITEMS_PER_PAGE = 24;
 import Link from "next/link";
 import ArticleImage from "./ArticleImage";
 
@@ -145,6 +147,7 @@ export default function ArticleFiltersClient({
   const [topicFilter, setTopicFilter] = useState("");
   const [dateFilter,  setDateFilter]  = useState("");
   const [sortOrder,   setSortOrder]   = useState("new");
+  const [page,        setPage]        = useState(1);
 
   /* ── Extract unique values from articles ── */
   const sports  = useMemo(() => [...new Set(articles.map(a => a.sport).filter(Boolean))], [articles]);
@@ -198,6 +201,8 @@ export default function ArticleFiltersClient({
 
     return result;
   }, [articles, keyword, sportFilter, leagueFilter, topicFilter, dateFilter, sortOrder, lang]);
+
+  useEffect(() => { setPage(1); }, [filtered]);
 
   return (
     <div style={{ direction: isRTL ? "rtl" : "ltr" }}>
@@ -318,9 +323,24 @@ export default function ArticleFiltersClient({
           gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
           gap: "20px",
         }}>
-          {filtered.map(a => (
+          {filtered.slice(0, page * ITEMS_PER_PAGE).map(a => (
             <ArticleCard key={a.slug} article={a} lang={lang} prefix={prefix} primaryColor={primaryColor} t={t} />
           ))}
+        </div>
+      )}
+
+      {filtered.length > page * ITEMS_PER_PAGE && (
+        <div style={{ textAlign: "center", marginTop: "24px" }}>
+          <button
+            onClick={() => setPage(p => p + 1)}
+            style={{
+              padding: "12px 32px", background: "var(--accent)", color: "white",
+              border: "none", borderRadius: "8px", fontSize: "15px",
+              cursor: "pointer", marginTop: "24px",
+            }}
+          >
+            تحميل المزيد
+          </button>
         </div>
       )}
     </div>
