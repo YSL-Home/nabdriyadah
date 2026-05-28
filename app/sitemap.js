@@ -72,6 +72,10 @@ export default function sitemap() {
     { url: `${BASE}/fr/`,  lastModified: now, changeFrequency: "hourly", priority: 0.90 },
     { url: `${BASE}/en/`,  lastModified: now, changeFrequency: "hourly", priority: 0.90 },
     { url: `${BASE}/videos/`, lastModified: now, changeFrequency: "daily", priority: 0.80 },
+    { url: `${BASE}/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.85 },
+    { url: `${BASE}/fr/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.80 },
+    { url: `${BASE}/en/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.80 },
+    { url: `${BASE}/live/`, lastModified: now, changeFrequency: "always", priority: 0.90 },
   ];
 
   // ── Sports (3 langues) ───────────────────────────────────────────────────

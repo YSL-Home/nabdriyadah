@@ -200,6 +200,18 @@ export default function ArticlePage({ params }) {
     .sort((a, b) => b.score - a.score)
     .slice(0, 4);
 
+  const bottomRelated = (() => {
+    const pool = articles.filter((item) => item.slug !== article.slug);
+    const byLeague = article.league
+      ? pool.filter((item) => item.league === article.league)
+      : [];
+    const bySport = pool.filter((item) => item.sport === article.sport);
+    const candidates = byLeague.length >= 3 ? byLeague : bySport;
+    return candidates
+      .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
+      .slice(0, 3);
+  })();
+
   return (
     <main
       style={{
@@ -620,6 +632,52 @@ export default function ArticlePage({ params }) {
           </article>
         </div>
       </div>
+
+      {bottomRelated.length > 0 && (
+        <div style={{ maxWidth: "1320px", margin: "32px auto 0", direction: "rtl" }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, color: theme.text, marginBottom: "16px" }}>
+            مقالات ذات صلة
+          </h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+            {bottomRelated.map((rel) => (
+              <Link
+                key={rel.slug}
+                href={`/articles/${rel.slug}/`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  background: theme.surface,
+                  border: `1px solid ${theme.border}`,
+                  borderRadius: "16px",
+                  padding: "12px",
+                  display: "flex",
+                  gap: "12px",
+                  alignItems: "flex-start",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.04)"
+                }}
+              >
+                {rel.image && (
+                  <img
+                    src={rel.image.startsWith("http") ? rel.image : `https://nabdriyadah.com${rel.image}`}
+                    alt={rel.title}
+                    style={{ width: "80px", height: "80px", objectFit: "cover", borderRadius: "10px", flexShrink: 0 }}
+                  />
+                )}
+                <div>
+                  <div style={{ fontSize: "14px", fontWeight: 700, color: theme.text, lineHeight: 1.6, marginBottom: "6px" }}>
+                    {rel.title}
+                  </div>
+                  {rel.publishedAt && (
+                    <div style={{ fontSize: "12px", color: theme.subtext }}>
+                      {formatDate(rel.publishedAt)}
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       <script
         type="application/ld+json"
