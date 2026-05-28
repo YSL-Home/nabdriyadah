@@ -30,16 +30,32 @@ const BREAKING_SOURCES = [
   { url: "https://news.google.com/rss/search?q=Champions+League+football&hl=ar&gl=AR&ceid=AR:ar", name: "GNews UCL", sport: "football", priority: 6 },
   { url: "https://news.google.com/rss/search?q=Premier+League+football&hl=ar&gl=AR&ceid=AR:ar",   name: "GNews PL",  sport: "football", priority: 5 },
   { url: "https://news.google.com/rss/search?q=La+Liga+football&hl=ar&gl=AR&ceid=AR:ar",          name: "GNews Liga",sport: "football", priority: 5 },
-  // ── Basket — limité ──────────────────────────────────────────────────────
-  { url: "https://news.google.com/rss/search?q=NBA+basketball&hl=ar&gl=AR&ceid=AR:ar",  name: "GNews NBA",          sport: "basketball",priority: 4  },
-  // ── Tennis — limité ──────────────────────────────────────────────────────
-  { url: "https://news.google.com/rss/search?q=tennis&hl=ar&gl=AR&ceid=AR:ar",          name: "GNews Tennis",       sport: "tennis",   priority: 3  },
+  // ── Football — sources supplémentaires ──────────────────────────────────
+  { url: "https://www.espn.com/espn/rss/soccer/news",                                    name: "ESPN Soccer",        sport: "football", priority: 8  },
+  { url: "https://www.marca.com/rss/futbol/primera-division.xml",                        name: "Marca",              sport: "football", priority: 7  },
+  { url: "https://www.as.com/rss/tags/ultimas_noticias.xml",                             name: "AS",                 sport: "football", priority: 7  },
+  { url: "https://www.lequipe.fr/rss/actu_rss_Football.xml",                             name: "L'Equipe",           sport: "football", priority: 7  },
+  { url: "https://news.google.com/rss/search?q=Bundesliga+football&hl=ar&gl=AR&ceid=AR:ar",     name: "GNews Bundesliga", sport: "football", priority: 5 },
+  { url: "https://news.google.com/rss/search?q=Serie+A+football&hl=ar&gl=AR&ceid=AR:ar",        name: "GNews SerieA",   sport: "football", priority: 5 },
+  { url: "https://news.google.com/rss/search?q=دوري+السعودي+كرة+القدم&hl=ar&gl=AR&ceid=AR:ar", name: "GNews Saudi",    sport: "football", priority: 6 },
+  { url: "https://news.google.com/rss/search?q=الدوري+المصري+الممتاز&hl=ar&gl=AR&ceid=AR:ar",  name: "GNews Egypt",    sport: "football", priority: 5 },
+  { url: "https://news.google.com/rss/search?q=الدوري+المغربي+كرة+القدم&hl=ar&gl=AR&ceid=AR:ar",name:"GNews Morocco",  sport: "football", priority: 5 },
+  { url: "https://news.google.com/rss/search?q=الدوري+الجزائري+كرة+القدم&hl=ar&gl=AR&ceid=AR:ar",name:"GNews Algeria", sport: "football", priority: 4 },
+  // ── Basket ───────────────────────────────────────────────────────────────
+  { url: "https://www.espn.com/espn/rss/nba/news",                                       name: "ESPN NBA",           sport: "basketball",priority: 7  },
+  { url: "https://feeds.bbci.co.uk/sport/basketball/rss.xml",                            name: "BBC Basketball",     sport: "basketball",priority: 6  },
+  { url: "https://news.google.com/rss/search?q=NBA+basketball&hl=ar&gl=AR&ceid=AR:ar",  name: "GNews NBA",          sport: "basketball",priority: 5  },
+  // ── Tennis ───────────────────────────────────────────────────────────────
+  { url: "https://www.espn.com/espn/rss/tennis/news",                                    name: "ESPN Tennis",        sport: "tennis",   priority: 7  },
+  { url: "https://feeds.bbci.co.uk/sport/tennis/rss.xml",                                name: "BBC Tennis",         sport: "tennis",   priority: 6  },
+  { url: "https://news.google.com/rss/search?q=tennis+ATP+WTA&hl=ar&gl=AR&ceid=AR:ar",  name: "GNews Tennis",       sport: "tennis",   priority: 4  },
   // ── F1 ───────────────────────────────────────────────────────────────────
   { url: "https://feeds.bbci.co.uk/sport/formula1/rss.xml",                              name: "BBC F1",             sport: "f1",       priority: 7  },
-  { url: `https://news.google.com/rss/search?q=Formula+1+F1+race+${new Date().getFullYear()}&hl=ar&gl=AR&ceid=AR:ar`, name: "GNews F1 AR",   sport: "f1",       priority: 6  },
+  { url: "https://www.espn.com/espn/rss/f1/news",                                        name: "ESPN F1",            sport: "f1",       priority: 7  },
+  { url: `https://news.google.com/rss/search?q=Formula+1+F1+race+${new Date().getFullYear()}&hl=ar&gl=AR&ceid=AR:ar`, name: "GNews F1", sport: "f1", priority: 5 },
   // ── Golf ─────────────────────────────────────────────────────────────────
   { url: "https://feeds.bbci.co.uk/sport/golf/rss.xml",                                  name: "BBC Golf",           sport: "golf",     priority: 5  },
-  { url: `https://news.google.com/rss/search?q=golf+PGA+tournament+${new Date().getFullYear()}&hl=ar&gl=AR&ceid=AR:ar`, name: "GNews Golf AR", sport: "golf",   priority: 4  },
+  { url: `https://news.google.com/rss/search?q=golf+PGA+Masters+${new Date().getFullYear()}&hl=ar&gl=AR&ceid=AR:ar`, name: "GNews Golf", sport: "golf", priority: 4 },
 ];
 
 const parser = new Parser({ timeout: 8000 });
@@ -94,9 +110,9 @@ async function main() {
       const key = normalizeTitle(title);
       if (!key || existingTitles.has(key) || rawTitles.has(key)) continue;
 
-      // Vérifie fraîcheur (< 2h)
+      // Vérifie fraîcheur (< 12h pour capturer plus d'articles)
       const pub = item.pubDate ? new Date(item.pubDate) : null;
-      if (pub && Date.now() - pub.getTime() > 2 * 60 * 60 * 1000) continue;
+      if (pub && Date.now() - pub.getTime() > 12 * 60 * 60 * 1000) continue;
 
       // Extraire l'image depuis le flux RSS
       const imageUrl = item.enclosure?.url

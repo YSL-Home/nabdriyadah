@@ -517,19 +517,21 @@ export default function ArticlePage({ params }) {
                 }}
               >
                 {(article.keywords || []).map((keyword, index) => (
-                  <span
+                  <Link
                     key={index}
+                    href={`/articles?q=${encodeURIComponent(keyword)}`}
                     style={{
                       padding: "8px 12px",
                       borderRadius: "999px",
                       background: theme.primarySoft,
                       color: theme.primary,
                       fontSize: "14px",
-                      fontWeight: 700
+                      fontWeight: 700,
+                      textDecoration: "none"
                     }}
                   >
                     {keyword}
-                  </span>
+                  </Link>
                 ))}
               </div>
 
