@@ -107,7 +107,15 @@ export function generateMetadata({ params }) {
     title: article.seoTitle || article.title,
     description: article.seoDescription || article.description,
     keywords: (article.keywords || []).join("، "),
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "ar": canonicalUrl,
+        ...(article.en_title ? { "en": `https://nabdriyadah.com/en/articles/${article.slug}/` } : {}),
+        ...(article.fr_title ? { "fr": `https://nabdriyadah.com/fr/articles/${article.slug}/` } : {}),
+        "x-default": canonicalUrl,
+      }
+    },
     openGraph: {
       title: article.seoTitle || article.title,
       description: article.seoDescription || article.description,

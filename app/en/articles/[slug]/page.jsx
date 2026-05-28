@@ -17,7 +17,15 @@ export function generateMetadata({ params }) {
   return {
     title: `${title} | Sports Pulse`,
     description: desc?.slice(0, 160),
-    alternates: { canonical: `https://nabdriyadah.com/en/articles/${params.slug}/` },
+    alternates: {
+      canonical: `https://nabdriyadah.com/en/articles/${params.slug}/`,
+      languages: {
+        "en": `https://nabdriyadah.com/en/articles/${params.slug}/`,
+        "ar": `https://nabdriyadah.com/articles/${params.slug}/`,
+        ...(a.fr_title ? { "fr": `https://nabdriyadah.com/fr/articles/${params.slug}/` } : {}),
+        "x-default": `https://nabdriyadah.com/articles/${params.slug}/`,
+      }
+    },
     openGraph: { title, description: desc?.slice(0, 160), type: "article" },
   };
 }
