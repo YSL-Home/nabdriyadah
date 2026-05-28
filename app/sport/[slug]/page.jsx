@@ -258,9 +258,41 @@ export default function SportPage({ params }) {
   const restArticles = sportArticles.slice(1);
   const standingsProps = getStandingsProps(params.slug);
 
+  const footballFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `ما هي رياضة ${sport.title}؟`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": sport.description
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `ما هي أبرز دوريات ${sport.title}؟`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `أبرز دوريات ${sport.title} تشمل: ${footballLeagues.map(l => l.title).join("، ")}.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `كيف أتابع أخبار ${sport.title}؟`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `يمكنك متابعة أحدث أخبار ${sport.title} على موقع نبض الرياضة — تغطية شاملة للدوريات والنتائج والانتقالات باللغة العربية.`
+        }
+      }
+    ]
+  };
+
   if (sport.isFootball) {
     return (
       <main style={{ minHeight: "100vh", background: sport.pageBg, padding: "28px 20px 52px", direction: "rtl" }}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(footballFaqSchema) }} />
         <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
 
           {/* Football Hero */}
@@ -343,6 +375,43 @@ export default function SportPage({ params }) {
               />
             </section>
           )}
+
+          {(() => {
+            const recentSportArticles = articles
+              .filter(a => a.slug && (a.sport === params.slug || (a.sport === "football" && params.slug === "football")))
+              .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
+              .slice(0, 6);
+            if (recentSportArticles.length === 0) return null;
+            return (
+              <section style={{ marginTop: "36px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
+                  <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: sport.primary }} />
+                  <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 800, color: "#111827" }}>آخر الأخبار</h2>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px" }}>
+                  {recentSportArticles.map(a => (
+                    <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                      <div style={{ background: "white", border: `1px solid ${sport.border}`, borderRadius: "18px", padding: "14px", display: "flex", alignItems: "flex-start", gap: "12px", boxShadow: "0 4px 14px rgba(0,0,0,0.05)" }}>
+                        <ArticleImage
+                          src={a.image}
+                          imageUrl={a.imageUrl}
+                          alt={a.title}
+                          sport={a.sport}
+                          league={a.league}
+                          slug={a.slug}
+                          style={{ width: "60px", height: "60px", borderRadius: "12px", flexShrink: 0, objectFit: "cover" }}
+                        />
+                        <div style={{ minWidth: 0 }}>
+                          <p style={{ margin: 0, fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{a.title}</p>
+                          {a.publishedAt && <span style={{ fontSize: "11px", color: "#6b7280", marginTop: "4px", display: "block" }}>{fmtDate(a.publishedAt)}</span>}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })()}
         </div>
       </main>
     );
@@ -373,9 +442,44 @@ export default function SportPage({ params }) {
     }
   };
 
+  const sportLeaguesForSlug = sportLeagues[params.slug] || [];
+  const sportFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `ما هي رياضة ${sport.title}؟`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": sport.description
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `ما هي أبرز بطولات ${sport.title}؟`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": sportLeaguesForSlug.length > 0
+            ? `أبرز بطولات ${sport.title} تشمل: ${sportLeaguesForSlug.map(l => l.title).join("، ")}.`
+            : `تشمل أبرز بطولات ${sport.title} العديد من المسابقات المحلية والدولية. ${sport.highlights.join("، ")}.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `كيف أتابع أخبار ${sport.title}؟`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `يمكنك متابعة أحدث أخبار ${sport.title} على موقع نبض الرياضة — تغطية شاملة للنتائج والانتقالات والتحليلات باللغة العربية.`
+        }
+      }
+    ]
+  };
+
   return (
     <main style={{ minHeight: "100vh", background: sport.pageBg, padding: "28px 20px 52px", direction: "rtl" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sportFaqSchema) }} />
       <div style={{ maxWidth: "1450px", margin: "0 auto" }}>
 
         {/* Hero */}
@@ -483,6 +587,43 @@ export default function SportPage({ params }) {
             />
           </section>
         )}
+
+        {(() => {
+          const recentSportArticles = articles
+            .filter(a => a.slug && a.sport === params.slug)
+            .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
+            .slice(0, 6);
+          if (recentSportArticles.length === 0) return null;
+          return (
+            <section style={{ marginTop: "36px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
+                <div style={{ width: "5px", height: "28px", borderRadius: "999px", background: sport.primary }} />
+                <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 800, color: "#111827" }}>آخر الأخبار</h2>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px" }}>
+                {recentSportArticles.map(a => (
+                  <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                    <div style={{ background: "white", border: `1px solid ${sport.border}`, borderRadius: "18px", padding: "14px", display: "flex", alignItems: "flex-start", gap: "12px", boxShadow: "0 4px 14px rgba(0,0,0,0.05)" }}>
+                      <ArticleImage
+                        src={a.image}
+                        imageUrl={a.imageUrl}
+                        alt={a.title}
+                        sport={a.sport}
+                        league={a.league}
+                        slug={a.slug}
+                        style={{ width: "60px", height: "60px", borderRadius: "12px", flexShrink: 0, objectFit: "cover" }}
+                      />
+                      <div style={{ minWidth: 0 }}>
+                        <p style={{ margin: 0, fontSize: "14px", fontWeight: 700, color: "#111827", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{a.title}</p>
+                        {a.publishedAt && <span style={{ fontSize: "11px", color: "#6b7280", marginTop: "4px", display: "block" }}>{fmtDate(a.publishedAt)}</span>}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
       </div>
     </main>
   );

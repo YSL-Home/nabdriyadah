@@ -263,6 +263,7 @@ export default function ArticlePage({ params }) {
                 <img
                   src={branding.leagueLogo}
                   alt={branding.title}
+                  loading="lazy"
                   style={{
                     width: "54px",
                     height: "54px",
@@ -345,6 +346,7 @@ export default function ArticlePage({ params }) {
                       <img
                         src={team.logo}
                         alt={team.name}
+                        loading="lazy"
                         style={{
                           width: "46px",
                           height: "46px",
@@ -496,6 +498,7 @@ export default function ArticlePage({ params }) {
                 <img
                   src={branding.leagueLogo}
                   alt={branding.title}
+                  loading="lazy"
                   style={{
                     width: "52px",
                     height: "52px",
@@ -668,6 +671,7 @@ export default function ArticlePage({ params }) {
                   <img
                     src={rel.image.startsWith("http") ? rel.image : `https://nabdriyadah.com${rel.image}`}
                     alt={rel.title}
+                    loading="lazy"
                     style={{ width: "80px", height: "80px", objectFit: "cover", borderRadius: "10px", flexShrink: 0 }}
                   />
                 )}
