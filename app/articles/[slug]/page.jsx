@@ -531,6 +531,12 @@ export default function ArticlePage({ params }) {
                 {article.title}
               </h1>
 
+              {(() => {
+                const words = (article.body || "").replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean).length;
+                const minutes = Math.max(1, Math.round(words / 200));
+                return <p style={{fontSize:"13px",color:"var(--text-3)",margin:"4px 0 16px"}}>{minutes} دقيقة للقراءة</p>;
+              })()}
+
               <p
                 style={{
                   margin: "0 0 22px 0",
@@ -673,6 +679,37 @@ export default function ArticlePage({ params }) {
                   </div>
                 </div>
               )}
+
+              <div style={{ marginTop: "36px" }}>
+                <div style={{ height: "1px", background: theme.border, marginBottom: "28px" }} />
+                <div style={{ fontSize: "15px", fontWeight: 800, marginBottom: "12px", color: theme.text }}>شارك المقال</div>
+                <div style={{ display: "flex", flexDirection: "row", gap: "12px", flexWrap: "wrap" }}>
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent(article.title + " " + "https://nabdriyadah.com/articles/" + article.slug + "/")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ padding: "8px 16px", borderRadius: "6px", fontSize: "13px", color: "white", textDecoration: "none", background: "#25D366" }}
+                  >
+                    WhatsApp
+                  </a>
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent("https://nabdriyadah.com/articles/" + article.slug + "/")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ padding: "8px 16px", borderRadius: "6px", fontSize: "13px", color: "white", textDecoration: "none", background: "#000" }}
+                  >
+                    X / Twitter
+                  </a>
+                  <a
+                    href={`https://t.me/share/url?url=${encodeURIComponent("https://nabdriyadah.com/articles/" + article.slug + "/")}&text=${encodeURIComponent(article.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ padding: "8px 16px", borderRadius: "6px", fontSize: "13px", color: "white", textDecoration: "none", background: "#0088cc" }}
+                  >
+                    Telegram
+                  </a>
+                </div>
+              </div>
             </div>
           </article>
         </div>

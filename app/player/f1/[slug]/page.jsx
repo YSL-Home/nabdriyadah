@@ -246,11 +246,20 @@ export default function F1DriverPage({ params }) {
     pageBg: "#fff1f2"
   };
 
-  // Articles F1 liés
+  // Articles liés au pilote
   const relatedArticles = articles
-    .filter((a) => a.slug && a.sport === "f1")
+    .filter((a) => a.slug && (a.title?.includes(driver.name) || a.title?.includes(nameAr) || a.tags?.includes(params.slug)))
     .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
-    .slice(0, 6);
+    .slice(0, 4);
+
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": driver.name,
+    "sport": "Formula 1",
+    "nationality": driver.country || meta.countryAr,
+    "url": `https://nabdriyadah.com/player/f1/${params.slug}/`
+  };
 
   return (
     <main
@@ -261,6 +270,10 @@ export default function F1DriverPage({ params }) {
         direction: "rtl"
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       {/* Hero */}
       <section
         style={{
@@ -525,16 +538,16 @@ export default function F1DriverPage({ params }) {
           </div>
         </section>
 
-        {/* Articles F1 */}
+        {/* آخر الأخبار */}
         {relatedArticles.length > 0 && (
           <section>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
               <div style={{ width: "5px", height: "26px", borderRadius: "999px", background: theme.primary }} />
               <span style={{ color: theme.primary, fontSize: "18px", fontWeight: 800 }}>
-                أحدث أخبار الفورمولا 1
+                آخر الأخبار
               </span>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
               {relatedArticles.map((article) => (
                 <Link
                   key={article.slug}
@@ -544,43 +557,47 @@ export default function F1DriverPage({ params }) {
                   <article
                     style={{
                       background: "white",
-                      borderRadius: "18px",
+                      borderRadius: "14px",
                       overflow: "hidden",
                       border: `1px solid ${theme.border}`,
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.04)"
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "10px 12px"
                     }}
                   >
-                    <div style={{ padding: "18px" }}>
-                      <div
+                    {article.image && (
+                      <img
+                        src={article.image}
+                        alt=""
+                        loading="lazy"
+                        width={56}
+                        height={56}
                         style={{
-                          display: "inline-block",
-                          background: theme.primarySoft,
-                          color: theme.primary,
-                          padding: "4px 10px",
-                          borderRadius: "999px",
-                          fontSize: "11px",
-                          fontWeight: 700,
-                          marginBottom: "10px"
+                          width: "56px",
+                          height: "56px",
+                          objectFit: "cover",
+                          borderRadius: "10px",
+                          flexShrink: 0
                         }}
-                      >
-                        فورمولا 1
-                      </div>
-                      <h3
-                        style={{
-                          margin: 0,
-                          fontSize: "15px",
-                          fontWeight: 700,
-                          color: "#111827",
-                          lineHeight: 1.5,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden"
-                        }}
-                      >
-                        {article.title}
-                      </h3>
-                    </div>
+                      />
+                    )}
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        color: "#111827",
+                        lineHeight: 1.4,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden"
+                      }}
+                    >
+                      {article.title}
+                    </h3>
                   </article>
                 </Link>
               ))}
