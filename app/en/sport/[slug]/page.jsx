@@ -26,7 +26,15 @@ export function generateMetadata({ params }) {
   return {
     title: `${titles[params.slug]} | Sports Pulse`,
     description: descs[params.slug],
-    alternates: { canonical: `https://nabdriyadah.com/en/sport/${params.slug}/` },
+    alternates: {
+      canonical: `https://nabdriyadah.com/en/sport/${params.slug}/`,
+      languages: {
+        "en": `https://nabdriyadah.com/en/sport/${params.slug}/`,
+        "fr": `https://nabdriyadah.com/fr/sport/${params.slug}/`,
+        "ar": `https://nabdriyadah.com/sport/${params.slug}/`,
+        "x-default": `https://nabdriyadah.com/sport/${params.slug}/`,
+      },
+    },
     openGraph: {
       title: titles[params.slug],
       description: descs[params.slug],

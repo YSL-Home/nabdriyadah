@@ -50,7 +50,15 @@ export function generateMetadata({ params }) {
   return {
     title: `${cfg.title} — Classement, Équipes & Actualités | Sports Pulse`,
     description: `Suivez les dernières actualités, le classement et les équipes de ${cfg.title} sur Sports Pulse.`,
-    alternates: { canonical: `https://nabdriyadah.com/fr/league/${params.slug}/` },
+    alternates: {
+      canonical: `https://nabdriyadah.com/fr/league/${params.slug}/`,
+      languages: {
+        "en": `https://nabdriyadah.com/en/league/${params.slug}/`,
+        "fr": `https://nabdriyadah.com/fr/league/${params.slug}/`,
+        "ar": `https://nabdriyadah.com/league/${params.slug}/`,
+        "x-default": `https://nabdriyadah.com/league/${params.slug}/`,
+      },
+    },
   };
 }
 
@@ -147,6 +155,30 @@ export default function FrLeaguePage({ params }) {
             ))}
           </div>
         </section>
+
+        {/* Dernières nouvelles — grille compacte */}
+        {(() => {
+          const recentArticles = articles
+            .filter(a => a.slug && a.league === slug)
+            .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
+            .slice(0, 6);
+          if (recentArticles.length === 0) return null;
+          return (
+            <section style={{ marginBottom: "28px" }}>
+              <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px", color: "var(--text-1)" }}>Dernières nouvelles</h2>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px" }}>
+                {recentArticles.map(a => (
+                  <Link key={a.slug} href={`/articles/${a.slug}/`} style={{ textDecoration: "none", display: "flex", gap: "10px", alignItems: "flex-start", background: "var(--bg-card)", borderRadius: "12px", padding: "10px", border: "1px solid var(--border)" }}>
+                    {a.image && (
+                      <img src={a.image} alt="" loading="lazy" style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "8px", flexShrink: 0 }} />
+                    )}
+                    <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-1)", lineHeight: 1.4 }}>{a.fr_title || a.title}</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* Actualités */}
         <section>
