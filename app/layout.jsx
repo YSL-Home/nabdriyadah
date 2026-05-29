@@ -40,6 +40,10 @@ export const metadata = {
       "en": "https://nabdriyadah.com/en/",
     }
   },
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
   openGraph: {
     title: "نبض الرياضة",
     description:

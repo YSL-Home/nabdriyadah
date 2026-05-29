@@ -1,72 +1,30 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "الصفحة غير موجودة | نبض الرياضة",
-  description: "الصفحة التي تبحث عنها غير موجودة."
+  title: "404 | نبض الرياضة",
 };
 
 export default function NotFound() {
   return (
     <main
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#ffffff",
         direction: "rtl",
-        fontFamily: "var(--font-inter, 'Inter', 'Segoe UI', Arial, sans-serif)",
-        padding: "20px"
+        textAlign: "center",
+        maxWidth: "600px",
+        margin: "auto",
+        padding: "80px 24px",
       }}
     >
-      <div
-        style={{
-          maxWidth: "500px",
-          width: "100%",
-          textAlign: "center"
-        }}
-      >
-        <div style={{ fontSize: "96px", lineHeight: 1, marginBottom: "16px" }}>
-          404
-        </div>
-        <h1
-          style={{
-            fontSize: "32px",
-            fontWeight: 800,
-            color: "#111827",
-            margin: "0 0 12px 0"
-          }}
-        >
-          الصفحة غير موجودة
-        </h1>
-        <p
-          style={{
-            fontSize: "18px",
-            color: "#6b7280",
-            lineHeight: 1.8,
-            margin: "0 0 32px 0"
-          }}
-        >
-          عذراً، الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.
-        </p>
-        <Link
-          href="/"
-          style={{
-            display: "inline-block",
-            background: "#2563eb",
-            color: "#ffffff",
-            textDecoration: "none",
-            padding: "14px 32px",
-            borderRadius: "12px",
-            fontSize: "16px",
-            fontWeight: 700,
-            transition: "background 0.2s"
-          }}
-        >
-          العودة إلى الرئيسية
-        </Link>
-      </div>
+      <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
+        404 - الصفحة غير موجودة
+      </h1>
+      <p>عذراً، الصفحة التي تبحث عنها غير متوفرة.</p>
+      <nav style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+        <Link href="/" style={{ color: "var(--accent)" }}>الرئيسية</Link>
+        <Link href="/articles/" style={{ color: "var(--accent)" }}>المقالات</Link>
+        <Link href="/sport/football/" style={{ color: "var(--accent)" }}>كرة القدم</Link>
+        <Link href="/live/" style={{ color: "var(--accent)" }}>نتائج مباشرة</Link>
+      </nav>
     </main>
   );
 }
