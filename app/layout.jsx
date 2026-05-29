@@ -55,6 +55,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl" className={inter.variable}>
       <head>
+        <link rel="preconnect" href="https://media.api-sports.io" />
+        <link rel="dns-prefetch" href="https://media.api-sports.io" />
+        <link rel="preconnect" href="https://www.thesportsdb.com" />
+        <link rel="dns-prefetch" href="https://www.thesportsdb.com" />
+        <link rel="preconnect" href="https://cdn.thesportsdb.com" />
+        <link rel="dns-prefetch" href="https://cdn.thesportsdb.com" />
         {/* Anti-flash: CLAIR par défaut — sombre seulement 20h–6h ou préférence système */}
         <script dangerouslySetInnerHTML={{ __html:
           `(function(){var h=new Date().getHours(),night=h<6||h>=20;var dark=night||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&!night===false);if(dark){document.documentElement.setAttribute('data-theme','dark');}})();`

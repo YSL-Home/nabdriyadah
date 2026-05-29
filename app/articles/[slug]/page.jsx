@@ -608,6 +608,40 @@ export default function ArticlePage({ params }) {
                 }}
               />
 
+              {(() => {
+                const body = article.body || "";
+                const wordCount = body.split(" ").length;
+                if (wordCount > 500) {
+                  const h2Matches = body.match(/<h2[^>]*>(.*?)<\/h2>/gi) || [];
+                  const h2Texts = h2Matches.map((tag) => tag.replace(/<[^>]+>/g, "").trim());
+                  if (h2Texts.length >= 3) {
+                    return (
+                      <div
+                        style={{
+                          background: "var(--bg-card)",
+                          border: "1px solid var(--border)",
+                          borderRadius: "8px",
+                          padding: "16px",
+                          marginBottom: "24px"
+                        }}
+                      >
+                        <div style={{ fontSize: "15px", fontWeight: 700, marginBottom: "10px" }}>
+                          جدول المحتويات
+                        </div>
+                        <ol style={{ margin: 0, padding: "0 20px", display: "grid", gap: "6px" }}>
+                          {h2Texts.map((text, i) => (
+                            <li key={i} style={{ fontSize: "14px", lineHeight: 1.6 }}>
+                              {text}
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    );
+                  }
+                }
+                return null;
+              })()}
+
               <div
                 style={{
                   fontSize: "20px",

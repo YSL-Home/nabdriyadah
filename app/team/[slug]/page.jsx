@@ -572,7 +572,62 @@ export default function TeamPage({ params }) {
           )}
         </section>
 
-        {/* ── JSON-LD ── */}
+        {/* ── آخر الأخبار ── */}
+        {(() => {
+          const slug = params.slug;
+          const seen2 = new Set();
+          const pool = articles.filter(a => {
+            if (!a.slug) return false;
+            const key = (a.title || "").toLowerCase().slice(0, 80);
+            if (seen2.has(key)) return false;
+            seen2.add(key);
+            return true;
+          });
+          const related = pool.filter(a =>
+            (Array.isArray(a.tags) && a.tags.includes(slug)) ||
+            (a.title && a.title.includes(team.name))
+          );
+          const base = related.length > 0
+            ? related
+            : pool.filter(a => a.league === team.league);
+          const latest = base
+            .slice()
+            .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
+            .slice(0, 6);
+          if (latest.length === 0) return null;
+          return (
+            <section style={{ background: "white", borderRadius: "28px", padding: "28px", border: `1px solid ${accentMid}`, marginBottom: "26px", boxShadow: "0 8px 24px rgba(0,0,0,0.04)" }}>
+              <h2 style={{ margin: "0 0 16px 0", fontSize: "20px", fontWeight: 700, color: "#111827" }}>آخر الأخبار</h2>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                {latest.map(item => (
+                  <Link key={item.slug} href={`/articles/${item.slug}/`} style={{ textDecoration: "none", color: "inherit" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", background: accentSoft, border: `1px solid ${accentMid}`, borderRadius: "14px", padding: "10px" }}>
+                      <img
+                        src={item.image || item.imageUrl || "/placeholder.jpg"}
+                        alt={item.title}
+                        loading="lazy"
+                        style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: "10px", flexShrink: 0 }}
+                      />
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", lineHeight: 1.45, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{item.title}</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
+
+        {/* ── JSON-LD SportsOrganization ── */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SportsOrganization",
+          "name": team.name,
+          "sport": team.sport || "كرة القدم",
+          "url": `https://nabdriyadah.com/team/${params.slug}/`,
+          "logo": team.logo
+        })}} />
+
+        {/* ── JSON-LD SportsTeam ── */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SportsTeam",
