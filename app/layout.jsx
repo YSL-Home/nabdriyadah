@@ -44,6 +44,9 @@ export const metadata = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
   ],
+  icons: {
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "نبض الرياضة",
     description:

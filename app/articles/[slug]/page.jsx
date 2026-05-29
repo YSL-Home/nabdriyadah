@@ -532,7 +532,7 @@ export default function ArticlePage({ params }) {
               </h1>
 
               {(() => {
-                const words = (article.body || "").replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean).length;
+                const words = (article.content || "").replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean).length;
                 const minutes = Math.max(1, Math.round(words / 200));
                 return <p style={{fontSize:"13px",color:"var(--text-3)",margin:"4px 0 16px"}}>{minutes} دقيقة للقراءة</p>;
               })()}
@@ -615,7 +615,7 @@ export default function ArticlePage({ params }) {
               />
 
               {(() => {
-                const body = article.body || "";
+                const body = article.content || "";
                 const wordCount = body.split(" ").length;
                 if (wordCount > 500) {
                   const h2Matches = body.match(/<h2[^>]*>(.*?)<\/h2>/gi) || [];
@@ -778,7 +778,7 @@ export default function ArticlePage({ params }) {
                 "dateModified": article.publishedAt || undefined,
                 "articleSection": leagueLabel(article.league, article.sport),
                 "image": article.imageUrl || (article.image?.startsWith("http") ? article.image : article.image ? `https://nabdriyadah.com${article.image}` : "https://nabdriyadah.com/og-default.jpg"),
-                "wordCount": article.body ? article.body.replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean).length : 0,
+                "wordCount": article.content ? article.content.replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean).length : 0,
                 "author": {
                   "@type": "Organization",
                   "name": "نبض الرياضة",
