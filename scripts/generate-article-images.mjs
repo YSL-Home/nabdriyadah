@@ -702,26 +702,61 @@ async function main() {
     }
 
     // ── Step 1: URL image source directe — sources propres uniquement ──────
-    // Blacklist : sites arabes avec watermark (kooora, btolat, hesport, etc.)
     const BLACKLISTED_DOMAINS = [
+      // Sites arabes avec watermark
       "kooora.com","btolat.com","hesport.com","yallakora.com",
       "filgoal.com","goal.com","koooora.com","masr-sport.com",
-      "dot-sport.com","kingfut.com","elfan.net","newsarabia.net"
+      "dot-sport.com","kingfut.com","elfan.net","newsarabia.net",
+      // Google News thumbnails (logos GE, icônes génériques)
+      "news.google.com","gstatic.com","googleusercontent.com","googleapis.com",
+      "google.com",
+      // Placeholders et icônes
+      "placeholder.com","placehold.it","via.placeholder",
     ];
-    const isBlacklisted = (url) => url && BLACKLISTED_DOMAINS.some(d => url.includes(d));
+    const BLACKLISTED_PATTERNS = [/\/icon[s]?\//i, /\/logo[s]?\//i, /\/favicon/i, /\.svg(\?|$)/i];
+    const isBlacklisted = (url) => {
+      if (!url) return true;
+      if (BLACKLISTED_DOMAINS.some(d => url.includes(d))) return true;
+      if (BLACKLISTED_PATTERNS.some(p => p.test(url))) return true;
+      return false;
+    };
+
+    // Valide qu'une URL image est réelle (taille > 20KB = pas un logo/icône)
+    async function isValidImageUrl(url) {
+      if (!url || isBlacklisted(url)) return false;
+      try {
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), 6000);
+        const res = await fetch(url, { method: "HEAD", signal: ctrl.signal, headers: { "User-Agent": "Mozilla/5.0" }, redirect: "follow" });
+        clearTimeout(t);
+        if (!res.ok) return false;
+        const ct = res.headers.get("content-type") || "";
+        if (!ct.includes("image")) return false;
+        const size = parseInt(res.headers.get("content-length") || "0", 10);
+        // Logos/icônes < 20KB, vraies photos > 50KB
+        if (size > 0 && size < 20000) return false;
+        return true;
+      } catch { return false; }
+    }
 
     const rssImageUrl = !isBlacklisted(article.imageUrl) ? (article.imageUrl || null) : null;
-    const sourceUrl   = article.sourceUrl || null;
-    let directImageUrl = rssImageUrl || null;
+    const sourceUrl   = article.sourceUrl || article.link || null;
+    let directImageUrl = null;
 
+    // Valider l'image RSS avant de l'utiliser
+    if (rssImageUrl && await isValidImageUrl(rssImageUrl)) {
+      directImageUrl = rssImageUrl;
+    }
+
+    // Sinon scraper l'OG image de l'article source
     if (!directImageUrl && sourceUrl && !isBlacklisted(sourceUrl)) {
       try {
         const og = await scrapeOgImage(sourceUrl);
-        if (!isBlacklisted(og)) directImageUrl = og;
+        if (og && await isValidImageUrl(og)) directImageUrl = og;
       } catch { /* silent */ }
     }
 
-    // URL propre trouvée → stocker directement
+    // URL propre et valide trouvée → stocker directement
     if (directImageUrl) {
       const art = articles.find(a => a.slug === slug);
       if (art) { art.image = directImageUrl; changed = true; generated++; }
