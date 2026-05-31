@@ -1,21 +1,29 @@
 {
-  "date": "2026-05-31T18:05:15.419Z",
-  "total": 619,
+  "date": "2026-05-31T20:12:54.850Z",
+  "total": 629,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 16,
+      "count": 17,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 16,
+      "count": 17,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ft-s23xsv",
+          "duplicate_of": "ft-ic8fjw"
+        },
+        {
+          "slug": "ft-1jcro8",
+          "duplicate_of": "ft-ub4aqx"
+        },
         {
           "slug": "ft-17v9gf",
           "duplicate_of": "ft-jos1jt"
@@ -54,7 +62,7 @@
         },
         {
           "slug": "ft-1xptc4",
-          "duplicate_of": "ft-s23xsv"
+          "duplicate_of": "ft-ic8fjw"
         },
         {
           "slug": "ft-zqk9nz",
@@ -549,16 +557,20 @@
           "duplicate_of": "tennis-39ew88-1780244646249"
         },
         {
+          "slug": "tennis-rlrc2q-1780228861594",
+          "duplicate_of": "tennis-rlrc2q-1780252218491"
+        },
+        {
           "slug": "tennis-rlrc2q-1780221213577",
-          "duplicate_of": "tennis-rlrc2q-1780228861594"
+          "duplicate_of": "tennis-rlrc2q-1780252218491"
         },
         {
           "slug": "tennis-rlrc2q-1780205621129",
-          "duplicate_of": "tennis-rlrc2q-1780228861594"
+          "duplicate_of": "tennis-rlrc2q-1780252218491"
         },
         {
           "slug": "tennis-rlrc2q",
-          "duplicate_of": "tennis-rlrc2q-1780228861594"
+          "duplicate_of": "tennis-rlrc2q-1780252218491"
         },
         {
           "slug": "tennis-1t02lo-1779959578218",
@@ -575,9 +587,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 16,
-    "missing_fr_title": 16,
+    "missing_en_title": 17,
+    "missing_fr_title": 17,
     "sport_mismatches_fixed": 0,
-    "duplicates": 138
+    "duplicates": 141
   }
 }
