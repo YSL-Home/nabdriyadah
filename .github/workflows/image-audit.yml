@@ -1,0 +1,53 @@
+name: Image Audit (4x/day)
+
+on:
+  schedule:
+    - cron: "0 2,8,14,20 * * *"   # 02h, 08h, 14h, 20h UTC
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Run image audit
+        id: audit
+        run: |
+          node scripts/audit-images.mjs && echo "issues=0" >> $GITHUB_OUTPUT || echo "issues=1" >> $GITHUB_OUTPUT
+        env:
+          MAX_HEAD_CHECKS: "100"
+
+      - name: Trigger image regeneration if issues found
+        if: steps.audit.outputs.issues == '1'
+        run: node scripts/generate-article-images.mjs
+        env:
+          GOOGLE_API_KEY:   ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_API_KEY_2: ${{ secrets.GOOGLE_API_KEY_2 }}
+          GOOGLE_API_KEY_3: ${{ secrets.GOOGLE_API_KEY_3 }}
+          GOOGLE_API_KEY_4: ${{ secrets.GOOGLE_API_KEY_4 }}
+          GOOGLE_API_KEY_5: ${{ secrets.GOOGLE_API_KEY_5 }}
+          GOOGLE_API_KEY_6: ${{ secrets.GOOGLE_API_KEY_6 }}
+          HF_API_KEY:       ${{ secrets.HF_API_KEY }}
+          OPENAI_API_KEY:   ${{ secrets.OPENAI_API_KEY }}
+          MAX_IMAGES_PER_RUN: "60"
+          MAX_IMAGE_RUNTIME_MS: "1200000"
+
+      - name: Commit fixes
+        run: |
+          git config user.name "nabdriyadah-bot"
+          git config user.email "bot@nabdriyadah.com"
+          git add content/articles/seo-articles.json content/image-audit-report.json || true
+          git diff --cached --quiet || git commit -m "fix(images): audit auto $(date '+%d/%m %H:%M') — $(cat content/image-audit-report.json | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf-8'));process.stdout.write(d.issuesFound+' issues')")"
+          git push || (git fetch origin main && git rebase origin/main && git push)
