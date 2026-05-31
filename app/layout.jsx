@@ -97,6 +97,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5420JXJVQ0');`
           }}
         />
+        {/* Plausible Analytics — sans cookies, RGPD compliant */}
+        <script defer data-domain="nabdriyadah.com" src="https://plausible.io/js/script.js" />
         {/* Protection DevTools — dissuasion inspection source */}
         <script dangerouslySetInnerHTML={{ __html: `
 (function(){

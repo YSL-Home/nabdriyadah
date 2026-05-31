@@ -33,9 +33,9 @@ const GROQ_MODEL_8B   = "llama-3.1-8b-instant";      // 131072 TPM — fallback 
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 
 // ── Paramètres ────────────────────────────────────────────────────────────
-const MAX_PER_RUN       = 60;    // 60/run × 24 runs/jour = 1440/jour → backlog 2446 en ~2 jours
-const MIN_AR_WORDS      = 400;   // en dessous = article "court" à upgrader
-const DELAY_MS          = 12000; // 12s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
+const MAX_PER_RUN       = 100;   // 100/run × 24 runs/jour = 2400/jour
+const MIN_AR_WORDS      = 600;   // en dessous = article "court" à upgrader
+const DELAY_MS          = 8000;  // 8s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
 const RECENT_DAYS       = 14;    // priorité aux articles < 14 jours
 
 if (!GOOGLE_API_KEY && !GOOGLE_API_KEY_2 && !GOOGLE_API_KEY_3 && !GOOGLE_API_KEY_4 && !GOOGLE_API_KEY_5 && !GOOGLE_API_KEY_6 && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {

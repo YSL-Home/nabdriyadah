@@ -20,6 +20,8 @@ function getTheme() {
 export default function ThemeController() {
   useEffect(() => {
     const apply = () => {
+      // Si l'utilisateur a choisi manuellement, ne pas écraser
+      if (localStorage.getItem("theme")) return;
       document.documentElement.setAttribute("data-theme", getTheme());
     };
     apply();

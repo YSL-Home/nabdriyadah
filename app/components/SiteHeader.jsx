@@ -59,7 +59,17 @@ export default function SiteHeader() {
   const [isDark,   setIsDark]   = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const toggleTheme = () => {
+    const next = isDark ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  };
+
   useEffect(() => {
+    // Appliquer le choix persisté au montage
+    const saved = localStorage.getItem("theme");
+    if (saved) document.documentElement.setAttribute("data-theme", saved);
+
     const check = () => {
       setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
     };
@@ -155,11 +165,15 @@ export default function SiteHeader() {
         <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
           <LangSwitcher />
 
-          {/* Badge thème */}
-          <span className="theme-badge"
-            title={isDark ? DARK_LABEL[lang] : LIGHT_LABEL[lang]}>
+          {/* Badge thème — cliquable */}
+          <button
+            onClick={toggleTheme}
+            className="theme-badge"
+            title={isDark ? LIGHT_LABEL[lang] : DARK_LABEL[lang]}
+            style={{ cursor: "pointer", background: "none", border: "none", padding: 0 }}
+          >
             {isDark ? `🌙 ${DARK_LABEL[lang]}` : `☀️ ${LIGHT_LABEL[lang]}`}
-          </span>
+          </button>
 
           {/* Lien About — requis AdSense */}
           <Link href={ABOUT_HREF[lang]} style={{

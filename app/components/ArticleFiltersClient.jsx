@@ -148,6 +148,7 @@ export default function ArticleFiltersClient({
   const [dateFilter,  setDateFilter]  = useState("");
   const [sortOrder,   setSortOrder]   = useState("new");
   const [page,        setPage]        = useState(1);
+  const [loading,     setLoading]     = useState(false);
 
   /* ── Extract unique values from articles ── */
   const sports  = useMemo(() => [...new Set(articles.map(a => a.sport).filter(Boolean))], [articles]);
@@ -202,7 +203,12 @@ export default function ArticleFiltersClient({
     return result;
   }, [articles, keyword, sportFilter, leagueFilter, topicFilter, dateFilter, sortOrder, lang]);
 
-  useEffect(() => { setPage(1); }, [filtered]);
+  useEffect(() => {
+    setPage(1);
+    setLoading(true);
+    const t = setTimeout(() => setLoading(false), 200);
+    return () => clearTimeout(t);
+  }, [filtered]);
 
   return (
     <div style={{ direction: isRTL ? "rtl" : "ltr" }}>
@@ -307,7 +313,24 @@ export default function ArticleFiltersClient({
       </div>
 
       {/* ── Results grid ──────────────────────────── */}
-      {filtered.length === 0 ? (
+      {loading ? (
+        <>
+          <style>{`@keyframes skPulse{0%,100%{opacity:1}50%{opacity:0.4}}`}</style>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: "20px",
+          }}>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} style={{
+                background: "var(--border)", borderRadius: "8px", height: "120px",
+                animation: "skPulse 1.2s ease-in-out infinite",
+                animationDelay: `${i * 0.08}s`,
+              }} />
+            ))}
+          </div>
+        </>
+      ) : filtered.length === 0 ? (
         <div style={{ textAlign: "center", padding: "60px 20px", color: "var(--text-3)" }}>
           <div style={{ fontSize: "48px", marginBottom: "12px" }}>🔍</div>
           <div style={{ fontSize: "18px", fontWeight: 700 }}>{hasFilters ? t.noResults : lang === "en" ? "Translated articles loading soon — check back shortly!" : lang === "fr" ? "Articles traduits bientôt disponibles — revenez dans quelques instants !" : t.noResults}</div>
