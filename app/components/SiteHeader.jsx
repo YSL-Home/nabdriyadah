@@ -48,6 +48,9 @@ const DARK_LABEL = { ar: "ليل",                fr: "Nuit",                  e
 const LIGHT_LABEL= { ar: "نهار",               fr: "Jour",                  en: "Day"                   };
 const ABOUT_LABEL= { ar: "عن الموقع",          fr: "À propos",              en: "About"                 };
 const ABOUT_HREF = { ar: "/about/",             fr: "/fr/about/",            en: "/en/about/"            };
+const SEARCH_LABEL={ ar: "بحث",                fr: "Recherche",             en: "Search"                };
+const SEARCH_HREF = { ar: "/search/",           fr: "/fr/search/",           en: "/en/search/"           };
+const SEARCH_ARIA = { ar: "صفحة البحث",        fr: "Page de recherche",     en: "Search page"           };
 /* Accessibility labels */
 const NAV_ARIA   = { ar: "التنقل الرئيسي",    fr: "Navigation principale", en: "Main navigation"       };
 const THEME_ARIA = {
@@ -199,6 +202,25 @@ export default function SiteHeader() {
             <span aria-hidden="true">{isDark ? `🌙 ${DARK_LABEL[lang]}` : `☀️ ${LIGHT_LABEL[lang]}`}</span>
           </button>
 
+          {/* Lien Recherche */}
+          <Link
+            href={SEARCH_HREF[lang]}
+            aria-label={SEARCH_ARIA[lang] || SEARCH_ARIA.ar}
+            style={{
+              textDecoration: "none",
+              fontSize: "18px",
+              padding: "10px 10px",
+              minHeight: "44px",
+              display: "inline-flex",
+              alignItems: "center",
+              borderRadius: "6px",
+              color: isDark ? "rgba(200,210,240,0.8)" : "rgba(30,50,100,0.65)",
+              transition: "color 0.15s",
+            }}
+          >
+            <span aria-hidden="true">🔍</span>
+          </Link>
+
           {/* Lien About — requis AdSense */}
           <Link
             href={ABOUT_HREF[lang]}
@@ -264,6 +286,13 @@ export default function SiteHeader() {
           style={{ color: isDark ? "#f87171" : "#c81e1e", borderColor: isDark ? "rgba(248,113,113,0.25)" : "#fcc", background: isDark ? "rgba(248,113,113,0.08)" : "#fff8f8" }}
         >
           <span aria-hidden="true">🔴</span>{" "}{LIVE[lang]}
+        </Link>
+        <Link
+          href={SEARCH_HREF[lang]}
+          className="hdr-pill-mobile"
+          aria-label={SEARCH_ARIA[lang] || SEARCH_ARIA.ar}
+        >
+          <span aria-hidden="true">🔍</span>{" "}{SEARCH_LABEL[lang]}
         </Link>
       </nav>
     </header>

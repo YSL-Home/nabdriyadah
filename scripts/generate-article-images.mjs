@@ -670,11 +670,16 @@ async function main() {
   let changed = false;
   let generated = 0;
 
-  // Trier : articles sans image générée en premier (nouveaux articles prioritaires)
+  // Trier : articles sans image en premier, puis prioriser les sports les moins couverts
+  const SPORT_PRIORITY = { basketball: 0, padel: 1, tennis: 2, futsal: 3, f1: 4, golf: 5, football: 6 };
   const sorted = [...articles].sort((a, b) => {
-    const aHas = a.image && a.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${a.slug}.png`));
-    const bHas = b.image && b.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${b.slug}.png`));
-    return (aHas ? 1 : 0) - (bHas ? 1 : 0);
+    const aHasImg = !!(a.image && a.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${a.slug}.png`)));
+    const bHasImg = !!(b.image && b.image.startsWith("/generated/") && fs.existsSync(path.join(OUTPUT_DIR, `${b.slug}.png`)));
+    if (aHasImg !== bHasImg) return (aHasImg ? 1 : 0) - (bHasImg ? 1 : 0);
+    // Même statut image → prioriser sport moins couvert
+    const aPrio = SPORT_PRIORITY[a.sport] ?? 5;
+    const bPrio = SPORT_PRIORITY[b.sport] ?? 5;
+    return aPrio - bPrio;
   });
 
   for (const article of sorted) {
