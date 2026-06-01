@@ -76,6 +76,7 @@ export default function sitemap() {
     { url: `${BASE}/fr/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.80 },
     { url: `${BASE}/en/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.80 },
     { url: `${BASE}/live/`, lastModified: now, changeFrequency: "always", priority: 0.90 },
+    { url: `${BASE}/search/`, lastModified: now, changeFrequency: "monthly", priority: 0.65 },
   ];
 
   // ── Sports (3 langues) ───────────────────────────────────────────────────
