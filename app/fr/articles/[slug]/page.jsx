@@ -134,16 +134,22 @@ export default function FrArticlePage({ params }) {
               "url": `https://nabdriyadah.com/fr/articles/${article.slug}/`,
               "inLanguage": "fr",
               "datePublished": article.publishedAt || undefined,
-              "dateModified": article.publishedAt || undefined,
+              "dateModified": article.updatedAt || article.publishedAt || undefined,
               "articleSection": article.sport || "football",
-              "image": article.image?.startsWith("http") ? article.image : article.image ? `https://nabdriyadah.com${article.image}` : undefined,
+              "image": {
+                "@type": "ImageObject",
+                "url": article.imageUrl || (article.image?.startsWith("http") ? article.image : article.image ? `https://nabdriyadah.com${article.image}` : "https://nabdriyadah.com/og-default.jpg"),
+                "width": 1200,
+                "height": 630
+              },
+              "isAccessibleForFree": true,
               "keywords": (article.keywords || []).join(", "),
               "author": { "@type": "Organization", "name": "Sports Pulse", "url": "https://nabdriyadah.com/fr/" },
               "publisher": {
                 "@type": "Organization",
                 "name": "Sports Pulse",
                 "url": "https://nabdriyadah.com",
-                "logo": { "@type": "ImageObject", "url": "https://nabdriyadah.com/logo-v2.svg" }
+                "logo": { "@type": "ImageObject", "url": "https://nabdriyadah.com/logo-v2.svg", "width": 200, "height": 60 }
               },
               "mainEntityOfPage": { "@type": "WebPage", "@id": `https://nabdriyadah.com/fr/articles/${article.slug}/` }
             },

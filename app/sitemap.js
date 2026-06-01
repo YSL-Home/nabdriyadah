@@ -75,8 +75,7 @@ export default function sitemap() {
     { url: `${BASE}/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.85 },
     { url: `${BASE}/fr/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.80 },
     { url: `${BASE}/en/articles/`, lastModified: now, changeFrequency: "hourly", priority: 0.80 },
-    { url: `${BASE}/live/`, lastModified: now, changeFrequency: "always", priority: 0.90 },
-    { url: `${BASE}/search/`, lastModified: now, changeFrequency: "monthly", priority: 0.65 },
+    { url: `${BASE}/live/`, lastModified: now, changeFrequency: "always", priority: 0.85 },
   ];
 
   // ── Sports (3 langues) ───────────────────────────────────────────────────
@@ -98,13 +97,13 @@ export default function sitemap() {
     const lastMod = article.publishedAt ? new Date(article.publishedAt) : now;
     const basePriority = article.sport === "football" ? 0.72 : 0.65;
     const urls = [
-      { url: `${BASE}/articles/${article.slug}/`, lastModified: lastMod, changeFrequency: "monthly", priority: basePriority },
+      { url: `${BASE}/articles/${article.slug}/`, lastModified: lastMod, changeFrequency: "weekly", priority: basePriority },
     ];
     if (article.fr_title) {
-      urls.push({ url: `${BASE}/fr/articles/${article.slug}/`, lastModified: lastMod, changeFrequency: "monthly", priority: basePriority - 0.05 });
+      urls.push({ url: `${BASE}/fr/articles/${article.slug}/`, lastModified: lastMod, changeFrequency: "weekly", priority: basePriority - 0.05 });
     }
     if (article.en_title) {
-      urls.push({ url: `${BASE}/en/articles/${article.slug}/`, lastModified: lastMod, changeFrequency: "monthly", priority: basePriority - 0.05 });
+      urls.push({ url: `${BASE}/en/articles/${article.slug}/`, lastModified: lastMod, changeFrequency: "weekly", priority: basePriority - 0.05 });
     }
     return urls;
   });

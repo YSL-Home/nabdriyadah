@@ -91,10 +91,10 @@ function Chip({ label, active, onClick, accent = "#4f8eff" }) {
     <button
       onClick={onClick}
       style={{
-        padding: "7px 14px", borderRadius: "999px", border: `1.5px solid ${active ? accent : "var(--border)"}`,
+        padding: "11px 16px", minHeight: "44px", borderRadius: "999px", border: `1.5px solid ${active ? accent : "var(--border)"}`,
         background: active ? accent + "22" : "var(--bg-soft)",
         color: active ? accent : "var(--text-2)",
-        fontWeight: active ? 700 : 500, fontSize: "13px", cursor: "pointer",
+        fontWeight: active ? 700 : 500, fontSize: "14px", cursor: "pointer",
         transition: "all 0.15s", whiteSpace: "nowrap",
       }}
     >
@@ -104,21 +104,24 @@ function Chip({ label, active, onClick, accent = "#4f8eff" }) {
 }
 
 /* ── Filter Select ──────────────────────────────────── */
-function FilterSelect({ value, onChange, options, placeholder, accent = "#4f8eff" }) {
+function FilterSelect({ value, onChange, options, placeholder, accent = "#4f8eff", isRTL = false }) {
   const active = value !== "";
   return (
     <select
       value={value}
       onChange={e => onChange(e.target.value)}
       style={{
-        padding: "8px 32px 8px 12px", borderRadius: "12px",
+        padding: isRTL ? "11px 12px 11px 32px" : "11px 32px 11px 12px",
+        minHeight: "44px",
+        borderRadius: "12px",
         border: `1.5px solid ${active ? accent : "var(--border)"}`,
         background: active ? accent + "15" : "var(--bg-soft)",
         color: active ? accent : "var(--text-2)",
-        fontWeight: active ? 700 : 500, fontSize: "13px", cursor: "pointer",
+        fontWeight: active ? 700 : 500, fontSize: "14px", cursor: "pointer",
         appearance: "none", WebkitAppearance: "none",
         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
-        backgroundRepeat: "no-repeat", backgroundPosition: "left 10px center",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: isRTL ? "right 10px center" : "left 10px center",
         minWidth: "130px",
       }}
     >
@@ -127,6 +130,13 @@ function FilterSelect({ value, onChange, options, placeholder, accent = "#4f8eff
     </select>
   );
 }
+
+/* ── Static date options (outside component to avoid recreation each render) ── */
+const DATE_OPTIONS = [
+  { value: "24h", key: "h24" },
+  { value: "7d",  key: "w1"  },
+  { value: "30d", key: "m1"  },
+];
 
 /* ══════════════════════════════════════════════════════
    MAIN EXPORT
@@ -155,11 +165,10 @@ export default function ArticleFiltersClient({
   const leagues = useMemo(() => [...new Set(articles.map(a => a.league).filter(x => x && x !== "mixed"))], [articles]);
   const topics  = useMemo(() => [...new Set(articles.flatMap(a => a.topicTags || []).filter(Boolean))].slice(0, 12), [articles]);
 
-  const dateOptions = [
-    { value: "24h", label: t.h24 },
-    { value: "7d",  label: t.w1  },
-    { value: "30d", label: t.m1  },
-  ];
+  const dateOptions = useMemo(
+    () => DATE_OPTIONS.map(o => ({ value: o.value, label: t[o.key] })),
+    [t]
+  );
 
   const hasFilters = keyword || sportFilter || leagueFilter || topicFilter || dateFilter;
 
@@ -206,8 +215,8 @@ export default function ArticleFiltersClient({
   useEffect(() => {
     setPage(1);
     setLoading(true);
-    const t = setTimeout(() => setLoading(false), 200);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setLoading(false), 200);
+    return () => clearTimeout(timer);
   }, [filtered]);
 
   return (
@@ -229,10 +238,11 @@ export default function ArticleFiltersClient({
             placeholder={t.search}
             style={{
               width: "100%", boxSizing: "border-box",
-              padding: isRTL ? "10px 44px 10px 16px" : "10px 16px 10px 44px",
+              padding: isRTL ? "12px 48px 12px 16px" : "12px 16px 12px 48px",
+              minHeight: "44px",
               borderRadius: "12px", border: `1.5px solid ${keyword ? primaryColor : "var(--border)"}`,
               background: "var(--bg-soft)", color: "var(--text-1)",
-              fontSize: "14px", outline: "none",
+              fontSize: "16px", outline: "none",
               transition: "border-color 0.15s",
             }}
           />
@@ -270,6 +280,7 @@ export default function ArticleFiltersClient({
               onChange={setLeagueFilter}
               placeholder={`🏆 ${t.competition}`}
               accent="#7c3aed"
+              isRTL={isRTL}
               options={leagues.map(l => ({ value: l, label: t.leagues[l] || l }))}
             />
           )}
@@ -281,6 +292,7 @@ export default function ArticleFiltersClient({
               onChange={setTopicFilter}
               placeholder={`🏷 ${t.topic}`}
               accent="#0ea5e9"
+              isRTL={isRTL}
               options={topics.map(tp => ({ value: tp, label: tp }))}
             />
           )}
@@ -291,6 +303,7 @@ export default function ArticleFiltersClient({
             onChange={setSortOrder}
             placeholder={t.sort}
             accent="#6b7280"
+            isRTL={isRTL}
             options={[
               { value: "new", label: t.sortNew },
               { value: "old", label: t.sortOld },
@@ -299,7 +312,7 @@ export default function ArticleFiltersClient({
 
           {/* Reset */}
           {hasFilters && (
-            <button onClick={resetFilters} style={{ padding: "7px 14px", borderRadius: "999px", border: "1.5px solid #dc2626", background: "#dc262618", color: "#dc2626", fontWeight: 700, fontSize: "13px", cursor: "pointer" }}>
+            <button onClick={resetFilters} style={{ padding: "11px 16px", minHeight: "44px", borderRadius: "999px", border: "1.5px solid #dc2626", background: "#dc262618", color: "#dc2626", fontWeight: 700, fontSize: "14px", cursor: "pointer" }}>
               ✕ {t.reset}
             </button>
           )}

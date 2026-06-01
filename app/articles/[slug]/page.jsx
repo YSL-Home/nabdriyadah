@@ -775,10 +775,16 @@ export default function ArticlePage({ params }) {
                 "url": `https://nabdriyadah.com/articles/${article.slug}/`,
                 "inLanguage": "ar",
                 "datePublished": article.publishedAt || undefined,
-                "dateModified": article.publishedAt || undefined,
+                "dateModified": article.updatedAt || article.publishedAt || undefined,
                 "articleSection": leagueLabel(article.league, article.sport),
-                "image": article.imageUrl || (article.image?.startsWith("http") ? article.image : article.image ? `https://nabdriyadah.com${article.image}` : "https://nabdriyadah.com/og-default.jpg"),
+                "image": {
+                  "@type": "ImageObject",
+                  "url": article.imageUrl || (article.image?.startsWith("http") ? article.image : article.image ? `https://nabdriyadah.com${article.image}` : "https://nabdriyadah.com/og-default.jpg"),
+                  "width": 1200,
+                  "height": 630
+                },
                 "wordCount": article.content ? article.content.replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean).length : 0,
+                "isAccessibleForFree": true,
                 "author": {
                   "@type": "Organization",
                   "name": "نبض الرياضة",
@@ -787,9 +793,12 @@ export default function ArticlePage({ params }) {
                 "publisher": {
                   "@type": "Organization",
                   "name": "نبض الرياضة",
+                  "url": "https://nabdriyadah.com",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://nabdriyadah.com/logo.png"
+                    "url": "https://nabdriyadah.com/logo-v2.svg",
+                    "width": 200,
+                    "height": 60
                   }
                 },
                 "keywords": (article.keywords || []).join(", "),

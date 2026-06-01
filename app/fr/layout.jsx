@@ -5,7 +5,15 @@ export const metadata = {
     template: "%s | Sports Pulse"
   },
   description: "Sports Pulse — Votre source quotidienne d'actualités sportives : football, basketball, tennis et padel des meilleures ligues mondiales.",
-  alternates: { canonical: "https://nabdriyadah.com/fr/" },
+  alternates: {
+    canonical: "https://nabdriyadah.com/fr/",
+    languages: {
+      "fr": "https://nabdriyadah.com/fr/",
+      "ar": "https://nabdriyadah.com/",
+      "en": "https://nabdriyadah.com/en/",
+      "x-default": "https://nabdriyadah.com/",
+    },
+  },
   openGraph: {
     title: "Sports Pulse",
     description: "Actualités sportives quotidiennes : football, basketball, tennis et padel.",

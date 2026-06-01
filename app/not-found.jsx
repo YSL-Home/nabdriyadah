@@ -9,21 +9,117 @@ export default function NotFound() {
     <main
       style={{
         direction: "rtl",
-        textAlign: "center",
+        textAlign: "right",
         maxWidth: "600px",
         margin: "auto",
-        padding: "80px 24px",
+        padding: "60px 24px 80px",
       }}
     >
-      <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
-        404 - الصفحة غير موجودة
+      <div style={{ fontSize: "64px", marginBottom: "16px", textAlign: "center" }}>⚽</div>
+
+      <h1 style={{ fontSize: "clamp(24px, 5vw, 36px)", fontWeight: 900, textAlign: "center", marginBottom: "12px" }}>
+        404 — الصفحة غير موجودة
       </h1>
-      <p>عذراً، الصفحة التي تبحث عنها غير متوفرة.</p>
-      <nav style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
-        <Link href="/" style={{ color: "var(--accent)" }}>الرئيسية</Link>
-        <Link href="/articles/" style={{ color: "var(--accent)" }}>المقالات</Link>
-        <Link href="/sport/football/" style={{ color: "var(--accent)" }}>كرة القدم</Link>
-        <Link href="/live/" style={{ color: "var(--accent)" }}>نتائج مباشرة</Link>
+
+      <p style={{ fontSize: "16px", lineHeight: 1.8, color: "var(--text-2)", textAlign: "center", marginBottom: "32px" }}>
+        عذراً، الصفحة التي تبحث عنها غير متوفرة أو تم نقلها.
+        يمكنك التنقل إلى إحدى الصفحات أدناه.
+      </p>
+
+      <nav
+        aria-label="روابط مقترحة"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: "12px",
+        }}
+      >
+        <Link
+          href="/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            minHeight: "52px",
+            padding: "12px 16px",
+            borderRadius: "12px",
+            background: "var(--accent)",
+            color: "white",
+            fontWeight: 700,
+            fontSize: "15px",
+            textDecoration: "none",
+            textAlign: "center",
+          }}
+        >
+          🏠 الرئيسية
+        </Link>
+
+        <Link
+          href="/articles/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            minHeight: "52px",
+            padding: "12px 16px",
+            borderRadius: "12px",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border)",
+            color: "var(--text-1)",
+            fontWeight: 700,
+            fontSize: "15px",
+            textDecoration: "none",
+            textAlign: "center",
+          }}
+        >
+          📰 المقالات
+        </Link>
+
+        <Link
+          href="/sport/football/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            minHeight: "52px",
+            padding: "12px 16px",
+            borderRadius: "12px",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border)",
+            color: "var(--text-1)",
+            fontWeight: 700,
+            fontSize: "15px",
+            textDecoration: "none",
+            textAlign: "center",
+          }}
+        >
+          ⚽ كرة القدم
+        </Link>
+
+        <Link
+          href="/live/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            minHeight: "52px",
+            padding: "12px 16px",
+            borderRadius: "12px",
+            background: "#fff0f0",
+            border: "1px solid #fcc",
+            color: "#c81e1e",
+            fontWeight: 700,
+            fontSize: "15px",
+            textDecoration: "none",
+            textAlign: "center",
+          }}
+        >
+          🔴 نتائج مباشرة
+        </Link>
       </nav>
     </main>
   );

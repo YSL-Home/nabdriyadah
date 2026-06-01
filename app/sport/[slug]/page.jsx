@@ -179,7 +179,15 @@ export function generateMetadata({ params }) {
   return {
     title: sport.title,
     description: sport.description,
-    alternates: { canonical: `https://nabdriyadah.com/sport/${params.slug}/` },
+    alternates: {
+      canonical: `https://nabdriyadah.com/sport/${params.slug}/`,
+      languages: {
+        "ar": `https://nabdriyadah.com/sport/${params.slug}/`,
+        "fr": `https://nabdriyadah.com/fr/sport/${params.slug}/`,
+        "en": `https://nabdriyadah.com/en/sport/${params.slug}/`,
+        "x-default": `https://nabdriyadah.com/sport/${params.slug}/`,
+      },
+    },
     openGraph: {
       title: sport.title,
       description: sport.description,
