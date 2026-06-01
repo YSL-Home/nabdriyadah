@@ -2,10 +2,11 @@ import articles from "../content/articles/seo-articles.json";
 import viralScoresRaw from "../content/viral-scores.json";
 import BreakingTicker from "./components/BreakingTicker";
 import HomepageClient from "./components/HomepageClient";
+import StatsStrip from "./components/StatsStrip";
 
 export const metadata = {
   title: "نبض الرياضة — أخبار الرياضة العربية والعالمية",
-  description: "تابع أحدث أخبار كرة القدم، كرة السلة، التنس، البادل والرياضات الأخرى مع تغطية يومية وتحليلات خاصة.",
+  description: "تابع أحدث أخبار كرة القدم، دوري أبطال أوروبا، الدوري الإنجليزي، كرة السلة، التنس، البادل والرياضات الأخرى مع تغطية يومية وتحليلات خاصة.",
   alternates: { canonical: "https://nabdriyadah.com/" }
 };
 
@@ -120,8 +121,13 @@ export default function HomePage() {
       {/* Bandeau عاجل — toujours visible */}
       <BreakingTicker items={breaking} />
 
+      {/* Stats strip — server component, rendu statique */}
+      <div style={{ maxWidth: "1450px", margin: "0 auto", padding: "16px 16px 0" }}>
+        <StatsStrip totalArticles={sorted.length} />
+      </div>
+
       {/* Main animated content — client component */}
-      <div style={{ maxWidth: "1450px", margin: "0 auto", padding: "20px 16px 60px" }}>
+      <div style={{ maxWidth: "1450px", margin: "0 auto", padding: "4px 16px 60px" }}>
         <HomepageClient
           featured={featured}
           secondary={secondary}
@@ -131,7 +137,6 @@ export default function HomePage() {
           tennis={tennis}
           padel={padel}
           sportCounts={sportCounts}
-          totalArticles={sorted.length}
           trending={trending}
         />
       </div>

@@ -172,39 +172,13 @@ function SportCategoriesBar({ lang, prefix, sportCounts }) {
   );
 }
 
-/* ── Stats strip ────────────────────────────────────── */
-function StatsStrip({ totalArticles, lang }) {
-  const stats = [
-    { value: totalArticles, label: ui("articles", lang), icon: "📰" },
-    { value: 7,             label: ui("sports", lang),   icon: "🏅" },
-    { value: 13,            label: ui("competitions", lang), icon: "🏆" },
-  ];
-  return (
-    <motion.div {...fadeUp(0.05)} style={{ marginBottom: "20px" }}>
-      <div className="stats-strip">
-        {stats.map((s, i) => (
-          <div key={i} className="stat-item">
-            <span style={{ fontSize: "16px" }}>{s.icon}</span>
-            <span style={{ fontWeight: 900, fontSize: "18px", color: "var(--accent)", lineHeight: 1 }}>
-              {s.value}+
-            </span>
-            <span style={{ fontSize: "12px", color: "var(--text-2)", fontWeight: 600 }}>
-              {s.label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
 /* ══════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════ */
 export default function HomepageClient({
   featured, secondary, grid, sidebar,
   basketball, tennis, padel,
-  sportCounts, totalArticles = 0,
+  sportCounts,
   lang = "ar", prefix = "",
   trending = [],
 }) {
@@ -216,9 +190,6 @@ export default function HomepageClient({
 
       {/* ── SPORT CATEGORIES ─────────────────────────── */}
       <SportCategoriesBar lang={lang} prefix={prefix} sportCounts={sportCounts} />
-
-      {/* ── STATS STRIP ──────────────────────────────── */}
-      {totalArticles > 0 && <StatsStrip totalArticles={totalArticles} lang={lang} />}
 
       {/* ── HERO ─────────────────────────────────────── */}
       <section style={{ marginBottom: "30px" }}>

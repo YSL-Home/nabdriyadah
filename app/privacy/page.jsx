@@ -67,6 +67,13 @@ export default function PrivacyPage() {
         <p style={{ textAlign: "center", color: "var(--text-3)", fontSize: "13px", marginTop: "40px" }}>
           نبض الرياضة · nabdriyadah.com
         </p>
+
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "سياسة الخصوصية",
+          "url": "https://nabdriyadah.com/privacy/"
+        })}} />
       </div>
     </main>
   );

@@ -387,7 +387,7 @@ async function _callGeminiWithKey(apiKey, deadFlag, setDead, prompt, systemPromp
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
-          generationConfig: { maxOutputTokens: 2048, temperature: 0.7 }
+          generationConfig: { maxOutputTokens: 3000, temperature: 0.7 }
         })
       });
       if (res.ok) {
@@ -662,12 +662,30 @@ async function rewriteArticle(item, index) {
     ? parsed.faq.slice(0, 3).map((f) => ({ q: sanitizeArabic(f.q || ""), a: sanitizeArabic(f.a || "") })).filter((f) => f.q && f.a)
     : [];
 
-  const finalWords = (content || "").split(/\s+/).filter(Boolean).length;
+  let finalWords = (content || "").split(/\s+/).filter(Boolean).length;
   if (finalWords < 200) {
     console.log(`  ⚠ Content after sanitize: only ${finalWords}w — checking raw content: "${(parsed.content||"").slice(0,200).replace(/\n/g,"↵")}"`);
   }
 
-  if (!title || !description || !content) return fallback;
+  // ── Validation post-génération : si contenu < 400 mots, appel de continuation ──
+  let finalContent = content;
+  if (finalWords < 400 && finalContent) {
+    console.log(`  ↩ Contenu trop court (${finalWords}w < 400w) — appel de continuation...`);
+    const continuationPrompt = `${finalContent}
+
+أكمل المقال وأضف 3 فقرات إضافية من 90-120 كلمة لكل فقرة. اكتب الفقرات مباشرة بدون JSON، بالعربية الفصحى، أسلوب صحفي.`;
+    const continuation = await callLLM(continuationPrompt, systemPrompt);
+    if (continuation) {
+      const contSanitized = sanitizeArabic(continuation);
+      if (contSanitized) {
+        finalContent = `${finalContent}\n\n${contSanitized}`;
+        finalWords = finalContent.split(/\s+/).filter(Boolean).length;
+        console.log(`  ✓ Après continuation: ${finalWords}w`);
+      }
+    }
+  }
+
+  if (!title || !description || !finalContent) return fallback;
 
   // EN/FR : si présents dans la réponse (Gemini peut les générer), on les garde.
   // Sinon null → backfill-translations.mjs les générera séparément.
@@ -678,7 +696,7 @@ async function rewriteArticle(item, index) {
   const en_content     = (parsed.en_content     || "").trim() || null;
   const fr_content     = (parsed.fr_content     || "").trim() || null;
 
-  return { title, description, seoTitle, seoDescription, content, keywords, faq,
+  return { title, description, seoTitle, seoDescription, content: finalContent, keywords, faq,
            en_title, en_description, en_content,
            fr_title, fr_description, fr_content };
 }

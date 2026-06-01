@@ -95,6 +95,13 @@ export default function AboutPage() {
           </a>
         </div>
 
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "name": "عن نبض الرياضة",
+          "url": "https://nabdriyadah.com/about/"
+        })}} />
+
       </div>
     </main>
   );

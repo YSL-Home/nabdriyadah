@@ -69,9 +69,8 @@ export default function ContactPage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          "name": "اتصل بنا — نبض الرياضة",
-          "url": "https://nabdriyadah.com/contact/",
-          "publisher": { "@type": "Organization", "name": "نبض الرياضة", "url": "https://nabdriyadah.com" }
+          "name": "اتصل بنا",
+          "url": "https://nabdriyadah.com/contact/"
         })}} />
 
       </div>
