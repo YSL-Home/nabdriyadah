@@ -715,6 +715,8 @@ async function main() {
       // Google News thumbnails (logos GE, icônes génériques)
       "news.google.com","gstatic.com","googleusercontent.com","googleapis.com",
       "google.com",
+      // Sources RSS avec images hors-contexte (animaux, politique, etc.)
+      "aljazeera.net","aljazeera.com","bbci.co.uk","bbc.co.uk","rfi.fr",
       // Placeholders et icônes
       "placeholder.com","placehold.it","via.placeholder",
     ];

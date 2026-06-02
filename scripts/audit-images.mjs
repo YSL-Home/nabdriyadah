@@ -25,6 +25,7 @@ const BLACKLISTED_DOMAINS = [
   "filgoal.com","goal.com","koooora.com","masr-sport.com",
   "dot-sport.com","kingfut.com","elfan.net","newsarabia.net",
   "google.com","gstatic.com","googleusercontent.com","googleapis.com",
+  "aljazeera.net","aljazeera.com","bbci.co.uk","bbc.co.uk","rfi.fr",
   "news.google.com","placeholder.com","placehold.it","via.placeholder",
 ];
 const BLACKLISTED_PATTERNS = [/\/icon[s]?\//i, /\/logo[s]?\//i, /\/favicon/i, /\.svg(\?|$)/i];
