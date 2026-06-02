@@ -234,7 +234,7 @@ export default function LocalizedSportPage({ slug, lang }) {
   const sportArticles = articles
     .filter(a => a.slug && (a.sport === slug || (slug === "football" && (!a.sport || a.sport === "football"))))
     .filter(a => lang === "ar" || getArticleTitle(a) !== null)
-    .slice(0, 8);
+    .slice(0, 6);
 
   const featuredArticle = sportArticles[0] || null;
   const restArticles    = sportArticles.slice(1);

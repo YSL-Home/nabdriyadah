@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect, useCallback, useMemo } from "react";
 
-const API_KEY = process.env.NEXT_PUBLIC_API_FOOTBALL_KEY;
-const BASE = "https://v3.football.api-sports.io";
+// Proxy via Cloudflare Pages Function (clé API côté serveur)
+const PROXY = "/api/live";
 
 // Top leagues shown first in filter
 const TOP_LEAGUE_IDS = [2, 39, 140, 78, 135, 61, 307, 848, 3, 1];
@@ -113,18 +113,14 @@ export default function LivePage() {
   const [selectedLeague, setSelectedLeague] = useState("all");
 
   const fetchData = useCallback(async (date) => {
-    if (!API_KEY) {
-      setError("مفتاح API غير مُعدَّ بعد. أضف NEXT_PUBLIC_API_FOOTBALL_KEY.");
-      setLoading(false);
-      return;
-    }
     setLoading(true);
     try {
-      const headers = { "x-apisports-key": API_KEY, "x-rapidapi-host": "v3.football.api-sports.io" };
       const isToday = date === todayStr();
 
-      const requests = [fetch(`${BASE}/fixtures?date=${date}`, { headers })];
-      if (isToday) requests.push(fetch(`${BASE}/fixtures?live=all`, { headers }));
+      const requests = [
+        fetch(`${PROXY}?path=${encodeURIComponent(`fixtures?date=${date}`)}`),
+      ];
+      if (isToday) requests.push(fetch(`${PROXY}?path=${encodeURIComponent("fixtures?live=all")}`));
 
       const results = await Promise.all(requests);
       const [dayData, liveData] = await Promise.all(results.map(r => r.json()));

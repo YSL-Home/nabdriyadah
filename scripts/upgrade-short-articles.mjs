@@ -36,7 +36,7 @@ const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 const MAX_PER_RUN       = 150;   // 150/run × 24 runs/jour = 3600/jour
 const MIN_AR_WORDS      = 600;   // en dessous = article "court" à upgrader
 const DELAY_MS          = 5000;  // 5s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
-const RECENT_DAYS       = 14;    // priorité aux articles < 14 jours
+const RECENT_DAYS       = 60;    // priorité aux articles < 60 jours (élargi de 14 → 60 pour couvrir plus d'articles)
 
 if (!GOOGLE_API_KEY && !GOOGLE_API_KEY_2 && !GOOGLE_API_KEY_3 && !GOOGLE_API_KEY_4 && !GOOGLE_API_KEY_5 && !GOOGLE_API_KEY_6 && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {
   console.log("Aucune clé API — upgrade ignoré.");
@@ -89,7 +89,7 @@ async function _callGeminiKey(apiKey, deadFlag, setDead, prompt) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 2048, temperature: 0.35 }
+          generationConfig: { maxOutputTokens: 3000, temperature: 0.35 }
         })
       });
       if (res.ok) { const d = await res.json(); return d?.candidates?.[0]?.content?.parts?.[0]?.text || null; }
@@ -321,13 +321,31 @@ async function main() {
           console.log("❌ JSON invalide");
           failed++;
         } else {
-          const newWords = arabicWordCount(parsed.content);
+          let newWords = arabicWordCount(parsed.content);
+          let finalContent = parsed.content;
+          let finalFaq = parsed.faq;
+
+          // Prompt de continuation si le contenu est trop court (<400 mots arabes)
+          if (newWords < 400) {
+            console.log(`  ↩ trop court (${newWords}w) — continuation...`);
+            const continuePrompt = `${buildUpgradePrompt(article)}\n\nالمحتوى الموجود ناقص (${newWords} كلمة فقط). أكمل وأعد الكتابة بالكامل مع التأكيد على الوصول لـ 650 كلمة على الأقل. الرد بـ JSON فقط.`;
+            const raw2 = await callLLM(continuePrompt);
+            if (raw2) {
+              const parsed2 = parseResponse(raw2);
+              if (parsed2 && arabicWordCount(parsed2.content) > newWords) {
+                finalContent = parsed2.content;
+                finalFaq = parsed2.faq.length > 0 ? parsed2.faq : finalFaq;
+                newWords = arabicWordCount(finalContent);
+              }
+            }
+          }
+
           if (newWords < MIN_AR_WORDS) {
             console.log(`⚠ trop court (${newWords}w) — ignoré`);
             failed++;
           } else {
-            articles[idx].content = parsed.content;
-            if (parsed.faq.length > 0) articles[idx].faq = parsed.faq;
+            articles[idx].content = finalContent;
+            if (finalFaq.length > 0) articles[idx].faq = finalFaq;
             // Reset en/fr content so backfill will retranslate the new longer content
             articles[idx].en_content = "";
             articles[idx].fr_content = "";
