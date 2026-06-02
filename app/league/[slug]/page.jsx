@@ -657,7 +657,13 @@ export function generateMetadata({ params }) {
     title: league.title,
     description: league.description,
     alternates: {
-      canonical: `https://nabdriyadah.com/league/${params.slug}/`
+      canonical: `https://nabdriyadah.com/league/${params.slug}/`,
+      languages: {
+        "ar": `https://nabdriyadah.com/league/${params.slug}/`,
+        "fr": `https://nabdriyadah.com/fr/league/${params.slug}/`,
+        "en": `https://nabdriyadah.com/en/league/${params.slug}/`,
+        "x-default": `https://nabdriyadah.com/league/${params.slug}/`,
+      },
     },
     openGraph: {
       title: league.title,

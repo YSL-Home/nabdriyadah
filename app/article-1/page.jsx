@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function Article1() {
   return (
     <main style={{ maxWidth: "900px", margin: "40px auto", padding: "20px" }}>
