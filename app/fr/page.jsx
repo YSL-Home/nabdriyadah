@@ -1,8 +1,8 @@
 import LocalizedHomePage from "../components/LocalizedHomePage";
 
 export const metadata = {
-  title: "Sports Pulse — Football, Basketball & Tennis Actualités",
-  description: "Suivez les dernières actualités football, basketball, tennis et padel avec une couverture quotidienne sur Sports Pulse.",
+  title: "Sports Pulse — Actualité Sportive Arabe",
+  description: "Suivez l'actualité sportive arabe : Ligue des Champions, Premier League, NBA et plus — couverture quotidienne et analyses exclusives sur Sports Pulse.",
   alternates: { canonical: "https://nabdriyadah.com/fr/" }
 };
 

@@ -3,8 +3,17 @@ import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 
 export const metadata = {
-  title: "فيديوهات كاريكاتورية | نبض الرياضة",
-  description: "أبرز الفيديوهات الكاريكاتورية الساخرة عن أحداث كرة القدم — تصميم حركي احترافي",
+  title: "مقاطع الفيديو الرياضية | نبض الرياضة",
+  description: "شاهد أبرز مقاطع الفيديو الرياضية الكاريكاتورية عن كرة القدم وكرة السلة والتنس — تصميم حركي احترافي يُنشر يومياً على إنستغرام وتيك توك ويوتيوب.",
+  alternates: {
+    canonical: "https://nabdriyadah.com/videos/",
+  },
+  openGraph: {
+    title: "مقاطع الفيديو الرياضية | نبض الرياضة",
+    description: "شاهد أبرز مقاطع الفيديو الرياضية الكاريكاتورية عن كرة القدم وكرة السلة والتنس — تصميم حركي احترافي.",
+    url: "https://nabdriyadah.com/videos/",
+    type: "website",
+  },
 };
 
 const SPORT_LABEL = {
@@ -26,11 +35,41 @@ function getVideos() {
   return [];
 }
 
+function buildJsonLd(videos) {
+  if (videos.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "مقاطع الفيديو الرياضية — نبض الرياضة",
+    "url": "https://nabdriyadah.com/videos/",
+    "numberOfItems": videos.length,
+    "itemListElement": videos.map((v, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "VideoObject",
+        "name": v.title,
+        "description": v.title,
+        "thumbnailUrl": v.thumb || "",
+        "contentUrl": v.videoPath || "",
+        "uploadDate": v.publishedAt || "",
+      },
+    })),
+  };
+}
+
 export default function VideosPage() {
   const videos = getVideos();
+  const jsonLd = buildJsonLd(videos);
 
   return (
     <main dir="rtl" className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       {/* Header */}
       <div className="border-b border-[var(--color-border)] px-4 py-10 text-center bg-[var(--color-surface)]">
         <div className="text-4xl mb-3">🎬</div>

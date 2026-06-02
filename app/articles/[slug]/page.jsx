@@ -99,9 +99,25 @@ export function generateMetadata({ params }) {
   }
 
   const canonicalUrl = `https://nabdriyadah.com/articles/${article.slug}/`;
-  const imageUrl = article.image?.startsWith("http")
-    ? article.image
-    : `https://nabdriyadah.com${article.image}`;
+
+  const SPORT_DEFAULT_IMAGES = {
+    football:   "https://nabdriyadah.com/og-football.jpg",
+    basketball: "https://nabdriyadah.com/og-basketball.jpg",
+    tennis:     "https://nabdriyadah.com/og-tennis.jpg",
+    f1:         "https://nabdriyadah.com/og-f1.jpg",
+    padel:      "https://nabdriyadah.com/og-padel.jpg",
+    futsal:     "https://nabdriyadah.com/og-futsal.jpg",
+    golf:       "https://nabdriyadah.com/og-golf.jpg",
+  };
+
+  const fallbackImage = SPORT_DEFAULT_IMAGES[article.sport] || "https://nabdriyadah.com/og-default.jpg";
+  const imageUrl = article.imageUrl
+    ? article.imageUrl
+    : article.image?.startsWith("http")
+      ? article.image
+      : article.image
+        ? `https://nabdriyadah.com${article.image}`
+        : fallbackImage;
 
   return {
     title: article.seoTitle || article.title,
@@ -123,7 +139,7 @@ export function generateMetadata({ params }) {
       siteName: "نبض الرياضة",
       locale: "ar_AR",
       type: "article",
-      images: article.imageUrl ? [{ url: article.imageUrl, width: 1200, height: 630, alt: article.title }] : [{ url: imageUrl, width: 1536, height: 1024, alt: article.title }]
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: article.title }]
     },
     twitter: {
       card: "summary_large_image",
@@ -167,6 +183,99 @@ function sportHref(league, sport) {
   if (sport === "f1") return "/sport/f1/";
   if (sport === "golf") return "/sport/golf/";
   return "/";
+}
+
+const INTERNAL_LINKS = {
+  "دوري أبطال أوروبا": "/league/champions-league/",
+  "الدوري الإنجليزي": "/league/premier-league/",
+  "الدوري الإسباني": "/league/la-liga/",
+  "البوندسليغا": "/league/bundesliga/",
+  "الدوري الإيطالي": "/league/serie-a/",
+  "الدوري السعودي": "/league/saudi-pro-league/",
+  "الدوري المصري": "/league/prem-egy/",
+  "البطولة المغربية": "/league/botola/",
+  "كرة القدم": "/sport/football/",
+  "كرة السلة": "/sport/basketball/",
+  "التنس": "/sport/tennis/",
+  "فورمولا 1": "/sport/f1/",
+};
+
+function addInternalLinks(content, currentSlug) {
+  if (!content) return null;
+
+  const currentPath = `/articles/${currentSlug}/`;
+  const MAX_LINKS = 5;
+  let linksAdded = 0;
+  const usedKeywords = new Set();
+
+  // Sort keywords longest first to avoid partial replacements
+  const keywords = Object.keys(INTERNAL_LINKS).sort((a, b) => b.length - a.length);
+
+  // Split content by existing <a> tags to avoid linking inside links
+  const parts = content.split(/(<a[\s\S]*?<\/a>)/gi);
+
+  const result = [];
+
+  for (let p = 0; p < parts.length; p++) {
+    const part = parts[p];
+
+    // If this part is an existing <a> tag, keep it as-is
+    if (/^<a[\s\S]*<\/a>$/i.test(part)) {
+      result.push(part);
+      continue;
+    }
+
+    if (linksAdded >= MAX_LINKS) {
+      result.push(part);
+      continue;
+    }
+
+    let remaining = part;
+    const segments = [];
+
+    while (remaining.length > 0 && linksAdded < MAX_LINKS) {
+      let matched = false;
+
+      for (const keyword of keywords) {
+        if (usedKeywords.has(keyword)) continue;
+        const url = INTERNAL_LINKS[keyword];
+        if (url === currentPath) continue;
+
+        const idx = remaining.indexOf(keyword);
+        if (idx === -1) continue;
+
+        // Push text before the keyword
+        if (idx > 0) segments.push(remaining.slice(0, idx));
+
+        // Push the linked keyword
+        segments.push(
+          <a
+            key={`il-${keyword}`}
+            href={url}
+            style={{ color: "inherit", textDecoration: "underline", textDecorationStyle: "dotted", textUnderlineOffset: "3px" }}
+          >
+            {keyword}
+          </a>
+        );
+
+        remaining = remaining.slice(idx + keyword.length);
+        usedKeywords.add(keyword);
+        linksAdded++;
+        matched = true;
+        break;
+      }
+
+      if (!matched) break;
+    }
+
+    if (remaining.length > 0) segments.push(remaining);
+
+    result.push(...segments);
+  }
+
+  return result.map((node, i) =>
+    typeof node === "string" ? <span key={i}>{node}</span> : node
+  );
 }
 
 function scoreRelatedness(baseArticle, otherArticle) {
@@ -656,7 +765,7 @@ export default function ArticlePage({ params }) {
                   whiteSpace: "pre-wrap"
                 }}
               >
-                {article.content}
+                {addInternalLinks(article.content, article.slug)}
               </div>
 
               {article.faq && article.faq.length > 0 && (
