@@ -547,25 +547,40 @@ async function generateImageBase64(prompt, article) {
 
 
 // ── Validation visuelle Gemini — vérifie que l'image correspond au sport ──────
-async function validateImageSport(imageBase64, sport) {
-  if (!GOOGLE_API_KEY || !imageBase64) return true; // skip si pas de clé
+async function validateImageSport(imageBase64, article) {
+  if (!GOOGLE_API_KEY || !imageBase64) return { ok: true };
+  const sport = article.sport || "football";
   const sportEN = {
     football:"football/soccer", basketball:"basketball/NBA",
     tennis:"tennis", padel:"padel", f1:"Formula 1 racing", golf:"golf", futsal:"futsal"
   }[sport] || "sports";
+  const title = normalizeText(article.en_title || article.fr_title || article.title || "").slice(0, 80);
+  const event = extractEventType(article);
+  const eventHint = {
+    transfer:"player transfer", trophy:"trophy/celebration", injury:"injury/medical",
+    final:"final match", press:"press conference", match:"match/game", training:"training"
+  }[event] || "";
+  const prompt = `You are a sports image validator. Analyze this image and answer these 2 questions:
+1. Does it show ${sportEN}? (YES/NO)
+2. Is it visually coherent with this article topic: "${title}"${eventHint ? ` (context: ${eventHint})` : ""}? (YES/NO)
+Answer format: Q1:YES/NO Q2:YES/NO`;
   try {
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GOOGLE_API_KEY}`,
       { method:"POST", headers:{"Content-Type":"application/json"},
         body: JSON.stringify({ contents:[{ parts:[
-          { text: `Does this image show ${sportEN}? Answer only YES or NO.` },
+          { text: prompt },
           { inline_data:{ mime_type:"image/jpeg", data: imageBase64 } }
-        ]}], generationConfig:{ maxOutputTokens:5, temperature:0 } }) }
+        ]}], generationConfig:{ maxOutputTokens:20, temperature:0 } }) }
     );
     const d = await res.json();
-    const ans = (d?.candidates?.[0]?.content?.parts?.[0]?.text || "").trim().toUpperCase();
-    return ans.startsWith("YES");
-  } catch { return true; } // en cas d'erreur → accepter
+    const ans = (d?.candidates?.[0]?.content?.parts?.[0]?.text || "").toUpperCase();
+    const q1 = /Q1:YES/.test(ans);
+    const q2 = /Q2:YES/.test(ans);
+    if (!q1) return { ok: false, reason: `wrong sport (${sport})` };
+    if (!q2) return { ok: false, reason: `incoherent with article context` };
+    return { ok: true };
+  } catch { return { ok: true }; } // erreur réseau → accepter
 }
 
 async function sleep(ms) {
@@ -827,9 +842,9 @@ if (leagueBanner) {
         const base64 = await generateImageBase64(buildPrompt(article), article);
         if (!base64) { console.log(`  Skipped (APIs fatales): ${slug}`); _apisFatal = true; break; }
         // Validation visuelle
-        const valid = await validateImageSport(base64, article.sport || "football");
+        const { ok: valid, reason: rejectReason } = await validateImageSport(base64, article);
         if (!valid) {
-          console.log(`  ✗ Image refusée (mauvais sport): ${slug} — nouvelle tentative`);
+          console.log(`  ✗ Refusée (${rejectReason}): ${slug} — tentative ${attempt}/3`);
           await sleep(1000);
           continue;
         }
