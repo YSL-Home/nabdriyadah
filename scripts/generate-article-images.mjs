@@ -545,6 +545,29 @@ async function generateImageBase64(prompt, article) {
   return null; // toutes les APIs ont échoué
 }
 
+
+// ── Validation visuelle Gemini — vérifie que l'image correspond au sport ──────
+async function validateImageSport(imageBase64, sport) {
+  if (!GOOGLE_API_KEY || !imageBase64) return true; // skip si pas de clé
+  const sportEN = {
+    football:"football/soccer", basketball:"basketball/NBA",
+    tennis:"tennis", padel:"padel", f1:"Formula 1 racing", golf:"golf", futsal:"futsal"
+  }[sport] || "sports";
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GOOGLE_API_KEY}`,
+      { method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ contents:[{ parts:[
+          { text: `Does this image show ${sportEN}? Answer only YES or NO.` },
+          { inline_data:{ mime_type:"image/jpeg", data: imageBase64 } }
+        ]}], generationConfig:{ maxOutputTokens:5, temperature:0 } }) }
+    );
+    const d = await res.json();
+    const ans = (d?.candidates?.[0]?.content?.parts?.[0]?.text || "").trim().toUpperCase();
+    return ans.startsWith("YES");
+  } catch { return true; } // en cas d'erreur → accepter
+}
+
 async function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
@@ -792,23 +815,38 @@ const leagueBanner = LEAGUE_BANNERS[article.league] || null;
 if (leagueBanner) {
   const art = articles.find(a => a.slug === slug);
   if (art) { art.image = leagueBanner; changed = true; generated++; }
-  console.log(\`  ✓ League banner: \${slug} [\${generated}/\${MAX_PER_RUN}]\`);
+  console.log(`  ✓ League banner: ${slug} [${generated}/${MAX_PER_RUN}]`);
   continue;
 }
 
-    // ── Step 3: génération IA pure (pas d'image source ou clone échoué) ──
-    try {
-      console.log(`  Generating: ${slug} (${article.sport || "football"})`);
-      const base64 = await generateImageBase64(buildPrompt(article));
-      if (!base64) { console.log(`  Skipped (APIs fatales): ${slug}`); break; }
-      fs.writeFileSync(absoluteImagePath, Buffer.from(base64, "base64"));
-      articles.find(a => a.slug === slug).image = publicImagePath;
-      changed = true; generated++;
-      console.log(`  ✓ Generated: ${fileName} [${generated}/${MAX_PER_RUN}]`);
-      await sleep(1200);
-    } catch (error) {
-      console.log(`  Failed ${slug}: ${error.message.slice(0, 100)}`);
-      if (_apisFatal) break;
+    // ── Step 3: génération IA + validation sport (max 3 tentatives) ──────
+    let validated = false;
+    for (let attempt = 1; attempt <= 3 && !_apisFatal; attempt++) {
+      try {
+        console.log(`  Generating: ${slug} (${article.sport}) attempt ${attempt}/3`);
+        const base64 = await generateImageBase64(buildPrompt(article), article);
+        if (!base64) { console.log(`  Skipped (APIs fatales): ${slug}`); _apisFatal = true; break; }
+        // Validation visuelle
+        const valid = await validateImageSport(base64, article.sport || "football");
+        if (!valid) {
+          console.log(`  ✗ Image refusée (mauvais sport): ${slug} — nouvelle tentative`);
+          await sleep(1000);
+          continue;
+        }
+        fs.writeFileSync(absoluteImagePath, Buffer.from(base64, "base64"));
+        articles.find(a => a.slug === slug).image = publicImagePath;
+        changed = true; generated++;
+        validated = true;
+        console.log(`  ✓ Generated+validated: ${fileName} [${generated}/${MAX_PER_RUN}]`);
+        await sleep(1200);
+        break;
+      } catch (error) {
+        console.log(`  Failed ${slug}: ${error.message.slice(0, 100)}`);
+        if (_apisFatal) break;
+      }
+    }
+    if (!validated && !_apisFatal) {
+      console.log(`  ⚠ ${slug}: image non validée après 3 tentatives — skip`);
     }
   }
 
