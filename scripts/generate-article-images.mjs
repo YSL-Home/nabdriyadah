@@ -773,6 +773,29 @@ async function main() {
 
     if (_apisFatal) break;
 
+// ── Step 2: Bannière officielle TheSportsDB par league (100% sport-correct) ──
+const LEAGUE_BANNERS = {
+  "champions-league":  "https://www.thesportsdb.com/images/media/league/banner/aqmgrq1448813372.jpg",
+  "premier-league":    "https://www.thesportsdb.com/images/media/league/banner/r0l0q11614944783.jpg",
+  "la-liga":           "https://www.thesportsdb.com/images/media/league/banner/7onmyv1614961812.jpg",
+  "bundesliga":        "https://www.thesportsdb.com/images/media/league/banner/ltb5261610462067.jpg",
+  "serie-a":           "https://www.thesportsdb.com/images/media/league/banner/m2fefx1614954086.jpg",
+  "ligue-1":           "https://www.thesportsdb.com/images/media/league/banner/xoyx2j1614962096.jpg",
+  "saudi-pro-league":  "https://www.thesportsdb.com/images/media/league/banner/yd3gbl1679271651.jpg",
+  "prem-egy":          "https://www.thesportsdb.com/images/media/league/banner/mygbwz1474815848.jpg",
+  "botola":            "https://www.thesportsdb.com/images/media/league/banner/ywpnvv1681305636.jpg",
+  "nba":               "https://www.thesportsdb.com/images/media/league/banner/7nh9lv1534796487.jpg",
+  "atp":               "https://www.thesportsdb.com/images/media/league/banner/utyqvs1596971414.jpg",
+  "f1":                "https://www.thesportsdb.com/images/media/league/banner/zqbowl1634826598.jpg",
+};
+const leagueBanner = LEAGUE_BANNERS[article.league] || null;
+if (leagueBanner) {
+  const art = articles.find(a => a.slug === slug);
+  if (art) { art.image = leagueBanner; changed = true; generated++; }
+  console.log(\`  ✓ League banner: \${slug} [\${generated}/\${MAX_PER_RUN}]\`);
+  continue;
+}
+
     // ── Step 3: génération IA pure (pas d'image source ou clone échoué) ──
     try {
       console.log(`  Generating: ${slug} (${article.sport || "football"})`);
