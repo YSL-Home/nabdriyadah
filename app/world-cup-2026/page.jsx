@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
+import highlightsData from "../../content/wc-highlights.json";
 
 const PROXY = "/api/live";
 
@@ -139,6 +140,51 @@ function GroupTable({ letter, rows }) {
   );
 }
 
+// ── Highlight card (vidéo des buts) ──────────────────────────────────────────
+function HighlightCard({ h }) {
+  const [play, setPlay] = useState(false);
+  const search = `https://www.youtube.com/results?search_query=${encodeURIComponent(`أهداف ${h.home} ضد ${h.away} كأس العالم 2026`)}`;
+  return (
+    <div style={{ background: "var(--card, #fff)", borderRadius: "16px", overflow: "hidden", border: "1.5px solid var(--border, #e5e7eb)", boxShadow: "0 2px 10px rgba(0,0,0,0.05)" }}>
+      <div style={{ position: "relative", aspectRatio: "16/9", background: "#000" }}>
+        {h.videoId ? (
+          play ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${h.videoId}?autoplay=1&rel=0`}
+              title={`${h.home} vs ${h.away}`}
+              allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              style={{ width: "100%", height: "100%", border: 0 }}
+            />
+          ) : (
+            <button onClick={() => setPlay(true)} aria-label="تشغيل ملخص الأهداف"
+              style={{ width: "100%", height: "100%", border: 0, padding: 0, cursor: "pointer", position: "relative", background: "#000" }}>
+              <img src={`https://i.ytimg.com/vi/${h.videoId}/hqdefault.jpg`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+              <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ width: "58px", height: "58px", borderRadius: "50%", background: "#16a34aee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", color: "#fff" }}>▶</span>
+              </span>
+            </button>
+          )
+        ) : (
+          <a href={search} target="_blank" rel="noopener noreferrer"
+            style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", color: "#fff", textDecoration: "none", background: "linear-gradient(135deg,#0f172a,#15803d)" }}>
+            <span style={{ fontSize: "30px" }}>🎬</span>
+            <span style={{ fontSize: "13px", fontWeight: 800 }}>ابحث عن ملخص الأهداف ←</span>
+          </a>
+        )}
+      </div>
+      <div style={{ padding: "12px 14px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", fontSize: "14px", fontWeight: 800, color: "var(--text, #111827)" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: "6px" }}><img src={h.homeLogo} alt="" style={{ width: "20px", height: "20px", objectFit: "contain" }} />{h.home}</span>
+          <span style={{ color: "#16a34a", fontWeight: 900 }}>{h.gh}-{h.ga}</span>
+          <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>{h.away}<img src={h.awayLogo} alt="" style={{ width: "20px", height: "20px", objectFit: "contain" }} /></span>
+        </div>
+        <div style={{ textAlign: "center", fontSize: "11px", color: "#9ca3af", marginTop: "6px" }}>{roundLabel(h.round)} · {dayLabel(h.date)}</div>
+      </div>
+    </div>
+  );
+}
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 export default function WorldCupPage() {
   const [matches, setMatches] = useState([]);
@@ -151,13 +197,12 @@ export default function WorldCupPage() {
     let timer;
     async function load() {
       try {
-        const res = await fetch(`${PROXY}?path=${encodeURIComponent("fixtures?league=1&season=2026")}`);
+        // Plan gratuit: league=1&season ne répond pas, mais date= inclut la CDM.
+        const today = new Date().toISOString().slice(0, 10);
+        const res = await fetch(`${PROXY}?path=${encodeURIComponent(`fixtures?date=${today}`)}`);
         const data = await res.json();
         if (!alive) return;
-        if (data?.errors && Object.keys(data.errors).length && !data.response?.length) {
-          setError("سيتم تحديث المباريات قريباً.");
-        }
-        const rows = data.response || [];
+        const rows = (data.response || []).filter(m => m.league?.id === 1);
         setMatches(rows);
         const hasLive = rows.some(m => isLive(m.fixture?.status?.short));
         timer = setTimeout(load, hasLive ? 60000 : 180000);
@@ -173,18 +218,49 @@ export default function WorldCupPage() {
 
   const liveMatches = useMemo(() => matches.filter(m => isLive(m.fixture?.status?.short)), [matches]);
 
+  // Matchs joués (JSON statique) normalisés au format API pour calendrier + classement
+  const playedNormalized = useMemo(() =>
+    Object.entries(highlightsData)
+      .filter(([, h]) => h && h.home && h.gh != null)
+      .map(([id, h]) => ({
+        fixture: { id: `j-${id}`, date: h.date, timestamp: new Date(h.date).getTime() / 1000, status: { short: "FT" } },
+        teams: { home: { id: `${id}h`, name: h.home, logo: h.homeLogo }, away: { id: `${id}a`, name: h.away, logo: h.awayLogo } },
+        goals: { home: h.gh, away: h.ga },
+        league: { id: 1, round: h.round || "" },
+      })),
+  []);
+
+  // Union live/aujourd'hui (API) + matchs joués (JSON), dédupliqués par paire+date
+  const allMatches = useMemo(() => {
+    const seen = new Set();
+    const out = [];
+    for (const m of [...matches, ...playedNormalized]) {
+      const key = `${m.teams?.home?.name}-${m.teams?.away?.name}-${(m.fixture?.date || "").slice(0, 10)}`;
+      if (seen.has(key)) continue;
+      seen.add(key); out.push(m);
+    }
+    return out;
+  }, [matches, playedNormalized]);
+
   // group by day for calendar
   const byDay = useMemo(() => {
     const map = {};
-    [...matches].sort((a, b) => (a.fixture?.timestamp || 0) - (b.fixture?.timestamp || 0))
+    [...allMatches].sort((a, b) => (a.fixture?.timestamp || 0) - (b.fixture?.timestamp || 0))
       .forEach(m => {
         const d = (m.fixture?.date || "").slice(0, 10);
         (map[d] ||= []).push(m);
       });
     return map;
-  }, [matches]);
+  }, [allMatches]);
 
-  const standings = useMemo(() => computeStandings(matches), [matches]);
+  const standings = useMemo(() => computeStandings(allMatches), [allMatches]);
+
+  // Matchs joués + vidéos (depuis le JSON statique, plus récent en premier)
+  const highlights = useMemo(() =>
+    Object.values(highlightsData)
+      .filter(h => h && h.home && h.gh != null)
+      .sort((a, b) => new Date(b.date) - new Date(a.date)),
+  []);
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg, #f3f4f6)", padding: "24px 16px 52px", direction: "rtl" }}>
@@ -211,7 +287,7 @@ export default function WorldCupPage() {
 
         {/* Tabs */}
         <div style={{ display: "flex", gap: "8px", marginBottom: "18px" }}>
-          {[["calendar", "📅 المباريات"], ["standings", "🏆 الترتيب"]].map(([k, lbl]) => (
+          {[["calendar", "📅 المباريات"], ["highlights", "🎬 الأهداف"], ["standings", "🏆 الترتيب"]].map(([k, lbl]) => (
             <button key={k} onClick={() => setTab(k)}
               style={{ flex: 1, padding: "11px", borderRadius: "12px", border: "none", cursor: "pointer", fontSize: "15px", fontWeight: 800,
                 background: tab === k ? "#16a34a" : "var(--card, #fff)", color: tab === k ? "#fff" : "var(--text, #374151)",
@@ -235,6 +311,17 @@ export default function WorldCupPage() {
             </div>
           </section>
         ))}
+
+        {/* Highlights — matchs joués + vidéos des buts */}
+        {tab === "highlights" && (
+          highlights.length > 0 ? (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))", gap: "16px" }}>
+              {highlights.map((h, i) => <HighlightCard key={i} h={h} />)}
+            </div>
+          ) : (
+            <div style={{ background: "var(--card, #fff)", borderRadius: "20px", padding: "40px", textAlign: "center", color: "#6b7280" }}>ستظهر ملخصات الأهداف بعد انتهاء أول المباريات.</div>
+          )
+        )}
 
         {/* Standings */}
         {!loading && tab === "standings" && (

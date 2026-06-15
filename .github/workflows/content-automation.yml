@@ -206,6 +206,12 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         continue-on-error: true
 
+      - name: Fetch World Cup highlights (buts/résumés YouTube)
+        run: node scripts/fetch-wc-highlights.mjs
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        continue-on-error: true
+
       - name: Audit images (mismatch sport / fichiers manquants)
         run: node scripts/audit-images.mjs
         continue-on-error: true
