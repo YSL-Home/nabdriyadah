@@ -22,7 +22,7 @@ export async function onRequest({ request, env }) {
         "x-apisports-key": apiKey,
         "x-rapidapi-host": "v3.football.api-sports.io",
       },
-      cf: { cacheTtl: 300, cacheEverything: true },
+      cf: { cacheTtl: 60, cacheEverything: false },
     });
 
     const data = await res.json();
@@ -32,7 +32,7 @@ export async function onRequest({ request, env }) {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "public, max-age=300",
+        "Cache-Control": "public, max-age=60",
       },
     });
   } catch (e) {
