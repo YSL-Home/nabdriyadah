@@ -2,8 +2,8 @@ name: Nabdriyadah Content Automation
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
-    - cron: "0 * * * *"
+    - cron: "*/15 * * * *"
+    - cron: "0,30 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -25,6 +25,7 @@ jobs:
   # ──────────────────────────────────────────────────────────────────────────
   breaking-news:
     name: Breaking News
+    if: github.event.schedule == '*/15 * * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     concurrency:
       group: nabdriyadah-breaking
@@ -101,6 +102,7 @@ jobs:
   # ──────────────────────────────────────────────────────────────────────────
   full-refresh:
     name: Full Content Refresh + Deploy
+    if: github.event.schedule == '0,30 * * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     env:
       CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}

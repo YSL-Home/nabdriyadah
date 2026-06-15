@@ -16,6 +16,12 @@ const ARTICLES_PATH = path.join(process.cwd(), "content/articles/seo-articles.js
 const FLAG_FILE   = "/tmp/breaking_changed";
 
 const BREAKING_SOURCES = [
+  // ── Coupe du Monde 2026 — priorité maximale ──────────────────────────────
+  { url: "https://news.google.com/rss/search?q=كأس+العالم+2026&hl=ar&gl=AR&ceid=AR:ar",          name: "GNews CDM AR",       sport: "football", priority: 11 },
+  { url: "https://news.google.com/rss/search?q=World+Cup+2026&hl=ar&gl=AR&ceid=AR:ar",           name: "GNews CDM EN",       sport: "football", priority: 11 },
+  { url: "https://news.google.com/rss/search?q=المنتخب+المغربي+كأس+العالم&hl=ar&gl=AR&ceid=AR:ar", name: "GNews CDM Maroc",  sport: "football", priority: 11 },
+  { url: "https://news.google.com/rss/search?q=المنتخب+السعودي+كأس+العالم&hl=ar&gl=AR&ceid=AR:ar", name: "GNews CDM Saoudi", sport: "football", priority: 11 },
+  { url: "https://news.google.com/rss/search?q=Coupe+du+Monde+2026&hl=ar&gl=AR&ceid=AR:ar",      name: "GNews CDM FR",       sport: "football", priority: 10 },
   // ── Football — sources prioritaires (arabes + anglais) ───────────────────
   { url: "https://www.bbc.com/sport/football/rss.xml",                                   name: "BBC Sport",          sport: "football", priority: 10 },
   { url: "https://www.btolat.com/rss",                                                   name: "Btolat",             sport: "football", priority: 10 },
