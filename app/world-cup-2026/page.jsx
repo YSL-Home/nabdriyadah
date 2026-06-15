@@ -148,6 +148,7 @@ export default function WorldCupPage() {
 
   useEffect(() => {
     let alive = true;
+    let timer;
     async function load() {
       try {
         const res = await fetch(`${PROXY}?path=${encodeURIComponent("fixtures?league=1&season=2026")}`);
@@ -156,16 +157,18 @@ export default function WorldCupPage() {
         if (data?.errors && Object.keys(data.errors).length && !data.response?.length) {
           setError("سيتم تحديث المباريات قريباً.");
         }
-        setMatches(data.response || []);
+        const rows = data.response || [];
+        setMatches(rows);
+        const hasLive = rows.some(m => isLive(m.fixture?.status?.short));
+        timer = setTimeout(load, hasLive ? 60000 : 180000);
       } catch {
-        if (alive) setError("تعذّر تحميل مباريات كأس العالم.");
+        if (alive) { setError("تعذّر تحميل مباريات كأس العالم."); timer = setTimeout(load, 180000); }
       } finally {
         if (alive) setLoading(false);
       }
     }
     load();
-    const iv = setInterval(load, 60000);
-    return () => { alive = false; clearInterval(iv); };
+    return () => { alive = false; clearTimeout(timer); };
   }, []);
 
   const liveMatches = useMemo(() => matches.filter(m => isLive(m.fixture?.status?.short)), [matches]);

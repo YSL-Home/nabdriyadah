@@ -45,16 +45,23 @@ export default function WorldCupBanner() {
 
   useEffect(() => {
     let alive = true;
+    let timer;
     async function load() {
       try {
         const res = await fetch(`${PROXY}?path=${encodeURIComponent("fixtures?league=1&season=2026")}`);
         const data = await res.json();
-        if (alive) setMatches(data.response || []);
-      } catch {}
+        if (!alive) return;
+        const rows = data.response || [];
+        setMatches(rows);
+        // Poll plus vite seulement s'il y a un match en direct, sinon lent (économie API)
+        const hasLive = rows.some(m => isLive(m.fixture?.status?.short));
+        timer = setTimeout(load, hasLive ? 60000 : 180000);
+      } catch {
+        if (alive) timer = setTimeout(load, 180000);
+      }
     }
     load();
-    const iv = setInterval(load, 60000);
-    return () => { alive = false; clearInterval(iv); };
+    return () => { alive = false; clearTimeout(timer); };
   }, []);
 
   // live first, then nearest upcoming, then last finished
