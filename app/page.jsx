@@ -1,6 +1,7 @@
 import articles from "../content/articles/seo-articles.json";
 import viralScoresRaw from "../content/viral-scores.json";
 import BreakingTicker from "./components/BreakingTicker";
+import WorldCupBanner from "./components/WorldCupBanner";
 import HomepageClient from "./components/HomepageClient";
 import StatsStrip from "./components/StatsStrip";
 
@@ -120,6 +121,9 @@ export default function HomePage() {
 
       {/* Bandeau عاجل — toujours visible */}
       <BreakingTicker items={breaking} />
+
+      {/* Bannière Coupe du Monde 2026 — proéminente, live + CTA */}
+      <WorldCupBanner />
 
       {/* Stats strip — server component, rendu statique */}
       <div style={{ maxWidth: "1450px", margin: "0 auto", padding: "16px 16px 0" }}>
