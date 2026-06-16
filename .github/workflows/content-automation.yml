@@ -61,6 +61,10 @@ jobs:
           node scripts/breaking-news-scan.mjs
           echo "changed=$(cat /tmp/breaking_changed 2>/dev/null || echo false)" >> $GITHUB_OUTPUT
 
+      - name: Fetch live snapshot (scores → JSON, lu par les visiteurs)
+        run: node scripts/fetch-live-snapshot.mjs
+        continue-on-error: true
+
       - name: Rewrite breaking article
         if: steps.scan.outputs.changed == 'true'
         run: node scripts/rewrite-article.mjs
@@ -80,9 +84,8 @@ jobs:
       # Commit sans déclencher de build Cloudflare (le déploiement est géré par full-refresh)
 
       - name: Commit & push content only
-        if: steps.scan.outputs.changed == 'true'
         run: |
-          bash scripts/git-safe-push.sh "breaking: $(date '+%H:%M') [skip deploy]"
+          bash scripts/git-safe-push.sh "live snapshot + breaking: $(date '+%H:%M') [skip deploy]"
 
       - name: Notify on failure (Telegram)
         if: failure() && env.TELEGRAM_BOT_TOKEN != ''

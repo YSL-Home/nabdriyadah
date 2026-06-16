@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import snapshot from "../../content/live-snapshot.json";
 
 const PROXY = "/api/live";
 
@@ -48,12 +49,15 @@ export default function WorldCupBanner() {
     let timer;
     async function load() {
       try {
-        const res = await fetch(`${PROXY}?path=${encodeURIComponent("fixtures?league=1&season=2026")}`);
+        const today = new Date().toISOString().slice(0, 10);
+        const res = await fetch(`${PROXY}?path=${encodeURIComponent(`fixtures?date=${today}`)}`);
         const data = await res.json();
         if (!alive) return;
-        const rows = data.response || [];
+        let rows = (data.response || []).filter(m => m.league?.id === 1);
+        if (rows.length === 0 && snapshot?.today?.length) {
+          rows = snapshot.today.filter(m => m.league?.id === 1);
+        }
         setMatches(rows);
-        // Poll plus vite seulement s'il y a un match en direct, sinon lent (économie API)
         const hasLive = rows.some(m => isLive(m.fixture?.status?.short));
         timer = setTimeout(load, hasLive ? 60000 : 180000);
       } catch {

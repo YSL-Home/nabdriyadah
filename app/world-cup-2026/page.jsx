@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import highlightsData from "../../content/wc-highlights.json";
+import snapshot from "../../content/live-snapshot.json";
 
 const PROXY = "/api/live";
 
@@ -202,7 +203,11 @@ export default function WorldCupPage() {
         const res = await fetch(`${PROXY}?path=${encodeURIComponent(`fixtures?date=${today}`)}`);
         const data = await res.json();
         if (!alive) return;
-        const rows = (data.response || []).filter(m => m.league?.id === 1);
+        let rows = (data.response || []).filter(m => m.league?.id === 1);
+        // Fallback snapshot CI si quota épuisé
+        if (rows.length === 0 && snapshot?.today?.length) {
+          rows = snapshot.today.filter(m => m.league?.id === 1);
+        }
         setMatches(rows);
         const hasLive = rows.some(m => isLive(m.fixture?.status?.short));
         timer = setTimeout(load, hasLive ? 60000 : 180000);

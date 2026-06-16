@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback, useMemo } from "react";
+import snapshot from "../../content/live-snapshot.json";
 
 // Proxy via Cloudflare Pages Function (clé API côté serveur)
 const PROXY = "/api/live";
@@ -133,8 +134,15 @@ export default function LivePage() {
       const results = await Promise.all(requests);
       const [dayData, liveData] = await Promise.all(results.map(r => r.json()));
 
-      setAllMatches(dayData.response || []);
-      setLiveMatches(isToday ? (liveData?.response || []) : []);
+      let day = dayData.response || [];
+      let live = isToday ? (liveData?.response || []) : [];
+
+      // Fallback: quota API épuisé → utiliser le snapshot CI (dernière sauvegarde)
+      if (isToday && day.length === 0 && snapshot?.today?.length) day = snapshot.today;
+      if (isToday && live.length === 0 && snapshot?.live?.length) live = snapshot.live;
+
+      setAllMatches(day);
+      setLiveMatches(live);
       setLastUpdate(new Date().toLocaleTimeString("ar-SA"));
       setError(null);
     } catch (e) {
