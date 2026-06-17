@@ -1,16 +1,16 @@
 {
-  "date": "2026-06-16",
-  "fetchedAt": "2026-06-16T22:35:17.594Z",
+  "date": "2026-06-17",
+  "fetchedAt": "2026-06-17T00:04:07.160Z",
   "live": [
     {
       "fixture": {
-        "id": 1547545,
+        "id": 1524945,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-06-16T12:00:00+00:00",
-        "timestamp": 1781611200,
+        "date": "2026-06-16T23:30:00+00:00",
+        "timestamp": 1781652600,
         "periods": {
-          "first": 1781611200,
+          "first": 1781652600,
           "second": null
         },
         "venue": {
@@ -21,41 +21,41 @@
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 30,
+          "elapsed": 28,
           "extra": null
         }
       },
       "league": {
-        "id": 813,
-        "name": "Elite Two",
-        "country": "Cameroon",
-        "logo": "https://media.api-sports.io/football/leagues/813.png",
-        "flag": "https://media.api-sports.io/flags/cm.svg",
+        "id": 256,
+        "name": "USL League Two",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/256.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
         "season": 2026,
-        "round": "Relegation Group - 5",
-        "standings": true
+        "round": "Group Stage",
+        "standings": false
       },
       "teams": {
         "home": {
-          "id": 27458,
-          "name": "Sable",
-          "logo": "https://media.api-sports.io/football/teams/27458.png",
-          "winner": null
+          "id": 4063,
+          "name": "Manhattan",
+          "logo": "https://media.api-sports.io/football/teams/4063.png",
+          "winner": false
         },
         "away": {
-          "id": 16527,
-          "name": "Foncha ST",
-          "logo": "https://media.api-sports.io/football/teams/16527.png",
-          "winner": null
+          "id": 4062,
+          "name": "Long Island Rough Riders",
+          "logo": "https://media.api-sports.io/football/teams/4062.png",
+          "winner": true
         }
       },
       "goals": {
-        "home": 1,
+        "home": 0,
         "away": 1
       },
       "score": {
         "halftime": {
-          "home": 1,
+          "home": 0,
           "away": 1
         },
         "fulltime": {
@@ -75,13 +75,553 @@
     },
     {
       "fixture": {
-        "id": 1547546,
+        "id": 1539016,
+        "referee": "Pierre Ghislain Atcho, Gabon",
+        "timezone": "UTC",
+        "date": "2026-06-16T22:00:00+00:00",
+        "timestamp": 1781647200,
+        "periods": {
+          "first": 1781647200,
+          "second": 1781650800
+        },
+        "venue": {
+          "id": 1618,
+          "name": "Gillette Stadium",
+          "city": "Boston"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": 7
+        }
+      },
+      "league": {
+        "id": 1,
+        "name": "World Cup",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/1.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Group Stage - 1",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1567,
+          "name": "Iraq",
+          "logo": "https://media.api-sports.io/football/teams/1567.png",
+          "winner": false
+        },
+        "away": {
+          "id": 1090,
+          "name": "Norway",
+          "logo": "https://media.api-sports.io/football/teams/1090.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 4
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 29,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 1100,
+            "name": "E. Haaland"
+          },
+          "assist": {
+            "id": 265782,
+            "name": "D. Wolfe"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 39,
+            "extra": null
+          },
+          "team": {
+            "id": 1567,
+            "name": "Iraq",
+            "logo": "https://media.api-sports.io/football/teams/1567.png"
+          },
+          "player": {
+            "id": 49451,
+            "name": "A. Hussein"
+          },
+          "assist": {
+            "id": 47792,
+            "name": "A. Al Ammari"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 43,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 1100,
+            "name": "E. Haaland"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 1567,
+            "name": "Iraq",
+            "logo": "https://media.api-sports.io/football/teams/1567.png"
+          },
+          "player": {
+            "id": 626479,
+            "name": "Z. Ismaeel"
+          },
+          "assist": {
+            "id": 284295,
+            "name": "Z. Iqbal"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 1567,
+            "name": "Iraq",
+            "logo": "https://media.api-sports.io/football/teams/1567.png"
+          },
+          "player": {
+            "id": 299813,
+            "name": "A. Al Hamadi"
+          },
+          "assist": {
+            "id": 265448,
+            "name": "M. Farji"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 314511,
+            "name": "A. Nusa"
+          },
+          "assist": {
+            "id": 301528,
+            "name": "A. Schjelderup"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 39043,
+            "name": "F. Aursnes"
+          },
+          "assist": {
+            "id": 39143,
+            "name": "K. Thorstvedt"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 265782,
+            "name": "D. Wolfe"
+          },
+          "assist": {
+            "id": 18967,
+            "name": "L. Ostigard"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 8492,
+            "name": "A. Sorloth"
+          },
+          "assist": {
+            "id": 278133,
+            "name": "O. Bobb"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 1567,
+            "name": "Iraq",
+            "logo": "https://media.api-sports.io/football/teams/1567.png"
+          },
+          "player": {
+            "id": 145465,
+            "name": "H. Ali"
+          },
+          "assist": {
+            "id": 427187,
+            "name": "M. Saadoon"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 1567,
+            "name": "Iraq",
+            "logo": "https://media.api-sports.io/football/teams/1567.png"
+          },
+          "player": {
+            "id": 542644,
+            "name": "A. Jasim"
+          },
+          "assist": {
+            "id": 229112,
+            "name": "A. Qasem"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 18967,
+            "name": "L. Ostigard"
+          },
+          "assist": {
+            "id": 37127,
+            "name": "M. Odegaard"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 1567,
+            "name": "Iraq",
+            "logo": "https://media.api-sports.io/football/teams/1567.png"
+          },
+          "player": {
+            "id": 140747,
+            "name": "I. Bayesh"
+          },
+          "assist": {
+            "id": 53894,
+            "name": "Meme"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 37127,
+            "name": "M. Odegaard"
+          },
+          "assist": {
+            "id": 39064,
+            "name": "P. Berg"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 86,
+            "extra": null
+          },
+          "team": {
+            "id": 1567,
+            "name": "Iraq",
+            "logo": "https://media.api-sports.io/football/teams/1567.png"
+          },
+          "player": {
+            "id": 296373,
+            "name": "Z. Tahseen"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Holding"
+        },
+        {
+          "time": {
+            "elapsed": 90,
+            "extra": 7
+          },
+          "team": {
+            "id": 1090,
+            "name": "Norway",
+            "logo": "https://media.api-sports.io/football/teams/1090.png"
+          },
+          "player": {
+            "id": 39143,
+            "name": "K. Thorstvedt"
+          },
+          "assist": {
+            "id": 1100,
+            "name": "E. Haaland"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1520725,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-06-16T12:00:00+00:00",
-        "timestamp": 1781611200,
+        "date": "2026-06-16T23:00:00+00:00",
+        "timestamp": 1781650800,
         "periods": {
-          "first": 1781611200,
+          "first": 1781650800,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": "Fortaleza"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 5
+        }
+      },
+      "league": {
+        "id": 72,
+        "name": "Serie B",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/72.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Regular Season - 13",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 154,
+          "name": "Fortaleza EC",
+          "logo": "https://media.api-sports.io/football/teams/154.png",
+          "winner": false
+        },
+        "away": {
+          "id": 125,
+          "name": "America Mineiro",
+          "logo": "https://media.api-sports.io/football/teams/125.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 30,
+            "extra": null
+          },
+          "team": {
+            "id": 125,
+            "name": "America Mineiro",
+            "logo": "https://media.api-sports.io/football/teams/125.png"
+          },
+          "player": {
+            "id": 180386,
+            "name": "M. Segovia"
+          },
+          "assist": {
+            "id": 199324,
+            "name": "Gabriel Barros"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 125,
+            "name": "America Mineiro",
+            "logo": "https://media.api-sports.io/football/teams/125.png"
+          },
+          "player": {
+            "id": 199324,
+            "name": "Gabriel Barros"
+          },
+          "assist": {
+            "id": 180386,
+            "name": "M. Segovia"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1524941,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-16T23:00:00+00:00",
+        "timestamp": 1781650800,
+        "periods": {
+          "first": 1781650800,
           "second": null
         },
         "venue": {
@@ -90,44 +630,115 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 27,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 3
         }
       },
       "league": {
-        "id": 813,
-        "name": "Elite Two",
-        "country": "Cameroon",
-        "logo": "https://media.api-sports.io/football/leagues/813.png",
-        "flag": "https://media.api-sports.io/flags/cm.svg",
+        "id": 256,
+        "name": "USL League Two",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/256.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
         "season": 2026,
-        "round": "Relegation Group - 5",
-        "standings": true
+        "round": "Group Stage",
+        "standings": false
       },
       "teams": {
         "home": {
-          "id": 5558,
-          "name": "Yafoot",
-          "logo": "https://media.api-sports.io/football/teams/5558.png",
-          "winner": false
+          "id": 4035,
+          "name": "Boston Bolts",
+          "logo": "https://media.api-sports.io/football/teams/4035.png",
+          "winner": true
         },
         "away": {
-          "id": 5557,
-          "name": "Bamboutos",
-          "logo": "https://media.api-sports.io/football/teams/5557.png",
-          "winner": true
+          "id": 9071,
+          "name": "Boston City",
+          "logo": "https://media.api-sports.io/football/teams/9071.png",
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 2,
         "away": 1
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 2,
           "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1524943,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-16T23:00:00+00:00",
+        "timestamp": 1781650800,
+        "periods": {
+          "first": 1781650800,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 1
+        }
+      },
+      "league": {
+        "id": 256,
+        "name": "USL League Two",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/256.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Group Stage",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 4075,
+          "name": "Reading United",
+          "logo": "https://media.api-sports.io/football/teams/4075.png",
+          "winner": null
+        },
+        "away": {
+          "id": 16686,
+          "name": "Real Central New Jersey",
+          "logo": "https://media.api-sports.io/football/teams/16686.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 2
         },
         "fulltime": {
           "home": null,
