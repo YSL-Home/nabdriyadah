@@ -1,16 +1,154 @@
 {
   "date": "2026-06-22",
-  "fetchedAt": "2026-06-22T11:14:29.552Z",
+  "fetchedAt": "2026-06-22T19:45:23.664Z",
   "live": [
     {
       "fixture": {
-        "id": 1559535,
+        "id": 1492737,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-06-22T11:00:00+00:00",
-        "timestamp": 1782126000,
+        "date": "2026-06-22T19:00:00+00:00",
+        "timestamp": 1782154800,
         "periods": {
-          "first": 1782126000,
+          "first": 1782154800,
+          "second": null
+        },
+        "venue": {
+          "id": 865,
+          "name": "Tallaght Stadium",
+          "city": "Dublin"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 45,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 357,
+        "name": "Premier Division",
+        "country": "Ireland",
+        "logo": "https://media.api-sports.io/football/leagues/357.png",
+        "flag": "https://media.api-sports.io/flags/ie.svg",
+        "season": 2026,
+        "round": "Regular Season - 25",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 652,
+          "name": "Shamrock Rovers",
+          "logo": "https://media.api-sports.io/football/teams/652.png",
+          "winner": false
+        },
+        "away": {
+          "id": 670,
+          "name": "Derry City",
+          "logo": "https://media.api-sports.io/football/teams/670.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 4,
+            "extra": null
+          },
+          "team": {
+            "id": 670,
+            "name": "Derry City",
+            "logo": "https://media.api-sports.io/football/teams/670.png"
+          },
+          "player": {
+            "id": 19507,
+            "name": "J. McClean"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 24,
+            "extra": null
+          },
+          "team": {
+            "id": 670,
+            "name": "Derry City",
+            "logo": "https://media.api-sports.io/football/teams/670.png"
+          },
+          "player": {
+            "id": 328436,
+            "name": "K. Santos"
+          },
+          "assist": {
+            "id": 69352,
+            "name": "D. Markey"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 670,
+            "name": "Derry City",
+            "logo": "https://media.api-sports.io/football/teams/670.png"
+          },
+          "player": {
+            "id": 20037,
+            "name": "L. Boyce"
+          },
+          "assist": {
+            "id": 19507,
+            "name": "J. McClean"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1508789,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-22T19:15:00+00:00",
+        "timestamp": 1782155700,
+        "periods": {
+          "first": 1782155700,
           "second": null
         },
         "venue": {
@@ -21,37 +159,219 @@
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 13,
+          "elapsed": 30,
           "extra": null
         }
       },
       "league": {
-        "id": 764,
-        "name": "Premier League",
-        "country": "Mongolia",
-        "logo": "https://media.api-sports.io/football/leagues/764.png",
-        "flag": "https://media.api-sports.io/flags/mn.svg",
+        "id": 164,
+        "name": "Úrvalsdeild",
+        "country": "Iceland",
+        "logo": "https://media.api-sports.io/football/leagues/164.png",
+        "flag": "https://media.api-sports.io/flags/is.svg",
         "season": 2026,
-        "round": "Regular Season - 19",
+        "round": "Regular Season - 11",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 26669,
-          "name": "Khovd Western",
-          "logo": "https://media.api-sports.io/football/teams/26669.png",
+          "id": 271,
+          "name": "KR Reykjavik",
+          "logo": "https://media.api-sports.io/football/teams/271.png",
+          "winner": false
+        },
+        "away": {
+          "id": 827,
+          "name": "IA Akranes",
+          "logo": "https://media.api-sports.io/football/teams/827.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 12,
+            "extra": null
+          },
+          "team": {
+            "id": 827,
+            "name": "IA Akranes",
+            "logo": "https://media.api-sports.io/football/teams/827.png"
+          },
+          "player": {
+            "id": 539296,
+            "name": "I. Gudjonsson"
+          },
+          "assist": {
+            "id": 539271,
+            "name": "O. Stefansson"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 14,
+            "extra": null
+          },
+          "team": {
+            "id": 827,
+            "name": "IA Akranes",
+            "logo": "https://media.api-sports.io/football/teams/827.png"
+          },
+          "player": {
+            "id": 39311,
+            "name": "E. T. Sandberg"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 15,
+            "extra": null
+          },
+          "team": {
+            "id": 271,
+            "name": "KR Reykjavik",
+            "logo": "https://media.api-sports.io/football/teams/271.png"
+          },
+          "player": {
+            "id": 1966,
+            "name": "A. Traustason"
+          },
+          "assist": {
+            "id": 61542,
+            "name": "S. Geirsson"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 16,
+            "extra": null
+          },
+          "team": {
+            "id": 827,
+            "name": "IA Akranes",
+            "logo": "https://media.api-sports.io/football/teams/827.png"
+          },
+          "player": {
+            "id": 539271,
+            "name": "O. Stefansson"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 24,
+            "extra": null
+          },
+          "team": {
+            "id": 827,
+            "name": "IA Akranes",
+            "logo": "https://media.api-sports.io/football/teams/827.png"
+          },
+          "player": {
+            "id": 539296,
+            "name": "I. Gudjonsson"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1539835,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-22T18:00:00+00:00",
+        "timestamp": 1782151200,
+        "periods": {
+          "first": 1782151200,
+          "second": 1782154800
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 89,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1076,
+        "name": "Catarinense U20",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/1076.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Regular Season - 11",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 13019,
+          "name": "Joinville U20",
+          "logo": "https://media.api-sports.io/football/teams/13019.png",
           "winner": null
         },
         "away": {
-          "id": 18104,
-          "name": "Khovd",
-          "logo": "https://media.api-sports.io/football/teams/18104.png",
+          "id": 20755,
+          "name": "Figueirense U20",
+          "logo": "https://media.api-sports.io/football/teams/20755.png",
           "winner": null
         }
       },
       "goals": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -71,58 +391,285 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 53,
+            "extra": null
+          },
+          "team": {
+            "id": 13019,
+            "name": "Joinville U20",
+            "logo": "https://media.api-sports.io/football/teams/13019.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 20755,
+            "name": "Figueirense U20",
+            "logo": "https://media.api-sports.io/football/teams/20755.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     },
     {
       "fixture": {
-        "id": 1522133,
+        "id": 1553061,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-06-22T10:15:00+00:00",
-        "timestamp": 1782123300,
+        "date": "2026-06-22T18:00:00+00:00",
+        "timestamp": 1782151200,
         "periods": {
-          "first": 1782123300,
-          "second": null
+          "first": 1782151200,
+          "second": 1782154800
         },
         "venue": {
-          "id": 0,
-          "name": null,
-          "city": null
+          "id": 1811,
+          "name": "Estadio Guillermo Briceno Rosamedina",
+          "city": "Juliaca"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 86,
+          "extra": null
         }
       },
       "league": {
-        "id": 836,
-        "name": "Victoria NPL 2",
-        "country": "Australia",
-        "logo": "https://media.api-sports.io/football/leagues/836.png",
-        "flag": "https://media.api-sports.io/flags/au.svg",
+        "id": 1232,
+        "name": "Copa De La Liga",
+        "country": "Peru",
+        "logo": "https://media.api-sports.io/football/leagues/1232.png",
+        "flag": "https://media.api-sports.io/flags/pe.svg",
         "season": 2026,
-        "round": "Regular Season - 18",
+        "round": "Group Stage - 2",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 2550,
+          "name": "Deportivo Binacional",
+          "logo": "https://media.api-sports.io/football/teams/2550.png",
+          "winner": true
+        },
+        "away": {
+          "id": 10013,
+          "name": "Cusco",
+          "logo": "https://media.api-sports.io/football/teams/10013.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 3,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 13,
+            "extra": null
+          },
+          "team": {
+            "id": 10013,
+            "name": "Cusco",
+            "logo": "https://media.api-sports.io/football/teams/10013.png"
+          },
+          "player": {
+            "id": 610494,
+            "name": "S. Quillahuaman"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 22,
+            "extra": null
+          },
+          "team": {
+            "id": 10013,
+            "name": "Cusco",
+            "logo": "https://media.api-sports.io/football/teams/10013.png"
+          },
+          "player": {
+            "id": 610494,
+            "name": "S. Quillahuaman"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 30,
+            "extra": null
+          },
+          "team": {
+            "id": 2550,
+            "name": "Deportivo Binacional",
+            "logo": "https://media.api-sports.io/football/teams/2550.png"
+          },
+          "player": {
+            "id": 39486,
+            "name": "T. Carranza"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 1
+          },
+          "team": {
+            "id": 2550,
+            "name": "Deportivo Binacional",
+            "logo": "https://media.api-sports.io/football/teams/2550.png"
+          },
+          "player": {
+            "id": 39486,
+            "name": "T. Carranza"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 51,
+            "extra": null
+          },
+          "team": {
+            "id": 2550,
+            "name": "Deportivo Binacional",
+            "logo": "https://media.api-sports.io/football/teams/2550.png"
+          },
+          "player": {
+            "id": 381070,
+            "name": "R. Rodriguez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1553791,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-22T17:45:00+00:00",
+        "timestamp": 1782150300,
+        "periods": {
+          "first": 1782150300,
+          "second": 1782153900
+        },
+        "venue": {
+          "id": 0,
+          "name": "Al Kuwait Sports Club Stadium",
+          "city": "Kuwait"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": 7
+        }
+      },
+      "league": {
+        "id": 330,
+        "name": "Premier League",
+        "country": "Kuwait",
+        "logo": "https://media.api-sports.io/football/leagues/330.png",
+        "flag": "https://media.api-sports.io/flags/kw.svg",
+        "season": 2025,
+        "round": "Championship Playoffs - 3",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 22823,
-          "name": "Melbourne Victory II",
-          "logo": "https://media.api-sports.io/football/teams/22823.png",
-          "winner": null
+          "id": 3535,
+          "name": "Al Kuwait",
+          "logo": "https://media.api-sports.io/football/teams/3535.png",
+          "winner": true
         },
         "away": {
-          "id": 16780,
-          "name": "Brunswick City",
-          "logo": "https://media.api-sports.io/football/teams/16780.png",
-          "winner": null
+          "id": 3532,
+          "name": "Al Arabi",
+          "logo": "https://media.api-sports.io/football/teams/3532.png",
+          "winner": false
         }
       },
       "goals": {
-        "home": 1,
-        "away": 1
+        "home": 3,
+        "away": 2
       },
       "score": {
         "halftime": {
@@ -145,13 +692,101 @@
       "events": [
         {
           "time": {
-            "elapsed": 23,
+            "elapsed": 9,
             "extra": null
           },
           "team": {
-            "id": 16780,
-            "name": "Brunswick City",
-            "logo": "https://media.api-sports.io/football/teams/16780.png"
+            "id": 3532,
+            "name": "Al Arabi",
+            "logo": "https://media.api-sports.io/football/teams/3532.png"
+          },
+          "player": {
+            "id": 615485,
+            "name": "A. Al Qarzaei"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 17,
+            "extra": null
+          },
+          "team": {
+            "id": 3535,
+            "name": "Al Kuwait",
+            "logo": "https://media.api-sports.io/football/teams/3535.png"
+          },
+          "player": {
+            "id": 2963,
+            "name": "T. Y. Khenissi"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 3535,
+            "name": "Al Kuwait",
+            "logo": "https://media.api-sports.io/football/teams/3535.png"
+          },
+          "player": {
+            "id": 17182,
+            "name": "A. A. Abdelfattah"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 3532,
+            "name": "Al Arabi",
+            "logo": "https://media.api-sports.io/football/teams/3532.png"
+          },
+          "player": {
+            "id": 542639,
+            "name": "Z. Qunbar"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 90,
+            "extra": 4
+          },
+          "team": {
+            "id": 3535,
+            "name": "Al Kuwait",
+            "logo": "https://media.api-sports.io/football/teams/3535.png"
           },
           "player": {
             "id": null,
@@ -164,16 +799,270 @@
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1492736,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-22T18:45:00+00:00",
+        "timestamp": 1782153900,
+        "periods": {
+          "first": 1782153900,
+          "second": null
         },
+        "venue": {
+          "id": 2639,
+          "name": "Tolka Park",
+          "city": "Dublin"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 2
+        }
+      },
+      "league": {
+        "id": 357,
+        "name": "Premier Division",
+        "country": "Ireland",
+        "logo": "https://media.api-sports.io/football/leagues/357.png",
+        "flag": "https://media.api-sports.io/flags/ie.svg",
+        "season": 2026,
+        "round": "Regular Season - 25",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3854,
+          "name": "Shelbourne",
+          "logo": "https://media.api-sports.io/football/teams/3854.png",
+          "winner": false
+        },
+        "away": {
+          "id": 3840,
+          "name": "Bohemians",
+          "logo": "https://media.api-sports.io/football/teams/3840.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
         {
           "time": {
-            "elapsed": 35,
+            "elapsed": 1,
             "extra": null
           },
           "team": {
-            "id": 22823,
-            "name": "Melbourne Victory II",
-            "logo": "https://media.api-sports.io/football/teams/22823.png"
+            "id": 3840,
+            "name": "Bohemians",
+            "logo": "https://media.api-sports.io/football/teams/3840.png"
+          },
+          "player": {
+            "id": 303560,
+            "name": "H. Vaughan"
+          },
+          "assist": {
+            "id": 116130,
+            "name": "C. Whelan"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 3840,
+            "name": "Bohemians",
+            "logo": "https://media.api-sports.io/football/teams/3840.png"
+          },
+          "player": {
+            "id": 69308,
+            "name": "R. Tierney"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Diving"
+        },
+        {
+          "time": {
+            "elapsed": 30,
+            "extra": null
+          },
+          "team": {
+            "id": 3840,
+            "name": "Bohemians",
+            "logo": "https://media.api-sports.io/football/teams/3840.png"
+          },
+          "player": {
+            "id": 116130,
+            "name": "C. Whelan"
+          },
+          "assist": {
+            "id": 69240,
+            "name": "J. Flores"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 3854,
+            "name": "Shelbourne",
+            "logo": "https://media.api-sports.io/football/teams/3854.png"
+          },
+          "player": {
+            "id": 69232,
+            "name": "S. Gannon"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1553792,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-22T18:45:00+00:00",
+        "timestamp": 1782153900,
+        "periods": {
+          "first": 1782153900,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": "Mohammed Al Hamad Stadium",
+          "city": "Kuwait"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 7
+        }
+      },
+      "league": {
+        "id": 330,
+        "name": "Premier League",
+        "country": "Kuwait",
+        "logo": "https://media.api-sports.io/football/leagues/330.png",
+        "flag": "https://media.api-sports.io/flags/kw.svg",
+        "season": 2025,
+        "round": "Championship Playoffs - 3",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3537,
+          "name": "Al Qadsia",
+          "logo": "https://media.api-sports.io/football/teams/3537.png",
+          "winner": false
+        },
+        "away": {
+          "id": 3540,
+          "name": "Kazma",
+          "logo": "https://media.api-sports.io/football/teams/3540.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 13,
+            "extra": null
+          },
+          "team": {
+            "id": 3540,
+            "name": "Kazma",
+            "logo": "https://media.api-sports.io/football/teams/3540.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Var",
+          "detail": "Goal Disallowed - video review",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 3540,
+            "name": "Kazma",
+            "logo": "https://media.api-sports.io/football/teams/3540.png"
           },
           "player": {
             "id": null,
