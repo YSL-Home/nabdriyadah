@@ -1,6 +1,6 @@
 {
   "date": "2026-06-24",
-  "fetchedAt": "2026-06-24T09:37:18.099Z",
+  "fetchedAt": "2026-06-24T09:40:53.147Z",
   "live": [
     {
       "fixture": {
@@ -1094,10 +1094,10 @@
           "city": "Taiyuan"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 84,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 8
         }
       },
       "league": {
@@ -1115,17 +1115,17 @@
           "id": 20674,
           "name": "Xi'an Ronghai",
           "logo": "https://media.api-sports.io/football/teams/20674.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 19321,
           "name": "Tai'an Tiankuang",
           "logo": "https://media.api-sports.io/football/teams/19321.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 2,
+        "home": 3,
         "away": 2
       },
       "score": {
@@ -1134,8 +1134,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 2
         },
         "extratime": {
           "home": null,
@@ -1156,7 +1156,7 @@
         "timestamp": 1782288000,
         "periods": {
           "first": 1782288000,
-          "second": null
+          "second": 1782291600
         },
         "venue": {
           "id": null,
@@ -1164,9 +1164,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 44,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 81,
           "extra": null
         }
       },
@@ -1195,7 +1195,7 @@
         }
       },
       "goals": {
-        "home": 1,
+        "home": 2,
         "away": 0
       },
       "score": {
@@ -1219,83 +1219,13 @@
     },
     {
       "fixture": {
-        "id": 1554508,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-06-24T08:45:00+00:00",
-        "timestamp": 1782290700,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 667,
-        "name": "Friendlies Clubs",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/667.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Club Friendlies",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 10533,
-          "name": "Dukla Banská Bystrica",
-          "logo": "https://media.api-sports.io/football/teams/10533.png",
-          "winner": null
-        },
-        "away": {
-          "id": 10550,
-          "name": "Tatran Prešov",
-          "logo": "https://media.api-sports.io/football/teams/10550.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
         "id": 1547856,
         "referee": null,
         "timezone": "UTC",
         "date": "2026-06-24T09:00:00+00:00",
         "timestamp": 1782291600,
         "periods": {
-          "first": null,
+          "first": 1782291600,
           "second": null
         },
         "venue": {
@@ -1304,9 +1234,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 37,
           "extra": null
         }
       },
@@ -1325,23 +1255,23 @@
           "id": 3549,
           "name": "Ružomberok",
           "logo": "https://media.api-sports.io/football/teams/3549.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 14058,
           "name": "Malženice",
           "logo": "https://media.api-sports.io/football/teams/14058.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -1412,6 +1342,76 @@
         "halftime": {
           "home": null,
           "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1554508,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-06-24T09:00:00+00:00",
+        "timestamp": 1782291600,
+        "periods": {
+          "first": 1782291600,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 37,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 10533,
+          "name": "Dukla Banská Bystrica",
+          "logo": "https://media.api-sports.io/football/teams/10533.png",
+          "winner": null
+        },
+        "away": {
+          "id": 10550,
+          "name": "Tatran Prešov",
+          "logo": "https://media.api-sports.io/football/teams/10550.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
           "home": null,
