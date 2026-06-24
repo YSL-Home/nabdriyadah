@@ -592,7 +592,7 @@ function buildPrompt(item, format, label, source, srcLang) {
 - كل فقرة يجب أن تكون طويلة جداً مثل هذا المثال:
   "شهدت المباراة توتراً ملحوظاً منذ الدقائق الأولى، حيث سعى الفريقان إلى فرض إيقاعهما على مجريات اللقاء. وتمكن الفريق المضيف من استغلال هشاشة الدفاع الزائر في الشوط الأول، مسجلاً هدف التقدم عبر هجمة مرتدة سريعة استغرقت أقل من ثلاثين ثانية من البداية إلى النهاية."
 - كل فقرة = 90 إلى 120 كلمة عربية بالضبط
-- المجموع الإجمالي: لا يقل عن 650 كلمة
+- المجموع الإجمالي: لا يقل عن 800 كلمة
 - البنية: [1]مقدمة [2]سياق [3]تفاصيل [4]تحليل [5]أرقام [6]توقعات [7]خلاصة
 - أسلوب: صحفي تحليلي معمق (الجزيرة / بي بي سي عربي)
 - لا ماركداون، لا نقاط، فقرات نثرية فحسب
@@ -667,10 +667,11 @@ async function rewriteArticle(item, index) {
     console.log(`  ⚠ Content after sanitize: only ${finalWords}w — checking raw content: "${(parsed.content||"").slice(0,200).replace(/\n/g,"↵")}"`);
   }
 
-  // ── Validation post-génération : si contenu < 400 mots, appel de continuation ──
+  // ── Validation post-génération : si contenu < 600 mots, appel de continuation ──
+  // 600 mots = seuil de sécurité AdSense (évite le "thin content")
   let finalContent = content;
-  if (finalWords < 400 && finalContent) {
-    console.log(`  ↩ Contenu trop court (${finalWords}w < 400w) — appel de continuation...`);
+  if (finalWords < 600 && finalContent) {
+    console.log(`  ↩ Contenu trop court (${finalWords}w < 600w) — appel de continuation...`);
     const continuationPrompt = `${finalContent}
 
 أكمل المقال وأضف 3 فقرات إضافية من 90-120 كلمة لكل فقرة. اكتب الفقرات مباشرة بدون JSON، بالعربية الفصحى، أسلوب صحفي.`;
