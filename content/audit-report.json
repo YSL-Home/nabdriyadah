@@ -1,21 +1,33 @@
 {
-  "date": "2026-06-24T00:00:32.673Z",
-  "total": 2243,
+  "date": "2026-06-24T03:44:25.441Z",
+  "total": 2252,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 16,
+      "count": 13,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 16,
+      "count": 13,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ft-j56tfb",
+          "duplicate_of": "ft-1jevy9"
+        },
+        {
+          "slug": "ft-1cp4do",
+          "duplicate_of": "ft-1jevy9"
+        },
+        {
+          "slug": "ft-2sphe",
+          "duplicate_of": "ft-1a9d07"
+        },
         {
           "slug": "ft-1extjn",
           "duplicate_of": "ft-5y4tfb"
@@ -34,11 +46,15 @@
         },
         {
           "slug": "ft-1sekh0",
-          "duplicate_of": "ft-2sphe"
+          "duplicate_of": "ft-1a9d07"
         },
         {
           "slug": "ft-1xvf9t",
           "duplicate_of": "ft-2ijdkg"
+        },
+        {
+          "slug": "ft-19phc7",
+          "duplicate_of": "ft-11e3zd"
         },
         {
           "slug": "ft-12cya0",
@@ -253,12 +269,16 @@
           "duplicate_of": "ft-95059"
         },
         {
+          "slug": "bball-mfzjwx-1782247394981",
+          "duplicate_of": "bball-mfzjwx-1782260835621"
+        },
+        {
           "slug": "bball-mfzjwx-1782206321503",
-          "duplicate_of": "bball-mfzjwx-1782247394981"
+          "duplicate_of": "bball-mfzjwx-1782260835621"
         },
         {
           "slug": "bball-mfzjwx",
-          "duplicate_of": "bball-mfzjwx-1782247394981"
+          "duplicate_of": "bball-mfzjwx-1782260835621"
         },
         {
           "slug": "ft-iexuyj-1781860265309",
@@ -2787,9 +2807,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 16,
-    "missing_fr_title": 16,
+    "missing_en_title": 13,
+    "missing_fr_title": 13,
     "sport_mismatches_fixed": 0,
-    "duplicates": 691
+    "duplicates": 696
   }
 }
