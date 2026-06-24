@@ -33,8 +33,8 @@ const GROQ_MODEL_8B   = "llama-3.1-8b-instant";      // 131072 TPM — fallback 
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 
 // ── Paramètres ────────────────────────────────────────────────────────────
-const MAX_PER_RUN       = 150;   // 150/run × 24 runs/jour = 3600/jour
-const MIN_AR_WORDS      = 600;   // en dessous = article "court" à upgrader
+const MAX_PER_RUN       = 200;   // 200/run × 48 runs/jour = 9600/jour
+const MIN_AR_WORDS      = 800;   // en dessous = article "court" à upgrader (cible AdSense)
 const DELAY_MS          = 5000;  // 5s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
 const RECENT_DAYS       = 60;    // priorité aux articles < 60 jours (élargi de 14 → 60 pour couvrir plus d'articles)
 
@@ -215,8 +215,8 @@ ${existing ? "المحتوى الموجود (مختصر): " + existing : ""}
 
 ⚠️ قواعد صارمة:
 - 7 فقرات مختلفة تماماً — لا تكرار لأي جملة أو فكرة
-- كل فقرة: جملة افتتاحية + 4-5 جمل تحليلية = 90-120 كلمة
-- الإجمالي: لا يقل عن 650 كلمة
+- كل فقرة: جملة افتتاحية + 5-6 جمل تحليلية = 110-140 كلمة
+- الإجمالي: لا يقل عن 850 كلمة
 - البنية: [1]مقدمة [2]سياق [3]تفاصيل [4]تحليل [5]أرقام [6]توقعات [7]خلاصة
 - أسلوب: صحفي تحليلي (الجزيرة / بي بي سي عربي)
 - لا ماركداون، لا نقاط، فقرات نثرية فقط
@@ -328,7 +328,7 @@ async function main() {
           // Prompt de continuation si le contenu est trop court (<400 mots arabes)
           if (newWords < 400) {
             console.log(`  ↩ trop court (${newWords}w) — continuation...`);
-            const continuePrompt = `${buildUpgradePrompt(article)}\n\nالمحتوى الموجود ناقص (${newWords} كلمة فقط). أكمل وأعد الكتابة بالكامل مع التأكيد على الوصول لـ 650 كلمة على الأقل. الرد بـ JSON فقط.`;
+            const continuePrompt = `${buildUpgradePrompt(article)}\n\nالمحتوى الموجود ناقص (${newWords} كلمة فقط). أكمل وأعد الكتابة بالكامل مع التأكيد على الوصول لـ 850 كلمة على الأقل. الرد بـ JSON فقط.`;
             const raw2 = await callLLM(continuePrompt);
             if (raw2) {
               const parsed2 = parseResponse(raw2);
