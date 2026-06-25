@@ -35,7 +35,7 @@ const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
 // ── Paramètres ────────────────────────────────────────────────────────────
 const MAX_PER_RUN       = 200;   // 200/run × 48 runs/jour = 9600/jour
 const MIN_AR_WORDS      = 800;   // en dessous = article "court" à upgrader (cible AdSense)
-const DELAY_MS          = 5000;  // 5s entre appels — respecte TPM Groq 70B (6000/min ÷ 800tok = 8s mini)
+const DELAY_MS          = 3000;  // 3s entre appels
 const RECENT_DAYS       = 60;    // priorité aux articles < 60 jours (élargi de 14 → 60 pour couvrir plus d'articles)
 
 if (!GOOGLE_API_KEY && !GOOGLE_API_KEY_2 && !GOOGLE_API_KEY_3 && !GOOGLE_API_KEY_4 && !GOOGLE_API_KEY_5 && !GOOGLE_API_KEY_6 && !GROQ_API_KEY && !ANTHROPIC_API_KEY && !OPENAI_API_KEY) {
@@ -123,15 +123,19 @@ async function _callGroqModel(model, deadFlag, setDead, prompt) {
     if (!res.ok) {
       const msg = JSON.stringify(d?.error || d);
       if (/rate_limit_exceeded/i.test(msg)) {
-        console.log(`  ↩ Groq ${model} rate limit — attente 30s...`);
-        await sleep(30000);
-        const r2 = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ model, temperature: 0.35, max_tokens: 2500, messages: [{ role: "user", content: prompt }] })
-        });
-        const d2 = await r2.json();
-        if (r2.ok) return d2?.choices?.[0]?.message?.content || null;
+        for (const wait of [20000, 40000]) {
+          console.log(`  ↩ Groq ${model} rate limit — attente ${wait/1000}s...`);
+          await sleep(wait);
+          const r2 = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ model, temperature: 0.35, max_tokens: 2500, messages: [{ role: "user", content: prompt }] })
+          });
+          const d2 = await r2.json();
+          if (r2.ok) return d2?.choices?.[0]?.message?.content || null;
+          const msg2 = JSON.stringify(d2?.error || d2);
+          if (!/rate_limit_exceeded/i.test(msg2)) break;
+        }
       }
       if (isFatal(msg)) { setDead(); }
       return null;
@@ -325,8 +329,8 @@ async function main() {
           let finalContent = parsed.content;
           let finalFaq = parsed.faq;
 
-          // Prompt de continuation si le contenu est trop court (<400 mots arabes)
-          if (newWords < 400) {
+          // Prompt de continuation si le contenu est trop court (<650 mots arabes)
+          if (newWords < 650) {
             console.log(`  ↩ trop court (${newWords}w) — continuation...`);
             const continuePrompt = `${buildUpgradePrompt(article)}\n\nالمحتوى الموجود ناقص (${newWords} كلمة فقط). أكمل وأعد الكتابة بالكامل مع التأكيد على الوصول لـ 850 كلمة على الأقل. الرد بـ JSON فقط.`;
             const raw2 = await callLLM(continuePrompt);
