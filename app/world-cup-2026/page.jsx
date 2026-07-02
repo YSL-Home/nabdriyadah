@@ -32,18 +32,23 @@ function timeLabel(iso) {
   return new Date(iso).toLocaleTimeString("ar-EG-u-nu-latn", { hour: "2-digit", minute: "2-digit" });
 }
 
-// Translate group round → Arabic. e.g. "Group Stage - 1" / "Group A"
+// Translate group round → Arabic. e.g. "Group Stage - 1" / "Round of 16"
 function roundLabel(round = "") {
   const r = round.toLowerCase();
   if (r.includes("final") && !r.includes("semi") && !r.includes("quarter")) return "النهائي";
   if (r.includes("semi")) return "نصف النهائي";
   if (r.includes("quarter")) return "ربع النهائي";
-  if (r.includes("16")) return "دور الـ16";
+  if (r.includes("16") || r.includes("round of 16")) return "دور الـ16";
   if (r.includes("3rd") || r.includes("third")) return "تحديد المركز الثالث";
   const g = round.match(/Group ([A-L])/i);
   if (g) return `المجموعة ${g[1]}`;
   if (r.includes("group")) return "دور المجموعات";
   return round;
+}
+
+function isKnockout(round = "") {
+  const r = round.toLowerCase();
+  return r.includes("16") || r.includes("quarter") || r.includes("semi") || r.includes("final") || r.includes("3rd") || r.includes("third");
 }
 
 // ── Match row ────────────────────────────────────────────────────────────────
@@ -81,42 +86,38 @@ function MatchRow({ m }) {
   );
 }
 
-// ── Standings table (computed from finished group matches) ───────────────────
+// ── Standings: all group-stage teams ranked by points ────────────────────────
 function computeStandings(matches) {
-  const groups = {};
+  const teams = {};
   for (const m of matches) {
-    const g = (m.league?.round || "").match(/Group ([A-L])/i);
-    if (!g) continue;
-    const key = g[1];
-    groups[key] ||= {};
+    const round = m.league?.round || "";
+    if (isKnockout(round)) continue; // skip knockout rounds
     const s = m.fixture?.status?.short;
     for (const side of ["home", "away"]) {
-      const t = m.teams[side];
+      const t = m.teams?.[side];
       if (!t?.id) continue;
-      groups[key][t.id] ||= { name: t.name, logo: t.logo, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0, Pts: 0 };
+      teams[t.id] ||= { name: t.name, logo: t.logo, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0, Pts: 0 };
     }
     if (!isFinished(s) || m.goals?.home == null) continue;
-    const h = groups[key][m.teams.home.id], a = groups[key][m.teams.away.id];
+    const h = teams[m.teams.home.id], a = teams[m.teams.away.id];
+    if (!h || !a) continue;
     const gh = m.goals.home, ga = m.goals.away;
     h.P++; a.P++; h.GF += gh; h.GA += ga; a.GF += ga; a.GA += gh;
     if (gh > ga) { h.W++; a.L++; h.Pts += 3; }
     else if (gh < ga) { a.W++; h.L++; a.Pts += 3; }
     else { h.D++; a.D++; h.Pts++; a.Pts++; }
   }
-  const out = {};
-  for (const k of Object.keys(groups).sort()) {
-    out[k] = Object.values(groups[k]).sort((x, y) => y.Pts - x.Pts || (y.GF - y.GA) - (x.GF - x.GA) || y.GF - x.GF);
-  }
-  return out;
+  return Object.values(teams).sort((x, y) => y.Pts - x.Pts || (y.GF - y.GA) - (x.GF - x.GA) || y.GF - x.GF);
 }
 
-function GroupTable({ letter, rows }) {
+function StandingsTable({ rows }) {
   return (
     <div style={{ background: "var(--card, #fff)", borderRadius: "16px", padding: "14px", border: "1.5px solid var(--border, #e5e7eb)" }}>
-      <h3 style={{ margin: "0 0 10px", fontSize: "16px", fontWeight: 900, color: "var(--text, #111827)" }}>المجموعة {letter}</h3>
+      <h3 style={{ margin: "0 0 10px", fontSize: "16px", fontWeight: 900, color: "var(--text, #111827)" }}>ترتيب دور المجموعات</h3>
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
         <thead>
           <tr style={{ color: "#9ca3af", fontWeight: 800 }}>
+            <th style={{ textAlign: "right", padding: "4px" }}>#</th>
             <th style={{ textAlign: "right", padding: "4px" }}>الفريق</th>
             <th style={{ padding: "4px" }}>لعب</th>
             <th style={{ padding: "4px" }}>+/-</th>
@@ -125,10 +126,13 @@ function GroupTable({ letter, rows }) {
         </thead>
         <tbody>
           {rows.map((t, i) => (
-            <tr key={i} style={{ borderTop: "1px solid var(--border, #f3f4f6)", color: "var(--text, #111827)", fontWeight: i < 2 ? 800 : 500, background: i < 2 ? "#16a34a11" : "transparent" }}>
-              <td style={{ padding: "6px 4px", display: "flex", alignItems: "center", gap: "6px" }}>
-                <img src={t.logo} alt="" style={{ width: "18px", height: "18px", objectFit: "contain" }} />
-                {t.name}
+            <tr key={i} style={{ borderTop: "1px solid var(--border, #f3f4f6)", color: "var(--text, #111827)", fontWeight: i < 32 ? 600 : 400 }}>
+              <td style={{ padding: "6px 4px", color: "#9ca3af", fontWeight: 700 }}>{i + 1}</td>
+              <td style={{ padding: "6px 4px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <img src={t.logo} alt="" style={{ width: "18px", height: "18px", objectFit: "contain" }} />
+                  {t.name}
+                </div>
               </td>
               <td style={{ textAlign: "center", padding: "6px 4px" }}>{t.P}</td>
               <td style={{ textAlign: "center", padding: "6px 4px" }}>{t.GF - t.GA > 0 ? "+" : ""}{t.GF - t.GA}</td>
@@ -235,6 +239,14 @@ export default function WorldCupPage() {
       })),
   []);
 
+  // Knockout matches (R16, QF, SF, F) from today's API + JSON
+  const knockoutMatches = useMemo(() => {
+    const all = [...matches, ...playedNormalized];
+    return all
+      .filter(m => isKnockout(m.league?.round || ""))
+      .sort((a, b) => (a.fixture?.timestamp || 0) - (b.fixture?.timestamp || 0));
+  }, [matches, playedNormalized]);
+
   // Union live/aujourd'hui (API) + matchs joués (JSON), dédupliqués par paire+date
   const allMatches = useMemo(() => {
     const seen = new Set();
@@ -259,6 +271,7 @@ export default function WorldCupPage() {
   }, [allMatches]);
 
   const standings = useMemo(() => computeStandings(allMatches), [allMatches]);
+  const hasKnockout = knockoutMatches.length > 0;
 
   // Matchs joués + vidéos (depuis le JSON statique, plus récent en premier)
   const highlights = useMemo(() =>
@@ -291,10 +304,15 @@ export default function WorldCupPage() {
         )}
 
         {/* Tabs */}
-        <div style={{ display: "flex", gap: "8px", marginBottom: "18px" }}>
-          {[["calendar", "📅 المباريات"], ["highlights", "🎬 الأهداف"], ["standings", "🏆 الترتيب"]].map(([k, lbl]) => (
+        <div style={{ display: "flex", gap: "8px", marginBottom: "18px", flexWrap: "wrap" }}>
+          {[
+            ["calendar", "📅 المباريات"],
+            ...(hasKnockout ? [["knockout", "⚔️ الأدوار الإقصائية"]] : []),
+            ["highlights", "🎬 الأهداف"],
+            ["standings", "📊 ترتيب المجموعات"],
+          ].map(([k, lbl]) => (
             <button key={k} onClick={() => setTab(k)}
-              style={{ flex: 1, padding: "11px", borderRadius: "12px", border: "none", cursor: "pointer", fontSize: "15px", fontWeight: 800,
+              style={{ flex: 1, minWidth: "120px", padding: "11px", borderRadius: "12px", border: "none", cursor: "pointer", fontSize: "14px", fontWeight: 800,
                 background: tab === k ? "#16a34a" : "var(--card, #fff)", color: tab === k ? "#fff" : "var(--text, #374151)",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
               {lbl}
@@ -328,14 +346,44 @@ export default function WorldCupPage() {
           )
         )}
 
-        {/* Standings */}
-        {!loading && tab === "standings" && (
-          Object.keys(standings).length > 0 ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))", gap: "14px" }}>
-              {Object.entries(standings).map(([letter, rows]) => <GroupTable key={letter} letter={letter} rows={rows} />)}
+        {/* Knockout bracket */}
+        {tab === "knockout" && (
+          knockoutMatches.length > 0 ? (
+            <div>
+              {["Round of 16", "Quarter-Finals", "Semi-Finals", "3rd Place Final", "Final"].map(phase => {
+                const phaseMatches = knockoutMatches.filter(m => {
+                  const r = (m.league?.round || "").toLowerCase();
+                  if (phase === "Round of 16") return r.includes("16");
+                  if (phase === "Quarter-Finals") return r.includes("quarter");
+                  if (phase === "Semi-Finals") return r.includes("semi");
+                  if (phase === "3rd Place Final") return r.includes("3rd") || r.includes("third");
+                  if (phase === "Final") return r.includes("final") && !r.includes("semi") && !r.includes("quarter") && !r.includes("3rd") && !r.includes("third");
+                  return false;
+                });
+                if (!phaseMatches.length) return null;
+                return (
+                  <section key={phase} style={{ marginBottom: "22px" }}>
+                    <h2 style={{ margin: "0 0 10px", fontSize: "18px", fontWeight: 900, color: "var(--text, #111827)" }}>
+                      <span style={{ background: "#16a34a", color: "#fff", borderRadius: "8px", padding: "3px 12px", fontSize: "14px" }}>{roundLabel(phaseMatches[0].league?.round || phase)}</span>
+                    </h2>
+                    <div style={{ display: "grid", gap: "8px" }}>
+                      {phaseMatches.map(m => <MatchRow key={m.fixture?.id} m={m} />)}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
           ) : (
-            <div style={{ background: "var(--card, #fff)", borderRadius: "20px", padding: "40px", textAlign: "center", color: "#6b7280" }}>سيُعرض ترتيب المجموعات بعد انطلاق المباريات.</div>
+            <div style={{ background: "var(--card, #fff)", borderRadius: "20px", padding: "40px", textAlign: "center", color: "#6b7280" }}>لم تنطلق الأدوار الإقصائية بعد.</div>
+          )
+        )}
+
+        {/* Standings */}
+        {!loading && tab === "standings" && (
+          standings.length > 0 ? (
+            <StandingsTable rows={standings} />
+          ) : (
+            <div style={{ background: "var(--card, #fff)", borderRadius: "20px", padding: "40px", textAlign: "center", color: "#6b7280", fontSize: "16px" }}>لا تتوفر بيانات ترتيب المجموعات حالياً.</div>
           )
         )}
       </div>

@@ -32,14 +32,28 @@ function loadExisting() {
 const WC_LEAGUE_ID = 1;
 
 // Le plan gratuit ne répond pas à league=1&season=2026, mais répond à fixtures?date=.
-// On interroge hier + aujourd'hui (2 appels), on filtre la CDM terminée. Cumulatif via le JSON.
-async function fetchFinishedMatches() {
-  const dates = [];
+// On interroge depuis le début du tournoi (11 juin) jusqu'à aujourd'hui + 1.
+// Idempotent : seuls les matchs sans videoId déjà en cache sont retraités.
+async function fetchFinishedMatches(existing) {
   const today = new Date();
-  for (let off = 0; off >= -1; off--) {
-    const d = new Date(today); d.setUTCDate(d.getUTCDate() + off);
+  // Trouver la date la plus récente déjà dans le JSON (pour ne pas refetch depuis le début si déjà à jour)
+  const lastKnown = Object.values(existing).reduce((max, m) => {
+    const d = (m.date || "").slice(0, 10);
+    return d > max ? d : max;
+  }, "2026-06-10");
+
+  // Fetch depuis (lastKnown - 2 jours) jusqu'à aujourd'hui + 1 (pour les matchs du lendemain)
+  const startDate = new Date(lastKnown);
+  startDate.setUTCDate(startDate.getUTCDate() - 2);
+  const endDate = new Date(today);
+  endDate.setUTCDate(endDate.getUTCDate() + 1);
+
+  const dates = [];
+  for (let d = new Date(startDate); d <= endDate; d.setUTCDate(d.getUTCDate() + 1)) {
     dates.push(d.toISOString().slice(0, 10));
   }
+  console.log(`  📅 Fetch ${dates[0]} → ${dates[dates.length - 1]} (${dates.length} jours)`);
+
   const out = [];
   for (const date of dates) {
     try {
@@ -51,7 +65,7 @@ async function fetchFinishedMatches() {
     } catch (e) {
       console.warn(`  ✗ date ${date}: ${e.message}`);
     }
-    await sleep(1500); // respecter 10 req/min du plan gratuit
+    await sleep(1500);
   }
   return out;
 }
@@ -80,7 +94,7 @@ async function main() {
   const existing = loadExisting();
   let matches;
   try {
-    matches = await fetchFinishedMatches();
+    matches = await fetchFinishedMatches(existing);
   } catch (e) {
     console.warn("⚠ Impossible de récupérer les matchs:", e.message);
     process.exit(0);
