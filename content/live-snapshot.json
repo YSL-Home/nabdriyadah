@@ -1,51 +1,609 @@
 {
   "date": "2026-07-03",
-  "fetchedAt": "2026-07-03T08:26:25.661Z",
+  "fetchedAt": "2026-07-03T11:07:38.778Z",
   "live": [
     {
       "fixture": {
-        "id": 1559548,
+        "id": 1522134,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-07-03T08:00:00+00:00",
-        "timestamp": 1783065600,
+        "date": "2026-07-03T10:30:00+00:00",
+        "timestamp": 1783074600,
         "periods": {
-          "first": 1783065600,
+          "first": 1783074600,
           "second": null
         },
         "venue": {
           "id": null,
+          "name": "John Cain Memorial Park",
+          "city": "Melbourne"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 36,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 836,
+        "name": "Victoria NPL 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/836.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 19",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 16788,
+          "name": "Northcote City",
+          "logo": "https://media.api-sports.io/football/teams/16788.png",
+          "winner": false
+        },
+        "away": {
+          "id": 24077,
+          "name": "Melbourne Srbija",
+          "logo": "https://media.api-sports.io/football/teams/24077.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 8,
+            "extra": null
+          },
+          "team": {
+            "id": 24077,
+            "name": "Melbourne Srbija",
+            "logo": "https://media.api-sports.io/football/teams/24077.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 35,
+            "extra": null
+          },
+          "team": {
+            "id": 24077,
+            "name": "Melbourne Srbija",
+            "logo": "https://media.api-sports.io/football/teams/24077.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1522138,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:30:00+00:00",
+        "timestamp": 1783074600,
+        "periods": {
+          "first": 1783074600,
+          "second": null
+        },
+        "venue": {
+          "id": 2577,
+          "name": "Knights Stadium",
+          "city": "Melbourne"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 37,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 836,
+        "name": "Victoria NPL 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/836.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 19",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3807,
+          "name": "Melbourne Knights",
+          "logo": "https://media.api-sports.io/football/teams/3807.png",
+          "winner": true
+        },
+        "away": {
+          "id": 16781,
+          "name": "Bulleen Lions",
+          "logo": "https://media.api-sports.io/football/teams/16781.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 31,
+            "extra": null
+          },
+          "team": {
+            "id": 3807,
+            "name": "Melbourne Knights",
+            "logo": "https://media.api-sports.io/football/teams/3807.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1522208,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:30:00+00:00",
+        "timestamp": 1783074600,
+        "periods": {
+          "first": 1783074600,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
           "name": null,
           "city": null
         },
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 26,
+          "elapsed": 36,
           "extra": null
         }
       },
       "league": {
-        "id": 764,
-        "name": "Premier League",
-        "country": "Mongolia",
-        "logo": "https://media.api-sports.io/football/leagues/764.png",
-        "flag": "https://media.api-sports.io/flags/mn.svg",
+        "id": 836,
+        "name": "Victoria NPL 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/836.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
         "season": 2026,
-        "round": "Regular Season - 23",
+        "round": "Regular Season - 19",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 22067,
-          "name": "Central Stallions",
-          "logo": "https://media.api-sports.io/football/teams/22067.png",
+          "id": 27510,
+          "name": "Brunswick Juventus FC",
+          "logo": "https://media.api-sports.io/football/teams/27510.png",
+          "winner": true
+        },
+        "away": {
+          "id": 16780,
+          "name": "Brunswick City",
+          "logo": "https://media.api-sports.io/football/teams/16780.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 1,
+            "extra": null
+          },
+          "team": {
+            "id": 27510,
+            "name": "Brunswick Juventus FC",
+            "logo": "https://media.api-sports.io/football/teams/27510.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 12,
+            "extra": null
+          },
+          "team": {
+            "id": 27510,
+            "name": "Brunswick Juventus FC",
+            "logo": "https://media.api-sports.io/football/teams/27510.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1524166,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:30:00+00:00",
+        "timestamp": 1783074600,
+        "periods": {
+          "first": 1783074600,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": "Moreton Bay Central Sports Complex",
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 36,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 833,
+        "name": "Queensland Premier League",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/833.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 17",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3756,
+          "name": "Caboolture",
+          "logo": "https://media.api-sports.io/football/teams/3756.png",
           "winner": null
         },
         "away": {
-          "id": 16185,
-          "name": "Deren",
-          "logo": "https://media.api-sports.io/football/teams/16185.png",
+          "id": 10223,
+          "name": "SC Wanderers",
+          "logo": "https://media.api-sports.io/football/teams/10223.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 9,
+            "extra": null
+          },
+          "team": {
+            "id": 3756,
+            "name": "Caboolture",
+            "logo": "https://media.api-sports.io/football/teams/3756.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1524167,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:30:00+00:00",
+        "timestamp": 1783074600,
+        "periods": {
+          "first": 1783074600,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": "Briggs Rd Sporting Complex",
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 33,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 833,
+        "name": "Queensland Premier League",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/833.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 17",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 22895,
+          "name": "Ipswich",
+          "logo": "https://media.api-sports.io/football/teams/22895.png",
+          "winner": false
+        },
+        "away": {
+          "id": 11178,
+          "name": "Holland Park Hawks",
+          "logo": "https://media.api-sports.io/football/teams/11178.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 7,
+            "extra": null
+          },
+          "team": {
+            "id": 22895,
+            "name": "Ipswich",
+            "logo": "https://media.api-sports.io/football/teams/22895.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 11178,
+            "name": "Holland Park Hawks",
+            "logo": "https://media.api-sports.io/football/teams/11178.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 29,
+            "extra": null
+          },
+          "team": {
+            "id": 11178,
+            "name": "Holland Park Hawks",
+            "logo": "https://media.api-sports.io/football/teams/11178.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1527096,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T11:00:00+00:00",
+        "timestamp": 1783076400,
+        "periods": {
+          "first": 1783076400,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Ellis Park",
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 2,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 194,
+        "name": "South Australia NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/194.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 17",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3786,
+          "name": "Adelaide Comets",
+          "logo": "https://media.api-sports.io/football/teams/3786.png",
+          "winner": null
+        },
+        "away": {
+          "id": 3792,
+          "name": "Croydon Kings",
+          "logo": "https://media.api-sports.io/football/teams/3792.png",
           "winner": null
         }
       },
@@ -75,13 +633,13 @@
     },
     {
       "fixture": {
-        "id": 1560500,
+        "id": 1550505,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-07-03T08:00:00+00:00",
-        "timestamp": 1783065600,
+        "date": "2026-07-03T11:00:00+00:00",
+        "timestamp": 1783076400,
         "periods": {
-          "first": 1783065600,
+          "first": 1783076400,
           "second": null
         },
         "venue": {
@@ -92,7 +650,7 @@
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 28,
+          "elapsed": 6,
           "extra": null
         }
       },
@@ -108,15 +666,157 @@
       },
       "teams": {
         "home": {
-          "id": 851,
-          "name": "Cherno More Varna",
-          "logo": "https://media.api-sports.io/football/teams/851.png",
+          "id": 402,
+          "name": "Aalborg",
+          "logo": "https://media.api-sports.io/football/teams/402.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2070,
+          "name": "Viborg",
+          "logo": "https://media.api-sports.io/football/teams/2070.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1559549,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T11:00:00+00:00",
+        "timestamp": 1783076400,
+        "periods": {
+          "first": 1783076400,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 8,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 764,
+        "name": "Premier League",
+        "country": "Mongolia",
+        "logo": "https://media.api-sports.io/football/leagues/764.png",
+        "flag": "https://media.api-sports.io/flags/mn.svg",
+        "season": 2026,
+        "round": "Regular Season - 23",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 16187,
+          "name": "Khangarid",
+          "logo": "https://media.api-sports.io/football/teams/16187.png",
+          "winner": null
+        },
+        "away": {
+          "id": 16854,
+          "name": "Ulaanbaatar",
+          "logo": "https://media.api-sports.io/football/teams/16854.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1519217,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": 1783072800,
+          "second": 1783076400
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 51,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 238,
+        "name": "Youth Championship",
+        "country": "Russia",
+        "logo": "https://media.api-sports.io/football/leagues/238.png",
+        "flag": "https://media.api-sports.io/flags/ru.svg",
+        "season": 2026,
+        "round": "Regular Season - 13",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 27473,
+          "name": "Almaz Antey U19",
+          "logo": "https://media.api-sports.io/football/teams/27473.png",
           "winner": true
         },
         "away": {
-          "id": 1418,
-          "name": "Spartak Pleven",
-          "logo": "https://media.api-sports.io/football/teams/1418.png",
+          "id": 9226,
+          "name": "Rubin Kazan U20",
+          "logo": "https://media.api-sports.io/football/teams/9226.png",
           "winner": false
         }
       },
@@ -145,13 +845,151 @@
       "events": [
         {
           "time": {
-            "elapsed": 1,
+            "elapsed": 42,
             "extra": null
           },
           "team": {
-            "id": 851,
-            "name": "Cherno More Varna",
-            "logo": "https://media.api-sports.io/football/teams/851.png"
+            "id": 27473,
+            "name": "Almaz Antey U19",
+            "logo": "https://media.api-sports.io/football/teams/27473.png"
+          },
+          "player": {
+            "id": 660585,
+            "name": "R. Bogomolov"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Own Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1521968,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T09:30:00+00:00",
+        "timestamp": 1783071000,
+        "periods": {
+          "first": 1783071000,
+          "second": 1783074600
+        },
+        "venue": {
+          "id": null,
+          "name": "Olympic Park Stadium",
+          "city": "Melbourne"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 76,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 195,
+        "name": "Victoria NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/195.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 19",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3803,
+          "name": "Heidelberg United",
+          "logo": "https://media.api-sports.io/football/teams/3803.png",
+          "winner": null
+        },
+        "away": {
+          "id": 9978,
+          "name": "St. Albans Saints",
+          "logo": "https://media.api-sports.io/football/teams/9978.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 3803,
+            "name": "Heidelberg United",
+            "logo": "https://media.api-sports.io/football/teams/3803.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Missed Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 34,
+            "extra": null
+          },
+          "team": {
+            "id": 3803,
+            "name": "Heidelberg United",
+            "logo": "https://media.api-sports.io/football/teams/3803.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 69,
+            "extra": null
+          },
+          "team": {
+            "id": 9978,
+            "name": "St. Albans Saints",
+            "logo": "https://media.api-sports.io/football/teams/9978.png"
           },
           "player": {
             "id": null,
@@ -169,14 +1007,317 @@
     },
     {
       "fixture": {
-        "id": 1560503,
+        "id": 1521969,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-07-03T08:00:00+00:00",
-        "timestamp": 1783065600,
+        "date": "2026-07-03T09:30:00+00:00",
+        "timestamp": 1783071000,
         "periods": {
-          "first": 1783065600,
-          "second": null
+          "first": 1783071000,
+          "second": 1783074600
+        },
+        "venue": {
+          "id": 2573,
+          "name": "Green Gully Reserve",
+          "city": "Melbourne"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 77,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 195,
+        "name": "Victoria NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/195.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 19",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3802,
+          "name": "Green Gully",
+          "logo": "https://media.api-sports.io/football/teams/3802.png",
+          "winner": true
+        },
+        "away": {
+          "id": 3799,
+          "name": "Bentleigh Greens",
+          "logo": "https://media.api-sports.io/football/teams/3799.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 3,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 11,
+            "extra": null
+          },
+          "team": {
+            "id": 3802,
+            "name": "Green Gully",
+            "logo": "https://media.api-sports.io/football/teams/3802.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 3802,
+            "name": "Green Gully",
+            "logo": "https://media.api-sports.io/football/teams/3802.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 55,
+            "extra": null
+          },
+          "team": {
+            "id": 3802,
+            "name": "Green Gully",
+            "logo": "https://media.api-sports.io/football/teams/3802.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1524065,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T09:30:00+00:00",
+        "timestamp": 1783071000,
+        "periods": {
+          "first": 1783071000,
+          "second": 1783074600
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 81,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 482,
+        "name": "Queensland NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/482.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 17",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 11184,
+          "name": "WDSC Wolves",
+          "logo": "https://media.api-sports.io/football/teams/11184.png",
+          "winner": false
+        },
+        "away": {
+          "id": 11182,
+          "name": "Rochedale Rovers",
+          "logo": "https://media.api-sports.io/football/teams/11182.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 69,
+            "extra": null
+          },
+          "team": {
+            "id": 11182,
+            "name": "Rochedale Rovers",
+            "logo": "https://media.api-sports.io/football/teams/11182.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1527330,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": 1783072800,
+          "second": 1783076400
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 48,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 834,
+        "name": "South Australia State League 1",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/834.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 17",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3787,
+          "name": "Adelaide Olympic",
+          "logo": "https://media.api-sports.io/football/teams/3787.png",
+          "winner": null
+        },
+        "away": {
+          "id": 22807,
+          "name": "Salisbury United",
+          "logo": "https://media.api-sports.io/football/teams/22807.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1541115,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": 1783072800,
+          "second": 1783076400
         },
         "venue": {
           "id": null,
@@ -184,9 +1325,405 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 26,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 48,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 363,
+        "name": "Premier League",
+        "country": "Ethiopia",
+        "logo": "https://media.api-sports.io/football/leagues/363.png",
+        "flag": "https://media.api-sports.io/flags/et.svg",
+        "season": 2025,
+        "round": "Regular Season - 38",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 4124,
+          "name": "Welayta Dicha",
+          "logo": "https://media.api-sports.io/football/teams/4124.png",
+          "winner": null
+        },
+        "away": {
+          "id": 4116,
+          "name": "Ethiopia Bunna",
+          "logo": "https://media.api-sports.io/football/teams/4116.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1541318,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T09:45:00+00:00",
+        "timestamp": 1783071900,
+        "periods": {
+          "first": 1783071900,
+          "second": 1783075500
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 64,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1226,
+        "name": "Victoria Premier League 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/1226.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 19",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3806,
+          "name": "Kingston City",
+          "logo": "https://media.api-sports.io/football/teams/3806.png",
+          "winner": true
+        },
+        "away": {
+          "id": 26150,
+          "name": "Nunawading",
+          "logo": "https://media.api-sports.io/football/teams/26150.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 3806,
+            "name": "Kingston City",
+            "logo": "https://media.api-sports.io/football/teams/3806.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 38,
+            "extra": null
+          },
+          "team": {
+            "id": 3806,
+            "name": "Kingston City",
+            "logo": "https://media.api-sports.io/football/teams/3806.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1541441,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T09:30:00+00:00",
+        "timestamp": 1783071000,
+        "periods": {
+          "first": 1783071000,
+          "second": 1783074600
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 76,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1226,
+        "name": "Victoria Premier League 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/1226.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 19",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 27695,
+          "name": "Box Hill",
+          "logo": "https://media.api-sports.io/football/teams/27695.png",
+          "winner": false
+        },
+        "away": {
+          "id": 27700,
+          "name": "Whittlesea United",
+          "logo": "https://media.api-sports.io/football/teams/27700.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 34,
+            "extra": null
+          },
+          "team": {
+            "id": 27700,
+            "name": "Whittlesea United",
+            "logo": "https://media.api-sports.io/football/teams/27700.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 27700,
+            "name": "Whittlesea United",
+            "logo": "https://media.api-sports.io/football/teams/27700.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 27695,
+            "name": "Box Hill",
+            "logo": "https://media.api-sports.io/football/teams/27695.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1543591,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 50,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1031,
+        "name": "Premier League",
+        "country": "Bhutan",
+        "logo": "https://media.api-sports.io/football/leagues/1031.png",
+        "flag": "https://media.api-sports.io/flags/bt.svg",
+        "season": 2026,
+        "round": null,
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 5590,
+          "name": "Tensung",
+          "logo": "https://media.api-sports.io/football/teams/5590.png",
+          "winner": null
+        },
+        "away": {
+          "id": 5591,
+          "name": "Thimphu",
+          "logo": "https://media.api-sports.io/football/teams/5591.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1547896,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": 1783072800,
+          "second": 1783076400
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 57,
           "extra": null
         }
       },
@@ -202,15 +1739,297 @@
       },
       "teams": {
         "home": {
-          "id": 2012,
-          "name": "FC Sochi",
-          "logo": "https://media.api-sports.io/football/teams/2012.png",
+          "id": 395,
+          "name": "Vejle",
+          "logo": "https://media.api-sports.io/football/teams/395.png",
+          "winner": true
+        },
+        "away": {
+          "id": 401,
+          "name": "Randers FC",
+          "logo": "https://media.api-sports.io/football/teams/401.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 50,
+            "extra": null
+          },
+          "team": {
+            "id": 395,
+            "name": "Vejle",
+            "logo": "https://media.api-sports.io/football/teams/395.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1560498,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": 1783072800,
+          "second": 1783076400
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 61,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 2072,
+          "name": "Hvidovre",
+          "logo": "https://media.api-sports.io/football/teams/2072.png",
+          "winner": true
+        },
+        "away": {
+          "id": 2063,
+          "name": "HB Koge",
+          "logo": "https://media.api-sports.io/football/teams/2063.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 36,
+            "extra": null
+          },
+          "team": {
+            "id": 2072,
+            "name": "Hvidovre",
+            "logo": "https://media.api-sports.io/football/teams/2072.png"
+          },
+          "player": {
+            "id": 342962,
+            "name": "D. Bagou"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1517899,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": 1783072800,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 3
+        }
+      },
+      "league": {
+        "id": 835,
+        "name": "New South Wales NPL 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/835.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 22",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 27463,
+          "name": "Prospect United",
+          "logo": "https://media.api-sports.io/football/teams/27463.png",
+          "winner": null
+        },
+        "away": {
+          "id": 3766,
+          "name": "Hakoah Sydney City",
+          "logo": "https://media.api-sports.io/football/teams/3766.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 31,
+            "extra": null
+          },
+          "team": {
+            "id": 3766,
+            "name": "Hakoah Sydney City",
+            "logo": "https://media.api-sports.io/football/teams/3766.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1517900,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
+        "periods": {
+          "first": 1783072800,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 2
+        }
+      },
+      "league": {
+        "id": 835,
+        "name": "New South Wales NPL 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/835.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 22",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 27462,
+          "name": "Hurstville FC",
+          "logo": "https://media.api-sports.io/football/teams/27462.png",
           "winner": false
         },
         "away": {
-          "id": 3985,
-          "name": "Torpedo Moskva",
-          "logo": "https://media.api-sports.io/football/teams/3985.png",
+          "id": 20791,
+          "name": "Canterbury Bankstown",
+          "logo": "https://media.api-sports.io/football/teams/20791.png",
           "winner": true
         }
       },
@@ -239,17 +2058,17 @@
       "events": [
         {
           "time": {
-            "elapsed": 5,
+            "elapsed": 23,
             "extra": null
           },
           "team": {
-            "id": 3985,
-            "name": "Torpedo Moskva",
-            "logo": "https://media.api-sports.io/football/teams/3985.png"
+            "id": 20791,
+            "name": "Canterbury Bankstown",
+            "logo": "https://media.api-sports.io/football/teams/20791.png"
           },
           "player": {
-            "id": 304215,
-            "name": "Aleksey Kashtanov"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
@@ -263,48 +2082,48 @@
     },
     {
       "fixture": {
-        "id": 1541119,
+        "id": 1523757,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-07-03T07:00:00+00:00",
-        "timestamp": 1783062000,
+        "date": "2026-07-03T10:00:00+00:00",
+        "timestamp": 1783072800,
         "periods": {
-          "first": 1783062000,
-          "second": 1783065600
+          "first": 1783072800,
+          "second": null
         },
         "venue": {
-          "id": null,
+          "id": 0,
           "name": null,
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 67,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 4
         }
       },
       "league": {
-        "id": 363,
-        "name": "Premier League",
-        "country": "Ethiopia",
-        "logo": "https://media.api-sports.io/football/leagues/363.png",
-        "flag": "https://media.api-sports.io/flags/et.svg",
-        "season": 2025,
-        "round": "Regular Season - 38",
+        "id": 481,
+        "name": "Northern NSW NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/481.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 14",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 4130,
-          "name": "Ethiopia Nigd Bank",
-          "logo": "https://media.api-sports.io/football/teams/4130.png",
+          "id": 18313,
+          "name": "Cooks Hill United",
+          "logo": "https://media.api-sports.io/football/teams/18313.png",
           "winner": true
         },
         "away": {
-          "id": 4112,
-          "name": "Bahardar",
-          "logo": "https://media.api-sports.io/football/teams/4112.png",
+          "id": 10209,
+          "name": "Valentine",
+          "logo": "https://media.api-sports.io/football/teams/10209.png",
           "winner": false
         }
       },
@@ -333,17 +2152,17 @@
       "events": [
         {
           "time": {
-            "elapsed": 7,
-            "extra": null
+            "elapsed": 45,
+            "extra": 4
           },
           "team": {
-            "id": 4130,
-            "name": "Ethiopia Nigd Bank",
-            "logo": "https://media.api-sports.io/football/teams/4130.png"
+            "id": 18313,
+            "name": "Cooks Hill United",
+            "logo": "https://media.api-sports.io/football/teams/18313.png"
           },
           "player": {
             "id": null,
-            "name": "simon peter"
+            "name": null
           },
           "assist": {
             "id": null,
@@ -357,53 +2176,53 @@
     },
     {
       "fixture": {
-        "id": 1554643,
+        "id": 1527385,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-07-03T07:00:00+00:00",
-        "timestamp": 1783062000,
+        "date": "2026-07-03T10:15:00+00:00",
+        "timestamp": 1783073700,
         "periods": {
-          "first": 1783062000,
-          "second": 1783065600
+          "first": 1783073700,
+          "second": null
         },
         "venue": {
-          "id": null,
+          "id": 0,
           "name": null,
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 67,
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
           "extra": null
         }
       },
       "league": {
-        "id": 667,
-        "name": "Friendlies Clubs",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/667.png",
-        "flag": null,
+        "id": 834,
+        "name": "South Australia State League 1",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/834.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
         "season": 2026,
-        "round": "Club Friendlies",
-        "standings": false
+        "round": "Regular Season - 17",
+        "standings": true
       },
       "teams": {
         "home": {
-          "id": 3617,
-          "name": "Karpaty",
-          "logo": "https://media.api-sports.io/football/teams/3617.png",
-          "winner": true
+          "id": 16766,
+          "name": "Eastern United",
+          "logo": "https://media.api-sports.io/football/teams/16766.png",
+          "winner": null
         },
         "away": {
-          "id": 6493,
-          "name": "Nyva Ternopil",
-          "logo": "https://media.api-sports.io/football/teams/6493.png",
-          "winner": false
+          "id": 10010,
+          "name": "Modbury Jets",
+          "logo": "https://media.api-sports.io/football/teams/10010.png",
+          "winner": null
         }
       },
       "goals": {
-        "home": 2,
+        "home": 0,
         "away": 0
       },
       "score": {
@@ -424,52 +2243,7 @@
           "away": null
         }
       },
-      "events": [
-        {
-          "time": {
-            "elapsed": 49,
-            "extra": null
-          },
-          "team": {
-            "id": 3617,
-            "name": "Karpaty",
-            "logo": "https://media.api-sports.io/football/teams/3617.png"
-          },
-          "player": {
-            "id": 264698,
-            "name": "Yaroslav Karabin"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 51,
-            "extra": null
-          },
-          "team": {
-            "id": 3617,
-            "name": "Karpaty",
-            "logo": "https://media.api-sports.io/football/teams/3617.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
+      "events": []
     }
   ],
   "today": [
