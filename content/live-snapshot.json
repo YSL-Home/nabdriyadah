@@ -1,17 +1,17 @@
 {
   "date": "2026-07-07",
-  "fetchedAt": "2026-07-07T08:39:17.700Z",
+  "fetchedAt": "2026-07-07T11:29:30.677Z",
   "live": [
     {
       "fixture": {
-        "id": 1567559,
+        "id": 1567560,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-07-07T07:00:00+00:00",
-        "timestamp": 1783407600,
+        "date": "2026-07-07T11:00:00+00:00",
+        "timestamp": 1783422000,
         "periods": {
-          "first": 1783407600,
-          "second": 1783411200
+          "first": 1783422000,
+          "second": null
         },
         "venue": {
           "id": null,
@@ -19,9 +19,9 @@
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 72,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 17,
           "extra": null
         }
       },
@@ -37,15 +37,109 @@
       },
       "teams": {
         "home": {
-          "id": 1430,
-          "name": "Arda Kardzhali",
-          "logo": "https://media.api-sports.io/football/teams/1430.png",
+          "id": 6813,
+          "name": "Dinamo Makhachkala",
+          "logo": "https://media.api-sports.io/football/teams/6813.png",
+          "winner": true
+        },
+        "away": {
+          "id": 434,
+          "name": "Gimnasia L.P.",
+          "logo": "https://media.api-sports.io/football/teams/434.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 1,
+            "extra": null
+          },
+          "team": {
+            "id": 6813,
+            "name": "Dinamo Makhachkala",
+            "logo": "https://media.api-sports.io/football/teams/6813.png"
+          },
+          "player": {
+            "id": 294652,
+            "name": "H. Mrezigue"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1527320,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-07T10:00:00+00:00",
+        "timestamp": 1783418400,
+        "periods": {
+          "first": 1783418400,
+          "second": 1783422000
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 68,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 834,
+        "name": "South Australia State League 1",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/834.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 14",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 25459,
+          "name": "The Cove",
+          "logo": "https://media.api-sports.io/football/teams/25459.png",
           "winner": null
         },
         "away": {
-          "id": 657,
-          "name": "Beitar Jerusalem",
-          "logo": "https://media.api-sports.io/football/teams/657.png",
+          "id": 10010,
+          "name": "Modbury Jets",
+          "logo": "https://media.api-sports.io/football/teams/10010.png",
           "winner": null
         }
       },
@@ -72,6 +166,398 @@
         }
       },
       "events": []
+    },
+    {
+      "fixture": {
+        "id": 1533718,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-07T10:00:00+00:00",
+        "timestamp": 1783418400,
+        "periods": {
+          "first": 1783418400,
+          "second": 1783422000
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 65,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 660,
+        "name": "WK-League",
+        "country": "South-Korea",
+        "logo": "https://media.api-sports.io/football/leagues/660.png",
+        "flag": "https://media.api-sports.io/flags/kr.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 14376,
+          "name": "Hwacheon KSPO W",
+          "logo": "https://media.api-sports.io/football/teams/14376.png",
+          "winner": false
+        },
+        "away": {
+          "id": 14379,
+          "name": "Suwon FMC W",
+          "logo": "https://media.api-sports.io/football/teams/14379.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 34,
+            "extra": null
+          },
+          "team": {
+            "id": 14379,
+            "name": "Suwon FMC W",
+            "logo": "https://media.api-sports.io/football/teams/14379.png"
+          },
+          "player": {
+            "id": 68605,
+            "name": "Ji So-Yun"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1537423,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-07T09:30:00+00:00",
+        "timestamp": 1783416600,
+        "periods": {
+          "first": 1783416600,
+          "second": 1783420200
+        },
+        "venue": {
+          "id": null,
+          "name": "Stryda Park",
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 189,
+        "name": "Capital Territory NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/189.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 3",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1453,
+          "name": "Monaro Panthers",
+          "logo": "https://media.api-sports.io/football/teams/1453.png",
+          "winner": true
+        },
+        "away": {
+          "id": 23519,
+          "name": "Queanbeyan City",
+          "logo": "https://media.api-sports.io/football/teams/23519.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 17,
+            "extra": null
+          },
+          "team": {
+            "id": 23519,
+            "name": "Queanbeyan City",
+            "logo": "https://media.api-sports.io/football/teams/23519.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 19,
+            "extra": null
+          },
+          "team": {
+            "id": 1453,
+            "name": "Monaro Panthers",
+            "logo": "https://media.api-sports.io/football/teams/1453.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 60,
+            "extra": null
+          },
+          "team": {
+            "id": 1453,
+            "name": "Monaro Panthers",
+            "logo": "https://media.api-sports.io/football/teams/1453.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 1453,
+            "name": "Monaro Panthers",
+            "logo": "https://media.api-sports.io/football/teams/1453.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1560538,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-07T10:00:00+00:00",
+        "timestamp": 1783418400,
+        "periods": {
+          "first": 1783418400,
+          "second": 1783422000
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 78,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 2072,
+          "name": "Hvidovre",
+          "logo": "https://media.api-sports.io/football/teams/2072.png",
+          "winner": true
+        },
+        "away": {
+          "id": 2065,
+          "name": "Fremad Amager",
+          "logo": "https://media.api-sports.io/football/teams/2065.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 2072,
+            "name": "Hvidovre",
+            "logo": "https://media.api-sports.io/football/teams/2072.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": null
+          },
+          "team": {
+            "id": 2065,
+            "name": "Fremad Amager",
+            "logo": "https://media.api-sports.io/football/teams/2065.png"
+          },
+          "player": {
+            "id": 15989,
+            "name": "C. Boateng"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 70,
+            "extra": null
+          },
+          "team": {
+            "id": 2072,
+            "name": "Hvidovre",
+            "logo": "https://media.api-sports.io/football/teams/2072.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     }
   ],
   "today": [
@@ -512,10 +998,10 @@
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 72,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 1
         }
       },
       "league": {
@@ -552,8 +1038,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -573,8 +1059,8 @@
         "date": "2026-07-07T09:00:00+00:00",
         "timestamp": 1783414800,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1783414800,
+          "second": 1783418400
         },
         "venue": {
           "id": null,
@@ -582,10 +1068,10 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 1
         }
       },
       "league": {
@@ -603,27 +1089,27 @@
           "id": 3489,
           "name": "Podbeskidzie",
           "logo": "https://media.api-sports.io/football/teams/3489.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 8621,
           "name": "Baník Ostrava II",
           "logo": "https://media.api-sports.io/football/teams/8621.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -638,6 +1124,76 @@
     {
       "fixture": {
         "id": 1554760,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-07T09:00:00+00:00",
+        "timestamp": 1783414800,
+        "periods": {
+          "first": 1783414800,
+          "second": 1783418400
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 3716,
+          "name": "Karviná",
+          "logo": "https://media.api-sports.io/football/teams/3716.png",
+          "winner": true
+        },
+        "away": {
+          "id": 3552,
+          "name": "Zemplín Michalovce",
+          "logo": "https://media.api-sports.io/football/teams/3552.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1562881,
         "referee": null,
         "timezone": "UTC",
         "date": "2026-07-07T09:00:00+00:00",
@@ -670,15 +1226,15 @@
       },
       "teams": {
         "home": {
-          "id": 3716,
-          "name": "Karviná",
-          "logo": "https://media.api-sports.io/football/teams/3716.png",
+          "id": 339,
+          "name": "Legia Warszawa",
+          "logo": "https://media.api-sports.io/football/teams/339.png",
           "winner": null
         },
         "away": {
-          "id": 3552,
-          "name": "Zemplín Michalovce",
-          "logo": "https://media.api-sports.io/football/teams/3552.png",
+          "id": 563,
+          "name": "Hapoel Beer Sheva",
+          "logo": "https://media.api-sports.io/football/teams/563.png",
           "winner": null
         }
       },
@@ -713,8 +1269,8 @@
         "date": "2026-07-07T09:30:00+00:00",
         "timestamp": 1783416600,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1783416600,
+          "second": 1783420200
         },
         "venue": {
           "id": 0,
@@ -722,10 +1278,10 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 5
         }
       },
       "league": {
@@ -743,27 +1299,27 @@
           "id": 10215,
           "name": "Gold Coast Knights",
           "logo": "https://media.api-sports.io/football/teams/10215.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 10217,
           "name": "Lions",
           "logo": "https://media.api-sports.io/football/teams/10217.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -783,8 +1339,8 @@
         "date": "2026-07-07T09:30:00+00:00",
         "timestamp": 1783416600,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1783416600,
+          "second": 1783420200
         },
         "venue": {
           "id": null,
@@ -792,9 +1348,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -813,23 +1369,23 @@
           "id": 1453,
           "name": "Monaro Panthers",
           "logo": "https://media.api-sports.io/football/teams/1453.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 23519,
           "name": "Queanbeyan City",
           "logo": "https://media.api-sports.io/football/teams/23519.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -923,8 +1479,8 @@
         "date": "2026-07-07T10:00:00+00:00",
         "timestamp": 1783418400,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1783418400,
+          "second": 1783422000
         },
         "venue": {
           "id": 0,
@@ -932,9 +1488,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 68,
           "extra": null
         }
       },
@@ -963,13 +1519,13 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -993,8 +1549,8 @@
         "date": "2026-07-07T10:00:00+00:00",
         "timestamp": 1783418400,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1783418400,
+          "second": 1783422000
         },
         "venue": {
           "id": null,
@@ -1002,9 +1558,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 65,
           "extra": null
         }
       },
@@ -1023,23 +1579,23 @@
           "id": 14376,
           "name": "Hwacheon KSPO W",
           "logo": "https://media.api-sports.io/football/teams/14376.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 14379,
           "name": "Suwon FMC W",
           "logo": "https://media.api-sports.io/football/teams/14379.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -1063,8 +1619,8 @@
         "date": "2026-07-07T10:00:00+00:00",
         "timestamp": 1783418400,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1783418400,
+          "second": 1783422000
         },
         "venue": {
           "id": null,
@@ -1072,9 +1628,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 78,
           "extra": null
         }
       },
@@ -1093,23 +1649,23 @@
           "id": 2072,
           "name": "Hvidovre",
           "logo": "https://media.api-sports.io/football/teams/2072.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 2065,
           "name": "Fremad Amager",
           "logo": "https://media.api-sports.io/football/teams/2065.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -1203,7 +1759,7 @@
         "date": "2026-07-07T11:00:00+00:00",
         "timestamp": 1783422000,
         "periods": {
-          "first": null,
+          "first": 1783422000,
           "second": null
         },
         "venue": {
@@ -1212,9 +1768,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 18,
           "extra": null
         }
       },
@@ -1233,23 +1789,23 @@
           "id": 6813,
           "name": "Dinamo Makhachkala",
           "logo": "https://media.api-sports.io/football/teams/6813.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 434,
           "name": "Gimnasia L.P.",
           "logo": "https://media.api-sports.io/football/teams/434.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -1407,76 +1963,6 @@
     },
     {
       "fixture": {
-        "id": 1554759,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-07-07T12:00:00+00:00",
-        "timestamp": 1783425600,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 667,
-        "name": "Friendlies Clubs",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/667.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Club Friendlies",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 1397,
-          "name": "SV Horn",
-          "logo": "https://media.api-sports.io/football/teams/1397.png",
-          "winner": null
-        },
-        "away": {
-          "id": 1395,
-          "name": "Floridsdorfer AC",
-          "logo": "https://media.api-sports.io/football/teams/1395.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
         "id": 1554761,
         "referee": null,
         "timezone": "UTC",
@@ -1547,76 +2033,6 @@
     },
     {
       "fixture": {
-        "id": 1560539,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-07-07T12:00:00+00:00",
-        "timestamp": 1783425600,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 667,
-        "name": "Friendlies Clubs",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/667.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Club Friendlies",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 7706,
-          "name": "Buxton",
-          "logo": "https://media.api-sports.io/football/teams/7706.png",
-          "winner": null
-        },
-        "away": {
-          "id": 217,
-          "name": "SC Braga",
-          "logo": "https://media.api-sports.io/football/teams/217.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
         "id": 1560541,
         "referee": null,
         "timezone": "UTC",
@@ -1659,76 +2075,6 @@
           "id": 2589,
           "name": "Uta Arad",
           "logo": "https://media.api-sports.io/football/teams/2589.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
-        "id": 1562881,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-07-07T12:00:00+00:00",
-        "timestamp": 1783425600,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 667,
-        "name": "Friendlies Clubs",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/667.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Club Friendlies",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 339,
-          "name": "Legia Warszawa",
-          "logo": "https://media.api-sports.io/football/teams/339.png",
-          "winner": null
-        },
-        "away": {
-          "id": 563,
-          "name": "Hapoel Beer Sheva",
-          "logo": "https://media.api-sports.io/football/teams/563.png",
           "winner": null
         }
       },
@@ -3157,6 +3503,76 @@
     },
     {
       "fixture": {
+        "id": 1554759,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-07T16:00:00+00:00",
+        "timestamp": 1783440000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 1397,
+          "name": "SV Horn",
+          "logo": "https://media.api-sports.io/football/teams/1397.png",
+          "winner": null
+        },
+        "away": {
+          "id": 1395,
+          "name": "Floridsdorfer AC",
+          "logo": "https://media.api-sports.io/football/teams/1395.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
         "id": 1554766,
         "referee": null,
         "timezone": "UTC",
@@ -3242,8 +3658,8 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Cancelled",
+          "short": "CANC",
           "elapsed": null,
           "extra": null
         }
@@ -4109,6 +4525,76 @@
           "id": 247,
           "name": "Celtic",
           "logo": "https://media.api-sports.io/football/teams/247.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1560539,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-07T17:00:00+00:00",
+        "timestamp": 1783443600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 7706,
+          "name": "Buxton",
+          "logo": "https://media.api-sports.io/football/teams/7706.png",
+          "winner": null
+        },
+        "away": {
+          "id": 217,
+          "name": "SC Braga",
+          "logo": "https://media.api-sports.io/football/teams/217.png",
           "winner": null
         }
       },
@@ -6182,8 +6668,8 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Cancelled",
+          "short": "CANC",
           "elapsed": null,
           "extra": null
         }
