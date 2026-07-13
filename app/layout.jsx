@@ -67,7 +67,7 @@ export const metadata = {
 
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || "ca-pub-6870790039775701";
 const GTM_ID     = "GTM-MHCF745N";
-const GA_ID      = "G-5420JXJVQ0";
+const GA_ID      = "G-B9GHQYQ41N";
 
 export default function RootLayout({ children }) {
   return (
