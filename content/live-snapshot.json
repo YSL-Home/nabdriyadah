@@ -1,133 +1,62 @@
 {
   "date": "2026-07-23",
-  "fetchedAt": "2026-07-23T09:44:33.511Z",
+  "fetchedAt": "2026-07-23T11:33:25.078Z",
   "live": [
     {
       "fixture": {
-        "id": 1600181,
+        "id": 1598631,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-07-23T09:30:00+00:00",
-        "timestamp": 1784799000,
+        "date": "2026-07-23T10:00:00+00:00",
+        "timestamp": 1784800800,
         "periods": {
-          "first": 1784799000,
+          "first": null,
           "second": null
         },
         "venue": {
-          "id": null,
+          "id": 0,
           "name": null,
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 13,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 74,
           "extra": null
         }
       },
       "league": {
-        "id": 1020,
-        "name": "Calcutta Premier Division",
-        "country": "India",
-        "logo": "https://media.api-sports.io/football/leagues/1020.png",
-        "flag": "https://media.api-sports.io/flags/in.svg",
+        "id": 1031,
+        "name": "Premier League",
+        "country": "Bhutan",
+        "logo": "https://media.api-sports.io/football/leagues/1031.png",
+        "flag": "https://media.api-sports.io/flags/bt.svg",
         "season": 2026,
-        "round": "Regular season",
+        "round": "Regular Season",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 15585,
-          "name": "Mohammedan",
-          "logo": "https://media.api-sports.io/football/teams/15585.png",
-          "winner": null
+          "id": 5590,
+          "name": "Tensung",
+          "logo": "https://media.api-sports.io/football/teams/5590.png",
+          "winner": false
         },
         "away": {
-          "id": 21612,
-          "name": "Wari",
-          "logo": "https://media.api-sports.io/football/teams/21612.png",
-          "winner": null
+          "id": 9426,
+          "name": "Paro",
+          "logo": "https://media.api-sports.io/football/teams/9426.png",
+          "winner": true
         }
       },
       "goals": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 3
       },
       "score": {
         "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1600182,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-07-23T09:30:00+00:00",
-        "timestamp": 1784799000,
-        "periods": {
-          "first": 1784799000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 13,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 1020,
-        "name": "Calcutta Premier Division",
-        "country": "India",
-        "logo": "https://media.api-sports.io/football/leagues/1020.png",
-        "flag": "https://media.api-sports.io/flags/in.svg",
-        "season": 2026,
-        "round": "Regular season",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 21614,
-          "name": "Police",
-          "logo": "https://media.api-sports.io/football/teams/21614.png",
-          "winner": null
-        },
-        "away": {
-          "id": 24100,
-          "name": "Calcutta Police",
-          "logo": "https://media.api-sports.io/football/teams/24100.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 3
         },
         "fulltime": {
           "home": null,
@@ -145,13 +74,79 @@
       "events": [
         {
           "time": {
-            "elapsed": 10,
+            "elapsed": 22,
             "extra": null
           },
           "team": {
-            "id": 21614,
-            "name": "Police",
-            "logo": "https://media.api-sports.io/football/teams/21614.png"
+            "id": 9426,
+            "name": "Paro",
+            "logo": "https://media.api-sports.io/football/teams/9426.png"
+          },
+          "player": {
+            "id": 195662,
+            "name": "tshelthrim namgyel"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 9426,
+            "name": "Paro",
+            "logo": "https://media.api-sports.io/football/teams/9426.png"
+          },
+          "player": {
+            "id": 166446,
+            "name": "Phurba·Wangchuk"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 40,
+            "extra": null
+          },
+          "team": {
+            "id": 9426,
+            "name": "Paro",
+            "logo": "https://media.api-sports.io/football/teams/9426.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 5590,
+            "name": "Tensung",
+            "logo": "https://media.api-sports.io/football/teams/5590.png"
           },
           "player": {
             "id": null,
@@ -176,7 +171,7 @@
         "timestamp": 1784799000,
         "periods": {
           "first": 1784799000,
-          "second": null
+          "second": 1784802600
         },
         "venue": {
           "id": null,
@@ -184,9 +179,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 13,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -205,23 +200,23 @@
           "id": 8241,
           "name": "United",
           "logo": "https://media.api-sports.io/football/teams/8241.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 24102,
           "name": "Measurers",
           "logo": "https://media.api-sports.io/football/teams/24102.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -236,7 +231,30 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 22,
+            "extra": null
+          },
+          "team": {
+            "id": 24102,
+            "name": "Measurers",
+            "logo": "https://media.api-sports.io/football/teams/24102.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     }
   ],
   "today": [
@@ -1929,7 +1947,7 @@
         "timestamp": 1784799000,
         "periods": {
           "first": 1784799000,
-          "second": null
+          "second": 1784802600
         },
         "venue": {
           "id": null,
@@ -1937,10 +1955,10 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 13,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 2
         }
       },
       "league": {
@@ -1968,8 +1986,8 @@
         }
       },
       "goals": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -1977,8 +1995,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -1999,7 +2017,7 @@
         "timestamp": 1784799000,
         "periods": {
           "first": 1784799000,
-          "second": null
+          "second": 1784802600
         },
         "venue": {
           "id": null,
@@ -2007,10 +2025,10 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 13,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 1
         }
       },
       "league": {
@@ -2028,27 +2046,27 @@
           "id": 21614,
           "name": "Police",
           "logo": "https://media.api-sports.io/football/teams/21614.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 24100,
           "name": "Calcutta Police",
           "logo": "https://media.api-sports.io/football/teams/24100.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 2,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 2,
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -2069,7 +2087,7 @@
         "timestamp": 1784799000,
         "periods": {
           "first": 1784799000,
-          "second": null
+          "second": 1784802600
         },
         "venue": {
           "id": null,
@@ -2077,9 +2095,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 13,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -2098,23 +2116,23 @@
           "id": 8241,
           "name": "United",
           "logo": "https://media.api-sports.io/football/teams/8241.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 24102,
           "name": "Measurers",
           "logo": "https://media.api-sports.io/football/teams/24102.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -2147,9 +2165,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 74,
           "extra": null
         }
       },
@@ -2168,23 +2186,23 @@
           "id": 5590,
           "name": "Tensung",
           "logo": "https://media.api-sports.io/football/teams/5590.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 9426,
           "name": "Paro",
           "logo": "https://media.api-sports.io/football/teams/9426.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 3
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 3
         },
         "fulltime": {
           "home": null,
@@ -2734,6 +2752,146 @@
           "id": 5229,
           "name": "Ngezi Platinum",
           "logo": "https://media.api-sports.io/football/teams/5229.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1601068,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-23T13:00:00+00:00",
+        "timestamp": 1784811600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 390,
+        "name": "Premier League",
+        "country": "Lebanon",
+        "logo": "https://media.api-sports.io/football/leagues/390.png",
+        "flag": "https://media.api-sports.io/flags/lb.svg",
+        "season": 2025,
+        "round": "Championship Round - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 4570,
+          "name": "Al Nejmeh",
+          "logo": "https://media.api-sports.io/football/teams/4570.png",
+          "winner": null
+        },
+        "away": {
+          "id": 26399,
+          "name": "Jwaaya FC",
+          "logo": "https://media.api-sports.io/football/teams/26399.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1601069,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-23T13:00:00+00:00",
+        "timestamp": 1784811600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 390,
+        "name": "Premier League",
+        "country": "Lebanon",
+        "logo": "https://media.api-sports.io/football/leagues/390.png",
+        "flag": "https://media.api-sports.io/flags/lb.svg",
+        "season": 2025,
+        "round": "Championship Round - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 4567,
+          "name": "Al Ahed",
+          "logo": "https://media.api-sports.io/football/teams/4567.png",
+          "winner": null
+        },
+        "away": {
+          "id": 4569,
+          "name": "Al Ansar",
+          "logo": "https://media.api-sports.io/football/teams/4569.png",
           "winner": null
         }
       },
