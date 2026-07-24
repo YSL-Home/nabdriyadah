@@ -1,6 +1,6 @@
 {
   "date": "2026-07-24",
-  "fetchedAt": "2026-07-24T04:30:12.675Z",
+  "fetchedAt": "2026-07-24T07:09:05.039Z",
   "live": [
     {
       "fixture": {
@@ -3239,8 +3239,8 @@
         "date": "2026-07-24T05:00:00+00:00",
         "timestamp": 1784869200,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1784869200,
+          "second": 1784872800
         },
         "venue": {
           "id": null,
@@ -3248,10 +3248,10 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 5
         }
       },
       "league": {
@@ -3279,17 +3279,17 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -4353,6 +4353,76 @@
     },
     {
       "fixture": {
+        "id": 1583416,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-24T09:45:00+00:00",
+        "timestamp": 1784886300,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 235,
+          "name": "Penafiel",
+          "logo": "https://media.api-sports.io/football/teams/235.png",
+          "winner": null
+        },
+        "away": {
+          "id": 537,
+          "name": "Leganes",
+          "logo": "https://media.api-sports.io/football/teams/537.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
         "id": 1519220,
         "referee": null,
         "timezone": "UTC",
@@ -4885,76 +4955,6 @@
           "id": 260,
           "name": "OH Leuven",
           "logo": "https://media.api-sports.io/football/teams/260.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
-        "id": 1583416,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-07-24T10:00:00+00:00",
-        "timestamp": 1784887200,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 667,
-        "name": "Friendlies Clubs",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/667.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Club Friendlies",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 235,
-          "name": "Penafiel",
-          "logo": "https://media.api-sports.io/football/teams/235.png",
-          "winner": null
-        },
-        "away": {
-          "id": 537,
-          "name": "Leganes",
-          "logo": "https://media.api-sports.io/football/teams/537.png",
           "winner": null
         }
       },
