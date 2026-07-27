@@ -2,8 +2,8 @@ name: Nabdriyadah Content Automation
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
-    - cron: "0,30 * * * *"
+    - cron: "*/15 * * * *"   # breaking-news job uniquement
+    - cron: "5,35 * * * *"   # full-refresh job (décalé de 5 min pour éviter la collision avec */15)
   workflow_dispatch:
     inputs:
       mode:
@@ -105,7 +105,7 @@ jobs:
   # ──────────────────────────────────────────────────────────────────────────
   full-refresh:
     name: Full Content Refresh + Deploy
-    if: github.event.schedule == '0,30 * * * *' || github.event_name == 'workflow_dispatch'
+    if: github.event.schedule == '5,35 * * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     env:
       CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
