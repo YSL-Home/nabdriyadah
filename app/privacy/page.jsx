@@ -13,7 +13,7 @@ export default function PrivacyPage() {
           سياسة الخصوصية
         </h1>
         <p style={{ color: "var(--text-3)", fontSize: "14px", marginBottom: "40px" }}>
-          آخر تحديث: مايو 2026
+          آخر تحديث: يوليو 2026
         </p>
 
         {[
@@ -46,7 +46,11 @@ export default function PrivacyPage() {
             body: `يحق لكم طلب الاطلاع على البيانات التي قد نكون جمعناها عنكم، أو تصحيحها أو حذفها. للتواصل معنا بشأن أي استفسار يتعلق بالخصوصية، يرجى زيارة صفحة الاتصال.`
           },
           {
-            title: "٨. التعديلات على هذه السياسة",
+            title: "٨. المسؤول عن معالجة البيانات",
+            body: `المسؤول عن معالجة بياناتكم هو مؤسس الموقع lahucef، المقيم في المغرب. للتواصل بشأن أي استفسار يتعلق بالبيانات الشخصية أو ممارسة حقوقكم (اطلاع، تصحيح، حذف)، يُرجى مراسلتنا عبر صفحة الاتصال: contact@nabdriyadah.com`
+          },
+          {
+            title: "٩. التعديلات على هذه السياسة",
             body: `نحتفظ بحق تعديل هذه السياسة في أي وقت. ستُنشر التغييرات على هذه الصفحة مع تحديث تاريخ المراجعة. ننصح بمراجعة هذه الصفحة بصفة دورية.`
           }
         ].map(({ title, body }) => (
@@ -72,7 +76,8 @@ export default function PrivacyPage() {
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "سياسة الخصوصية",
-          "url": "https://nabdriyadah.com/privacy/"
+          "url": "https://nabdriyadah.com/privacy/",
+          "publisher": { "@type": "Person", "name": "lahucef" }
         })}} />
       </div>
     </main>

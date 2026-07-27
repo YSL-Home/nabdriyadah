@@ -1,14 +1,14 @@
 export const metadata = {
   title: "عن نبض الرياضة | موقعك العربي للأخبار الرياضية",
-  description: "نبض الرياضة — موقع إخباري رياضي عربي يقدم تغطية يومية لأبرز أحداث كرة القدم والدوريات الكبرى حول العالم.",
+  description: "نبض الرياضة — موقع إخباري رياضي عربي مقره المغرب، يقدم تغطية يومية لأبرز أحداث كرة القدم والدوريات الكبرى حول العالم.",
   alternates: { canonical: "https://nabdriyadah.com/about/" }
 };
 
 const stats = [
-  { value: "+100",   label: "مقال جديد كل يوم" },
-  { value: "20+",    label: "دوري وبطولة مغطّاة" },
-  { value: "3",      label: "لغات: عربي، إنجليزي، فرنسي" },
-  { value: "24/7",   label: "تغطية على مدار الساعة" },
+  { value: "+2000", label: "مقال منشور" },
+  { value: "20+",   label: "دوري وبطولة مغطّاة" },
+  { value: "3",     label: "لغات: عربي، إنجليزي، فرنسي" },
+  { value: "24/7",  label: "تغطية على مدار الساعة" },
 ];
 
 const sports = ["كرة القدم ⚽", "كرة السلة 🏀", "التنس 🎾", "البادل 🏓", "كرة قدم الصالات 🥅", "الفورمولا 1 🏎️", "الغولف ⛳"];
@@ -43,6 +43,35 @@ export default function AboutPage() {
           ))}
         </div>
 
+        {/* Fondateur */}
+        <section style={{
+          background: "linear-gradient(135deg, var(--bg-card), var(--accent-soft))",
+          borderRadius: "24px", padding: "36px",
+          border: "1px solid var(--border)", marginBottom: "28px"
+        }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, color: "var(--text-1)", marginBottom: "20px" }}>فريق التحرير</h2>
+          <div style={{ display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
+            <div style={{
+              width: "72px", height: "72px", borderRadius: "50%",
+              background: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "28px", fontWeight: 900, color: "#fff", flexShrink: 0
+            }}>
+              L
+            </div>
+            <div>
+              <div style={{ fontSize: "20px", fontWeight: 900, color: "var(--text-1)", marginBottom: "4px" }}>
+                lahucef
+              </div>
+              <div style={{ fontSize: "14px", color: "var(--accent)", fontWeight: 700, marginBottom: "8px" }}>
+                مؤسس ورئيس تحرير · المغرب 🇲🇦
+              </div>
+              <p style={{ fontSize: "15px", color: "var(--text-2)", lineHeight: 1.75, margin: 0, maxWidth: "520px" }}>
+                مدوّن رياضي مغربي شغوف بالكرة العربية والدوريات الكبرى. أسّس نبض الرياضة لتقديم تغطية إخبارية رياضية عربية موثوقة ومتجددة، بعيدة عن الترجمة الآلية وقريبة من روح الملعب.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Mission */}
         <section style={{
           background: "var(--bg-card)", borderRadius: "24px", padding: "36px",
@@ -50,9 +79,24 @@ export default function AboutPage() {
         }}>
           <h2 style={{ fontSize: "22px", fontWeight: 800, color: "var(--text-1)", marginBottom: "16px" }}>رسالتنا</h2>
           <p style={{ fontSize: "17px", color: "var(--text-2)", lineHeight: 1.9, margin: 0 }}>
-            أُسِّس موقع نبض الرياضة بهدف تقديم أخبار رياضية موثوقة ومحايدة باللغة العربية، تواكب إيقاع الحدث لحظةً بلحظة.
-            نؤمن بأن المشجّع العربي يستحق تغطية احترافية بلغته الأم، بعيداً عن الترجمة الآلية وقريباً من روح الملعب.
+            أُسِّس موقع نبض الرياضة انطلاقاً من المغرب بهدف تقديم أخبار رياضية موثوقة ومحايدة باللغة العربية، تواكب إيقاع الحدث لحظةً بلحظة.
+            نؤمن بأن المشجّع العربي يستحق تغطية احترافية بلغته الأم. نلتزم بالتحقق من المعلومات قبل نشرها، ونرفض ترويج أي خبر غير موثّق.
           </p>
+        </section>
+
+        {/* Politique éditoriale */}
+        <section style={{
+          background: "var(--bg-card)", borderRadius: "24px", padding: "36px",
+          border: "1px solid var(--border)", marginBottom: "28px"
+        }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, color: "var(--text-1)", marginBottom: "16px" }}>المنهج التحريري</h2>
+          <ul style={{ fontSize: "16px", color: "var(--text-2)", lineHeight: 2, paddingRight: "20px", margin: 0 }}>
+            <li>التحقق من كل خبر من مصدر رسمي أو موثوق قبل النشر</li>
+            <li>الفصل الواضح بين الخبر والتحليل والرأي</li>
+            <li>التصحيح الفوري لأي خطأ يُكتشف بعد النشر</li>
+            <li>عدم نشر أي معلومة مشكوك في صحتها</li>
+            <li>احترام حقوق الصور والمحتوى المرئي</li>
+          </ul>
         </section>
 
         {/* Sports */}
@@ -80,12 +124,12 @@ export default function AboutPage() {
           <p style={{ fontSize: "17px", color: "var(--text-2)", lineHeight: 1.9, margin: 0 }}>
             نغطّي الدوريات الأوروبية الكبرى (الدوري الإنجليزي، الإسباني، الألماني، الإيطالي، الفرنسي)
             ودوري أبطال أوروبا، إلى جانب تغطية واسعة للبطولات العربية والأفريقية:
-            الدوري الجزائري، الدوري المصري الممتاز، البطولة المغربية، والرابطة التونسية المحترفة.
+            البطولة المغربية، الدوري المصري الممتاز، الدوري الجزائري، والرابطة التونسية المحترفة.
           </p>
         </section>
 
-        {/* CTA */}
-        <div style={{ textAlign: "center", marginTop: "48px" }}>
+        {/* Contact CTA */}
+        <div style={{ textAlign: "center", marginTop: "48px", display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
           <a href="/" style={{
             display: "inline-block", background: "var(--accent)", color: "#fff",
             padding: "14px 40px", borderRadius: "999px", fontWeight: 800,
@@ -93,13 +137,26 @@ export default function AboutPage() {
           }}>
             اقرأ أحدث الأخبار →
           </a>
+          <a href="/contact/" style={{
+            display: "inline-block", background: "var(--bg-card)", color: "var(--accent)",
+            padding: "14px 40px", borderRadius: "999px", fontWeight: 800,
+            fontSize: "16px", textDecoration: "none", border: "2px solid var(--accent)"
+          }}>
+            تواصل معنا
+          </a>
         </div>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "AboutPage",
           "name": "عن نبض الرياضة",
-          "url": "https://nabdriyadah.com/about/"
+          "url": "https://nabdriyadah.com/about/",
+          "publisher": {
+            "@type": "Person",
+            "name": "lahucef",
+            "jobTitle": "مؤسس ورئيس تحرير",
+            "nationality": "المغرب"
+          }
         })}} />
 
       </div>
