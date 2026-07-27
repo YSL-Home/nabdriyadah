@@ -19,8 +19,28 @@ const OUT = path.join(ROOT, "content/wc-highlights.json");
 
 const SITE = process.env.SITE_URL || "https://nabdriyadah.com";
 const PROXY = `${SITE}/api/live`;
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || "";
 const YT_SEARCH = "https://www.googleapis.com/youtube/v3/search";
+
+// Rotation clés YouTube (10k unités/jour chacune, search=100u → 100 recherches/clé)
+const YT_KEYS = [
+  process.env.GOOGLE_API_KEY,
+  process.env.GOOGLE_API_KEY_2,
+  process.env.GOOGLE_API_KEY_3,
+  process.env.GOOGLE_API_KEY_4,
+  process.env.GOOGLE_API_KEY_5,
+  process.env.GOOGLE_API_KEY_6,
+].filter(Boolean);
+
+let ytKeyIdx = 0;
+function nextYtKey() {
+  if (!YT_KEYS.length) return null;
+  const k = YT_KEYS[ytKeyIdx % YT_KEYS.length];
+  ytKeyIdx++;
+  return k;
+}
+
+const MAX_DAYS_PER_RUN = 5;      // max 5 appels API Football/run pour préserver le quota
+const WC_END_DATE = "2026-07-20"; // jour après la finale (19 juillet)
 
 const FINISHED = ["FT", "AET", "PEN"];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -31,28 +51,27 @@ function loadExisting() {
 
 const WC_LEAGUE_ID = 1;
 
-// Le plan gratuit ne répond pas à league=1&season=2026, mais répond à fixtures?date=.
-// On interroge depuis le début du tournoi (11 juin) jusqu'à aujourd'hui + 1.
 // Idempotent : seuls les matchs sans videoId déjà en cache sont retraités.
+// Cap à MAX_DAYS_PER_RUN pour préserver le quota API (rattrapage progressif).
 async function fetchFinishedMatches(existing) {
-  const today = new Date();
-  // Trouver la date la plus récente déjà dans le JSON (pour ne pas refetch depuis le début si déjà à jour)
+  // Dernière date connue dans le JSON
   const lastKnown = Object.values(existing).reduce((max, m) => {
     const d = (m.date || "").slice(0, 10);
     return d > max ? d : max;
   }, "2026-06-10");
 
-  // Fetch depuis (lastKnown - 2 jours) jusqu'à aujourd'hui + 1 (pour les matchs du lendemain)
   const startDate = new Date(lastKnown);
-  startDate.setUTCDate(startDate.getUTCDate() - 2);
-  const endDate = new Date(today);
-  endDate.setUTCDate(endDate.getUTCDate() + 1);
+  startDate.setUTCDate(startDate.getUTCDate() - 1); // recouverture d'1 jour
+  const endDate = new Date(Math.min(new Date(WC_END_DATE).getTime(), Date.now() + 86400000));
 
-  const dates = [];
+  // Générer toutes les dates manquantes, limiter à MAX_DAYS_PER_RUN
+  const allDates = [];
   for (let d = new Date(startDate); d <= endDate; d.setUTCDate(d.getUTCDate() + 1)) {
-    dates.push(d.toISOString().slice(0, 10));
+    allDates.push(d.toISOString().slice(0, 10));
   }
-  console.log(`  📅 Fetch ${dates[0]} → ${dates[dates.length - 1]} (${dates.length} jours)`);
+  const dates = allDates.slice(0, MAX_DAYS_PER_RUN);
+  const remaining = allDates.length - dates.length;
+  console.log(`  📅 Fetch ${dates[0]} → ${dates[dates.length - 1]} (${dates.length} jours, ${remaining} restants pour prochains runs)`);
 
   const out = [];
   for (const date of dates) {
@@ -71,23 +90,29 @@ async function fetchFinishedMatches(existing) {
 }
 
 async function searchHighlight(home, away) {
-  if (!GOOGLE_API_KEY) return null;
-  // Requête arabe ciblée chaînes de résumés (beIN, FIFA, officiels)
-  const q = `أهداف وملخص ${home} ضد ${away} كأس العالم 2026`;
-  const params = new URLSearchParams({
-    key: GOOGLE_API_KEY, part: "snippet", q, type: "video",
-    videoEmbeddable: "true", maxResults: "1", relevanceLanguage: "ar", order: "relevance",
-  });
-  try {
-    const res = await fetch(`${YT_SEARCH}?${params}`);
-    const data = await res.json();
-    const item = data.items?.[0];
-    if (!item) return null;
-    return { videoId: item.id.videoId, title: item.snippet?.title || "" };
-  } catch (e) {
-    console.warn("  ✗ YouTube:", e.message);
-    return null;
+  if (!YT_KEYS.length) return null;
+  // Essayer en arabe d'abord, puis en anglais en fallback
+  const queries = [
+    `أهداف وملخص ${home} ضد ${away} كأس العالم 2026`,
+    `${home} vs ${away} highlights FIFA World Cup 2026`,
+  ];
+  for (const q of queries) {
+    for (let attempt = 0; attempt < YT_KEYS.length; attempt++) {
+      const key = nextYtKey();
+      const params = new URLSearchParams({
+        key, part: "snippet", q, type: "video",
+        videoEmbeddable: "true", maxResults: "3", order: "relevance",
+      });
+      try {
+        const res = await fetch(`${YT_SEARCH}?${params}`);
+        const data = await res.json();
+        if (data.error?.code === 403 || data.error?.code === 429) continue; // quota épuisé → clé suivante
+        const item = data.items?.[0];
+        if (item?.id?.videoId) return { videoId: item.id.videoId, title: item.snippet?.title || "" };
+      } catch { continue; }
+    }
   }
+  return null;
 }
 
 async function main() {
