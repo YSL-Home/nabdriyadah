@@ -208,32 +208,38 @@ function buildUpgradePrompt(article) {
   const league = article.league || "";
   const title = article.title || "";
   const desc = article.description || "";
-  const existing = (article.content || "").slice(0, 600);
+  const existing = (article.content || "").slice(0, 800);
+  const keywords = (article.keywords || []).slice(0, 6).join("، ");
+  const publishedAt = article.publishedAt ? article.publishedAt.slice(0, 10) : "";
 
-  return `أنت محرر رياضي متمرس. اكتب مقالاً صحفياً عربياً احترافياً ومفصلاً عن الموضوع التالي.
+  return `أنت صحفي رياضي متخصص يكتب لموقع نبض الرياضة. مهمتك كتابة مقال صحفي احترافي ومفيد للقارئ العربي.
 
-العنوان: ${title}
-الرياضة: ${sport}${league ? " — " + league : ""}
-${desc ? "الوصف: " + desc : ""}
-${existing ? "المحتوى الموجود (مختصر): " + existing : ""}
+📋 بيانات المقال:
+- العنوان: ${title}
+- الرياضة: ${sport}${league ? " — " + league : ""}
+- التاريخ: ${publishedAt}
+${desc ? `- الوصف: ${desc}` : ""}
+${keywords ? `- الكلمات المفتاحية: ${keywords}` : ""}
+${existing ? `\n📄 المحتوى الموجود (أعد كتابته وطوّره):\n${existing}` : ""}
 
-⚠️ قواعد صارمة:
-- 7 فقرات مختلفة تماماً — لا تكرار لأي جملة أو فكرة
-- كل فقرة: جملة افتتاحية + 5-6 جمل تحليلية = 110-140 كلمة
-- الإجمالي: لا يقل عن 850 كلمة
-- البنية: [1]مقدمة [2]سياق [3]تفاصيل [4]تحليل [5]أرقام [6]توقعات [7]خلاصة
-- أسلوب: صحفي تحليلي (الجزيرة / بي بي سي عربي)
-- لا ماركداون، لا نقاط، فقرات نثرية فقط
+🎯 المطلوب — مقال صحفي حقيقي لا رديء:
+1. ابدأ مباشرة بالخبر الرئيسي: من؟ ماذا؟ متى؟ أين؟ — لا مقدمات فضفاضة
+2. استخدم الأسماء والأرقام والتواريخ المذكورة في العنوان والوصف
+3. 7 فقرات، كل فقرة 110-130 كلمة، إجمالي لا يقل عن 850 كلمة
+4. البنية: [مقدمة إخبارية] → [سياق وخلفية] → [تفاصيل الحدث] → [ردود الفعل] → [أرقام وإحصاءات ذات صلة] → [تحليل وتداعيات] → [خلاصة وتوقعات]
+5. أسلوب بي بي سي عربي: جمل مباشرة، دقيقة، خالية من الحشو
+6. ممنوع: عبارات مثل "شهدت هذه المرحلة"، "تقلبات درامية"، أي حشو عام لا يخص الخبر المحدد
+7. ممنوع اختراع أرقام أو أحداث غير موجودة في العنوان/الوصف — اكتفِ بما هو معلوم
 
-FAQ: 3 أسئلة وأجوبة، كل جواب 50-70 كلمة.
+FAQ: 3 أسئلة حقيقية يبحث عنها القارئ عن هذا الخبر تحديداً، جواب 50-70 كلمة.
 
-الردّ بتنسيق JSON فقط، بدون ماركداون:
+الرد بـ JSON فقط:
 {
   "content": "الفقرة الأولى...\\n\\nالفقرة الثانية...\\n\\n...",
   "faq": [
-    {"q": "سؤال 1؟", "a": "إجابة مفصلة 1..."},
-    {"q": "سؤال 2؟", "a": "إجابة مفصلة 2..."},
-    {"q": "سؤال 3؟", "a": "إجابة مفصلة 3..."}
+    {"q": "سؤال محدد عن الخبر؟", "a": "إجابة مباشرة ومحددة..."},
+    {"q": "سؤال 2؟", "a": "إجابة 2..."},
+    {"q": "سؤال 3؟", "a": "إجابة 3..."}
   ]
 }`;
 }
@@ -271,17 +277,25 @@ async function main() {
 
   const articles = JSON.parse(fs.readFileSync(ARTICLES_PATH, "utf-8"));
 
-  // Identifier les articles courts, triés par récence
+  // Identifier les articles courts, triés par qualité potentielle puis récence
   const recentCutoff = Date.now() - RECENT_DAYS * 24 * 3600 * 1000;
   const allShort = articles
-    .map((a, i) => ({ a, i, words: arabicWordCount(a.content), ts: new Date(a.publishedAt || 0).getTime() }))
+    .map((a, i) => ({
+      a, i,
+      words: arabicWordCount(a.content),
+      ts: new Date(a.publishedAt || 0).getTime(),
+      // Score qualité : articles avec titre + description + contenu partiel = meilleurs candidats
+      qualityScore: (a.title ? 2 : 0) + (a.description && a.description.length > 30 ? 2 : 0) + (a.content && a.content.length > 100 ? 1 : 0),
+    }))
     .filter(({ words }) => words < MIN_AR_WORDS)
     .sort((x, y) => {
-      // Priorité 1 : récents (<RECENT_DAYS jours)
+      // Priorité 1 : articles avec contenu existant (meilleur résultat LLM)
+      if (y.qualityScore !== x.qualityScore) return y.qualityScore - x.qualityScore;
+      // Priorité 2 : récents (<RECENT_DAYS jours)
       const xRecent = x.ts > recentCutoff ? 1 : 0;
       const yRecent = y.ts > recentCutoff ? 1 : 0;
       if (xRecent !== yRecent) return yRecent - xRecent;
-      // Priorité 2 : plus récent en premier
+      // Priorité 3 : plus récent en premier
       return y.ts - x.ts;
     });
 

@@ -119,10 +119,15 @@ export function generateMetadata({ params }) {
         ? `https://nabdriyadah.com${article.image}`
         : fallbackImage;
 
+  // Articles trop courts → noindex (AdSense + qualité SEO)
+  const wordCount = (article.content || "").trim().split(/\s+/).filter(Boolean).length;
+  const tooShort = wordCount < 300;
+
   return {
     title: article.seoTitle || article.title,
     description: article.seoDescription || article.description,
     keywords: (article.keywords || []).join("، "),
+    ...(tooShort ? { robots: { index: false, follow: false } } : {}),
     alternates: {
       canonical: canonicalUrl,
       languages: {
