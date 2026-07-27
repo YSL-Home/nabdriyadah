@@ -38,6 +38,7 @@ const FOOTER_LINKS = {
           { label: "من نحن", href: "/about/" },
           { label: "اتصل بنا", href: "/contact/" },
           { label: "سياسة الخصوصية", href: "/privacy/" },
+          { label: "شروط الاستخدام", href: "/terms/" },
           { label: "English", href: "/en/" },
           { label: "Français", href: "/fr/" },
         ]
@@ -81,6 +82,7 @@ const FOOTER_LINKS = {
           { label: "About", href: "/about/" },
           { label: "Contact", href: "/contact/" },
           { label: "Privacy Policy", href: "/privacy/" },
+          { label: "Terms of Use", href: "/terms/" },
           { label: "عربي", href: "/" },
           { label: "Français", href: "/fr/" },
         ]
@@ -124,6 +126,7 @@ const FOOTER_LINKS = {
           { label: "À propos", href: "/about/" },
           { label: "Contact", href: "/contact/" },
           { label: "Politique de confidentialité", href: "/privacy/" },
+          { label: "Conditions d'utilisation", href: "/terms/" },
           { label: "عربي", href: "/" },
           { label: "English", href: "/en/" },
         ]

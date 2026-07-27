@@ -4,6 +4,7 @@ import Script from "next/script";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import ThemeController from "./components/ThemeController";
+import CookieConsent from "./components/CookieConsent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -106,6 +107,7 @@ export default function RootLayout({ children }) {
         <SiteHeader />
         {children}
         <SiteFooter lang="ar" />
+        <CookieConsent />
 
         {/* ── Scripts analytics — chargés après le contenu (afterInteractive) ── */}
 

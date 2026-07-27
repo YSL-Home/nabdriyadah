@@ -593,6 +593,9 @@ export default function ArticlePage({ params }) {
                   {leagueLabel(article.league, article.sport)}
                 </Link>
 
+                <span style={{ color: "#9ca3af" }}>•</span>
+                <span style={{ color: "#6b7280", fontSize: "13px", fontWeight: 600 }}>lahucef</span>
+
                 {article.publishedAt && (
                   <>
                     <span style={{ color: "#9ca3af" }}>•</span>
