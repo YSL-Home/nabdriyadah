@@ -242,26 +242,6 @@ export default function SiteHeader() {
             {ABOUT_LABEL[lang]}
           </Link>
 
-          {/* Badge LIVE */}
-          <Link
-            href={WC_HREF[lang]}
-            style={{
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              minHeight: "44px",
-              padding: "0 12px",
-              borderRadius: "999px",
-              background: "linear-gradient(135deg,#0f172a,#16a34a)",
-              color: "#fff",
-              fontWeight: 800,
-              fontSize: "13px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {WC_LABEL[lang]}
-          </Link>
-
           <Link
             href={LIVE_HREF[lang]}
             aria-label={LIVE_ARIA[lang] || LIVE_ARIA.ar}
@@ -300,14 +280,6 @@ export default function SiteHeader() {
             <span aria-hidden="true">{link.emoji}</span>{" "}{link.label}
           </Link>
         ))}
-        <Link
-          href={WC_HREF[lang]}
-          className="hdr-pill-mobile"
-          aria-current={pathname.startsWith("/world-cup-2026") ? "page" : undefined}
-          style={{ color: "#fff", borderColor: "transparent", background: "linear-gradient(135deg,#0f172a,#16a34a)", fontWeight: 800 }}
-        >
-          {WC_LABEL[lang]}
-        </Link>
         <Link
           href={LIVE_HREF[lang]}
           className="hdr-pill-mobile"
