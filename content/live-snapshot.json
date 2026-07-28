@@ -1,51 +1,51 @@
 {
   "date": "2026-07-28",
-  "fetchedAt": "2026-07-28T22:07:20.968Z",
+  "fetchedAt": "2026-07-28T23:14:09.332Z",
   "live": [
     {
       "fixture": {
-        "id": 1493018,
-        "referee": "A. Gariano",
+        "id": 1520795,
+        "referee": "Lucas Casagrande, Brazil",
         "timezone": "UTC",
-        "date": "2026-07-28T22:00:00+00:00",
-        "timestamp": 1785276000,
+        "date": "2026-07-28T22:30:00+00:00",
+        "timestamp": 1785277800,
         "periods": {
-          "first": 1785276000,
+          "first": 1785277800,
           "second": null
         },
         "venue": {
           "id": null,
-          "name": "Estadio Florencio Sola",
-          "city": "Buenos Aires"
+          "name": "Estádio Alfredo Jaconi",
+          "city": "Caxias do Sul"
         },
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 7,
+          "elapsed": 44,
           "extra": null
         }
       },
       "league": {
-        "id": 128,
-        "name": "Liga Profesional Argentina",
-        "country": "Argentina",
-        "logo": "https://media.api-sports.io/football/leagues/128.png",
-        "flag": "https://media.api-sports.io/flags/ar.svg",
+        "id": 72,
+        "name": "Serie B",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/72.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
         "season": 2026,
-        "round": "Clausura - 2",
+        "round": "Regular Season - 20",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 449,
-          "name": "Banfield",
-          "logo": "https://media.api-sports.io/football/teams/449.png",
+          "id": 152,
+          "name": "Juventude",
+          "logo": "https://media.api-sports.io/football/teams/152.png",
           "winner": null
         },
         "away": {
-          "id": 474,
-          "name": "Sarmiento Junin",
-          "logo": "https://media.api-sports.io/football/teams/474.png",
+          "id": 145,
+          "name": "Avai",
+          "logo": "https://media.api-sports.io/football/teams/145.png",
           "winner": null
         }
       },
@@ -75,24 +75,371 @@
     },
     {
       "fixture": {
-        "id": 1493028,
-        "referee": "F. Echenique",
+        "id": 1520797,
+        "referee": "Gustavo Ervino Bauermann, Brazil",
+        "timezone": "UTC",
+        "date": "2026-07-28T22:30:00+00:00",
+        "timestamp": 1785277800,
+        "periods": {
+          "first": 1785277800,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Moisés Lucarelli",
+          "city": "Campinas"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 44,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 72,
+        "name": "Serie B",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/72.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Regular Season - 20",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 139,
+          "name": "Ponte Preta",
+          "logo": "https://media.api-sports.io/football/teams/139.png",
+          "winner": true
+        },
+        "away": {
+          "id": 13975,
+          "name": "Athletic Club",
+          "logo": "https://media.api-sports.io/football/teams/13975.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 5,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 454454,
+            "name": "Max"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
+        },
+        {
+          "time": {
+            "elapsed": 20,
+            "extra": null
+          },
+          "team": {
+            "id": 139,
+            "name": "Ponte Preta",
+            "logo": "https://media.api-sports.io/football/teams/139.png"
+          },
+          "player": {
+            "id": 41092,
+            "name": "Lucas Cunha"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
+        },
+        {
+          "time": {
+            "elapsed": 21,
+            "extra": null
+          },
+          "team": {
+            "id": 139,
+            "name": "Ponte Preta",
+            "logo": "https://media.api-sports.io/football/teams/139.png"
+          },
+          "player": {
+            "id": 9535,
+            "name": "Leo Gomes"
+          },
+          "assist": {
+            "id": 9398,
+            "name": "Elvis"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1599158,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-07-28T22:30:00+00:00",
+        "timestamp": 1785277800,
+        "periods": {
+          "first": 1785277800,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 44,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 251,
+        "name": "Division Intermedia",
+        "country": "Paraguay",
+        "logo": "https://media.api-sports.io/football/leagues/251.png",
+        "flag": "https://media.api-sports.io/flags/py.svg",
+        "season": 2026,
+        "round": "Regular Season - 16",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1186,
+          "name": "Independiente F.b.c.",
+          "logo": "https://media.api-sports.io/football/teams/1186.png",
+          "winner": null
+        },
+        "away": {
+          "id": 1180,
+          "name": "Deportivo Capiata",
+          "logo": "https://media.api-sports.io/football/teams/1180.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1493018,
+        "referee": "Carlos Andres Gariano, Argentina",
         "timezone": "UTC",
         "date": "2026-07-28T22:00:00+00:00",
         "timestamp": 1785276000,
         "periods": {
           "first": 1785276000,
-          "second": null
+          "second": 1785279600
         },
         "venue": {
           "id": null,
-          "name": "Estadio Pedro Bidegain",
+          "name": "Florencio Sola",
           "city": "Buenos Aires"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 7,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 55,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 128,
+        "name": "Liga Profesional Argentina",
+        "country": "Argentina",
+        "logo": "https://media.api-sports.io/football/leagues/128.png",
+        "flag": "https://media.api-sports.io/flags/ar.svg",
+        "season": 2026,
+        "round": "Clausura - 2",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 449,
+          "name": "Banfield",
+          "logo": "https://media.api-sports.io/football/teams/449.png",
+          "winner": true
+        },
+        "away": {
+          "id": 474,
+          "name": "Sarmiento Junin",
+          "logo": "https://media.api-sports.io/football/teams/474.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 449,
+            "name": "Banfield",
+            "logo": "https://media.api-sports.io/football/teams/449.png"
+          },
+          "player": {
+            "id": 469552,
+            "name": "L. Gomez"
+          },
+          "assist": {
+            "id": 58591,
+            "name": "B. Sepulveda"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 474,
+            "name": "Sarmiento Junin",
+            "logo": "https://media.api-sports.io/football/teams/474.png"
+          },
+          "player": {
+            "id": 362526,
+            "name": "G. Diaz"
+          },
+          "assist": {
+            "id": 470218,
+            "name": "J. Renteria"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 53,
+            "extra": null
+          },
+          "team": {
+            "id": 449,
+            "name": "Banfield",
+            "logo": "https://media.api-sports.io/football/teams/449.png"
+          },
+          "player": {
+            "id": 524475,
+            "name": "T. Perrotta"
+          },
+          "assist": {
+            "id": 354789,
+            "name": "D. Zalazar"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1493028,
+        "referee": "Fernando Echenique, Argentina",
+        "timezone": "UTC",
+        "date": "2026-07-28T22:00:00+00:00",
+        "timestamp": 1785276000,
+        "periods": {
+          "first": 1785276000,
+          "second": 1785279600
+        },
+        "venue": {
+          "id": null,
+          "name": "Pedro Bidegain",
+          "city": "Buenos Aires"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 57,
           "extra": null
         }
       },
@@ -142,28 +489,117 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 460,
+            "name": "San Lorenzo",
+            "logo": "https://media.api-sports.io/football/teams/460.png"
+          },
+          "player": {
+            "id": 296488,
+            "name": "G. Alassia"
+          },
+          "assist": {
+            "id": 506474,
+            "name": "J. Rattalino"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 1066,
+            "name": "Gimnasia M.",
+            "logo": "https://media.api-sports.io/football/teams/1066.png"
+          },
+          "player": {
+            "id": 5348,
+            "name": "D. Mondino"
+          },
+          "assist": {
+            "id": 455044,
+            "name": "L. Carrera"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 460,
+            "name": "San Lorenzo",
+            "logo": "https://media.api-sports.io/football/teams/460.png"
+          },
+          "player": {
+            "id": 657005,
+            "name": "F. Gulli"
+          },
+          "assist": {
+            "id": 6613,
+            "name": "N. Barrios"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 52,
+            "extra": null
+          },
+          "team": {
+            "id": 1066,
+            "name": "Gimnasia M.",
+            "logo": "https://media.api-sports.io/football/teams/1066.png"
+          },
+          "player": {
+            "id": 310719,
+            "name": "M. Recalde"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        }
+      ]
     },
     {
       "fixture": {
         "id": 1547787,
-        "referee": null,
+        "referee": "Flavio Rodrigues De Souza, Brazil",
         "timezone": "UTC",
         "date": "2026-07-28T22:00:00+00:00",
         "timestamp": 1785276000,
         "periods": {
           "first": 1785276000,
-          "second": null
+          "second": 1785279600
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Estadio Jose Dellagiovanna",
           "city": "Buenos Aires"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 7,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 54,
           "extra": null
         }
       },
@@ -182,23 +618,23 @@
           "id": 452,
           "name": "Tigre",
           "logo": "https://media.api-sports.io/football/teams/452.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 2356,
           "name": "Club Nacional",
           "logo": "https://media.api-sports.io/football/teams/2356.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
         "home": 0,
-        "away": 0
+        "away": 2
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -213,7 +649,74 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 11,
+            "extra": null
+          },
+          "team": {
+            "id": 2356,
+            "name": "Club Nacional",
+            "logo": "https://media.api-sports.io/football/teams/2356.png"
+          },
+          "player": {
+            "id": 2615,
+            "name": "M. Gomez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 31,
+            "extra": null
+          },
+          "team": {
+            "id": 2356,
+            "name": "Club Nacional",
+            "logo": "https://media.api-sports.io/football/teams/2356.png"
+          },
+          "player": {
+            "id": 52058,
+            "name": "M. Silvera"
+          },
+          "assist": {
+            "id": 5689,
+            "name": "T. Veron"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 51,
+            "extra": null
+          },
+          "team": {
+            "id": 2356,
+            "name": "Club Nacional",
+            "logo": "https://media.api-sports.io/football/teams/2356.png"
+          },
+          "player": {
+            "id": 51343,
+            "name": "L. Rodriguez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Tripping"
+        }
+      ]
     },
     {
       "fixture": {
@@ -224,7 +727,7 @@
         "timestamp": 1785274200,
         "periods": {
           "first": 1785274200,
-          "second": null
+          "second": 1785277800
         },
         "venue": {
           "id": 1212,
@@ -232,9 +735,9 @@
           "city": "Pedro Juan Caballero"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 37,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 83,
           "extra": null
         }
       },
@@ -263,8 +766,8 @@
         }
       },
       "goals": {
-        "home": 1,
-        "away": 0
+        "home": 2,
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -328,6 +831,270 @@
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 2140,
+            "name": "2 de Mayo",
+            "logo": "https://media.api-sports.io/football/teams/2140.png"
+          },
+          "player": {
+            "id": 406563,
+            "name": "A. Gomez"
+          },
+          "assist": {
+            "id": 195791,
+            "name": "P. Delvalle"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 1176,
+            "name": "Cerro Porteno",
+            "logo": "https://media.api-sports.io/football/teams/1176.png"
+          },
+          "player": {
+            "id": 646258,
+            "name": "C. Bobadilla"
+          },
+          "assist": {
+            "id": 5284,
+            "name": "J. Torres"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 56,
+            "extra": null
+          },
+          "team": {
+            "id": 2140,
+            "name": "2 de Mayo",
+            "logo": "https://media.api-sports.io/football/teams/2140.png"
+          },
+          "player": {
+            "id": 95302,
+            "name": "J. Sanguina"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 1176,
+            "name": "Cerro Porteno",
+            "logo": "https://media.api-sports.io/football/teams/1176.png"
+          },
+          "player": {
+            "id": 48376,
+            "name": "B. Riveros"
+          },
+          "assist": {
+            "id": 311802,
+            "name": "A. Nunez"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 1176,
+            "name": "Cerro Porteno",
+            "logo": "https://media.api-sports.io/football/teams/1176.png"
+          },
+          "player": {
+            "id": 404572,
+            "name": "A. Gamarra"
+          },
+          "assist": {
+            "id": 5970,
+            "name": "A. E. Almendra"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 1176,
+            "name": "Cerro Porteno",
+            "logo": "https://media.api-sports.io/football/teams/1176.png"
+          },
+          "player": {
+            "id": 2511,
+            "name": "R. Piris"
+          },
+          "assist": {
+            "id": 70595,
+            "name": "J. Morel"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 2140,
+            "name": "2 de Mayo",
+            "logo": "https://media.api-sports.io/football/teams/2140.png"
+          },
+          "player": {
+            "id": 70551,
+            "name": "C. Saiz"
+          },
+          "assist": {
+            "id": 425081,
+            "name": "A. D. Aguilera"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 1176,
+            "name": "Cerro Porteno",
+            "logo": "https://media.api-sports.io/football/teams/1176.png"
+          },
+          "player": {
+            "id": 5284,
+            "name": "J. Torres"
+          },
+          "assist": {
+            "id": 2517,
+            "name": "C. Dominguez"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 69,
+            "extra": null
+          },
+          "team": {
+            "id": 2140,
+            "name": "2 de Mayo",
+            "logo": "https://media.api-sports.io/football/teams/2140.png"
+          },
+          "player": {
+            "id": 278381,
+            "name": "O. Romero"
+          },
+          "assist": {
+            "id": 425081,
+            "name": "A. D. Aguilera"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 2140,
+            "name": "2 de Mayo",
+            "logo": "https://media.api-sports.io/football/teams/2140.png"
+          },
+          "player": {
+            "id": 95302,
+            "name": "J. Sanguina"
+          },
+          "assist": {
+            "id": 371639,
+            "name": "T. Cervera"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 2140,
+            "name": "2 de Mayo",
+            "logo": "https://media.api-sports.io/football/teams/2140.png"
+          },
+          "player": {
+            "id": 70591,
+            "name": "M. Gonzalez"
+          },
+          "assist": {
+            "id": 95371,
+            "name": "U. Coronel"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 2140,
+            "name": "2 de Mayo",
+            "logo": "https://media.api-sports.io/football/teams/2140.png"
+          },
+          "player": {
+            "id": 278381,
+            "name": "O. Romero"
+          },
+          "assist": {
+            "id": 661034,
+            "name": "A. Aguayo"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
         }
       ]
     },
@@ -340,7 +1107,7 @@
         "timestamp": 1785274200,
         "periods": {
           "first": 1785274200,
-          "second": null
+          "second": 1785277800
         },
         "venue": {
           "id": null,
@@ -348,9 +1115,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 34,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 79,
           "extra": null
         }
       },
@@ -369,17 +1136,17 @@
           "id": 24530,
           "name": "Cacahuatique",
           "logo": "https://media.api-sports.io/football/teams/24530.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 28018,
           "name": "Atletico Balboa",
           "logo": "https://media.api-sports.io/football/teams/28018.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 2,
+        "home": 4,
         "away": 2
       },
       "score": {
@@ -425,7 +1192,7 @@
         },
         {
           "time": {
-            "elapsed": 23,
+            "elapsed": 24,
             "extra": null
           },
           "team": {
@@ -434,8 +1201,8 @@
             "logo": "https://media.api-sports.io/football/teams/24530.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 453423,
+            "name": "L. Cruz"
           },
           "assist": {
             "id": null,
@@ -447,7 +1214,7 @@
         },
         {
           "time": {
-            "elapsed": 29,
+            "elapsed": 30,
             "extra": null
           },
           "team": {
@@ -457,7 +1224,7 @@
           },
           "player": {
             "id": null,
-            "name": null
+            "name": "O. Martinez"
           },
           "assist": {
             "id": null,
@@ -469,7 +1236,7 @@
         },
         {
           "time": {
-            "elapsed": 32,
+            "elapsed": 33,
             "extra": null
           },
           "team": {
@@ -479,101 +1246,7 @@
           },
           "player": {
             "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1544725,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-07-28T21:00:00+00:00",
-        "timestamp": 1785272400,
-        "periods": {
-          "first": 1785272400,
-          "second": 1785276000
-        },
-        "venue": {
-          "id": null,
-          "name": "Estadio Universitario BUAP",
-          "city": "Puebla"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 48,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 537,
-        "name": "CONCACAF U20",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/537.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Concacaf Championship U20 - 2",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 11003,
-          "name": "Haiti U20",
-          "logo": "https://media.api-sports.io/football/teams/11003.png",
-          "winner": true
-        },
-        "away": {
-          "id": 10994,
-          "name": "Cuba U20",
-          "logo": "https://media.api-sports.io/football/teams/10994.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 2,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 2,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 16,
-            "extra": null
-          },
-          "team": {
-            "id": 11003,
-            "name": "Haiti U20",
-            "logo": "https://media.api-sports.io/football/teams/11003.png"
-          },
-          "player": {
-            "id": 599553,
-            "name": "M. Joseph"
+            "name": "Y. Tobar"
           },
           "assist": {
             "id": null,
@@ -585,155 +1258,17 @@
         },
         {
           "time": {
-            "elapsed": 34,
+            "elapsed": 51,
             "extra": null
           },
           "team": {
-            "id": 11003,
-            "name": "Haiti U20",
-            "logo": "https://media.api-sports.io/football/teams/11003.png"
+            "id": 24530,
+            "name": "Cacahuatique",
+            "logo": "https://media.api-sports.io/football/teams/24530.png"
           },
           "player": {
-            "id": 595876,
-            "name": "F. Celestine"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 10994,
-            "name": "Cuba U20",
-            "logo": "https://media.api-sports.io/football/teams/10994.png"
-          },
-          "player": {
-            "id": 669886,
-            "name": "A. Grave"
-          },
-          "assist": {
-            "id": 669898,
-            "name": "Y. Iglesias"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 10994,
-            "name": "Cuba U20",
-            "logo": "https://media.api-sports.io/football/teams/10994.png"
-          },
-          "player": {
-            "id": 669884,
-            "name": "A. Aguila"
-          },
-          "assist": {
-            "id": 669887,
-            "name": "R. Zerquera"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1603944,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-07-28T20:00:00+00:00",
-        "timestamp": 1785268800,
-        "periods": {
-          "first": 1785268800,
-          "second": 1785272400
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Penalty in progress",
-          "short": "P",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 534,
-        "name": "CONCACAF Caribbean Club Shield",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/534.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Quarter-finals",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 14020,
-          "name": "Inter Willemstad",
-          "logo": "https://media.api-sports.io/football/teams/14020.png",
-          "winner": false
-        },
-        "away": {
-          "id": 16139,
-          "name": "Delfines Del Este",
-          "logo": "https://media.api-sports.io/football/teams/16139.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 1
-        },
-        "fulltime": {
-          "home": 1,
-          "away": 1
-        },
-        "extratime": {
-          "home": 0,
-          "away": 0
-        },
-        "penalty": {
-          "home": 2,
-          "away": 3
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 37,
-            "extra": null
-          },
-          "team": {
-            "id": 16139,
-            "name": "Delfines Del Este",
-            "logo": "https://media.api-sports.io/football/teams/16139.png"
-          },
-          "player": {
-            "id": null,
-            "name": "E. Gomez"
+            "id": 552545,
+            "name": "R. Padilla"
           },
           "assist": {
             "id": null,
@@ -745,17 +1280,17 @@
         },
         {
           "time": {
-            "elapsed": 53,
+            "elapsed": 54,
             "extra": null
           },
           "team": {
-            "id": 14020,
-            "name": "Inter Willemstad",
-            "logo": "https://media.api-sports.io/football/teams/14020.png"
+            "id": 24530,
+            "name": "Cacahuatique",
+            "logo": "https://media.api-sports.io/football/teams/24530.png"
           },
           "player": {
-            "id": 670352,
-            "name": "R. Leuteria"
+            "id": 51647,
+            "name": "E. Umeres"
           },
           "assist": {
             "id": null,
@@ -764,160 +1299,6 @@
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 120,
-            "extra": 1
-          },
-          "team": {
-            "id": 16139,
-            "name": "Delfines Del Este",
-            "logo": "https://media.api-sports.io/football/teams/16139.png"
-          },
-          "player": {
-            "id": null,
-            "name": "F. Gonzalez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": "Penalty Shootout"
-        },
-        {
-          "time": {
-            "elapsed": 120,
-            "extra": 1
-          },
-          "team": {
-            "id": 14020,
-            "name": "Inter Willemstad",
-            "logo": "https://media.api-sports.io/football/teams/14020.png"
-          },
-          "player": {
-            "id": 453423,
-            "name": "J. Martina"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": "Penalty Shootout"
-        },
-        {
-          "time": {
-            "elapsed": 120,
-            "extra": 2
-          },
-          "team": {
-            "id": 16139,
-            "name": "Delfines Del Este",
-            "logo": "https://media.api-sports.io/football/teams/16139.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": "Penalty Shootout"
-        },
-        {
-          "time": {
-            "elapsed": 120,
-            "extra": 2
-          },
-          "team": {
-            "id": 14020,
-            "name": "Inter Willemstad",
-            "logo": "https://media.api-sports.io/football/teams/14020.png"
-          },
-          "player": {
-            "id": 453423,
-            "name": "D. Rosa"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Missed Penalty",
-          "comments": "Penalty Shootout"
-        },
-        {
-          "time": {
-            "elapsed": 120,
-            "extra": 3
-          },
-          "team": {
-            "id": 16139,
-            "name": "Delfines Del Este",
-            "logo": "https://media.api-sports.io/football/teams/16139.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": "Penalty Shootout"
-        },
-        {
-          "time": {
-            "elapsed": 120,
-            "extra": 3
-          },
-          "team": {
-            "id": 14020,
-            "name": "Inter Willemstad",
-            "logo": "https://media.api-sports.io/football/teams/14020.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": "Penalty Shootout"
-        },
-        {
-          "time": {
-            "elapsed": 120,
-            "extra": 4
-          },
-          "team": {
-            "id": 16139,
-            "name": "Delfines Del Este",
-            "logo": "https://media.api-sports.io/football/teams/16139.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Missed Penalty",
-          "comments": "Penalty Shootout"
         }
       ]
     }
@@ -12560,9 +12941,9 @@
           "city": null
         },
         "status": {
-          "long": "Penalty in progress",
-          "short": "P",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "PEN",
+          "elapsed": 120,
           "extra": null
         }
       },
@@ -12608,8 +12989,8 @@
           "away": 0
         },
         "penalty": {
-          "home": 2,
-          "away": 3
+          "home": 5,
+          "away": 6
         }
       }
     },
@@ -12621,8 +13002,8 @@
         "date": "2026-07-28T20:45:00+00:00",
         "timestamp": 1785271500,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1785271500,
+          "second": 1785275100
         },
         "venue": {
           "id": 0,
@@ -12630,9 +13011,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -12651,27 +13032,27 @@
           "id": 11039,
           "name": "Morocco U20",
           "logo": "https://media.api-sports.io/football/teams/11039.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 19926,
           "name": "Valencia U20",
           "logo": "https://media.api-sports.io/football/teams/19926.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -12700,10 +13081,10 @@
           "city": "Puebla"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 48,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 7
         }
       },
       "league": {
@@ -12731,8 +13112,8 @@
         }
       },
       "goals": {
-        "home": 2,
-        "away": 0
+        "home": 3,
+        "away": 2
       },
       "score": {
         "halftime": {
@@ -12740,8 +13121,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 2
         },
         "extratime": {
           "home": null,
@@ -12762,7 +13143,7 @@
         "timestamp": 1785274200,
         "periods": {
           "first": 1785274200,
-          "second": null
+          "second": 1785277800
         },
         "venue": {
           "id": 1212,
@@ -12770,9 +13151,9 @@
           "city": "Pedro Juan Caballero"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 37,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 83,
           "extra": null
         }
       },
@@ -12801,8 +13182,8 @@
         }
       },
       "goals": {
-        "home": 1,
-        "away": 0
+        "home": 2,
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -12832,7 +13213,7 @@
         "timestamp": 1785274200,
         "periods": {
           "first": 1785274200,
-          "second": null
+          "second": 1785277800
         },
         "venue": {
           "id": null,
@@ -12840,9 +13221,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 34,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 79,
           "extra": null
         }
       },
@@ -12861,17 +13242,17 @@
           "id": 24530,
           "name": "Cacahuatique",
           "logo": "https://media.api-sports.io/football/teams/24530.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 28018,
           "name": "Atletico Balboa",
           "logo": "https://media.api-sports.io/football/teams/28018.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 2,
+        "home": 4,
         "away": 2
       },
       "score": {
@@ -12896,23 +13277,23 @@
     {
       "fixture": {
         "id": 1493018,
-        "referee": "A. Gariano",
+        "referee": "Carlos Andres Gariano, Argentina",
         "timezone": "UTC",
         "date": "2026-07-28T22:00:00+00:00",
         "timestamp": 1785276000,
         "periods": {
           "first": 1785276000,
-          "second": null
+          "second": 1785279600
         },
         "venue": {
           "id": null,
-          "name": "Estadio Florencio Sola",
+          "name": "Florencio Sola",
           "city": "Buenos Aires"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 7,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 55,
           "extra": null
         }
       },
@@ -12931,17 +13312,17 @@
           "id": 449,
           "name": "Banfield",
           "logo": "https://media.api-sports.io/football/teams/449.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 474,
           "name": "Sarmiento Junin",
           "logo": "https://media.api-sports.io/football/teams/474.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
@@ -12966,23 +13347,23 @@
     {
       "fixture": {
         "id": 1493028,
-        "referee": "F. Echenique",
+        "referee": "Fernando Echenique, Argentina",
         "timezone": "UTC",
         "date": "2026-07-28T22:00:00+00:00",
         "timestamp": 1785276000,
         "periods": {
           "first": 1785276000,
-          "second": null
+          "second": 1785279600
         },
         "venue": {
           "id": null,
-          "name": "Estadio Pedro Bidegain",
+          "name": "Pedro Bidegain",
           "city": "Buenos Aires"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 8,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 56,
           "extra": null
         }
       },
@@ -13036,23 +13417,23 @@
     {
       "fixture": {
         "id": 1547787,
-        "referee": null,
+        "referee": "Flavio Rodrigues De Souza, Brazil",
         "timezone": "UTC",
         "date": "2026-07-28T22:00:00+00:00",
         "timestamp": 1785276000,
         "periods": {
           "first": 1785276000,
-          "second": null
+          "second": 1785279600
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Estadio Jose Dellagiovanna",
           "city": "Buenos Aires"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 7,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 54,
           "extra": null
         }
       },
@@ -13071,23 +13452,23 @@
           "id": 452,
           "name": "Tigre",
           "logo": "https://media.api-sports.io/football/teams/452.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 2356,
           "name": "Club Nacional",
           "logo": "https://media.api-sports.io/football/teams/2356.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
         "home": 0,
-        "away": 0
+        "away": 2
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -13106,23 +13487,23 @@
     {
       "fixture": {
         "id": 1520795,
-        "referee": "L. Casagrande",
+        "referee": "Lucas Casagrande, Brazil",
         "timezone": "UTC",
         "date": "2026-07-28T22:30:00+00:00",
         "timestamp": 1785277800,
         "periods": {
-          "first": null,
+          "first": 1785277800,
           "second": null
         },
         "venue": {
           "id": null,
-          "name": "Estadio Alfredo Jaconi",
+          "name": "Estádio Alfredo Jaconi",
           "city": "Caxias do Sul"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 43,
           "extra": null
         }
       },
@@ -13151,13 +13532,13 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -13176,23 +13557,23 @@
     {
       "fixture": {
         "id": 1520797,
-        "referee": "G. Bauermann",
+        "referee": "Gustavo Ervino Bauermann, Brazil",
         "timezone": "UTC",
         "date": "2026-07-28T22:30:00+00:00",
         "timestamp": 1785277800,
         "periods": {
-          "first": null,
+          "first": 1785277800,
           "second": null
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Moisés Lucarelli",
           "city": "Campinas"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 44,
           "extra": null
         }
       },
@@ -13211,23 +13592,23 @@
           "id": 139,
           "name": "Ponte Preta",
           "logo": "https://media.api-sports.io/football/teams/139.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 13975,
           "name": "Athletic Club",
           "logo": "https://media.api-sports.io/football/teams/13975.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -13251,7 +13632,7 @@
         "date": "2026-07-28T22:30:00+00:00",
         "timestamp": 1785277800,
         "periods": {
-          "first": null,
+          "first": 1785277800,
           "second": null
         },
         "venue": {
@@ -13260,9 +13641,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 44,
           "extra": null
         }
       },
@@ -13291,13 +13672,13 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
           "home": null,
