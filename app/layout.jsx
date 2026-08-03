@@ -94,6 +94,56 @@ export default function RootLayout({ children }) {
       </head>
 
       <body style={{ margin: 0, fontFamily: "var(--font-inter, 'Inter', 'Segoe UI', Arial, sans-serif)" }}>
+        {/* GEO: Organization + WebSite entity — lu par ChatGPT, Perplexity, Gemini */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "NewsMediaOrganization",
+            "@id": "https://nabdriyadah.com/#organization",
+            "name": "نبض الرياضة",
+            "alternateName": ["Nabdriyadah", "Sports Pulse", "نبض الرياضة الرياضي"],
+            "url": "https://nabdriyadah.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://nabdriyadah.com/logo-v2.svg",
+              "width": 200,
+              "height": 60
+            },
+            "description": "موقع إخباري رياضي عربي يقدّم تغطية يومية لأبرز أحداث الملاعب حول العالم، مقرّه المغرب.",
+            "foundingDate": "2024",
+            "inLanguage": ["ar", "en", "fr"],
+            "areaServed": { "@type": "Place", "name": "العالم العربي" },
+            "address": { "@type": "PostalAddress", "addressCountry": "MA" },
+            "founder": {
+              "@type": "Person",
+              "@id": "https://nabdriyadah.com/about/#lahucef",
+              "name": "lahucef",
+              "jobTitle": "مؤسس ورئيس تحرير",
+              "nationality": { "@type": "Country", "name": "Morocco" }
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "contact@nabdriyadah.com",
+              "contactType": "editorial"
+            },
+            "sameAs": ["https://nabdriyadah.com"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "@id": "https://nabdriyadah.com/#website",
+            "name": "نبض الرياضة",
+            "url": "https://nabdriyadah.com",
+            "inLanguage": "ar",
+            "publisher": { "@id": "https://nabdriyadah.com/#organization" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": { "@type": "EntryPoint", "urlTemplate": "https://nabdriyadah.com/search/?q={search_term_string}" },
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ])}} />
+
         {/* GTM noscript — doit être immédiatement après <body> */}
         <noscript>
           <iframe

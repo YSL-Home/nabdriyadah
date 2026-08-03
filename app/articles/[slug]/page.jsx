@@ -766,6 +766,7 @@ export default function ArticlePage({ params }) {
               })()}
 
               <div
+                className="article-body-lead"
                 style={{
                   fontSize: "20px",
                   lineHeight: 2.15,
@@ -902,13 +903,17 @@ export default function ArticlePage({ params }) {
                 },
                 "wordCount": article.content ? article.content.replace(/<[^>]+>/g, "").split(/\s+/).filter(Boolean).length : 0,
                 "isAccessibleForFree": true,
+                "abstract": (article.seoDescription || article.description || "").slice(0, 300) || undefined,
                 "author": {
-                  "@type": "Organization",
-                  "name": "نبض الرياضة",
-                  "url": "https://nabdriyadah.com"
+                  "@type": "Person",
+                  "@id": "https://nabdriyadah.com/about/#lahucef",
+                  "name": "lahucef",
+                  "url": "https://nabdriyadah.com/about/",
+                  "nationality": { "@type": "Country", "name": "Morocco" }
                 },
                 "publisher": {
-                  "@type": "Organization",
+                  "@type": "NewsMediaOrganization",
+                  "@id": "https://nabdriyadah.com/#organization",
                   "name": "نبض الرياضة",
                   "url": "https://nabdriyadah.com",
                   "logo": {
@@ -919,6 +924,10 @@ export default function ArticlePage({ params }) {
                   }
                 },
                 "keywords": (article.keywords || []).join(", "),
+                "speakable": {
+                  "@type": "SpeakableSpecification",
+                  "cssSelector": ["h1", ".article-body-lead"]
+                },
                 "mainEntityOfPage": {
                   "@type": "WebPage",
                   "@id": `https://nabdriyadah.com/articles/${article.slug}/`
