@@ -1,62 +1,62 @@
 {
   "date": "2026-08-04",
-  "fetchedAt": "2026-08-04T09:26:39.140Z",
+  "fetchedAt": "2026-08-04T11:37:54.300Z",
   "live": [
     {
       "fixture": {
-        "id": 1610531,
+        "id": 1542344,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-04T08:30:00+00:00",
-        "timestamp": 1785832200,
+        "date": "2026-08-04T11:00:00+00:00",
+        "timestamp": 1785841200,
         "periods": {
-          "first": 1785832200,
+          "first": 1785841200,
           "second": null
         },
         "venue": {
           "id": null,
-          "name": "Gelora Bandung Lautan Api Stadium",
-          "city": "Bandung"
+          "name": "Jeju World Cup Stadium",
+          "city": "Seogwipo"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 9
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 38,
+          "extra": null
         }
       },
       "league": {
-        "id": 924,
-        "name": "Piala Presiden",
-        "country": "Indonesia",
-        "logo": "https://media.api-sports.io/football/leagues/924.png",
-        "flag": "https://media.api-sports.io/flags/id.svg",
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
         "season": 2026,
-        "round": "Semi-finals",
-        "standings": true
+        "round": "Club Friendlies",
+        "standings": false
       },
       "teams": {
         "home": {
-          "id": 2445,
-          "name": "Persib Bandung",
-          "logo": "https://media.api-sports.io/football/teams/2445.png",
-          "winner": true
+          "id": 2761,
+          "name": "Jeju United FC",
+          "logo": "https://media.api-sports.io/football/teams/2761.png",
+          "winner": null
         },
         "away": {
-          "id": 10134,
-          "name": "Persija",
-          "logo": "https://media.api-sports.io/football/teams/10134.png",
-          "winner": false
+          "id": 157,
+          "name": "Bayern München",
+          "logo": "https://media.api-sports.io/football/teams/157.png",
+          "winner": null
         }
       },
       "goals": {
-        "home": 2,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": 2,
-          "away": 0
+          "home": 1,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -74,43 +74,21 @@
       "events": [
         {
           "time": {
-            "elapsed": 18,
+            "elapsed": 11,
             "extra": null
           },
           "team": {
-            "id": 2445,
-            "name": "Persib Bandung",
-            "logo": "https://media.api-sports.io/football/teams/2445.png"
+            "id": 157,
+            "name": "Bayern München",
+            "logo": "https://media.api-sports.io/football/teams/157.png"
           },
           "player": {
-            "id": 29376,
-            "name": "A. Alis"
+            "id": 414474,
+            "name": "F. Chavez"
           },
           "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 22,
-            "extra": null
-          },
-          "team": {
-            "id": 2445,
-            "name": "Persib Bandung",
-            "logo": "https://media.api-sports.io/football/teams/2445.png"
-          },
-          "player": {
-            "id": 564132,
-            "name": "Uilliam"
-          },
-          "assist": {
-            "id": 13142,
-            "name": "L. Guaycochea"
+            "id": 568043,
+            "name": "G. Della Rovere"
           },
           "type": "Goal",
           "detail": "Normal Goal",
@@ -118,17 +96,309 @@
         },
         {
           "time": {
-            "elapsed": 28,
+            "elapsed": 15,
             "extra": null
           },
           "team": {
-            "id": 2445,
-            "name": "Persib Bandung",
-            "logo": "https://media.api-sports.io/football/teams/2445.png"
+            "id": 2761,
+            "name": "Jeju United FC",
+            "logo": "https://media.api-sports.io/football/teams/2761.png"
           },
           "player": {
-            "id": 66845,
-            "name": "B. Sekulic"
+            "id": 34777,
+            "name": "Lee Chang-Min"
+          },
+          "assist": {
+            "id": 122688,
+            "name": "Matheus Aias"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 36,
+            "extra": null
+          },
+          "team": {
+            "id": 157,
+            "name": "Bayern München",
+            "logo": "https://media.api-sports.io/football/teams/157.png"
+          },
+          "player": {
+            "id": 2897,
+            "name": "Kim Min-Jae"
+          },
+          "assist": {
+            "id": 567873,
+            "name": "T. Binder"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1548099,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-04T10:00:00+00:00",
+        "timestamp": 1785837600,
+        "periods": {
+          "first": 1785837600,
+          "second": 1785841200
+        },
+        "venue": {
+          "id": 0,
+          "name": "Thuwunna Youth Training Centre Stadium",
+          "city": "Yangon"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 73,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 24,
+        "name": "ASEAN Championship",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/24.png",
+        "flag": null,
+        "season": 2025,
+        "round": "Group Stage - 4",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 1556,
+          "name": "Myanmar",
+          "logo": "https://media.api-sports.io/football/teams/1556.png",
+          "winner": true
+        },
+        "away": {
+          "id": 1558,
+          "name": "Laos",
+          "logo": "https://media.api-sports.io/football/teams/1558.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 5,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 4,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 2,
+            "extra": null
+          },
+          "team": {
+            "id": 1556,
+            "name": "Myanmar",
+            "logo": "https://media.api-sports.io/football/teams/1556.png"
+          },
+          "player": {
+            "id": 123799,
+            "name": "Aung Lwin Moe"
+          },
+          "assist": {
+            "id": 122455,
+            "name": "M. M. Lwin"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 4,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 670339,
+            "name": "P. Siphanom"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 17,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 670340,
+            "name": "B. Chernvanglien"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 20,
+            "extra": null
+          },
+          "team": {
+            "id": 1556,
+            "name": "Myanmar",
+            "logo": "https://media.api-sports.io/football/teams/1556.png"
+          },
+          "player": {
+            "id": 315985,
+            "name": "N. T. Win"
+          },
+          "assist": {
+            "id": 122455,
+            "name": "M. M. Lwin"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 345895,
+            "name": "P. Sangvilay"
+          },
+          "assist": {
+            "id": 670340,
+            "name": "B. Chernvanglien"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 1556,
+            "name": "Myanmar",
+            "logo": "https://media.api-sports.io/football/teams/1556.png"
+          },
+          "player": {
+            "id": 195053,
+            "name": "Min Zwe Khant"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 1556,
+            "name": "Myanmar",
+            "logo": "https://media.api-sports.io/football/teams/1556.png"
+          },
+          "player": {
+            "id": 315985,
+            "name": "N. T. Win"
+          },
+          "assist": {
+            "id": 122455,
+            "name": "M. M. Lwin"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 4
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 672181,
+            "name": "K. Phetsivilay"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 6
+          },
+          "team": {
+            "id": 1556,
+            "name": "Myanmar",
+            "logo": "https://media.api-sports.io/football/teams/1556.png"
+          },
+          "player": {
+            "id": 122455,
+            "name": "M. M. Lwin"
           },
           "assist": {
             "id": null,
@@ -136,6 +406,320 @@
           },
           "type": "Goal",
           "detail": "Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 570042,
+            "name": "K. Keonuchanh"
+          },
+          "assist": {
+            "id": 642083,
+            "name": "S. Sengvanny"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 52,
+            "extra": null
+          },
+          "team": {
+            "id": 1556,
+            "name": "Myanmar",
+            "logo": "https://media.api-sports.io/football/teams/1556.png"
+          },
+          "player": {
+            "id": 124068,
+            "name": "T. Paing"
+          },
+          "assist": {
+            "id": 123799,
+            "name": "Aung Lwin Moe"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 55,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 345904,
+            "name": "C. Wenpaserth"
+          },
+          "assist": {
+            "id": 636146,
+            "name": "K. Noophackde"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 55,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 670339,
+            "name": "P. Siphanom"
+          },
+          "assist": {
+            "id": 624852,
+            "name": "V. Chanthaleuxay"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 62,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 670342,
+            "name": "V. Kulungsy"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 345895,
+            "name": "P. Sangvilay"
+          },
+          "assist": {
+            "id": 570043,
+            "name": "S. Keohanam"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 70,
+            "extra": null
+          },
+          "team": {
+            "id": 1556,
+            "name": "Myanmar",
+            "logo": "https://media.api-sports.io/football/teams/1556.png"
+          },
+          "player": {
+            "id": 122455,
+            "name": "M. M. Lwin"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": "Unsportsmanlike conduct"
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 1558,
+            "name": "Laos",
+            "logo": "https://media.api-sports.io/football/teams/1558.png"
+          },
+          "player": {
+            "id": 570043,
+            "name": "S. Keohanam"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": "Unsportsmanlike conduct"
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1610286,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-04T10:00:00+00:00",
+        "timestamp": 1785837600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 82,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1031,
+        "name": "Premier League",
+        "country": "Bhutan",
+        "logo": "https://media.api-sports.io/football/leagues/1031.png",
+        "flag": "https://media.api-sports.io/flags/bt.svg",
+        "season": 2026,
+        "round": "Regular Season",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 19005,
+          "name": "RTC",
+          "logo": "https://media.api-sports.io/football/teams/19005.png",
+          "winner": false
+        },
+        "away": {
+          "id": 5591,
+          "name": "Thimphu",
+          "logo": "https://media.api-sports.io/football/teams/5591.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 33,
+            "extra": null
+          },
+          "team": {
+            "id": 5591,
+            "name": "Thimphu",
+            "logo": "https://media.api-sports.io/football/teams/5591.png"
+          },
+          "player": {
+            "id": null,
+            "name": "Chencho Gyeltshen"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 49,
+            "extra": null
+          },
+          "team": {
+            "id": 5591,
+            "name": "Thimphu",
+            "logo": "https://media.api-sports.io/football/teams/5591.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 19005,
+            "name": "RTC",
+            "logo": "https://media.api-sports.io/football/teams/19005.png"
+          },
+          "player": {
+            "id": null,
+            "name": "Jigdrel Wangchuk"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
           "comments": null
         }
       ]
