@@ -1,51 +1,167 @@
 {
-  "date": "2026-08-03",
-  "fetchedAt": "2026-08-03T23:17:35.056Z",
+  "date": "2026-08-04",
+  "fetchedAt": "2026-08-04T00:58:02.013Z",
   "live": [
     {
       "fixture": {
-        "id": 1549573,
-        "referee": null,
+        "id": 1493034,
+        "referee": "Sebastian Zunino, Argentina",
         "timezone": "UTC",
-        "date": "2026-08-03T20:30:00+00:00",
-        "timestamp": 1785789000,
+        "date": "2026-08-04T00:15:00+00:00",
+        "timestamp": 1785802500,
         "periods": {
-          "first": 1785789000,
+          "first": 1785802500,
           "second": null
         },
         "venue": {
           "id": null,
-          "name": "Estadio Municipal Raul Miranda",
-          "city": null
+          "name": "Estadio Unico Madre De Ciudades",
+          "city": "Santiago del Estero"
         },
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 26,
+          "elapsed": 42,
           "extra": null
         }
       },
       "league": {
-        "id": 240,
-        "name": "Primera B",
-        "country": "Colombia",
-        "logo": "https://media.api-sports.io/football/leagues/240.png",
-        "flag": "https://media.api-sports.io/flags/co.svg",
+        "id": 128,
+        "name": "Liga Profesional Argentina",
+        "country": "Argentina",
+        "logo": "https://media.api-sports.io/football/leagues/128.png",
+        "flag": "https://media.api-sports.io/flags/ar.svg",
         "season": 2026,
-        "round": "Clausura - 2",
+        "round": "Clausura - 3",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 27411,
-          "name": "Ind. Yumbo",
-          "logo": "https://media.api-sports.io/football/teams/27411.png",
+          "id": 1065,
+          "name": "Central Cordoba de Santiago",
+          "logo": "https://media.api-sports.io/football/teams/1065.png",
+          "winner": true
+        },
+        "away": {
+          "id": 460,
+          "name": "San Lorenzo",
+          "logo": "https://media.api-sports.io/football/teams/460.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 31,
+            "extra": null
+          },
+          "team": {
+            "id": 1065,
+            "name": "Central Cordoba de Santiago",
+            "logo": "https://media.api-sports.io/football/teams/1065.png"
+          },
+          "player": {
+            "id": 47424,
+            "name": "M. Santos"
+          },
+          "assist": {
+            "id": 5796,
+            "name": "S. Moyano"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 1065,
+            "name": "Central Cordoba de Santiago",
+            "logo": "https://media.api-sports.io/football/teams/1065.png"
+          },
+          "player": {
+            "id": 405310,
+            "name": "D. Barrera"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1493039,
+        "referee": "Bruno Amiconi, Argentina",
+        "timezone": "UTC",
+        "date": "2026-08-04T00:15:00+00:00",
+        "timestamp": 1785802500,
+        "periods": {
+          "first": 1785802500,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Estadio Tomas Adolfo Duco",
+          "city": "Buenos Aires"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 43,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 128,
+        "name": "Liga Profesional Argentina",
+        "country": "Argentina",
+        "logo": "https://media.api-sports.io/football/leagues/128.png",
+        "flag": "https://media.api-sports.io/flags/ar.svg",
+        "season": 2026,
+        "round": "Clausura - 3",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 445,
+          "name": "Huracan",
+          "logo": "https://media.api-sports.io/football/teams/445.png",
           "winner": null
         },
         "away": {
-          "id": 1129,
-          "name": "Envigado",
-          "logo": "https://media.api-sports.io/football/teams/1129.png",
+          "id": 455,
+          "name": "Atletico Tucuman",
+          "logo": "https://media.api-sports.io/football/teams/455.png",
           "winner": null
         }
       },
@@ -71,179 +187,20 @@
           "away": null
         }
       },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1493045,
-        "referee": "Pablo Echavarria, Argentina",
-        "timezone": "UTC",
-        "date": "2026-08-03T19:45:00+00:00",
-        "timestamp": 1785786300,
-        "periods": {
-          "first": 1785786300,
-          "second": 1785789900
-        },
-        "venue": {
-          "id": null,
-          "name": "Estadio Eva Perón",
-          "city": "Junin"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 49,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 128,
-        "name": "Liga Profesional Argentina",
-        "country": "Argentina",
-        "logo": "https://media.api-sports.io/football/leagues/128.png",
-        "flag": "https://media.api-sports.io/flags/ar.svg",
-        "season": 2026,
-        "round": "Clausura - 3",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 474,
-          "name": "Sarmiento Junin",
-          "logo": "https://media.api-sports.io/football/teams/474.png",
-          "winner": true
-        },
-        "away": {
-          "id": 473,
-          "name": "Independ. Rivadavia",
-          "logo": "https://media.api-sports.io/football/teams/473.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 2,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 2,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
       "events": [
         {
           "time": {
-            "elapsed": 12,
+            "elapsed": 20,
             "extra": null
           },
           "team": {
-            "id": 474,
-            "name": "Sarmiento Junin",
-            "logo": "https://media.api-sports.io/football/teams/474.png"
+            "id": 455,
+            "name": "Atletico Tucuman",
+            "logo": "https://media.api-sports.io/football/teams/455.png"
           },
           "player": {
-            "id": 5918,
-            "name": "M. Martinez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 31,
-            "extra": null
-          },
-          "team": {
-            "id": 473,
-            "name": "Independ. Rivadavia",
-            "logo": "https://media.api-sports.io/football/teams/473.png"
-          },
-          "player": {
-            "id": 133614,
-            "name": "M. Fernandez"
-          },
-          "assist": {
-            "id": 133614,
-            "name": "M. Fernandez"
-          },
-          "type": "Goal",
-          "detail": "Missed Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 31,
-            "extra": null
-          },
-          "team": {
-            "id": 473,
-            "name": "Independ. Rivadavia",
-            "logo": "https://media.api-sports.io/football/teams/473.png"
-          },
-          "player": {
-            "id": 133614,
-            "name": "M. Fernandez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 37,
-            "extra": null
-          },
-          "team": {
-            "id": 474,
-            "name": "Sarmiento Junin",
-            "logo": "https://media.api-sports.io/football/teams/474.png"
-          },
-          "player": {
-            "id": 422464,
-            "name": "J. Mavilla"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 41,
-            "extra": null
-          },
-          "team": {
-            "id": 474,
-            "name": "Sarmiento Junin",
-            "logo": "https://media.api-sports.io/football/teams/474.png"
-          },
-          "player": {
-            "id": 5918,
-            "name": "M. Martinez"
+            "id": 129968,
+            "name": "M. Villa"
           },
           "assist": {
             "id": null,
@@ -255,121 +212,121 @@
         },
         {
           "time": {
-            "elapsed": 46,
+            "elapsed": 34,
             "extra": null
           },
           "team": {
-            "id": 473,
-            "name": "Independ. Rivadavia",
-            "logo": "https://media.api-sports.io/football/teams/473.png"
+            "id": 455,
+            "name": "Atletico Tucuman",
+            "logo": "https://media.api-sports.io/football/teams/455.png"
           },
           "player": {
-            "id": 133614,
-            "name": "M. Fernandez"
+            "id": 6038,
+            "name": "L. Diaz"
           },
           "assist": {
-            "id": 95460,
-            "name": "A. Arce"
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
+        },
+        {
+          "time": {
+            "elapsed": 38,
+            "extra": null
+          },
+          "team": {
+            "id": 445,
+            "name": "Huracan",
+            "logo": "https://media.api-sports.io/football/teams/445.png"
+          },
+          "player": {
+            "id": 16590,
+            "name": "J. Caicedo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
+        },
+        {
+          "time": {
+            "elapsed": 39,
+            "extra": null
+          },
+          "team": {
+            "id": 455,
+            "name": "Atletico Tucuman",
+            "logo": "https://media.api-sports.io/football/teams/455.png"
+          },
+          "player": {
+            "id": 6038,
+            "name": "L. Diaz"
+          },
+          "assist": {
+            "id": 199926,
+            "name": "N. Lamendola"
           },
           "type": "subst",
           "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 473,
-            "name": "Independ. Rivadavia",
-            "logo": "https://media.api-sports.io/football/teams/473.png"
-          },
-          "player": {
-            "id": 362740,
-            "name": "R. Atencio"
-          },
-          "assist": {
-            "id": 167651,
-            "name": "L. Sequeira"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 473,
-            "name": "Independ. Rivadavia",
-            "logo": "https://media.api-sports.io/football/teams/473.png"
-          },
-          "player": {
-            "id": 292885,
-            "name": "T. Bottari"
-          },
-          "assist": {
-            "id": 119809,
-            "name": "J. I. Florentin Bobadilla"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
           "comments": null
         }
       ]
     },
     {
       "fixture": {
-        "id": 1508823,
+        "id": 1511628,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-03T19:15:00+00:00",
-        "timestamp": 1785784500,
+        "date": "2026-08-04T00:00:00+00:00",
+        "timestamp": 1785801600,
         "periods": {
-          "first": 1785784500,
-          "second": 1785788100
+          "first": 1785801600,
+          "second": null
         },
         "venue": {
           "id": null,
           "name": null,
-          "city": null
+          "city": "Temuco"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 83,
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
           "extra": null
         }
       },
       "league": {
-        "id": 164,
-        "name": "Úrvalsdeild",
-        "country": "Iceland",
-        "logo": "https://media.api-sports.io/football/leagues/164.png",
-        "flag": "https://media.api-sports.io/flags/is.svg",
+        "id": 266,
+        "name": "Primera B",
+        "country": "Chile",
+        "logo": "https://media.api-sports.io/football/leagues/266.png",
+        "flag": "https://media.api-sports.io/flags/cl.svg",
         "season": 2026,
-        "round": "Regular Season - 17",
+        "round": "Regular Season - 18",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 274,
-          "name": "Valur Reykjavik",
-          "logo": "https://media.api-sports.io/football/teams/274.png",
-          "winner": true
+          "id": 2317,
+          "name": "Deportes Temuco",
+          "logo": "https://media.api-sports.io/football/teams/2317.png",
+          "winner": null
         },
         "away": {
-          "id": 275,
-          "name": "Stjarnan",
-          "logo": "https://media.api-sports.io/football/teams/275.png",
-          "winner": false
+          "id": 2343,
+          "name": "Deportes Copiapo",
+          "logo": "https://media.api-sports.io/football/teams/2343.png",
+          "winner": null
         }
       },
       "goals": {
-        "home": 2,
+        "home": 1,
         "away": 1
       },
       "score": {
@@ -397,65 +354,21 @@
             "extra": null
           },
           "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
+            "id": 2343,
+            "name": "Deportes Copiapo",
+            "logo": "https://media.api-sports.io/football/teams/2343.png"
           },
           "player": {
-            "id": 263685,
-            "name": "B. Waren"
-          },
-          "assist": {
-            "id": 28886,
-            "name": "E. Atlason"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 25,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 28760,
-            "name": "J. Jonsson"
-          },
-          "assist": {
-            "id": 588791,
-            "name": "S. Veseli"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 28,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 39138,
-            "name": "S. Fridjonsson"
+            "id": 12364,
+            "name": "L. Palacios"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Foul"
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
         },
         {
           "time": {
@@ -463,492 +376,68 @@
             "extra": null
           },
           "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
+            "id": 2317,
+            "name": "Deportes Temuco",
+            "logo": "https://media.api-sports.io/football/teams/2317.png"
           },
           "player": {
-            "id": 28753,
-            "name": "G. Kristjansson"
-          },
-          "assist": {
-            "id": 28652,
-            "name": "A. Leifsson"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 36,
-            "extra": null
-          },
-          "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
-          },
-          "player": {
-            "id": 61613,
-            "name": "J. Gunnarsson"
+            "id": 11360,
+            "name": "D. Buonanotte"
           },
           "assist": {
             "id": null,
             "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Foul"
-        },
-        {
-          "time": {
-            "elapsed": 45,
-            "extra": 3
-          },
-          "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
-          },
-          "player": {
-            "id": 28784,
-            "name": "T. Thorisson"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Foul"
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 623990,
-            "name": "D. Gardarson"
-          },
-          "assist": {
-            "id": 100094,
-            "name": "A. Skoglund"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 57,
-            "extra": null
-          },
-          "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
-          },
-          "player": {
-            "id": 28886,
-            "name": "E. Atlason"
-          },
-          "assist": {
-            "id": 396563,
-            "name": "B. Hauksson"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 57,
-            "extra": null
-          },
-          "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
-          },
-          "player": {
-            "id": 28784,
-            "name": "T. Thorisson"
-          },
-          "assist": {
-            "id": 48255,
-            "name": "A. Bjarnason"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 60,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 588791,
-            "name": "S. Veseli"
-          },
-          "assist": {
-            "id": 204166,
-            "name": "B. Heimisson"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 69,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 64184,
-            "name": "J. Palsson"
-          },
-          "assist": {
-            "id": 89714,
-            "name": "P. Pedersen"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 75,
-            "extra": null
-          },
-          "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
-          },
-          "player": {
-            "id": null,
-            "name": "J. Hauksson"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Unsportsmanlike conduct"
-        },
-        {
-          "time": {
-            "elapsed": 77,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 69216,
-            "name": "L. Heimisson"
-          },
-          "assist": {
-            "id": 557870,
-            "name": "M. Veldman"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 77,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 39138,
-            "name": "S. Fridjonsson"
-          },
-          "assist": {
-            "id": 28696,
-            "name": "H. Gunnarsson"
-          },
-          "type": "subst",
-          "detail": "Substitution 5",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 80,
-            "extra": null
-          },
-          "team": {
-            "id": 274,
-            "name": "Valur Reykjavik",
-            "logo": "https://media.api-sports.io/football/teams/274.png"
-          },
-          "player": {
-            "id": 557870,
-            "name": "M. Veldman"
-          },
-          "assist": {
-            "id": 204166,
-            "name": "B. Heimisson"
           },
           "type": "Goal",
           "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 83,
-            "extra": null
-          },
-          "team": {
-            "id": 275,
-            "name": "Stjarnan",
-            "logo": "https://media.api-sports.io/football/teams/275.png"
-          },
-          "player": {
-            "id": 28853,
-            "name": "B. Ingason"
-          },
-          "assist": {
-            "id": 63615,
-            "name": "A. Vilhjalmsson"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
           "comments": null
         }
       ]
     },
     {
       "fixture": {
-        "id": 1609866,
-        "referee": null,
+        "id": 1519434,
+        "referee": "Lenin Quinonez, Ecuador",
         "timezone": "UTC",
-        "date": "2026-08-03T19:30:00+00:00",
-        "timestamp": 1785785400,
+        "date": "2026-08-04T00:00:00+00:00",
+        "timestamp": 1785801600,
         "periods": {
-          "first": 1785785400,
-          "second": 1785789000
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 67,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 300,
-        "name": "Segunda División",
-        "country": "Venezuela",
-        "logo": "https://media.api-sports.io/football/leagues/300.png",
-        "flag": "https://media.api-sports.io/flags/ve.svg",
-        "season": 2026,
-        "round": "Regular Season - 21",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 2841,
-          "name": "Zamora FC B",
-          "logo": "https://media.api-sports.io/football/teams/2841.png",
-          "winner": true
-        },
-        "away": {
-          "id": 2816,
-          "name": "Urena SC",
-          "logo": "https://media.api-sports.io/football/teams/2816.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 2,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 2,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 17,
-            "extra": null
-          },
-          "team": {
-            "id": 2816,
-            "name": "Urena SC",
-            "logo": "https://media.api-sports.io/football/teams/2816.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 31,
-            "extra": null
-          },
-          "team": {
-            "id": 2841,
-            "name": "Zamora FC B",
-            "logo": "https://media.api-sports.io/football/teams/2841.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 45,
-            "extra": null
-          },
-          "team": {
-            "id": 2841,
-            "name": "Zamora FC B",
-            "logo": "https://media.api-sports.io/football/teams/2841.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 61,
-            "extra": null
-          },
-          "team": {
-            "id": 2816,
-            "name": "Urena SC",
-            "logo": "https://media.api-sports.io/football/teams/2816.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Red Card",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1599165,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-03T20:00:00+00:00",
-        "timestamp": 1785787200,
-        "periods": {
-          "first": 1785787200,
+          "first": 1785801600,
           "second": null
         },
         "venue": {
-          "id": null,
-          "name": null,
-          "city": null
+          "id": 471,
+          "name": "Estadio Rodrigo Paz Delgado",
+          "city": "Quito"
         },
         "status": {
           "long": "Halftime",
           "short": "HT",
           "elapsed": 45,
-          "extra": 2
+          "extra": null
         }
       },
       "league": {
-        "id": 251,
-        "name": "Division Intermedia",
-        "country": "Paraguay",
-        "logo": "https://media.api-sports.io/football/leagues/251.png",
-        "flag": "https://media.api-sports.io/flags/py.svg",
+        "id": 242,
+        "name": "Liga Pro",
+        "country": "Ecuador",
+        "logo": "https://media.api-sports.io/football/leagues/242.png",
+        "flag": "https://media.api-sports.io/flags/ec.svg",
         "season": 2026,
-        "round": "Regular Season - 17",
+        "round": "Regular Season - 23",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 21374,
-          "name": "3 de Noviembre",
-          "logo": "https://media.api-sports.io/football/teams/21374.png",
+          "id": 1158,
+          "name": "LDU de Quito",
+          "logo": "https://media.api-sports.io/football/teams/1158.png",
           "winner": null
         },
         "away": {
-          "id": 20786,
-          "name": "Sportivo Carapeguá",
-          "logo": "https://media.api-sports.io/football/teams/20786.png",
+          "id": 1149,
+          "name": "Delfin SC",
+          "logo": "https://media.api-sports.io/football/teams/1149.png",
           "winner": null
         }
       },
@@ -977,188 +466,94 @@
       "events": [
         {
           "time": {
-            "elapsed": 4,
+            "elapsed": 41,
             "extra": null
           },
           "team": {
-            "id": 21374,
-            "name": "3 de Noviembre",
-            "logo": "https://media.api-sports.io/football/teams/21374.png"
+            "id": 1158,
+            "name": "LDU de Quito",
+            "logo": "https://media.api-sports.io/football/teams/1158.png"
           },
           "player": {
-            "id": null,
-            "name": "D. Martinez"
-          },
-          "assist": {
-            "id": null,
-            "name": "D. Martinez"
-          },
-          "type": "Goal",
-          "detail": "Missed Penalty",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1606348,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-03T20:00:00+00:00",
-        "timestamp": 1785787200,
-        "periods": {
-          "first": 1785787200,
-          "second": null
-        },
-        "venue": {
-          "id": 0,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 4
-        }
-      },
-      "league": {
-        "id": 1016,
-        "name": "CAC Games",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/1016.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Group Stage - 1",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 28047,
-          "name": "Costa Rica U21",
-          "logo": "https://media.api-sports.io/football/teams/28047.png",
-          "winner": null
-        },
-        "away": {
-          "id": 28046,
-          "name": "Colombia U21",
-          "logo": "https://media.api-sports.io/football/teams/28046.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 7,
-            "extra": null
-          },
-          "team": {
-            "id": 28046,
-            "name": "Colombia U21",
-            "logo": "https://media.api-sports.io/football/teams/28046.png"
-          },
-          "player": {
-            "id": 538193,
-            "name": "M. Marulanda"
-          },
-          "assist": {
-            "id": 642536,
-            "name": "J. Cordoba"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 10,
-            "extra": null
-          },
-          "team": {
-            "id": 28047,
-            "name": "Costa Rica U21",
-            "logo": "https://media.api-sports.io/football/teams/28047.png"
-          },
-          "player": {
-            "id": 308197,
-            "name": "E. Salazar"
+            "id": 12303,
+            "name": "R. Ade"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 3
+          },
+          "team": {
+            "id": 1158,
+            "name": "LDU de Quito",
+            "logo": "https://media.api-sports.io/football/teams/1158.png"
+          },
+          "player": {
+            "id": 16413,
+            "name": "J. Corozo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Var",
+          "detail": "Goal Disallowed - offside",
           "comments": null
         }
       ]
     },
     {
       "fixture": {
-        "id": 1606350,
+        "id": 1546843,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-03T20:00:00+00:00",
-        "timestamp": 1785787200,
+        "date": "2026-08-04T00:00:00+00:00",
+        "timestamp": 1785801600,
         "periods": {
-          "first": 1785787200,
+          "first": 1785801600,
           "second": null
         },
         "venue": {
-          "id": 0,
-          "name": null,
-          "city": null
+          "id": null,
+          "name": "Arena da Baixada",
+          "city": "Curitiba"
         },
         "status": {
           "long": "Halftime",
           "short": "HT",
           "elapsed": 45,
-          "extra": 3
+          "extra": null
         }
       },
       "league": {
-        "id": 1016,
-        "name": "CAC Games",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/1016.png",
-        "flag": null,
+        "id": 73,
+        "name": "Copa Do Brasil",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/73.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
         "season": 2026,
-        "round": "Group Stage - 1",
-        "standings": true
+        "round": "Round of 16",
+        "standings": false
       },
       "teams": {
         "home": {
-          "id": 23541,
-          "name": "Panama U21",
-          "logo": "https://media.api-sports.io/football/teams/23541.png",
+          "id": 134,
+          "name": "Atletico Paranaense",
+          "logo": "https://media.api-sports.io/football/teams/134.png",
           "winner": true
         },
         "away": {
-          "id": 28048,
-          "name": "Cuba U21",
-          "logo": "https://media.api-sports.io/football/teams/28048.png",
+          "id": 136,
+          "name": "Vitoria",
+          "logo": "https://media.api-sports.io/football/teams/136.png",
           "winner": false
         }
       },
@@ -1187,24 +582,68 @@
       "events": [
         {
           "time": {
-            "elapsed": 6,
+            "elapsed": 9,
             "extra": null
           },
           "team": {
-            "id": 23541,
-            "name": "Panama U21",
-            "logo": "https://media.api-sports.io/football/teams/23541.png"
+            "id": 134,
+            "name": "Atletico Paranaense",
+            "logo": "https://media.api-sports.io/football/teams/134.png"
           },
           "player": {
-            "id": 671741,
-            "name": "C. Sinisterra"
+            "id": 544942,
+            "name": "Joao Cruz"
+          },
+          "assist": {
+            "id": 408145,
+            "name": "Leozinho"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 21,
+            "extra": null
+          },
+          "team": {
+            "id": 136,
+            "name": "Vitoria",
+            "logo": "https://media.api-sports.io/football/teams/136.png"
+          },
+          "player": {
+            "id": 16637,
+            "name": "Emmanuel Martinez"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 26,
+            "extra": null
+          },
+          "team": {
+            "id": 134,
+            "name": "Atletico Paranaense",
+            "logo": "https://media.api-sports.io/football/teams/134.png"
+          },
+          "player": {
+            "id": 457420,
+            "name": "Arthur Dias"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
           "comments": null
         }
       ]
