@@ -1,17 +1,17 @@
 {
   "date": "2026-08-06",
-  "fetchedAt": "2026-08-06T09:23:39.398Z",
+  "fetchedAt": "2026-08-06T11:38:59.664Z",
   "live": [
     {
       "fixture": {
-        "id": 1611279,
+        "id": 1527348,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-06T08:30:00+00:00",
-        "timestamp": 1786005000,
+        "date": "2026-08-06T10:00:00+00:00",
+        "timestamp": 1786010400,
         "periods": {
-          "first": 1786005000,
-          "second": null
+          "first": 1786010400,
+          "second": 1786014000
         },
         "venue": {
           "id": 0,
@@ -19,44 +19,44 @@
           "city": null
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 9
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 80,
+          "extra": null
         }
       },
       "league": {
-        "id": 924,
-        "name": "Piala Presiden",
-        "country": "Indonesia",
-        "logo": "https://media.api-sports.io/football/leagues/924.png",
-        "flag": "https://media.api-sports.io/flags/id.svg",
+        "id": 834,
+        "name": "South Australia State League 1",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/834.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
         "season": 2026,
-        "round": "Third runner",
+        "round": "Regular Season - 21",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 10134,
-          "name": "Persija",
-          "logo": "https://media.api-sports.io/football/teams/10134.png",
-          "winner": null
+          "id": 22807,
+          "name": "Salisbury United",
+          "logo": "https://media.api-sports.io/football/teams/22807.png",
+          "winner": false
         },
         "away": {
-          "id": 2438,
-          "name": "Arema FC",
-          "logo": "https://media.api-sports.io/football/teams/2438.png",
-          "winner": null
+          "id": 3795,
+          "name": "South Adelaide Panthers",
+          "logo": "https://media.api-sports.io/football/teams/3795.png",
+          "winner": true
         }
       },
       "goals": {
         "home": 1,
-        "away": 1
+        "away": 3
       },
       "score": {
         "halftime": {
           "home": 1,
-          "away": 1
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -74,17 +74,17 @@
       "events": [
         {
           "time": {
-            "elapsed": 6,
+            "elapsed": 9,
             "extra": null
           },
           "team": {
-            "id": 10134,
-            "name": "Persija",
-            "logo": "https://media.api-sports.io/football/teams/10134.png"
+            "id": 3795,
+            "name": "South Adelaide Panthers",
+            "logo": "https://media.api-sports.io/football/teams/3795.png"
           },
           "player": {
-            "id": 199185,
-            "name": "Witan"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
@@ -96,39 +96,17 @@
         },
         {
           "time": {
-            "elapsed": 13,
+            "elapsed": 10,
             "extra": null
           },
           "team": {
-            "id": 2438,
-            "name": "Arema FC",
-            "logo": "https://media.api-sports.io/football/teams/2438.png"
+            "id": 3795,
+            "name": "South Adelaide Panthers",
+            "logo": "https://media.api-sports.io/football/teams/3795.png"
           },
           "player": {
-            "id": 564207,
-            "name": "B. Setiawan"
-          },
-          "assist": {
             "id": null,
             "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 27,
-            "extra": null
-          },
-          "team": {
-            "id": 2438,
-            "name": "Arema FC",
-            "logo": "https://media.api-sports.io/football/teams/2438.png"
-          },
-          "player": {
-            "id": 564232,
-            "name": "S. Tuharea"
           },
           "assist": {
             "id": null,
@@ -140,24 +118,46 @@
         },
         {
           "time": {
-            "elapsed": 40,
+            "elapsed": 15,
             "extra": null
           },
           "team": {
-            "id": 2438,
-            "name": "Arema FC",
-            "logo": "https://media.api-sports.io/football/teams/2438.png"
+            "id": 22807,
+            "name": "Salisbury United",
+            "logo": "https://media.api-sports.io/football/teams/22807.png"
           },
           "player": {
-            "id": 306060,
-            "name": "MV"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Var",
-          "detail": "Goal Disallowed - video review",
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 3795,
+            "name": "South Adelaide Panthers",
+            "logo": "https://media.api-sports.io/football/teams/3795.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
           "comments": null
         }
       ]
@@ -1783,7 +1783,7 @@
         "timestamp": 1786005000,
         "periods": {
           "first": 1786005000,
-          "second": null
+          "second": 1786008600
         },
         "venue": {
           "id": 0,
@@ -1791,10 +1791,10 @@
           "city": null
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 9
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 11
         }
       },
       "league": {
@@ -1812,17 +1812,17 @@
           "id": 10134,
           "name": "Persija",
           "logo": "https://media.api-sports.io/football/teams/10134.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 2438,
           "name": "Arema FC",
           "logo": "https://media.api-sports.io/football/teams/2438.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 1,
+        "home": 3,
         "away": 1
       },
       "score": {
@@ -1831,8 +1831,8 @@
           "away": 1
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -1852,8 +1852,8 @@
         "date": "2026-08-06T09:30:00+00:00",
         "timestamp": 1786008600,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1786008600,
+          "second": 1786012200
         },
         "venue": {
           "id": null,
@@ -1861,10 +1861,10 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 8
         }
       },
       "league": {
@@ -1882,27 +1882,27 @@
           "id": 28010,
           "name": "Bidhannagar",
           "logo": "https://media.api-sports.io/football/teams/28010.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 21597,
           "name": "BSS Sporting",
           "logo": "https://media.api-sports.io/football/teams/21597.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 4
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 4
         },
         "extratime": {
           "home": null,
@@ -1922,8 +1922,8 @@
         "date": "2026-08-06T09:30:00+00:00",
         "timestamp": 1786008600,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1786008600,
+          "second": 1786012200
         },
         "venue": {
           "id": null,
@@ -1931,10 +1931,10 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 6
         }
       },
       "league": {
@@ -1952,27 +1952,27 @@
           "id": 21605,
           "name": "Kalighat",
           "logo": "https://media.api-sports.io/football/teams/21605.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 21607,
           "name": "Patha Chakra",
           "logo": "https://media.api-sports.io/football/teams/21607.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 6,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 6,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -1992,8 +1992,8 @@
         "date": "2026-08-06T10:00:00+00:00",
         "timestamp": 1786010400,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1786010400,
+          "second": 1786014000
         },
         "venue": {
           "id": 0,
@@ -2001,9 +2001,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 80,
           "extra": null
         }
       },
@@ -2022,23 +2022,23 @@
           "id": 22807,
           "name": "Salisbury United",
           "logo": "https://media.api-sports.io/football/teams/22807.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 3795,
           "name": "South Adelaide Panthers",
           "logo": "https://media.api-sports.io/football/teams/3795.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 3
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 2
         },
         "fulltime": {
           "home": null,
