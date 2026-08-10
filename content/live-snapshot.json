@@ -1,6 +1,6 @@
 {
   "date": "2026-08-10",
-  "fetchedAt": "2026-08-10T05:02:57.436Z",
+  "fetchedAt": "2026-08-10T06:21:12.490Z",
   "live": [
     {
       "fixture": {
@@ -1780,8 +1780,8 @@
         "date": "2026-08-10T03:00:00+00:00",
         "timestamp": 1786330800,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1786330800,
+          "second": 1786334400
         },
         "venue": {
           "id": null,
@@ -1789,9 +1789,9 @@
           "city": "Lautoka"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -1810,27 +1810,27 @@
           "id": 19008,
           "name": "Central Coast",
           "logo": "https://media.api-sports.io/football/teams/19008.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 2537,
           "name": "Auckland City",
           "logo": "https://media.api-sports.io/football/teams/2537.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 2
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 2
         },
         "extratime": {
           "home": null,
