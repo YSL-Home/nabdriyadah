@@ -1,6 +1,6 @@
 {
   "date": "2026-08-11",
-  "fetchedAt": "2026-08-11T06:33:49.278Z",
+  "fetchedAt": "2026-08-11T07:52:04.044Z",
   "live": [
     {
       "fixture": {
@@ -339,8 +339,8 @@
         "date": "2026-08-11T00:00:00+00:00",
         "timestamp": 1786406400,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1786406400,
+          "second": 1786410000
         },
         "venue": {
           "id": 0,
@@ -348,9 +348,9 @@
           "city": "Betim"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -369,18 +369,18 @@
           "id": 1802,
           "name": "America Mineiro W",
           "logo": "https://media.api-sports.io/football/teams/1802.png",
-          "winner": true
+          "winner": null
         },
         "away": {
           "id": 1794,
           "name": "Flamengo W",
           "logo": "https://media.api-sports.io/football/teams/1794.png",
-          "winner": false
+          "winner": null
         }
       },
       "goals": {
         "home": 1,
-        "away": 0
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -388,8 +388,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -838,9 +838,9 @@
           "city": "Ulaanbaatar"
         },
         "status": {
-          "long": "Penalty In Progress",
-          "short": "P",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "PEN",
+          "elapsed": 120,
           "extra": null
         }
       },
@@ -859,13 +859,13 @@
           "id": 22067,
           "name": "Central Stallions",
           "logo": "https://media.api-sports.io/football/teams/22067.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 12543,
           "name": "Tainan City",
           "logo": "https://media.api-sports.io/football/teams/12543.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
@@ -886,8 +886,8 @@
           "away": 0
         },
         "penalty": {
-          "home": 0,
-          "away": 0
+          "home": 3,
+          "away": 5
         }
       }
     },
@@ -1215,6 +1215,76 @@
           "id": 15550,
           "name": "Macarthur",
           "logo": "https://media.api-sports.io/football/teams/15550.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1620968,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-11T09:30:00+00:00",
+        "timestamp": 1786440600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1020,
+        "name": "Calcutta Premier Division",
+        "country": "India",
+        "logo": "https://media.api-sports.io/football/leagues/1020.png",
+        "flag": "https://media.api-sports.io/flags/in.svg",
+        "season": 2026,
+        "round": "Regular season",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 21599,
+          "name": "Calcutta Customs",
+          "logo": "https://media.api-sports.io/football/teams/21599.png",
+          "winner": null
+        },
+        "away": {
+          "id": 21605,
+          "name": "Kalighat",
+          "logo": "https://media.api-sports.io/football/teams/21605.png",
           "winner": null
         }
       },
@@ -14138,8 +14208,8 @@
           "city": "Piedecuesta"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Postponed",
+          "short": "PST",
           "elapsed": null,
           "extra": null
         }
@@ -14208,8 +14278,8 @@
           "city": "Envigado"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Postponed",
+          "short": "PST",
           "elapsed": null,
           "extra": null
         }
@@ -14278,8 +14348,8 @@
           "city": "Palmira"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Postponed",
+          "short": "PST",
           "elapsed": null,
           "extra": null
         }
@@ -14348,8 +14418,8 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Postponed",
+          "short": "PST",
           "elapsed": null,
           "extra": null
         }
@@ -14768,8 +14838,8 @@
           "city": "Cartagena"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Postponed",
+          "short": "PST",
           "elapsed": null,
           "extra": null
         }
@@ -14978,8 +15048,8 @@
           "city": "Tunja"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Postponed",
+          "short": "PST",
           "elapsed": null,
           "extra": null
         }
@@ -15048,8 +15118,8 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
+          "long": "Match Postponed",
+          "short": "PST",
           "elapsed": null,
           "extra": null
         }
