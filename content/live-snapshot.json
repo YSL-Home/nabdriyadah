@@ -1,6 +1,6 @@
 {
   "date": "2026-08-11",
-  "fetchedAt": "2026-08-11T04:37:29.464Z",
+  "fetchedAt": "2026-08-11T05:40:41.572Z",
   "live": [
     {
       "fixture": {
@@ -698,8 +698,8 @@
           "city": "Barranquilla"
         },
         "status": {
-          "long": "Match Postponed",
-          "short": "PST",
+          "long": "Not Started",
+          "short": "NS",
           "elapsed": null,
           "extra": null
         }
@@ -838,9 +838,9 @@
           "city": "Ulaanbaatar"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 77,
+          "long": "Penalty In Progress",
+          "short": "P",
+          "elapsed": null,
           "extra": null
         }
       },
@@ -869,8 +869,8 @@
         }
       },
       "goals": {
-        "home": 1,
-        "away": 1
+        "home": 2,
+        "away": 2
       },
       "score": {
         "halftime": {
@@ -878,16 +878,16 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 2
         },
         "extratime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "penalty": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       }
     },
@@ -15005,6 +15005,76 @@
           "id": 1469,
           "name": "Orsomarso",
           "logo": "https://media.api-sports.io/football/teams/1469.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1549719,
+        "referee": "J. A. Mayorga Londono",
+        "timezone": "UTC",
+        "date": "2026-08-11T23:00:00+00:00",
+        "timestamp": 1786489200,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Estadio Atanasio Girardot",
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 239,
+        "name": "Primera A",
+        "country": "Colombia",
+        "logo": "https://media.api-sports.io/football/leagues/239.png",
+        "flag": "https://media.api-sports.io/flags/co.svg",
+        "season": 2026,
+        "round": "Clausura - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1128,
+          "name": "Independiente Medellin",
+          "logo": "https://media.api-sports.io/football/teams/1128.png",
+          "winner": null
+        },
+        "away": {
+          "id": 1125,
+          "name": "Millonarios",
+          "logo": "https://media.api-sports.io/football/teams/1125.png",
           "winner": null
         }
       },
