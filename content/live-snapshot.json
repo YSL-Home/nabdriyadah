@@ -1,78 +1,7 @@
 {
   "date": "2026-08-11",
-  "fetchedAt": "2026-08-11T10:34:48.079Z",
+  "fetchedAt": "2026-08-11T11:28:23.773Z",
   "live": [
-    {
-      "fixture": {
-        "id": 1527115,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-11T10:30:00+00:00",
-        "timestamp": 1786444200,
-        "periods": {
-          "first": 1786444200,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Karinya Reserve",
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 3,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 194,
-        "name": "South Australia NPL",
-        "country": "Australia",
-        "logo": "https://media.api-sports.io/football/leagues/194.png",
-        "flag": "https://media.api-sports.io/flags/au.svg",
-        "season": 2026,
-        "round": "Regular Season - 20",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 12866,
-          "name": "Sturt Lions",
-          "logo": "https://media.api-sports.io/football/teams/12866.png",
-          "winner": null
-        },
-        "away": {
-          "id": 3786,
-          "name": "Adelaide Comets",
-          "logo": "https://media.api-sports.io/football/teams/3786.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
     {
       "fixture": {
         "id": 1533725,
@@ -82,7 +11,7 @@
         "timestamp": 1786442400,
         "periods": {
           "first": 1786442400,
-          "second": null
+          "second": 1786446000
         },
         "venue": {
           "id": null,
@@ -90,9 +19,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 24,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 69,
           "extra": null
         }
       },
@@ -153,7 +82,7 @@
         "timestamp": 1786442400,
         "periods": {
           "first": 1786442400,
-          "second": null
+          "second": 1786446000
         },
         "venue": {
           "id": null,
@@ -161,9 +90,9 @@
           "city": "Perth"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 22,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 59,
           "extra": null
         }
       },
@@ -182,22 +111,22 @@
           "id": 496,
           "name": "Juventus",
           "logo": "https://media.api-sports.io/football/teams/496.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 522,
           "name": "Palermo",
           "logo": "https://media.api-sports.io/football/teams/522.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "fulltime": {
@@ -235,79 +164,96 @@
           "type": "Card",
           "detail": "Yellow Card",
           "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 496,
+            "name": "Juventus",
+            "logo": "https://media.api-sports.io/football/teams/496.png"
+          },
+          "player": {
+            "id": 339883,
+            "name": "K. Yildiz"
+          },
+          "assist": {
+            "id": 22222,
+            "name": "Z. Celik"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 496,
+            "name": "Juventus",
+            "logo": "https://media.api-sports.io/football/teams/496.png"
+          },
+          "player": {
+            "id": 161585,
+            "name": "F. Conceicao"
+          },
+          "assist": {
+            "id": 48392,
+            "name": "E. Zhegrova"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 496,
+            "name": "Juventus",
+            "logo": "https://media.api-sports.io/football/teams/496.png"
+          },
+          "player": {
+            "id": 47522,
+            "name": "Douglas Luiz"
+          },
+          "assist": {
+            "id": 30533,
+            "name": "M. Locatelli"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 496,
+            "name": "Juventus",
+            "logo": "https://media.api-sports.io/football/teams/496.png"
+          },
+          "player": {
+            "id": 268341,
+            "name": "F. Gatti"
+          },
+          "assist": {
+            "id": 861,
+            "name": "D. Rugani"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
         }
       ]
-    },
-    {
-      "fixture": {
-        "id": 1567328,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-11T10:30:00+00:00",
-        "timestamp": 1786444200,
-        "periods": {
-          "first": 1786444200,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Gangneung Stadium",
-          "city": "Gangneung"
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 3,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 17,
-        "name": "AFC Champions League Elite",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/17.png",
-        "flag": null,
-        "season": 2026,
-        "round": "1st Preliminary Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 2746,
-          "name": "Gangwon FC",
-          "logo": "https://media.api-sports.io/football/teams/2746.png",
-          "winner": null
-        },
-        "away": {
-          "id": 293,
-          "name": "Gamba Osaka",
-          "logo": "https://media.api-sports.io/football/teams/293.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
     },
     {
       "fixture": {
@@ -318,7 +264,7 @@
         "timestamp": 1786442400,
         "periods": {
           "first": 1786442400,
-          "second": null
+          "second": 1786446000
         },
         "venue": {
           "id": null,
@@ -326,9 +272,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 32,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 65,
           "extra": null
         }
       },
@@ -347,22 +293,22 @@
           "id": 15469,
           "name": "Sporting Braga U23",
           "logo": "https://media.api-sports.io/football/teams/15469.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 17474,
           "name": "Farense U23",
           "logo": "https://media.api-sports.io/football/teams/17474.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "fulltime": {
@@ -378,7 +324,30 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 15469,
+            "name": "Sporting Braga U23",
+            "logo": "https://media.api-sports.io/football/teams/15469.png"
+          },
+          "player": {
+            "id": 579858,
+            "name": "G. Moraes"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     },
     {
       "fixture": {
@@ -389,7 +358,7 @@
         "timestamp": 1786442400,
         "periods": {
           "first": 1786442400,
-          "second": null
+          "second": 1786446000
         },
         "venue": {
           "id": null,
@@ -397,9 +366,9 @@
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 34,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 69,
           "extra": null
         }
       },
@@ -418,23 +387,23 @@
           "id": 15464,
           "name": "Famalicão U23",
           "logo": "https://media.api-sports.io/football/teams/15464.png",
-          "winner": false
+          "winner": null
         },
         "away": {
           "id": 21720,
           "name": "Torreense U23",
           "logo": "https://media.api-sports.io/football/teams/21720.png",
-          "winner": true
+          "winner": null
         }
       },
       "goals": {
-        "home": 0,
-        "away": 1
+        "home": 2,
+        "away": 2
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 1
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -471,252 +440,42 @@
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1567326,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-11T09:30:00+00:00",
-        "timestamp": 1786440600,
-        "periods": {
-          "first": 1786440600,
-          "second": 1786444200
         },
-        "venue": {
-          "id": null,
-          "name": "Coopers Stadium",
-          "city": "Adelaide"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 48,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 17,
-        "name": "AFC Champions League Elite",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/17.png",
-        "flag": null,
-        "season": 2026,
-        "round": "1st Preliminary Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 948,
-          "name": "Adelaide United",
-          "logo": "https://media.api-sports.io/football/teams/948.png",
-          "winner": false
-        },
-        "away": {
-          "id": 16400,
-          "name": "Công An Nhân Dân",
-          "logo": "https://media.api-sports.io/football/teams/16400.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
         {
           "time": {
-            "elapsed": 8,
+            "elapsed": 37,
             "extra": null
           },
           "team": {
-            "id": 16400,
-            "name": "Công An Nhân Dân",
-            "logo": "https://media.api-sports.io/football/teams/16400.png"
+            "id": 21720,
+            "name": "Torreense U23",
+            "logo": "https://media.api-sports.io/football/teams/21720.png"
           },
           "player": {
-            "id": 531629,
-            "name": "L. Adou"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
             "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 22,
-            "extra": null
-          },
-          "team": {
-            "id": 948,
-            "name": "Adelaide United",
-            "logo": "https://media.api-sports.io/football/teams/948.png"
-          },
-          "player": {
-            "id": 403904,
-            "name": "P. Kikianis"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 31,
-            "extra": null
-          },
-          "team": {
-            "id": 948,
-            "name": "Adelaide United",
-            "logo": "https://media.api-sports.io/football/teams/948.png"
-          },
-          "player": {
-            "id": 485819,
-            "name": "H. Crawford"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 41,
-            "extra": null
-          },
-          "team": {
-            "id": 16400,
-            "name": "Công An Nhân Dân",
-            "logo": "https://media.api-sports.io/football/teams/16400.png"
-          },
-          "player": {
-            "id": 8566,
-            "name": "D. Henen"
-          },
-          "assist": {
-            "id": 13790,
-            "name": "B. Perea"
           },
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1582813,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-11T09:00:00+00:00",
-        "timestamp": 1786438800,
-        "periods": {
-          "first": 1786438800,
-          "second": 1786442400
         },
-        "venue": {
-          "id": null,
-          "name": "Muktijuddho Sriti Stadium",
-          "city": "Rajshahi"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 76,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 1132,
-        "name": "AFC Challenge League",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/1132.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Preliminary Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 20780,
-          "name": "Fortis",
-          "logo": "https://media.api-sports.io/football/teams/20780.png",
-          "winner": true
-        },
-        "away": {
-          "id": 21167,
-          "name": "Muras United",
-          "logo": "https://media.api-sports.io/football/teams/21167.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
         {
           "time": {
             "elapsed": 52,
             "extra": null
           },
           "team": {
-            "id": 20780,
-            "name": "Fortis",
-            "logo": "https://media.api-sports.io/football/teams/20780.png"
+            "id": 15464,
+            "name": "Famalicão U23",
+            "logo": "https://media.api-sports.io/football/teams/15464.png"
           },
           "player": {
-            "id": 121648,
-            "name": "M. Ibrahim"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
@@ -728,13 +487,13 @@
         },
         {
           "time": {
-            "elapsed": 75,
+            "elapsed": 56,
             "extra": null
           },
           "team": {
-            "id": 21167,
-            "name": "Muras United",
-            "logo": "https://media.api-sports.io/football/teams/21167.png"
+            "id": 15464,
+            "name": "Famalicão U23",
+            "logo": "https://media.api-sports.io/football/teams/15464.png"
           },
           "player": {
             "id": null,
@@ -745,219 +504,10 @@
             "name": null
           },
           "type": "Goal",
-          "detail": "Missed Penalty",
+          "detail": "Normal Goal",
           "comments": null
         }
       ]
-    },
-    {
-      "fixture": {
-        "id": 1607633,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-11T09:30:00+00:00",
-        "timestamp": 1786440600,
-        "periods": {
-          "first": 1786440600,
-          "second": 1786444200
-        },
-        "venue": {
-          "id": 20807,
-          "name": "Lions Stadium",
-          "city": "Brisbane"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 48,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 874,
-        "name": "Australia Cup",
-        "country": "Australia",
-        "logo": "https://media.api-sports.io/football/leagues/874.png",
-        "flag": "https://media.api-sports.io/flags/au.svg",
-        "season": 2026,
-        "round": "Round of 16",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 10217,
-          "name": "Lions",
-          "logo": "https://media.api-sports.io/football/teams/10217.png",
-          "winner": true
-        },
-        "away": {
-          "id": 945,
-          "name": "Melbourne City",
-          "logo": "https://media.api-sports.io/football/teams/945.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 20,
-            "extra": null
-          },
-          "team": {
-            "id": 10217,
-            "name": "Lions",
-            "logo": "https://media.api-sports.io/football/teams/10217.png"
-          },
-          "player": {
-            "id": 337586,
-            "name": "J. Nieuwenhuizen"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Own Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 40,
-            "extra": null
-          },
-          "team": {
-            "id": 945,
-            "name": "Melbourne City",
-            "logo": "https://media.api-sports.io/football/teams/945.png"
-          },
-          "player": {
-            "id": 496443,
-            "name": "K. Rahmani"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 42,
-            "extra": null
-          },
-          "team": {
-            "id": 10217,
-            "name": "Lions",
-            "logo": "https://media.api-sports.io/football/teams/10217.png"
-          },
-          "player": {
-            "id": 6853,
-            "name": "R. Akbari"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1607635,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-11T09:30:00+00:00",
-        "timestamp": 1786440600,
-        "periods": {
-          "first": 1786440600,
-          "second": 1786444200
-        },
-        "venue": {
-          "id": null,
-          "name": "Ernie Smith Reserve",
-          "city": null
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 47,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 874,
-        "name": "Australia Cup",
-        "country": "Australia",
-        "logo": "https://media.api-sports.io/football/leagues/874.png",
-        "flag": "https://media.api-sports.io/flags/au.svg",
-        "season": 2026,
-        "round": "Round of 16",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 16777,
-          "name": "SD Raiders",
-          "logo": "https://media.api-sports.io/football/teams/16777.png",
-          "winner": null
-        },
-        "away": {
-          "id": 15550,
-          "name": "Macarthur",
-          "logo": "https://media.api-sports.io/football/teams/15550.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
     },
     {
       "fixture": {
@@ -968,7 +518,7 @@
         "timestamp": 1786440600,
         "periods": {
           "first": 1786440600,
-          "second": null
+          "second": 1786444200
         },
         "venue": {
           "id": null,
@@ -976,10 +526,10 @@
           "city": null
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": 5
         }
       },
       "league": {
@@ -1032,7 +582,7 @@
         {
           "time": {
             "elapsed": 45,
-            "extra": 4
+            "extra": 2
           },
           "team": {
             "id": 21605,
@@ -1041,7 +591,7 @@
           },
           "player": {
             "id": null,
-            "name": null
+            "name": "A. Sakirul"
           },
           "assist": {
             "id": null,
@@ -1049,6 +599,529 @@
           },
           "type": "Goal",
           "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1607635,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-11T09:30:00+00:00",
+        "timestamp": 1786440600,
+        "periods": {
+          "first": 1786440600,
+          "second": 1786444200
+        },
+        "venue": {
+          "id": null,
+          "name": "Ernie Smith Reserve",
+          "city": null
+        },
+        "status": {
+          "long": "Extra Time",
+          "short": "ET",
+          "elapsed": 95,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 874,
+        "name": "Australia Cup",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/874.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Round of 16",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 16777,
+          "name": "SD Raiders",
+          "logo": "https://media.api-sports.io/football/teams/16777.png",
+          "winner": null
+        },
+        "away": {
+          "id": 15550,
+          "name": "Macarthur",
+          "logo": "https://media.api-sports.io/football/teams/15550.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 0
+        },
+        "extratime": {
+          "home": 0,
+          "away": 0
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 55,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 638483,
+            "name": "M. Pratezina"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 310214,
+            "name": "B. Gibson"
+          },
+          "assist": {
+            "id": 598333,
+            "name": "J. Machar Reec"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 7056,
+            "name": "C. Pain"
+          },
+          "assist": {
+            "id": 568549,
+            "name": "Z. Helweh"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 216800,
+            "name": "C. Talbot"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 70,
+            "extra": null
+          },
+          "team": {
+            "id": 16777,
+            "name": "SD Raiders",
+            "logo": "https://media.api-sports.io/football/teams/16777.png"
+          },
+          "player": {
+            "id": 640774,
+            "name": "N. Chianese"
+          },
+          "assist": {
+            "id": 648597,
+            "name": "J. Malbasa"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 70,
+            "extra": null
+          },
+          "team": {
+            "id": 16777,
+            "name": "SD Raiders",
+            "logo": "https://media.api-sports.io/football/teams/16777.png"
+          },
+          "player": {
+            "id": 653113,
+            "name": "M. Fernandez"
+          },
+          "assist": {
+            "id": 665044,
+            "name": "M. Marcic"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 669417,
+            "name": "T. McLachlan"
+          },
+          "assist": {
+            "id": 6987,
+            "name": "K. Grozos"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 669330,
+            "name": "H. Menham"
+          },
+          "assist": {
+            "id": 360987,
+            "name": "H. Politidis"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 16777,
+            "name": "SD Raiders",
+            "logo": "https://media.api-sports.io/football/teams/16777.png"
+          },
+          "player": {
+            "id": 668185,
+            "name": "L. McGrath"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 82,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 568664,
+            "name": "H. Oliveira"
+          },
+          "assist": {
+            "id": 568665,
+            "name": "L. Vickery"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 85,
+            "extra": null
+          },
+          "team": {
+            "id": 16777,
+            "name": "SD Raiders",
+            "logo": "https://media.api-sports.io/football/teams/16777.png"
+          },
+          "player": {
+            "id": 653641,
+            "name": "L. Knezevic"
+          },
+          "assist": {
+            "id": 668192,
+            "name": "T. Santarossa"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 86,
+            "extra": null
+          },
+          "team": {
+            "id": 15550,
+            "name": "Macarthur",
+            "logo": "https://media.api-sports.io/football/teams/15550.png"
+          },
+          "player": {
+            "id": 578877,
+            "name": "S. Krslovic"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1527115,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-11T10:30:00+00:00",
+        "timestamp": 1786444200,
+        "periods": {
+          "first": 1786444200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Karinya Reserve",
+          "city": null
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 2
+        }
+      },
+      "league": {
+        "id": 194,
+        "name": "South Australia NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/194.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 20",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 12866,
+          "name": "Sturt Lions",
+          "logo": "https://media.api-sports.io/football/teams/12866.png",
+          "winner": null
+        },
+        "away": {
+          "id": 3786,
+          "name": "Adelaide Comets",
+          "logo": "https://media.api-sports.io/football/teams/3786.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1567328,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-11T10:30:00+00:00",
+        "timestamp": 1786444200,
+        "periods": {
+          "first": 1786444200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Gangneung Stadium",
+          "city": "Gangneung"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 2
+        }
+      },
+      "league": {
+        "id": 17,
+        "name": "AFC Champions League Elite",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/17.png",
+        "flag": null,
+        "season": 2026,
+        "round": "1st Preliminary Round",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 2746,
+          "name": "Gangwon FC",
+          "logo": "https://media.api-sports.io/football/teams/2746.png",
+          "winner": null
+        },
+        "away": {
+          "id": 293,
+          "name": "Gamba Osaka",
+          "logo": "https://media.api-sports.io/football/teams/293.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 6,
+            "extra": null
+          },
+          "team": {
+            "id": 293,
+            "name": "Gamba Osaka",
+            "logo": "https://media.api-sports.io/football/teams/293.png"
+          },
+          "player": {
+            "id": 33714,
+            "name": "T. Kishimoto"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 28,
+            "extra": null
+          },
+          "team": {
+            "id": 293,
+            "name": "Gamba Osaka",
+            "logo": "https://media.api-sports.io/football/teams/293.png"
+          },
+          "player": {
+            "id": 33242,
+            "name": "R. Hatsuse"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
           "comments": null
         }
       ]
