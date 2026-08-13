@@ -1,62 +1,62 @@
 {
   "date": "2026-08-13",
-  "fetchedAt": "2026-08-13T09:31:30.899Z",
+  "fetchedAt": "2026-08-13T10:42:41.493Z",
   "live": [
     {
       "fixture": {
-        "id": 1549145,
+        "id": 1623062,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-12T22:15:00+00:00",
-        "timestamp": 1786572900,
+        "date": "2026-08-13T09:30:00+00:00",
+        "timestamp": 1786613400,
         "periods": {
-          "first": 1786572900,
-          "second": null
+          "first": 1786613400,
+          "second": 1786617000
         },
         "venue": {
-          "id": null,
+          "id": 0,
           "name": null,
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 40,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 50,
           "extra": null
         }
       },
       "league": {
-        "id": 130,
-        "name": "Copa Argentina",
-        "country": "Argentina",
-        "logo": "https://media.api-sports.io/football/leagues/130.png",
-        "flag": "https://media.api-sports.io/flags/ar.svg",
+        "id": 1020,
+        "name": "Calcutta Premier Division",
+        "country": "India",
+        "logo": "https://media.api-sports.io/football/leagues/1020.png",
+        "flag": "https://media.api-sports.io/flags/in.svg",
         "season": 2026,
-        "round": "Round of 16",
-        "standings": false
+        "round": "Regular season",
+        "standings": true
       },
       "teams": {
         "home": {
-          "id": 455,
-          "name": "Atletico Tucuman",
-          "logo": "https://media.api-sports.io/football/teams/455.png",
-          "winner": true
+          "id": 21604,
+          "name": "George Telegraph",
+          "logo": "https://media.api-sports.io/football/teams/21604.png",
+          "winner": false
         },
         "away": {
-          "id": 453,
-          "name": "Independiente",
-          "logo": "https://media.api-sports.io/football/teams/453.png",
-          "winner": false
+          "id": 26118,
+          "name": "United Kolkata",
+          "logo": "https://media.api-sports.io/football/teams/26118.png",
+          "winner": true
         }
       },
       "goals": {
         "home": 1,
-        "away": 0
+        "away": 5
       },
       "score": {
         "halftime": {
           "home": 1,
-          "away": 0
+          "away": 5
         },
         "fulltime": {
           "home": null,
@@ -74,24 +74,24 @@
       "events": [
         {
           "time": {
-            "elapsed": 11,
+            "elapsed": 18,
             "extra": null
           },
           "team": {
-            "id": 455,
-            "name": "Atletico Tucuman",
-            "logo": "https://media.api-sports.io/football/teams/455.png"
+            "id": 26118,
+            "name": "United Kolkata",
+            "logo": "https://media.api-sports.io/football/teams/26118.png"
           },
           "player": {
-            "id": 460761,
-            "name": "C. D. Ferreira Namandu"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Card",
-          "detail": "Yellow Card",
+          "type": "Goal",
+          "detail": "Normal Goal",
           "comments": null
         },
         {
@@ -100,57 +100,101 @@
             "extra": null
           },
           "team": {
-            "id": 453,
-            "name": "Independiente",
-            "logo": "https://media.api-sports.io/football/teams/453.png"
+            "id": 26118,
+            "name": "United Kolkata",
+            "logo": "https://media.api-sports.io/football/teams/26118.png"
           },
           "player": {
-            "id": 371790,
-            "name": "M. Gutierrez"
+            "id": null,
+            "name": null
           },
           "assist": {
-            "id": 348720,
-            "name": "M. Abaldo"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 30,
-            "extra": null
-          },
-          "team": {
-            "id": 453,
-            "name": "Independiente",
-            "logo": "https://media.api-sports.io/football/teams/453.png"
-          },
-          "player": {
-            "id": 265973,
-            "name": "S. Montiel"
-          },
-          "assist": {
-            "id": 265973,
-            "name": "S. Montiel"
+            "id": null,
+            "name": null
           },
           "type": "Goal",
-          "detail": "Missed Penalty",
+          "detail": "Normal Goal",
           "comments": null
         },
         {
           "time": {
-            "elapsed": 31,
+            "elapsed": 29,
             "extra": null
           },
           "team": {
-            "id": 455,
-            "name": "Atletico Tucuman",
-            "logo": "https://media.api-sports.io/football/teams/455.png"
+            "id": 26118,
+            "name": "United Kolkata",
+            "logo": "https://media.api-sports.io/football/teams/26118.png"
           },
           "player": {
-            "id": 199926,
-            "name": "N. Lamendola"
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 38,
+            "extra": null
+          },
+          "team": {
+            "id": 26118,
+            "name": "United Kolkata",
+            "logo": "https://media.api-sports.io/football/teams/26118.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 42,
+            "extra": null
+          },
+          "team": {
+            "id": 21604,
+            "name": "George Telegraph",
+            "logo": "https://media.api-sports.io/football/teams/21604.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 3
+          },
+          "team": {
+            "id": 26118,
+            "name": "United Kolkata",
+            "logo": "https://media.api-sports.io/football/teams/26118.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
@@ -164,59 +208,59 @@
     },
     {
       "fixture": {
-        "id": 1606272,
+        "id": 1623063,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-12T22:30:00+00:00",
-        "timestamp": 1786573800,
+        "date": "2026-08-13T09:30:00+00:00",
+        "timestamp": 1786613400,
         "periods": {
-          "first": 1786573800,
-          "second": null
+          "first": 1786613400,
+          "second": 1786617000
         },
         "venue": {
-          "id": null,
+          "id": 0,
           "name": null,
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 29,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 51,
           "extra": null
         }
       },
       "league": {
-        "id": 1030,
-        "name": "Goiano - 2",
-        "country": "Brazil",
-        "logo": "https://media.api-sports.io/football/leagues/1030.png",
-        "flag": "https://media.api-sports.io/flags/br.svg",
+        "id": 1020,
+        "name": "Calcutta Premier Division",
+        "country": "India",
+        "logo": "https://media.api-sports.io/football/leagues/1020.png",
+        "flag": "https://media.api-sports.io/flags/in.svg",
         "season": 2026,
-        "round": "Regular Season - 5",
+        "round": "Regular season",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 10674,
-          "name": "Goiânia",
-          "logo": "https://media.api-sports.io/football/teams/10674.png",
+          "id": 21597,
+          "name": "BSS Sporting",
+          "logo": "https://media.api-sports.io/football/teams/21597.png",
           "winner": true
         },
         "away": {
-          "id": 23307,
-          "name": "Trindade",
-          "logo": "https://media.api-sports.io/football/teams/23307.png",
+          "id": 21606,
+          "name": "Kidderpore",
+          "logo": "https://media.api-sports.io/football/teams/21606.png",
           "winner": false
         }
       },
       "goals": {
-        "home": 1,
-        "away": 0
+        "home": 3,
+        "away": 2
       },
       "score": {
         "halftime": {
-          "home": 1,
-          "away": 0
+          "home": 2,
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -234,13 +278,101 @@
       "events": [
         {
           "time": {
-            "elapsed": 21,
+            "elapsed": 8,
             "extra": null
           },
           "team": {
-            "id": 10674,
-            "name": "Goiânia",
-            "logo": "https://media.api-sports.io/football/teams/10674.png"
+            "id": 21606,
+            "name": "Kidderpore",
+            "logo": "https://media.api-sports.io/football/teams/21606.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 21597,
+            "name": "BSS Sporting",
+            "logo": "https://media.api-sports.io/football/teams/21597.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 31,
+            "extra": null
+          },
+          "team": {
+            "id": 21606,
+            "name": "Kidderpore",
+            "logo": "https://media.api-sports.io/football/teams/21606.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 42,
+            "extra": null
+          },
+          "team": {
+            "id": 21597,
+            "name": "BSS Sporting",
+            "logo": "https://media.api-sports.io/football/teams/21597.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 50,
+            "extra": null
+          },
+          "team": {
+            "id": 21597,
+            "name": "BSS Sporting",
+            "logo": "https://media.api-sports.io/football/teams/21597.png"
           },
           "player": {
             "id": null,
@@ -258,48 +390,48 @@
     },
     {
       "fixture": {
-        "id": 1606273,
+        "id": 1623064,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-12T22:30:00+00:00",
-        "timestamp": 1786573800,
+        "date": "2026-08-13T09:30:00+00:00",
+        "timestamp": 1786613400,
         "periods": {
-          "first": 1786573800,
-          "second": null
+          "first": 1786613400,
+          "second": 1786617000
         },
         "venue": {
-          "id": null,
+          "id": 0,
           "name": null,
           "city": null
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 28,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 53,
           "extra": null
         }
       },
       "league": {
-        "id": 1030,
-        "name": "Goiano - 2",
-        "country": "Brazil",
-        "logo": "https://media.api-sports.io/football/leagues/1030.png",
-        "flag": "https://media.api-sports.io/flags/br.svg",
+        "id": 1020,
+        "name": "Calcutta Premier Division",
+        "country": "India",
+        "logo": "https://media.api-sports.io/football/leagues/1020.png",
+        "flag": "https://media.api-sports.io/flags/in.svg",
         "season": 2026,
-        "round": "Regular Season - 5",
+        "round": "Regular season",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 24769,
-          "name": "Mineiros",
-          "logo": "https://media.api-sports.io/football/teams/24769.png",
+          "id": 28010,
+          "name": "Bidhannagar",
+          "logo": "https://media.api-sports.io/football/teams/28010.png",
           "winner": false
         },
         "away": {
-          "id": 24771,
-          "name": "Rio Verde",
-          "logo": "https://media.api-sports.io/football/teams/24771.png",
+          "id": 3467,
+          "name": "Mohun Bagan",
+          "logo": "https://media.api-sports.io/football/teams/3467.png",
           "winner": true
         }
       },
@@ -328,13 +460,13 @@
       "events": [
         {
           "time": {
-            "elapsed": 5,
+            "elapsed": 10,
             "extra": null
           },
           "team": {
-            "id": 24771,
-            "name": "Rio Verde",
-            "logo": "https://media.api-sports.io/football/teams/24771.png"
+            "id": 3467,
+            "name": "Mohun Bagan",
+            "logo": "https://media.api-sports.io/football/teams/3467.png"
           },
           "player": {
             "id": null,
@@ -346,353 +478,6 @@
           },
           "type": "Goal",
           "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 19,
-            "extra": null
-          },
-          "team": {
-            "id": 24771,
-            "name": "Rio Verde",
-            "logo": "https://media.api-sports.io/football/teams/24771.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1606376,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-12T22:30:00+00:00",
-        "timestamp": 1786573800,
-        "periods": {
-          "first": 1786573800,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Estadio Roberto Natalio Carminatti",
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 25,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 134,
-        "name": "Torneo Federal A",
-        "country": "Argentina",
-        "logo": "https://media.api-sports.io/football/leagues/134.png",
-        "flag": "https://media.api-sports.io/flags/ar.svg",
-        "season": 2026,
-        "round": "Winners Stage - 3",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 443,
-          "name": "Olimpo Bahia Blanca",
-          "logo": "https://media.api-sports.io/football/teams/443.png",
-          "winner": null
-        },
-        "away": {
-          "id": 1938,
-          "name": "Villa Mitre",
-          "logo": "https://media.api-sports.io/football/teams/1938.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1620969,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-12T22:30:00+00:00",
-        "timestamp": 1786573800,
-        "periods": {
-          "first": 1786573800,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 24,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 619,
-        "name": "Mineiro - 2",
-        "country": "Brazil",
-        "logo": "https://media.api-sports.io/football/leagues/619.png",
-        "flag": "https://media.api-sports.io/flags/br.svg",
-        "season": 2026,
-        "round": "Finals",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 7869,
-          "name": "Villa Nova",
-          "logo": "https://media.api-sports.io/football/teams/7869.png",
-          "winner": null
-        },
-        "away": {
-          "id": 13081,
-          "name": "Democrata SL",
-          "logo": "https://media.api-sports.io/football/teams/13081.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 23,
-            "extra": null
-          },
-          "team": {
-            "id": 13081,
-            "name": "Democrata SL",
-            "logo": "https://media.api-sports.io/football/teams/13081.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1511646,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-12T22:00:00+00:00",
-        "timestamp": 1786572000,
-        "periods": {
-          "first": 1786572000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": "Recoleta"
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 5
-        }
-      },
-      "league": {
-        "id": 266,
-        "name": "Primera B",
-        "country": "Chile",
-        "logo": "https://media.api-sports.io/football/leagues/266.png",
-        "flag": "https://media.api-sports.io/flags/cl.svg",
-        "season": 2026,
-        "round": "Regular Season - 20",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 5644,
-          "name": "Recoleta",
-          "logo": "https://media.api-sports.io/football/teams/5644.png",
-          "winner": null
-        },
-        "away": {
-          "id": 2344,
-          "name": "Rangers de Talca",
-          "logo": "https://media.api-sports.io/football/teams/2344.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 8,
-            "extra": null
-          },
-          "team": {
-            "id": 5644,
-            "name": "Recoleta",
-            "logo": "https://media.api-sports.io/football/teams/5644.png"
-          },
-          "player": {
-            "id": 590493,
-            "name": "C. Gonzalez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 24,
-            "extra": null
-          },
-          "team": {
-            "id": 2344,
-            "name": "Rangers de Talca",
-            "logo": "https://media.api-sports.io/football/teams/2344.png"
-          },
-          "player": {
-            "id": 578942,
-            "name": "I. S. Mesias Gonzalez"
-          },
-          "assist": {
-            "id": 578942,
-            "name": "I. S. Mesias Gonzalez"
-          },
-          "type": "Goal",
-          "detail": "Missed Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 39,
-            "extra": null
-          },
-          "team": {
-            "id": 5644,
-            "name": "Recoleta",
-            "logo": "https://media.api-sports.io/football/teams/5644.png"
-          },
-          "player": {
-            "id": 11648,
-            "name": "P. Sanchez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 42,
-            "extra": null
-          },
-          "team": {
-            "id": 5644,
-            "name": "Recoleta",
-            "logo": "https://media.api-sports.io/football/teams/5644.png"
-          },
-          "player": {
-            "id": 554652,
-            "name": "D. Viveros"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
           "comments": null
         },
         {
@@ -701,593 +486,9 @@
             "extra": null
           },
           "team": {
-            "id": 2344,
-            "name": "Rangers de Talca",
-            "logo": "https://media.api-sports.io/football/teams/2344.png"
-          },
-          "player": {
-            "id": 6248,
-            "name": "J. Arias"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1547762,
-        "referee": "Gustavo Tejera, Uruguay",
-        "timezone": "UTC",
-        "date": "2026-08-12T22:00:00+00:00",
-        "timestamp": 1786572000,
-        "periods": {
-          "first": 1786572000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Nubank Parque",
-          "city": "Sao Paulo"
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 13,
-        "name": "CONMEBOL Libertadores",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/13.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Round of 16",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 121,
-          "name": "Palmeiras",
-          "logo": "https://media.api-sports.io/football/teams/121.png",
-          "winner": null
-        },
-        "away": {
-          "id": 1176,
-          "name": "Cerro Porteno",
-          "logo": "https://media.api-sports.io/football/teams/1176.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 41,
-            "extra": null
-          },
-          "team": {
-            "id": 1176,
-            "name": "Cerro Porteno",
-            "logo": "https://media.api-sports.io/football/teams/1176.png"
-          },
-          "player": {
-            "id": 126868,
-            "name": "F. Dominguez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1547763,
-        "referee": "Juan Gabriel Benitez, Paraguay",
-        "timezone": "UTC",
-        "date": "2026-08-12T22:00:00+00:00",
-        "timestamp": 1786572000,
-        "periods": {
-          "first": 1786572000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Estadio Ciudad de Vicente Lopez",
-          "city": "Florida"
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 13,
-        "name": "CONMEBOL Libertadores",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/13.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Round of 16",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 1064,
-          "name": "Platense",
-          "logo": "https://media.api-sports.io/football/teams/1064.png",
-          "winner": true
-        },
-        "away": {
-          "id": 2330,
-          "name": "Coquimbo Unido",
-          "logo": "https://media.api-sports.io/football/teams/2330.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 4,
-            "extra": null
-          },
-          "team": {
-            "id": 2330,
-            "name": "Coquimbo Unido",
-            "logo": "https://media.api-sports.io/football/teams/2330.png"
-          },
-          "player": {
-            "id": 564071,
-            "name": "P. Rodriguez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Foul"
-        },
-        {
-          "time": {
-            "elapsed": 35,
-            "extra": null
-          },
-          "team": {
-            "id": 1064,
-            "name": "Platense",
-            "logo": "https://media.api-sports.io/football/teams/1064.png"
-          },
-          "player": {
-            "id": 294033,
-            "name": "L. Gimenez"
-          },
-          "assist": {
-            "id": 170010,
-            "name": "J. Saborido"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 39,
-            "extra": null
-          },
-          "team": {
-            "id": 2330,
-            "name": "Coquimbo Unido",
-            "logo": "https://media.api-sports.io/football/teams/2330.png"
-          },
-          "player": {
-            "id": 12343,
-            "name": "B. Gazzolo"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 39,
-            "extra": null
-          },
-          "team": {
-            "id": 1064,
-            "name": "Platense",
-            "logo": "https://media.api-sports.io/football/teams/1064.png"
-          },
-          "player": {
-            "id": 5947,
-            "name": "B. Merlini"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Unsportsmanlike conduct"
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1606077,
-        "referee": "Ramon Abatti Abel, Brazil",
-        "timezone": "UTC",
-        "date": "2026-08-12T22:00:00+00:00",
-        "timestamp": 1786572000,
-        "periods": {
-          "first": 1786572000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Estadio Jose Dellagiovanna",
-          "city": "Buenos Aires"
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 11,
-        "name": "CONMEBOL Sudamericana",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/11.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Round of 16",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 452,
-          "name": "Tigre",
-          "logo": "https://media.api-sports.io/football/teams/452.png",
-          "winner": null
-        },
-        "away": {
-          "id": 2365,
-          "name": "Atletico Torque",
-          "logo": "https://media.api-sports.io/football/teams/2365.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1606270,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-12T22:00:00+00:00",
-        "timestamp": 1786572000,
-        "periods": {
-          "first": 1786572000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 1030,
-        "name": "Goiano - 2",
-        "country": "Brazil",
-        "logo": "https://media.api-sports.io/football/leagues/1030.png",
-        "flag": "https://media.api-sports.io/flags/br.svg",
-        "season": 2026,
-        "round": "Regular Season - 5",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 13127,
-          "name": "Grêmio Anápolis",
-          "logo": "https://media.api-sports.io/football/teams/13127.png",
-          "winner": null
-        },
-        "away": {
-          "id": 24773,
-          "name": "Tupy FC",
-          "logo": "https://media.api-sports.io/football/teams/24773.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1607197,
-        "referee": "Leandro Rey Hilfer, Argentina",
-        "timezone": "UTC",
-        "date": "2026-08-12T22:00:00+00:00",
-        "timestamp": 1786572000,
-        "periods": {
-          "first": 1786572000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Estádio Cícero de Souza Marques",
-          "city": "Bragança Paulista"
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 11,
-        "name": "CONMEBOL Sudamericana",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/11.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Round of 16",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 794,
-          "name": "RB Bragantino",
-          "logo": "https://media.api-sports.io/football/teams/794.png",
-          "winner": null
-        },
-        "away": {
-          "id": 1062,
-          "name": "Atletico-MG",
-          "logo": "https://media.api-sports.io/football/teams/1062.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 29,
-            "extra": null
-          },
-          "team": {
-            "id": 1062,
-            "name": "Atletico-MG",
-            "logo": "https://media.api-sports.io/football/teams/1062.png"
-          },
-          "player": {
-            "id": 30476,
-            "name": "Lyanco"
-          },
-          "assist": {
-            "id": 30398,
-            "name": "Vitor Hugo"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1610884,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-12T22:00:00+00:00",
-        "timestamp": 1786572000,
-        "periods": {
-          "first": 1786572000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 2
-        }
-      },
-      "league": {
-        "id": 1112,
-        "name": "Cearense U20",
-        "country": "Brazil",
-        "logo": "https://media.api-sports.io/football/leagues/1112.png",
-        "flag": "https://media.api-sports.io/flags/br.svg",
-        "season": 2026,
-        "round": "Semi-finals",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 26056,
-          "name": "Quixadá U20",
-          "logo": "https://media.api-sports.io/football/teams/26056.png",
-          "winner": null
-        },
-        "away": {
-          "id": 13009,
-          "name": "Fortaleza U20",
-          "logo": "https://media.api-sports.io/football/teams/13009.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 2,
-            "extra": null
-          },
-          "team": {
-            "id": 26056,
-            "name": "Quixadá U20",
-            "logo": "https://media.api-sports.io/football/teams/26056.png"
+            "id": 3467,
+            "name": "Mohun Bagan",
+            "logo": "https://media.api-sports.io/football/teams/3467.png"
           },
           "player": {
             "id": null,
