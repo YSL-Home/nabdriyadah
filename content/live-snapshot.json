@@ -1,6 +1,6 @@
 {
   "date": "2026-08-13",
-  "fetchedAt": "2026-08-13T22:01:11.987Z",
+  "fetchedAt": "2026-08-13T22:59:19.494Z",
   "live": [
     {
       "fixture": {
@@ -19,10 +19,10 @@
           "city": "Quillota"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 1,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
         }
       },
       "league": {
@@ -40,23 +40,23 @@
           "id": 2322,
           "name": "San Luis",
           "logo": "https://media.api-sports.io/football/teams/2322.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 2317,
           "name": "Deportes Temuco",
           "logo": "https://media.api-sports.io/football/teams/2317.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -71,12 +71,101 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 9,
+            "extra": null
+          },
+          "team": {
+            "id": 2317,
+            "name": "Deportes Temuco",
+            "logo": "https://media.api-sports.io/football/teams/2317.png"
+          },
+          "player": {
+            "id": 554678,
+            "name": "N. A. Rivera Faundez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 2322,
+            "name": "San Luis",
+            "logo": "https://media.api-sports.io/football/teams/2322.png"
+          },
+          "player": {
+            "id": 36175,
+            "name": "F. Juarez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 37,
+            "extra": null
+          },
+          "team": {
+            "id": 2317,
+            "name": "Deportes Temuco",
+            "logo": "https://media.api-sports.io/football/teams/2317.png"
+          },
+          "player": {
+            "id": 125787,
+            "name": "F. Ortega"
+          },
+          "assist": {
+            "id": 546931,
+            "name": "Zambrano Diego"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 1
+          },
+          "team": {
+            "id": 2317,
+            "name": "Deportes Temuco",
+            "logo": "https://media.api-sports.io/football/teams/2317.png"
+          },
+          "player": {
+            "id": 11360,
+            "name": "D. Buonanotte"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     },
     {
       "fixture": {
         "id": 1547761,
-        "referee": "A. Herrera",
+        "referee": "Alexis Herrera, Venezuela",
         "timezone": "UTC",
         "date": "2026-08-13T22:00:00+00:00",
         "timestamp": 1786658400,
@@ -86,14 +175,14 @@
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Estádio José Maria de Campos Maia",
           "city": "Mirassol"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 1,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
         }
       },
       "league": {
@@ -111,22 +200,22 @@
           "id": 7848,
           "name": "Mirassol",
           "logo": "https://media.api-sports.io/football/teams/7848.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 1158,
           "name": "LDU de Quito",
           "logo": "https://media.api-sports.io/football/teams/1158.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "fulltime": {
@@ -142,12 +231,79 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 15,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 44348,
+            "name": "Eduardo"
+          },
+          "assist": {
+            "id": 54238,
+            "name": "Edson Carioca"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 35,
+            "extra": null
+          },
+          "team": {
+            "id": 1158,
+            "name": "LDU de Quito",
+            "logo": "https://media.api-sports.io/football/teams/1158.png"
+          },
+          "player": {
+            "id": 392640,
+            "name": "Y. Quinonez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 504957,
+            "name": "Neto Moura"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Roughing"
+        }
+      ]
     },
     {
       "fixture": {
-        "id": 1607199,
-        "referee": "D. Herrera",
+        "id": 1606076,
+        "referee": "Kevin Ortega, Peru",
         "timezone": "UTC",
         "date": "2026-08-13T22:00:00+00:00",
         "timestamp": 1786658400,
@@ -157,14 +313,196 @@
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Estádio Urbano Caldeira",
+          "city": "Santos"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
+        }
+      },
+      "league": {
+        "id": 11,
+        "name": "CONMEBOL Sudamericana",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/11.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Round of 16",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 128,
+          "name": "Santos",
+          "logo": "https://media.api-sports.io/football/teams/128.png",
+          "winner": null
+        },
+        "away": {
+          "id": 1155,
+          "name": "Macara",
+          "logo": "https://media.api-sports.io/football/teams/1155.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 5,
+            "extra": null
+          },
+          "team": {
+            "id": 1155,
+            "name": "Macara",
+            "logo": "https://media.api-sports.io/football/teams/1155.png"
+          },
+          "player": {
+            "id": 562676,
+            "name": "F. Posse"
+          },
+          "assist": {
+            "id": 460061,
+            "name": "M. Viera"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 128,
+            "name": "Santos",
+            "logo": "https://media.api-sports.io/football/teams/128.png"
+          },
+          "player": {
+            "id": 195111,
+            "name": "Gabriel Menino"
+          },
+          "assist": {
+            "id": 609619,
+            "name": "D. Fernandes"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 43,
+            "extra": null
+          },
+          "team": {
+            "id": 128,
+            "name": "Santos",
+            "logo": "https://media.api-sports.io/football/teams/128.png"
+          },
+          "player": {
+            "id": 506275,
+            "name": "Gabriel Bontempo"
+          },
+          "assist": {
+            "id": 119485,
+            "name": "B. Rollheiser"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 128,
+            "name": "Santos",
+            "logo": "https://media.api-sports.io/football/teams/128.png"
+          },
+          "player": {
+            "id": 10174,
+            "name": "Gabriel Barbosa"
+          },
+          "assist": {
+            "id": 276,
+            "name": "Neymar"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 5
+          },
+          "team": {
+            "id": 1155,
+            "name": "Macara",
+            "logo": "https://media.api-sports.io/football/teams/1155.png"
+          },
+          "player": {
+            "id": 16355,
+            "name": "M. Ayala"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Tripping"
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1607199,
+        "referee": "Dario Herrera, Argentina",
+        "timezone": "UTC",
+        "date": "2026-08-13T22:00:00+00:00",
+        "timestamp": 1786658400,
+        "periods": {
+          "first": 1786658400,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Estádio São Januário",
           "city": "Rio de Janeiro"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 1,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
         }
       },
       "league": {
@@ -213,354 +551,74 @@
           "away": null
         }
       },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1526596,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-13T20:30:00+00:00",
-        "timestamp": 1786653000,
-        "periods": {
-          "first": 1786653000,
-          "second": 1786656600
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": "Quito"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 69,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 243,
-        "name": "Liga Pro Serie B",
-        "country": "Ecuador",
-        "logo": "https://media.api-sports.io/football/leagues/243.png",
-        "flag": "https://media.api-sports.io/flags/ec.svg",
-        "season": 2026,
-        "round": "Regular Season - 21",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 16476,
-          "name": "Cumbayá",
-          "logo": "https://media.api-sports.io/football/teams/16476.png",
-          "winner": null
-        },
-        "away": {
-          "id": 19414,
-          "name": "Santo Domingo",
-          "logo": "https://media.api-sports.io/football/teams/19414.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 2,
-        "away": 2
-      },
-      "score": {
-        "halftime": {
-          "home": 2,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
       "events": [
         {
           "time": {
-            "elapsed": 26,
+            "elapsed": 34,
             "extra": null
           },
           "team": {
-            "id": 16476,
-            "name": "Cumbayá",
-            "logo": "https://media.api-sports.io/football/teams/16476.png"
+            "id": 1182,
+            "name": "Olimpia",
+            "logo": "https://media.api-sports.io/football/teams/1182.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 70771,
+            "name": "F. Cardozo"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
         },
         {
           "time": {
-            "elapsed": 33,
+            "elapsed": 34,
             "extra": null
           },
           "team": {
-            "id": 16476,
-            "name": "Cumbayá",
-            "logo": "https://media.api-sports.io/football/teams/16476.png"
+            "id": 133,
+            "name": "Vasco DA Gama",
+            "logo": "https://media.api-sports.io/football/teams/133.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 22232,
+            "name": "Thiago Mendes"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
         },
         {
           "time": {
-            "elapsed": 35,
-            "extra": null
+            "elapsed": 45,
+            "extra": 1
           },
           "team": {
-            "id": 19414,
-            "name": "Santo Domingo",
-            "logo": "https://media.api-sports.io/football/teams/19414.png"
+            "id": 133,
+            "name": "Vasco DA Gama",
+            "logo": "https://media.api-sports.io/football/teams/133.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 351920,
+            "name": "J. Rojas"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 54,
-            "extra": null
-          },
-          "team": {
-            "id": 19414,
-            "name": "Santo Domingo",
-            "logo": "https://media.api-sports.io/football/teams/19414.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Tripping"
         }
       ]
-    },
-    {
-      "fixture": {
-        "id": 1526597,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-13T20:30:00+00:00",
-        "timestamp": 1786653000,
-        "periods": {
-          "first": 1786653000,
-          "second": 1786656600
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": "Quito"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 69,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 243,
-        "name": "Liga Pro Serie B",
-        "country": "Ecuador",
-        "logo": "https://media.api-sports.io/football/leagues/243.png",
-        "flag": "https://media.api-sports.io/flags/ec.svg",
-        "season": 2026,
-        "round": "Regular Season - 21",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 1150,
-          "name": "El Nacional",
-          "logo": "https://media.api-sports.io/football/teams/1150.png",
-          "winner": false
-        },
-        "away": {
-          "id": 23310,
-          "name": "San Antonio",
-          "logo": "https://media.api-sports.io/football/teams/23310.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 7,
-            "extra": null
-          },
-          "team": {
-            "id": 1150,
-            "name": "El Nacional",
-            "logo": "https://media.api-sports.io/football/teams/1150.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Missed Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 8,
-            "extra": null
-          },
-          "team": {
-            "id": 23310,
-            "name": "San Antonio",
-            "logo": "https://media.api-sports.io/football/teams/23310.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1526600,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-13T20:30:00+00:00",
-        "timestamp": 1786653000,
-        "periods": {
-          "first": 1786653000,
-          "second": 1786656600
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": "Quito"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 69,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 243,
-        "name": "Liga Pro Serie B",
-        "country": "Ecuador",
-        "logo": "https://media.api-sports.io/football/leagues/243.png",
-        "flag": "https://media.api-sports.io/flags/ec.svg",
-        "season": 2026,
-        "round": "Regular Season - 21",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 21103,
-          "name": "Cuniburo",
-          "logo": "https://media.api-sports.io/football/teams/21103.png",
-          "winner": null
-        },
-        "away": {
-          "id": 1988,
-          "name": "LDU Portoviejo",
-          "logo": "https://media.api-sports.io/football/teams/1988.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
     }
   ],
   "today": [
@@ -7441,8 +7499,8 @@
           "city": null
         },
         "status": {
-          "long": "Match Interrupted",
-          "short": "INT",
+          "long": "Not Started",
+          "short": "NS",
           "elapsed": null,
           "extra": null
         }
@@ -7472,8 +7530,8 @@
         }
       },
       "goals": {
-        "home": 0,
-        "away": 0
+        "home": null,
+        "away": null
       },
       "score": {
         "halftime": {
@@ -8281,10 +8339,10 @@
           "city": "Quito"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 69,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 7
         }
       },
       "league": {
@@ -8312,8 +8370,8 @@
         }
       },
       "goals": {
-        "home": 2,
-        "away": 2
+        "home": 3,
+        "away": 3
       },
       "score": {
         "halftime": {
@@ -8321,8 +8379,8 @@
           "away": 1
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 3
         },
         "extratime": {
           "home": null,
@@ -8351,10 +8409,10 @@
           "city": "Quito"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 69,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 8
         }
       },
       "league": {
@@ -8391,8 +8449,8 @@
           "away": 1
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -8421,10 +8479,10 @@
           "city": "Quito"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 69,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 10
         }
       },
       "league": {
@@ -8461,8 +8519,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -8561,10 +8619,10 @@
           "city": "Quillota"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 2,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
         }
       },
       "league": {
@@ -8582,23 +8640,23 @@
           "id": 2322,
           "name": "San Luis",
           "logo": "https://media.api-sports.io/football/teams/2322.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 2317,
           "name": "Deportes Temuco",
           "logo": "https://media.api-sports.io/football/teams/2317.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -8617,7 +8675,7 @@
     {
       "fixture": {
         "id": 1547761,
-        "referee": "A. Herrera",
+        "referee": "Alexis Herrera, Venezuela",
         "timezone": "UTC",
         "date": "2026-08-13T22:00:00+00:00",
         "timestamp": 1786658400,
@@ -8627,14 +8685,14 @@
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Estádio José Maria de Campos Maia",
           "city": "Mirassol"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 1,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
         }
       },
       "league": {
@@ -8652,22 +8710,22 @@
           "id": 7848,
           "name": "Mirassol",
           "logo": "https://media.api-sports.io/football/teams/7848.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 1158,
           "name": "LDU de Quito",
           "logo": "https://media.api-sports.io/football/teams/1158.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "fulltime": {
@@ -8687,24 +8745,24 @@
     {
       "fixture": {
         "id": 1606076,
-        "referee": "K. Ortega",
+        "referee": "Kevin Ortega, Peru",
         "timezone": "UTC",
         "date": "2026-08-13T22:00:00+00:00",
         "timestamp": 1786658400,
         "periods": {
-          "first": null,
+          "first": 1786658400,
           "second": null
         },
         "venue": {
           "id": null,
-          "name": "Estadio Urbano Caldeira",
+          "name": "Estádio Urbano Caldeira",
           "city": "Santos"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
         }
       },
       "league": {
@@ -8732,13 +8790,13 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -8757,7 +8815,7 @@
     {
       "fixture": {
         "id": 1607199,
-        "referee": "D. Herrera",
+        "referee": "Dario Herrera, Argentina",
         "timezone": "UTC",
         "date": "2026-08-13T22:00:00+00:00",
         "timestamp": 1786658400,
@@ -8767,14 +8825,14 @@
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Estádio São Januário",
           "city": "Rio de Janeiro"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 1,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
         }
       },
       "league": {
