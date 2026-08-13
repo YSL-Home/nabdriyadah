@@ -1,7 +1,194 @@
 {
   "date": "2026-08-13",
-  "fetchedAt": "2026-08-13T22:59:19.494Z",
+  "fetchedAt": "2026-08-13T23:42:18.239Z",
   "live": [
+    {
+      "fixture": {
+        "id": 1530157,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-13T23:30:00+00:00",
+        "timestamp": 1786663800,
+        "periods": {
+          "first": 1786663800,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Sports Illustrated Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 2,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 772,
+        "name": "Leagues Cup",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/772.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Group Stage",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 1604,
+          "name": "New York City FC",
+          "logo": "https://media.api-sports.io/football/teams/1604.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2288,
+          "name": "Necaxa",
+          "logo": "https://media.api-sports.io/football/teams/2288.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1530158,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-13T23:00:00+00:00",
+        "timestamp": 1786662000,
+        "periods": {
+          "first": 1786662000,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Subaru Park",
+          "city": "Chester"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 32,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 772,
+        "name": "Leagues Cup",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/772.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Group Stage",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 1599,
+          "name": "Philadelphia Union",
+          "logo": "https://media.api-sports.io/football/teams/1599.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2285,
+          "name": "Santos Laguna",
+          "logo": "https://media.api-sports.io/football/teams/2285.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 2285,
+            "name": "Santos Laguna",
+            "logo": "https://media.api-sports.io/football/teams/2285.png"
+          },
+          "player": {
+            "id": 35663,
+            "name": "E. Orona"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 26,
+            "extra": null
+          },
+          "team": {
+            "id": 2285,
+            "name": "Santos Laguna",
+            "logo": "https://media.api-sports.io/football/teams/2285.png"
+          },
+          "player": {
+            "id": 405243,
+            "name": "K. Picon"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
     {
       "fixture": {
         "id": 1511647,
@@ -11,7 +198,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -19,10 +206,10 @@
           "city": "Quillota"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 81,
+          "extra": null
         }
       },
       "league": {
@@ -40,17 +227,17 @@
           "id": 2322,
           "name": "San Luis",
           "logo": "https://media.api-sports.io/football/teams/2322.png",
-          "winner": false
+          "winner": null
         },
         "away": {
           "id": 2317,
           "name": "Deportes Temuco",
           "logo": "https://media.api-sports.io/football/teams/2317.png",
-          "winner": true
+          "winner": null
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 1
       },
       "score": {
@@ -74,7 +261,7 @@
       "events": [
         {
           "time": {
-            "elapsed": 9,
+            "elapsed": 10,
             "extra": null
           },
           "team": {
@@ -141,7 +328,7 @@
         {
           "time": {
             "elapsed": 45,
-            "extra": 1
+            "extra": 2
           },
           "team": {
             "id": 2317,
@@ -151,6 +338,182 @@
           "player": {
             "id": 11360,
             "name": "D. Buonanotte"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 2317,
+            "name": "Deportes Temuco",
+            "logo": "https://media.api-sports.io/football/teams/2317.png"
+          },
+          "player": {
+            "id": 554678,
+            "name": "N. A. Rivera Faundez"
+          },
+          "assist": {
+            "id": 554558,
+            "name": "S. Molina"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 2322,
+            "name": "San Luis",
+            "logo": "https://media.api-sports.io/football/teams/2322.png"
+          },
+          "player": {
+            "id": 554682,
+            "name": "S. Parada"
+          },
+          "assist": {
+            "id": 577013,
+            "name": "F. Pastenes"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 2322,
+            "name": "San Luis",
+            "logo": "https://media.api-sports.io/football/teams/2322.png"
+          },
+          "player": {
+            "id": 12001,
+            "name": "D. Catalan"
+          },
+          "assist": {
+            "id": 637962,
+            "name": "G. Plaza"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 2317,
+            "name": "Deportes Temuco",
+            "logo": "https://media.api-sports.io/football/teams/2317.png"
+          },
+          "player": {
+            "id": 545845,
+            "name": "D. Sanchez"
+          },
+          "assist": {
+            "id": 628444,
+            "name": "C. Rocha"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 67,
+            "extra": null
+          },
+          "team": {
+            "id": 2322,
+            "name": "San Luis",
+            "logo": "https://media.api-sports.io/football/teams/2322.png"
+          },
+          "player": {
+            "id": 12018,
+            "name": "V. Duran"
+          },
+          "assist": {
+            "id": 554681,
+            "name": "M. Carreno"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 2322,
+            "name": "San Luis",
+            "logo": "https://media.api-sports.io/football/teams/2322.png"
+          },
+          "player": {
+            "id": 35891,
+            "name": "G. Madrigal"
+          },
+          "assist": {
+            "id": 564084,
+            "name": "S. Vergara"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 75,
+            "extra": null
+          },
+          "team": {
+            "id": 2317,
+            "name": "Deportes Temuco",
+            "logo": "https://media.api-sports.io/football/teams/2317.png"
+          },
+          "player": {
+            "id": 51862,
+            "name": "C. Nunez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 2322,
+            "name": "San Luis",
+            "logo": "https://media.api-sports.io/football/teams/2322.png"
+          },
+          "player": {
+            "id": 554681,
+            "name": "M. Carreno"
           },
           "assist": {
             "id": null,
@@ -171,7 +534,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -179,10 +542,10 @@
           "city": "Mirassol"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 82,
+          "extra": null
         }
       },
       "league": {
@@ -297,6 +660,138 @@
           "type": "Card",
           "detail": "Yellow Card",
           "comments": "Roughing"
+        },
+        {
+          "time": {
+            "elapsed": 55,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 405353,
+            "name": "Japa"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Roughing"
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 405353,
+            "name": "Japa"
+          },
+          "assist": {
+            "id": 159493,
+            "name": "Wallisson"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 71,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 9429,
+            "name": "Alesson"
+          },
+          "assist": {
+            "id": 77680,
+            "name": "Fernandinho"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 44348,
+            "name": "Eduardo"
+          },
+          "assist": {
+            "id": 10025,
+            "name": "Shaylon"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 504957,
+            "name": "Neto Moura"
+          },
+          "assist": {
+            "id": 276452,
+            "name": "Denilson"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 79,
+            "extra": null
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 54238,
+            "name": "Edson Carioca"
+          },
+          "assist": {
+            "id": 520668,
+            "name": "Carlos Eduardo"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
         }
       ]
     },
@@ -309,7 +804,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -317,10 +812,10 @@
           "city": "Santos"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 79,
+          "extra": null
         }
       },
       "league": {
@@ -338,17 +833,17 @@
           "id": 128,
           "name": "Santos",
           "logo": "https://media.api-sports.io/football/teams/128.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 1155,
           "name": "Macara",
           "logo": "https://media.api-sports.io/football/teams/1155.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 1,
+        "home": 2,
         "away": 1
       },
       "score": {
@@ -416,7 +911,7 @@
         },
         {
           "time": {
-            "elapsed": 43,
+            "elapsed": 42,
             "extra": null
           },
           "team": {
@@ -479,6 +974,160 @@
           "type": "Card",
           "detail": "Yellow Card",
           "comments": "Tripping"
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 1155,
+            "name": "Macara",
+            "logo": "https://media.api-sports.io/football/teams/1155.png"
+          },
+          "player": {
+            "id": 16355,
+            "name": "M. Ayala"
+          },
+          "assist": {
+            "id": 304844,
+            "name": "J. Mohor"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 56,
+            "extra": null
+          },
+          "team": {
+            "id": 128,
+            "name": "Santos",
+            "logo": "https://media.api-sports.io/football/teams/128.png"
+          },
+          "player": {
+            "id": 10174,
+            "name": "Gabriel Barbosa"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Var",
+          "detail": "Goal Disallowed - offside",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 62,
+            "extra": null
+          },
+          "team": {
+            "id": 128,
+            "name": "Santos",
+            "logo": "https://media.api-sports.io/football/teams/128.png"
+          },
+          "player": {
+            "id": 6052,
+            "name": "A. Barreal"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 70,
+            "extra": null
+          },
+          "team": {
+            "id": 1155,
+            "name": "Macara",
+            "logo": "https://media.api-sports.io/football/teams/1155.png"
+          },
+          "player": {
+            "id": 152780,
+            "name": "M. Miranda"
+          },
+          "assist": {
+            "id": 452228,
+            "name": "M. Tello"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 1155,
+            "name": "Macara",
+            "logo": "https://media.api-sports.io/football/teams/1155.png"
+          },
+          "player": {
+            "id": 16472,
+            "name": "J. Cazares"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Roughing"
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 128,
+            "name": "Santos",
+            "logo": "https://media.api-sports.io/football/teams/128.png"
+          },
+          "player": {
+            "id": 10173,
+            "name": "Willian Arao"
+          },
+          "assist": {
+            "id": 276,
+            "name": "Neymar"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 77,
+            "extra": null
+          },
+          "team": {
+            "id": 128,
+            "name": "Santos",
+            "logo": "https://media.api-sports.io/football/teams/128.png"
+          },
+          "player": {
+            "id": 10174,
+            "name": "Gabriel Barbosa"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
         }
       ]
     },
@@ -491,7 +1140,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -499,10 +1148,10 @@
           "city": "Rio de Janeiro"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 80,
+          "extra": null
         }
       },
       "league": {
@@ -558,13 +1207,13 @@
             "extra": null
           },
           "team": {
-            "id": 1182,
-            "name": "Olimpia",
-            "logo": "https://media.api-sports.io/football/teams/1182.png"
+            "id": 133,
+            "name": "Vasco DA Gama",
+            "logo": "https://media.api-sports.io/football/teams/133.png"
           },
           "player": {
-            "id": 70771,
-            "name": "F. Cardozo"
+            "id": 22232,
+            "name": "Thiago Mendes"
           },
           "assist": {
             "id": null,
@@ -580,13 +1229,13 @@
             "extra": null
           },
           "team": {
-            "id": 133,
-            "name": "Vasco DA Gama",
-            "logo": "https://media.api-sports.io/football/teams/133.png"
+            "id": 1182,
+            "name": "Olimpia",
+            "logo": "https://media.api-sports.io/football/teams/1182.png"
           },
           "player": {
-            "id": 22232,
-            "name": "Thiago Mendes"
+            "id": 70771,
+            "name": "F. Cardozo"
           },
           "assist": {
             "id": null,
@@ -617,6 +1266,182 @@
           "type": "Card",
           "detail": "Yellow Card",
           "comments": "Tripping"
+        },
+        {
+          "time": {
+            "elapsed": 55,
+            "extra": null
+          },
+          "team": {
+            "id": 1182,
+            "name": "Olimpia",
+            "logo": "https://media.api-sports.io/football/teams/1182.png"
+          },
+          "player": {
+            "id": 319569,
+            "name": "S. Quintana"
+          },
+          "assist": {
+            "id": 390741,
+            "name": "F. Alfonso"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 56,
+            "extra": null
+          },
+          "team": {
+            "id": 1182,
+            "name": "Olimpia",
+            "logo": "https://media.api-sports.io/football/teams/1182.png"
+          },
+          "player": {
+            "id": 390741,
+            "name": "F. Alfonso"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 133,
+            "name": "Vasco DA Gama",
+            "logo": "https://media.api-sports.io/football/teams/133.png"
+          },
+          "player": {
+            "id": 306261,
+            "name": "Adson"
+          },
+          "assist": {
+            "id": 6735,
+            "name": "C. Spinelli"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 133,
+            "name": "Vasco DA Gama",
+            "logo": "https://media.api-sports.io/football/teams/133.png"
+          },
+          "player": {
+            "id": 163260,
+            "name": "N. Moreira"
+          },
+          "assist": {
+            "id": 64134,
+            "name": "M. Hinestroza"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 1182,
+            "name": "Olimpia",
+            "logo": "https://media.api-sports.io/football/teams/1182.png"
+          },
+          "player": {
+            "id": 279785,
+            "name": "R. Benitez"
+          },
+          "assist": {
+            "id": 377174,
+            "name": "R. Lezcano"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 1182,
+            "name": "Olimpia",
+            "logo": "https://media.api-sports.io/football/teams/1182.png"
+          },
+          "player": {
+            "id": 10149,
+            "name": "B. Romero"
+          },
+          "assist": {
+            "id": 406562,
+            "name": "T. I. Caballero Fleytas"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 67,
+            "extra": null
+          },
+          "team": {
+            "id": 133,
+            "name": "Vasco DA Gama",
+            "logo": "https://media.api-sports.io/football/teams/133.png"
+          },
+          "player": {
+            "id": 353034,
+            "name": "Cuiabano"
+          },
+          "assist": {
+            "id": 10234,
+            "name": "Lucas Piton"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 67,
+            "extra": null
+          },
+          "team": {
+            "id": 133,
+            "name": "Vasco DA Gama",
+            "logo": "https://media.api-sports.io/football/teams/133.png"
+          },
+          "player": {
+            "id": 22232,
+            "name": "Thiago Mendes"
+          },
+          "assist": {
+            "id": 614200,
+            "name": "Ramon Rique"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
         }
       ]
     }
@@ -8059,8 +8884,8 @@
           "city": "Torshavn"
         },
         "status": {
-          "long": "Match Postponed",
-          "short": "PST",
+          "long": "Not Started",
+          "short": "NS",
           "elapsed": null,
           "extra": null
         }
@@ -8611,7 +9436,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -8619,10 +9444,10 @@
           "city": "Quillota"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 81,
+          "extra": null
         }
       },
       "league": {
@@ -8640,17 +9465,17 @@
           "id": 2322,
           "name": "San Luis",
           "logo": "https://media.api-sports.io/football/teams/2322.png",
-          "winner": false
+          "winner": null
         },
         "away": {
           "id": 2317,
           "name": "Deportes Temuco",
           "logo": "https://media.api-sports.io/football/teams/2317.png",
-          "winner": true
+          "winner": null
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 1
       },
       "score": {
@@ -8681,7 +9506,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -8689,10 +9514,10 @@
           "city": "Mirassol"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 82,
+          "extra": null
         }
       },
       "league": {
@@ -8751,7 +9576,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -8759,10 +9584,10 @@
           "city": "Santos"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 79,
+          "extra": null
         }
       },
       "league": {
@@ -8780,17 +9605,17 @@
           "id": 128,
           "name": "Santos",
           "logo": "https://media.api-sports.io/football/teams/128.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 1155,
           "name": "Macara",
           "logo": "https://media.api-sports.io/football/teams/1155.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 1,
+        "home": 2,
         "away": 1
       },
       "score": {
@@ -8821,7 +9646,7 @@
         "timestamp": 1786658400,
         "periods": {
           "first": 1786658400,
-          "second": null
+          "second": 1786662000
         },
         "venue": {
           "id": null,
@@ -8829,10 +9654,10 @@
           "city": "Rio de Janeiro"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 80,
+          "extra": null
         }
       },
       "league": {
@@ -8890,18 +9715,18 @@
         "date": "2026-08-13T23:00:00+00:00",
         "timestamp": 1786662000,
         "periods": {
-          "first": null,
+          "first": 1786662000,
           "second": null
         },
         "venue": {
           "id": null,
           "name": "Subaru Park",
-          "city": null
+          "city": "Chester"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 32,
           "extra": null
         }
       },
@@ -8930,13 +9755,13 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -8960,7 +9785,7 @@
         "date": "2026-08-13T23:30:00+00:00",
         "timestamp": 1786663800,
         "periods": {
-          "first": null,
+          "first": 1786663800,
           "second": null
         },
         "venue": {
@@ -8969,9 +9794,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 2,
           "extra": null
         }
       },
@@ -9000,13 +9825,13 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
           "home": null,
