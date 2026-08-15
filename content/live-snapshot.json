@@ -1,51 +1,145 @@
 {
   "date": "2026-08-15",
-  "fetchedAt": "2026-08-15T04:01:16.014Z",
+  "fetchedAt": "2026-08-15T04:44:53.354Z",
   "live": [
     {
       "fixture": {
-        "id": 1522437,
+        "id": 1522159,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-15T00:00:00+00:00",
-        "timestamp": 1786752000,
+        "date": "2026-08-15T04:00:00+00:00",
+        "timestamp": 1786766400,
         "periods": {
-          "first": null,
+          "first": 1786766400,
           "second": null
         },
         "venue": {
           "id": 0,
-          "name": "Estadio Municipal Castor Cifuentes",
-          "city": "Nova Lima"
+          "name": null,
+          "city": null
         },
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": null,
+          "elapsed": 44,
           "extra": null
         }
       },
       "league": {
-        "id": 74,
-        "name": "Brasileiro Women",
-        "country": "Brazil",
-        "logo": "https://media.api-sports.io/football/leagues/74.png",
-        "flag": "https://media.api-sports.io/flags/br.svg",
+        "id": 836,
+        "name": "Victoria NPL 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/836.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
         "season": 2026,
-        "round": "Regular Season - 16",
+        "round": "Regular Season - 24",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 18727,
-          "name": "Atlético Mineiro W",
-          "logo": "https://media.api-sports.io/football/teams/18727.png",
+          "id": 3810,
+          "name": "Port Melbourne",
+          "logo": "https://media.api-sports.io/football/teams/3810.png",
+          "winner": true
+        },
+        "away": {
+          "id": 3807,
+          "name": "Melbourne Knights",
+          "logo": "https://media.api-sports.io/football/teams/3807.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 3810,
+            "name": "Port Melbourne",
+            "logo": "https://media.api-sports.io/football/teams/3810.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1620982,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-15T04:30:00+00:00",
+        "timestamp": 1786768200,
+        "periods": {
+          "first": 1786768200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Devonport Oval",
+          "city": "Devonport"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 11,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 648,
+        "name": "Tasmania NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/648.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Quarter-finals",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 14100,
+          "name": "Devonport City",
+          "logo": "https://media.api-sports.io/football/teams/14100.png",
           "winner": null
         },
         "away": {
-          "id": 1817,
-          "name": "Gremio W",
-          "logo": "https://media.api-sports.io/football/teams/1817.png",
+          "id": 14102,
+          "name": "Kingborough Lions",
+          "logo": "https://media.api-sports.io/football/teams/14102.png",
           "winner": null
         }
       },
@@ -75,1036 +169,6 @@
     },
     {
       "fixture": {
-        "id": 1508504,
-        "referee": "Lauren Aldrich, USA",
-        "timezone": "UTC",
-        "date": "2026-08-15T02:00:00+00:00",
-        "timestamp": 1786759200,
-        "periods": {
-          "first": 1786759200,
-          "second": 1786762800
-        },
-        "venue": {
-          "id": null,
-          "name": "Snapdragon Stadium",
-          "city": "San Diego"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 90,
-          "extra": 1
-        }
-      },
-      "league": {
-        "id": 254,
-        "name": "NWSL Women",
-        "country": "USA",
-        "logo": "https://media.api-sports.io/football/leagues/254.png",
-        "flag": "https://media.api-sports.io/flags/us.svg",
-        "season": 2026,
-        "round": "Group Stage",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 18451,
-          "name": "San Diego Wave W",
-          "logo": "https://media.api-sports.io/football/teams/18451.png",
-          "winner": null
-        },
-        "away": {
-          "id": 27378,
-          "name": "Denver Summit W",
-          "logo": "https://media.api-sports.io/football/teams/27378.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 16,
-            "extra": null
-          },
-          "team": {
-            "id": 27378,
-            "name": "Denver Summit W",
-            "logo": "https://media.api-sports.io/football/teams/27378.png"
-          },
-          "player": {
-            "id": 456940,
-            "name": "E. Gaetino"
-          },
-          "assist": {
-            "id": 362388,
-            "name": "M. Reid"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 35,
-            "extra": null
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 414289,
-            "name": "M. Barcenas"
-          },
-          "assist": {
-            "id": 88426,
-            "name": "G. Corley"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 27378,
-            "name": "Denver Summit W",
-            "logo": "https://media.api-sports.io/football/teams/27378.png"
-          },
-          "player": {
-            "id": 647476,
-            "name": "D. Lynch"
-          },
-          "assist": {
-            "id": 414291,
-            "name": "E. Regan"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 27378,
-            "name": "Denver Summit W",
-            "logo": "https://media.api-sports.io/football/teams/27378.png"
-          },
-          "player": {
-            "id": 647477,
-            "name": "N. Means"
-          },
-          "assist": {
-            "id": 88335,
-            "name": "M. Kossler"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 58,
-            "extra": null
-          },
-          "team": {
-            "id": 27378,
-            "name": "Denver Summit W",
-            "logo": "https://media.api-sports.io/football/teams/27378.png"
-          },
-          "player": {
-            "id": 317408,
-            "name": "Y. Ryan"
-          },
-          "assist": {
-            "id": 68954,
-            "name": "J. Sonis"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 59,
-            "extra": null
-          },
-          "team": {
-            "id": 27378,
-            "name": "Denver Summit W",
-            "logo": "https://media.api-sports.io/football/teams/27378.png"
-          },
-          "player": {
-            "id": 647475,
-            "name": "Y. McCormack"
-          },
-          "assist": {
-            "id": 284721,
-            "name": "N. Flint"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 64,
-            "extra": null
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 536153,
-            "name": "Ludmila"
-          },
-          "assist": {
-            "id": 68957,
-            "name": "A. Leon"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 72,
-            "extra": null
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 271660,
-            "name": "L. Fazer"
-          },
-          "assist": {
-            "id": 536216,
-            "name": "L. Harbert"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 72,
-            "extra": null
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 613320,
-            "name": "T. Byars"
-          },
-          "assist": {
-            "id": 77395,
-            "name": "Gabi Portilho"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 72,
-            "extra": null
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 414289,
-            "name": "M. Barcenas"
-          },
-          "assist": {
-            "id": 647482,
-            "name": "T. Wynalda"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 79,
-            "extra": null
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 536216,
-            "name": "L. Harbert"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Foul"
-        },
-        {
-          "time": {
-            "elapsed": 83,
-            "extra": null
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 87570,
-            "name": "P. Morroni"
-          },
-          "assist": {
-            "id": 536158,
-            "name": "B. Courtnall"
-          },
-          "type": "subst",
-          "detail": "Substitution 5",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 90,
-            "extra": 1
-          },
-          "team": {
-            "id": 18451,
-            "name": "San Diego Wave W",
-            "logo": "https://media.api-sports.io/football/teams/18451.png"
-          },
-          "player": {
-            "id": 68957,
-            "name": "A. Leon"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Foul"
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1508505,
-        "referee": "Marie Durr, USA",
-        "timezone": "UTC",
-        "date": "2026-08-15T02:00:00+00:00",
-        "timestamp": 1786759200,
-        "periods": {
-          "first": 1786759200,
-          "second": 1786762800
-        },
-        "venue": {
-          "id": null,
-          "name": "Lumen Field",
-          "city": "Seattle"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 90,
-          "extra": 1
-        }
-      },
-      "league": {
-        "id": 254,
-        "name": "NWSL Women",
-        "country": "USA",
-        "logo": "https://media.api-sports.io/football/leagues/254.png",
-        "flag": "https://media.api-sports.io/flags/us.svg",
-        "season": 2026,
-        "round": "Group Stage",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 3002,
-          "name": "Seattle Reign FC W",
-          "logo": "https://media.api-sports.io/football/teams/3002.png",
-          "winner": true
-        },
-        "away": {
-          "id": 2997,
-          "name": "Chicago Red Stars W",
-          "logo": "https://media.api-sports.io/football/teams/2997.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 2997,
-            "name": "Chicago Red Stars W",
-            "logo": "https://media.api-sports.io/football/teams/2997.png"
-          },
-          "player": {
-            "id": 88261,
-            "name": "A. Gasper"
-          },
-          "assist": {
-            "id": 461525,
-            "name": "B. Franklin"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 2997,
-            "name": "Chicago Red Stars W",
-            "logo": "https://media.api-sports.io/football/teams/2997.png"
-          },
-          "player": {
-            "id": 69032,
-            "name": "M. Swanson"
-          },
-          "assist": {
-            "id": 441874,
-            "name": "N. Gomes"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 53,
-            "extra": null
-          },
-          "team": {
-            "id": 3002,
-            "name": "Seattle Reign FC W",
-            "logo": "https://media.api-sports.io/football/teams/3002.png"
-          },
-          "player": {
-            "id": 536136,
-            "name": "M. Mercado"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 70,
-            "extra": null
-          },
-          "team": {
-            "id": 3002,
-            "name": "Seattle Reign FC W",
-            "logo": "https://media.api-sports.io/football/teams/3002.png"
-          },
-          "player": {
-            "id": 536137,
-            "name": "M. Dahlien"
-          },
-          "assist": {
-            "id": 614763,
-            "name": "H. Ward"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 70,
-            "extra": null
-          },
-          "team": {
-            "id": 3002,
-            "name": "Seattle Reign FC W",
-            "logo": "https://media.api-sports.io/football/teams/3002.png"
-          },
-          "player": {
-            "id": 440562,
-            "name": "M. Fishel"
-          },
-          "assist": {
-            "id": 87455,
-            "name": "N. Mondesir"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 74,
-            "extra": null
-          },
-          "team": {
-            "id": 2997,
-            "name": "Chicago Red Stars W",
-            "logo": "https://media.api-sports.io/football/teams/2997.png"
-          },
-          "player": {
-            "id": 317407,
-            "name": "B. A. Pinto"
-          },
-          "assist": {
-            "id": 495242,
-            "name": "M. Johnson"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 74,
-            "extra": null
-          },
-          "team": {
-            "id": 2997,
-            "name": "Chicago Red Stars W",
-            "logo": "https://media.api-sports.io/football/teams/2997.png"
-          },
-          "player": {
-            "id": 462460,
-            "name": "J. Joseph"
-          },
-          "assist": {
-            "id": 372199,
-            "name": "J. Bike"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 83,
-            "extra": null
-          },
-          "team": {
-            "id": 3002,
-            "name": "Seattle Reign FC W",
-            "logo": "https://media.api-sports.io/football/teams/3002.png"
-          },
-          "player": {
-            "id": 536189,
-            "name": "S. Menti"
-          },
-          "assist": {
-            "id": 393734,
-            "name": "E. Adames"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 83,
-            "extra": null
-          },
-          "team": {
-            "id": 3002,
-            "name": "Seattle Reign FC W",
-            "logo": "https://media.api-sports.io/football/teams/3002.png"
-          },
-          "player": {
-            "id": 536163,
-            "name": "M. Curry"
-          },
-          "assist": {
-            "id": 372153,
-            "name": "R. Brown"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1508506,
-        "referee": "John Griggs, USA",
-        "timezone": "UTC",
-        "date": "2026-08-15T02:00:00+00:00",
-        "timestamp": 1786759200,
-        "periods": {
-          "first": 1786759200,
-          "second": 1786762800
-        },
-        "venue": {
-          "id": null,
-          "name": "America First Field",
-          "city": "Sandy"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 90,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 254,
-        "name": "NWSL Women",
-        "country": "USA",
-        "logo": "https://media.api-sports.io/football/leagues/254.png",
-        "flag": "https://media.api-sports.io/flags/us.svg",
-        "season": 2026,
-        "round": "Group Stage",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 3004,
-          "name": "Utah Royals W",
-          "logo": "https://media.api-sports.io/football/teams/3004.png",
-          "winner": true
-        },
-        "away": {
-          "id": 22943,
-          "name": "Bay FC W",
-          "logo": "https://media.api-sports.io/football/teams/22943.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 3,
-        "away": 2
-      },
-      "score": {
-        "halftime": {
-          "home": 2,
-          "away": 2
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 6,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 509301,
-            "name": "K. Lema"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 7,
-            "extra": null
-          },
-          "team": {
-            "id": 3004,
-            "name": "Utah Royals W",
-            "logo": "https://media.api-sports.io/football/teams/3004.png"
-          },
-          "player": {
-            "id": 395353,
-            "name": "M. Moriya"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 22,
-            "extra": null
-          },
-          "team": {
-            "id": 3004,
-            "name": "Utah Royals W",
-            "logo": "https://media.api-sports.io/football/teams/3004.png"
-          },
-          "player": {
-            "id": 68857,
-            "name": "N. Miura"
-          },
-          "assist": {
-            "id": 290326,
-            "name": "C. Lacasse"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 29,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 670020,
-            "name": "H. Gilchrist"
-          },
-          "assist": {
-            "id": 511557,
-            "name": "H. Bebar"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 61,
-            "extra": null
-          },
-          "team": {
-            "id": 3004,
-            "name": "Utah Royals W",
-            "logo": "https://media.api-sports.io/football/teams/3004.png"
-          },
-          "player": {
-            "id": 228904,
-            "name": "K. Riehl"
-          },
-          "assist": {
-            "id": 310447,
-            "name": "T. Milazzo"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 61,
-            "extra": null
-          },
-          "team": {
-            "id": 3004,
-            "name": "Utah Royals W",
-            "logo": "https://media.api-sports.io/football/teams/3004.png"
-          },
-          "player": {
-            "id": 99895,
-            "name": "A. Tejada Jimenez"
-          },
-          "assist": {
-            "id": 265352,
-            "name": "M. Hammond"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 62,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 536214,
-            "name": "A. Pfeiffer"
-          },
-          "assist": {
-            "id": 530560,
-            "name": "K. Barry"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 62,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 670020,
-            "name": "H. Gilchrist"
-          },
-          "assist": {
-            "id": 413398,
-            "name": "J. Nighswonger"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 71,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 413398,
-            "name": "J. Nighswonger"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": "Foul"
-        },
-        {
-          "time": {
-            "elapsed": 79,
-            "extra": null
-          },
-          "team": {
-            "id": 3004,
-            "name": "Utah Royals W",
-            "logo": "https://media.api-sports.io/football/teams/3004.png"
-          },
-          "player": {
-            "id": 301790,
-            "name": "M. Tanaka"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 79,
-            "extra": null
-          },
-          "team": {
-            "id": 3004,
-            "name": "Utah Royals W",
-            "logo": "https://media.api-sports.io/football/teams/3004.png"
-          },
-          "player": {
-            "id": 102261,
-            "name": "C. Delzer"
-          },
-          "assist": {
-            "id": 461509,
-            "name": "C. Brown"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 79,
-            "extra": null
-          },
-          "team": {
-            "id": 3004,
-            "name": "Utah Royals W",
-            "logo": "https://media.api-sports.io/football/teams/3004.png"
-          },
-          "player": {
-            "id": 102272,
-            "name": "P. Cronin"
-          },
-          "assist": {
-            "id": 536129,
-            "name": "B. Mozingo"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 82,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 509301,
-            "name": "K. Lema"
-          },
-          "assist": {
-            "id": 587136,
-            "name": "A. Holzheier"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 88,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 68897,
-            "name": "A. Cometti"
-          },
-          "assist": {
-            "id": 360345,
-            "name": "J. Anderson"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 88,
-            "extra": null
-          },
-          "team": {
-            "id": 22943,
-            "name": "Bay FC W",
-            "logo": "https://media.api-sports.io/football/teams/22943.png"
-          },
-          "player": {
-            "id": 509300,
-            "name": "T. Huff"
-          },
-          "assist": {
-            "id": 68771,
-            "name": "C. Girelli"
-          },
-          "type": "subst",
-          "detail": "Substitution 5",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
         "id": 1581473,
         "referee": null,
         "timezone": "UTC",
@@ -1112,7 +176,7 @@
         "timestamp": 1786762800,
         "periods": {
           "first": 1786762800,
-          "second": null
+          "second": 1786766400
         },
         "venue": {
           "id": 19979,
@@ -1120,10 +184,10 @@
           "city": "La Paz"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 4
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 83,
+          "extra": null
         }
       },
       "league": {
@@ -1175,7 +239,7 @@
       "events": [
         {
           "time": {
-            "elapsed": 12,
+            "elapsed": 11,
             "extra": null
           },
           "team": {
@@ -1215,6 +279,270 @@
           },
           "type": "Goal",
           "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 19024,
+            "name": "CA La Paz",
+            "logo": "https://media.api-sports.io/football/teams/19024.png"
+          },
+          "player": {
+            "id": 35835,
+            "name": "C. Robles"
+          },
+          "assist": {
+            "id": 405883,
+            "name": "I. Larios"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 62,
+            "extra": null
+          },
+          "team": {
+            "id": 27935,
+            "name": "Piratas",
+            "logo": "https://media.api-sports.io/football/teams/27935.png"
+          },
+          "player": {
+            "id": 108542,
+            "name": "J. Venegas"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 19024,
+            "name": "CA La Paz",
+            "logo": "https://media.api-sports.io/football/teams/19024.png"
+          },
+          "player": {
+            "id": 157905,
+            "name": "A. Robles"
+          },
+          "assist": {
+            "id": 372099,
+            "name": "R. Renteria"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 19024,
+            "name": "CA La Paz",
+            "logo": "https://media.api-sports.io/football/teams/19024.png"
+          },
+          "player": {
+            "id": 127231,
+            "name": "O. Millan"
+          },
+          "assist": {
+            "id": 275582,
+            "name": "D. Hernandez"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 27935,
+            "name": "Piratas",
+            "logo": "https://media.api-sports.io/football/teams/27935.png"
+          },
+          "player": {
+            "id": 350665,
+            "name": "K. Y. Jaime Sanchez"
+          },
+          "assist": {
+            "id": 671828,
+            "name": "E. Vargas"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 27935,
+            "name": "Piratas",
+            "logo": "https://media.api-sports.io/football/teams/27935.png"
+          },
+          "player": {
+            "id": 580339,
+            "name": "I. Doumbouya"
+          },
+          "assist": {
+            "id": 670033,
+            "name": "A. Enciso"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 27935,
+            "name": "Piratas",
+            "logo": "https://media.api-sports.io/football/teams/27935.png"
+          },
+          "player": {
+            "id": 554773,
+            "name": "O. Soto"
+          },
+          "assist": {
+            "id": 372171,
+            "name": "G. Lopez"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 27935,
+            "name": "Piratas",
+            "logo": "https://media.api-sports.io/football/teams/27935.png"
+          },
+          "player": {
+            "id": 35918,
+            "name": "B. Figueroa"
+          },
+          "assist": {
+            "id": 607841,
+            "name": "F. Garcia"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 19024,
+            "name": "CA La Paz",
+            "logo": "https://media.api-sports.io/football/teams/19024.png"
+          },
+          "player": {
+            "id": 35625,
+            "name": "F. Illescas"
+          },
+          "assist": {
+            "id": 554814,
+            "name": "S. Vazquez"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 19024,
+            "name": "CA La Paz",
+            "logo": "https://media.api-sports.io/football/teams/19024.png"
+          },
+          "player": {
+            "id": 372099,
+            "name": "R. Renteria"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 80,
+            "extra": null
+          },
+          "team": {
+            "id": 19024,
+            "name": "CA La Paz",
+            "logo": "https://media.api-sports.io/football/teams/19024.png"
+          },
+          "player": {
+            "id": 551474,
+            "name": "H. Torres"
+          },
+          "assist": {
+            "id": 669744,
+            "name": "D. Alvarado"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 27935,
+            "name": "Piratas",
+            "logo": "https://media.api-sports.io/football/teams/27935.png"
+          },
+          "player": {
+            "id": 671828,
+            "name": "E. Vargas"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
           "comments": null
         }
       ]
@@ -1378,9 +706,9 @@
           "city": "Nova Lima"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -1399,17 +727,17 @@
           "id": 18727,
           "name": "Atlético Mineiro W",
           "logo": "https://media.api-sports.io/football/teams/18727.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 1817,
           "name": "Gremio W",
           "logo": "https://media.api-sports.io/football/teams/1817.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 2,
         "away": 0
       },
       "score": {
@@ -1418,8 +746,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -1439,8 +767,8 @@
         "date": "2026-08-15T00:00:00+00:00",
         "timestamp": 1786752000,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1786752000,
+          "second": 1786755600
         },
         "venue": {
           "id": null,
@@ -1448,9 +776,9 @@
           "city": "Ba"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -1469,27 +797,27 @@
           "id": 8130,
           "name": "Tupapa Maraerenga",
           "logo": "https://media.api-sports.io/football/teams/8130.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 9566,
           "name": "ABM Galaxy",
           "logo": "https://media.api-sports.io/football/teams/9566.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 7
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 2
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 7
         },
         "extratime": {
           "home": null,
@@ -2008,10 +1336,10 @@
           "city": "La Chorrera"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
+          "long": "Match Finished",
+          "short": "FT",
           "elapsed": 90,
-          "extra": 1
+          "extra": 5
         }
       },
       "league": {
@@ -2048,8 +1376,8 @@
           "away": 1
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -2078,10 +1406,10 @@
           "city": "San Diego"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 52,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 4
         }
       },
       "league": {
@@ -2099,18 +1427,18 @@
           "id": 18451,
           "name": "San Diego Wave W",
           "logo": "https://media.api-sports.io/football/teams/18451.png",
-          "winner": true
+          "winner": null
         },
         "away": {
           "id": 27378,
           "name": "Denver Summit W",
           "logo": "https://media.api-sports.io/football/teams/27378.png",
-          "winner": false
+          "winner": null
         }
       },
       "goals": {
         "home": 1,
-        "away": 0
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -2118,8 +1446,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -2148,10 +1476,10 @@
           "city": "Seattle"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 52,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 4
         }
       },
       "league": {
@@ -2169,17 +1497,17 @@
           "id": 3002,
           "name": "Seattle Reign FC W",
           "logo": "https://media.api-sports.io/football/teams/3002.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 2997,
           "name": "Chicago Red Stars W",
           "logo": "https://media.api-sports.io/football/teams/2997.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
@@ -2188,8 +1516,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -2218,10 +1546,10 @@
           "city": "Sandy"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 55,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 8
         }
       },
       "league": {
@@ -2239,17 +1567,17 @@
           "id": 3004,
           "name": "Utah Royals W",
           "logo": "https://media.api-sports.io/football/teams/3004.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 22943,
           "name": "Bay FC W",
           "logo": "https://media.api-sports.io/football/teams/22943.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 2,
+        "home": 3,
         "away": 2
       },
       "score": {
@@ -2258,8 +1586,8 @@
           "away": 2
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 2
         },
         "extratime": {
           "home": null,
@@ -2288,10 +1616,10 @@
           "city": "Ciudad Quesada"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 60,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 5
         }
       },
       "league": {
@@ -2309,17 +1637,17 @@
           "id": 823,
           "name": "San Carlos",
           "logo": "https://media.api-sports.io/football/teams/823.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 815,
           "name": "CS Herediano",
           "logo": "https://media.api-sports.io/football/teams/815.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
@@ -2328,8 +1656,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -2490,7 +1818,7 @@
         "timestamp": 1786762800,
         "periods": {
           "first": 1786762800,
-          "second": null
+          "second": 1786766400
         },
         "venue": {
           "id": 19979,
@@ -2498,9 +1826,9 @@
           "city": "La Paz"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 21,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 83,
           "extra": null
         }
       },
@@ -2529,12 +1857,12 @@
         }
       },
       "goals": {
-        "home": 1,
+        "home": 2,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         },
         "fulltime": {
@@ -2559,7 +1887,7 @@
         "date": "2026-08-15T04:00:00+00:00",
         "timestamp": 1786766400,
         "periods": {
-          "first": null,
+          "first": 1786766400,
           "second": null
         },
         "venue": {
@@ -2568,9 +1896,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 43,
           "extra": null
         }
       },
@@ -2589,23 +1917,23 @@
           "id": 3810,
           "name": "Port Melbourne",
           "logo": "https://media.api-sports.io/football/teams/3810.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 3807,
           "name": "Melbourne Knights",
           "logo": "https://media.api-sports.io/football/teams/3807.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -3399,7 +2727,7 @@
         "date": "2026-08-15T04:30:00+00:00",
         "timestamp": 1786768200,
         "periods": {
-          "first": null,
+          "first": 1786768200,
           "second": null
         },
         "venue": {
@@ -3408,9 +2736,9 @@
           "city": "Devonport"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 10,
           "extra": null
         }
       },
@@ -3439,13 +2767,13 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
           "home": null,
