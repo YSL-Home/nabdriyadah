@@ -1,7 +1,78 @@
 {
   "date": "2026-08-15",
-  "fetchedAt": "2026-08-15T05:03:24.521Z",
+  "fetchedAt": "2026-08-15T05:37:23.635Z",
   "live": [
+    {
+      "fixture": {
+        "id": 1517626,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-15T05:00:00+00:00",
+        "timestamp": 1786770000,
+        "periods": {
+          "first": 1786770000,
+          "second": null
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 31,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 192,
+        "name": "New South Wales NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/192.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 28",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 14025,
+          "name": "Western Sydney Wanderers U23",
+          "logo": "https://media.api-sports.io/football/teams/14025.png",
+          "winner": null
+        },
+        "away": {
+          "id": 16779,
+          "name": "St. George Saints",
+          "logo": "https://media.api-sports.io/football/teams/16779.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
     {
       "fixture": {
         "id": 1521998,
@@ -21,7 +92,7 @@
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 2,
+          "elapsed": 36,
           "extra": null
         }
       },
@@ -50,13 +121,13 @@
         }
       },
       "goals": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -71,7 +142,52 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 5,
+            "extra": null
+          },
+          "team": {
+            "id": 3803,
+            "name": "Heidelberg United",
+            "logo": "https://media.api-sports.io/football/teams/3803.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 29,
+            "extra": null
+          },
+          "team": {
+            "id": 3804,
+            "name": "Hume City",
+            "logo": "https://media.api-sports.io/football/teams/3804.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     },
     {
       "fixture": {
@@ -92,7 +208,7 @@
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 3,
+          "elapsed": 37,
           "extra": null
         }
       },
@@ -111,23 +227,23 @@
           "id": 20783,
           "name": "Melbourne City II",
           "logo": "https://media.api-sports.io/football/teams/20783.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 3811,
           "name": "South Melbourne",
           "logo": "https://media.api-sports.io/football/teams/3811.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
         "home": 0,
-        "away": 0
+        "away": 2
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -142,7 +258,190 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 30,
+            "extra": null
+          },
+          "team": {
+            "id": 3811,
+            "name": "South Melbourne",
+            "logo": "https://media.api-sports.io/football/teams/3811.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 34,
+            "extra": null
+          },
+          "team": {
+            "id": 3811,
+            "name": "South Melbourne",
+            "logo": "https://media.api-sports.io/football/teams/3811.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1537513,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-15T05:00:00+00:00",
+        "timestamp": 1786770000,
+        "periods": {
+          "first": 1786770000,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Calwell Field",
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 34,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 189,
+        "name": "Capital Territory NPL",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/189.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 21",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 23516,
+          "name": "Brindabella",
+          "logo": "https://media.api-sports.io/football/teams/23516.png",
+          "winner": false
+        },
+        "away": {
+          "id": 1452,
+          "name": "Cooma Tigers FC",
+          "logo": "https://media.api-sports.io/football/teams/1452.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 8,
+            "extra": null
+          },
+          "team": {
+            "id": 1452,
+            "name": "Cooma Tigers FC",
+            "logo": "https://media.api-sports.io/football/teams/1452.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 13,
+            "extra": null
+          },
+          "team": {
+            "id": 1452,
+            "name": "Cooma Tigers FC",
+            "logo": "https://media.api-sports.io/football/teams/1452.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 18,
+            "extra": null
+          },
+          "team": {
+            "id": 23516,
+            "name": "Brindabella",
+            "logo": "https://media.api-sports.io/football/teams/23516.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     },
     {
       "fixture": {
@@ -163,7 +462,7 @@
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 2,
+          "elapsed": 36,
           "extra": null
         }
       },
@@ -182,22 +481,22 @@
           "id": 18419,
           "name": "O'Connor Knights",
           "logo": "https://media.api-sports.io/football/teams/18419.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 23518,
           "name": "Canberra White Eagles",
           "logo": "https://media.api-sports.io/football/teams/23518.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "fulltime": {
@@ -213,7 +512,30 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 16,
+            "extra": null
+          },
+          "team": {
+            "id": 18419,
+            "name": "O'Connor Knights",
+            "logo": "https://media.api-sports.io/football/teams/18419.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     },
     {
       "fixture": {
@@ -234,7 +556,7 @@
         "status": {
           "long": "First Half",
           "short": "1H",
-          "elapsed": 1,
+          "elapsed": 35,
           "extra": null
         }
       },
@@ -288,6 +610,122 @@
     },
     {
       "fixture": {
+        "id": 1522159,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-15T04:00:00+00:00",
+        "timestamp": 1786766400,
+        "periods": {
+          "first": 1786766400,
+          "second": 1786770000
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 77,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 836,
+        "name": "Victoria NPL 2",
+        "country": "Australia",
+        "logo": "https://media.api-sports.io/football/leagues/836.png",
+        "flag": "https://media.api-sports.io/flags/au.svg",
+        "season": 2026,
+        "round": "Regular Season - 24",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3810,
+          "name": "Port Melbourne",
+          "logo": "https://media.api-sports.io/football/teams/3810.png",
+          "winner": null
+        },
+        "away": {
+          "id": 3807,
+          "name": "Melbourne Knights",
+          "logo": "https://media.api-sports.io/football/teams/3807.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 3810,
+            "name": "Port Melbourne",
+            "logo": "https://media.api-sports.io/football/teams/3810.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 70,
+            "extra": null
+          },
+          "team": {
+            "id": 3807,
+            "name": "Melbourne Knights",
+            "logo": "https://media.api-sports.io/football/teams/3807.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
         "id": 1620982,
         "referee": null,
         "timezone": "UTC",
@@ -303,10 +741,10 @@
           "city": "Devonport"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 29,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 3
         }
       },
       "league": {
@@ -334,12 +772,12 @@
         }
       },
       "goals": {
-        "home": 1,
+        "home": 2,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         },
         "fulltime": {
@@ -377,88 +815,16 @@
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1522159,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-15T04:00:00+00:00",
-        "timestamp": 1786766400,
-        "periods": {
-          "first": 1786766400,
-          "second": null
         },
-        "venue": {
-          "id": 0,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 4
-        }
-      },
-      "league": {
-        "id": 836,
-        "name": "Victoria NPL 2",
-        "country": "Australia",
-        "logo": "https://media.api-sports.io/football/leagues/836.png",
-        "flag": "https://media.api-sports.io/flags/au.svg",
-        "season": 2026,
-        "round": "Regular Season - 24",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 3810,
-          "name": "Port Melbourne",
-          "logo": "https://media.api-sports.io/football/teams/3810.png",
-          "winner": true
-        },
-        "away": {
-          "id": 3807,
-          "name": "Melbourne Knights",
-          "logo": "https://media.api-sports.io/football/teams/3807.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
         {
           "time": {
-            "elapsed": 10,
+            "elapsed": 44,
             "extra": null
           },
           "team": {
-            "id": 3810,
-            "name": "Port Melbourne",
-            "logo": "https://media.api-sports.io/football/teams/3810.png"
+            "id": 14100,
+            "name": "Devonport City",
+            "logo": "https://media.api-sports.io/football/teams/14100.png"
           },
           "player": {
             "id": null,
