@@ -1,56 +1,56 @@
 {
   "date": "2026-08-17",
-  "fetchedAt": "2026-08-17T15:17:14.858Z",
+  "fetchedAt": "2026-08-17T14:19:03.654Z",
   "live": [
     {
       "fixture": {
-        "id": 1495762,
-        "referee": null,
+        "id": 1550927,
+        "referee": "Victor Alfonso Caceres Hernandez, Mexico",
         "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
+        "date": "2026-08-17T03:00:00+00:00",
+        "timestamp": 1786935600,
         "periods": {
-          "first": 1786978800,
-          "second": null
+          "first": 1786935600,
+          "second": 1786939200
         },
         "venue": {
-          "id": 2698,
-          "name": "Markku.fi Areena",
-          "city": "Helsinki"
+          "id": 1088,
+          "name": "Estadio Caliente",
+          "city": "Tijuana"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 17,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 72,
           "extra": null
         }
       },
       "league": {
-        "id": 244,
-        "name": "Veikkausliiga",
-        "country": "Finland",
-        "logo": "https://media.api-sports.io/football/leagues/244.png",
-        "flag": "https://media.api-sports.io/flags/fi.svg",
+        "id": 262,
+        "name": "Liga MX",
+        "country": "Mexico",
+        "logo": "https://media.api-sports.io/football/leagues/262.png",
+        "flag": "https://media.api-sports.io/flags/mx.svg",
         "season": 2026,
-        "round": "Regular Season - 20",
+        "round": "Apertura - 4",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 2082,
-          "name": "Gnistan",
-          "logo": "https://media.api-sports.io/football/teams/2082.png",
-          "winner": null
+          "id": 2280,
+          "name": "Club Tijuana",
+          "logo": "https://media.api-sports.io/football/teams/2280.png",
+          "winner": true
         },
         "away": {
-          "id": 1163,
-          "name": "Ilves",
-          "logo": "https://media.api-sports.io/football/teams/1163.png",
-          "winner": null
+          "id": 2295,
+          "name": "Cruz Azul",
+          "logo": "https://media.api-sports.io/football/teams/2295.png",
+          "winner": false
         }
       },
       "goals": {
-        "home": 1,
+        "home": 2,
         "away": 1
       },
       "score": {
@@ -74,181 +74,65 @@
       "events": [
         {
           "time": {
-            "elapsed": 4,
+            "elapsed": 44,
             "extra": null
           },
           "team": {
-            "id": 2082,
-            "name": "Gnistan",
-            "logo": "https://media.api-sports.io/football/teams/2082.png"
+            "id": 2280,
+            "name": "Club Tijuana",
+            "logo": "https://media.api-sports.io/football/teams/2280.png"
           },
           "player": {
-            "id": 30987,
-            "name": "S. Vaisanen"
+            "id": 35694,
+            "name": "I. Rivero"
           },
           "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Own Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 14,
-            "extra": null
-          },
-          "team": {
-            "id": 1163,
-            "name": "Ilves",
-            "logo": "https://media.api-sports.io/football/teams/1163.png"
-          },
-          "player": {
-            "id": 264539,
-            "name": "T. Hytonen"
-          },
-          "assist": {
-            "id": 263441,
-            "name": "O. Pettersson"
+            "id": 482605,
+            "name": "G. Mora"
           },
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1547611,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
         },
-        "venue": {
-          "id": null,
-          "name": "Siauliai central stadium",
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 11,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 362,
-        "name": "A Lyga",
-        "country": "Lithuania",
-        "logo": "https://media.api-sports.io/football/leagues/362.png",
-        "flag": "https://media.api-sports.io/flags/lt.svg",
-        "season": 2026,
-        "round": "Regular Season - 27",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 3870,
-          "name": "Šiauliai",
-          "logo": "https://media.api-sports.io/football/teams/3870.png",
-          "winner": true
-        },
-        "away": {
-          "id": 3874,
-          "name": "Panevėžys",
-          "logo": "https://media.api-sports.io/football/teams/3874.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
         {
           "time": {
-            "elapsed": 3,
-            "extra": null
+            "elapsed": 45,
+            "extra": 2
           },
           "team": {
-            "id": 3874,
-            "name": "Panevėžys",
-            "logo": "https://media.api-sports.io/football/teams/3874.png"
+            "id": 2295,
+            "name": "Cruz Azul",
+            "logo": "https://media.api-sports.io/football/teams/2295.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 36059,
+            "name": "N. Ibanez"
           },
           "assist": {
-            "id": null,
-            "name": null
+            "id": 263812,
+            "name": "L. Romero"
           },
-          "type": "Card",
-          "detail": "Yellow Card",
+          "type": "Goal",
+          "detail": "Normal Goal",
           "comments": null
         },
         {
           "time": {
-            "elapsed": 4,
+            "elapsed": 46,
             "extra": null
           },
           "team": {
-            "id": 3874,
-            "name": "Panevėžys",
-            "logo": "https://media.api-sports.io/football/teams/3874.png"
+            "id": 2280,
+            "name": "Club Tijuana",
+            "logo": "https://media.api-sports.io/football/teams/2280.png"
           },
           "player": {
-            "id": 10988,
-            "name": "V. Cerniauskas"
+            "id": 425583,
+            "name": "P. N. Ortiz Orozco"
           },
           "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Red Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 6,
-            "extra": null
-          },
-          "team": {
-            "id": 3874,
-            "name": "Panevėžys",
-            "logo": "https://media.api-sports.io/football/teams/3874.png"
-          },
-          "player": {
-            "id": 45383,
-            "name": "M. Bacanin"
-          },
-          "assist": {
-            "id": 306531,
-            "name": "A. Brazinskas"
+            "id": 299896,
+            "name": "A. Vega"
           },
           "type": "subst",
           "detail": "Substitution 1",
@@ -256,729 +140,43 @@
         },
         {
           "time": {
-            "elapsed": 9,
+            "elapsed": 49,
             "extra": null
           },
           "team": {
-            "id": 3870,
-            "name": "Šiauliai",
-            "logo": "https://media.api-sports.io/football/teams/3870.png"
+            "id": 2295,
+            "name": "Cruz Azul",
+            "logo": "https://media.api-sports.io/football/teams/2295.png"
           },
           "player": {
-            "id": 266059,
-            "name": "D. Dovydaitis"
+            "id": 53961,
+            "name": "C. Ebere"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1561100,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
         },
-        "venue": {
-          "id": null,
-          "name": "Pasienky",
-          "city": "Bratislava"
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 17,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 506,
-        "name": "2. liga",
-        "country": "Slovakia",
-        "logo": "https://media.api-sports.io/football/leagues/506.png",
-        "flag": "https://media.api-sports.io/flags/sk.svg",
-        "season": 2026,
-        "round": "Regular Season - 4",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 10544,
-          "name": "Slovan Bratislava II",
-          "logo": "https://media.api-sports.io/football/teams/10544.png",
-          "winner": true
-        },
-        "away": {
-          "id": 14068,
-          "name": "Humenné",
-          "logo": "https://media.api-sports.io/football/teams/14068.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
         {
           "time": {
-            "elapsed": 13,
+            "elapsed": 54,
             "extra": null
           },
           "team": {
-            "id": 10544,
-            "name": "Slovan Bratislava II",
-            "logo": "https://media.api-sports.io/football/teams/10544.png"
+            "id": 2280,
+            "name": "Club Tijuana",
+            "logo": "https://media.api-sports.io/football/teams/2280.png"
           },
           "player": {
-            "id": 599371,
-            "name": "D. Balog"
+            "id": 482605,
+            "name": "G. Mora"
           },
           "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1565456,
-        "referee": "O. Afanasyev",
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
-        },
-        "venue": {
-          "id": 11948,
-          "name": "Tsentralnyi Stadion",
-          "city": "Zhytomyr"
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 14,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 333,
-        "name": "Premier League",
-        "country": "Ukraine",
-        "logo": "https://media.api-sports.io/football/leagues/333.png",
-        "flag": "https://media.api-sports.io/flags/ua.svg",
-        "season": 2026,
-        "round": "Regular Season - 3",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 6496,
-          "name": "Polessya",
-          "logo": "https://media.api-sports.io/football/teams/6496.png",
-          "winner": null
-        },
-        "away": {
-          "id": 599,
-          "name": "Zorya Luhansk",
-          "logo": "https://media.api-sports.io/football/teams/599.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1571511,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
-        },
-        "venue": {
-          "id": 11660,
-          "name": "efbet Arena",
-          "city": "Burgas"
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 17,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 173,
-        "name": "Second League",
-        "country": "Bulgaria",
-        "logo": "https://media.api-sports.io/football/leagues/173.png",
-        "flag": "https://media.api-sports.io/flags/bg.svg",
-        "season": 2026,
-        "round": "Regular Season - 4",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 8530,
-          "name": "Chernomorets 1919 Burgas",
-          "logo": "https://media.api-sports.io/football/teams/8530.png",
-          "winner": null
-        },
-        "away": {
-          "id": 1415,
-          "name": "CSKA Sofia II",
-          "logo": "https://media.api-sports.io/football/teams/1415.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1578032,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Markaziy Stadium",
-          "city": "Qarshi"
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 17,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 1140,
-        "name": "AFC Women's Champions League",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/1140.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Preliminary",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 24899,
-          "name": "Nasaf W",
-          "logo": "https://media.api-sports.io/football/teams/24899.png",
-          "winner": null
-        },
-        "away": {
-          "id": 26463,
-          "name": "Master W",
-          "logo": "https://media.api-sports.io/football/teams/26463.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1592144,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Skonto stadions",
-          "city": "Riga"
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 17,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 658,
-        "name": "Cup",
-        "country": "Latvia",
-        "logo": "https://media.api-sports.io/football/leagues/658.png",
-        "flag": "https://media.api-sports.io/flags/lv.svg",
-        "season": 2026,
-        "round": "Quarter-finals",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 4135,
-          "name": "Auda",
-          "logo": "https://media.api-sports.io/football/teams/4135.png",
-          "winner": null
-        },
-        "away": {
-          "id": 4138,
-          "name": "Grobiņa",
-          "logo": "https://media.api-sports.io/football/teams/4138.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1592813,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 12,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 1200,
-        "name": "Liga MX U21",
-        "country": "Mexico",
-        "logo": "https://media.api-sports.io/football/leagues/1200.png",
-        "flag": "https://media.api-sports.io/flags/mx.svg",
-        "season": 2026,
-        "round": "Regular Season - 4",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 26837,
-          "name": "Necaxa U21",
-          "logo": "https://media.api-sports.io/football/teams/26837.png",
-          "winner": false
-        },
-        "away": {
-          "id": 26830,
-          "name": "Club Leon U21",
-          "logo": "https://media.api-sports.io/football/teams/26830.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 9,
-            "extra": null
-          },
-          "team": {
-            "id": 26830,
-            "name": "Club Leon U21",
-            "logo": "https://media.api-sports.io/football/teams/26830.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1606516,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T14:30:00+00:00",
-        "timestamp": 1786977000,
-        "periods": {
-          "first": 1786977000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 43,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 1195,
-        "name": "Liga E Pare",
-        "country": "Kosovo",
-        "logo": "https://media.api-sports.io/football/leagues/1195.png",
-        "flag": "https://media.api-sports.io/flags/xk.svg",
-        "season": 2026,
-        "round": "Regular Season - 1",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 22816,
-          "name": "Prishtina e Re",
-          "logo": "https://media.api-sports.io/football/teams/22816.png",
-          "winner": null
-        },
-        "away": {
-          "id": 3885,
-          "name": "Trepça'89",
-          "logo": "https://media.api-sports.io/football/teams/3885.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1610818,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T15:00:00+00:00",
-        "timestamp": 1786978800,
-        "periods": {
-          "first": 1786978800,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 17,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 199,
-        "name": "Cup",
-        "country": "Greece",
-        "logo": "https://media.api-sports.io/football/leagues/199.png",
-        "flag": "https://media.api-sports.io/flags/gr.svg",
-        "season": 2026,
-        "round": "Qualifying Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 2094,
-          "name": "Anagennisi Karditsas",
-          "logo": "https://media.api-sports.io/football/teams/2094.png",
-          "winner": null
-        },
-        "away": {
-          "id": 1123,
-          "name": "Aris Thessalonikis",
-          "logo": "https://media.api-sports.io/football/teams/1123.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1497213,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T14:00:00+00:00",
-        "timestamp": 1786975200,
-        "periods": {
-          "first": 1786975200,
-          "second": 1786978800
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 56,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 778,
-        "name": "3. Division - Girone 5",
-        "country": "Norway",
-        "logo": "https://media.api-sports.io/football/leagues/778.png",
-        "flag": "https://media.api-sports.io/flags/no.svg",
-        "season": 2026,
-        "round": "Regular Season - 16",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 18444,
-          "name": "Bossekop",
-          "logo": "https://media.api-sports.io/football/teams/18444.png",
-          "winner": false
-        },
-        "away": {
-          "id": 16232,
-          "name": "Tromsø II",
-          "logo": "https://media.api-sports.io/football/teams/16232.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 2
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 33,
-            "extra": null
-          },
-          "team": {
-            "id": 16232,
-            "name": "Tromsø II",
-            "logo": "https://media.api-sports.io/football/teams/16232.png"
-          },
-          "player": {
-            "id": 577486,
-            "name": "A. Evensen-Jensen"
-          },
-          "assist": {
-            "id": null,
-            "name": null
+            "id": 299896,
+            "name": "A. Vega"
           },
           "type": "Goal",
           "detail": "Normal Goal",
@@ -986,372 +184,134 @@
         },
         {
           "time": {
-            "elapsed": 48,
+            "elapsed": 56,
             "extra": null
           },
           "team": {
-            "id": 16232,
-            "name": "Tromsø II",
-            "logo": "https://media.api-sports.io/football/teams/16232.png"
+            "id": 2280,
+            "name": "Club Tijuana",
+            "logo": "https://media.api-sports.io/football/teams/2280.png"
           },
           "player": {
-            "id": 612633,
-            "name": "O. Ottesen"
+            "id": 16688,
+            "name": "A. Preciado"
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 2280,
+            "name": "Club Tijuana",
+            "logo": "https://media.api-sports.io/football/teams/2280.png"
+          },
+          "player": {
+            "id": 35694,
+            "name": "I. Rivero"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Unsportsmanlike conduct"
+        },
+        {
+          "time": {
+            "elapsed": 61,
+            "extra": null
+          },
+          "team": {
+            "id": 2295,
+            "name": "Cruz Azul",
+            "logo": "https://media.api-sports.io/football/teams/2295.png"
+          },
+          "player": {
+            "id": 266638,
+            "name": "A. Montes"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 2280,
+            "name": "Club Tijuana",
+            "logo": "https://media.api-sports.io/football/teams/2280.png"
+          },
+          "player": {
+            "id": 316520,
+            "name": "D. Abreu"
+          },
+          "assist": {
+            "id": 119223,
+            "name": "M. El Ghezouani"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
           "comments": null
         },
         {
           "time": {
-            "elapsed": 55,
+            "elapsed": 68,
             "extra": null
           },
           "team": {
-            "id": 18444,
-            "name": "Bossekop",
-            "logo": "https://media.api-sports.io/football/teams/18444.png"
+            "id": 2295,
+            "name": "Cruz Azul",
+            "logo": "https://media.api-sports.io/football/teams/2295.png"
           },
           "player": {
-            "id": 577506,
-            "name": "J. A. Amundsen"
+            "id": 263812,
+            "name": "L. Romero"
           },
           "assist": {
-            "id": null,
-            "name": null
+            "id": 357997,
+            "name": "A. Montano"
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1601093,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T14:10:00+00:00",
-        "timestamp": 1786975800,
-        "periods": {
-          "first": 1786975800,
-          "second": 1786979400
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 46,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 1218,
-        "name": "Pro League U23",
-        "country": "United-Arab-Emirates",
-        "logo": "https://media.api-sports.io/football/leagues/1218.png",
-        "flag": "https://media.api-sports.io/flags/ae.svg",
-        "season": 2026,
-        "round": "Regular Season - 1",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 27485,
-          "name": "Al Ain U23",
-          "logo": "https://media.api-sports.io/football/teams/27485.png",
-          "winner": null
-        },
-        "away": {
-          "id": 27493,
-          "name": "Bani Yas U23",
-          "logo": "https://media.api-sports.io/football/teams/27493.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 37,
-            "extra": null
-          },
-          "team": {
-            "id": 27485,
-            "name": "Al Ain U23",
-            "logo": "https://media.api-sports.io/football/teams/27485.png"
-          },
-          "player": {
-            "id": 586022,
-            "name": "M. Niang"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
+          "type": "subst",
+          "detail": "Substitution 1",
           "comments": null
         },
         {
           "time": {
-            "elapsed": 45,
-            "extra": 4
-          },
-          "team": {
-            "id": 27493,
-            "name": "Bani Yas U23",
-            "logo": "https://media.api-sports.io/football/teams/27493.png"
-          },
-          "player": {
-            "id": 101647,
-            "name": "A. Fawzi"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1623379,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T14:00:00+00:00",
-        "timestamp": 1786975200,
-        "periods": {
-          "first": 1786975200,
-          "second": 1786978800
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 55,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 199,
-        "name": "Cup",
-        "country": "Greece",
-        "logo": "https://media.api-sports.io/football/leagues/199.png",
-        "flag": "https://media.api-sports.io/flags/gr.svg",
-        "season": 2026,
-        "round": "Qualifying Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 2095,
-          "name": "Kallithea",
-          "logo": "https://media.api-sports.io/football/teams/2095.png",
-          "winner": false
-        },
-        "away": {
-          "id": 953,
-          "name": "Larisa",
-          "logo": "https://media.api-sports.io/football/teams/953.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 2
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 1
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 45,
+            "elapsed": 68,
             "extra": null
           },
           "team": {
-            "id": 953,
-            "name": "Larisa",
-            "logo": "https://media.api-sports.io/football/teams/953.png"
+            "id": 2295,
+            "name": "Cruz Azul",
+            "logo": "https://media.api-sports.io/football/teams/2295.png"
           },
           "player": {
-            "id": 561733,
-            "name": "K. Papageorgiou"
+            "id": 2888,
+            "name": "C. Rodriguez"
           },
           "assist": {
-            "id": null,
-            "name": null
+            "id": 51616,
+            "name": "G. Fernandez"
           },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 53,
-            "extra": null
-          },
-          "team": {
-            "id": 953,
-            "name": "Larisa",
-            "logo": "https://media.api-sports.io/football/teams/953.png"
-          },
-          "player": {
-            "id": 561733,
-            "name": "K. Papageorgiou"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1601094,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-17T14:10:00+00:00",
-        "timestamp": 1786975800,
-        "periods": {
-          "first": 1786975800,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 1218,
-        "name": "Pro League U23",
-        "country": "United-Arab-Emirates",
-        "logo": "https://media.api-sports.io/football/leagues/1218.png",
-        "flag": "https://media.api-sports.io/flags/ae.svg",
-        "season": 2026,
-        "round": "Regular Season - 1",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 27488,
-          "name": "Al Jazira U23",
-          "logo": "https://media.api-sports.io/football/teams/27488.png",
-          "winner": true
-        },
-        "away": {
-          "id": 28029,
-          "name": "Hatta U23",
-          "logo": "https://media.api-sports.io/football/teams/28029.png",
-          "winner": false
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 1,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 43,
-            "extra": null
-          },
-          "team": {
-            "id": 27488,
-            "name": "Al Jazira U23",
-            "logo": "https://media.api-sports.io/football/teams/27488.png"
-          },
-          "player": {
-            "id": 162161,
-            "name": "J. Geusens"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
+          "type": "subst",
+          "detail": "Substitution 2",
           "comments": null
         }
       ]
