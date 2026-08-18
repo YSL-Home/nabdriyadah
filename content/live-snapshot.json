@@ -1,17 +1,17 @@
 {
   "date": "2026-08-18",
-  "fetchedAt": "2026-08-18T04:49:31.451Z",
+  "fetchedAt": "2026-08-18T03:23:29.832Z",
   "live": [
     {
       "fixture": {
         "id": 1550929,
-        "referee": "Aldo Ballesteros Barba, Mexico",
+        "referee": "A. Barba",
         "timezone": "UTC",
         "date": "2026-08-18T03:06:00+00:00",
         "timestamp": 1787022360,
         "periods": {
           "first": 1787022360,
-          "second": 1787025960
+          "second": null
         },
         "venue": {
           "id": null,
@@ -19,9 +19,9 @@
           "city": "Pachuca de Soto"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 81,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 17,
           "extra": null
         }
       },
@@ -40,23 +40,23 @@
           "id": 2292,
           "name": "CF Pachuca",
           "logo": "https://media.api-sports.io/football/teams/2292.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 2291,
           "name": "Puebla",
           "logo": "https://media.api-sports.io/football/teams/2291.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": 2,
-        "away": 2
+        "home": 0,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": 1,
-          "away": 2
+          "home": 0,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -84,11 +84,105 @@
           },
           "player": {
             "id": 51470,
-            "name": "Emiliano Gómez"
+            "name": "E. Gomez"
           },
           "assist": {
-            "id": 282780,
-            "name": "Eduardo Mustre"
+            "id": 35793,
+            "name": "B. Garnica"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1598809,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-18T02:00:00+00:00",
+        "timestamp": 1787018400,
+        "periods": {
+          "first": 1787018400,
+          "second": 1787022000
+        },
+        "venue": {
+          "id": null,
+          "name": "Estadio Puente de Piedra",
+          "city": "Grecia"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 60,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 162,
+        "name": "Primera División",
+        "country": "Costa-Rica",
+        "logo": "https://media.api-sports.io/football/leagues/162.png",
+        "flag": "https://media.api-sports.io/flags/cr.svg",
+        "season": 2026,
+        "round": "Apertura - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 2047,
+          "name": "Sporting San Jose",
+          "logo": "https://media.api-sports.io/football/teams/2047.png",
+          "winner": true
+        },
+        "away": {
+          "id": 17377,
+          "name": "Escorpiones Belén",
+          "logo": "https://media.api-sports.io/football/teams/17377.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 2,
+            "extra": null
+          },
+          "team": {
+            "id": 2047,
+            "name": "Sporting San Jose",
+            "logo": "https://media.api-sports.io/football/teams/2047.png"
+          },
+          "player": {
+            "id": 14116,
+            "name": "J. Mendez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
           },
           "type": "Goal",
           "detail": "Normal Goal",
@@ -96,68 +190,68 @@
         },
         {
           "time": {
-            "elapsed": 31,
+            "elapsed": 4,
             "extra": null
           },
           "team": {
-            "id": 2291,
-            "name": "Puebla",
-            "logo": "https://media.api-sports.io/football/teams/2291.png"
+            "id": 2047,
+            "name": "Sporting San Jose",
+            "logo": "https://media.api-sports.io/football/teams/2047.png"
           },
           "player": {
-            "id": 2836,
-            "name": "Juan Pablo Vargas"
+            "id": 14025,
+            "name": "M. Urena"
           },
           "assist": {
             "id": null,
             "name": null
-          },
-          "type": "Var",
-          "detail": "Penalty confirmed",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 33,
-            "extra": null
-          },
-          "team": {
-            "id": 2291,
-            "name": "Puebla",
-            "logo": "https://media.api-sports.io/football/teams/2291.png"
-          },
-          "player": {
-            "id": 13406,
-            "name": "Kevin Velasco"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 42,
-            "extra": null
-          },
-          "team": {
-            "id": 2292,
-            "name": "CF Pachuca",
-            "logo": "https://media.api-sports.io/football/teams/2292.png"
-          },
-          "player": {
-            "id": 2461,
-            "name": "Salomón Rondón"
-          },
-          "assist": {
-            "id": 270947,
-            "name": "Carlos Sánchez"
           },
           "type": "Goal",
           "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 21,
+            "extra": null
+          },
+          "team": {
+            "id": 2047,
+            "name": "Sporting San Jose",
+            "logo": "https://media.api-sports.io/football/teams/2047.png"
+          },
+          "player": {
+            "id": 13929,
+            "name": "J. Navarro"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 28,
+            "extra": null
+          },
+          "team": {
+            "id": 2047,
+            "name": "Sporting San Jose",
+            "logo": "https://media.api-sports.io/football/teams/2047.png"
+          },
+          "player": {
+            "id": 2833,
+            "name": "G. Gonzalez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
           "comments": null
         },
         {
@@ -166,17 +260,39 @@
             "extra": null
           },
           "team": {
-            "id": 2292,
-            "name": "CF Pachuca",
-            "logo": "https://media.api-sports.io/football/teams/2292.png"
+            "id": 17377,
+            "name": "Escorpiones Belén",
+            "logo": "https://media.api-sports.io/football/teams/17377.png"
           },
           "player": {
-            "id": 424400,
-            "name": "Elías Montiel"
+            "id": 565715,
+            "name": "L. Mena"
           },
           "assist": {
-            "id": 2883,
-            "name": "Rodolfo Pizarro"
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 17377,
+            "name": "Escorpiones Belén",
+            "logo": "https://media.api-sports.io/football/teams/17377.png"
+          },
+          "player": {
+            "id": 643829,
+            "name": "C. Munoz"
+          },
+          "assist": {
+            "id": 544262,
+            "name": "N. Monge"
           },
           "type": "subst",
           "detail": "Substitution 1",
@@ -184,21 +300,21 @@
         },
         {
           "time": {
-            "elapsed": 45,
+            "elapsed": 46,
             "extra": null
           },
           "team": {
-            "id": 2292,
-            "name": "CF Pachuca",
-            "logo": "https://media.api-sports.io/football/teams/2292.png"
+            "id": 17377,
+            "name": "Escorpiones Belén",
+            "logo": "https://media.api-sports.io/football/teams/17377.png"
           },
           "player": {
-            "id": 18902,
-            "name": "Robert Nunes"
+            "id": 565715,
+            "name": "L. Mena"
           },
           "assist": {
-            "id": 362744,
-            "name": "Javier Vallejo"
+            "id": 577076,
+            "name": "P. Kilwien"
           },
           "type": "subst",
           "detail": "Substitution 2",
@@ -206,90 +322,46 @@
         },
         {
           "time": {
-            "elapsed": 60,
+            "elapsed": 46,
             "extra": null
           },
           "team": {
-            "id": 2292,
-            "name": "CF Pachuca",
-            "logo": "https://media.api-sports.io/football/teams/2292.png"
+            "id": 17377,
+            "name": "Escorpiones Belén",
+            "logo": "https://media.api-sports.io/football/teams/17377.png"
           },
           "player": {
-            "id": 196460,
-            "name": "Mauricio Isais"
+            "id": 671985,
+            "name": "A. Fernandez"
           },
           "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Var",
-          "detail": "Penalty confirmed",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 63,
-            "extra": null
-          },
-          "team": {
-            "id": 2292,
-            "name": "CF Pachuca",
-            "logo": "https://media.api-sports.io/football/teams/2292.png"
-          },
-          "player": {
-            "id": 2461,
-            "name": "Salomón Rondón"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 65,
-            "extra": null
-          },
-          "team": {
-            "id": 2291,
-            "name": "Puebla",
-            "logo": "https://media.api-sports.io/football/teams/2291.png"
-          },
-          "player": {
-            "id": 425002,
-            "name": "S. Sanabria"
-          },
-          "assist": {
-            "id": 358091,
-            "name": "Alonso Ramirez"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 79,
-            "extra": null
-          },
-          "team": {
-            "id": 2292,
-            "name": "CF Pachuca",
-            "logo": "https://media.api-sports.io/football/teams/2292.png"
-          },
-          "player": {
-            "id": 2723,
-            "name": "Oussama Idrissi"
-          },
-          "assist": {
-            "id": 407363,
-            "name": "Gael Álvarez"
+            "id": 541306,
+            "name": "F. Chaves"
           },
           "type": "subst",
           "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 55,
+            "extra": null
+          },
+          "team": {
+            "id": 2047,
+            "name": "Sporting San Jose",
+            "logo": "https://media.api-sports.io/football/teams/2047.png"
+          },
+          "player": {
+            "id": 13929,
+            "name": "J. Navarro"
+          },
+          "assist": {
+            "id": 541192,
+            "name": "R. Ramirez"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
           "comments": null
         }
       ]
@@ -439,7 +511,7 @@
     {
       "fixture": {
         "id": 1493068,
-        "referee": "Carlos Andres Gariano, Argentina",
+        "referee": "A. Gariano",
         "timezone": "UTC",
         "date": "2026-08-18T00:30:00+00:00",
         "timestamp": 1787013000,
@@ -449,7 +521,7 @@
         },
         "venue": {
           "id": null,
-          "name": "Víctor Legrotaglie",
+          "name": "Victor Legrotaglie",
           "city": "Mendoza"
         },
         "status": {
@@ -719,7 +791,7 @@
     {
       "fixture": {
         "id": 1550928,
-        "referee": "Luis Santander, Mexico",
+        "referee": "L. E. Santander Aguirre",
         "timezone": "UTC",
         "date": "2026-08-18T01:00:00+00:00",
         "timestamp": 1787014800,
@@ -733,10 +805,10 @@
           "city": "Aguascalientes"
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 7
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 71,
+          "extra": null
         }
       },
       "league": {
@@ -754,18 +826,18 @@
           "id": 2288,
           "name": "Necaxa",
           "logo": "https://media.api-sports.io/football/teams/2288.png",
-          "winner": false
+          "winner": null
         },
         "away": {
           "id": 2289,
           "name": "Leon",
           "logo": "https://media.api-sports.io/football/teams/2289.png",
-          "winner": true
+          "winner": null
         }
       },
       "goals": {
         "home": 1,
-        "away": 2
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -773,8 +845,8 @@
           "away": 1
         },
         "fulltime": {
-          "home": 1,
-          "away": 2
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -803,10 +875,10 @@
           "city": "Panama City"
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 8
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 70,
+          "extra": null
         }
       },
       "league": {
@@ -843,8 +915,8 @@
           "away": 1
         },
         "fulltime": {
-          "home": 0,
-          "away": 1
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -873,10 +945,10 @@
           "city": null
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 5
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 68,
+          "extra": null
         }
       },
       "league": {
@@ -904,8 +976,8 @@
         }
       },
       "goals": {
-        "home": 2,
-        "away": 1
+        "home": 1,
+        "away": 0
       },
       "score": {
         "halftime": {
@@ -913,8 +985,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": 2,
-          "away": 1
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -943,10 +1015,10 @@
           "city": null
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 7
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 62,
+          "extra": null
         }
       },
       "league": {
@@ -974,8 +1046,8 @@
         }
       },
       "goals": {
-        "home": 1,
-        "away": 4
+        "home": 0,
+        "away": 3
       },
       "score": {
         "halftime": {
@@ -983,8 +1055,8 @@
           "away": 3
         },
         "fulltime": {
-          "home": 1,
-          "away": 4
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -1005,7 +1077,7 @@
         "timestamp": 1787018400,
         "periods": {
           "first": 1787018400,
-          "second": 1787022000
+          "second": null
         },
         "venue": {
           "id": null,
@@ -1013,10 +1085,10 @@
           "city": "Grecia"
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 5
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 27,
+          "extra": null
         }
       },
       "league": {
@@ -1053,8 +1125,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": 2,
-          "away": 0
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -1069,13 +1141,13 @@
     {
       "fixture": {
         "id": 1550929,
-        "referee": "Aldo Ballesteros Barba, Mexico",
+        "referee": "A. Barba",
         "timezone": "UTC",
         "date": "2026-08-18T03:06:00+00:00",
         "timestamp": 1787022360,
         "periods": {
-          "first": 1787022360,
-          "second": 1787025960
+          "first": null,
+          "second": null
         },
         "venue": {
           "id": null,
@@ -1083,9 +1155,9 @@
           "city": "Pachuca de Soto"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 81,
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
           "extra": null
         }
       },
@@ -1114,13 +1186,13 @@
         }
       },
       "goals": {
-        "home": 2,
-        "away": 2
+        "home": null,
+        "away": null
       },
       "score": {
         "halftime": {
-          "home": 1,
-          "away": 2
+          "home": null,
+          "away": null
         },
         "fulltime": {
           "home": null,
