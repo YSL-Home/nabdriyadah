@@ -1,21 +1,25 @@
 {
-  "date": "2026-08-18T12:37:09.305Z",
-  "total": 2522,
+  "date": "2026-08-18T13:20:59.259Z",
+  "total": 2526,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 195,
+      "count": 199,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 195,
+      "count": 199,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ucl-13ocia",
+          "duplicate_of": "ucl-1hhjw6"
+        },
         {
           "slug": "liga-vzyjrg",
           "duplicate_of": "liga-eh5npo"
@@ -1389,6 +1393,10 @@
           "duplicate_of": "ft-1g9ouj"
         },
         {
+          "slug": "bball-wwufop-1787058186181",
+          "duplicate_of": "bball-wwufop-1781242661916"
+        },
+        {
           "slug": "bball-wwufop-1787055570544",
           "duplicate_of": "bball-wwufop-1781242661916"
         },
@@ -2597,16 +2605,20 @@
           "duplicate_of": "bball-xe666i-1780032210387"
         },
         {
+          "slug": "padel-4fvrzn-1781672459449",
+          "duplicate_of": "padel-1rj584"
+        },
+        {
           "slug": "padel-4fvrzn-1781351536999",
-          "duplicate_of": "padel-4fvrzn-1781672459449"
+          "duplicate_of": "padel-1rj584"
         },
         {
           "slug": "padel-4fvrzn-1781324026932",
-          "duplicate_of": "padel-4fvrzn-1781672459449"
+          "duplicate_of": "padel-1rj584"
         },
         {
           "slug": "padel-4fvrzn",
-          "duplicate_of": "padel-4fvrzn-1781672459449"
+          "duplicate_of": "padel-1rj584"
         },
         {
           "slug": "futsal-1raaev",
@@ -3259,9 +3271,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 195,
-    "missing_fr_title": 195,
+    "missing_en_title": 199,
+    "missing_fr_title": 199,
     "sport_mismatches_fixed": 0,
-    "duplicates": 809
+    "duplicates": 812
   }
 }
