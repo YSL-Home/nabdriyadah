@@ -1,6 +1,6 @@
 {
   "date": "2026-08-19",
-  "fetchedAt": "2026-08-19T05:07:32.778Z",
+  "fetchedAt": "2026-08-19T06:03:18.638Z",
   "live": [
     {
       "fixture": {
@@ -1169,10 +1169,10 @@
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 67,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 7
         }
       },
       "league": {
@@ -1201,7 +1201,7 @@
       },
       "goals": {
         "home": 0,
-        "away": 1
+        "away": 2
       },
       "score": {
         "halftime": {
@@ -1209,8 +1209,8 @@
           "away": 1
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 2
         },
         "extratime": {
           "home": null,
@@ -1239,9 +1239,9 @@
           "city": "Quetzaltenango"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 68,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -1270,7 +1270,7 @@
         }
       },
       "goals": {
-        "home": 1,
+        "home": 2,
         "away": 0
       },
       "score": {
@@ -1279,8 +1279,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -1300,8 +1300,8 @@
         "date": "2026-08-19T03:00:00+00:00",
         "timestamp": 1787108400,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1787108400,
+          "second": 1787112000
         },
         "venue": {
           "id": null,
@@ -1309,9 +1309,9 @@
           "city": "Ba"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -1330,27 +1330,27 @@
           "id": 2537,
           "name": "Auckland City",
           "logo": "https://media.api-sports.io/football/teams/2537.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 4387,
           "name": "Rewa",
           "logo": "https://media.api-sports.io/football/teams/4387.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 3,
+        "away": 1
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -17534,76 +17534,6 @@
     },
     {
       "fixture": {
-        "id": 1604795,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-19T17:00:00+00:00",
-        "timestamp": 1787158800,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 667,
-        "name": "Friendlies Clubs",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/667.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Club Friendlies",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 9385,
-          "name": "Coruxo",
-          "logo": "https://media.api-sports.io/football/teams/9385.png",
-          "winner": null
-        },
-        "away": {
-          "id": 9407,
-          "name": "Pontevedra",
-          "logo": "https://media.api-sports.io/football/teams/9407.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
         "id": 1611948,
         "referee": null,
         "timezone": "UTC",
@@ -19536,6 +19466,76 @@
           "id": 7197,
           "name": "Manchester City U21",
           "logo": "https://media.api-sports.io/football/teams/7197.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1604795,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-19T18:00:00+00:00",
+        "timestamp": 1787162400,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 9385,
+          "name": "Coruxo",
+          "logo": "https://media.api-sports.io/football/teams/9385.png",
+          "winner": null
+        },
+        "away": {
+          "id": 9407,
+          "name": "Pontevedra",
+          "logo": "https://media.api-sports.io/football/teams/9407.png",
           "winner": null
         }
       },
