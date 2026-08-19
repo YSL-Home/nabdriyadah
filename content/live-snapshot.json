@@ -1,62 +1,62 @@
 {
   "date": "2026-08-19",
-  "fetchedAt": "2026-08-19T06:03:18.638Z",
+  "fetchedAt": "2026-08-19T08:26:00.223Z",
   "live": [
     {
       "fixture": {
-        "id": 1548361,
+        "id": 1611866,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-19T03:00:00+00:00",
-        "timestamp": 1787108400,
+        "date": "2026-08-19T08:00:00+00:00",
+        "timestamp": 1787126400,
         "periods": {
-          "first": 1787108400,
-          "second": 1787112000
+          "first": 1787126400,
+          "second": null
         },
         "venue": {
           "id": null,
-          "name": "Estadio Independencia",
+          "name": null,
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 67,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 20,
           "extra": null
         }
       },
       "league": {
-        "id": 1028,
-        "name": "CONCACAF Central American Cup",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/1028.png",
-        "flag": null,
+        "id": 1065,
+        "name": "U19 League",
+        "country": "Ukraine",
+        "logo": "https://media.api-sports.io/football/leagues/1065.png",
+        "flag": "https://media.api-sports.io/flags/ua.svg",
         "season": 2026,
-        "round": "Group Stage",
-        "standings": false
+        "round": "Regular Season - 3",
+        "standings": true
       },
       "teams": {
         "home": {
-          "id": 4645,
-          "name": "Real Estelí",
-          "logo": "https://media.api-sports.io/football/teams/4645.png",
-          "winner": false
+          "id": 23077,
+          "name": "LNZ Cherkasy U19",
+          "logo": "https://media.api-sports.io/football/teams/23077.png",
+          "winner": null
         },
         "away": {
-          "id": 815,
-          "name": "CS Herediano",
-          "logo": "https://media.api-sports.io/football/teams/815.png",
-          "winner": true
+          "id": 28083,
+          "name": "Lviv U19",
+          "logo": "https://media.api-sports.io/football/teams/28083.png",
+          "winner": null
         }
       },
       "goals": {
         "home": 0,
-        "away": 1
+        "away": 0
       },
       "score": {
         "halftime": {
           "home": 0,
-          "away": 1
+          "away": 0
         },
         "fulltime": {
           "home": null,
@@ -71,251 +71,123 @@
           "away": null
         }
       },
-      "events": [
-        {
-          "time": {
-            "elapsed": 21,
-            "extra": null
-          },
-          "team": {
-            "id": 815,
-            "name": "CS Herediano",
-            "logo": "https://media.api-sports.io/football/teams/815.png"
-          },
-          "player": {
-            "id": 2838,
-            "name": "E. Aguilar"
-          },
-          "assist": {
-            "id": 79686,
-            "name": "A. Murillo"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 26,
-            "extra": null
-          },
-          "team": {
-            "id": 815,
-            "name": "CS Herediano",
-            "logo": "https://media.api-sports.io/football/teams/815.png"
-          },
-          "player": {
-            "id": 270487,
-            "name": "H. Quiros"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 30,
-            "extra": null
-          },
-          "team": {
-            "id": 815,
-            "name": "CS Herediano",
-            "logo": "https://media.api-sports.io/football/teams/815.png"
-          },
-          "player": {
-            "id": 27623,
-            "name": "G. Montes"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 37,
-            "extra": null
-          },
-          "team": {
-            "id": 4645,
-            "name": "Real Estelí",
-            "logo": "https://media.api-sports.io/football/teams/4645.png"
-          },
-          "player": {
-            "id": 585838,
-            "name": "H. Aranda"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 44,
-            "extra": null
-          },
-          "team": {
-            "id": 4645,
-            "name": "Real Estelí",
-            "logo": "https://media.api-sports.io/football/teams/4645.png"
-          },
-          "player": {
-            "id": 585838,
-            "name": "H. Aranda"
-          },
-          "assist": {
-            "id": 113004,
-            "name": "A. Baez"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 4645,
-            "name": "Real Estelí",
-            "logo": "https://media.api-sports.io/football/teams/4645.png"
-          },
-          "player": {
-            "id": 586897,
-            "name": "J. Gutierrez"
-          },
-          "assist": {
-            "id": 113005,
-            "name": "J. Quijano"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 56,
-            "extra": null
-          },
-          "team": {
-            "id": 4645,
-            "name": "Real Estelí",
-            "logo": "https://media.api-sports.io/football/teams/4645.png"
-          },
-          "player": {
-            "id": 113005,
-            "name": "J. Quijano"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 60,
-            "extra": null
-          },
-          "team": {
-            "id": 4645,
-            "name": "Real Estelí",
-            "logo": "https://media.api-sports.io/football/teams/4645.png"
-          },
-          "player": {
-            "id": 585833,
-            "name": "E. Casado"
-          },
-          "assist": {
-            "id": 605302,
-            "name": "E. Castillo"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 60,
-            "extra": null
-          },
-          "team": {
-            "id": 4645,
-            "name": "Real Estelí",
-            "logo": "https://media.api-sports.io/football/teams/4645.png"
-          },
-          "player": {
-            "id": 113190,
-            "name": "O. Acevedo"
-          },
-          "assist": {
-            "id": 642206,
-            "name": "L. Moses"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        }
-      ]
+      "events": []
     },
     {
       "fixture": {
-        "id": 1548362,
+        "id": 1623316,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-19T03:00:00+00:00",
-        "timestamp": 1787108400,
+        "date": "2026-08-19T08:00:00+00:00",
+        "timestamp": 1787126400,
         "periods": {
-          "first": 1787108400,
-          "second": 1787112000
+          "first": 1787126400,
+          "second": null
         },
         "venue": {
           "id": null,
-          "name": "Estadio Mario Camposeco",
-          "city": "Quetzaltenango"
+          "name": null,
+          "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 68,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 25,
           "extra": null
         }
       },
       "league": {
-        "id": 1028,
-        "name": "CONCACAF Central American Cup",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/1028.png",
-        "flag": null,
+        "id": 102,
+        "name": "Emperor Cup",
+        "country": "Japan",
+        "logo": "https://media.api-sports.io/football/leagues/102.png",
+        "flag": "https://media.api-sports.io/flags/jp.svg",
         "season": 2026,
-        "round": "Group Stage",
+        "round": "1st Round",
         "standings": false
       },
       "teams": {
         "home": {
-          "id": 3667,
-          "name": "Xelajú",
-          "logo": "https://media.api-sports.io/football/teams/3667.png",
+          "id": 7116,
+          "name": "Arterivo Wakayama",
+          "logo": "https://media.api-sports.io/football/teams/7116.png",
+          "winner": null
+        },
+        "away": {
+          "id": 4314,
+          "name": "Azul Claro Numazu",
+          "logo": "https://media.api-sports.io/football/teams/4314.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1629012,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-19T08:00:00+00:00",
+        "timestamp": 1787126400,
+        "periods": {
+          "first": 1787126400,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 26,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 667,
+        "name": "Friendlies Clubs",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/667.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Club Friendlies",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 9691,
+          "name": "Elche II",
+          "logo": "https://media.api-sports.io/football/teams/9691.png",
           "winner": true
         },
         "away": {
-          "id": 4641,
-          "name": "Diriangén",
-          "logo": "https://media.api-sports.io/football/teams/4641.png",
+          "id": 5262,
+          "name": "FC Cartagena",
+          "logo": "https://media.api-sports.io/football/teams/5262.png",
           "winner": false
         }
       },
@@ -344,178 +216,24 @@
       "events": [
         {
           "time": {
-            "elapsed": 14,
+            "elapsed": 19,
             "extra": null
           },
           "team": {
-            "id": 4641,
-            "name": "Diriangén",
-            "logo": "https://media.api-sports.io/football/teams/4641.png"
+            "id": 9691,
+            "name": "Elche II",
+            "logo": "https://media.api-sports.io/football/teams/9691.png"
           },
           "player": {
-            "id": 586866,
-            "name": "E. Tellez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 16,
-            "extra": null
-          },
-          "team": {
-            "id": 3667,
-            "name": "Xelajú",
-            "logo": "https://media.api-sports.io/football/teams/3667.png"
-          },
-          "player": {
-            "id": 51379,
-            "name": "D. Casas"
+            "id": 655136,
+            "name": "M. Sciancalepore"
           },
           "assist": {
             "id": null,
             "name": null
           },
           "type": "Goal",
-          "detail": "Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 32,
-            "extra": null
-          },
-          "team": {
-            "id": 4641,
-            "name": "Diriangén",
-            "logo": "https://media.api-sports.io/football/teams/4641.png"
-          },
-          "player": {
-            "id": 13948,
-            "name": "C. Reyes"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 45,
-            "extra": 1
-          },
-          "team": {
-            "id": 3667,
-            "name": "Xelajú",
-            "logo": "https://media.api-sports.io/football/teams/3667.png"
-          },
-          "player": {
-            "id": 324113,
-            "name": "S. Cardenas"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 58,
-            "extra": null
-          },
-          "team": {
-            "id": 4641,
-            "name": "Diriangén",
-            "logo": "https://media.api-sports.io/football/teams/4641.png"
-          },
-          "player": {
-            "id": 669809,
-            "name": "W. Vasquez"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 61,
-            "extra": null
-          },
-          "team": {
-            "id": 3667,
-            "name": "Xelajú",
-            "logo": "https://media.api-sports.io/football/teams/3667.png"
-          },
-          "player": {
-            "id": 324113,
-            "name": "S. Cardenas"
-          },
-          "assist": {
-            "id": 531462,
-            "name": "Y. Jaen"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 65,
-            "extra": null
-          },
-          "team": {
-            "id": 3667,
-            "name": "Xelajú",
-            "logo": "https://media.api-sports.io/football/teams/3667.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 65,
-            "extra": null
-          },
-          "team": {
-            "id": 3667,
-            "name": "Xelajú",
-            "logo": "https://media.api-sports.io/football/teams/3667.png"
-          },
-          "player": {
-            "id": 64606,
-            "name": "J. Castaneda"
-          },
-          "assist": {
-            "id": 575565,
-            "name": "E. Gonzalez"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
+          "detail": "Normal Goal",
           "comments": null
         }
       ]
