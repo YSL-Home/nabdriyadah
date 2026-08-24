@@ -83,9 +83,15 @@ const leagueBranding = {
   }
 };
 
+function wordCount(text) {
+  return (text || "").replace(/<[^>]+>/g, "").trim().split(/\s+/).filter(Boolean).length;
+}
+
 export function generateStaticParams() {
   if (!articles.length) return [{ slug: "_placeholder" }];
-  return articles.map((article) => ({ slug: article.slug }));
+  return articles
+    .filter(a => a.slug && wordCount(a.content) >= 300)
+    .map(a => ({ slug: a.slug }));
 }
 
 export function generateMetadata({ params }) {
