@@ -1,6 +1,6 @@
 {
   "date": "2026-08-25",
-  "fetchedAt": "2026-08-25T03:13:16.871Z",
+  "fetchedAt": "2026-08-25T02:13:53.400Z",
   "live": [
     {
       "fixture": {
@@ -11,7 +11,7 @@
         "timestamp": 1787623200,
         "periods": {
           "first": 1787623200,
-          "second": 1787626800
+          "second": null
         },
         "venue": {
           "id": null,
@@ -19,9 +19,9 @@
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 51,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 11,
           "extra": null
         }
       },
@@ -40,22 +40,93 @@
           "id": 4020,
           "name": "Tacoma Defiance",
           "logo": "https://media.api-sports.io/football/teams/4020.png",
-          "winner": true
+          "winner": null
         },
         "away": {
           "id": 4019,
           "name": "Sporting KC II",
           "logo": "https://media.api-sports.io/football/teams/4019.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1549604,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-25T00:45:00+00:00",
+        "timestamp": 1787618700,
+        "periods": {
+          "first": 1787618700,
+          "second": 1787622300
+        },
+        "venue": {
+          "id": null,
+          "name": "Francisco Rivera Escobar",
+          "city": "Palmira"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 68,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 240,
+        "name": "Primera B",
+        "country": "Colombia",
+        "logo": "https://media.api-sports.io/football/leagues/240.png",
+        "flag": "https://media.api-sports.io/flags/co.svg",
+        "season": 2026,
+        "round": "Clausura - 6",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 23326,
+          "name": "Internacional Palmira",
+          "logo": "https://media.api-sports.io/football/teams/23326.png",
+          "winner": true
+        },
+        "away": {
+          "id": 1466,
+          "name": "Barranquilla",
+          "logo": "https://media.api-sports.io/football/teams/1466.png",
           "winner": false
         }
       },
       "goals": {
-        "home": 4,
-        "away": 1
+        "home": 1,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": 3,
+          "home": 1,
           "away": 0
         },
         "fulltime": {
@@ -74,21 +145,21 @@
       "events": [
         {
           "time": {
-            "elapsed": 11,
+            "elapsed": 8,
             "extra": null
           },
           "team": {
-            "id": 4020,
-            "name": "Tacoma Defiance",
-            "logo": "https://media.api-sports.io/football/teams/4020.png"
+            "id": 23326,
+            "name": "Internacional Palmira",
+            "logo": "https://media.api-sports.io/football/teams/23326.png"
           },
           "player": {
-            "id": 543304,
-            "name": "M. Bronnik"
+            "id": 538234,
+            "name": "K. Gonzalez"
           },
           "assist": {
-            "id": 266308,
-            "name": "R. Jauregui"
+            "id": null,
+            "name": null
           },
           "type": "Goal",
           "detail": "Normal Goal",
@@ -100,57 +171,13 @@
             "extra": null
           },
           "team": {
-            "id": 4020,
-            "name": "Tacoma Defiance",
-            "logo": "https://media.api-sports.io/football/teams/4020.png"
+            "id": 1466,
+            "name": "Barranquilla",
+            "logo": "https://media.api-sports.io/football/teams/1466.png"
           },
           "player": {
-            "id": 73864,
-            "name": "D. Robles"
-          },
-          "assist": {
-            "id": 458377,
-            "name": "M. Bell"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 19,
-            "extra": null
-          },
-          "team": {
-            "id": 4020,
-            "name": "Tacoma Defiance",
-            "logo": "https://media.api-sports.io/football/teams/4020.png"
-          },
-          "player": {
-            "id": 540774,
-            "name": "X. Gnaulati"
-          },
-          "assist": {
-            "id": 266308,
-            "name": "R. Jauregui"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 36,
-            "extra": null
-          },
-          "team": {
-            "id": 4019,
-            "name": "Sporting KC II",
-            "logo": "https://media.api-sports.io/football/teams/4019.png"
-          },
-          "player": {
-            "id": 541897,
-            "name": "G. Quintero"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
@@ -162,35 +189,333 @@
         },
         {
           "time": {
-            "elapsed": 46,
+            "elapsed": 36,
             "extra": null
           },
           "team": {
-            "id": 4019,
-            "name": "Sporting KC II",
-            "logo": "https://media.api-sports.io/football/teams/4019.png"
+            "id": 23326,
+            "name": "Internacional Palmira",
+            "logo": "https://media.api-sports.io/football/teams/23326.png"
           },
           "player": {
-            "id": 660888,
-            "name": "M. Ferguson"
+            "id": null,
+            "name": null
           },
           "assist": {
-            "id": 644128,
-            "name": "L. Antongirolami"
+            "id": null,
+            "name": null
           },
-          "type": "subst",
-          "detail": "Substitution 1",
+          "type": "Card",
+          "detail": "Yellow Card",
           "comments": null
         },
         {
           "time": {
-            "elapsed": 48,
+            "elapsed": 36,
             "extra": null
           },
           "team": {
-            "id": 4020,
-            "name": "Tacoma Defiance",
-            "logo": "https://media.api-sports.io/football/teams/4020.png"
+            "id": 1466,
+            "name": "Barranquilla",
+            "logo": "https://media.api-sports.io/football/teams/1466.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 40,
+            "extra": null
+          },
+          "team": {
+            "id": 23326,
+            "name": "Internacional Palmira",
+            "logo": "https://media.api-sports.io/football/teams/23326.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1583746,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-25T01:00:00+00:00",
+        "timestamp": 1787619600,
+        "periods": {
+          "first": 1787619600,
+          "second": 1787623200
+        },
+        "venue": {
+          "id": null,
+          "name": "Estadio Javier Cruz",
+          "city": "Panama City"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 57,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 304,
+        "name": "Liga Panameña de Fútbol",
+        "country": "Panama",
+        "logo": "https://media.api-sports.io/football/leagues/304.png",
+        "flag": "https://media.api-sports.io/flags/pa.svg",
+        "season": 2026,
+        "round": "Apertura - 5",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 2881,
+          "name": "Alianza FC",
+          "logo": "https://media.api-sports.io/football/teams/2881.png",
+          "winner": true
+        },
+        "away": {
+          "id": 2885,
+          "name": "Tauro FC",
+          "logo": "https://media.api-sports.io/football/teams/2885.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 5,
+            "extra": null
+          },
+          "team": {
+            "id": 2881,
+            "name": "Alianza FC",
+            "logo": "https://media.api-sports.io/football/teams/2881.png"
+          },
+          "player": {
+            "id": 535975,
+            "name": "M. Rodriguez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 2881,
+            "name": "Alianza FC",
+            "logo": "https://media.api-sports.io/football/teams/2881.png"
+          },
+          "player": {
+            "id": 535914,
+            "name": "A. Mendoza"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 16,
+            "extra": null
+          },
+          "team": {
+            "id": 2885,
+            "name": "Tauro FC",
+            "logo": "https://media.api-sports.io/football/teams/2885.png"
+          },
+          "player": {
+            "id": 536093,
+            "name": "K. Quintero"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 2885,
+            "name": "Tauro FC",
+            "logo": "https://media.api-sports.io/football/teams/2885.png"
+          },
+          "player": {
+            "id": 535827,
+            "name": "I. Hernandez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 39,
+            "extra": null
+          },
+          "team": {
+            "id": 2881,
+            "name": "Alianza FC",
+            "logo": "https://media.api-sports.io/football/teams/2881.png"
+          },
+          "player": {
+            "id": 535914,
+            "name": "A. Mendoza"
+          },
+          "assist": {
+            "id": 535844,
+            "name": "J. Asprilla"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1601413,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-25T01:00:00+00:00",
+        "timestamp": 1787619600,
+        "periods": {
+          "first": 1787619600,
+          "second": 1787623200
+        },
+        "venue": {
+          "id": null,
+          "name": "Estadio Coyella Fonseca",
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 55,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 163,
+        "name": "Liga de Ascenso",
+        "country": "Costa-Rica",
+        "logo": "https://media.api-sports.io/football/leagues/163.png",
+        "flag": "https://media.api-sports.io/flags/cr.svg",
+        "season": 2026,
+        "round": "Regular Season - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 821,
+          "name": "Guadalupe FC",
+          "logo": "https://media.api-sports.io/football/teams/821.png",
+          "winner": false
+        },
+        "away": {
+          "id": 814,
+          "name": "AD Carmelita",
+          "logo": "https://media.api-sports.io/football/teams/814.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 54,
+            "extra": null
+          },
+          "team": {
+            "id": 814,
+            "name": "AD Carmelita",
+            "logo": "https://media.api-sports.io/football/teams/814.png"
           },
           "player": {
             "id": null,
@@ -203,24 +528,162 @@
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1603335,
+        "referee": "A. C. Guarneros Lezama",
+        "timezone": "UTC",
+        "date": "2026-08-25T01:00:00+00:00",
+        "timestamp": 1787619600,
+        "periods": {
+          "first": 1787619600,
+          "second": 1787623200
         },
+        "venue": {
+          "id": 1071,
+          "name": "Estadio Jalisco",
+          "city": "Guadalajara"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 52,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 673,
+        "name": "Liga MX Femenil",
+        "country": "Mexico",
+        "logo": "https://media.api-sports.io/football/leagues/673.png",
+        "flag": "https://media.api-sports.io/flags/mx.svg",
+        "season": 2026,
+        "round": "Regular Season - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 14873,
+          "name": "Atlas W",
+          "logo": "https://media.api-sports.io/football/teams/14873.png",
+          "winner": true
+        },
+        "away": {
+          "id": 14872,
+          "name": "Tijuana W",
+          "logo": "https://media.api-sports.io/football/teams/14872.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
         {
           "time": {
-            "elapsed": 50,
+            "elapsed": 2,
             "extra": null
           },
           "team": {
-            "id": 4019,
-            "name": "Sporting KC II",
-            "logo": "https://media.api-sports.io/football/teams/4019.png"
+            "id": 14872,
+            "name": "Tijuana W",
+            "logo": "https://media.api-sports.io/football/teams/14872.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 554531,
+            "name": "K. Hancar"
+          },
+          "assist": {
+            "id": 554531,
+            "name": "K. Hancar"
+          },
+          "type": "Goal",
+          "detail": "Missed Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 21,
+            "extra": null
+          },
+          "team": {
+            "id": 14872,
+            "name": "Tijuana W",
+            "logo": "https://media.api-sports.io/football/teams/14872.png"
+          },
+          "player": {
+            "id": 554533,
+            "name": "N. Rojo"
+          },
+          "assist": {
+            "id": 571948,
+            "name": "A. M. Marroquin"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 14872,
+            "name": "Tijuana W",
+            "logo": "https://media.api-sports.io/football/teams/14872.png"
+          },
+          "player": {
+            "id": 545224,
+            "name": "F. Ibarra"
           },
           "assist": {
             "id": null,
             "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": null
+          },
+          "team": {
+            "id": 14873,
+            "name": "Atlas W",
+            "logo": "https://media.api-sports.io/football/teams/14873.png"
+          },
+          "player": {
+            "id": 653168,
+            "name": "A. Martinez"
+          },
+          "assist": {
+            "id": 634561,
+            "name": "V. Penuna"
           },
           "type": "Goal",
           "detail": "Normal Goal",
@@ -373,7 +836,7 @@
     {
       "fixture": {
         "id": 1493090,
-        "referee": "Sebastian Nicolas Martinez, Argentina",
+        "referee": "S. Martinez",
         "timezone": "UTC",
         "date": "2026-08-25T00:15:00+00:00",
         "timestamp": 1787616900,
@@ -383,7 +846,7 @@
         },
         "venue": {
           "id": null,
-          "name": "Mario Alberto Kempes",
+          "name": "Estadio Mario Alberto Kempes",
           "city": "Cordoba"
         },
         "status": {
@@ -457,10 +920,10 @@
           "city": "Palmira"
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 68,
+          "extra": null
         }
       },
       "league": {
@@ -497,8 +960,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": 1,
-          "away": 0
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -527,10 +990,10 @@
           "city": "Panama City"
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 4
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 57,
+          "extra": null
         }
       },
       "league": {
@@ -558,7 +1021,7 @@
         }
       },
       "goals": {
-        "home": 2,
+        "home": 1,
         "away": 0
       },
       "score": {
@@ -567,8 +1030,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": 2,
-          "away": 0
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -597,10 +1060,10 @@
           "city": null
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 55,
+          "extra": null
         }
       },
       "league": {
@@ -637,8 +1100,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": 0,
-          "away": 1
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -667,10 +1130,10 @@
           "city": "Guadalajara"
         },
         "status": {
-          "long": "Match Finished",
-          "short": "FT",
-          "elapsed": 90,
-          "extra": 6
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 52,
+          "extra": null
         }
       },
       "league": {
@@ -698,7 +1161,7 @@
         }
       },
       "goals": {
-        "home": 2,
+        "home": 1,
         "away": 0
       },
       "score": {
@@ -707,8 +1170,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": 2,
-          "away": 0
+          "home": null,
+          "away": null
         },
         "extratime": {
           "home": null,
@@ -729,7 +1192,7 @@
         "timestamp": 1787623200,
         "periods": {
           "first": 1787623200,
-          "second": 1787626800
+          "second": null
         },
         "venue": {
           "id": null,
@@ -737,9 +1200,9 @@
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 51,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 11,
           "extra": null
         }
       },
@@ -758,22 +1221,22 @@
           "id": 4020,
           "name": "Tacoma Defiance",
           "logo": "https://media.api-sports.io/football/teams/4020.png",
-          "winner": true
+          "winner": null
         },
         "away": {
           "id": 4019,
           "name": "Sporting KC II",
           "logo": "https://media.api-sports.io/football/teams/4019.png",
-          "winner": false
+          "winner": null
         }
       },
       "goals": {
-        "home": 4,
-        "away": 1
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": 3,
+          "home": 0,
           "away": 0
         },
         "fulltime": {
