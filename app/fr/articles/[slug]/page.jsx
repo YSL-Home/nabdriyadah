@@ -5,7 +5,7 @@ import ArticleImage from "../../../components/ArticleImage";
 import AdSlot from "../../../components/AdSlot";
 
 export function generateStaticParams() {
-  return [];
+  return [{ slug: "_placeholder" }];
 }
 
 export function generateMetadata({ params }) {
