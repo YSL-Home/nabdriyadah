@@ -1,61 +1,155 @@
 {
   "date": "2026-08-26",
-  "fetchedAt": "2026-08-26T12:01:40.403Z",
+  "fetchedAt": "2026-08-26T13:14:00.772Z",
   "live": [
     {
       "fixture": {
-        "id": 1507043,
-        "referee": "Dong Jun Lee, South Korea",
+        "id": 1507425,
+        "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-26T10:30:00+00:00",
-        "timestamp": 1787740200,
+        "date": "2026-08-26T12:30:00+00:00",
+        "timestamp": 1787747400,
         "periods": {
-          "first": 1787740200,
-          "second": 1787743800
+          "first": 1787747400,
+          "second": null
         },
         "venue": {
-          "id": 1003,
-          "name": "Anyang Stadium",
-          "city": "Anyang"
+          "id": null,
+          "name": "Shevardeni Stadium",
+          "city": "Tbilisi"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 70,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 40,
           "extra": null
         }
       },
       "league": {
-        "id": 292,
-        "name": "K League 1",
-        "country": "South-Korea",
-        "logo": "https://media.api-sports.io/football/leagues/292.png",
-        "flag": "https://media.api-sports.io/flags/kr.svg",
+        "id": 1104,
+        "name": "Liga 3",
+        "country": "Georgia",
+        "logo": "https://media.api-sports.io/football/leagues/1104.png",
+        "flag": "https://media.api-sports.io/flags/ge.svg",
         "season": 2026,
-        "round": "Regular Season - 25",
+        "round": "Regular Season - 19",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 2748,
-          "name": "FC Anyang",
-          "logo": "https://media.api-sports.io/football/teams/2748.png",
-          "winner": null
+          "id": 3504,
+          "name": "WIT Georgia",
+          "logo": "https://media.api-sports.io/football/teams/3504.png",
+          "winner": true
         },
         "away": {
-          "id": 2763,
-          "name": "Incheon United",
-          "logo": "https://media.api-sports.io/football/teams/2763.png",
-          "winner": null
+          "id": 16505,
+          "name": "Iberia 2010",
+          "logo": "https://media.api-sports.io/football/teams/16505.png",
+          "winner": false
         }
       },
       "goals": {
         "home": 1,
-        "away": 1
+        "away": 0
       },
       "score": {
         "halftime": {
           "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 22,
+            "extra": null
+          },
+          "team": {
+            "id": 3504,
+            "name": "WIT Georgia",
+            "logo": "https://media.api-sports.io/football/teams/3504.png"
+          },
+          "player": {
+            "id": 560566,
+            "name": "Z. Betsukeli"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1565131,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-26T13:00:00+00:00",
+        "timestamp": 1787749200,
+        "periods": {
+          "first": 1787749200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 13,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 668,
+        "name": "1. Liga U19",
+        "country": "Czech-Republic",
+        "logo": "https://media.api-sports.io/football/leagues/668.png",
+        "flag": "https://media.api-sports.io/flags/cz.svg",
+        "season": 2026,
+        "round": "Regular Season - 11",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 14840,
+          "name": "Zlín U19",
+          "logo": "https://media.api-sports.io/football/teams/14840.png",
+          "winner": false
+        },
+        "away": {
+          "id": 14836,
+          "name": "Pardubice U19",
+          "logo": "https://media.api-sports.io/football/teams/14836.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
           "away": 1
         },
         "fulltime": {
@@ -74,105 +168,17 @@
       "events": [
         {
           "time": {
-            "elapsed": 18,
+            "elapsed": 12,
             "extra": null
           },
           "team": {
-            "id": 2763,
-            "name": "Incheon United",
-            "logo": "https://media.api-sports.io/football/teams/2763.png"
+            "id": 14836,
+            "name": "Pardubice U19",
+            "logo": "https://media.api-sports.io/football/teams/14836.png"
           },
           "player": {
-            "id": null,
-            "name": "L. Myung-joo"
-          },
-          "assist": {
             "id": null,
             "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 30,
-            "extra": null
-          },
-          "team": {
-            "id": 2748,
-            "name": "FC Anyang",
-            "logo": "https://media.api-sports.io/football/teams/2748.png"
-          },
-          "player": {
-            "id": 128538,
-            "name": "K. Han"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 40,
-            "extra": null
-          },
-          "team": {
-            "id": 2763,
-            "name": "Incheon United",
-            "logo": "https://media.api-sports.io/football/teams/2763.png"
-          },
-          "player": {
-            "id": 547230,
-            "name": "Lee Dong-Ryul"
-          },
-          "assist": {
-            "id": 547281,
-            "name": "Kim Young-whan"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 45,
-            "extra": 1
-          },
-          "team": {
-            "id": 2748,
-            "name": "FC Anyang",
-            "logo": "https://media.api-sports.io/football/teams/2748.png"
-          },
-          "player": {
-            "id": 9718,
-            "name": "Matheus Oliveira"
-          },
-          "assist": {
-            "id": 9718,
-            "name": "Matheus Oliveira"
-          },
-          "type": "Goal",
-          "detail": "Missed Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 45,
-            "extra": 1
-          },
-          "team": {
-            "id": 2748,
-            "name": "FC Anyang",
-            "logo": "https://media.api-sports.io/football/teams/2748.png"
-          },
-          "player": {
-            "id": 9718,
-            "name": "Matheus Oliveira"
           },
           "assist": {
             "id": null,
@@ -180,164 +186,54 @@
           },
           "type": "Goal",
           "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 2763,
-            "name": "Incheon United",
-            "logo": "https://media.api-sports.io/football/teams/2763.png"
-          },
-          "player": {
-            "id": 547281,
-            "name": "Kim Young-whan"
-          },
-          "assist": {
-            "id": 2905,
-            "name": "Lee Chung-Yong"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 53,
-            "extra": null
-          },
-          "team": {
-            "id": 2763,
-            "name": "Incheon United",
-            "logo": "https://media.api-sports.io/football/teams/2763.png"
-          },
-          "player": {
-            "id": 51267,
-            "name": "Gerso"
-          },
-          "assist": {
-            "id": 77860,
-            "name": "Leandro Ribeiro"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 53,
-            "extra": null
-          },
-          "team": {
-            "id": 2763,
-            "name": "Incheon United",
-            "logo": "https://media.api-sports.io/football/teams/2763.png"
-          },
-          "player": {
-            "id": 20445,
-            "name": "M. Ferrier"
-          },
-          "assist": {
-            "id": 34822,
-            "name": "S. Mugosa"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 57,
-            "extra": null
-          },
-          "team": {
-            "id": 2763,
-            "name": "Incheon United",
-            "logo": "https://media.api-sports.io/football/teams/2763.png"
-          },
-          "player": {
-            "id": 46906,
-            "name": "Ibiza"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 64,
-            "extra": null
-          },
-          "team": {
-            "id": 2748,
-            "name": "FC Anyang",
-            "logo": "https://media.api-sports.io/football/teams/2748.png"
-          },
-          "player": {
-            "id": 128538,
-            "name": "K. Han"
-          },
-          "assist": {
-            "id": 34617,
-            "name": "Kim Jung-Hyun"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
           "comments": null
         }
       ]
     },
     {
       "fixture": {
-        "id": 1507044,
-        "referee": "Yong-jun Shin, South Korea",
+        "id": 1601147,
+        "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-26T10:30:00+00:00",
-        "timestamp": 1787740200,
+        "date": "2026-08-26T13:00:00+00:00",
+        "timestamp": 1787749200,
         "periods": {
-          "first": 1787740200,
-          "second": 1787743800
+          "first": 1787749200,
+          "second": null
         },
         "venue": {
-          "id": 1008,
-          "name": "Daejeon World Cup Stadium",
-          "city": "Daejeon"
+          "id": null,
+          "name": "KLFA Stadium",
+          "city": "Kuala Lumpur"
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 70,
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 14,
           "extra": null
         }
       },
       "league": {
-        "id": 292,
-        "name": "K League 1",
-        "country": "South-Korea",
-        "logo": "https://media.api-sports.io/football/leagues/292.png",
-        "flag": "https://media.api-sports.io/flags/kr.svg",
+        "id": 278,
+        "name": "Super League",
+        "country": "Malaysia",
+        "logo": "https://media.api-sports.io/football/leagues/278.png",
+        "flag": "https://media.api-sports.io/flags/my.svg",
         "season": 2026,
-        "round": "Regular Season - 25",
+        "round": "Regular Season - 6",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 2750,
-          "name": "Daejeon Citizen",
-          "logo": "https://media.api-sports.io/football/teams/2750.png",
+          "id": 2517,
+          "name": "Kuala Lumpur FA",
+          "logo": "https://media.api-sports.io/football/teams/2517.png",
           "winner": false
         },
         "away": {
-          "id": 2767,
-          "name": "Ulsan Hyundai FC",
-          "logo": "https://media.api-sports.io/football/teams/2767.png",
+          "id": 10108,
+          "name": "Kuching FA",
+          "logo": "https://media.api-sports.io/football/teams/10108.png",
           "winner": true
         }
       },
@@ -348,7 +244,7 @@
       "score": {
         "halftime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -366,83 +262,17 @@
       "events": [
         {
           "time": {
-            "elapsed": 46,
+            "elapsed": 4,
             "extra": null
           },
           "team": {
-            "id": 2750,
-            "name": "Daejeon Citizen",
-            "logo": "https://media.api-sports.io/football/teams/2750.png"
+            "id": 10108,
+            "name": "Kuching FA",
+            "logo": "https://media.api-sports.io/football/teams/10108.png"
           },
           "player": {
-            "id": 2912,
-            "name": "Kim Moon-Hwan"
-          },
-          "assist": {
-            "id": 34772,
-            "name": "Kang Yun-Sung"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 2750,
-            "name": "Daejeon Citizen",
-            "logo": "https://media.api-sports.io/football/teams/2750.png"
-          },
-          "player": {
-            "id": 197524,
-            "name": "Diogo Oliveira"
-          },
-          "assist": {
-            "id": 34427,
-            "name": "Joo Min-Kyu"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 48,
-            "extra": null
-          },
-          "team": {
-            "id": 2767,
-            "name": "Ulsan Hyundai FC",
-            "logo": "https://media.api-sports.io/football/teams/2767.png"
-          },
-          "player": {
-            "id": 37877,
-            "name": "T. Oude Kotte"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 49,
-            "extra": null
-          },
-          "team": {
-            "id": 2767,
-            "name": "Ulsan Hyundai FC",
-            "logo": "https://media.api-sports.io/football/teams/2767.png"
-          },
-          "player": {
-            "id": 2907,
-            "name": "Lee Jin-Hyun"
+            "id": 532238,
+            "name": "P. Shitembi"
           },
           "assist": {
             "id": null,
@@ -451,443 +281,19 @@
           "type": "Goal",
           "detail": "Normal Goal",
           "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 51,
-            "extra": null
-          },
-          "team": {
-            "id": 2750,
-            "name": "Daejeon Citizen",
-            "logo": "https://media.api-sports.io/football/teams/2750.png"
-          },
-          "player": {
-            "id": 34427,
-            "name": "Joo Min-Kyu"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 59,
-            "extra": null
-          },
-          "team": {
-            "id": 2767,
-            "name": "Ulsan Hyundai FC",
-            "logo": "https://media.api-sports.io/football/teams/2767.png"
-          },
-          "player": {
-            "id": 146018,
-            "name": "Erick Farias"
-          },
-          "assist": {
-            "id": 34149,
-            "name": "H. Lee"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 59,
-            "extra": null
-          },
-          "team": {
-            "id": 2767,
-            "name": "Ulsan Hyundai FC",
-            "logo": "https://media.api-sports.io/football/teams/2767.png"
-          },
-          "player": {
-            "id": 403576,
-            "name": "Jang Si-Young"
-          },
-          "assist": {
-            "id": 34586,
-            "name": "Sim Sang-Min"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 64,
-            "extra": null
-          },
-          "team": {
-            "id": 2750,
-            "name": "Daejeon Citizen",
-            "logo": "https://media.api-sports.io/football/teams/2750.png"
-          },
-          "player": {
-            "id": 91772,
-            "name": "M. Ishida"
-          },
-          "assist": {
-            "id": 47706,
-            "name": "G. Ludwigson"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 65,
-            "extra": null
-          },
-          "team": {
-            "id": 2767,
-            "name": "Ulsan Hyundai FC",
-            "logo": "https://media.api-sports.io/football/teams/2767.png"
-          },
-          "player": {
-            "id": 2890,
-            "name": "Jo Hyeon-Woo"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
         }
       ]
     },
     {
       "fixture": {
-        "id": 1507045,
-        "referee": "Woo-Sung Kim, South Korea",
-        "timezone": "UTC",
-        "date": "2026-08-26T10:30:00+00:00",
-        "timestamp": 1787740200,
-        "periods": {
-          "first": 1787740200,
-          "second": 1787743800
-        },
-        "venue": {
-          "id": 1009,
-          "name": "Chuncheon Songam Stadium",
-          "city": "Chuncheon"
-        },
-        "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 71,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 292,
-        "name": "K League 1",
-        "country": "South-Korea",
-        "logo": "https://media.api-sports.io/football/leagues/292.png",
-        "flag": "https://media.api-sports.io/flags/kr.svg",
-        "season": 2026,
-        "round": "Regular Season - 25",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 2746,
-          "name": "Gangwon FC",
-          "logo": "https://media.api-sports.io/football/teams/2746.png",
-          "winner": false
-        },
-        "away": {
-          "id": 2759,
-          "name": "Gwangju FC",
-          "logo": "https://media.api-sports.io/football/teams/2759.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 2
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 2
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 5,
-            "extra": null
-          },
-          "team": {
-            "id": 2759,
-            "name": "Gwangju FC",
-            "logo": "https://media.api-sports.io/football/teams/2759.png"
-          },
-          "player": {
-            "id": 453968,
-            "name": "Moon Min-seo"
-          },
-          "assist": {
-            "id": 66205,
-            "name": "A. Ba Loua"
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 22,
-            "extra": null
-          },
-          "team": {
-            "id": 2746,
-            "name": "Gangwon FC",
-            "logo": "https://media.api-sports.io/football/teams/2746.png"
-          },
-          "player": {
-            "id": 201279,
-            "name": "Goh Young-Jun"
-          },
-          "assist": {
-            "id": 403349,
-            "name": "Lee Seung-Won"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 45,
-            "extra": null
-          },
-          "team": {
-            "id": 2759,
-            "name": "Gwangju FC",
-            "logo": "https://media.api-sports.io/football/teams/2759.png"
-          },
-          "player": {
-            "id": 453968,
-            "name": "Moon Min-seo"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Penalty",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 46,
-            "extra": null
-          },
-          "team": {
-            "id": 2759,
-            "name": "Gwangju FC",
-            "logo": "https://media.api-sports.io/football/teams/2759.png"
-          },
-          "player": {
-            "id": 653115,
-            "name": "Y. Kim"
-          },
-          "assist": {
-            "id": 2902,
-            "name": "Ju Se-Jong"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 53,
-            "extra": null
-          },
-          "team": {
-            "id": 2759,
-            "name": "Gwangju FC",
-            "logo": "https://media.api-sports.io/football/teams/2759.png"
-          },
-          "player": {
-            "id": 34685,
-            "name": "Min Sang-Gi"
-          },
-          "assist": {
-            "id": 34636,
-            "name": "Im Seung-Kyum"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 57,
-            "extra": null
-          },
-          "team": {
-            "id": 2746,
-            "name": "Gangwon FC",
-            "logo": "https://media.api-sports.io/football/teams/2746.png"
-          },
-          "player": {
-            "id": 304960,
-            "name": "Park Sang-Hyeok"
-          },
-          "assist": {
-            "id": 34556,
-            "name": "Kim Gun-Hee"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 57,
-            "extra": null
-          },
-          "team": {
-            "id": 2746,
-            "name": "Gangwon FC",
-            "logo": "https://media.api-sports.io/football/teams/2746.png"
-          },
-          "player": {
-            "id": 301577,
-            "name": "Y. Kang"
-          },
-          "assist": {
-            "id": 62204,
-            "name": "J. Sekidika"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 66,
-            "extra": null
-          },
-          "team": {
-            "id": 2759,
-            "name": "Gwangju FC",
-            "logo": "https://media.api-sports.io/football/teams/2759.png"
-          },
-          "player": {
-            "id": 667472,
-            "name": "Kim Woo-jin"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 68,
-            "extra": null
-          },
-          "team": {
-            "id": 2759,
-            "name": "Gwangju FC",
-            "logo": "https://media.api-sports.io/football/teams/2759.png"
-          },
-          "player": {
-            "id": 403362,
-            "name": "Joung Ji-hun"
-          },
-          "assist": {
-            "id": 177649,
-            "name": "J. Iredale"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 68,
-            "extra": null
-          },
-          "team": {
-            "id": 2759,
-            "name": "Gwangju FC",
-            "logo": "https://media.api-sports.io/football/teams/2759.png"
-          },
-          "player": {
-            "id": 667472,
-            "name": "Kim Woo-jin"
-          },
-          "assist": {
-            "id": 57162,
-            "name": "H. Fridjonsson"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 69,
-            "extra": null
-          },
-          "team": {
-            "id": 2746,
-            "name": "Gangwon FC",
-            "logo": "https://media.api-sports.io/football/teams/2746.png"
-          },
-          "player": {
-            "id": 2894,
-            "name": "Hong Chul"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Red Card",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1611746,
+        "id": 1611744,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-26T10:00:00+00:00",
-        "timestamp": 1787738400,
+        "date": "2026-08-26T13:00:00+00:00",
+        "timestamp": 1787749200,
         "periods": {
-          "first": 1787738400,
-          "second": 1787742000
+          "first": 1787749200,
+          "second": null
         },
         "venue": {
           "id": null,
@@ -895,10 +301,10 @@
           "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 90,
-          "extra": 6
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 14,
+          "extra": null
         }
       },
       "league": {
@@ -913,26 +319,97 @@
       },
       "teams": {
         "home": {
-          "id": 23081,
-          "name": "Oleksandria U19",
-          "logo": "https://media.api-sports.io/football/teams/23081.png",
-          "winner": true
+          "id": 25118,
+          "name": "Livyi Bereh U19",
+          "logo": "https://media.api-sports.io/football/teams/25118.png",
+          "winner": null
         },
         "away": {
-          "id": 24177,
-          "name": "Karpaty Lviv U19",
-          "logo": "https://media.api-sports.io/football/teams/24177.png",
-          "winner": false
+          "id": 23075,
+          "name": "Kolos Kovalivka U19",
+          "logo": "https://media.api-sports.io/football/teams/23075.png",
+          "winner": null
         }
       },
       "goals": {
-        "home": 2,
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1630226,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-26T13:00:00+00:00",
+        "timestamp": 1787749200,
+        "periods": {
+          "first": 1787749200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "My Dinh National Stadium",
+          "city": "Hanoi"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 13,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 24,
+        "name": "ASEAN Championship",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/24.png",
+        "flag": null,
+        "season": 2025,
+        "round": "Final",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 1542,
+          "name": "Vietnam",
+          "logo": "https://media.api-sports.io/football/teams/1542.png",
+          "winner": false
+        },
+        "away": {
+          "id": 1564,
+          "name": "Thailand",
+          "logo": "https://media.api-sports.io/football/teams/1564.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
         "away": 1
       },
       "score": {
         "halftime": {
-          "home": 1,
-          "away": 0
+          "home": 0,
+          "away": 1
         },
         "fulltime": {
           "home": null,
@@ -950,65 +427,43 @@
       "events": [
         {
           "time": {
-            "elapsed": 24,
+            "elapsed": 10,
             "extra": null
           },
           "team": {
-            "id": 23081,
-            "name": "Oleksandria U19",
-            "logo": "https://media.api-sports.io/football/teams/23081.png"
+            "id": 1542,
+            "name": "Vietnam",
+            "logo": "https://media.api-sports.io/football/teams/1542.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 207972,
+            "name": "Nguyen Van Vi"
           },
           "assist": {
-            "id": null,
-            "name": null
+            "id": 531473,
+            "name": "T. T. Phan"
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
+          "type": "subst",
+          "detail": "Substitution 1",
           "comments": null
         },
         {
           "time": {
-            "elapsed": 87,
+            "elapsed": 12,
             "extra": null
           },
           "team": {
-            "id": 24177,
-            "name": "Karpaty Lviv U19",
-            "logo": "https://media.api-sports.io/football/teams/24177.png"
+            "id": 1564,
+            "name": "Thailand",
+            "logo": "https://media.api-sports.io/football/teams/1564.png"
           },
           "player": {
-            "id": null,
-            "name": null
+            "id": 380758,
+            "name": "Y. Burapha"
           },
           "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 90,
-            "extra": 2
-          },
-          "team": {
-            "id": 23081,
-            "name": "Oleksandria U19",
-            "logo": "https://media.api-sports.io/football/teams/23081.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
-          },
-          "assist": {
-            "id": null,
-            "name": null
+            "id": 357906,
+            "name": "S. Ratree"
           },
           "type": "Goal",
           "detail": "Normal Goal",
@@ -1018,14 +473,14 @@
     },
     {
       "fixture": {
-        "id": 1627496,
+        "id": 1588812,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-26T11:00:00+00:00",
-        "timestamp": 1787742000,
+        "date": "2026-08-26T12:00:00+00:00",
+        "timestamp": 1787745600,
         "periods": {
-          "first": 1787742000,
-          "second": 1787745600
+          "first": 1787745600,
+          "second": 1787749200
         },
         "venue": {
           "id": null,
@@ -1035,184 +490,42 @@
         "status": {
           "long": "Second Half",
           "short": "2H",
-          "elapsed": 46,
+          "elapsed": 55,
           "extra": null
         }
       },
       "league": {
-        "id": 237,
+        "id": 709,
         "name": "Cup",
-        "country": "Russia",
-        "logo": "https://media.api-sports.io/football/leagues/237.png",
-        "flag": "https://media.api-sports.io/flags/ru.svg",
+        "country": "Armenia",
+        "logo": "https://media.api-sports.io/football/leagues/709.png",
+        "flag": "https://media.api-sports.io/flags/am.svg",
         "season": 2026,
-        "round": "Regions Path - 3rd Round",
+        "round": "Round of 32",
         "standings": false
       },
       "teams": {
         "home": {
-          "id": 6818,
-          "name": "Nosta",
-          "logo": "https://media.api-sports.io/football/teams/6818.png",
-          "winner": null
+          "id": 6281,
+          "name": "Lernayin Artsakh",
+          "logo": "https://media.api-sports.io/football/teams/6281.png",
+          "winner": true
         },
         "away": {
-          "id": 1995,
-          "name": "FK Sokol Saratov",
-          "logo": "https://media.api-sports.io/football/teams/1995.png",
-          "winner": null
+          "id": 22562,
+          "name": "Ecoville",
+          "logo": "https://media.api-sports.io/football/teams/22562.png",
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 2,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 2,
           "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1623342,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-26T10:00:00+00:00",
-        "timestamp": 1787738400,
-        "periods": {
-          "first": 1787738400,
-          "second": 1787742000
-        },
-        "venue": {
-          "id": null,
-          "name": "Iwaki Greenfield",
-          "city": "Iwaki"
-        },
-        "status": {
-          "long": "Break Time",
-          "short": "BT",
-          "elapsed": null,
-          "extra": 1
-        }
-      },
-      "league": {
-        "id": 102,
-        "name": "Emperor Cup",
-        "country": "Japan",
-        "logo": "https://media.api-sports.io/football/leagues/102.png",
-        "flag": "https://media.api-sports.io/flags/jp.svg",
-        "season": 2026,
-        "round": "2nd Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 7127,
-          "name": "Iwaki",
-          "logo": "https://media.api-sports.io/football/teams/7127.png",
-          "winner": null
-        },
-        "away": {
-          "id": 298,
-          "name": "Oita Trinita",
-          "logo": "https://media.api-sports.io/football/teams/298.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1623344,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-26T10:00:00+00:00",
-        "timestamp": 1787738400,
-        "periods": {
-          "first": 1787738400,
-          "second": 1787742000
-        },
-        "venue": {
-          "id": null,
-          "name": "ND Soft Stadium Yamagata",
-          "city": "Tendo"
-        },
-        "status": {
-          "long": "Break Time",
-          "short": "BT",
-          "elapsed": null,
-          "extra": 5
-        }
-      },
-      "league": {
-        "id": 102,
-        "name": "Emperor Cup",
-        "country": "Japan",
-        "logo": "https://media.api-sports.io/football/leagues/102.png",
-        "flag": "https://media.api-sports.io/flags/jp.svg",
-        "season": 2026,
-        "round": "2nd Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 312,
-          "name": "Montedio Yamagata",
-          "logo": "https://media.api-sports.io/football/teams/312.png",
-          "winner": null
-        },
-        "away": {
-          "id": 4317,
-          "name": "Fujieda MYFC",
-          "logo": "https://media.api-sports.io/football/teams/4317.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 3,
-        "away": 3
-      },
-      "score": {
-        "halftime": {
-          "home": 3,
-          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -1230,39 +543,17 @@
       "events": [
         {
           "time": {
-            "elapsed": 7,
+            "elapsed": 2,
             "extra": null
           },
           "team": {
-            "id": 4317,
-            "name": "Fujieda MYFC",
-            "logo": "https://media.api-sports.io/football/teams/4317.png"
+            "id": 6281,
+            "name": "Lernayin Artsakh",
+            "logo": "https://media.api-sports.io/football/teams/6281.png"
           },
           "player": {
-            "id": 581811,
-            "name": "W. Kanemoto"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 13,
-            "extra": null
-          },
-          "team": {
-            "id": 4317,
-            "name": "Fujieda MYFC",
-            "logo": "https://media.api-sports.io/football/teams/4317.png"
-          },
-          "player": {
-            "id": 33598,
-            "name": "S. Nakagawa"
+            "id": 453423,
+            "name": "V. Baloyi"
           },
           "assist": {
             "id": null,
@@ -1278,13 +569,151 @@
             "extra": null
           },
           "team": {
-            "id": 312,
-            "name": "Montedio Yamagata",
-            "logo": "https://media.api-sports.io/football/teams/312.png"
+            "id": 6281,
+            "name": "Lernayin Artsakh",
+            "logo": "https://media.api-sports.io/football/teams/6281.png"
           },
           "player": {
-            "id": 351086,
-            "name": "R. Yokoyama"
+            "id": 453423,
+            "name": "V. Baloyi"
+          },
+          "assist": {
+            "id": 453423,
+            "name": "Sepehrekran"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 51,
+            "extra": null
+          },
+          "team": {
+            "id": 22562,
+            "name": "Ecoville",
+            "logo": "https://media.api-sports.io/football/teams/22562.png"
+          },
+          "player": {
+            "id": 453423,
+            "name": "H. Gevorgyan"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1588813,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-26T12:00:00+00:00",
+        "timestamp": 1787745600,
+        "periods": {
+          "first": 1787745600,
+          "second": 1787749200
+        },
+        "venue": {
+          "id": null,
+          "name": "MIKA Stadium",
+          "city": "Yerevan"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 53,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 709,
+        "name": "Cup",
+        "country": "Armenia",
+        "logo": "https://media.api-sports.io/football/leagues/709.png",
+        "flag": "https://media.api-sports.io/flags/am.svg",
+        "season": 2026,
+        "round": "Round of 32",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 11174,
+          "name": "Mika",
+          "logo": "https://media.api-sports.io/football/teams/11174.png",
+          "winner": true
+        },
+        "away": {
+          "id": 24965,
+          "name": "Bentonit Ijevan",
+          "logo": "https://media.api-sports.io/football/teams/24965.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 9,
+            "extra": null
+          },
+          "team": {
+            "id": 11174,
+            "name": "Mika",
+            "logo": "https://media.api-sports.io/football/teams/11174.png"
+          },
+          "player": {
+            "id": 676527,
+            "name": "A. Mekkaoui"
+          },
+          "assist": {
+            "id": 65428,
+            "name": "A. Jindoyan"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 11174,
+            "name": "Mika",
+            "logo": "https://media.api-sports.io/football/teams/11174.png"
+          },
+          "player": {
+            "id": null,
+            "name": "H. Hovsepyan"
           },
           "assist": {
             "id": null,
@@ -1296,46 +725,90 @@
         },
         {
           "time": {
-            "elapsed": 18,
+            "elapsed": 25,
             "extra": null
           },
           "team": {
-            "id": 312,
-            "name": "Montedio Yamagata",
-            "logo": "https://media.api-sports.io/football/teams/312.png"
+            "id": 11174,
+            "name": "Mika",
+            "logo": "https://media.api-sports.io/football/teams/11174.png"
           },
           "player": {
-            "id": 289884,
-            "name": "K. Mori"
+            "id": 65428,
+            "name": "A. Jindoyan"
           },
           "assist": {
-            "id": null,
-            "name": null
+            "id": 65428,
+            "name": "A. Jindoyan"
           },
           "type": "Goal",
-          "detail": "Normal Goal",
+          "detail": "Missed Penalty",
           "comments": null
         },
         {
           "time": {
-            "elapsed": 35,
+            "elapsed": 39,
             "extra": null
           },
           "team": {
-            "id": 312,
-            "name": "Montedio Yamagata",
-            "logo": "https://media.api-sports.io/football/teams/312.png"
+            "id": 24965,
+            "name": "Bentonit Ijevan",
+            "logo": "https://media.api-sports.io/football/teams/24965.png"
           },
           "player": {
-            "id": 33376,
-            "name": "Yoshio Kaina"
+            "id": 540601,
+            "name": "A. Valpeters"
           },
           "assist": {
             "id": null,
             "name": null
           },
           "type": "Goal",
-          "detail": "Normal Goal",
+          "detail": "Own Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 24965,
+            "name": "Bentonit Ijevan",
+            "logo": "https://media.api-sports.io/football/teams/24965.png"
+          },
+          "player": {
+            "id": null,
+            "name": "A. Kirakosyan"
+          },
+          "assist": {
+            "id": null,
+            "name": "A. Arakelyan"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 24965,
+            "name": "Bentonit Ijevan",
+            "logo": "https://media.api-sports.io/football/teams/24965.png"
+          },
+          "player": {
+            "id": null,
+            "name": "A. Karapetyan"
+          },
+          "assist": {
+            "id": 453423,
+            "name": "A. Porghosyan"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
           "comments": null
         },
         {
@@ -1344,545 +817,78 @@
             "extra": null
           },
           "team": {
-            "id": 4317,
-            "name": "Fujieda MYFC",
-            "logo": "https://media.api-sports.io/football/teams/4317.png"
+            "id": 11174,
+            "name": "Mika",
+            "logo": "https://media.api-sports.io/football/teams/11174.png"
           },
           "player": {
-            "id": 639506,
-            "name": "Y. Tsunoda"
+            "id": null,
+            "name": null
           },
           "assist": {
             "id": null,
             "name": null
           },
-          "type": "Goal",
-          "detail": "Normal Goal",
+          "type": "Card",
+          "detail": "Yellow Card",
           "comments": null
         }
       ]
     },
     {
       "fixture": {
-        "id": 1630758,
+        "id": 1611747,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-08-26T10:00:00+00:00",
-        "timestamp": 1787738400,
+        "date": "2026-08-26T12:00:00+00:00",
+        "timestamp": 1787745600,
         "periods": {
-          "first": 1787738400,
-          "second": 1787742000
+          "first": 1787745600,
+          "second": 1787749200
         },
         "venue": {
-          "id": 962,
-          "name": "Fukuda Denshi Arena",
-          "city": "Chiba"
+          "id": null,
+          "name": null,
+          "city": null
         },
         "status": {
-          "long": "Break Time",
-          "short": "BT",
-          "elapsed": null,
-          "extra": 6
-        }
-      },
-      "league": {
-        "id": 102,
-        "name": "Emperor Cup",
-        "country": "Japan",
-        "logo": "https://media.api-sports.io/football/leagues/102.png",
-        "flag": "https://media.api-sports.io/flags/jp.svg",
-        "season": 2026,
-        "round": "2nd Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 301,
-          "name": "JEF United Chiba",
-          "logo": "https://media.api-sports.io/football/teams/301.png",
-          "winner": null
-        },
-        "away": {
-          "id": 4314,
-          "name": "Azul Claro Numazu",
-          "logo": "https://media.api-sports.io/football/teams/4314.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1623343,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-26T10:00:00+00:00",
-        "timestamp": 1787738400,
-        "periods": {
-          "first": 1787738400,
-          "second": 1787742000
-        },
-        "venue": {
-          "id": 963,
-          "name": "Yamaha Stadium",
-          "city": "Iwata"
-        },
-        "status": {
-          "long": "Extra Time",
-          "short": "ET",
-          "elapsed": 92,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 56,
           "extra": null
         }
       },
       "league": {
-        "id": 102,
-        "name": "Emperor Cup",
-        "country": "Japan",
-        "logo": "https://media.api-sports.io/football/leagues/102.png",
-        "flag": "https://media.api-sports.io/flags/jp.svg",
+        "id": 1065,
+        "name": "U19 League",
+        "country": "Ukraine",
+        "logo": "https://media.api-sports.io/football/leagues/1065.png",
+        "flag": "https://media.api-sports.io/flags/ua.svg",
         "season": 2026,
-        "round": "2nd Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 280,
-          "name": "Jubilo Iwata",
-          "logo": "https://media.api-sports.io/football/teams/280.png",
-          "winner": null
-        },
-        "away": {
-          "id": 10409,
-          "name": "Tegevajaro Miyazaki",
-          "logo": "https://media.api-sports.io/football/teams/10409.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": 0,
-          "away": 0
-        },
-        "extratime": {
-          "home": 0,
-          "away": 0
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1630767,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-26T10:00:00+00:00",
-        "timestamp": 1787738400,
-        "periods": {
-          "first": 1787738400,
-          "second": 1787742000
-        },
-        "venue": {
-          "id": 976,
-          "name": "IAI Stadium Nihondaira",
-          "city": "Shizuoka"
-        },
-        "status": {
-          "long": "Extra Time",
-          "short": "ET",
-          "elapsed": 95,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 102,
-        "name": "Emperor Cup",
-        "country": "Japan",
-        "logo": "https://media.api-sports.io/football/leagues/102.png",
-        "flag": "https://media.api-sports.io/flags/jp.svg",
-        "season": 2026,
-        "round": "2nd Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 283,
-          "name": "Shimizu S-pulse",
-          "logo": "https://media.api-sports.io/football/teams/283.png",
-          "winner": null
-        },
-        "away": {
-          "id": 7138,
-          "name": "Osaka",
-          "logo": "https://media.api-sports.io/football/teams/7138.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 1,
-        "away": 1
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 1
-        },
-        "fulltime": {
-          "home": 1,
-          "away": 1
-        },
-        "extratime": {
-          "home": 0,
-          "away": 0
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 17,
-            "extra": null
-          },
-          "team": {
-            "id": 7138,
-            "name": "Osaka",
-            "logo": "https://media.api-sports.io/football/teams/7138.png"
-          },
-          "player": {
-            "id": 225079,
-            "name": "R. Sugawara"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 62,
-            "extra": null
-          },
-          "team": {
-            "id": 283,
-            "name": "Shimizu S-pulse",
-            "logo": "https://media.api-sports.io/football/teams/283.png"
-          },
-          "player": {
-            "id": 99186,
-            "name": "Oh Se-Hun"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1627490,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-26T11:00:00+00:00",
-        "timestamp": 1787742000,
-        "periods": {
-          "first": 1787742000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
-        }
-      },
-      "league": {
-        "id": 237,
-        "name": "Cup",
-        "country": "Russia",
-        "logo": "https://media.api-sports.io/football/leagues/237.png",
-        "flag": "https://media.api-sports.io/flags/ru.svg",
-        "season": 2026,
-        "round": "Regions Path - 3rd Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 25867,
-          "name": "KDV",
-          "logo": "https://media.api-sports.io/football/teams/25867.png",
-          "winner": false
-        },
-        "away": {
-          "id": 2014,
-          "name": "Chertanovo Moscow",
-          "logo": "https://media.api-sports.io/football/teams/2014.png",
-          "winner": true
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 3
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 3
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": [
-        {
-          "time": {
-            "elapsed": 8,
-            "extra": null
-          },
-          "team": {
-            "id": 2014,
-            "name": "Chertanovo Moscow",
-            "logo": "https://media.api-sports.io/football/teams/2014.png"
-          },
-          "player": {
-            "id": 562430,
-            "name": "R. Gaynullin"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 14,
-            "extra": null
-          },
-          "team": {
-            "id": 2014,
-            "name": "Chertanovo Moscow",
-            "logo": "https://media.api-sports.io/football/teams/2014.png"
-          },
-          "player": {
-            "id": 673028,
-            "name": "M. Grachev"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 38,
-            "extra": null
-          },
-          "team": {
-            "id": 2014,
-            "name": "Chertanovo Moscow",
-            "logo": "https://media.api-sports.io/football/teams/2014.png"
-          },
-          "player": {
-            "id": 562430,
-            "name": "R. Gaynullin"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Goal",
-          "detail": "Normal Goal",
-          "comments": null
-        }
-      ]
-    },
-    {
-      "fixture": {
-        "id": 1627495,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-26T11:00:00+00:00",
-        "timestamp": 1787742000,
-        "periods": {
-          "first": 1787742000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 4
-        }
-      },
-      "league": {
-        "id": 237,
-        "name": "Cup",
-        "country": "Russia",
-        "logo": "https://media.api-sports.io/football/leagues/237.png",
-        "flag": "https://media.api-sports.io/flags/ru.svg",
-        "season": 2026,
-        "round": "Regions Path - 3rd Round",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 16864,
-          "name": "Torpedo Miass",
-          "logo": "https://media.api-sports.io/football/teams/16864.png",
-          "winner": null
-        },
-        "away": {
-          "id": 14124,
-          "name": "Volna Nizhegorodskaya",
-          "logo": "https://media.api-sports.io/football/teams/14124.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1630060,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-08-26T11:00:00+00:00",
-        "timestamp": 1787742000,
-        "periods": {
-          "first": 1787742000,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 2
-        }
-      },
-      "league": {
-        "id": 1241,
-        "name": "U19 league",
-        "country": "Serbia",
-        "logo": "https://media.api-sports.io/football/leagues/1241.png",
-        "flag": "https://media.api-sports.io/flags/rs.svg",
-        "season": 2026,
-        "round": "Regular Season - 3",
+        "round": "Regular Season - 4",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 28269,
-          "name": "Vozdovac U19",
-          "logo": "https://media.api-sports.io/football/teams/28269.png",
-          "winner": null
+          "id": 20240,
+          "name": "Rukh Vynnyky U19",
+          "logo": "https://media.api-sports.io/football/teams/20240.png",
+          "winner": true
         },
         "away": {
-          "id": 7891,
-          "name": "Brodarac U19",
-          "logo": "https://media.api-sports.io/football/teams/7891.png",
-          "winner": null
+          "id": 23082,
+          "name": "Veres Rivne U19",
+          "logo": "https://media.api-sports.io/football/teams/23082.png",
+          "winner": false
         }
       },
       "goals": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "score": {
         "halftime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "fulltime": {
@@ -1898,7 +904,124 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 27,
+            "extra": null
+          },
+          "team": {
+            "id": 20240,
+            "name": "Rukh Vynnyky U19",
+            "logo": "https://media.api-sports.io/football/teams/20240.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1611868,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-26T12:00:00+00:00",
+        "timestamp": 1787745600,
+        "periods": {
+          "first": 1787745600,
+          "second": 1787749200
+        },
+        "venue": {
+          "id": null,
+          "name": "Slavutych-Arena",
+          "city": "Zaporizhia"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 50,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1065,
+        "name": "U19 League",
+        "country": "Ukraine",
+        "logo": "https://media.api-sports.io/football/leagues/1065.png",
+        "flag": "https://media.api-sports.io/flags/ua.svg",
+        "season": 2026,
+        "round": "Regular Season - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 28082,
+          "name": "SK Metalurh U19",
+          "logo": "https://media.api-sports.io/football/teams/28082.png",
+          "winner": true
+        },
+        "away": {
+          "id": 23078,
+          "name": "Metalist 1925 U19",
+          "logo": "https://media.api-sports.io/football/teams/23078.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 15,
+            "extra": null
+          },
+          "team": {
+            "id": 28082,
+            "name": "SK Metalurh U19",
+            "logo": "https://media.api-sports.io/football/teams/28082.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
     },
     {
       "fixture": {
@@ -1909,7 +1032,7 @@
         "timestamp": 1787742300,
         "periods": {
           "first": 1787742300,
-          "second": null
+          "second": 1787745900
         },
         "venue": {
           "id": 20417,
@@ -1917,10 +1040,10 @@
           "city": "Fukuoka"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 1
+          "long": "Extra Time",
+          "short": "ET",
+          "elapsed": 101,
+          "extra": null
         }
       },
       "league": {
@@ -1957,12 +1080,12 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "extratime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "penalty": {
           "home": null,
@@ -1990,6 +1113,232 @@
           },
           "type": "Card",
           "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 52,
+            "extra": null
+          },
+          "team": {
+            "id": 316,
+            "name": "Avispa Fukuoka",
+            "logo": "https://media.api-sports.io/football/teams/316.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 100,
+            "extra": null
+          },
+          "team": {
+            "id": 7151,
+            "name": "Verspah Oita",
+            "logo": "https://media.api-sports.io/football/teams/7151.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1601146,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-08-26T12:15:00+00:00",
+        "timestamp": 1787746500,
+        "periods": {
+          "first": 1787746500,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Sultan Ibrahim Stadium",
+          "city": "Johor Bahru"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 4
+        }
+      },
+      "league": {
+        "id": 278,
+        "name": "Super League",
+        "country": "Malaysia",
+        "logo": "https://media.api-sports.io/football/leagues/278.png",
+        "flag": "https://media.api-sports.io/flags/my.svg",
+        "season": 2026,
+        "round": "Regular Season - 6",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 2523,
+          "name": "Johor Darul Takzim FC",
+          "logo": "https://media.api-sports.io/football/teams/2523.png",
+          "winner": true
+        },
+        "away": {
+          "id": 27373,
+          "name": "Kelantan Red Warrior FC",
+          "logo": "https://media.api-sports.io/football/teams/27373.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 3,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 3,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 1,
+            "extra": null
+          },
+          "team": {
+            "id": 2523,
+            "name": "Johor Darul Takzim FC",
+            "logo": "https://media.api-sports.io/football/teams/2523.png"
+          },
+          "player": {
+            "id": 46740,
+            "name": "Stoichkov"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 17,
+            "extra": null
+          },
+          "team": {
+            "id": 2523,
+            "name": "Johor Darul Takzim FC",
+            "logo": "https://media.api-sports.io/football/teams/2523.png"
+          },
+          "player": {
+            "id": 6800,
+            "name": "S. Lowry"
+          },
+          "assist": {
+            "id": 35141,
+            "name": "L. Corbin-Ong"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 37,
+            "extra": null
+          },
+          "team": {
+            "id": 2523,
+            "name": "Johor Darul Takzim FC",
+            "logo": "https://media.api-sports.io/football/teams/2523.png"
+          },
+          "player": {
+            "id": 89712,
+            "name": "S. Zahedi"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 40,
+            "extra": null
+          },
+          "team": {
+            "id": 27373,
+            "name": "Kelantan Red Warrior FC",
+            "logo": "https://media.api-sports.io/football/teams/27373.png"
+          },
+          "player": {
+            "id": 676528,
+            "name": "N. Mulhassan"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 2
+          },
+          "team": {
+            "id": 2523,
+            "name": "Johor Darul Takzim FC",
+            "logo": "https://media.api-sports.io/football/teams/2523.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
           "comments": null
         }
       ]
