@@ -16,10 +16,12 @@ export const metadata = {
   },
 };
 
+const LISTING_FIELDS = ["slug","title","seoTitle","description","seoDescription","publishedAt","updatedAt","imageUrl","image","league","sport","keywords","sourceTitle"];
+
 export default function ArticlesPage() {
-  const sorted = [...articles].sort(
-    (a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
-  );
+  const sorted = [...articles]
+    .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))
+    .map(a => Object.fromEntries(LISTING_FIELDS.filter(k => a[k] !== undefined).map(k => [k, a[k]])));
 
   return (
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 16px", direction: "rtl" }}>
