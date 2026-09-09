@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import Link from "next/link";
-import articles from "../../content/articles/seo-articles.json";
+import articles from "../../content/articles/seo-articles-meta.json";
 import ArticleImage from "../components/ArticleImage";
 
 /* ── Helpers ──────────────────────────────────────────── */

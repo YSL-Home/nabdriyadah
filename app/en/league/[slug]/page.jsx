@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
-import articles from "../../../../content/articles/seo-articles.json";
+import articles from "../../../../content/articles/seo-articles-meta.json";
 import teamsDataRaw from "../../../../content/teams-data.json";
 import AdSlot from "../../../components/AdSlot";
 import ArticleImage from "../../../components/ArticleImage";

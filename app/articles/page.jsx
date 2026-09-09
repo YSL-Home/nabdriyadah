@@ -1,4 +1,4 @@
-import articles from "../../content/articles/seo-articles.json";
+import articles from "../../content/articles/seo-articles-meta.json";
 import ArticleFiltersClient from "../components/ArticleFiltersClient";
 import AdSlot from "../components/AdSlot";
 

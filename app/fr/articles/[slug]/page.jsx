@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import articles from "../../../../content/articles/seo-articles.json";
+import articles from "../../../../content/articles/seo-articles-meta.json";
 import ArticleImage from "../../../components/ArticleImage";
 import AdSlot from "../../../components/AdSlot";
 

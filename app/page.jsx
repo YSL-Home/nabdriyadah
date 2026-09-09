@@ -1,4 +1,4 @@
-import articles from "../content/articles/seo-articles.json";
+import articles from "../content/articles/seo-articles-meta.json";
 import viralScoresRaw from "../content/viral-scores.json";
 import BreakingTicker from "./components/BreakingTicker";
 import HomepageClient from "./components/HomepageClient";

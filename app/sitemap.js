@@ -1,4 +1,4 @@
-import articles from "../content/articles/seo-articles.json";
+import articles from "../content/articles/seo-articles-meta.json";
 import tennisTop20Raw from "../content/players/tennis-top20.json";
 import fs from "fs";
 import path from "path";

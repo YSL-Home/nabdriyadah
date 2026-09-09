@@ -1,4 +1,4 @@
-import articles from "../../content/articles/seo-articles.json";
+import articles from "../../content/articles/seo-articles-meta.json";
 import BreakingTicker from "./BreakingTicker";
 import HomepageClient from "./HomepageClient";
 import { getT, leagueNames, sportNames, siteName } from "../../lib/i18n";
