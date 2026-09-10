@@ -1,6 +1,6 @@
 {
   "date": "2026-09-10",
-  "fetchedAt": "2026-09-10T05:16:37.800Z",
+  "fetchedAt": "2026-09-10T09:54:45.381Z",
   "live": [
     {
       "fixture": {
@@ -5809,8 +5809,8 @@
         "date": "2026-09-10T07:30:00+00:00",
         "timestamp": 1789025400,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1789025400,
+          "second": 1789029000
         },
         "venue": {
           "id": null,
@@ -5818,9 +5818,9 @@
           "city": "Barcelona"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -5839,27 +5839,97 @@
           "id": 7885,
           "name": "Barcelona U19",
           "logo": "https://media.api-sports.io/football/teams/7885.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 7981,
           "name": "Feyenoord U19",
           "logo": "https://media.api-sports.io/football/teams/7981.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 2
       },
       "score": {
         "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 2
+        },
+        "extratime": {
           "home": null,
           "away": null
         },
-        "fulltime": {
+        "penalty": {
           "home": null,
           "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1611755,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-10T08:00:00+00:00",
+        "timestamp": 1789027200,
+        "periods": {
+          "first": 1789027200,
+          "second": 1789030800
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 3
+        }
+      },
+      "league": {
+        "id": 1065,
+        "name": "U19 League",
+        "country": "Ukraine",
+        "logo": "https://media.api-sports.io/football/leagues/1065.png",
+        "flag": "https://media.api-sports.io/flags/ua.svg",
+        "season": 2026,
+        "round": "Regular Season - 6",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 23077,
+          "name": "LNZ Cherkasy U19",
+          "logo": "https://media.api-sports.io/football/teams/23077.png",
+          "winner": false
+        },
+        "away": {
+          "id": 23078,
+          "name": "Metalist 1925 U19",
+          "logo": "https://media.api-sports.io/football/teams/23078.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -5888,9 +5958,9 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
           "extra": null
         }
       },
@@ -5909,12 +5979,152 @@
           "id": 19005,
           "name": "RTC",
           "logo": "https://media.api-sports.io/football/teams/19005.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 5592,
           "name": "Thimphu City",
           "logo": "https://media.api-sports.io/football/teams/5592.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1638873,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-10T09:30:00+00:00",
+        "timestamp": 1789032600,
+        "periods": {
+          "first": 1789032600,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 24,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1020,
+        "name": "Calcutta Premier Division",
+        "country": "India",
+        "logo": "https://media.api-sports.io/football/leagues/1020.png",
+        "flag": "https://media.api-sports.io/flags/in.svg",
+        "season": 2026,
+        "round": "Regular season",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 28009,
+          "name": "Coal India",
+          "logo": "https://media.api-sports.io/football/teams/28009.png",
+          "winner": false
+        },
+        "away": {
+          "id": 3467,
+          "name": "Mohun Bagan",
+          "logo": "https://media.api-sports.io/football/teams/3467.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1638874,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-10T09:30:00+00:00",
+        "timestamp": 1789032600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1020,
+        "name": "Calcutta Premier Division",
+        "country": "India",
+        "logo": "https://media.api-sports.io/football/leagues/1020.png",
+        "flag": "https://media.api-sports.io/flags/in.svg",
+        "season": 2026,
+        "round": "Regular season",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 8241,
+          "name": "United",
+          "logo": "https://media.api-sports.io/football/teams/8241.png",
+          "winner": null
+        },
+        "away": {
+          "id": 3463,
+          "name": "East Bengal",
+          "logo": "https://media.api-sports.io/football/teams/3463.png",
           "winner": null
         }
       },
@@ -8855,6 +9065,76 @@
           "id": 16553,
           "name": "Bodø / Glimt U19",
           "logo": "https://media.api-sports.io/football/teams/16553.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1638896,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-10T14:00:00+00:00",
+        "timestamp": 1789048800,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 569,
+        "name": "Premier League",
+        "country": "Kyrgyzstan",
+        "logo": "https://media.api-sports.io/football/leagues/569.png",
+        "flag": "https://media.api-sports.io/flags/kg.svg",
+        "season": 2026,
+        "round": "Regular Season - 23",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 8022,
+          "name": "Alay",
+          "logo": "https://media.api-sports.io/football/teams/8022.png",
+          "winner": null
+        },
+        "away": {
+          "id": 21167,
+          "name": "Muras United",
+          "logo": "https://media.api-sports.io/football/teams/21167.png",
           "winner": null
         }
       },
