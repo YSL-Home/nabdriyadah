@@ -1,21 +1,37 @@
 {
-  "date": "2026-09-14T11:21:38.141Z",
-  "total": 4427,
+  "date": "2026-09-14T17:19:32.136Z",
+  "total": 4434,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 2075,
+      "count": 2082,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 2100,
+      "count": 2107,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ft-qkhtkn",
+          "duplicate_of": "ft-5bd280"
+        },
+        {
+          "slug": "ft-cj50ih",
+          "duplicate_of": "ft-1uxu0v"
+        },
+        {
+          "slug": "ft-1bk2d5",
+          "duplicate_of": "ft-s2665h"
+        },
+        {
+          "slug": "ft-16h755",
+          "duplicate_of": "ft-vu3o5p"
+        },
         {
           "slug": "padel-1o55iz",
           "duplicate_of": "padel-h003ah"
@@ -726,6 +742,10 @@
         },
         {
           "slug": "bball-1cuiip",
+          "duplicate_of": "bball-zq67bg-1789119638908"
+        },
+        {
+          "slug": "bball-zq67bg-1789405304867",
           "duplicate_of": "bball-zq67bg-1789119638908"
         },
         {
@@ -6967,9 +6987,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 2075,
-    "missing_fr_title": 2100,
+    "missing_en_title": 2082,
+    "missing_fr_title": 2107,
     "sport_mismatches_fixed": 0,
-    "duplicates": 1736
+    "duplicates": 1741
   }
 }
