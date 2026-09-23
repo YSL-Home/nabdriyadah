@@ -1,51 +1,51 @@
 {
   "date": "2026-09-23",
-  "fetchedAt": "2026-09-23T01:29:01.622Z",
+  "fetchedAt": "2026-09-23T06:23:11.036Z",
   "live": [
     {
       "fixture": {
-        "id": 1549802,
-        "referee": "Alejandro Moncada Sanchez",
+        "id": 1639462,
+        "referee": null,
         "timezone": "UTC",
-        "date": "2026-09-23T01:00:00+00:00",
-        "timestamp": 1790125200,
+        "date": "2026-09-23T05:30:00+00:00",
+        "timestamp": 1790141400,
         "periods": {
-          "first": null,
+          "first": 1790141400,
           "second": null
         },
         "venue": {
-          "id": 383,
-          "name": "Estadio El Campin",
-          "city": "Bogota"
+          "id": 972,
+          "name": "Toyota Stadium",
+          "city": "Toyota City"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 28,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 2
         }
       },
       "league": {
-        "id": 239,
-        "name": "Primera A",
-        "country": "Colombia",
-        "logo": "https://media.api-sports.io/football/leagues/239.png",
-        "flag": "https://media.api-sports.io/flags/co.svg",
+        "id": 803,
+        "name": "Asian Games",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/803.png",
+        "flag": null,
         "season": 2026,
-        "round": "Clausura - 12",
+        "round": "Group Stage - 3",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 1139,
-          "name": "Santa Fe",
-          "logo": "https://media.api-sports.io/football/teams/1139.png",
+          "id": 10932,
+          "name": "China PR U23",
+          "logo": "https://media.api-sports.io/football/teams/10932.png",
           "winner": null
         },
         "away": {
-          "id": 1127,
-          "name": "Deportivo Cali",
-          "logo": "https://media.api-sports.io/football/teams/1127.png",
+          "id": 10184,
+          "name": "UAE U23",
+          "logo": "https://media.api-sports.io/football/teams/10184.png",
           "winner": null
         }
       },
@@ -75,59 +75,59 @@
     },
     {
       "fixture": {
-        "id": 1638381,
+        "id": 1639469,
         "referee": null,
         "timezone": "UTC",
-        "date": "2026-09-22T23:30:00+00:00",
-        "timestamp": 1790119800,
+        "date": "2026-09-23T05:30:00+00:00",
+        "timestamp": 1790141400,
         "periods": {
-          "first": 1790119800,
-          "second": 1790123400
+          "first": 1790141400,
+          "second": null
         },
         "venue": {
-          "id": null,
-          "name": "Estadio Bicentenario de La Florida",
-          "city": "Santiago de Chile"
+          "id": 0,
+          "name": "Wave Stadium Kariya",
+          "city": null
         },
         "status": {
-          "long": "Second Half",
-          "short": "2H",
-          "elapsed": 90,
-          "extra": 8
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 4
         }
       },
       "league": {
-        "id": 267,
-        "name": "Copa Chile",
-        "country": "Chile",
-        "logo": "https://media.api-sports.io/football/leagues/267.png",
-        "flag": "https://media.api-sports.io/flags/cl.svg",
+        "id": 803,
+        "name": "Asian Games",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/803.png",
+        "flag": null,
         "season": 2026,
-        "round": "Round of 16",
-        "standings": false
+        "round": "Group Stage - 3",
+        "standings": true
       },
       "teams": {
         "home": {
-          "id": 2329,
-          "name": "A. Italiano",
-          "logo": "https://media.api-sports.io/football/teams/2329.png",
-          "winner": null
+          "id": 10937,
+          "name": "Iran U23",
+          "logo": "https://media.api-sports.io/football/teams/10937.png",
+          "winner": false
         },
         "away": {
-          "id": 2315,
-          "name": "Colo Colo",
-          "logo": "https://media.api-sports.io/football/teams/2315.png",
-          "winner": null
+          "id": 10939,
+          "name": "Korea DPR U23",
+          "logo": "https://media.api-sports.io/football/teams/10939.png",
+          "winner": true
         }
       },
       "goals": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 2
       },
       "score": {
         "halftime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -145,21 +145,43 @@
       "events": [
         {
           "time": {
-            "elapsed": 46,
+            "elapsed": 17,
             "extra": null
           },
           "team": {
-            "id": 2329,
-            "name": "A. Italiano",
-            "logo": "https://media.api-sports.io/football/teams/2329.png"
+            "id": 10937,
+            "name": "Iran U23",
+            "logo": "https://media.api-sports.io/football/teams/10937.png"
           },
           "player": {
-            "id": 362431,
-            "name": "F. Loyola"
+            "id": 29937,
+            "name": "A. Hosseinzadeh"
           },
           "assist": {
-            "id": 310594,
-            "name": "P. Guajardo"
+            "id": 423759,
+            "name": "K. Taheri"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 22,
+            "extra": null
+          },
+          "team": {
+            "id": 10939,
+            "name": "Korea DPR U23",
+            "logo": "https://media.api-sports.io/football/teams/10939.png"
+          },
+          "player": {
+            "id": 682012,
+            "name": "Ri Song-hung"
+          },
+          "assist": {
+            "id": 682013,
+            "name": "Han Jae-yong"
           },
           "type": "subst",
           "detail": "Substitution 1",
@@ -167,21 +189,21 @@
         },
         {
           "time": {
-            "elapsed": 46,
+            "elapsed": 38,
             "extra": null
           },
           "team": {
-            "id": 2329,
-            "name": "A. Italiano",
-            "logo": "https://media.api-sports.io/football/teams/2329.png"
+            "id": 10939,
+            "name": "Korea DPR U23",
+            "logo": "https://media.api-sports.io/football/teams/10939.png"
           },
           "player": {
-            "id": 70464,
-            "name": "B. Soto"
+            "id": 542848,
+            "name": "Ri Kum-Chol"
           },
           "assist": {
-            "id": 11368,
-            "name": "C. Pinares"
+            "id": 651590,
+            "name": "R. Kwang-Myong"
           },
           "type": "subst",
           "detail": "Substitution 2",
@@ -189,17 +211,61 @@
         },
         {
           "time": {
-            "elapsed": 50,
+            "elapsed": 41,
             "extra": null
           },
           "team": {
-            "id": 2315,
-            "name": "Colo Colo",
-            "logo": "https://media.api-sports.io/football/teams/2315.png"
+            "id": 10939,
+            "name": "Korea DPR U23",
+            "logo": "https://media.api-sports.io/football/teams/10939.png"
           },
           "player": {
-            "id": 11471,
-            "name": "T. Alarcon"
+            "id": 510256,
+            "name": "Choe Kuk"
+          },
+          "assist": {
+            "id": 682014,
+            "name": "Yom Chol-gyong"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 10939,
+            "name": "Korea DPR U23",
+            "logo": "https://media.api-sports.io/football/teams/10939.png"
+          },
+          "player": {
+            "id": 542839,
+            "name": "M. Ra"
+          },
+          "assist": {
+            "id": 682013,
+            "name": "Han Jae-yong"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 2
+          },
+          "team": {
+            "id": 10939,
+            "name": "Korea DPR U23",
+            "logo": "https://media.api-sports.io/football/teams/10939.png"
+          },
+          "player": {
+            "id": 542801,
+            "name": "Kim Kuk-Bom"
           },
           "assist": {
             "id": null,
@@ -211,171 +277,17 @@
         },
         {
           "time": {
-            "elapsed": 66,
-            "extra": null
+            "elapsed": 45,
+            "extra": 3
           },
           "team": {
-            "id": 2315,
-            "name": "Colo Colo",
-            "logo": "https://media.api-sports.io/football/teams/2315.png"
+            "id": 10937,
+            "name": "Iran U23",
+            "logo": "https://media.api-sports.io/football/teams/10937.png"
           },
           "player": {
-            "id": 251,
-            "name": "M. Romero"
-          },
-          "assist": {
-            "id": 11432,
-            "name": "M. Bolados"
-          },
-          "type": "subst",
-          "detail": "Substitution 1",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 66,
-            "extra": null
-          },
-          "team": {
-            "id": 2329,
-            "name": "A. Italiano",
-            "logo": "https://media.api-sports.io/football/teams/2329.png"
-          },
-          "player": {
-            "id": 35950,
-            "name": "A. Uribe"
-          },
-          "assist": {
-            "id": 414545,
-            "name": "G. Chiaverano"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 72,
-            "extra": null
-          },
-          "team": {
-            "id": 2329,
-            "name": "A. Italiano",
-            "logo": "https://media.api-sports.io/football/teams/2329.png"
-          },
-          "player": {
-            "id": 344165,
-            "name": "D. Pizarro"
-          },
-          "assist": {
-            "id": 6131,
-            "name": "F. Troyansky"
-          },
-          "type": "subst",
-          "detail": "Substitution 4",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 79,
-            "extra": null
-          },
-          "team": {
-            "id": 2315,
-            "name": "Colo Colo",
-            "logo": "https://media.api-sports.io/football/teams/2315.png"
-          },
-          "player": {
-            "id": 362705,
-            "name": "L. Pastran"
-          },
-          "assist": {
-            "id": null,
-            "name": "G. Diaz"
-          },
-          "type": "subst",
-          "detail": "Substitution 2",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 79,
-            "extra": null
-          },
-          "team": {
-            "id": 2315,
-            "name": "Colo Colo",
-            "logo": "https://media.api-sports.io/football/teams/2315.png"
-          },
-          "player": {
-            "id": 11856,
-            "name": "M. Fernandez"
-          },
-          "assist": {
-            "id": 666677,
-            "name": "P. Allende"
-          },
-          "type": "subst",
-          "detail": "Substitution 3",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 82,
-            "extra": null
-          },
-          "team": {
-            "id": 2329,
-            "name": "A. Italiano",
-            "logo": "https://media.api-sports.io/football/teams/2329.png"
-          },
-          "player": {
-            "id": 11713,
-            "name": "M. Fuentes"
-          },
-          "assist": {
-            "id": 11356,
-            "name": "R. Rebolledo"
-          },
-          "type": "subst",
-          "detail": "Substitution 5",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 90,
-            "extra": 4
-          },
-          "team": {
-            "id": 2315,
-            "name": "Colo Colo",
-            "logo": "https://media.api-sports.io/football/teams/2315.png"
-          },
-          "player": {
-            "id": 11643,
-            "name": "A. Madrid"
-          },
-          "assist": {
-            "id": null,
-            "name": null
-          },
-          "type": "Card",
-          "detail": "Yellow Card",
-          "comments": null
-        },
-        {
-          "time": {
-            "elapsed": 90,
-            "extra": 6
-          },
-          "team": {
-            "id": 2329,
-            "name": "A. Italiano",
-            "logo": "https://media.api-sports.io/football/teams/2329.png"
-          },
-          "player": {
-            "id": null,
-            "name": null
+            "id": 436621,
+            "name": "M. Dehghan"
           },
           "assist": {
             "id": null,
@@ -406,9 +318,9 @@
           "city": "Bogota"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 28,
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
           "extra": null
         }
       },
@@ -427,12 +339,152 @@
           "id": 1139,
           "name": "Santa Fe",
           "logo": "https://media.api-sports.io/football/teams/1139.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 1127,
           "name": "Deportivo Cali",
           "logo": "https://media.api-sports.io/football/teams/1127.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1641076,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-23T04:00:00+00:00",
+        "timestamp": 1790136000,
+        "periods": {
+          "first": 1790136000,
+          "second": 1790139600
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 666,
+        "name": "Friendlies Women",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/666.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Friendly International Women",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 19937,
+          "name": "Vanuatu W",
+          "logo": "https://media.api-sports.io/football/teams/19937.png",
+          "winner": true
+        },
+        "away": {
+          "id": 22603,
+          "name": "New Caledonia W",
+          "logo": "https://media.api-sports.io/football/teams/22603.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 5,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 5,
+          "away": 0
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1639462,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-23T05:30:00+00:00",
+        "timestamp": 1790141400,
+        "periods": {
+          "first": 1790141400,
+          "second": null
+        },
+        "venue": {
+          "id": 972,
+          "name": "Toyota Stadium",
+          "city": "Toyota City"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 2
+        }
+      },
+      "league": {
+        "id": 803,
+        "name": "Asian Games",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/803.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Group Stage - 3",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 10932,
+          "name": "China PR U23",
+          "logo": "https://media.api-sports.io/football/teams/10932.png",
+          "winner": null
+        },
+        "away": {
+          "id": 10184,
+          "name": "UAE U23",
+          "logo": "https://media.api-sports.io/football/teams/10184.png",
           "winner": null
         }
       },
@@ -461,153 +513,13 @@
     },
     {
       "fixture": {
-        "id": 1641076,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-09-23T04:00:00+00:00",
-        "timestamp": 1790136000,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 666,
-        "name": "Friendlies Women",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/666.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Friendly International Women",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 19937,
-          "name": "Vanuatu W",
-          "logo": "https://media.api-sports.io/football/teams/19937.png",
-          "winner": null
-        },
-        "away": {
-          "id": 22603,
-          "name": "New Caledonia W",
-          "logo": "https://media.api-sports.io/football/teams/22603.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
-        "id": 1639462,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-09-23T05:30:00+00:00",
-        "timestamp": 1790141400,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": 0,
-          "name": "Toyota Stadium",
-          "city": "Toyota City"
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 803,
-        "name": "Asian Games",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/803.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Group Stage - 3",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 10932,
-          "name": "China PR U23",
-          "logo": "https://media.api-sports.io/football/teams/10932.png",
-          "winner": null
-        },
-        "away": {
-          "id": 10184,
-          "name": "UAE U23",
-          "logo": "https://media.api-sports.io/football/teams/10184.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
         "id": 1639469,
         "referee": null,
         "timezone": "UTC",
         "date": "2026-09-23T05:30:00+00:00",
         "timestamp": 1790141400,
         "periods": {
-          "first": null,
+          "first": 1790141400,
           "second": null
         },
         "venue": {
@@ -616,10 +528,10 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 4
         }
       },
       "league": {
@@ -637,23 +549,23 @@
           "id": 10937,
           "name": "Iran U23",
           "logo": "https://media.api-sports.io/football/teams/10937.png",
-          "winner": null
+          "winner": false
         },
         "away": {
           "id": 10939,
           "name": "Korea DPR U23",
           "logo": "https://media.api-sports.io/football/teams/10939.png",
-          "winner": null
+          "winner": true
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 2
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 2
         },
         "fulltime": {
           "home": null,
@@ -2842,7 +2754,7 @@
     {
       "fixture": {
         "id": 1640769,
-        "referee": null,
+        "referee": "A. Pesu",
         "timezone": "UTC",
         "date": "2026-09-23T13:00:00+00:00",
         "timestamp": 1790168400,
@@ -2883,76 +2795,6 @@
           "id": 19078,
           "name": "Spain U20 W",
           "logo": "https://media.api-sports.io/football/teams/19078.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
-        "id": 1641129,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-09-23T13:00:00+00:00",
-        "timestamp": 1790168400,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 951,
-        "name": "South American Youth Games",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/951.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Semi-finals",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 20536,
-          "name": "Peru U19",
-          "logo": "https://media.api-sports.io/football/teams/20536.png",
-          "winner": null
-        },
-        "away": {
-          "id": 20532,
-          "name": "Argentina U19",
-          "logo": "https://media.api-sports.io/football/teams/20532.png",
           "winner": null
         }
       },
@@ -6831,76 +6673,6 @@
     },
     {
       "fixture": {
-        "id": 1628519,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-09-23T15:00:00+00:00",
-        "timestamp": 1790175600,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": 3926,
-          "name": "Yakubu Gowon Stadium",
-          "city": "Port Harcourt"
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 399,
-        "name": "NPFL",
-        "country": "Nigeria",
-        "logo": "https://media.api-sports.io/football/leagues/399.png",
-        "flag": "https://media.api-sports.io/flags/ng.svg",
-        "season": 2027,
-        "round": "Regular Season - 5",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 5192,
-          "name": "Rivers United",
-          "logo": "https://media.api-sports.io/football/teams/5192.png",
-          "winner": null
-        },
-        "away": {
-          "id": 26401,
-          "name": "Kun Khalifat FC",
-          "logo": "https://media.api-sports.io/football/teams/26401.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
         "id": 1628520,
         "referee": null,
         "timezone": "UTC",
@@ -8232,7 +8004,7 @@
     {
       "fixture": {
         "id": 1641075,
-        "referee": null,
+        "referee": "C. Reibelt",
         "timezone": "UTC",
         "date": "2026-09-23T16:30:00+00:00",
         "timestamp": 1790181000,
@@ -8243,7 +8015,7 @@
         "venue": {
           "id": 0,
           "name": null,
-          "city": null
+          "city": "Lodz"
         },
         "status": {
           "long": "Not Started",
@@ -9771,6 +9543,76 @@
     },
     {
       "fixture": {
+        "id": 1641129,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-23T17:00:00+00:00",
+        "timestamp": 1790182800,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 951,
+        "name": "South American Youth Games",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/951.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Semi-finals",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 20536,
+          "name": "Peru U19",
+          "logo": "https://media.api-sports.io/football/teams/20536.png",
+          "winner": null
+        },
+        "away": {
+          "id": 20532,
+          "name": "Argentina U19",
+          "logo": "https://media.api-sports.io/football/teams/20532.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
         "id": 1621620,
         "referee": null,
         "timezone": "UTC",
@@ -11252,8 +11094,8 @@
         },
         "venue": {
           "id": null,
-          "name": null,
-          "city": null
+          "name": "Riverside Stadium",
+          "city": "Middlesbrough"
         },
         "status": {
           "long": "Not Started",
@@ -11322,8 +11164,8 @@
         },
         "venue": {
           "id": null,
-          "name": null,
-          "city": null
+          "name": "Victoria Road",
+          "city": "London"
         },
         "status": {
           "long": "Not Started",
@@ -12193,76 +12035,6 @@
           "id": 13021,
           "name": "Juventus U20",
           "logo": "https://media.api-sports.io/football/teams/13021.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
-        "id": 1641130,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-09-23T18:00:00+00:00",
-        "timestamp": 1790186400,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 951,
-        "name": "South American Youth Games",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/951.png",
-        "flag": null,
-        "season": 2026,
-        "round": "Semi-finals",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 20535,
-          "name": "Paraguay U19",
-          "logo": "https://media.api-sports.io/football/teams/20535.png",
-          "winner": null
-        },
-        "away": {
-          "id": 20533,
-          "name": "Chile U19",
-          "logo": "https://media.api-sports.io/football/teams/20533.png",
           "winner": null
         }
       },
@@ -13202,7 +12974,7 @@
     {
       "fixture": {
         "id": 1571133,
-        "referee": null,
+        "referee": "A. Clemente Ortuno",
         "timezone": "UTC",
         "date": "2026-09-23T19:00:00+00:00",
         "timestamp": 1790190000,
@@ -13212,8 +12984,8 @@
         },
         "venue": {
           "id": null,
-          "name": null,
-          "city": null
+          "name": "Can Drago",
+          "city": "Barcelona"
         },
         "status": {
           "long": "Not Started",
@@ -13702,7 +13474,7 @@
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Estadio Panamericano",
           "city": null
         },
         "status": {
@@ -13943,6 +13715,76 @@
           "id": 10984,
           "name": "Saint Martin",
           "logo": "https://media.api-sports.io/football/teams/10984.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1641130,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-23T20:00:00+00:00",
+        "timestamp": 1790193600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 951,
+        "name": "South American Youth Games",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/951.png",
+        "flag": null,
+        "season": 2026,
+        "round": "Semi-finals",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 20535,
+          "name": "Paraguay U19",
+          "logo": "https://media.api-sports.io/football/teams/20535.png",
+          "winner": null
+        },
+        "away": {
+          "id": 20533,
+          "name": "Chile U19",
+          "logo": "https://media.api-sports.io/football/teams/20533.png",
           "winner": null
         }
       },
@@ -14402,7 +14244,7 @@
         },
         "venue": {
           "id": null,
-          "name": null,
+          "name": "Polideportivo Moca 85",
           "city": null
         },
         "status": {
@@ -14472,8 +14314,8 @@
         },
         "venue": {
           "id": null,
-          "name": null,
-          "city": null
+          "name": "Estadio El Condor",
+          "city": "La Vega"
         },
         "status": {
           "long": "Not Started",
