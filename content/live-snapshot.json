@@ -1,122 +1,817 @@
 {
   "date": "2026-09-29",
-  "fetchedAt": "2026-09-29T20:21:11.580Z",
+  "fetchedAt": "2026-09-29T23:50:53.750Z",
   "live": [
     {
       "fixture": {
-        "id": 1640263,
-        "referee": null,
+        "id": 1520891,
+        "referee": "Edina Alves Batista",
         "timezone": "UTC",
-        "date": "2026-09-29T09:00:00+00:00",
-        "timestamp": 1790672400,
-        "periods": {
-          "first": 1790672400,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": "Vivekananda Yuba Bharati Krirangan",
-          "city": "Kolkata"
-        },
-        "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 1,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 1201,
-        "name": "IFA Shield",
-        "country": "India",
-        "logo": "https://media.api-sports.io/football/leagues/1201.png",
-        "flag": "https://media.api-sports.io/flags/in.svg",
-        "season": 2026,
-        "round": "Group Stage",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 15516,
-          "name": "ATK Mohun Bagan",
-          "logo": "https://media.api-sports.io/football/teams/15516.png",
-          "winner": null
-        },
-        "away": {
-          "id": 3479,
-          "name": "NorthEast United",
-          "logo": "https://media.api-sports.io/football/teams/3479.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": 0,
-        "away": 0
-      },
-      "score": {
-        "halftime": {
-          "home": 0,
-          "away": 0
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      },
-      "events": []
-    },
-    {
-      "fixture": {
-        "id": 1641710,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-09-29T09:00:00+00:00",
-        "timestamp": 1790672400,
+        "date": "2026-09-29T22:30:00+00:00",
+        "timestamp": 1790721000,
         "periods": {
           "first": null,
           "second": null
         },
         "venue": {
-          "id": 0,
-          "name": "Jalak Harupat Soreang Stadium ",
-          "city": "Bandung"
+          "id": 219,
+          "name": "Estadio Santa Cruz",
+          "city": "Ribeirao Preto"
         },
         "status": {
-          "long": "First Half",
-          "short": "1H",
-          "elapsed": 2,
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 58,
           "extra": null
         }
       },
       "league": {
-        "id": 1247,
-        "name": "FIFA Asean Cup",
-        "country": "World",
-        "logo": "https://media.api-sports.io/football/leagues/1247.png",
-        "flag": null,
+        "id": 72,
+        "name": "Serie B",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/72.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
         "season": 2026,
-        "round": "Division 1 - 2",
+        "round": "Regular Season - 30",
         "standings": true
       },
       "teams": {
         "home": {
-          "id": 1555,
-          "name": "Philippines",
-          "logo": "https://media.api-sports.io/football/teams/1555.png",
+          "id": 2618,
+          "name": "Botafogo SP",
+          "logo": "https://media.api-sports.io/football/teams/2618.png",
+          "winner": true
+        },
+        "away": {
+          "id": 139,
+          "name": "Ponte Preta",
+          "logo": "https://media.api-sports.io/football/teams/139.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 6,
+            "extra": null
+          },
+          "team": {
+            "id": 2618,
+            "name": "Botafogo SP",
+            "logo": "https://media.api-sports.io/football/teams/2618.png"
+          },
+          "player": {
+            "id": 77703,
+            "name": "Rafael Gava"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 24,
+            "extra": null
+          },
+          "team": {
+            "id": 2618,
+            "name": "Botafogo SP",
+            "logo": "https://media.api-sports.io/football/teams/2618.png"
+          },
+          "player": {
+            "id": 307580,
+            "name": "Gustavo Vilar dos Santos"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 26,
+            "extra": null
+          },
+          "team": {
+            "id": 139,
+            "name": "Ponte Preta",
+            "logo": "https://media.api-sports.io/football/teams/139.png"
+          },
+          "player": {
+            "id": 10552,
+            "name": "Danilo Barcelos"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 40,
+            "extra": null
+          },
+          "team": {
+            "id": 2618,
+            "name": "Botafogo SP",
+            "logo": "https://media.api-sports.io/football/teams/2618.png"
+          },
+          "player": {
+            "id": 9345,
+            "name": "Patrick Brey"
+          },
+          "assist": {
+            "id": 10039,
+            "name": "Arthur Caíke"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 139,
+            "name": "Ponte Preta",
+            "logo": "https://media.api-sports.io/football/teams/139.png"
+          },
+          "player": {
+            "id": 204016,
+            "name": "André da Silva Lima"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "Foul"
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": null
+          },
+          "team": {
+            "id": 139,
+            "name": "Ponte Preta",
+            "logo": "https://media.api-sports.io/football/teams/139.png"
+          },
+          "player": {
+            "id": 204016,
+            "name": "André da Silva Lima"
+          },
+          "assist": {
+            "id": 633523,
+            "name": "Julio De Oliveira"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": null
+          },
+          "team": {
+            "id": 139,
+            "name": "Ponte Preta",
+            "logo": "https://media.api-sports.io/football/teams/139.png"
+          },
+          "player": {
+            "id": 10552,
+            "name": "Danilo Barcelos"
+          },
+          "assist": {
+            "id": 633699,
+            "name": "Juan Rodrigues Leopoldino"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1619693,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-29T22:00:00+00:00",
+        "timestamp": 1790719200,
+        "periods": {
+          "first": 1790719200,
+          "second": 1790722800
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": 3
+        }
+      },
+      "league": {
+        "id": 964,
+        "name": "Copa de la División Profesional",
+        "country": "Bolivia",
+        "logo": "https://media.api-sports.io/football/leagues/964.png",
+        "flag": "https://media.api-sports.io/flags/bo.svg",
+        "season": 2026,
+        "round": "Group Stage - 6",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 3708,
+          "name": "Real Potosí",
+          "logo": "https://media.api-sports.io/football/teams/3708.png",
+          "winner": true
+        },
+        "away": {
+          "id": 17743,
+          "name": "ABB",
+          "logo": "https://media.api-sports.io/football/teams/17743.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 12,
+            "extra": null
+          },
+          "team": {
+            "id": 3708,
+            "name": "Real Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3708.png"
+          },
+          "player": {
+            "id": 79169,
+            "name": "J. Rivas"
+          },
+          "assist": {
+            "id": 546779,
+            "name": "J. Rojas"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 3708,
+            "name": "Real Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3708.png"
+          },
+          "player": {
+            "id": 445968,
+            "name": "C. Vedia"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 33,
+            "extra": null
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 579028,
+            "name": "E. Condori"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 3708,
+            "name": "Real Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3708.png"
+          },
+          "player": {
+            "id": 546779,
+            "name": "J. Rojas"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 4
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 354228,
+            "name": "B. Espinoza"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 3708,
+            "name": "Real Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3708.png"
+          },
+          "player": {
+            "id": 65874,
+            "name": "M. Gomez"
+          },
+          "assist": {
+            "id": 653457,
+            "name": "B. Condori"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 67,
+            "extra": null
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 406305,
+            "name": "G. Rea Mendieta"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 68,
+            "extra": null
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 579028,
+            "name": "E. Condori"
+          },
+          "assist": {
+            "id": null,
+            "name": "J. Veliz"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 68,
+            "extra": null
+          },
+          "team": {
+            "id": 3708,
+            "name": "Real Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3708.png"
+          },
+          "player": {
+            "id": 546779,
+            "name": "J. Rojas"
+          },
+          "assist": {
+            "id": 415588,
+            "name": "A. Brito"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 68,
+            "extra": null
+          },
+          "team": {
+            "id": 3708,
+            "name": "Real Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3708.png"
+          },
+          "player": {
+            "id": 79169,
+            "name": "J. Rivas"
+          },
+          "assist": {
+            "id": 65703,
+            "name": "L. Ali"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 77,
+            "extra": null
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 549677,
+            "name": "A. Camacho"
+          },
+          "assist": {
+            "id": 672891,
+            "name": "J. Minah"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 354228,
+            "name": "B. Espinoza"
+          },
+          "assist": {
+            "id": 590815,
+            "name": "I. Mollinedo"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 79,
+            "extra": null
+          },
+          "team": {
+            "id": 3708,
+            "name": "Real Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3708.png"
+          },
+          "player": {
+            "id": 653456,
+            "name": "G. Anasgo"
+          },
+          "assist": {
+            "id": 65943,
+            "name": "J. Thomas"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 83,
+            "extra": null
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 445305,
+            "name": "C. Jemio"
+          },
+          "assist": {
+            "id": 65947,
+            "name": "F. Abastoflor"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 83,
+            "extra": null
+          },
+          "team": {
+            "id": 17743,
+            "name": "ABB",
+            "logo": "https://media.api-sports.io/football/teams/17743.png"
+          },
+          "player": {
+            "id": 406171,
+            "name": "M. Salazar"
+          },
+          "assist": {
+            "id": 419221,
+            "name": "P. Anez"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1549650,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-29T23:00:00+00:00",
+        "timestamp": 1790722800,
+        "periods": {
+          "first": 1790722800,
+          "second": null
+        },
+        "venue": {
+          "id": 387,
+          "name": "Estadio Sierra Nevada",
+          "city": "Santa Marta"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 1
+        }
+      },
+      "league": {
+        "id": 240,
+        "name": "Primera B",
+        "country": "Colombia",
+        "logo": "https://media.api-sports.io/football/leagues/240.png",
+        "flag": "https://media.api-sports.io/flags/co.svg",
+        "season": 2026,
+        "round": "Clausura - 11",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1465,
+          "name": "Union Magdalena",
+          "logo": "https://media.api-sports.io/football/teams/1465.png",
           "winner": null
         },
         "away": {
-          "id": 5535,
-          "name": "Pakistan",
-          "logo": "https://media.api-sports.io/football/teams/5535.png",
+          "id": 1459,
+          "name": "Real Cartagena",
+          "logo": "https://media.api-sports.io/football/teams/1459.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 1459,
+            "name": "Real Cartagena",
+            "logo": "https://media.api-sports.io/football/teams/1459.png"
+          },
+          "player": {
+            "id": 669741,
+            "name": "L. Taffur"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 43,
+            "extra": null
+          },
+          "team": {
+            "id": 1459,
+            "name": "Real Cartagena",
+            "logo": "https://media.api-sports.io/football/teams/1459.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 1465,
+            "name": "Union Magdalena",
+            "logo": "https://media.api-sports.io/football/teams/1465.png"
+          },
+          "player": {
+            "id": 306728,
+            "name": "J. A. Solarte Espana"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Own Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1639965,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-09-29T23:00:00+00:00",
+        "timestamp": 1790722800,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Sir Vivian Richards Stadium",
+          "city": "Antigua"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 536,
+        "name": "CONCACAF Nations League",
+        "country": "World",
+        "logo": "https://media.api-sports.io/football/leagues/536.png",
+        "flag": null,
+        "season": 2025,
+        "round": "League C - 2",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 8150,
+          "name": "Anguilla",
+          "logo": "https://media.api-sports.io/football/teams/8150.png",
+          "winner": null
+        },
+        "away": {
+          "id": 8167,
+          "name": "Aruba",
+          "logo": "https://media.api-sports.io/football/teams/8167.png",
           "winner": null
         }
       },
@@ -142,7 +837,30 @@
           "away": null
         }
       },
-      "events": []
+      "events": [
+        {
+          "time": {
+            "elapsed": 39,
+            "extra": null
+          },
+          "team": {
+            "id": 8150,
+            "name": "Anguilla",
+            "logo": "https://media.api-sports.io/football/teams/8150.png"
+          },
+          "player": {
+            "id": null,
+            "name": "Jordan Deans"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
     }
   ],
   "today": [
