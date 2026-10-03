@@ -1,21 +1,25 @@
 {
-  "date": "2026-10-03T06:39:29.006Z",
-  "total": 5251,
+  "date": "2026-10-03T12:24:52.916Z",
+  "total": 5259,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 2897,
+      "count": 2905,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 2924,
+      "count": 2932,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ft-lojva2",
+          "duplicate_of": "ft-n4qozl"
+        },
         {
           "slug": "ft-zuv9lj",
           "duplicate_of": "ft-4hybre"
@@ -133,20 +137,28 @@
           "duplicate_of": "ft-1s6ndf"
         },
         {
+          "slug": "bball-unts78",
+          "duplicate_of": "bball-1f6tu3-1791029050555"
+        },
+        {
           "slug": "bball-1f6tu3",
-          "duplicate_of": "bball-unts78"
+          "duplicate_of": "bball-1f6tu3-1791029050555"
+        },
+        {
+          "slug": "bball-1qt6sm-1791008583742",
+          "duplicate_of": "bball-1qt6sm-1791029025459"
         },
         {
           "slug": "bball-1qt6sm-1790988437864",
-          "duplicate_of": "bball-1qt6sm-1791008583742"
+          "duplicate_of": "bball-1qt6sm-1791029025459"
         },
         {
           "slug": "bball-1qt6sm-1790976116581",
-          "duplicate_of": "bball-1qt6sm-1791008583742"
+          "duplicate_of": "bball-1qt6sm-1791029025459"
         },
         {
           "slug": "bball-1qt6sm",
-          "duplicate_of": "bball-1qt6sm-1791008583742"
+          "duplicate_of": "bball-1qt6sm-1791029025459"
         },
         {
           "slug": "ft-sx5ujq",
@@ -8247,9 +8259,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 2897,
-    "missing_fr_title": 2924,
+    "missing_en_title": 2905,
+    "missing_fr_title": 2932,
     "sport_mismatches_fixed": 0,
-    "duplicates": 2056
+    "duplicates": 2059
   }
 }
