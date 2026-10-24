@@ -1,21 +1,25 @@
 {
-  "date": "2026-10-24T07:28:35.631Z",
-  "total": 6120,
+  "date": "2026-10-24T12:21:28.731Z",
+  "total": 6128,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 3758,
+      "count": 3766,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 3793,
+      "count": 3801,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "epl-1rry8m",
+          "duplicate_of": "epl-b5hzmi"
+        },
         {
           "slug": "ft-1x9k94",
           "duplicate_of": "ft-6ff9x9"
@@ -107,6 +111,10 @@
         {
           "slug": "ft-eebtfc",
           "duplicate_of": "ft-1e8h0f"
+        },
+        {
+          "slug": "bball-e89ed0",
+          "duplicate_of": "bball-e89ed0-1792843485174"
         },
         {
           "slug": "ft-rwmoqz",
@@ -9515,9 +9523,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 3758,
-    "missing_fr_title": 3793,
+    "missing_en_title": 3766,
+    "missing_fr_title": 3801,
     "sport_mismatches_fixed": 0,
-    "duplicates": 2373
+    "duplicates": 2375
   }
 }
