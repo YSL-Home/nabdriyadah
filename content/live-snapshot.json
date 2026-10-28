@@ -1,6 +1,6 @@
 {
   "date": "2026-10-28",
-  "fetchedAt": "2026-10-28T01:57:36.665Z",
+  "fetchedAt": "2026-10-28T07:52:36.414Z",
   "live": [
     {
       "fixture": {
@@ -2639,13 +2639,13 @@
     {
       "fixture": {
         "id": 1549726,
-        "referee": "Diego Ulloa Angulo",
+        "referee": "Diego Ulloa Angulo, Colombia",
         "timezone": "UTC",
         "date": "2026-10-28T01:05:00+00:00",
         "timestamp": 1793149500,
         "periods": {
           "first": 1793149500,
-          "second": null
+          "second": 1793153100
         },
         "venue": {
           "id": 372,
@@ -2653,10 +2653,10 @@
           "city": "Tunja"
         },
         "status": {
-          "long": "Halftime",
-          "short": "HT",
-          "elapsed": 45,
-          "extra": 3
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 7
         }
       },
       "league": {
@@ -2684,8 +2684,8 @@
         }
       },
       "goals": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "score": {
         "halftime": {
@@ -2693,8 +2693,8 @@
           "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         },
         "extratime": {
           "home": null,
@@ -2714,8 +2714,8 @@
         "date": "2026-10-28T02:00:00+00:00",
         "timestamp": 1793152800,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1793152800,
+          "second": 1793156400
         },
         "venue": {
           "id": 3284,
@@ -2723,10 +2723,10 @@
           "city": "San Salvador"
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 5
         }
       },
       "league": {
@@ -2754,17 +2754,17 @@
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "extratime": {
           "home": null,
@@ -2784,8 +2784,8 @@
         "date": "2026-10-28T05:00:00+00:00",
         "timestamp": 1793163600,
         "periods": {
-          "first": null,
-          "second": null
+          "first": 1793163600,
+          "second": 1793167200
         },
         "venue": {
           "id": null,
@@ -2793,10 +2793,10 @@
           "city": null
         },
         "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": 6
         }
       },
       "league": {
@@ -2814,27 +2814,27 @@
           "id": 28430,
           "name": "Amtat FC",
           "logo": "https://media.api-sports.io/football/teams/28430.png",
-          "winner": null
+          "winner": true
         },
         "away": {
           "id": 18104,
           "name": "Khovd",
           "logo": "https://media.api-sports.io/football/teams/18104.png",
-          "winner": null
+          "winner": false
         }
       },
       "goals": {
-        "home": null,
-        "away": null
+        "home": 5,
+        "away": 3
       },
       "score": {
         "halftime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 1
         },
         "fulltime": {
-          "home": null,
-          "away": null
+          "home": 5,
+          "away": 3
         },
         "extratime": {
           "home": null,
@@ -6138,6 +6138,76 @@
     },
     {
       "fixture": {
+        "id": 1629088,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-10-28T11:00:00+00:00",
+        "timestamp": 1793185200,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 276,
+        "name": "FKF Premier League",
+        "country": "Kenya",
+        "logo": "https://media.api-sports.io/football/leagues/276.png",
+        "flag": "https://media.api-sports.io/flags/ke.svg",
+        "season": 2026,
+        "round": "Regular Season - 4",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 2460,
+          "name": "Bandari",
+          "logo": "https://media.api-sports.io/football/teams/2460.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2459,
+          "name": "Posta Rangers FC",
+          "logo": "https://media.api-sports.io/football/teams/2459.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
         "id": 1629089,
         "referee": null,
         "timezone": "UTC",
@@ -6390,6 +6460,76 @@
           "id": 5384,
           "name": "Victoria Bardar",
           "logo": "https://media.api-sports.io/football/teams/5384.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1640673,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-10-28T11:00:00+00:00",
+        "timestamp": 1793185200,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 11948,
+          "name": "Tsentralnyi Stadion",
+          "city": "Zhytomyr"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 335,
+        "name": "Cup",
+        "country": "Ukraine",
+        "logo": "https://media.api-sports.io/football/leagues/335.png",
+        "flag": "https://media.api-sports.io/flags/ua.svg",
+        "season": 2026,
+        "round": "Round of 16",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 6496,
+          "name": "Polessya",
+          "logo": "https://media.api-sports.io/football/teams/6496.png",
+          "winner": null
+        },
+        "away": {
+          "id": 28128,
+          "name": "Novyi Rozdil",
+          "logo": "https://media.api-sports.io/football/teams/28128.png",
           "winner": null
         }
       },
@@ -6708,7 +6848,7 @@
           "second": null
         },
         "venue": {
-          "id": null,
+          "id": 19916,
           "name": "Cigand Varosi Stadion",
           "city": "Cigand"
         },
@@ -6918,7 +7058,7 @@
           "second": null
         },
         "venue": {
-          "id": null,
+          "id": 806,
           "name": "Balassi Balint utcai stadion",
           "city": "Monor"
         },
@@ -8280,76 +8420,6 @@
           "id": 24667,
           "name": "3K",
           "logo": "https://media.api-sports.io/football/teams/24667.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
-        "id": 1629088,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-10-28T12:00:00+00:00",
-        "timestamp": 1793188800,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 276,
-        "name": "FKF Premier League",
-        "country": "Kenya",
-        "logo": "https://media.api-sports.io/football/leagues/276.png",
-        "flag": "https://media.api-sports.io/flags/ke.svg",
-        "season": 2026,
-        "round": "Regular Season - 4",
-        "standings": true
-      },
-      "teams": {
-        "home": {
-          "id": 2460,
-          "name": "Bandari",
-          "logo": "https://media.api-sports.io/football/teams/2460.png",
-          "winner": null
-        },
-        "away": {
-          "id": 2459,
-          "name": "Posta Rangers FC",
-          "logo": "https://media.api-sports.io/football/teams/2459.png",
           "winner": null
         }
       },
@@ -13698,76 +13768,6 @@
     },
     {
       "fixture": {
-        "id": 1642157,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-10-28T13:00:00+00:00",
-        "timestamp": 1793192400,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": null,
-          "name": null,
-          "city": null
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 726,
-        "name": "Sultan Cup",
-        "country": "Oman",
-        "logo": "https://media.api-sports.io/football/leagues/726.png",
-        "flag": "https://media.api-sports.io/flags/om.svg",
-        "season": 2026,
-        "round": "Round of 32",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 28588,
-          "name": "Al Wahda",
-          "logo": "https://media.api-sports.io/football/teams/28588.png",
-          "winner": null
-        },
-        "away": {
-          "id": 5331,
-          "name": "Mjees",
-          "logo": "https://media.api-sports.io/football/teams/5331.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
         "id": 1645114,
         "referee": null,
         "timezone": "UTC",
@@ -14650,76 +14650,6 @@
           "id": 7968,
           "name": "Septemvri Sofia U19",
           "logo": "https://media.api-sports.io/football/teams/7968.png",
-          "winner": null
-        }
-      },
-      "goals": {
-        "home": null,
-        "away": null
-      },
-      "score": {
-        "halftime": {
-          "home": null,
-          "away": null
-        },
-        "fulltime": {
-          "home": null,
-          "away": null
-        },
-        "extratime": {
-          "home": null,
-          "away": null
-        },
-        "penalty": {
-          "home": null,
-          "away": null
-        }
-      }
-    },
-    {
-      "fixture": {
-        "id": 1640673,
-        "referee": null,
-        "timezone": "UTC",
-        "date": "2026-10-28T13:30:00+00:00",
-        "timestamp": 1793194200,
-        "periods": {
-          "first": null,
-          "second": null
-        },
-        "venue": {
-          "id": 11948,
-          "name": "Tsentralnyi Stadion",
-          "city": "Zhytomyr"
-        },
-        "status": {
-          "long": "Not Started",
-          "short": "NS",
-          "elapsed": null,
-          "extra": null
-        }
-      },
-      "league": {
-        "id": 335,
-        "name": "Cup",
-        "country": "Ukraine",
-        "logo": "https://media.api-sports.io/football/leagues/335.png",
-        "flag": "https://media.api-sports.io/flags/ua.svg",
-        "season": 2026,
-        "round": "Round of 16",
-        "standings": false
-      },
-      "teams": {
-        "home": {
-          "id": 6496,
-          "name": "Polessya",
-          "logo": "https://media.api-sports.io/football/teams/6496.png",
-          "winner": null
-        },
-        "away": {
-          "id": 28128,
-          "name": "Novyi Rozdil",
-          "logo": "https://media.api-sports.io/football/teams/28128.png",
           "winner": null
         }
       },
@@ -15910,6 +15840,76 @@
           "id": 3535,
           "name": "Al Kuwait",
           "logo": "https://media.api-sports.io/football/teams/3535.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1642157,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-10-28T13:55:00+00:00",
+        "timestamp": 1793195700,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 726,
+        "name": "Sultan Cup",
+        "country": "Oman",
+        "logo": "https://media.api-sports.io/football/leagues/726.png",
+        "flag": "https://media.api-sports.io/flags/om.svg",
+        "season": 2026,
+        "round": "Round of 32",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 28588,
+          "name": "Al Wahda",
+          "logo": "https://media.api-sports.io/football/teams/28588.png",
+          "winner": null
+        },
+        "away": {
+          "id": 5331,
+          "name": "Mjees",
+          "logo": "https://media.api-sports.io/football/teams/5331.png",
           "winner": null
         }
       },
@@ -37373,8 +37373,8 @@
           "city": "Caracas"
         },
         "status": {
-          "long": "Match Postponed",
-          "short": "PST",
+          "long": "Not Started",
+          "short": "NS",
           "elapsed": null,
           "extra": null
         }
