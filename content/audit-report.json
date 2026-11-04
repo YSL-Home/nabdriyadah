@@ -1,21 +1,25 @@
 {
-  "date": "2026-11-04T02:29:07.644Z",
-  "total": 6977,
+  "date": "2026-11-04T09:22:24.000Z",
+  "total": 7002,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 4356,
+      "count": 4370,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 4650,
+      "count": 4675,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "ft-23xdby",
+          "duplicate_of": "ft-73mkit"
+        },
         {
           "slug": "tennis-95g1jd",
           "duplicate_of": "tennis-1eklwc"
@@ -93,6 +97,10 @@
           "duplicate_of": "ft-cmbcjp"
         },
         {
+          "slug": "bball-hu1pzd",
+          "duplicate_of": "bball-hu1pzd-1793783180350"
+        },
+        {
           "slug": "ft-pilqgv",
           "duplicate_of": "ft-cmbcjp"
         },
@@ -117,6 +125,10 @@
           "duplicate_of": "epl-1sxku0"
         },
         {
+          "slug": "bball-1izab4-1793743377048",
+          "duplicate_of": "bball-1izab4-1793783155495"
+        },
+        {
           "slug": "ft-x9jhyp",
           "duplicate_of": "ft-1pw8xu"
         },
@@ -134,7 +146,7 @@
         },
         {
           "slug": "bball-1izab4",
-          "duplicate_of": "bball-1izab4-1793743377048"
+          "duplicate_of": "bball-1izab4-1793783155495"
         },
         {
           "slug": "ft-5jm433",
@@ -9899,9 +9911,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 4356,
-    "missing_fr_title": 4650,
+    "missing_en_title": 4370,
+    "missing_fr_title": 4675,
     "sport_mismatches_fixed": 0,
-    "duplicates": 2469
+    "duplicates": 2472
   }
 }
