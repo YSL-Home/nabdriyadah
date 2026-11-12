@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import articles from "../../../content/articles/seo-articles.json";
 import ArticleImage from "../../components/ArticleImage";
+import { isLowValueArticle } from "../../../lib/contentQuality";
 
 const leagueBranding = {
   "premier-league": {
@@ -125,15 +126,15 @@ export function generateMetadata({ params }) {
         ? `https://nabdriyadah.com${article.image}`
         : fallbackImage;
 
-  // Articles trop courts → noindex (AdSense + qualité SEO)
-  const wordCount = (article.content || "").trim().split(/\s+/).filter(Boolean).length;
-  const tooShort = wordCount < 300;
+  // Articles trop courts ou générés en fallback (contenu générique dupliqué
+  // quand toutes les API LLM étaient indisponibles) → noindex (AdSense + qualité SEO)
+  const lowValue = isLowValueArticle(article);
 
   return {
     title: article.seoTitle || article.title,
     description: article.seoDescription || article.description,
     keywords: (article.keywords || []).join("، "),
-    ...(tooShort ? { robots: { index: false, follow: false } } : {}),
+    ...(lowValue ? { robots: { index: false, follow: false } } : {}),
     alternates: {
       canonical: canonicalUrl,
       languages: {

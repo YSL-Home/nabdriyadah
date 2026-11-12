@@ -1,7 +1,12 @@
-import articles from "../content/articles/seo-articles-meta.json";
+import allArticles from "../content/articles/seo-articles-meta.json";
 import tennisTop20Raw from "../content/players/tennis-top20.json";
 import fs from "fs";
 import path from "path";
+import { isLowValueArticle } from "../lib/contentQuality";
+
+// Exclut les articles générés en fallback (contenu générique dupliqué,
+// cf. lib/contentQuality.js) — ils sont aussi en noindex sur leur propre page.
+const articles = allArticles.filter((a) => !isLowValueArticle(a));
 
 const BASE = "https://nabdriyadah.com";
 
