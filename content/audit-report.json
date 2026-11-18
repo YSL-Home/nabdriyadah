@@ -1,21 +1,25 @@
 {
-  "date": "2026-11-17T18:44:35.962Z",
-  "total": 8049,
+  "date": "2026-11-18T01:36:19.829Z",
+  "total": 8070,
   "fixes": [],
   "warnings": [
     {
       "type": "missing_en_title",
-      "count": 5087,
+      "count": 5103,
       "action": "needs_llm_backfill"
     },
     {
       "type": "missing_fr_title",
-      "count": 5722,
+      "count": 5743,
       "action": "needs_llm_backfill"
     },
     {
       "type": "duplicate_articles",
       "items": [
+        {
+          "slug": "tennis-179khu",
+          "duplicate_of": "tennis-f27cmc"
+        },
         {
           "slug": "ft-1jkent",
           "duplicate_of": "ft-llkni"
@@ -411,6 +415,10 @@
         {
           "slug": "epl-1g88a1",
           "duplicate_of": "epl-1k90ns"
+        },
+        {
+          "slug": "ft-15a3uv",
+          "duplicate_of": "ft-15a3uv-1794959977848"
         },
         {
           "slug": "ft-23xdby",
@@ -10447,9 +10455,9 @@
     "fixes_applied": 0,
     "warnings": 3,
     "missing_images": 0,
-    "missing_en_title": 5087,
-    "missing_fr_title": 5722,
+    "missing_en_title": 5103,
+    "missing_fr_title": 5743,
     "sport_mismatches_fixed": 0,
-    "duplicates": 2606
+    "duplicates": 2608
   }
 }
